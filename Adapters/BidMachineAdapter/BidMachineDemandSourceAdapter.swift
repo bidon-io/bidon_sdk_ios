@@ -10,24 +10,15 @@ import BidMachine
 import MobileAdvertising
 
 
-internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter
+internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter
 
 
-public struct BidMachineAdapterParameters: Codable {
-    public var sellerId: String
-    
-    public init(sellerId: String) {
-        self.sellerId = sellerId
-    }
-}
-
-
-@objc public final class BidMachineAdapter: NSObject, DemandSourceAdapter {
+@objc public final class BidMachineDemandSourceAdapter: NSObject, DemandSourceAdapter {
     @objc public let id: String = "bidmachine"
     
-    public let parameters: BidMachineAdapterParameters
+    public let parameters: BidMachineParameters
     
-    public init(parameters: BidMachineAdapterParameters) {
+    public init(parameters: BidMachineParameters) {
         self.parameters = parameters
         super.init()
     }
@@ -35,15 +26,19 @@ public struct BidMachineAdapterParameters: Codable {
     public func interstitial() throws -> InterstitialDemandProvider {
         return BidMachineInterstitialDemandProvider()
     }
+    
+    public func rewardedAd() throws -> RewardedAdDemandProvider {
+        return BidMachineRewardedAdDemandProvider()
+    }
 }
 
 
-extension BidMachineAdapter: ParameterizedAdapter {
-    public typealias Parameters = BidMachineAdapterParameters
+extension BidMachineDemandSourceAdapter: ParameterizedAdapter {
+    public typealias Parameters = BidMachineParameters
     
     @objc public convenience init(rawParameters: Data) throws {
         let parameters = try JSONDecoder().decode(
-            BidMachineAdapterParameters.self,
+            BidMachineParameters.self,
             from: rawParameters
         )
         self.init(parameters: parameters)
@@ -51,7 +46,7 @@ extension BidMachineAdapter: ParameterizedAdapter {
 }
 
 
-extension BidMachineAdapter: InitializableAdapter {
+extension BidMachineDemandSourceAdapter: InitializableAdapter {
     @available(iOS 13, *)
     public func initialize() async throws {
         return try await withCheckedThrowingContinuation { continuation in

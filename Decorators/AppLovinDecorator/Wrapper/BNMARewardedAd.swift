@@ -1,8 +1,8 @@
 //
-//  InterstitialAd.swift
+//  BNMARewardedAd.swift
 //  AppLovinDecorator
 //
-//  Created by Stas Kochkin on 28.06.2022.
+//  Created by Stas Kochkin on 07.07.2022.
 //
 
 import Foundation
@@ -11,12 +11,15 @@ import MobileAdvertising
 
 
 @objc
-final public class BNMAInterstitialAd: NSObject {
-    private typealias Mediator = AppLovinFullscreenDemandProvider<MAInterstitialAd>
-
+final public class BNMARewardedAd: NSObject {
+    private typealias Mediator = AppLovinFullscreenDemandProvider<MARewardedAd>
+    private typealias RewardedAdRepository = Repository<String, BNMARewardedAd>
+    
+    private static let repository = RewardedAdRepository("com.ads.applovin.rewarded.instances.queue")
+    
     @objc public let adUnitIdentifier: String
     
-    @objc public weak var delegate: BNMAAdDelegate?
+    @objc public weak var delegate: BNMARewardedAdDelegate?
     @objc public weak var auctionDelegate: BNMAuctionDelegate?
     @objc public weak var revenueDelegate: BNMAAdRevenueDelegate?
     @objc public weak var adReviewDelegate: BNMAAdReviewDelegate?
@@ -28,8 +31,8 @@ final public class BNMAInterstitialAd: NSObject {
         !auction.isEmpty
     }
     
-    private var postbid: [InterstitialDemandProvider] {
-        sdk.bid.bidon.interstitialDemandProviders()
+    private var postbid: [RewardedAdDemandProvider] {
+        sdk.bid.bidon.rewardedAdDemandProviders()
     }
     
     private lazy var mediator: Mediator = {
@@ -40,9 +43,9 @@ final public class BNMAInterstitialAd: NSObject {
             displayArguments: weakSelf?.displayArguments,
             sdk: sdk
         )
-        
-        mediator.fullscreenAd.revenueDelegate = self
+                
         mediator.fullscreenAd.adReviewDelegate = self
+        mediator.fullscreenAd.revenueDelegate = self
         
         return mediator
     }()
@@ -56,20 +59,38 @@ final public class BNMAInterstitialAd: NSObject {
             .build()
     }()
     
-    @objc public init(
-        adUnitIdentifier: String
-    ) {
-        self.adUnitIdentifier = adUnitIdentifier
-        self.sdk = ALSdk.shared()
-        super.init()
+    @objc public static func shared(
+        withAdUnitIdentifier adUnitIdentifier: String
+    ) -> BNMARewardedAd {
+        return shared(adUnitIdentifier)
     }
     
-    @objc public init(
-        adUnitIdentifier: String,
+    @objc public static func shared(
+        withAdUnitIdentifier adUnitIdentifier: String,
         sdk: ALSdk
+    ) -> BNMARewardedAd {
+        return shared(adUnitIdentifier, sdk: sdk)
+    }
+    
+    private static func shared(
+        _ adUnitIdentifier: String,
+        sdk: ALSdk! = ALSdk.shared()
+    ) -> BNMARewardedAd {
+        guard let instance: BNMARewardedAd = repository[adUnitIdentifier] else {
+            let instance = self.init(adUnitIdentifier: adUnitIdentifier, sdk: sdk)
+            repository[adUnitIdentifier] = instance
+            return instance
+        }
+        
+        return instance
+    }
+    
+    private init(
+        adUnitIdentifier: String,
+        sdk: ALSdk! = ALSdk.shared()
     ) {
-        self.sdk = sdk
         self.adUnitIdentifier = adUnitIdentifier
+        self.sdk = sdk
         super.init()
     }
     
@@ -113,12 +134,13 @@ final public class BNMAInterstitialAd: NSObject {
         
         auction.finish { [weak self] provider, ad, error in
             guard let ad = ad else { return }
-            guard let provider = provider as? InterstitialDemandProvider else {
+            guard let provider = provider as? RewardedAdDemandProvider else {
                 self?.delegate?.didFail(toDisplay: ad, withError: SDKError(error))
                 return
             }
             
             provider.delegate = self
+            provider.rewardDelegate = self
             provider._show(ad: ad, from: viewController)
         }
     }
@@ -133,7 +155,7 @@ final public class BNMAInterstitialAd: NSObject {
 }
 
 
-extension BNMAInterstitialAd: AuctionControllerDelegate {
+extension BNMARewardedAd: AuctionControllerDelegate {
     public func controllerDidStartAuction(_ controller: AuctionController) {
         auctionDelegate?.didStartAuction()
     }
@@ -157,47 +179,90 @@ extension BNMAInterstitialAd: AuctionControllerDelegate {
         auctionDelegate?.didReceiveAd(ad)
     }
     
-    public func controller(_ contoller: AuctionController, didCompleteRound round: AuctionRound) {
+    public func controller(
+        _ contoller: AuctionController,
+        didCompleteRound round: AuctionRound
+    ) {
         auctionDelegate?.didCompleteAuctionRound(round.id)
     }
     
-    public func controller(_ controller: AuctionController, completeAuction winner: Ad) {
+    public func controller(
+        _ controller: AuctionController,
+        completeAuction winner: Ad
+    ) {
         auctionDelegate?.didCompleteAuction(winner)
         delegate?.didLoad(winner)
     }
     
-    public func controller(_ controller: AuctionController, failedAuction error: Error) {
+    public func controller(
+        _ controller: AuctionController,
+        failedAuction error: Error
+    ) {
         auctionDelegate?.didCompleteAuction(nil)
-        delegate?.didFailToLoadAd(forAdUnitIdentifier: adUnitIdentifier, withError: error)
+        
+        delegate?.didFailToLoadAd(
+            forAdUnitIdentifier: adUnitIdentifier,
+            withError: error
+        )
     }
 }
 
 
-extension BNMAInterstitialAd: MAAdRevenueDelegate, MAAdReviewDelegate {
+extension BNMARewardedAd: MAAdRevenueDelegate, MAAdReviewDelegate {
     public func didPayRevenue(for ad: MAAd) {
         revenueDelegate?.didPayRevenue(for: ad.wrapped)
     }
     
-    public func didGenerateCreativeIdentifier(_ creativeIdentifier: String, for ad: MAAd) {
-        adReviewDelegate?.didGenerateCreativeIdentifier(creativeIdentifier, for: ad.wrapped)
+    public func didGenerateCreativeIdentifier(
+        _ creativeIdentifier: String,
+        for ad: MAAd
+    ) {
+        adReviewDelegate?.didGenerateCreativeIdentifier(
+            creativeIdentifier,
+            for: ad.wrapped
+        )
     }
 }
 
 
-extension BNMAInterstitialAd: DemandProviderDelegate {
-    public func provider(_ provider: DemandProvider, didPresent ad: Ad) {
+extension BNMARewardedAd: DemandProviderDelegate {
+    public func provider(
+        _ provider: DemandProvider,
+        didPresent ad: Ad
+    ) {
         delegate?.didDisplay(ad)
     }
     
-    public func provider(_ provider: DemandProvider, didHide ad: Ad) {
+    public func provider(
+        _ provider: DemandProvider,
+        didHide ad: Ad
+    ) {
         delegate?.didHide(ad)
     }
     
-    public func provider(_ provider: DemandProvider, didClick ad: Ad) {
+    public func provider(
+        _ provider: DemandProvider,
+        didClick ad: Ad
+    ) {
         delegate?.didClick(ad)
     }
     
-    public func provider(_ provider: DemandProvider, didFailToDisplay ad: Ad, error: Error) {
+    public func provider(
+        _ provider: DemandProvider,
+        didFailToDisplay ad: Ad,
+        error: Error
+    ) {
         delegate?.didFail(toDisplay: ad, withError: error)
+    }
+}
+
+
+extension BNMARewardedAd: DemandProviderRewardDelegate {
+    public func provider(
+        _ provider: DemandProvider,
+        didReceiveReward reward: Reward,
+        ad: Ad
+    ) {
+        delegate?.didRewardUser(for: ad, with: reward)
     }
 }

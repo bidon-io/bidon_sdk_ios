@@ -15,8 +15,12 @@
 		429EE2B2286B438A009439C6 /* BNMAInterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B1286B438A009439C6 /* BNMAInterstitialAd.swift */; };
 		429EE2B4286B59B9009439C6 /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B3286B59B9009439C6 /* Proxy.swift */; };
 		429EE2B6286B5A81009439C6 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429EE2B5286B5A81009439C6 /* MobileAdvertising.framework */; };
-		429EE2D9286EF59B009439C6 /* AppLovinMaxInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2D8286EF59B009439C6 /* AppLovinMaxInterstitialDemandProvider.swift */; };
+		429EE2D9286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2D8286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift */; };
 		42BA81A828758A53001F1744 /* BNMAAuctionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81A728758A53001F1744 /* BNMAAuctionDelegate.swift */; };
+		42BA81D32876F9A1001F1744 /* BNMARewardedAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D22876F9A1001F1744 /* BNMARewardedAd.swift */; };
+		42BA81D52876FAE7001F1744 /* BNMARewardedAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D42876FAE6001F1744 /* BNMARewardedAdDelegate.swift */; };
+		42BA81D9287703E9001F1744 /* MAFullscreenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D8287703E9001F1744 /* MAFullscreenAd.swift */; };
+		42BA81DD28770C06001F1744 /* BNMARewardWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81DC28770C06001F1744 /* BNMARewardWrapper.swift */; };
 		9C3F2FC8302DEA66C5792F64 /* Pods_AppLovinDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DFA6D8633E4FC45A275893 /* Pods_AppLovinDecorator.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,8 +34,12 @@
 		429EE2B1286B438A009439C6 /* BNMAInterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAInterstitialAd.swift; sourceTree = "<group>"; };
 		429EE2B3286B59B9009439C6 /* Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
 		429EE2B5286B5A81009439C6 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		429EE2D8286EF59B009439C6 /* AppLovinMaxInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinMaxInterstitialDemandProvider.swift; sourceTree = "<group>"; };
+		429EE2D8286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinFullscreenDemandProvider.swift; sourceTree = "<group>"; };
 		42BA81A728758A53001F1744 /* BNMAAuctionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAuctionDelegate.swift; sourceTree = "<group>"; };
+		42BA81D22876F9A1001F1744 /* BNMARewardedAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMARewardedAd.swift; sourceTree = "<group>"; };
+		42BA81D42876FAE6001F1744 /* BNMARewardedAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMARewardedAdDelegate.swift; sourceTree = "<group>"; };
+		42BA81D8287703E9001F1744 /* MAFullscreenAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAFullscreenAd.swift; sourceTree = "<group>"; };
+		42BA81DC28770C06001F1744 /* BNMARewardWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMARewardWrapper.swift; sourceTree = "<group>"; };
 		68CBF590B4386AAFAB4CC698 /* Pods-AppLovinDecorator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinDecorator.release.xcconfig"; path = "Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator.release.xcconfig"; sourceTree = "<group>"; };
 		68DFA6D8633E4FC45A275893 /* Pods_AppLovinDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppLovinDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE30FE2885C3640B22F331FE /* Pods-AppLovinDecorator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinDecorator.debug.xcconfig"; path = "Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -54,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				42389E0B287436EA006024BA /* BNMAAdDelegate.swift */,
+				42BA81D42876FAE6001F1744 /* BNMARewardedAdDelegate.swift */,
 				42BA81A728758A53001F1744 /* BNMAAuctionDelegate.swift */,
 				42389E0D2874378C006024BA /* BNMAAdRevenueDelegate.swift */,
 				42389E0F28743ADE006024BA /* BNMAAdReviewDelegate.swift */,
@@ -95,7 +104,9 @@
 				42389E14287463AA006024BA /* Delegate */,
 				429EE2B3286B59B9009439C6 /* Proxy.swift */,
 				42389DE92872E2A2006024BA /* BNMAAdWrapper.swift */,
+				42BA81DC28770C06001F1744 /* BNMARewardWrapper.swift */,
 				429EE2B1286B438A009439C6 /* BNMAInterstitialAd.swift */,
+				42BA81D22876F9A1001F1744 /* BNMARewardedAd.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -103,7 +114,8 @@
 		429EE2D7286EF540009439C6 /* Adapter */ = {
 			isa = PBXGroup;
 			children = (
-				429EE2D8286EF59B009439C6 /* AppLovinMaxInterstitialDemandProvider.swift */,
+				429EE2D8286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift */,
+				42BA81D8287703E9001F1744 /* MAFullscreenAd.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -251,12 +263,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42BA81D32876F9A1001F1744 /* BNMARewardedAd.swift in Sources */,
 				42BA81A828758A53001F1744 /* BNMAAuctionDelegate.swift in Sources */,
 				42389E0E2874378C006024BA /* BNMAAdRevenueDelegate.swift in Sources */,
 				42389E0C287436EA006024BA /* BNMAAdDelegate.swift in Sources */,
 				429EE2B2286B438A009439C6 /* BNMAInterstitialAd.swift in Sources */,
+				42BA81D9287703E9001F1744 /* MAFullscreenAd.swift in Sources */,
+				42BA81DD28770C06001F1744 /* BNMARewardWrapper.swift in Sources */,
 				42389E1028743ADE006024BA /* BNMAAdReviewDelegate.swift in Sources */,
-				429EE2D9286EF59B009439C6 /* AppLovinMaxInterstitialDemandProvider.swift in Sources */,
+				429EE2D9286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift in Sources */,
+				42BA81D52876FAE7001F1744 /* BNMARewardedAdDelegate.swift in Sources */,
 				42389DEA2872E2A2006024BA /* BNMAAdWrapper.swift in Sources */,
 				429EE2B4286B59B9009439C6 /* Proxy.swift in Sources */,
 			);

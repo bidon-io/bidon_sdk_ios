@@ -18,30 +18,16 @@ struct HomeView: View {
                         "Interstitial",
                         destination: InterstitialView()
                     )
+                    NavigationLink(
+                        "Rewarded Ad",
+                        destination: RewardedAdView()
+                    )
                 }
             }
+            .navigationBarHidden(true)
         }
     }
 }
-
-
-//final class HomeView: ObservableObject {
-//    private lazy var interstitial: BNMAInterstitialAd = {
-//        let interstitial = BNMAInterstitialAd(
-//            adUnitIdentifier: "YOUR_AD_UNIT_ID",
-//            sdk: applovin
-//        )
-//        return interstitial
-//    }()
-//
-//    func appear() {
-//        interstitial.loadAd()
-//    }
-//
-//    func present() {
-//        interstitial.show()
-//    }
-//}
 
 
 struct HomeView_Previews: PreviewProvider {

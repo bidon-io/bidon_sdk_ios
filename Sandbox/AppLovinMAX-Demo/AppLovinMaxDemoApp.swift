@@ -36,8 +36,8 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
     ) -> Bool {
         applovin.mediationProvider = ALMediationProviderMAX
         applovin.bid.register(
-            adapter: BidMachineAdapter.self,
-            parameters: BidMachineAdapterParameters(
+            adapter: BidMachineDemandSourceAdapter.self,
+            parameters: BidMachineParameters(
                 sellerId: "1"
             )
         )
@@ -48,6 +48,10 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
                 interstitial: [
                     LineItem(0.1, adUnitId: "ca-app-pub-3940256099942544/4411468910"),
                     LineItem(0.05, adUnitId: "ca-app-pub-3940256099942544/4411468910"),
+                ],
+                rewardedAd: [
+                    LineItem(0.1, adUnitId: "ca-app-pub-3940256099942544/1712485313"),
+                    LineItem(0.05, adUnitId: "ca-app-pub-3940256099942544/1712485313"),
                 ]
             )
         )

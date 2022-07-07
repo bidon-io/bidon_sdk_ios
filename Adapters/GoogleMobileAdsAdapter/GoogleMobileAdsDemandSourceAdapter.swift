@@ -10,7 +10,7 @@ import GoogleMobileAds
 import MobileAdvertising
 
 
-internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter
+internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter
 
 
 @objc public final class GoogleMobileAdsDemandSourceAdapter: NSObject, DemandSourceAdapter {
@@ -24,8 +24,14 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter
     }
     
     public func interstitial() throws -> InterstitialDemandProvider {
-        GoogleMobileAdsInterstitialDemandProvider { [weak self] price in
+        GoogleMobileAdsFullscreenDemandProvider<GADInterstitialAd> { [weak self] price in
             return self?.parameters.lineItems.interstitial?.item(for: price)
+        }
+    }
+    
+    public func rewardedAd() throws -> RewardedAdDemandProvider {
+        GoogleMobileAdsFullscreenDemandProvider<GADRewardedAd> { [weak self] price in
+            return self?.parameters.lineItems.rewardedAd?.item(for: price)
         }
     }
 }

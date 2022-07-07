@@ -1,21 +1,22 @@
 //
-//  InterstitialView.swift
+//  RewardedAdView.swift
 //  AppLovinMAX-Demo
 //
-//  Created by Stas Kochkin on 05.07.2022.
+//  Created by Stas Kochkin on 07.07.2022.
 //
+
 import Foundation
 import SwiftUI
 import AppLovinDecorator
 import MobileAdvertising
 
 
-struct InterstitialView: View {
+struct RewardedAdView: View {
     static private let offset: CGFloat = 154
     
-    @StateObject var vm = InterstitialViewModel()
+    @StateObject var vm = RewardedAdViewModel()
     
-    @State private var offset: CGFloat = InterstitialView.offset
+    @State private var offset: CGFloat = RewardedAdView.offset
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -78,26 +79,26 @@ struct InterstitialView: View {
                 DragGesture()
                     .onChanged { gesture in
                         withAnimation(.interactiveSpring())  {
-                            offset = max(0, min(gesture.translation.height, InterstitialView.offset))
+                            offset = max(0, min(gesture.translation.height, RewardedAdView.offset))
                         }
                     }
                     .onEnded { _ in
                         if offset > 50 {
-                            withAnimation { offset = InterstitialView.offset }
+                            withAnimation { offset = RewardedAdView.offset }
                         } else {
                             withAnimation { offset = 0 }
                         }
                     }
             )
         }
-        .navigationTitle("Interstitial")
+        .navigationTitle("Rewarded Ad")
         .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 
-struct InterstitialView_Previews: PreviewProvider {
+struct RewardedAdView_Previews: PreviewProvider {
     static var previews: some View {
-        InterstitialView()
+        RewardedAdView()
     }
 }

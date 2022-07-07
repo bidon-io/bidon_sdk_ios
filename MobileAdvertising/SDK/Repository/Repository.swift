@@ -8,11 +8,11 @@
 import Foundation
 
 
-internal final class Repository<Key, Value> where Key: Hashable {
+public final class Repository<Key, Value> where Key: Hashable {
     internal let queue: DispatchQueue
     internal var objects: [Key: Any]
     
-    init(_ queueName: String) {
+    public init(_ queueName: String) {
         objects = [:]
         queue = DispatchQueue(
             label: queueName,
@@ -36,7 +36,7 @@ internal final class Repository<Key, Value> where Key: Hashable {
         }
     }
     
-    subscript<T>(key: Key) -> T? {
+    public subscript<T>(key: Key) -> T? {
         get { value(key) }
         set { setValue(newValue, key: key) }
     }

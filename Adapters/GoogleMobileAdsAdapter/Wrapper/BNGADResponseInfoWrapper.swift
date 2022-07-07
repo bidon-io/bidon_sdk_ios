@@ -30,14 +30,14 @@ final internal class BNGADResponseInfoWrapper: NSObject, Ad {
     }
     
     convenience init(
-        _ interstitial: GADInterstitialAd,
+        _ fullscreenAd: BNGADFullscreenAd,
         item: LineItem
     ) {
         self.init(
-            id: interstitial.responseInfo.responseIdentifier ?? item.adUnitId,
+            id: fullscreenAd.responseInfo.responseIdentifier ?? item.adUnitId,
             price: item.pricefloor,
-            dsp: interstitial.responseInfo.adNetworkClassName ?? "admob",
-            wrapped: interstitial.responseInfo
+            dsp: fullscreenAd.responseInfo.adNetworkClassName ?? "admob",
+            wrapped: fullscreenAd.responseInfo
         )
     }
 }

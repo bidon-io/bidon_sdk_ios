@@ -17,8 +17,30 @@ struct ContentView: View {
         if app.isInitialized {
             HomeView()
         } else {
-            ProgressView()
-                .progressViewStyle(.circular)
+            VStack {
+                Image(systemName: "brain.head.profile")
+                    .padding(32)
+                    .imageScale(.large)
+                
+                ZStack {
+                    Text("AppLovin MAX + Bidon")
+                        .font(Font.system(size: 16, weight: .heavy, design: .monospaced))
+                        .offset(x: 0.5, y: 0.5)
+                    Text("AppLovin MAX + Bidon")
+                        .foregroundColor(.primary)
+                        .font(Font.system(size: 16, weight: .heavy, design: .monospaced))
+                }
+                
+                ProgressView()
+                    .progressViewStyle(.circular)
+            }
+            .foregroundStyle(
+                LinearGradient(
+                    colors: [.blue, .purple, .red],
+                    startPoint: .bottomLeading,
+                    endPoint: .topTrailing
+                )
+            )
         }
     }
 }

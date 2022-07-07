@@ -38,4 +38,9 @@ public extension SDK {
         let sources: [InterstitialDemandSourceAdapter] = repository.all()
         return sources.compactMap { try? $0.interstitial() }
     }
+    
+    func rewardedAdDemandProviders() -> [RewardedAdDemandProvider] {
+        let sources: [RewardedAdDemandSourceAdapter] = repository.all()
+        return sources.compactMap { try? $0.rewardedAd() }
+    }
 }

@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		42389DFA28735618006024BA /* BidMachineAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42389DF728735618006024BA /* BidMachineAdapter.framework */; };
+		42389DFC28735618006024BA /* AppLovinDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42389DF828735618006024BA /* AppLovinDecorator.framework */; };
+		42389DFE28735618006024BA /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42389DF928735618006024BA /* MobileAdvertising.framework */; };
+		42389E0228742D43006024BA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0128742D43006024BA /* HomeView.swift */; };
+		42389E0428742E34006024BA /* InterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0328742E34006024BA /* InterstitialView.swift */; };
+		42389E082874301F006024BA /* InterstitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E072874301F006024BA /* InterstitialViewModel.swift */; };
+		42389E0A28743032006024BA /* InterstitialEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0928743032006024BA /* InterstitialEventPublisher.swift */; };
+		42389E1A28747D00006024BA /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E1928747D00006024BA /* RoundedCorners.swift */; };
+		429EE2A4286B39D1009439C6 /* AppLovinMaxDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2A3286B39D1009439C6 /* AppLovinMaxDemoApp.swift */; };
+		429EE2A6286B39D1009439C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2A5286B39D1009439C6 /* ContentView.swift */; };
+		429EE2A8286B39D2009439C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 429EE2A7286B39D2009439C6 /* Assets.xcassets */; };
+		429EE2AB286B39D2009439C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 429EE2AA286B39D2009439C6 /* Preview Assets.xcassets */; };
+		42BA81BC2875AC91001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BA81BB2875AC91001F1744 /* GoogleMobileAdsAdapter.framework */; };
+		CF95B206081C3B7C4DC26915 /* Pods_AppLovinMAX_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		078D6AEA594DCCBBB0DED4F0 /* Pods-AppLovinMAX-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinMAX-Demo.release.xcconfig"; path = "Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		42389DF728735618006024BA /* BidMachineAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidMachineAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42389DF828735618006024BA /* AppLovinDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppLovinDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42389DF928735618006024BA /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42389E0128742D43006024BA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		42389E0328742E34006024BA /* InterstitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialView.swift; sourceTree = "<group>"; };
+		42389E072874301F006024BA /* InterstitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialViewModel.swift; sourceTree = "<group>"; };
+		42389E0928743032006024BA /* InterstitialEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialEventPublisher.swift; sourceTree = "<group>"; };
+		42389E1928747D00006024BA /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
+		429EE2A0286B39D1009439C6 /* AppLovinMAX-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppLovinMAX-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		429EE2A3286B39D1009439C6 /* AppLovinMaxDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinMaxDemoApp.swift; sourceTree = "<group>"; };
+		429EE2A5286B39D1009439C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		429EE2A7286B39D2009439C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		429EE2AA286B39D2009439C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		42BA81BB2875AC91001F1744 /* GoogleMobileAdsAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleMobileAdsAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA81C92875DF25001F1744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinMAX-Demo.debug.xcconfig"; path = "Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppLovinMAX_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		429EE29D286B39D1009439C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42389DFA28735618006024BA /* BidMachineAdapter.framework in Frameworks */,
+				CF95B206081C3B7C4DC26915 /* Pods_AppLovinMAX_Demo.framework in Frameworks */,
+				42389DFC28735618006024BA /* AppLovinDecorator.framework in Frameworks */,
+				42389DFE28735618006024BA /* MobileAdvertising.framework in Frameworks */,
+				42BA81BC2875AC91001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		42389E0528742FFD006024BA /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				42389E062874300E006024BA /* Interstitial */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		42389E062874300E006024BA /* Interstitial */ = {
+			isa = PBXGroup;
+			children = (
+				42389E0328742E34006024BA /* InterstitialView.swift */,
+				42389E072874301F006024BA /* InterstitialViewModel.swift */,
+				42389E0928743032006024BA /* InterstitialEventPublisher.swift */,
+			);
+			path = Interstitial;
+			sourceTree = "<group>";
+		};
+		42389E1828747CEE006024BA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				42389E1928747D00006024BA /* RoundedCorners.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		429EE295286B399F009439C6 = {
+			isa = PBXGroup;
+			children = (
+				429EE2A2286B39D1009439C6 /* AppLovinMAX-Demo */,
+				429EE2A1286B39D1009439C6 /* Products */,
+				EC5257D01495BEB6BFA1EB2E /* Pods */,
+				D25A351439A02A755F92C24A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		429EE2A1286B39D1009439C6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				429EE2A0286B39D1009439C6 /* AppLovinMAX-Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		429EE2A2286B39D1009439C6 /* AppLovinMAX-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				42BA81C92875DF25001F1744 /* Info.plist */,
+				42389E1828747CEE006024BA /* Shared */,
+				42389E0528742FFD006024BA /* Modules */,
+				429EE2A3286B39D1009439C6 /* AppLovinMaxDemoApp.swift */,
+				429EE2A5286B39D1009439C6 /* ContentView.swift */,
+				42389E0128742D43006024BA /* HomeView.swift */,
+				429EE2A7286B39D2009439C6 /* Assets.xcassets */,
+				429EE2A9286B39D2009439C6 /* Preview Content */,
+			);
+			path = "AppLovinMAX-Demo";
+			sourceTree = "<group>";
+		};
+		429EE2A9286B39D2009439C6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				429EE2AA286B39D2009439C6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D25A351439A02A755F92C24A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42BA81BB2875AC91001F1744 /* GoogleMobileAdsAdapter.framework */,
+				42389DF728735618006024BA /* BidMachineAdapter.framework */,
+				42389DF828735618006024BA /* AppLovinDecorator.framework */,
+				42389DF928735618006024BA /* MobileAdvertising.framework */,
+				D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC5257D01495BEB6BFA1EB2E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */,
+				078D6AEA594DCCBBB0DED4F0 /* Pods-AppLovinMAX-Demo.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		429EE29F286B39D1009439C6 /* AppLovinMAX-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 429EE2AE286B39D2009439C6 /* Build configuration list for PBXNativeTarget "AppLovinMAX-Demo" */;
+			buildPhases = (
+				B0474D747F61B035E780D94F /* [CP] Check Pods Manifest.lock */,
+				429EE29C286B39D1009439C6 /* Sources */,
+				429EE29D286B39D1009439C6 /* Frameworks */,
+				429EE29E286B39D1009439C6 /* Resources */,
+				206D479DF9B4E35B3277572F /* [CP] Embed Pods Frameworks */,
+				B0304FECAC1B4247F052276B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AppLovinMAX-Demo";
+			productName = "AppLovinMAX-Demo";
+			productReference = 429EE2A0286B39D1009439C6 /* AppLovinMAX-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		429EE296286B399F009439C6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					429EE29F286B39D1009439C6 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 429EE299286B399F009439C6 /* Build configuration list for PBXProject "Sandbox" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 429EE295286B399F009439C6;
+			productRefGroup = 429EE2A1286B39D1009439C6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				429EE29F286B39D1009439C6 /* AppLovinMAX-Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		429EE29E286B39D1009439C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				429EE2AB286B39D2009439C6 /* Preview Assets.xcassets in Resources */,
+				429EE2A8286B39D2009439C6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		206D479DF9B4E35B3277572F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0304FECAC1B4247F052276B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0474D747F61B035E780D94F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppLovinMAX-Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		429EE29C286B39D1009439C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42389E0428742E34006024BA /* InterstitialView.swift in Sources */,
+				429EE2A6286B39D1009439C6 /* ContentView.swift in Sources */,
+				42389E082874301F006024BA /* InterstitialViewModel.swift in Sources */,
+				429EE2A4286B39D1009439C6 /* AppLovinMaxDemoApp.swift in Sources */,
+				42389E0A28743032006024BA /* InterstitialEventPublisher.swift in Sources */,
+				42389E0228742D43006024BA /* HomeView.swift in Sources */,
+				42389E1A28747D00006024BA /* RoundedCorners.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		429EE29A286B399F009439C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		429EE29B286B399F009439C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		429EE2AC286B39D2009439C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"AppLovinMAX-Demo/Preview Content\"";
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AppLovinMAX-Demo/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.AppLovinMAX-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		429EE2AD286B39D2009439C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 078D6AEA594DCCBBB0DED4F0 /* Pods-AppLovinMAX-Demo.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = "\"AppLovinMAX-Demo/Preview Content\"";
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AppLovinMAX-Demo/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.AppLovinMAX-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		429EE299286B399F009439C6 /* Build configuration list for PBXProject "Sandbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				429EE29A286B399F009439C6 /* Debug */,
+				429EE29B286B399F009439C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		429EE2AE286B39D2009439C6 /* Build configuration list for PBXNativeTarget "AppLovinMAX-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				429EE2AC286B39D2009439C6 /* Debug */,
+				429EE2AD286B39D2009439C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 429EE296286B399F009439C6 /* Project object */;
+}

@@ -11,25 +11,14 @@ import MobileAdvertising
 
 
 struct InterstitialView: View {
-    static private let offset: CGFloat = 154
-    
     @StateObject var vm = InterstitialViewModel()
-    
-    @State private var offset: CGFloat = InterstitialView.offset
-    
+        
     var body: some View {
-        ZStack(alignment: .bottom) {
-            List(vm.events) { event in
-                AdEventView(model: event)
-            }
-            .listStyle(.plain)
-            .padding(.bottom, 100)
-            
-            VStack(alignment: .center) {
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(Color.secondary)
-                    .frame(width: 32, height: 4)
-                    .padding(.top)
+        FullscreenAdPresentationView(
+            title: "Interstitial",
+            events: vm.events
+        ) {
+            VStack(spacing: 16) {
                 HStack(spacing: 10) {
                     Button(action: {
                         vm.state.isReady ? vm.present() : vm.load()
@@ -55,8 +44,6 @@ struct InterstitialView: View {
                             .foregroundColor(.red)
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Ad Unit Identifier".uppercased())
@@ -66,32 +53,9 @@ struct InterstitialView: View {
                         .textFieldStyle(.roundedBorder)
                         .frame(height: 44)
                 }
-                .padding()
-                .padding(.bottom, 64)
             }
-            .background(
-                RoundedCorners(tl: 20, tr: 20)
-            )
-            .frame(maxWidth: .infinity)
-            .offset(y: offset)
-            .gesture(
-                DragGesture()
-                    .onChanged { gesture in
-                        withAnimation(.interactiveSpring())  {
-                            offset = max(0, min(gesture.translation.height, InterstitialView.offset))
-                        }
-                    }
-                    .onEnded { _ in
-                        if offset > 50 {
-                            withAnimation { offset = InterstitialView.offset }
-                        } else {
-                            withAnimation { offset = 0 }
-                        }
-                    }
-            )
+            .padding(.horizontal)
         }
-        .navigationTitle("Interstitial")
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

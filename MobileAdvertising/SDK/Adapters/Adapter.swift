@@ -14,10 +14,23 @@ import Foundation
 
 
 public protocol InitializableAdapter: Adapter {
-    @available(iOS 13.0.0, *)
-    func initialize() async throws
-    
     func initilize(_ completion: @escaping (Error?) -> ())
+}
+
+
+extension InitializableAdapter {
+    @available(iOS 13, *)
+    public func initialize() async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            initilize { error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
+        }
+    }
 }
 
 

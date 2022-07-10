@@ -15,3 +15,7 @@ public protocol InterstitialDemandSourceAdapter: Adapter {
 public protocol RewardedAdDemandSourceAdapter: Adapter {
     func rewardedAd() throws -> RewardedAdDemandProvider
 }
+
+public protocol AdViewDemandSourceAdapter: Adapter {
+    func adView(_ context: AdViewContext) throws -> AdViewDemandProvider
+}

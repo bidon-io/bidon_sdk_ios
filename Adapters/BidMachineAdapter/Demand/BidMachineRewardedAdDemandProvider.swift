@@ -32,10 +32,6 @@ internal final class BidMachineRewardedAdDemandProvider: NSObject {
 
 
 extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
-    func request(pricefloor: Price) async throws -> Ad {
-        fatalError()
-    }
-
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse

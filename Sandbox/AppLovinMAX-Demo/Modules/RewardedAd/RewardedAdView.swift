@@ -19,18 +19,11 @@ struct RewardedAdView: View {
     @State private var offset: CGFloat = RewardedAdView.offset
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            List(vm.events) { event in
-                AdEventView(model: event)
-            }
-            .listStyle(.plain)
-            .padding(.bottom, 100)
-            
-            VStack(alignment: .center) {
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(Color.secondary)
-                    .frame(width: 32, height: 4)
-                    .padding(.top)
+        FullscreenAdPresentationView(
+            title: "Rewarded Ad",
+            events: vm.events
+        ) {
+            VStack(spacing: 16) {
                 HStack(spacing: 10) {
                     Button(action: {
                         vm.state.isReady ? vm.present() : vm.load()
@@ -57,7 +50,6 @@ struct RewardedAdView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .padding()
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Ad Unit Identifier".uppercased())
@@ -67,32 +59,9 @@ struct RewardedAdView: View {
                         .textFieldStyle(.roundedBorder)
                         .frame(height: 44)
                 }
-                .padding()
-                .padding(.bottom, 64)
             }
-            .background(
-                RoundedCorners(tl: 20, tr: 20)
-            )
-            .frame(maxWidth: .infinity)
-            .offset(y: offset)
-            .gesture(
-                DragGesture()
-                    .onChanged { gesture in
-                        withAnimation(.interactiveSpring())  {
-                            offset = max(0, min(gesture.translation.height, RewardedAdView.offset))
-                        }
-                    }
-                    .onEnded { _ in
-                        if offset > 50 {
-                            withAnimation { offset = RewardedAdView.offset }
-                        } else {
-                            withAnimation { offset = 0 }
-                        }
-                    }
-            )
+            .padding(.horizontal)
         }
-        .navigationTitle("Rewarded Ad")
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

@@ -20,7 +20,6 @@ final class InterstitialViewModel: AdViewModel {
         }
     }
     
-    
     func load() {
         let interstital = BNMAInterstitialAd(
             adUnitIdentifier: adUnitIdentifier,

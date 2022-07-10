@@ -10,6 +10,10 @@ import GoogleMobileAds
 import MobileAdvertising
 
 
+protocol ResponseInfoProvider {
+    var info: GADResponseInfo? { get }
+}
+
 final internal class BNGADResponseInfoWrapper: NSObject, Ad {
     var id: String
     var price: Price
@@ -30,16 +34,21 @@ final internal class BNGADResponseInfoWrapper: NSObject, Ad {
     }
     
     convenience init(
-        _ fullscreenAd: BNGADFullscreenAd,
+        _ provider: ResponseInfoProvider,
         item: LineItem
     ) {
         self.init(
-            id: fullscreenAd.responseInfo.responseIdentifier ?? item.adUnitId,
+            id: provider.info?.responseIdentifier ?? item.adUnitId,
             price: item.pricefloor,
-            dsp: fullscreenAd.responseInfo.adNetworkClassName ?? "admob",
-            wrapped: fullscreenAd.responseInfo
+            dsp: provider.info?.adNetworkClassName ?? "admob",
+            wrapped: provider.info ?? NSNull()
         )
     }
+}
+
+
+extension GADBannerView: ResponseInfoProvider {
+    var info: GADResponseInfo? { responseInfo }
 }
 
 

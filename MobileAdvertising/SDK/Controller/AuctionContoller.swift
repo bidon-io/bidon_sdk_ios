@@ -19,7 +19,7 @@ public final class AuctionController {
     private lazy var active = Set<ConcurentAuctionRound>()
     private lazy var repository = AdsRepository()
     
-    private var winner: Ad?
+    private(set) public var winner: Ad?
     
     internal init(
         auction: ConcurentAuction,
@@ -38,6 +38,10 @@ public final class AuctionController {
     public func load() {
         delegate?.controllerDidStartAuction(self)
         auction.root.forEach(perform)
+    }
+    
+    public func provider<T>(for ad: Ad) -> T? {
+        return repository.provider(for: ad) as? T
     }
     
     public func finish(

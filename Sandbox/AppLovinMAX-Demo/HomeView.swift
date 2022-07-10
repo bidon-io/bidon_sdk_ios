@@ -22,6 +22,14 @@ struct HomeView: View {
                         "Rewarded Ad",
                         destination: RewardedAdView()
                     )
+                    NavigationLink(
+                        "Banner",
+                        destination: BannerView()
+                    )
+                    NavigationLink(
+                        "MREC",
+                        destination: MRECView()
+                    )
                 }
             }
             .navigationBarHidden(true)

@@ -66,10 +66,6 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BNGAD
 
 
 extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
-    func request(pricefloor: Price) async throws -> Ad {
-        fatalError()
-    }
-    
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse

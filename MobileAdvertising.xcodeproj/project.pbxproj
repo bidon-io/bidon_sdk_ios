@@ -28,6 +28,9 @@
 		42BA81AC28758AC6001F1744 /* AuctionControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81AB28758AC6001F1744 /* AuctionControllerBuilder.swift */; };
 		42BA81D7287702B6001F1744 /* RewardedAdDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D6287702B6001F1744 /* RewardedAdDemandProvider.swift */; };
 		42BA81DB28770B5D001F1744 /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81DA28770B5D001F1744 /* Reward.swift */; };
+		42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */; };
+		42BA82072878547C001F1744 /* AdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82062878547C001F1744 /* AdContainerView.swift */; };
+		42BA820928785506001F1744 /* AdContainerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820828785506001F1744 /* AdContainerViewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +56,9 @@
 		42BA81AB28758AC6001F1744 /* AuctionControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionControllerBuilder.swift; sourceTree = "<group>"; };
 		42BA81D6287702B6001F1744 /* RewardedAdDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdDemandProvider.swift; sourceTree = "<group>"; };
 		42BA81DA28770B5D001F1744 /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
+		42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewDemandProvider.swift; sourceTree = "<group>"; };
+		42BA82062878547C001F1744 /* AdContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContainerView.swift; sourceTree = "<group>"; };
+		42BA820828785506001F1744 /* AdContainerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContainerViewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,7 @@
 				429EE2CA286D9995009439C6 /* Auction */,
 				429EE2C3286CA252009439C6 /* Adapters */,
 				429EE2B9286C82D9009439C6 /* Repository */,
+				42BA820528785464001F1744 /* Banner */,
 				422101972859E2C3006596DA /* SDK.swift */,
 				42389E162874665A006024BA /* UIApplication+Extensions.swift */,
 				4221019B2859E3D0006596DA /* Defines.swift */,
@@ -111,6 +118,7 @@
 				429EE2C8286CA2B0009439C6 /* DemandProvider.swift */,
 				42389E1128745C6A006024BA /* InterstitialDemandProvider.swift */,
 				42BA81D6287702B6001F1744 /* RewardedAdDemandProvider.swift */,
+				42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -156,6 +164,15 @@
 				42389DF12872F63F006024BA /* AuctionResolver.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		42BA820528785464001F1744 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				42BA82062878547C001F1744 /* AdContainerView.swift */,
+				42BA820828785506001F1744 /* AdContainerViewManager.swift */,
+			);
+			path = Banner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,12 +260,14 @@
 				4221019A2859E35C006596DA /* Adapter.swift in Sources */,
 				42389DF22872F63F006024BA /* AuctionResolver.swift in Sources */,
 				42389DEE2872F52A006024BA /* AdsRepository.swift in Sources */,
+				42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */,
 				42BA81DB28770B5D001F1744 /* Reward.swift in Sources */,
 				429EE2C9286CA2B0009439C6 /* DemandProvider.swift in Sources */,
 				42BA81AA28758A90001F1744 /* AuctionControllerDelegate.swift in Sources */,
 				42389DF02872F57D006024BA /* Ad.swift in Sources */,
 				42389E172874665A006024BA /* UIApplication+Extensions.swift in Sources */,
 				429EE2DB286F1C8C009439C6 /* ConcurentAuctionRound.swift in Sources */,
+				42BA820928785506001F1744 /* AdContainerViewManager.swift in Sources */,
 				429EE2C2286CA23F009439C6 /* Repository.swift in Sources */,
 				429EE2C7286CA283009439C6 /* DemandSourceAdapter.swift in Sources */,
 				4221019C2859E3D0006596DA /* Defines.swift in Sources */,
@@ -257,6 +276,7 @@
 				42389E1228745C6A006024BA /* InterstitialDemandProvider.swift in Sources */,
 				42BA81AC28758AC6001F1744 /* AuctionControllerBuilder.swift in Sources */,
 				429EE2D1286DD0E2009439C6 /* AuctionContoller.swift in Sources */,
+				42BA82072878547C001F1744 /* AdContainerView.swift in Sources */,
 				42389DEC2872F497006024BA /* AdaptersRepository.swift in Sources */,
 				42BA81D7287702B6001F1744 /* RewardedAdDemandProvider.swift in Sources */,
 			);

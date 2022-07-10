@@ -77,10 +77,6 @@ internal final class AppLovinFullscreenDemandProvider<FullscreenAd: MAFullscreen
 
 
 extension AppLovinFullscreenDemandProvider: InterstitialDemandProvider {
-    func request(pricefloor: Price) async throws -> Ad {
-        fatalError()
-    }
-
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse

@@ -31,10 +31,6 @@ internal final class BidMachineInterstitialDemandProvider: NSObject {
 
 
 extension BidMachineInterstitialDemandProvider: InterstitialDemandProvider {
-    func request(pricefloor: Price) async throws -> Ad {
-        fatalError()
-    }
-
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse

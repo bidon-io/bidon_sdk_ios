@@ -43,4 +43,9 @@ public extension SDK {
         let sources: [RewardedAdDemandSourceAdapter] = repository.all()
         return sources.compactMap { try? $0.rewardedAd() }
     }
+    
+    func adViewDemandProviders(_ context: AdViewContext) -> [AdViewDemandProvider] {
+        let sources: [AdViewDemandSourceAdapter] = repository.all()
+        return sources.compactMap { try? $0.adView(context) }
+    }
 }

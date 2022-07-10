@@ -52,6 +52,10 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
                 rewardedAd: [
                     LineItem(0.1, adUnitId: "ca-app-pub-3940256099942544/1712485313"),
                     LineItem(0.05, adUnitId: "ca-app-pub-3940256099942544/1712485313"),
+                ],
+                banner: [
+                    LineItem(0.1, adUnitId: "ca-app-pub-3940256099942544/2934735716"),
+                    LineItem(0.05, adUnitId: "ca-app-pub-3940256099942544/2934735716")
                 ]
             )
         )

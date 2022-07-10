@@ -13,7 +13,7 @@ protocol BNGADFullscreenAdRewardDelegate: AnyObject {
     func rewardedAd(_ rewardedAd: GADRewardedAd, didReceiveReward reward: GADAdReward)
 }
 
-protocol BNGADFullscreenAd: GADFullScreenPresentingAd {
+protocol BNGADFullscreenAd: GADFullScreenPresentingAd, ResponseInfoProvider {
     static func request(
         adUnitID: String,
         request: GADRequest,
@@ -21,7 +21,6 @@ protocol BNGADFullscreenAd: GADFullScreenPresentingAd {
     )
     
     var rewardDelegate: BNGADFullscreenAdRewardDelegate? { get set }
-    var responseInfo: GADResponseInfo { get }
     
     func present(fromRootViewController rootViewController: UIViewController)
 }
@@ -44,6 +43,8 @@ extension GADInterstitialAd: BNGADFullscreenAd {
         get { nil }
         set { }
     }
+    
+    var info: GADResponseInfo? { Optional(responseInfo) }
 }
 
 
@@ -67,6 +68,8 @@ extension GADRewardedAd: BNGADFullscreenAd {
         set { objc_setAssociatedObject(self, &GADRewardedAd.rewardDelegateKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
     }
     
+    var info: GADResponseInfo? { Optional(responseInfo) }
+
     func present(fromRootViewController rootViewController: UIViewController) {
         present(fromRootViewController: rootViewController) { [weak self] in
             guard let self = self else { return }

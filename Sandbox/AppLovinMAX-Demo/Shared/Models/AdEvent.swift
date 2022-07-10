@@ -25,6 +25,8 @@ enum AdEvent {
     case didPay(ad: Ad)
     case didGenerateCreativeId(id: String, ad: Ad)
     case didReward(ad: Ad, reward: Reward)
+    case didExpand(ad: Ad)
+    case didCollapse(ad: Ad)
 }
 
 extension AdEvent {
@@ -44,6 +46,8 @@ extension AdEvent {
         case .didDisplayFail: return Text("An attempt to display ads was unsuccessful")
         case .didGenerateCreativeId: return Text("The ad did generate creative id")
         case .didReward(_, let reward): return Text("The ad did receive reward: ") + Text("\"\(reward.amount)\"").bold() + Text(" of ") + Text(reward.label).bold()
+        case .didExpand: return Text("The ad did expand")
+        case .didCollapse: return Text("The ad did collapse")
         }
     }
     
@@ -58,11 +62,14 @@ extension AdEvent {
         case .didHide(let ad): return ad.text
         case .didClick(let ad): return ad.text
         case .didLoad(let ad): return ad.text
+        case .didExpand(let ad): return ad.text
+        case .didCollapse(let ad): return ad.text
         case .didReceive(let ad): return ad.text
         case .didDisplay(ad: let ad): return ad.text
         case .didGenerateCreativeId(let id, let ad): return "CID: \(id), \(ad)"
         case .didDisplayFail(_, let error): return error.localizedDescription
         case .didFail(_, let error): return error.localizedDescription
+        
         }
     }
     

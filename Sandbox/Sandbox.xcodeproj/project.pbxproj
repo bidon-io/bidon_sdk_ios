@@ -27,6 +27,12 @@
 		42BA81E928771D9A001F1744 /* RewardedAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81E828771D9A001F1744 /* RewardedAdView.swift */; };
 		42BA81EB28771DBF001F1744 /* RewardedAdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81EA28771DBF001F1744 /* RewardedAdViewModel.swift */; };
 		42BA81ED28771E28001F1744 /* AdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81EC28771E28001F1744 /* AdViewModel.swift */; };
+		42BA81FF287824D1001F1744 /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81FE287824D1001F1744 /* AdBannerView.swift */; };
+		42BA820228784D9C001F1744 /* BannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820128784D9C001F1744 /* BannerViewModel.swift */; };
+		42BA820428784E41001F1744 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820328784E41001F1744 /* BannerView.swift */; };
+		42BA821228788D74001F1744 /* MRECViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821128788D74001F1744 /* MRECViewModel.swift */; };
+		42BA821428788DA3001F1744 /* MRECView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821328788DA3001F1744 /* MRECView.swift */; };
+		42BA821628789009001F1744 /* AdPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821528789009001F1744 /* AdPresentationView.swift */; };
 		CF95B206081C3B7C4DC26915 /* Pods_AppLovinMAX_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +60,12 @@
 		42BA81E828771D9A001F1744 /* RewardedAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdView.swift; sourceTree = "<group>"; };
 		42BA81EA28771DBF001F1744 /* RewardedAdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdViewModel.swift; sourceTree = "<group>"; };
 		42BA81EC28771E28001F1744 /* AdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewModel.swift; sourceTree = "<group>"; };
+		42BA81FE287824D1001F1744 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
+		42BA820128784D9C001F1744 /* BannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewModel.swift; sourceTree = "<group>"; };
+		42BA820328784E41001F1744 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		42BA821128788D74001F1744 /* MRECViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRECViewModel.swift; sourceTree = "<group>"; };
+		42BA821328788DA3001F1744 /* MRECView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRECView.swift; sourceTree = "<group>"; };
+		42BA821528789009001F1744 /* AdPresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPresentationView.swift; sourceTree = "<group>"; };
 		C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinMAX-Demo.debug.xcconfig"; path = "Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppLovinMAX_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -77,6 +89,8 @@
 		42389E0528742FFD006024BA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				42BA821028788D1E001F1744 /* MREC */,
+				42BA820028784CA7001F1744 /* Banner */,
 				42BA81E728771D88001F1744 /* RewardedAd */,
 				42389E062874300E006024BA /* Interstitial */,
 				42BA81EC28771E28001F1744 /* AdViewModel.swift */,
@@ -158,6 +172,8 @@
 			children = (
 				42389E1928747D00006024BA /* RoundedCorners.swift */,
 				42BA81D02876DDC0001F1744 /* AdEventView.swift */,
+				42BA81FE287824D1001F1744 /* AdBannerView.swift */,
+				42BA821528789009001F1744 /* AdPresentationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,6 +194,24 @@
 				42BA81EA28771DBF001F1744 /* RewardedAdViewModel.swift */,
 			);
 			path = RewardedAd;
+			sourceTree = "<group>";
+		};
+		42BA820028784CA7001F1744 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				42BA820128784D9C001F1744 /* BannerViewModel.swift */,
+				42BA820328784E41001F1744 /* BannerView.swift */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
+		42BA821028788D1E001F1744 /* MREC */ = {
+			isa = PBXGroup;
+			children = (
+				42BA821128788D74001F1744 /* MRECViewModel.swift */,
+				42BA821328788DA3001F1744 /* MRECView.swift */,
+			);
+			path = MREC;
 			sourceTree = "<group>";
 		};
 		D25A351439A02A755F92C24A /* Frameworks */ = {
@@ -336,10 +370,13 @@
 			files = (
 				42389E0428742E34006024BA /* InterstitialView.swift in Sources */,
 				42BA81ED28771E28001F1744 /* AdViewModel.swift in Sources */,
+				42BA820228784D9C001F1744 /* BannerViewModel.swift in Sources */,
+				42BA821628789009001F1744 /* AdPresentationView.swift in Sources */,
 				42BA81E928771D9A001F1744 /* RewardedAdView.swift in Sources */,
 				429EE2A6286B39D1009439C6 /* ContentView.swift in Sources */,
 				42389E082874301F006024BA /* InterstitialViewModel.swift in Sources */,
 				429EE2A4286B39D1009439C6 /* AppLovinMaxDemoApp.swift in Sources */,
+				42BA81FF287824D1001F1744 /* AdBannerView.swift in Sources */,
 				42BA81E628771C19001F1744 /* AdState.swift in Sources */,
 				42BA81D12876DDC0001F1744 /* AdEventView.swift in Sources */,
 				42389E0228742D43006024BA /* HomeView.swift in Sources */,
@@ -347,7 +384,10 @@
 				42BA81EB28771DBF001F1744 /* RewardedAdViewModel.swift in Sources */,
 				42BA81CB2876D5DE001F1744 /* AdEventPublisher.swift in Sources */,
 				42BA81CD2876D9D7001F1744 /* AppLovinDecorator+Combine.swift in Sources */,
+				42BA820428784E41001F1744 /* BannerView.swift in Sources */,
 				42389E1A28747D00006024BA /* RoundedCorners.swift in Sources */,
+				42BA821228788D74001F1744 /* MRECViewModel.swift in Sources */,
+				42BA821428788DA3001F1744 /* MRECView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

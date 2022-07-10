@@ -10,7 +10,7 @@ import BidMachine
 import MobileAdvertising
 
 
-internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter
+internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter & AdViewDemandSourceAdapter
 
 
 @objc public final class BidMachineDemandSourceAdapter: NSObject, DemandSourceAdapter {
@@ -30,6 +30,10 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
     public func rewardedAd() throws -> RewardedAdDemandProvider {
         return BidMachineRewardedAdDemandProvider()
     }
+    
+    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+        return BidMachineBannerDemandProvider(context: context)
+    }
 }
 
 
@@ -47,19 +51,6 @@ extension BidMachineDemandSourceAdapter: ParameterizedAdapter {
 
 
 extension BidMachineDemandSourceAdapter: InitializableAdapter {
-    @available(iOS 13, *)
-    public func initialize() async throws {
-        return try await withCheckedThrowingContinuation { continuation in
-            initilize { error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else {
-                    continuation.resume()
-                }
-            }
-        }
-    }
-    
     public func initilize(
         _ completion: @escaping (Error?) -> ()
     ) {

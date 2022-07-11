@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct RoundedCorners: View {
-    var color: Color = Color(uiColor: .secondarySystemBackground)
+    var color: Color = Color(UIColor.secondarySystemBackground)
     
     var tl: CGFloat = 0.0
     var tr: CGFloat = 0.0

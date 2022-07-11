@@ -33,6 +33,18 @@
 		42BA821228788D74001F1744 /* MRECViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821128788D74001F1744 /* MRECViewModel.swift */; };
 		42BA821428788DA3001F1744 /* MRECView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821328788DA3001F1744 /* MRECView.swift */; };
 		42BA821628789009001F1744 /* AdPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821528789009001F1744 /* AdPresentationView.swift */; };
+		42BA822E287B30D6001F1744 /* IronSourceDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA822D287B30D6001F1744 /* IronSourceDemoApp.swift */; };
+		42BA8230287B30D6001F1744 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA822F287B30D6001F1744 /* ContentView.swift */; };
+		42BA8232287B30D7001F1744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42BA8231287B30D7001F1744 /* Assets.xcassets */; };
+		42BA8235287B30D7001F1744 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42BA8234287B30D7001F1744 /* Preview Assets.xcassets */; };
+		42BA823D287B3395001F1744 /* BidMachineAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BA8239287B3395001F1744 /* BidMachineAdapter.framework */; };
+		42BA823F287B3395001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BA823A287B3395001F1744 /* GoogleMobileAdsAdapter.framework */; };
+		42BA8241287B3395001F1744 /* IronSourceDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BA823B287B3395001F1744 /* IronSourceDecorator.framework */; };
+		42BA8243287B3395001F1744 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BA823C287B3395001F1744 /* MobileAdvertising.framework */; };
+		42BA8247287B3640001F1744 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8246287B3640001F1744 /* HomeViewModel.swift */; };
+		42BA824B287B3A4F001F1744 /* ISInitializationDelegatePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA824A287B3A4F001F1744 /* ISInitializationDelegatePublisher.swift */; };
+		42BA824D287B44DA001F1744 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA824C287B44DA001F1744 /* HomeView.swift */; };
+		5AD96AB751E760B75E33C1B3 /* Pods_IronSource_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B16B68E746E573C2D23FE99 /* Pods_IronSource_Demo.framework */; };
 		CF95B206081C3B7C4DC26915 /* Pods_AppLovinMAX_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,8 +78,24 @@
 		42BA821128788D74001F1744 /* MRECViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRECViewModel.swift; sourceTree = "<group>"; };
 		42BA821328788DA3001F1744 /* MRECView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRECView.swift; sourceTree = "<group>"; };
 		42BA821528789009001F1744 /* AdPresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPresentationView.swift; sourceTree = "<group>"; };
+		42BA822B287B30D6001F1744 /* IronSource-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IronSource-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA822D287B30D6001F1744 /* IronSourceDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronSourceDemoApp.swift; sourceTree = "<group>"; };
+		42BA822F287B30D6001F1744 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		42BA8231287B30D7001F1744 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		42BA8234287B30D7001F1744 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		42BA8239287B3395001F1744 /* BidMachineAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidMachineAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA823A287B3395001F1744 /* GoogleMobileAdsAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleMobileAdsAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA823B287B3395001F1744 /* IronSourceDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IronSourceDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA823C287B3395001F1744 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA8246287B3640001F1744 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		42BA8248287B37F2001F1744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		42BA824A287B3A4F001F1744 /* ISInitializationDelegatePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISInitializationDelegatePublisher.swift; sourceTree = "<group>"; };
+		42BA824C287B44DA001F1744 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8B16B68E746E573C2D23FE99 /* Pods_IronSource_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSource_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinMAX-Demo.debug.xcconfig"; path = "Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppLovinMAX_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB9E126F407D4AED0211FE4F /* Pods-IronSource-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSource-Demo.debug.xcconfig"; path = "Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		F0260EF7A3BBC980251E0461 /* Pods-IronSource-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSource-Demo.release.xcconfig"; path = "Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +108,18 @@
 				42389DFC28735618006024BA /* AppLovinDecorator.framework in Frameworks */,
 				42389DFE28735618006024BA /* MobileAdvertising.framework in Frameworks */,
 				42BA81BC2875AC91001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42BA8228287B30D6001F1744 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42BA823D287B3395001F1744 /* BidMachineAdapter.framework in Frameworks */,
+				42BA8241287B3395001F1744 /* IronSourceDecorator.framework in Frameworks */,
+				5AD96AB751E760B75E33C1B3 /* Pods_IronSource_Demo.framework in Frameworks */,
+				42BA8243287B3395001F1744 /* MobileAdvertising.framework in Frameworks */,
+				42BA823F287B3395001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				429EE2A2286B39D1009439C6 /* AppLovinMAX-Demo */,
+				42BA822C287B30D6001F1744 /* IronSource-Demo */,
 				429EE2A1286B39D1009439C6 /* Products */,
 				EC5257D01495BEB6BFA1EB2E /* Pods */,
 				D25A351439A02A755F92C24A /* Frameworks */,
@@ -131,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				429EE2A0286B39D1009439C6 /* AppLovinMAX-Demo.app */,
+				42BA822B287B30D6001F1744 /* IronSource-Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,14 +256,50 @@
 			path = MREC;
 			sourceTree = "<group>";
 		};
+		42BA822C287B30D6001F1744 /* IronSource-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				42BA8248287B37F2001F1744 /* Info.plist */,
+				42BA8249287B39FD001F1744 /* Publishers */,
+				42BA822D287B30D6001F1744 /* IronSourceDemoApp.swift */,
+				42BA822F287B30D6001F1744 /* ContentView.swift */,
+				42BA824C287B44DA001F1744 /* HomeView.swift */,
+				42BA8246287B3640001F1744 /* HomeViewModel.swift */,
+				42BA8231287B30D7001F1744 /* Assets.xcassets */,
+				42BA8233287B30D7001F1744 /* Preview Content */,
+			);
+			path = "IronSource-Demo";
+			sourceTree = "<group>";
+		};
+		42BA8233287B30D7001F1744 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				42BA8234287B30D7001F1744 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		42BA8249287B39FD001F1744 /* Publishers */ = {
+			isa = PBXGroup;
+			children = (
+				42BA824A287B3A4F001F1744 /* ISInitializationDelegatePublisher.swift */,
+			);
+			path = Publishers;
+			sourceTree = "<group>";
+		};
 		D25A351439A02A755F92C24A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42BA8239287B3395001F1744 /* BidMachineAdapter.framework */,
+				42BA823A287B3395001F1744 /* GoogleMobileAdsAdapter.framework */,
+				42BA823B287B3395001F1744 /* IronSourceDecorator.framework */,
+				42BA823C287B3395001F1744 /* MobileAdvertising.framework */,
 				42BA81BB2875AC91001F1744 /* GoogleMobileAdsAdapter.framework */,
 				42389DF728735618006024BA /* BidMachineAdapter.framework */,
 				42389DF828735618006024BA /* AppLovinDecorator.framework */,
 				42389DF928735618006024BA /* MobileAdvertising.framework */,
 				D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */,
+				8B16B68E746E573C2D23FE99 /* Pods_IronSource_Demo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -231,6 +309,8 @@
 			children = (
 				C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */,
 				078D6AEA594DCCBBB0DED4F0 /* Pods-AppLovinMAX-Demo.release.xcconfig */,
+				EB9E126F407D4AED0211FE4F /* Pods-IronSource-Demo.debug.xcconfig */,
+				F0260EF7A3BBC980251E0461 /* Pods-IronSource-Demo.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -259,6 +339,25 @@
 			productReference = 429EE2A0286B39D1009439C6 /* AppLovinMAX-Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		42BA822A287B30D6001F1744 /* IronSource-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42BA8236287B30D7001F1744 /* Build configuration list for PBXNativeTarget "IronSource-Demo" */;
+			buildPhases = (
+				20B6A6DB5DCFA8F7D69BD9DA /* [CP] Check Pods Manifest.lock */,
+				42BA8227287B30D6001F1744 /* Sources */,
+				42BA8228287B30D6001F1744 /* Frameworks */,
+				42BA8229287B30D6001F1744 /* Resources */,
+				3F28DE5DA9D14EB7517E310F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "IronSource-Demo";
+			productName = "IronSource-Demo";
+			productReference = 42BA822B287B30D6001F1744 /* IronSource-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -270,6 +369,9 @@
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					429EE29F286B39D1009439C6 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					42BA822A287B30D6001F1744 = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
 				};
@@ -288,6 +390,7 @@
 			projectRoot = "";
 			targets = (
 				429EE29F286B39D1009439C6 /* AppLovinMAX-Demo */,
+				42BA822A287B30D6001F1744 /* IronSource-Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -299,6 +402,15 @@
 			files = (
 				429EE2AB286B39D2009439C6 /* Preview Assets.xcassets in Resources */,
 				429EE2A8286B39D2009439C6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42BA8229287B30D6001F1744 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42BA8235287B30D7001F1744 /* Preview Assets.xcassets in Resources */,
+				42BA8232287B30D7001F1744 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +432,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		20B6A6DB5DCFA8F7D69BD9DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IronSource-Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F28DE5DA9D14EB7517E310F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B0304FECAC1B4247F052276B /* [CP] Copy Pods Resources */ = {
@@ -388,6 +539,18 @@
 				42389E1A28747D00006024BA /* RoundedCorners.swift in Sources */,
 				42BA821228788D74001F1744 /* MRECViewModel.swift in Sources */,
 				42BA821428788DA3001F1744 /* MRECView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42BA8227287B30D6001F1744 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42BA8230287B30D6001F1744 /* ContentView.swift in Sources */,
+				42BA822E287B30D6001F1744 /* IronSourceDemoApp.swift in Sources */,
+				42BA8247287B3640001F1744 /* HomeViewModel.swift in Sources */,
+				42BA824D287B44DA001F1744 /* HomeView.swift in Sources */,
+				42BA824B287B3A4F001F1744 /* ISInitializationDelegatePublisher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,7 +634,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -550,7 +713,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -559,6 +722,170 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.AppLovinMAX-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		42BA8237287B30D7001F1744 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB9E126F407D4AED0211FE4F /* Pods-IronSource-Demo.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"IronSource-Demo/Preview Content\"";
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "IronSource-Demo/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.IronSource-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		42BA8238287B30D7001F1744 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0260EF7A3BBC980251E0461 /* Pods-IronSource-Demo.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = "\"IronSource-Demo/Preview Content\"";
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "IronSource-Demo/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.IronSource-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -587,6 +914,15 @@
 			buildConfigurations = (
 				429EE2AC286B39D2009439C6 /* Debug */,
 				429EE2AD286B39D2009439C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42BA8236287B30D7001F1744 /* Build configuration list for PBXNativeTarget "IronSource-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42BA8237287B30D7001F1744 /* Debug */,
+				42BA8238287B30D7001F1744 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -16,6 +16,9 @@ final class BannerViewModel: AdViewModel {
     private let eventPassthroughSubject = PassthroughSubject<AdEvent, Never>()
     
     @Published var adFormat: MAAdFormat = UIDevice.current.userInterfaceIdiom == .pad ? .leader : .banner
+    @Published var isAutorefresh: Bool = true
+    @Published var autorefreshInterval: TimeInterval = 5
+    @Published var isAdaptive: Bool = true
     
     var bannerHieght: CGFloat {
         UIDevice.current.userInterfaceIdiom == .pad ? 90 : 50

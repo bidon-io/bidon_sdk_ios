@@ -12,9 +12,34 @@ import UIKit
 final internal class AdContainerViewManager {
     weak var container: UIView?
     
+    private var timer: Timer?
+    
     var isAdPresented: Bool {
         guard let container = container else { return false }
         return !container.subviews.isEmpty
+    }
+    
+    var isRefreshGranted: Bool { timer == nil && isAdPresented }
+    
+    func schedule(
+        _ interval: TimeInterval,
+        block: (() -> ())?
+    ) {
+        let timer = Timer.scheduledTimer(
+            withTimeInterval: interval,
+            repeats: false
+        ) { [weak self] _ in
+            self?.timer = nil
+            block?()
+        }
+        
+        RunLoop.main.add(timer, forMode: .default)
+        self.timer = timer
+    }
+    
+    func cancelRefreshTimer() {
+        timer?.invalidate()
+        timer = nil
     }
     
     func layout(view: UIView) {

@@ -13,6 +13,8 @@ import SwiftUI
 
 
 final class RewardedAdViewModel: AdViewModel {
+    @Published var placement: String = ""
+    
     private var rewardedAd: BNMARewardedAd? {
         didSet {
             guard let rewardedAd = rewardedAd else { return }
@@ -33,5 +35,10 @@ final class RewardedAdViewModel: AdViewModel {
     func present() {
         guard let rewardedAd = rewardedAd else { return }
         rewardedAd.show()
+    }
+    
+    func presentWithPlacement() {
+        guard let rewardedAd = rewardedAd else { return }
+        rewardedAd.show(forPlacement: placement)
     }
 }

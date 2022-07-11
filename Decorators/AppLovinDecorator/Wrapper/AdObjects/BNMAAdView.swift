@@ -48,8 +48,6 @@ import MobileAdvertising
             .map { $0 as NSString }
             .map { $0.boolValue } ?? false
         
-        
-        
         let ctx = AdViewContext(adFormat?.fmt ?? .banner, isAdaptive: isAdaptive)
         
         return sdk.bid.bidon.adViewDemandProviders(ctx)
@@ -120,16 +118,16 @@ import MobileAdvertising
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc public func loadAd() {
+    @objc public override func loadAd() {
         auction.load()
     }
     
     @objc public func startAutoRefresh() {
-#warning("Implement autorefresh")
+        isAutorefreshing = true
     }
     
     @objc public func stopAutoRefresh() {
-#warning("Implement autorefresh")
+        isAutorefreshing = false
     }
     
     @objc public func setExtraParameterForKey(_ key: String, value: String?) {

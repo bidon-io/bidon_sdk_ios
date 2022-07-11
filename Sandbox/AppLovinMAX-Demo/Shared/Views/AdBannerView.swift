@@ -16,8 +16,9 @@ struct AdBannerView: UIViewRepresentable {
     typealias UIViewType = BNMAAdView
     
     @Binding var isAutoRefresh: Bool
+    @Binding var autorefreshInterval: TimeInterval
     @Binding var isAdaptive: Bool
-    
+
     var adUnitIdentifier: String
     var adFormat: MAAdFormat
     var sdk: ALSdk
@@ -42,6 +43,7 @@ struct AdBannerView: UIViewRepresentable {
     
     func updateUIView(_ uiView: BNMAAdView, context: Context) {
         isAutoRefresh ? uiView.startAutoRefresh() : uiView.stopAutoRefresh()
+        uiView.autorefreshInterval = autorefreshInterval
         uiView.setExtraParameterForKey("adaptive_banner", value: isAdaptive ? "true" : "false")
     }
     

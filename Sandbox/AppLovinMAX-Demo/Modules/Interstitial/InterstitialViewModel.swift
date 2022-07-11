@@ -13,6 +13,8 @@ import SwiftUI
 
 
 final class InterstitialViewModel: AdViewModel {
+    @Published var placement: String = ""
+    
     private var interstitial: BNMAInterstitialAd? {
         didSet {
             guard let interstitial = interstitial else { return }
@@ -33,5 +35,10 @@ final class InterstitialViewModel: AdViewModel {
     func present() {
         guard let interstitial = interstitial else { return }
         interstitial.show()
+    }
+    
+    func presentWithPlacement() {
+        guard let interstitial = interstitial else { return }
+        interstitial.show(forPlacement: placement)
     }
 }

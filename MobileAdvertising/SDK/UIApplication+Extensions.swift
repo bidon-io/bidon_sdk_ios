@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-internal extension UIApplication {
+
+public extension UIApplication {
     var topViewContoller: UIViewController? {
         if #available(iOS 13.0, *) {
             return connectedScenes

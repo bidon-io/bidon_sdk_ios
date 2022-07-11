@@ -13,7 +13,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             List {
-                Section("Ads") {
+                Section(header: Text("Ads")) {
                     NavigationLink(
                         "Interstitial",
                         destination: InterstitialView()

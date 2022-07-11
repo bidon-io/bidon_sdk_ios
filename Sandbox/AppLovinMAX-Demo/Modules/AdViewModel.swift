@@ -21,7 +21,7 @@ class AdViewModel: ObservableObject {
         cancellables.removeAll()
         publisher.receive(on: DispatchQueue.main).sink { [unowned self] event in
             var state = self.state
-            
+                        
             switch event {
             case .didStartAuction: state = .loading
             case .didFail: state = .failed

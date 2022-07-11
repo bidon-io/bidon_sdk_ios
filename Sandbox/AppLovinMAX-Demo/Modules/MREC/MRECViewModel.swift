@@ -16,6 +16,8 @@ final class MRECViewModel: AdViewModel {
     private let eventPassthroughSubject = PassthroughSubject<AdEvent, Never>()
     
     @Published var adFormat: MAAdFormat = .mrec
+    @Published var isAutorefresh: Bool = true
+    @Published var autorefreshInterval: TimeInterval = 5
     
     override init() {
         super.init()

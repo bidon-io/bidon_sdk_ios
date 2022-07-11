@@ -24,8 +24,9 @@ struct BannerView: View {
             content: { content }
         ) {
             AdBannerView(
-                isAutoRefresh: .constant(true),
-                isAdaptive: .constant(true),
+                isAutoRefresh: $vm.isAutorefresh,
+                autorefreshInterval: $vm.autorefreshInterval,
+                isAdaptive: $vm.isAdaptive,
                 adUnitIdentifier: vm.adUnitIdentifier,
                 adFormat: vm.adFormat,
                 sdk: applovin,
@@ -69,17 +70,36 @@ struct BannerView: View {
                 }
             }
             .frame(maxWidth: .infinity)
+            .padding(.horizontal)
             
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Ad Unit Identifier".uppercased())
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                TextField("", text: $vm.adUnitIdentifier)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(height: 44)
+            List {
+                Section(header: Text("Ad Unit Identifier")) {
+                    TextField("Ad Unit Identifier", text: $vm.adUnitIdentifier)
+                        .textFieldStyle(.automatic)
+                }
+                
+                Section(header: Text("Auto refresh")) {
+                    Toggle("Enabled", isOn: $vm.isAutorefresh)
+                    HStack {
+                        Text("Interval")
+                        Spacer()
+                        Text(String(format: "%1.0f", vm.autorefreshInterval) + "s")
+                            .foregroundColor(.secondary)
+                    }
+                    Slider(
+                        value: Binding(
+                            get: { vm.autorefreshInterval / 5 },
+                            set: { vm.autorefreshInterval = 5 * $0 }
+                        ),
+                        in: (1...6)
+                    )
+                }
+                
+                Section(header: Text("Adaptive size")) {
+                    Toggle("Enabled", isOn: $vm.isAdaptive)
+                }
             }
         }
-        .padding(.horizontal)
     }
 }
 

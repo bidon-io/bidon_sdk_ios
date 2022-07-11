@@ -50,17 +50,27 @@ struct RewardedAdView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
+                .padding(.horizontal)
                 
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Ad Unit Identifier".uppercased())
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    TextField("", text: $vm.adUnitIdentifier)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(height: 44)
+                List {
+                    Section(header: Text("Ad Unit Identifier")) {
+                        TextField("Ad Unit Identifier", text: $vm.adUnitIdentifier)
+                            .textFieldStyle(.automatic)
+                    }
+                    
+                    Section(header: Text("Placement")) {
+                        TextField("Placement", text: $vm.placement)
+                            .textFieldStyle(.automatic)
+                        Button(action: vm.presentWithPlacement) {
+                            HStack {
+                                Spacer()
+                                Text("Show with placement")
+                                Spacer()
+                            }
+                        }
+                    }
                 }
             }
-            .padding(.horizontal)
         }
     }
 }

@@ -49,10 +49,7 @@ struct AdPresentationView<Content: View, Ad: View>: View {
                             .frame(width: 56, height: 6)
                             .padding(8)
                             .gesture(gesture(proxy))
-                        ScrollView {
-                            content
-                        }
-                        .frame(maxWidth: .infinity)
+                        content
                     }
                     .background(RoundedCorners(tl: 20, tr: 20))
                     .offset(y: proxy.size.height - offset)
@@ -131,7 +128,9 @@ struct AdPresentationView_Previews: PreviewProvider {
                 .padding()
             },
             ad: {
-                Rectangle().fill(.cyan).frame(height: 50)
+                Rectangle()
+                    .fill(.green)
+                    .frame(height: 50)
             }
         )
     }

@@ -19,7 +19,7 @@ public final class Repository<Key, Value> where Key: Hashable {
             attributes: .concurrent
         )
     }
-
+    
     var isEmpty: Bool {
         return objects.isEmpty
     }
@@ -41,6 +41,11 @@ public final class Repository<Key, Value> where Key: Hashable {
         set { setValue(newValue, key: key) }
     }
     
+    func clear() {
+        queue.sync { [unowned self] in
+            self.objects.removeAll()
+        }
+    }
     
     func all<T>() -> [T] {
         queue.sync { [unowned self] in

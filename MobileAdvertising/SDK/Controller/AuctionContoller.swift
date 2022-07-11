@@ -36,6 +36,11 @@ public final class AuctionController {
     }
     
     public func load() {
+        guard active.isEmpty else { return }
+        
+        winner = nil
+        repository.clear()
+        
         delegate?.controllerDidStartAuction(self)
         auction.root.forEach(perform)
     }

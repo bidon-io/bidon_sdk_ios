@@ -6,6 +6,7 @@ PODS:
     - Protobuf (~> 3.9)
     - StackModules (~> 1.2.1)
     - StackProtobuf (~> 0.8.1)
+  - FairBidSDK (3.28.0)
   - Google-Mobile-Ads-SDK (9.6.0):
     - GoogleAppMeasurement (< 10.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
@@ -68,6 +69,7 @@ PODS:
 DEPENDENCIES:
   - AppLovinSDK
   - BidMachine
+  - FairBidSDK
   - Google-Mobile-Ads-SDK
   - IronSourceSDK (= 7.2.3.1-APD)
 
@@ -77,6 +79,7 @@ SPEC REPOS:
   trunk:
     - AppLovinSDK
     - BidMachine
+    - FairBidSDK
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
@@ -90,6 +93,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AppLovinSDK: 119a0b2a743f9d9c6002c58776b1013778a65084
   BidMachine: a6f15f38dc7245112840d2687cb523122808d15e
+  FairBidSDK: 473c36188467896143fd3b372b6325ac25f101ee
   Google-Mobile-Ads-SDK: bdf13d37aa77e368510687b5305d4972b4f9e9c7
   GoogleAppMeasurement: 7a33224321f975d58c166657260526775d9c6b1a
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
@@ -101,6 +105,6 @@ SPEC CHECKSUMS:
   StackModules: d111b6d7441f5457980e85b0cbcc776cc4921afa
   StackProtobuf: 599ee5dfb2b6943e8f5769d92526ee6177b7bbc7
 
-PODFILE CHECKSUM: 0d2f0fd9f60c17694f2d2b65062a567a3a6b5be6
+PODFILE CHECKSUM: bb02c074fc231bfdb7cfd8fc4174c535fd30b994
 
 COCOAPODS: 1.11.3

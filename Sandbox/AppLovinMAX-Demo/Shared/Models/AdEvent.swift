@@ -69,7 +69,6 @@ extension AdEvent {
         case .didGenerateCreativeId(let id, let ad): return "CID: \(id), \(ad)"
         case .didDisplayFail(_, let error): return error.localizedDescription
         case .didFail(_, let error): return error.localizedDescription
-        
         }
     }
     

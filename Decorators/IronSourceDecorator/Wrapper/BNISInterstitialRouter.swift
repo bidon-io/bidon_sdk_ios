@@ -10,7 +10,7 @@ import IronSource
 import MobileAdvertising
 
 
-final class InterstitialRouter: NSObject {
+final class BNISInterstitialRouter: NSObject {
     let mediator = IronSourceInterstitialDemandProvider()
     
     weak var delegate: ISInterstitialDelegate?
@@ -60,7 +60,7 @@ final class InterstitialRouter: NSObject {
 }
 
 
-extension InterstitialRouter: AuctionControllerDelegate {
+extension BNISInterstitialRouter: AuctionControllerDelegate {
     func controllerDidStartAuction(_ controller: AuctionController) {
         
     }
@@ -87,7 +87,7 @@ extension InterstitialRouter: AuctionControllerDelegate {
 }
 
 
-extension InterstitialRouter: DemandProviderDelegate {
+extension BNISInterstitialRouter: DemandProviderDelegate {
     func provider(_ provider: DemandProvider, didPresent ad: Ad) {
         
     }

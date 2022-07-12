@@ -17,6 +17,15 @@
 		429EE2B4286B59B9009439C6 /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B3286B59B9009439C6 /* Proxy.swift */; };
 		429EE2B6286B5A81009439C6 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429EE2B5286B5A81009439C6 /* MobileAdvertising.framework */; };
 		429EE2D9286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2D8286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift */; };
+		42A6B632287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B631287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift */; };
+		42A6B639287D7DE600C1DFB9 /* BNFYBAuctionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B638287D7DE600C1DFB9 /* BNFYBAuctionDelegate.swift */; };
+		42A6B63D287D937C00C1DFB9 /* BNFYBRewarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B63C287D937C00C1DFB9 /* BNFYBRewarded.swift */; };
+		42A6B63F287D942900C1DFB9 /* BNFYBRewardedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B63E287D942900C1DFB9 /* BNFYBRewardedDelegate.swift */; };
+		42A6B641287D963B00C1DFB9 /* FyberRewardedAdDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B640287D963B00C1DFB9 /* FyberRewardedAdDemandProvider.swift */; };
+		42A6B64A287D9DBC00C1DFB9 /* FyberBannerDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B649287D9DBC00C1DFB9 /* FyberBannerDemandProvider.swift */; };
+		42A6B653287DC42900C1DFB9 /* BNFYBBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B652287DC42900C1DFB9 /* BNFYBBanner.swift */; };
+		42A6B655287DC4EB00C1DFB9 /* BNFYBBannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B654287DC4EB00C1DFB9 /* BNFYBBannerDelegate.swift */; };
+		42A6B657287DC56500C1DFB9 /* BNFYBBannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B656287DC56500C1DFB9 /* BNFYBBannerAdView.swift */; };
 		42BA81A828758A53001F1744 /* BNMAAuctionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81A728758A53001F1744 /* BNMAAuctionDelegate.swift */; };
 		42BA81D32876F9A1001F1744 /* BNMARewardedAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D22876F9A1001F1744 /* BNMARewardedAd.swift */; };
 		42BA81D52876FAE7001F1744 /* BNMARewardedAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D42876FAE6001F1744 /* BNMARewardedAdDelegate.swift */; };
@@ -27,12 +36,18 @@
 		42BA81FB287734B0001F1744 /* AppLovinAdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81FA287734B0001F1744 /* AppLovinAdViewDemandProvider.swift */; };
 		42BA821F287B25AB001F1744 /* IronSourceDecorator.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA821E287B25AA001F1744 /* IronSourceDecorator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42BA8225287B26BC001F1744 /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8224287B26BC001F1744 /* Proxy.swift */; };
-		42BA824F287B4F51001F1744 /* InterstitialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA824E287B4F51001F1744 /* InterstitialRouter.swift */; };
+		42BA824F287B4F51001F1744 /* BNISInterstitialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA824E287B4F51001F1744 /* BNISInterstitialRouter.swift */; };
 		42BA8252287B5D3B001F1744 /* IronSourceInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8251287B5D3B001F1744 /* IronSourceInterstitialDemandProvider.swift */; };
 		42BA8255287B63D0001F1744 /* BNISAdInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8254287B63D0001F1744 /* BNISAdInfo.swift */; };
 		42BA8257287C0DCC001F1744 /* IronSourceRewardedAdDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8256287C0DCC001F1744 /* IronSourceRewardedAdDemandProvider.swift */; };
-		42BA8259287C0E8D001F1744 /* RewardedVideoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8258287C0E8D001F1744 /* RewardedVideoRouter.swift */; };
+		42BA8259287C0E8D001F1744 /* BNISRewardedVideoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8258287C0E8D001F1744 /* BNISRewardedVideoRouter.swift */; };
+		42BA826A287C64A5001F1744 /* FyberDecorator.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA8269287C64A5001F1744 /* FyberDecorator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42BA8282287C65B6001F1744 /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8281287C65B6001F1744 /* Proxy.swift */; };
+		42BA8284287C67B6001F1744 /* BNFYBInterstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8283287C67B6001F1744 /* BNFYBInterstitial.swift */; };
+		42BA8287287C68AD001F1744 /* FyberInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8286287C68AD001F1744 /* FyberInterstitialDemandProvider.swift */; };
+		42BA828C287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA828B287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift */; };
 		9C3F2FC8302DEA66C5792F64 /* Pods_AppLovinDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DFA6D8633E4FC45A275893 /* Pods_AppLovinDecorator.framework */; };
+		D233922F1C5641C7234D4D99 /* Pods_FyberDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16007588FDD639D32D3754 /* Pods_FyberDecorator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +63,15 @@
 		429EE2B3286B59B9009439C6 /* Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
 		429EE2B5286B5A81009439C6 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		429EE2D8286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinFullscreenDemandProvider.swift; sourceTree = "<group>"; };
+		42A6B631287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBInterstitialDelegate.swift; sourceTree = "<group>"; };
+		42A6B638287D7DE600C1DFB9 /* BNFYBAuctionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBAuctionDelegate.swift; sourceTree = "<group>"; };
+		42A6B63C287D937C00C1DFB9 /* BNFYBRewarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBRewarded.swift; sourceTree = "<group>"; };
+		42A6B63E287D942900C1DFB9 /* BNFYBRewardedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBRewardedDelegate.swift; sourceTree = "<group>"; };
+		42A6B640287D963B00C1DFB9 /* FyberRewardedAdDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FyberRewardedAdDemandProvider.swift; sourceTree = "<group>"; };
+		42A6B649287D9DBC00C1DFB9 /* FyberBannerDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FyberBannerDemandProvider.swift; sourceTree = "<group>"; };
+		42A6B652287DC42900C1DFB9 /* BNFYBBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBBanner.swift; sourceTree = "<group>"; };
+		42A6B654287DC4EB00C1DFB9 /* BNFYBBannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBBannerDelegate.swift; sourceTree = "<group>"; };
+		42A6B656287DC56500C1DFB9 /* BNFYBBannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBBannerAdView.swift; sourceTree = "<group>"; };
 		42BA81A728758A53001F1744 /* BNMAAuctionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAuctionDelegate.swift; sourceTree = "<group>"; };
 		42BA81D22876F9A1001F1744 /* BNMARewardedAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMARewardedAd.swift; sourceTree = "<group>"; };
 		42BA81D42876FAE6001F1744 /* BNMARewardedAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMARewardedAdDelegate.swift; sourceTree = "<group>"; };
@@ -59,14 +83,23 @@
 		42BA821C287B25AA001F1744 /* IronSourceDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IronSourceDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BA821E287B25AA001F1744 /* IronSourceDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IronSourceDecorator.h; sourceTree = "<group>"; };
 		42BA8224287B26BC001F1744 /* Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
-		42BA824E287B4F51001F1744 /* InterstitialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialRouter.swift; sourceTree = "<group>"; };
+		42BA824E287B4F51001F1744 /* BNISInterstitialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNISInterstitialRouter.swift; sourceTree = "<group>"; };
 		42BA8251287B5D3B001F1744 /* IronSourceInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronSourceInterstitialDemandProvider.swift; sourceTree = "<group>"; };
 		42BA8254287B63D0001F1744 /* BNISAdInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNISAdInfo.swift; sourceTree = "<group>"; };
 		42BA8256287C0DCC001F1744 /* IronSourceRewardedAdDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronSourceRewardedAdDemandProvider.swift; sourceTree = "<group>"; };
-		42BA8258287C0E8D001F1744 /* RewardedVideoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideoRouter.swift; sourceTree = "<group>"; };
+		42BA8258287C0E8D001F1744 /* BNISRewardedVideoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNISRewardedVideoRouter.swift; sourceTree = "<group>"; };
+		42BA8267287C64A5001F1744 /* FyberDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FyberDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA8269287C64A5001F1744 /* FyberDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FyberDecorator.h; sourceTree = "<group>"; };
+		42BA8281287C65B6001F1744 /* Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
+		42BA8283287C67B6001F1744 /* BNFYBInterstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBInterstitial.swift; sourceTree = "<group>"; };
+		42BA8286287C68AD001F1744 /* FyberInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FyberInterstitialDemandProvider.swift; sourceTree = "<group>"; };
+		42BA828B287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBImpressionDataWrapper.swift; sourceTree = "<group>"; };
 		49823ADA8D938D1B58EE3B13 /* Pods-IronSourceDecorator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceDecorator.debug.xcconfig"; path = "Target Support Files/Pods-IronSourceDecorator/Pods-IronSourceDecorator.debug.xcconfig"; sourceTree = "<group>"; };
 		68CBF590B4386AAFAB4CC698 /* Pods-AppLovinDecorator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinDecorator.release.xcconfig"; path = "Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator.release.xcconfig"; sourceTree = "<group>"; };
 		68DFA6D8633E4FC45A275893 /* Pods_AppLovinDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppLovinDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		697DAEC31605832889D2C4FD /* Pods-FyberDecorator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FyberDecorator.release.xcconfig"; path = "Target Support Files/Pods-FyberDecorator/Pods-FyberDecorator.release.xcconfig"; sourceTree = "<group>"; };
+		8869C938B40F735E03C3C677 /* Pods-FyberDecorator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FyberDecorator.debug.xcconfig"; path = "Target Support Files/Pods-FyberDecorator/Pods-FyberDecorator.debug.xcconfig"; sourceTree = "<group>"; };
+		CE16007588FDD639D32D3754 /* Pods_FyberDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FyberDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE30FE2885C3640B22F331FE /* Pods-AppLovinDecorator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinDecorator.debug.xcconfig"; path = "Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +118,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A3766B4DC348FB0061A4282 /* Pods_IronSourceDecorator.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42BA8264287C64A5001F1744 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D233922F1C5641C7234D4D99 /* Pods_FyberDecorator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +150,7 @@
 			children = (
 				429EE28F286B38FE009439C6 /* AppLovinDecorator */,
 				42BA821D287B25AA001F1744 /* IronSourceDecorator */,
+				42BA8268287C64A5001F1744 /* FyberDecorator */,
 				429EE28E286B38FE009439C6 /* Products */,
 				B3D9F426D094669891C24479 /* Pods */,
 				6F4298EBCE471EE63C835613 /* Frameworks */,
@@ -120,6 +162,7 @@
 			children = (
 				429EE28D286B38FE009439C6 /* AppLovinDecorator.framework */,
 				42BA821C287B25AA001F1744 /* IronSourceDecorator.framework */,
+				42BA8267287C64A5001F1744 /* FyberDecorator.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +196,17 @@
 				42BA81D8287703E9001F1744 /* MAFullscreenAd.swift */,
 			);
 			path = Adapters;
+			sourceTree = "<group>";
+		};
+		42A6B630287D638900C1DFB9 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				42A6B631287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift */,
+				42A6B63E287D942900C1DFB9 /* BNFYBRewardedDelegate.swift */,
+				42A6B654287DC4EB00C1DFB9 /* BNFYBBannerDelegate.swift */,
+				42A6B638287D7DE600C1DFB9 /* BNFYBAuctionDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		42BA81FC287738E9001F1744 /* Models */ = {
@@ -189,8 +243,8 @@
 			children = (
 				42BA8253287B63B3001F1744 /* Models */,
 				42BA8224287B26BC001F1744 /* Proxy.swift */,
-				42BA824E287B4F51001F1744 /* InterstitialRouter.swift */,
-				42BA8258287C0E8D001F1744 /* RewardedVideoRouter.swift */,
+				42BA824E287B4F51001F1744 /* BNISInterstitialRouter.swift */,
+				42BA8258287C0E8D001F1744 /* BNISRewardedVideoRouter.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -212,12 +266,55 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		42BA8268287C64A5001F1744 /* FyberDecorator */ = {
+			isa = PBXGroup;
+			children = (
+				42BA8285287C688F001F1744 /* Adapter */,
+				42BA8280287C659B001F1744 /* Wrapper */,
+				42BA8269287C64A5001F1744 /* FyberDecorator.h */,
+			);
+			path = FyberDecorator;
+			sourceTree = "<group>";
+		};
+		42BA8280287C659B001F1744 /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				42A6B630287D638900C1DFB9 /* Delegates */,
+				42BA828A287C73D5001F1744 /* Models */,
+				42BA8281287C65B6001F1744 /* Proxy.swift */,
+				42BA8283287C67B6001F1744 /* BNFYBInterstitial.swift */,
+				42A6B63C287D937C00C1DFB9 /* BNFYBRewarded.swift */,
+				42A6B652287DC42900C1DFB9 /* BNFYBBanner.swift */,
+			);
+			path = Wrapper;
+			sourceTree = "<group>";
+		};
+		42BA8285287C688F001F1744 /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				42BA8286287C68AD001F1744 /* FyberInterstitialDemandProvider.swift */,
+				42A6B640287D963B00C1DFB9 /* FyberRewardedAdDemandProvider.swift */,
+				42A6B649287D9DBC00C1DFB9 /* FyberBannerDemandProvider.swift */,
+			);
+			path = Adapter;
+			sourceTree = "<group>";
+		};
+		42BA828A287C73D5001F1744 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				42BA828B287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift */,
+				42A6B656287DC56500C1DFB9 /* BNFYBBannerAdView.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		6F4298EBCE471EE63C835613 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				429EE2B5286B5A81009439C6 /* MobileAdvertising.framework */,
 				68DFA6D8633E4FC45A275893 /* Pods_AppLovinDecorator.framework */,
 				3657819312D6CDE7D2FD950F /* Pods_IronSourceDecorator.framework */,
+				CE16007588FDD639D32D3754 /* Pods_FyberDecorator.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -229,6 +326,8 @@
 				68CBF590B4386AAFAB4CC698 /* Pods-AppLovinDecorator.release.xcconfig */,
 				49823ADA8D938D1B58EE3B13 /* Pods-IronSourceDecorator.debug.xcconfig */,
 				11727C61DD7A63F9C65F934F /* Pods-IronSourceDecorator.release.xcconfig */,
+				8869C938B40F735E03C3C677 /* Pods-FyberDecorator.debug.xcconfig */,
+				697DAEC31605832889D2C4FD /* Pods-FyberDecorator.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -250,6 +349,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				42BA821F287B25AB001F1744 /* IronSourceDecorator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42BA8262287C64A5001F1744 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42BA826A287C64A5001F1744 /* FyberDecorator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +402,25 @@
 			productReference = 42BA821C287B25AA001F1744 /* IronSourceDecorator.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		42BA8266287C64A5001F1744 /* FyberDecorator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42BA826B287C64A5001F1744 /* Build configuration list for PBXNativeTarget "FyberDecorator" */;
+			buildPhases = (
+				8B3B03D78BE0C7D15CEAE7D0 /* [CP] Check Pods Manifest.lock */,
+				42BA8262287C64A5001F1744 /* Headers */,
+				42BA8263287C64A5001F1744 /* Sources */,
+				42BA8264287C64A5001F1744 /* Frameworks */,
+				42BA8265287C64A5001F1744 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FyberDecorator;
+			productName = FyberDecorator;
+			productReference = 42BA8267287C64A5001F1744 /* FyberDecorator.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -309,6 +435,10 @@
 						LastSwiftMigration = 1330;
 					};
 					42BA821B287B25AA001F1744 = {
+						CreatedOnToolsVersion = 13.3.1;
+						LastSwiftMigration = 1330;
+					};
+					42BA8266287C64A5001F1744 = {
 						CreatedOnToolsVersion = 13.3.1;
 						LastSwiftMigration = 1330;
 					};
@@ -329,6 +459,7 @@
 			targets = (
 				429EE28C286B38FE009439C6 /* AppLovinDecorator */,
 				42BA821B287B25AA001F1744 /* IronSourceDecorator */,
+				42BA8266287C64A5001F1744 /* FyberDecorator */,
 			);
 		};
 /* End PBXProject section */
@@ -342,6 +473,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		42BA821A287B25AA001F1744 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42BA8265287C64A5001F1744 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -366,6 +504,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B3B03D78BE0C7D15CEAE7D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FyberDecorator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A850C10BCA24D60189C1BAEF /* [CP] Check Pods Manifest.lock */ = {
@@ -441,12 +601,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42BA8259287C0E8D001F1744 /* RewardedVideoRouter.swift in Sources */,
+				42BA8259287C0E8D001F1744 /* BNISRewardedVideoRouter.swift in Sources */,
 				42BA8255287B63D0001F1744 /* BNISAdInfo.swift in Sources */,
-				42BA824F287B4F51001F1744 /* InterstitialRouter.swift in Sources */,
+				42BA824F287B4F51001F1744 /* BNISInterstitialRouter.swift in Sources */,
 				42BA8257287C0DCC001F1744 /* IronSourceRewardedAdDemandProvider.swift in Sources */,
 				42BA8252287B5D3B001F1744 /* IronSourceInterstitialDemandProvider.swift in Sources */,
 				42BA8225287B26BC001F1744 /* Proxy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42BA8263287C64A5001F1744 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42A6B63F287D942900C1DFB9 /* BNFYBRewardedDelegate.swift in Sources */,
+				42A6B639287D7DE600C1DFB9 /* BNFYBAuctionDelegate.swift in Sources */,
+				42A6B655287DC4EB00C1DFB9 /* BNFYBBannerDelegate.swift in Sources */,
+				42A6B63D287D937C00C1DFB9 /* BNFYBRewarded.swift in Sources */,
+				42A6B641287D963B00C1DFB9 /* FyberRewardedAdDemandProvider.swift in Sources */,
+				42A6B64A287D9DBC00C1DFB9 /* FyberBannerDemandProvider.swift in Sources */,
+				42A6B632287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift in Sources */,
+				42BA828C287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift in Sources */,
+				42BA8282287C65B6001F1744 /* Proxy.swift in Sources */,
+				42BA8287287C68AD001F1744 /* FyberInterstitialDemandProvider.swift in Sources */,
+				42A6B653287DC42900C1DFB9 /* BNFYBBanner.swift in Sources */,
+				42BA8284287C67B6001F1744 /* BNFYBInterstitial.swift in Sources */,
+				42A6B657287DC56500C1DFB9 /* BNFYBBannerAdView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +977,172 @@
 			};
 			name = Release;
 		};
+		42BA826C287C64A5001F1744 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8869C938B40F735E03C3C677 /* Pods-FyberDecorator.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.FyberDecorator;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		42BA826D287C64A5001F1744 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 697DAEC31605832889D2C4FD /* Pods-FyberDecorator.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.FyberDecorator;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -823,6 +1169,15 @@
 			buildConfigurations = (
 				42BA8221287B25AB001F1744 /* Debug */,
 				42BA8222287B25AB001F1744 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42BA826B287C64A5001F1744 /* Build configuration list for PBXNativeTarget "FyberDecorator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42BA826C287C64A5001F1744 /* Debug */,
+				42BA826D287C64A5001F1744 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

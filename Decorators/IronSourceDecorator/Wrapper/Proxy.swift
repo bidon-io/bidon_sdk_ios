@@ -12,8 +12,8 @@ import MobileAdvertising
 
 @objc public final class Proxy: NSObject {
     internal lazy var bidon = SDK()
-    internal lazy var interstitial = InterstitialRouter()
-    internal lazy var rewardedVideo = RewardedVideoRouter()
+    internal lazy var interstitial = BNISInterstitialRouter()
+    internal lazy var rewardedVideo = BNISRewardedVideoRouter()
 
     public func register<T: ParameterizedAdapter>(
         adapter: T.Type,

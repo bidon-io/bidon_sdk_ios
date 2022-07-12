@@ -10,7 +10,7 @@ import IronSource
 import MobileAdvertising
 
 
-final class RewardedVideoRouter: NSObject {
+final class BNISRewardedVideoRouter: NSObject {
     let mediator = IronSourceRewardedAdDemandProvider()
     
     weak var delegate: ISRewardedVideoDelegate?
@@ -54,15 +54,17 @@ final class RewardedVideoRouter: NSObject {
             }
             
             provider.delegate = self
+            provider.rewardDelegate = self
+            
             provider._show(ad: ad, from: viewController)
         }
     }
 }
 
 
-extension RewardedVideoRouter: AuctionControllerDelegate {
+extension BNISRewardedVideoRouter: AuctionControllerDelegate {
     func controllerDidStartAuction(_ controller: AuctionController) {
-        
+       
     }
     
     func controller(_ contoller: AuctionController, didStartRound round: AuctionRound, pricefloor: Price) {
@@ -78,29 +80,52 @@ extension RewardedVideoRouter: AuctionControllerDelegate {
     }
     
     func controller(_ controller: AuctionController, completeAuction winner: Ad) {
-        
+        delegate?.rewardedVideoHasChangedAvailability(true)
     }
     
     func controller(_ controller: AuctionController, failedAuction error: Error) {
-        
+        delegate?.rewardedVideoHasChangedAvailability(false)
     }
 }
 
 
-extension RewardedVideoRouter: DemandProviderDelegate {
+extension BNISRewardedVideoRouter: DemandProviderDelegate {
     func provider(_ provider: DemandProvider, didPresent ad: Ad) {
-        
+        delegate?.rewardedVideoHasChangedAvailability(false)
+        delegate?.rewardedVideoDidOpen()
+        delegate?.rewardedVideoDidStart()
     }
     
     func provider(_ provider: DemandProvider, didHide ad: Ad) {
-        
+        delegate?.rewardedVideoDidEnd()
+        delegate?.rewardedVideoDidClose()
     }
     
     func provider(_ provider: DemandProvider, didClick ad: Ad) {
+        let placement = ISPlacementInfo(
+            placement: "",
+            reward: "",
+            rewardAmount: 0
+        )
         
+        delegate?.didClickRewardedVideo(placement)
     }
     
     func provider(_ provider: DemandProvider, didFailToDisplay ad: Ad, error: Error) {
+        delegate?.rewardedVideoHasChangedAvailability(false)
+        delegate?.rewardedVideoDidFailToShowWithError(error)
+    }
+}
+
+
+extension BNISRewardedVideoRouter: DemandProviderRewardDelegate {
+    func provider(_ provider: DemandProvider, didReceiveReward reward: Reward, ad: Ad) {
+        let placement = ISPlacementInfo(
+            placement: "",
+            reward: reward.label,
+            rewardAmount: reward.amount as NSNumber
+        )
         
+        delegate?.didReceiveReward(forPlacement: placement)
     }
 }

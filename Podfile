@@ -18,6 +18,10 @@ def ironsource
   pod 'IronSourceSDK', '7.2.3.1-APD'
 end 
 
+def fyber
+  pod 'FairBidSDK'
+end
+
 def bidmachine 
   pod 'BidMachine'
 end
@@ -37,6 +41,11 @@ end
 target 'IronSourceDecorator' do
   project 'Decorators/Decorators.xcodeproj'
   ironsource
+end
+
+target 'FyberDecorator' do
+  project 'Decorators/Decorators.xcodeproj'
+  fyber
 end
 
 target 'BidMachineAdapter' do
@@ -71,6 +80,13 @@ end
 target 'IronSource-Demo' do
   project 'Sandbox/Sandbox.xcodeproj'
   ironsource
+  bidmachine
+  admob
+end
+
+target 'Fyber-Demo' do
+  project 'Sandbox/Sandbox.xcodeproj'
+  fyber
   bidmachine
   admob
 end

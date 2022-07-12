@@ -1,6 +1,6 @@
 //
 //  AdListView.swift
-//  AppLovinMAX-Demo
+//  Fyber-Demo
 //
 //  Created by Stas Kochkin on 05.07.2022.
 //
@@ -10,6 +10,8 @@ import SwiftUI
 
 
 struct HomeView: View {
+    @StateObject var vm = HomeViewModel()
+    
     var body: some View {
         NavigationView {
             List {
@@ -17,22 +19,21 @@ struct HomeView: View {
                     NavigationLink(
                         "Interstitial",
                         destination: InterstitialView()
+                            .environmentObject(vm.interstitial)
                     )
                     NavigationLink(
-                        "Rewarded Ad",
-                        destination: RewardedAdView()
+                        "Rewarded",
+                        destination: RewardedView()
+                            .environmentObject(vm.rewarded)
                     )
                     NavigationLink(
                         "Banner",
                         destination: BannerView()
-                    )
-                    NavigationLink(
-                        "MREC",
-                        destination: MRECView()
+                            .environmentObject(vm.banner)
                     )
                 }
             }
-            .navigationTitle("AppLovin Max + Bidon")
+            .navigationTitle("Fyber + Bidon")
         }
     }
 }

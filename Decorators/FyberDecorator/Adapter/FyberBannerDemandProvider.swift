@@ -41,7 +41,7 @@ internal final class FyberBannerDemandProvider: NSObject {
 
 
 extension FyberBannerDemandProvider: AdViewDemandProvider {
-    var adView: UIView? { banner }
+    var adView: AdView? { banner }
     
     func request(
         pricefloor: Price,
@@ -141,17 +141,25 @@ extension FyberBannerDemandProvider: FYBBannerDelegate {
     }
     
     func bannerWillPresentModalView(_ banner: FYBBannerAdView) {
-        adViewDelegate?.provider(self, didExpandAd: banner.wrappedImpressionData)
+        adViewDelegate?.provider(self, willPresentModalView: banner.wrappedImpressionData)
     }
     
     func bannerDidDismissModalView(_ banner: FYBBannerAdView) {
-        adViewDelegate?.provider(self, didCollapseAd: banner.wrappedImpressionData)
+        adViewDelegate?.provider(self, didDismissModalView: banner.wrappedImpressionData)
     }
     
+    func bannerWillLeaveApplication(_ banner: FYBBannerAdView) {
+        adViewDelegate?.provider(self, willLeaveApplication: banner.wrappedImpressionData)
+    }
+
     func bannerWillRequest(_ placementId: String) {}
-    func bannerWillLeaveApplication(_ banner: FYBBannerAdView) {}
     func banner(
         _ banner: FYBBannerAdView,
         didResizeToFrame frame: CGRect
     ) {}
+}
+
+
+extension FYBBannerAdView: AdView {
+    public var isAdaptive: Bool { true }
 }

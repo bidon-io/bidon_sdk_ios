@@ -26,7 +26,7 @@ import MobileAdvertising
     
     private var extraParameters: [String: String] = [:]
     private let sdk: ALSdk!
-    private var fetchCompletion: ((UIView?) -> ())?
+    private var fetchCompletion: ((AdView?) -> ())?
     
     private lazy var mediator: Mediator = {
         weak var weakSelf = self
@@ -62,8 +62,12 @@ import MobileAdvertising
             .build()
     }()
     
+    public override func preferredSize() -> CGSize {
+        return adFormat?.size ?? AdViewFormat.banner.preferredSize
+    }
+    
     public override func fetch(
-        _ completion: @escaping (UIView?) -> ()
+        _ completion: @escaping (AdView?) -> ()
     ) {
         guard
             let ad = auction.winner,
@@ -215,11 +219,13 @@ extension BNMAAdView: DemandProviderDelegate {
 
 
 extension BNMAAdView: DemandProviderAdViewDelegate {
-    public func provider(_ provider: AdViewDemandProvider, didExpandAd ad: Ad) {
+    public func provider(_ provider: AdViewDemandProvider, willPresentModalView ad: Ad) {
         delegate?.didExpand(ad)
     }
     
-    public func provider(_ provider: AdViewDemandProvider, didCollapseAd ad: Ad) {
+    public func provider(_ provider: AdViewDemandProvider, didDismissModalView ad: Ad) {
         delegate?.didCollapse(ad)
     }
+    
+    public func provider(_ provider: AdViewDemandProvider, willLeaveApplication ad: Ad) {}
 }

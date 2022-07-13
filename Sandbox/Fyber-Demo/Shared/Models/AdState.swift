@@ -38,7 +38,7 @@ extension AdState {
     
     var disabled: Bool {
         switch self {
-        case .loading, .presenting: return true
+        case .loading: return true
         default: return false
         }
     }

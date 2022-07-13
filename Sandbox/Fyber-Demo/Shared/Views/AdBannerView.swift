@@ -38,4 +38,13 @@ struct AdBannerView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {}
+    
+    static func dismantleUIView(_ uiView: UIView, coordinator: ()) {
+        uiView
+            .subviews
+            .compactMap { $0 as? BNFYBBannerAdView }
+            .first
+            .map { $0.options.placementId }
+            .map { BNFYBBanner.destroy($0) }
+    }
 }

@@ -32,6 +32,26 @@ struct HomeView: View {
                             .environmentObject(vm.banner)
                     )
                 }
+                
+                Section(header: Text("Resolution")) {
+                    ForEach(Resolution.allCases, id: \.self) { resolution in
+                        Button(action: {
+                            withAnimation {
+                                vm.resolution = resolution
+                            }
+                        }) {
+                            HStack {
+                                Text(resolution.rawValue)
+                                Spacer()
+                                if vm.resolution == resolution {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                            .foregroundColor(.primary)
+                        }
+                    }
+                }
             }
             .navigationTitle("Fyber + Bidon")
         }

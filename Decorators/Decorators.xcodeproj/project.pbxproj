@@ -26,6 +26,7 @@
 		42A6B653287DC42900C1DFB9 /* BNFYBBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B652287DC42900C1DFB9 /* BNFYBBanner.swift */; };
 		42A6B655287DC4EB00C1DFB9 /* BNFYBBannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B654287DC4EB00C1DFB9 /* BNFYBBannerDelegate.swift */; };
 		42A6B657287DC56500C1DFB9 /* BNFYBBannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B656287DC56500C1DFB9 /* BNFYBBannerAdView.swift */; };
+		42B97610287F0165006F4EAA /* AdViewFormat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B9760F287F0165006F4EAA /* AdViewFormat+Extensions.swift */; };
 		42BA81A828758A53001F1744 /* BNMAAuctionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81A728758A53001F1744 /* BNMAAuctionDelegate.swift */; };
 		42BA81D32876F9A1001F1744 /* BNMARewardedAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D22876F9A1001F1744 /* BNMARewardedAd.swift */; };
 		42BA81D52876FAE7001F1744 /* BNMARewardedAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D42876FAE6001F1744 /* BNMARewardedAdDelegate.swift */; };
@@ -72,6 +73,7 @@
 		42A6B652287DC42900C1DFB9 /* BNFYBBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBBanner.swift; sourceTree = "<group>"; };
 		42A6B654287DC4EB00C1DFB9 /* BNFYBBannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBBannerDelegate.swift; sourceTree = "<group>"; };
 		42A6B656287DC56500C1DFB9 /* BNFYBBannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBBannerAdView.swift; sourceTree = "<group>"; };
+		42B9760F287F0165006F4EAA /* AdViewFormat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdViewFormat+Extensions.swift"; sourceTree = "<group>"; };
 		42BA81A728758A53001F1744 /* BNMAAuctionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAuctionDelegate.swift; sourceTree = "<group>"; };
 		42BA81D22876F9A1001F1744 /* BNMARewardedAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMARewardedAd.swift; sourceTree = "<group>"; };
 		42BA81D42876FAE6001F1744 /* BNMARewardedAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMARewardedAdDelegate.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			children = (
 				42BA828B287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift */,
 				42A6B656287DC56500C1DFB9 /* BNFYBBannerAdView.swift */,
+				42B9760F287F0165006F4EAA /* AdViewFormat+Extensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				42A6B63D287D937C00C1DFB9 /* BNFYBRewarded.swift in Sources */,
 				42A6B641287D963B00C1DFB9 /* FyberRewardedAdDemandProvider.swift in Sources */,
 				42A6B64A287D9DBC00C1DFB9 /* FyberBannerDemandProvider.swift in Sources */,
+				42B97610287F0165006F4EAA /* AdViewFormat+Extensions.swift in Sources */,
 				42A6B632287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift in Sources */,
 				42BA828C287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift in Sources */,
 				42BA8282287C65B6001F1744 /* Proxy.swift in Sources */,

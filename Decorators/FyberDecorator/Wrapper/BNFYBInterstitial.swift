@@ -19,6 +19,8 @@ import FairBidSDK
     @objc public static weak var delegate: BNFYBInterstitialDelegate?
     @objc public static weak var auctionDelegate: BNFYBAuctionDelegate?
     
+    @objc public static var resolver: AuctionResolver = HigherRevenueAuctionResolver()
+
     private let placement: String
     
     private var postbid: [InterstitialDemandProvider] {
@@ -32,7 +34,7 @@ import FairBidSDK
             .withMediator(mediator)
             .withPostbid(postbid)
             .withDelegate(self)
-            .withResolver(HigherRevenueAuctionResolver())
+            .withResolver(BNFYBInterstitial.resolver)
             .build()
     }()
     

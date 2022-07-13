@@ -11,41 +11,37 @@ import MobileAdvertising
 import FairBidSDK
 
 
-@objc final public class BNFYBBannerAdView: UIView {
-    internal let ad: Ad
-    internal let provider: AdViewDemandProvider
+@objc final public class BNFYBBannerAdView: AdContainerView {
+    internal var ad: Ad?
+    internal var provider: AdViewDemandProvider?
+    
+    private let load: () -> ()
     
     @objc public let options: FYBBannerOptions
     
     internal init(
-        ad: Ad,
-        provider: AdViewDemandProvider,
-        options: FYBBannerOptions
+        options: FYBBannerOptions,
+        load: @escaping () -> ()
     ) {
-        self.ad = ad
-        self.provider = provider
         self.options = options
-        
+        self.load = load
         super.init(frame: .zero)
-        
-        setup()
+    }
+    
+    public override func preferredSize() -> CGSize {
+        return AdViewFormat.default.preferredSize
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setup() {
-        guard let adView = provider.adView else { return }
-        
-        adView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(adView)
-        
-        NSLayoutConstraint.activate([
-            adView.topAnchor.constraint(equalTo: topAnchor),
-            adView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            adView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            adView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        ])
+    public override func fetch(_ completion: @escaping (AdView?) -> ()) {
+        guard let adView = provider?.adView else { return }
+        completion(adView)
+    }
+
+    public override func loadAd() {
+        load()
     }
 }

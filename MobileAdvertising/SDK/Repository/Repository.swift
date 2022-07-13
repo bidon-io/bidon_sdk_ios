@@ -36,13 +36,19 @@ public final class Repository<Key, Value> where Key: Hashable {
         }
     }
     
+    public func removeValue(forKey key: Key) {
+        queue.async(flags: .barrier) { [weak self] in
+            self?.objects.removeValue(forKey: key)
+        }
+    }
+    
     public subscript<T>(key: Key) -> T? {
         get { value(key) }
         set { setValue(newValue, key: key) }
     }
     
     func clear() {
-        queue.sync { [unowned self] in
+        queue.async(flags: .barrier) { [unowned self] in
             self.objects.removeAll()
         }
     }

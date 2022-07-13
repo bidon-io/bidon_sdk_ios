@@ -29,11 +29,16 @@ class AdViewModel: ObservableObject {
                 var state = self.state
                 
                 switch event {
-                case .willRequest: state = .loading
-                case .isUnavailable: state = .failed
-                case .didShow: state = .presenting
-                case .didDismiss: state = .idle
-                case .isAvailable: state = .ready
+                case .willRequest:
+                    state = .loading
+                case .isAvailable, .didLoad:
+                    state = .ready
+                case .isUnavailable, .didFailToLoad:
+                    state = .failed
+                case .didShow:
+                    state = .presenting
+                case .didDismiss:
+                    state = .idle
                 default: break
                 }
                 

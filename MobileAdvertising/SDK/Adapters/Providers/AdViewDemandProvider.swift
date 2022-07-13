@@ -47,7 +47,7 @@ public enum AdViewFormat {
     case leaderboard
     case mrec
     
-    var preferredSize: CGSize {
+    public var preferredSize: CGSize {
         switch self {
         case .banner:
             return CGSize(width: 320, height: 50)
@@ -60,14 +60,20 @@ public enum AdViewFormat {
 }
 
 
+public protocol AdView: UIView {
+    var isAdaptive: Bool { get }
+}
+
+
 public protocol DemandProviderAdViewDelegate: AnyObject {
-    func provider(_ provider: AdViewDemandProvider, didExpandAd ad: Ad)
-    func provider(_ provider: AdViewDemandProvider, didCollapseAd ad: Ad)
+    func provider(_ provider: AdViewDemandProvider, willPresentModalView ad: Ad)
+    func provider(_ provider: AdViewDemandProvider, didDismissModalView ad: Ad)
+    func provider(_ provider: AdViewDemandProvider, willLeaveApplication ad: Ad)
 }
 
 
 public protocol AdViewDemandProvider: DemandProvider {
     var adViewDelegate: DemandProviderAdViewDelegate? { get set }
     
-    var adView: UIView? { get }
+    var adView: AdView? { get }
 }

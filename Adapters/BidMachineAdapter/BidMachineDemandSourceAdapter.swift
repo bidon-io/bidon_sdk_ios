@@ -55,7 +55,11 @@ extension BidMachineDemandSourceAdapter: InitializableAdapter {
         _ completion: @escaping (Error?) -> ()
     ) {
         let configuration = BDMSdkConfiguration()
+        
+#if DEBUG
         configuration.testMode = true
+        BDMSdk.shared().enableLogging = true
+#endif
         
         BDMSdk.shared().startSession(
             withSellerID: parameters.sellerId,

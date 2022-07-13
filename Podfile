@@ -24,6 +24,7 @@ end
 
 def bidmachine 
   pod 'BidMachine'
+  pod 'BDMIABAdapter'
 end
 
 def admob

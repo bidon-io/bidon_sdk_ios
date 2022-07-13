@@ -28,23 +28,32 @@ import UIKit
         return manager
     }()
     
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     final override public func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         guard !manager.isAdPresented else { return }
         refresh()
     }
     
-    open func fetch(_ completion: @escaping (UIView?) -> ()) {}
+    open func fetch(_ completion: @escaping (AdView?) -> ()) {}
     open func loadAd() {}
+    open func preferredSize() -> CGSize { .zero }
     
-    final func layout(adView: UIView) {
+    final func layout(adView: AdView) {
         DispatchQueue.main.async { [weak self, weak adView] in
             guard
                 let self = self,
                 let adView = adView
             else { return }
             
-            self.manager.layout(view: adView)
+            self.manager.layout(view: adView, size: self.preferredSize())
             self.scheduleRefreshIfNeeded()
         }
     }

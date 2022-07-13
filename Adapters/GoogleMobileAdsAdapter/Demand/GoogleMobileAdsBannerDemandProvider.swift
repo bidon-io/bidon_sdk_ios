@@ -40,7 +40,7 @@ internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
 
 
 extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
-    var adView: UIView? { banner }
+    var adView: AdView? { banner }
     
     func request(
         pricefloor: Price,
@@ -91,12 +91,12 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
-        adViewDelegate?.provider(self, didExpandAd: wrapped)
+        adViewDelegate?.provider(self, willPresentModalView: wrapped)
     }
     
-    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
-        adViewDelegate?.provider(self, didCollapseAd: wrapped)
+        adViewDelegate?.provider(self, didDismissModalView: wrapped)
     }
     
     func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
@@ -146,4 +146,9 @@ extension AdViewContext {
             return window.bounds.width
         }
     }
+}
+
+
+extension GADBannerView: AdView {
+    public var isAdaptive: Bool { return true }
 }

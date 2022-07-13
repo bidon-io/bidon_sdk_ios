@@ -42,7 +42,7 @@ final internal class AdContainerViewManager {
         timer = nil
     }
     
-    func layout(view: UIView) {
+    func layout(view: AdView, size: CGSize) {
         guard
             let container = container,
             !container.subviews.contains(view)
@@ -52,12 +52,23 @@ final internal class AdContainerViewManager {
         view.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(view)
         
-        let constraints: [NSLayoutConstraint] = [
-            view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-            view.topAnchor.constraint(equalTo: container.topAnchor),
-            view.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-        ]
+        let constraints: [NSLayoutConstraint]
+        
+        if view.isAdaptive {
+            constraints = [
+                view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+                view.topAnchor.constraint(equalTo: container.topAnchor),
+                view.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+            ]
+        } else {
+            constraints = [
+                view.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+                view.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+                view.widthAnchor.constraint(equalToConstant: size.width),
+                view.heightAnchor.constraint(equalToConstant: size.height)
+            ]
+        }
         
         NSLayoutConstraint.activate(constraints)
     }

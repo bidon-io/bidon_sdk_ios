@@ -66,39 +66,40 @@ where S : Subscriber, S.Input == AdEventModel {
     }
     
     func bannerDidLoad(_ banner: BNFYBBannerAdView) {
-        
+        produce(.didLoad(placement: banner.options.placementId))
     }
     
     func bannerDidFail(toLoad placementId: String, withError error: Error) {
-        
+        produce(.didFailToLoad(placement: placementId, error: error))
+
     }
     
     func bannerDidShow(_ banner: BNFYBBannerAdView, impressionData: Ad) {
-        
+        produce(.didShow(placement: banner.options.placementId, impression: impressionData))
     }
     
     func bannerDidClick(_ banner: BNFYBBannerAdView) {
-        
+        produce(.didClick(placement: banner.options.placementId))
     }
     
     func bannerWillPresentModalView(_ banner: BNFYBBannerAdView) {
-        
+        produce(.willPresentModalView(placement: banner.options.placementId))
     }
     
     func bannerDidDismissModalView(_ banner: BNFYBBannerAdView) {
-        
+        produce(.didDimissModalView(placement: banner.options.placementId))
     }
     
     func bannerWillLeaveApplication(_ banner: BNFYBBannerAdView) {
-        
+        produce(.willLeaveApplication(placement: banner.options.placementId))
     }
     
     func banner(_ banner: BNFYBBannerAdView, didResizeToFrame frame: CGRect) {
-        
+        produce(.didResize(placement: banner.options.placementId, frame: frame))
     }
     
     func bannerWillRequest(_ placementId: String) {
-        
+        produce(.willRequest(placement: placementId))
     }
 }
 

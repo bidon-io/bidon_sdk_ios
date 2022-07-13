@@ -29,6 +29,8 @@
 		42A6B64F287DAC4900C1DFB9 /* BannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B64E287DAC4900C1DFB9 /* BannerViewModel.swift */; };
 		42A6B651287DAC8100C1DFB9 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B650287DAC8000C1DFB9 /* BannerView.swift */; };
 		42A6B659287DD6B500C1DFB9 /* BNFYBBannerDelegatePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B658287DD6B500C1DFB9 /* BNFYBBannerDelegatePublisher.swift */; };
+		42A6B65C287EEA4000C1DFB9 /* ManualAuctionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */; };
+		42A6B65E287EEA8200C1DFB9 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B65D287EEA8200C1DFB9 /* Resolution.swift */; };
 		42BA81BC2875AC91001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BA81BB2875AC91001F1744 /* GoogleMobileAdsAdapter.framework */; };
 		42BA81CB2876D5DE001F1744 /* AdEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81CA2876D5DE001F1744 /* AdEventPublisher.swift */; };
 		42BA81CD2876D9D7001F1744 /* AppLovinDecorator+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81CC2876D9D7001F1744 /* AppLovinDecorator+Combine.swift */; };
@@ -104,6 +106,8 @@
 		42A6B64E287DAC4900C1DFB9 /* BannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewModel.swift; sourceTree = "<group>"; };
 		42A6B650287DAC8000C1DFB9 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		42A6B658287DD6B500C1DFB9 /* BNFYBBannerDelegatePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBBannerDelegatePublisher.swift; sourceTree = "<group>"; };
+		42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAuctionResolver.swift; sourceTree = "<group>"; };
+		42A6B65D287EEA8200C1DFB9 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
 		42BA81BB2875AC91001F1744 /* GoogleMobileAdsAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleMobileAdsAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BA81C92875DF25001F1744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		42BA81CA2876D5DE001F1744 /* AdEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventPublisher.swift; sourceTree = "<group>"; };
@@ -309,6 +313,15 @@
 			path = Banner;
 			sourceTree = "<group>";
 		};
+		42A6B65A287EEA2900C1DFB9 /* Resolvers */ = {
+			isa = PBXGroup;
+			children = (
+				42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */,
+				42A6B65D287EEA8200C1DFB9 /* Resolution.swift */,
+			);
+			path = Resolvers;
+			sourceTree = "<group>";
+		};
 		42BA81E228771BE0001F1744 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +475,7 @@
 		42BA82A8287C81F0001F1744 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				42A6B65A287EEA2900C1DFB9 /* Resolvers */,
 				42A6B633287D655B00C1DFB9 /* Publishers */,
 				42BA82A9287C81F0001F1744 /* Models */,
 				42BA82AC287C81F0001F1744 /* Extensions */,
@@ -851,6 +865,7 @@
 			files = (
 				42A6B651287DAC8100C1DFB9 /* BannerView.swift in Sources */,
 				42BA82B7287C81F0001F1744 /* InterstitialView.swift in Sources */,
+				42A6B65E287EEA8200C1DFB9 /* Resolution.swift in Sources */,
 				42A6B635287D656F00C1DFB9 /* BNFYBInterstitialDelegatePublisher.swift in Sources */,
 				42BA82C1287C81F0001F1744 /* AdPresentationView.swift in Sources */,
 				42A6B63B287D7F1900C1DFB9 /* BNFYBAuctionDelegatePublisher.swift in Sources */,
@@ -858,6 +873,7 @@
 				42BA8299287C81E4001F1744 /* FyberDemoApp.swift in Sources */,
 				42A6B64F287DAC4900C1DFB9 /* BannerViewModel.swift in Sources */,
 				42BA82BD287C81F0001F1744 /* AdEvent.swift in Sources */,
+				42A6B65C287EEA4000C1DFB9 /* ManualAuctionResolver.swift in Sources */,
 				42BA8292287C81A2001F1744 /* HomeView.swift in Sources */,
 				42BA82C4287C81F0001F1744 /* RoundedCorners.swift in Sources */,
 				42A6B637287D69E500C1DFB9 /* HomeViewModel.swift in Sources */,

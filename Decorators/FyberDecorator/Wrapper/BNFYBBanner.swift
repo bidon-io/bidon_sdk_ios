@@ -16,18 +16,29 @@ import FairBidSDK
     
     private static let repository = BannerRepository("com.ads.fyber.banner.instances.queue")
     
+    @objc public static var autorefreshInterval: TimeInterval = 5
+    @objc public static var isAutorefreshing: Bool = true
+    @objc public static var isAdaptiveSize: Bool = true
+    
     @objc public static weak var delegate: BNFYBBannerDelegate?
     @objc public static weak var auctionDelegate: BNFYBAuctionDelegate?
     
+    @objc public static var resolver: AuctionResolver = HigherRevenueAuctionResolver()
+
     private let placement: String
     private var shouldLayoutOnLoad: Bool = false
     
     private var view: BNFYBBannerAdView?
     private var position = FYBBannerAdViewPosition.top
+    private weak var rootViewController: UIViewController?
     private weak var container: UIView?
     
     private var postbid: [AdViewDemandProvider] {
-        let ctx = AdViewContext(.banner)
+        let ctx = AdViewContext(
+            .default,
+            isAdaptive: BNFYBBanner.isAdaptiveSize,
+            rootViewController: rootViewController ?? UIApplication.shared.topViewContoller
+        )
         return FairBid.bid.bidon.adViewDemandProviders(ctx)
     }
     
@@ -38,7 +49,7 @@ import FairBidSDK
             .withMediator(mediator)
             .withPostbid(postbid)
             .withDelegate(self)
-            .withResolver(HigherRevenueAuctionResolver())
+            .withResolver(BNFYBBanner.resolver)
             .build()
     }()
     
@@ -62,6 +73,11 @@ import FairBidSDK
         instance(placement).isAvailable()
     }
     
+    @objc public static func destroy(_ placement: String) {
+        instance(placement).destroy()
+        repository.removeValue(forKey: placement)
+    }
+    
     private static func instance(_ placement: String) -> BNFYBBanner {
         guard let instance: BNFYBBanner = repository[placement] else {
             let instance = BNFYBBanner(placement: placement)
@@ -81,9 +97,10 @@ import FairBidSDK
         position: FYBBannerAdViewPosition,
         options: FYBBannerOptions
     ) {
+        self.rootViewController = options.presentingViewController
         self.position = position
         self.container = view
-        self.shouldLayoutOnLoad = self.view == nil
+        self.shouldLayoutOnLoad = true
         
         request()
         layoutIfNeeded()
@@ -96,13 +113,16 @@ import FairBidSDK
     private func isAvailable() -> Bool {
         return !auction.isEmpty
     }
-    
+
     private func layoutIfNeeded() {
         guard
             shouldLayoutOnLoad,
             let view = view,
+            let ad = view.ad,
             let container = container
         else { return }
+        
+        BNFYBBanner.delegate?.bannerDidShow(view, impressionData: ad)
         
         container.subviews
             .compactMap { $0 as? BNFYBBannerAdView }
@@ -111,9 +131,12 @@ import FairBidSDK
         view.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(view)
         
+        let height: CGFloat = AdViewFormat.default.preferredSize.height
+        
         var constraints: [NSLayoutConstraint] = [
             view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-            view.leadingAnchor.constraint(equalTo: container.leadingAnchor)
+            view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            view.heightAnchor.constraint(equalToConstant: height)
         ]
         
         switch position {
@@ -130,6 +153,16 @@ import FairBidSDK
         }
         
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func destroy() {
+        container?
+            .subviews
+            .compactMap { $0 as? BNFYBBannerAdView }
+            .forEach { $0.removeFromSuperview() }
+        
+        shouldLayoutOnLoad = false
+        auction.finish()
     }
 }
 
@@ -177,7 +210,6 @@ extension BNFYBBanner: AuctionControllerDelegate {
         _ controller: AuctionController,
         completeAuction winner: Ad
     ) {
-        
         guard
             let ad = auction.winner,
             let provider: AdViewDemandProvider = auction.provider(for: ad)
@@ -186,25 +218,38 @@ extension BNFYBBanner: AuctionControllerDelegate {
             return
         }
         
-        let options = FYBBannerOptions()
-        options.placementId = placement
-        options.presentingViewController = UIApplication.shared.topViewContoller
-        
-        let view = BNFYBBannerAdView(
-            ad: ad,
-            provider: provider,
-            options: options
-        )
-        
-        BNFYBBanner.delegate?.bannerDidLoad(view)
+        if let view = self.view {
+            view.ad = ad
+            view.provider = provider
+            view.autorefreshInterval = BNFYBBanner.autorefreshInterval
+            view.isAutorefreshing = BNFYBBanner.isAutorefreshing
+            
+            BNFYBBanner.delegate?.bannerDidLoad(view)
+        } else {
+            let options = FYBBannerOptions()
+            options.placementId = placement
+            options.presentingViewController = UIApplication.shared.topViewContoller
+            
+            let view = BNFYBBannerAdView(options: options) { [weak self] in
+                self?.request()
+            }
+            
+            view.ad = ad
+            view.provider = provider
+            view.autorefreshInterval = BNFYBBanner.autorefreshInterval
+            view.isAutorefreshing = BNFYBBanner.isAutorefreshing
+            
+            self.view = view
+            
+            BNFYBBanner.delegate?.bannerDidLoad(view)
+        }
+       
         
         BNFYBBanner.auctionDelegate?.didCompleteAuction(
             winner,
             placement: placement
         )
-        
-        self.view = view
-        
+    
         layoutIfNeeded()
     }
     
@@ -240,11 +285,18 @@ extension BNFYBBanner: DemandProviderDelegate {
 
 
 extension BNFYBBanner: DemandProviderAdViewDelegate {
-    public func provider(_ provider: AdViewDemandProvider, didExpandAd ad: Ad) {
-//        BNFYBBanner.delegate?.bannerWillPresentModalView(<#T##banner: BNFYBBannerAdView##BNFYBBannerAdView#>)
+    public func provider(_ provider: AdViewDemandProvider, willPresentModalView ad: Ad) {
+        guard let view = view else { return }
+        BNFYBBanner.delegate?.bannerWillPresentModalView(view)
     }
     
-    public func provider(_ provider: AdViewDemandProvider, didCollapseAd ad: Ad) {
-        
+    public func provider(_ provider: AdViewDemandProvider, didDismissModalView ad: Ad) {
+        guard let view = view else { return }
+        BNFYBBanner.delegate?.bannerDidDismissModalView(view)
+    }
+    
+    public func provider(_ provider: AdViewDemandProvider, willLeaveApplication ad: Ad) {
+        guard let view = view else { return }
+        BNFYBBanner.delegate?.bannerWillLeaveApplication(view)
     }
 }

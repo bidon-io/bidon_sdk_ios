@@ -70,26 +70,26 @@ struct BannerView: View {
                         .textFieldStyle(.automatic)
                 }
                 
-//                Section(header: Text("Auto refresh")) {
-//                    Toggle("Enabled", isOn: $vm.isAutorefresh)
-//                    HStack {
-//                        Text("Interval")
-//                        Spacer()
-//                        Text(String(format: "%1.0f", vm.autorefreshInterval) + "s")
-//                            .foregroundColor(.secondary)
-//                    }
-//                    Slider(
-//                        value: Binding(
-//                            get: { vm.autorefreshInterval / 5 },
-//                            set: { vm.autorefreshInterval = 5 * $0 }
-//                        ),
-//                        in: (1...6)
-//                    )
-//                }
-//
-//                Section(header: Text("Adaptive size")) {
-//                    Toggle("Enabled", isOn: $vm.isAdaptive)
-//                }
+                Section(header: Text("Auto refresh")) {
+                    Toggle("Enabled", isOn: $vm.isAutorefreshing)
+                    HStack {
+                        Text("Interval")
+                        Spacer()
+                        Text(String(format: "%1.0f", vm.autorefreshInterval) + "s")
+                            .foregroundColor(.secondary)
+                    }
+                    Slider(
+                        value: Binding(
+                            get: { vm.autorefreshInterval / 5 },
+                            set: { vm.autorefreshInterval = 5 * $0 }
+                        ),
+                        in: (1...6)
+                    )
+                }
+
+                Section(header: Text("Adaptive size")) {
+                    Toggle("Enabled", isOn: $vm.isAdaptiveSize)
+                }
             }
         }
     }

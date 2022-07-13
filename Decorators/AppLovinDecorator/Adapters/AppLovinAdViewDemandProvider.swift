@@ -11,8 +11,6 @@ import AppLovinSDK
 
 
 internal final class AppLovinAdViewDemandProvider: NSObject, MAAdViewAdDelegate {
-    var adView: UIView? { ad }
-    
     weak var delegate: DemandProviderDelegate?
     weak var adViewDelegate: DemandProviderAdViewDelegate?
     
@@ -86,16 +84,18 @@ internal final class AppLovinAdViewDemandProvider: NSObject, MAAdViewAdDelegate 
     }
     
     func didExpand(_ ad: MAAd) {
-        adViewDelegate?.provider(self, didExpandAd: ad.wrapped)
+        adViewDelegate?.provider(self, willPresentModalView: ad.wrapped)
     }
     
     func didCollapse(_ ad: MAAd) {
-        adViewDelegate?.provider(self, didCollapseAd: ad.wrapped)
+        adViewDelegate?.provider(self, didDismissModalView: ad.wrapped)
     }
 }
 
 
-extension AppLovinAdViewDemandProvider: AdViewDemandProvider {    
+extension AppLovinAdViewDemandProvider: AdViewDemandProvider {
+    var adView: AdView? { ad }
+
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse
@@ -123,4 +123,9 @@ extension MAAdFormat {
         
         return format
     }
+}
+
+
+extension MAAdView: AdView {
+    public var isAdaptive: Bool { true }
 }

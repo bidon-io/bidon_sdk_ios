@@ -24,17 +24,14 @@ struct AdEventView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     model.adType.title
-                    Image(systemName: model.event.systemImageName)
-                        .foregroundColor(model.event.accentColor)
+                    model.event.bage
                     Spacer()
                 }
                 
                 model.event.title
                     .foregroundColor(.primary)
                 
-                Text(model.event.subtitle)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+               model.event.subtitle
             }
             
             Spacer()

@@ -21,6 +21,7 @@ internal final class BidMachineBannerDemandProvider: NSObject {
     private lazy var banner: BDMBannerView = {
         let banner = BDMBannerView()
         banner.delegate = self
+        banner.rootViewController = context.rootViewController
         banner.frame = CGRect(
             origin: .zero,
             size: context.size
@@ -39,7 +40,7 @@ internal final class BidMachineBannerDemandProvider: NSObject {
 
 
 extension BidMachineBannerDemandProvider: AdViewDemandProvider {
-    var adView: UIView? { banner }
+    var adView: AdView? { banner }
 
     func request(
         pricefloor: Price,
@@ -74,11 +75,15 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     }
     
     func bannerViewWillPresentScreen(_ bannerView: BDMBannerView) {
-        adViewDelegate?.provider(self, didExpandAd: bannerView.adObject.wrapped)
+        adViewDelegate?.provider(self, willPresentModalView: bannerView.adObject.wrapped)
     }
     
     func bannerViewDidDismissScreen(_ bannerView: BDMBannerView) {
-        adViewDelegate?.provider(self, didCollapseAd: bannerView.adObject.wrapped)
+        adViewDelegate?.provider(self, didDismissModalView: bannerView.adObject.wrapped)
+    }
+    
+    func bannerViewWillLeaveApplication(_ bannerView: BDMBannerView) {
+        adViewDelegate?.provider(self, willLeaveApplication: bannerView.adObject.wrapped)
     }
     
     func bannerViewRecieveUserInteraction(_ bannerView: BDMBannerView) {
@@ -86,7 +91,6 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     }
     
     func bannerViewDidExpire(_ bannerView: BDMBannerView) {}
-    func bannerViewWillLeaveApplication(_ bannerView: BDMBannerView) {}
 }
 
 
@@ -101,4 +105,9 @@ extension BDMBannerAdSize {
             self = .size300x250
         }
     }
+}
+
+
+extension BDMBannerView: AdView {
+    public var isAdaptive: Bool { return false }
 }

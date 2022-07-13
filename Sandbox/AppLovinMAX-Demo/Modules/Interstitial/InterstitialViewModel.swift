@@ -27,7 +27,7 @@ final class InterstitialViewModel: AdViewModel {
             adUnitIdentifier: adUnitIdentifier,
             sdk: applovin
         )
-    
+        interstital.resolver = resolver
         self.interstitial = interstital
         self.interstitial?.loadAd()
     }

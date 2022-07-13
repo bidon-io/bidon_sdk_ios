@@ -29,15 +29,11 @@ struct AdEventView: View {
         HStack {
             VStack(alignment: .leading, spacing: 10) {
                 model.event.title
-                    .foregroundColor(.primary)
-                Text(model.event.subtitle)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                model.event.subtitle
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 10) {
-                Image(systemName: model.event.systemImageName)
-                    .foregroundColor(model.event.accentColor)
+                model.event.bage
                 Text(AdEventView.formatter.string(from: model.time))
                     .font(.caption).foregroundColor(.secondary)
             }

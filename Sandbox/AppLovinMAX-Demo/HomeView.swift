@@ -10,6 +10,8 @@ import SwiftUI
 
 
 struct HomeView: View {
+    @State var resolution: Resolution = .default
+    
     var body: some View {
         NavigationView {
             List {
@@ -31,6 +33,29 @@ struct HomeView: View {
                         destination: MRECView()
                     )
                 }
+                
+                Section(header: Text("Resolution")) {
+                    ForEach(Resolution.allCases, id: \.self) { resolution in
+                        Button(action: {
+                            withAnimation {
+                                self.resolution = resolution
+                            }
+                        }) {
+                            HStack {
+                                Text(resolution.rawValue)
+                                Spacer()
+                                if self.resolution == resolution {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                            .foregroundColor(.primary)
+                        }
+                    }
+                }
+            }
+            .onChange(of: resolution) { resolution in
+                resolver = resolution.resolver
             }
             .navigationTitle("AppLovin Max + Bidon")
         }

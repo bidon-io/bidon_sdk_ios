@@ -24,6 +24,8 @@ final public class BNMARewardedAd: NSObject {
     @objc public weak var revenueDelegate: BNMAAdRevenueDelegate?
     @objc public weak var adReviewDelegate: BNMAAdReviewDelegate?
     
+    @objc public var resolver: AuctionResolver = HigherRevenueAuctionResolver()
+
     private let sdk: ALSdk!
     private var displayArguments: FullscreenAdDisplayArguments?
     
@@ -55,7 +57,7 @@ final public class BNMARewardedAd: NSObject {
             .withMediator(mediator)
             .withPostbid(postbid)
             .withDelegate(self)
-            .withResolver(HigherRevenueAuctionResolver())
+            .withResolver(resolver)
             .build()
     }()
     

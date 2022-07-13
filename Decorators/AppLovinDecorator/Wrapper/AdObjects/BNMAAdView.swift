@@ -24,6 +24,8 @@ import MobileAdvertising
     @objc public weak var revenueDelegate: BNMAAdRevenueDelegate?
     @objc public weak var adReviewDelegate: BNMAAdReviewDelegate?
     
+    @objc public var resolver: AuctionResolver = HigherRevenueAuctionResolver()
+
     private var extraParameters: [String: String] = [:]
     private let sdk: ALSdk!
     private var fetchCompletion: ((AdView?) -> ())?
@@ -58,7 +60,7 @@ import MobileAdvertising
             .withMediator(mediator)
             .withPostbid(postbid)
             .withDelegate(self)
-            .withResolver(HigherRevenueAuctionResolver())
+            .withResolver(resolver)
             .build()
     }()
     

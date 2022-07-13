@@ -31,6 +31,8 @@
 		42A6B659287DD6B500C1DFB9 /* BNFYBBannerDelegatePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B658287DD6B500C1DFB9 /* BNFYBBannerDelegatePublisher.swift */; };
 		42A6B65C287EEA4000C1DFB9 /* ManualAuctionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */; };
 		42A6B65E287EEA8200C1DFB9 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B65D287EEA8200C1DFB9 /* Resolution.swift */; };
+		42B97613287F0383006F4EAA /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B97612287F0383006F4EAA /* Resolution.swift */; };
+		42B97615287F03C3006F4EAA /* ManualAuctionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B97614287F03C3006F4EAA /* ManualAuctionResolver.swift */; };
 		42BA81BC2875AC91001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BA81BB2875AC91001F1744 /* GoogleMobileAdsAdapter.framework */; };
 		42BA81CB2876D5DE001F1744 /* AdEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81CA2876D5DE001F1744 /* AdEventPublisher.swift */; };
 		42BA81CD2876D9D7001F1744 /* AppLovinDecorator+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81CC2876D9D7001F1744 /* AppLovinDecorator+Combine.swift */; };
@@ -108,6 +110,8 @@
 		42A6B658287DD6B500C1DFB9 /* BNFYBBannerDelegatePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBBannerDelegatePublisher.swift; sourceTree = "<group>"; };
 		42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAuctionResolver.swift; sourceTree = "<group>"; };
 		42A6B65D287EEA8200C1DFB9 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
+		42B97612287F0383006F4EAA /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
+		42B97614287F03C3006F4EAA /* ManualAuctionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAuctionResolver.swift; sourceTree = "<group>"; };
 		42BA81BB2875AC91001F1744 /* GoogleMobileAdsAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleMobileAdsAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BA81C92875DF25001F1744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		42BA81CA2876D5DE001F1744 /* AdEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventPublisher.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 		42389E1828747CEE006024BA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				42B97611287F0366006F4EAA /* Resolvers */,
 				42BA81E428771BFA001F1744 /* Extensions */,
 				42BA81E228771BE0001F1744 /* Models */,
 				42BA81E328771BE8001F1744 /* Views */,
@@ -318,6 +323,15 @@
 			children = (
 				42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */,
 				42A6B65D287EEA8200C1DFB9 /* Resolution.swift */,
+			);
+			path = Resolvers;
+			sourceTree = "<group>";
+		};
+		42B97611287F0366006F4EAA /* Resolvers */ = {
+			isa = PBXGroup;
+			children = (
+				42B97612287F0383006F4EAA /* Resolution.swift */,
+				42B97614287F03C3006F4EAA /* ManualAuctionResolver.swift */,
 			);
 			path = Resolvers;
 			sourceTree = "<group>";
@@ -824,11 +838,13 @@
 				42389E0428742E34006024BA /* InterstitialView.swift in Sources */,
 				42BA81ED28771E28001F1744 /* AdViewModel.swift in Sources */,
 				42BA820228784D9C001F1744 /* BannerViewModel.swift in Sources */,
+				42B97613287F0383006F4EAA /* Resolution.swift in Sources */,
 				42BA821628789009001F1744 /* AdPresentationView.swift in Sources */,
 				42BA81E928771D9A001F1744 /* RewardedAdView.swift in Sources */,
 				429EE2A6286B39D1009439C6 /* ContentView.swift in Sources */,
 				42389E082874301F006024BA /* InterstitialViewModel.swift in Sources */,
 				429EE2A4286B39D1009439C6 /* AppLovinMaxDemoApp.swift in Sources */,
+				42B97615287F03C3006F4EAA /* ManualAuctionResolver.swift in Sources */,
 				42BA81FF287824D1001F1744 /* AdBannerView.swift in Sources */,
 				42BA81E628771C19001F1744 /* AdState.swift in Sources */,
 				42BA81D12876DDC0001F1744 /* AdEventView.swift in Sources */,

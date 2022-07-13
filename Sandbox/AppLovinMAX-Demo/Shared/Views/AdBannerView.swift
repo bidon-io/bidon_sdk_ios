@@ -35,7 +35,7 @@ struct AdBannerView: UIViewRepresentable {
         view.auctionDelegate = context.coordinator
         view.revenueDelegate = context.coordinator
         view.adReviewDelegate = context.coordinator
-
+        view.resolver = resolver
         view.loadAd()
         
         return view

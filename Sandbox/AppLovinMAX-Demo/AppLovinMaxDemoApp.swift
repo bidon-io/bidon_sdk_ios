@@ -10,11 +10,15 @@ import AppLovinSDK
 import AppLovinDecorator
 import BidMachineAdapter
 import GoogleMobileAdsAdapter
+import MobileAdvertising
 
 
 let applovin = ALSdk.shared(
     withKey: "05TMDQ5tZabpXQ45_UTbmEGNUtVAzSTzT6KmWQc5_CuWdzccS4DCITZoL3yIWUG3bbq60QC_d4WF28tUC4gVTF"
 )!
+
+var resolver: AuctionResolver = ManualAuctionResolver()
+
 
 @main
 struct AppLovinMaxDemoApp: App {

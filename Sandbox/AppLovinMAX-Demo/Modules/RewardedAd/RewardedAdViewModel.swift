@@ -27,7 +27,7 @@ final class RewardedAdViewModel: AdViewModel {
             withAdUnitIdentifier: adUnitIdentifier,
             sdk: applovin
         )
-    
+        rewardedAd.resolver = resolver
         self.rewardedAd = rewardedAd
         self.rewardedAd?.loadAd()
     }

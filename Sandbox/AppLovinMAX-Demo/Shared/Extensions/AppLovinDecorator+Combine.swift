@@ -13,10 +13,10 @@ import AppLovinDecorator
 extension BNMAInterstitialAd: BNMAAdDelegateProvider, BNMAAdRevenueDelegateProvider, BNMAAdReviewDelegateProvider, BNMAuctionDelegateProvider {
     var publisher: AnyPublisher<AdEvent, Never> {
         let publishers: [AnyPublisher<AdEvent, Never>] = [
-            AdEventPublishers.BNMAAdDelegatePublisher(self).eraseToAnyPublisher(),
-            AdEventPublishers.BNMAuctionDelegatePublisher(self).eraseToAnyPublisher(),
-            AdEventPublishers.BNMAAdReviewDelegatePublisher(self).eraseToAnyPublisher(),
-            AdEventPublishers.BNMAAdRevenueDelegatePublisher(self).eraseToAnyPublisher()
+            AdEventPublishers.BNMAAdPublisher(self).eraseToAnyPublisher(),
+            AdEventPublishers.BNMAuctionPublisher(self).eraseToAnyPublisher(),
+            AdEventPublishers.BNMAAdReviewPublisher(self).eraseToAnyPublisher(),
+            AdEventPublishers.BNMAAdRevenuePublisher(self).eraseToAnyPublisher()
         ]
         
         return Publishers.MergeMany(publishers)
@@ -28,10 +28,10 @@ extension BNMAInterstitialAd: BNMAAdDelegateProvider, BNMAAdRevenueDelegateProvi
 extension BNMARewardedAd: BNMARewardedAdDelegateProvider, BNMAAdRevenueDelegateProvider, BNMAAdReviewDelegateProvider, BNMAuctionDelegateProvider {
     var publisher: AnyPublisher<AdEvent, Never> {
         let publishers: [AnyPublisher<AdEvent, Never>] = [
-            AdEventPublishers.BNMARewardedAdDelegatePublisher(self).eraseToAnyPublisher(),
-            AdEventPublishers.BNMAuctionDelegatePublisher(self).eraseToAnyPublisher(),
-            AdEventPublishers.BNMAAdReviewDelegatePublisher(self).eraseToAnyPublisher(),
-            AdEventPublishers.BNMAAdRevenueDelegatePublisher(self).eraseToAnyPublisher()
+            AdEventPublishers.BNMARewardedAdPublisher(self).eraseToAnyPublisher(),
+            AdEventPublishers.BNMAuctionPublisher(self).eraseToAnyPublisher(),
+            AdEventPublishers.BNMAAdReviewPublisher(self).eraseToAnyPublisher(),
+            AdEventPublishers.BNMAAdRevenuePublisher(self).eraseToAnyPublisher()
         ]
         
         return Publishers.MergeMany(publishers)

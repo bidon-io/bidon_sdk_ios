@@ -1,5 +1,5 @@
 //
-//  ISInitializationDelegatePublisher.swift
+//  ISInitializationPublisher.swift
 //  IronSource-Demo
 //
 //  Created by Stas Kochkin on 10.07.2022.
@@ -11,7 +11,7 @@ import IronSource
 import IronSourceDecorator
 
 
-struct ISInitializationDelegatePublisher: Publisher {
+struct ISInitializationPublisher: Publisher {
     typealias Output = ()
     typealias Failure = Never
     
@@ -74,7 +74,7 @@ extension IronSourceDecorator.Proxy {
         _ appKey: String,
         adUnits: [String]
     ) -> AnyPublisher<Void, Never> {
-        return ISInitializationDelegatePublisher { [unowned self] delegate in
+        return ISInitializationPublisher { [unowned self] delegate in
             self.initWithAppKey(
                 appKey,
                 adUnits: adUnits,

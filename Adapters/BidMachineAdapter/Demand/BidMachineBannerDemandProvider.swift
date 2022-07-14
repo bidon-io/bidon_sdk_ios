@@ -40,8 +40,6 @@ internal final class BidMachineBannerDemandProvider: NSObject {
 
 
 extension BidMachineBannerDemandProvider: AdViewDemandProvider {
-    var adView: AdView? { banner }
-
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse
@@ -59,6 +57,10 @@ extension BidMachineBannerDemandProvider: AdViewDemandProvider {
         case .lose(let ad):
             request.notifyMediationLoss(ad.dsp, ecpm: ad.price as NSNumber)
         }
+    }
+    
+    func adView(for ad: Ad) -> AdView? {
+        return banner
     }
 }
 

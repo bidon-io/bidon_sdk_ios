@@ -13,12 +13,11 @@ import MobileAdvertising
 final class IronSourceRewardedAdDemandProvider: NSObject, RewardedAdDemandProvider {
     struct DisplayArguments {
         var placement: String?
-        var instanceId: String?
     }
     
     weak var delegate: DemandProviderDelegate?
     weak var rewardDelegate: DemandProviderRewardDelegate?
-
+    
     var load: (() -> ())?
     var displayArguments: (() -> DisplayArguments)?
     
@@ -28,23 +27,18 @@ final class IronSourceRewardedAdDemandProvider: NSObject, RewardedAdDemandProvid
         pricefloor: Price,
         response: @escaping DemandProviderResponse
     ) {
-        guard
-            let ad = ads.first(where: { $0.revenue.doubleValue >= pricefloor })
-        else {
+        guard let ad = ads.info(with: pricefloor) else {
             response(nil, SDKError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
             return
         }
         
-        ads.remove(ad)
         response(ad.wrapped, nil)
     }
     
     func notify(_ event: AuctionEvent) {}
     
     func show(ad: Ad, from viewController: UIViewController) {
-        if let instanceId = displayArguments?().instanceId {
-            IronSource.showISDemandOnlyRewardedVideo(viewController, instanceId: instanceId)
-        } else if let placement = displayArguments?().placement {
+        if let placement = displayArguments?().placement {
             IronSource.showRewardedVideo(with: viewController, placement: placement)
         } else {
             IronSource.showRewardedVideo(with: viewController)
@@ -54,16 +48,26 @@ final class IronSourceRewardedAdDemandProvider: NSObject, RewardedAdDemandProvid
 
 
 extension IronSourceRewardedAdDemandProvider: LevelPlayRewardedVideoDelegate {
-    func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
-        
+    func didFailToShowWithError(
+        _ error: Error!,
+        andAdInfo adInfo: ISAdInfo!
+    ) {
+        guard let adInfo = adInfo else { return }
+        delegate?.provider(
+            self,
+            didFailToDisplay: adInfo.wrapped,
+            error: error.map { SDKError($0) } ?? .unknown
+        )
     }
     
     func didOpen(with adInfo: ISAdInfo!) {
-        
+        guard let adInfo = adInfo else { return }
+        delegate?.provider(self, didPresent: adInfo.wrapped)
     }
     
     func didClose(with adInfo: ISAdInfo!) {
-        
+        guard let adInfo = adInfo else { return }
+        delegate?.provider(self, didHide: adInfo.wrapped)
     }
     
     func hasAvailableAd(with adInfo: ISAdInfo!) {
@@ -71,16 +75,29 @@ extension IronSourceRewardedAdDemandProvider: LevelPlayRewardedVideoDelegate {
         ads.insert(adInfo)
         load?()
     }
-    
-    func hasNoAvailableAd() {
         
-    }
-    
-    func didReceiveReward(forPlacement placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!) {
+    func didReceiveReward(
+        forPlacement placementInfo: ISPlacementInfo!,
+        with adInfo: ISAdInfo!
+    ) {
+        guard
+            let adInfo = adInfo,
+            let reward = placementInfo
+        else { return }
         
+        rewardDelegate?.provider(
+            self,
+            didReceiveReward: reward.wrapped,
+            ad: adInfo.wrapped
+        )
     }
     
     func didClick(_ placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!) {
-        
+        guard let adInfo = adInfo else { return }
+        delegate?.provider(self, didClick: adInfo.wrapped)
+    }
+    
+    func hasNoAvailableAd() {
+        ads.removeAll()
     }
 }

@@ -78,7 +78,7 @@ import MobileAdvertising
             self.fetchCompletion = completion
             return
         }
-        completion(provider.adView)
+        completion(provider.adView(for: ad))
     }
     
     @objc public convenience init(
@@ -180,7 +180,7 @@ extension BNMAAdView: AuctionControllerDelegate {
         delegate?.didLoad(winner)
         
         guard let provider: AdViewDemandProvider = controller.provider(for: winner) else { return }
-        fetchCompletion?(provider.adView)
+        fetchCompletion?(provider.adView(for: winner))
     }
     
     public func controller(_ controller: AuctionController, failedAuction error: Error) {

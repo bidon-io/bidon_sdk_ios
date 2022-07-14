@@ -94,8 +94,6 @@ internal final class AppLovinAdViewDemandProvider: NSObject, MAAdViewAdDelegate 
 
 
 extension AppLovinAdViewDemandProvider: AdViewDemandProvider {
-    var adView: AdView? { ad }
-
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse
@@ -106,6 +104,10 @@ extension AppLovinAdViewDemandProvider: AdViewDemandProvider {
     }
     
     func notify(_ event: AuctionEvent) {}
+    
+    func adView(for ad: Ad) -> AdView? {
+        return self.ad
+    }
 }
 
 

@@ -37,10 +37,14 @@ import FairBidSDK
     }
     
     public override func fetch(_ completion: @escaping (AdView?) -> ()) {
-        guard let adView = provider?.adView else { return }
+        guard
+            let ad = ad,
+            let adView = provider?.adView(for: ad)
+        else { return }
+        
         completion(adView)
     }
-
+    
     public override func loadAd() {
         load()
     }

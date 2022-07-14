@@ -12,7 +12,7 @@ import MobileAdvertising
 
 final class ManualAuctionResolver: AuctionResolver {
     func resolve(ads: [Ad], resolution: @escaping (Ad?) -> ()) {
-        guard let controller = UIApplication.shared.topViewContoller else {
+        guard let controller = UIApplication.shared.topViewContoller, !ads.isEmpty else {
             resolution(nil)
             return
         }

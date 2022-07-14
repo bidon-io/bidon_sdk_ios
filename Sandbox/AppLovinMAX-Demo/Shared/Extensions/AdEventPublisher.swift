@@ -36,7 +36,7 @@ struct AdEventPublishers {
     typealias Output = AdEvent
     typealias Failure = Never
     
-    struct BNMAAdDelegatePublisher: Publisher {
+    struct BNMAAdPublisher: Publisher {
         typealias Output = AdEvent
         typealias Failure = Never
         
@@ -58,7 +58,7 @@ struct AdEventPublishers {
         }
     }
     
-    struct BNMARewardedAdDelegatePublisher: Publisher {
+    struct BNMARewardedAdPublisher: Publisher {
         typealias Output = AdEvent
         typealias Failure = Never
         
@@ -80,7 +80,7 @@ struct AdEventPublishers {
         }
     }
     
-    struct BNMAAdRevenueDelegatePublisher: Publisher {
+    struct BNMAAdRevenuePublisher: Publisher {
         typealias Output = AdEvent
         typealias Failure = Never
         
@@ -102,7 +102,7 @@ struct AdEventPublishers {
         }
     }
     
-    struct BNMAAdReviewDelegatePublisher: Publisher {
+    struct BNMAAdReviewPublisher: Publisher {
         typealias Output = AdEvent
         typealias Failure = Never
         
@@ -124,7 +124,7 @@ struct AdEventPublishers {
         }
     }
     
-    struct BNMAuctionDelegatePublisher: Publisher {
+    struct BNMAuctionPublisher: Publisher {
         typealias Output = AdEvent
         typealias Failure = Never
         

@@ -24,6 +24,7 @@ struct AdEventModel: Identifiable {
     var event: AdEvent
 }
 
+
 enum AdEvent {
     case didStartAuction(placement: String)
     case didStartAuctionRound(placement: String, id: String, pricefloor: Price)
@@ -148,7 +149,7 @@ extension AdEvent {
                 .foregroundColor(.purple)
         default:
             return Image(systemName: "arrow.down")
-                .foregroundColor(.primary)
+                .foregroundColor(.blue)
         }
     }
 }

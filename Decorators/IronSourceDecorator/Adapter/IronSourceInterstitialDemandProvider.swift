@@ -13,7 +13,6 @@ import MobileAdvertising
 final class IronSourceInterstitialDemandProvider: NSObject, InterstitialDemandProvider {
     struct DisplayArguments {
         var placement: String?
-        var instanceId: String?
     }
     
     weak var delegate: DemandProviderDelegate?
@@ -21,29 +20,24 @@ final class IronSourceInterstitialDemandProvider: NSObject, InterstitialDemandPr
     var load: (() -> ())?
     var displayArguments: (() -> DisplayArguments)?
     
-    private var ads = Set<ISAdInfo>()
+    private var ads = ISAdInfoSet()
     
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse
     ) {
-        guard
-            let ad = ads.first(where: { $0.revenue.doubleValue >= pricefloor })
-        else {
+        guard let ad = ads.info(with: pricefloor) else {
             response(nil, SDKError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
             return
         }
         
-        ads.remove(ad)
         response(ad.wrapped, nil)
     }
     
     func notify(_ event: AuctionEvent) {}
     
     func show(ad: Ad, from viewController: UIViewController) {
-        if let instanceId = displayArguments?().instanceId {
-            IronSource.showISDemandOnlyInterstitial(viewController, instanceId: instanceId)
-        } else if let placement = displayArguments?().placement {
+        if let placement = displayArguments?().placement {
             IronSource.showInterstitial(with: viewController, placement: placement)
         } else {
             IronSource.showInterstitial(with: viewController)
@@ -60,26 +54,30 @@ extension IronSourceInterstitialDemandProvider: LevelPlayInterstitialDelegate {
     }
     
     func didFailToLoadWithError(_ error: Error!) {
-        
-    }
-    
-    func didOpen(with adInfo: ISAdInfo!) {
-        
+        ads.removeAll()
     }
     
     func didShow(with adInfo: ISAdInfo!) {
-        
+        guard let adInfo = adInfo else { return }
+        ads.remove(adInfo)
+        delegate?.provider(self, didPresent: adInfo.wrapped)
     }
     
     func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
-        
+        guard let adInfo = adInfo else { return }
+        delegate?.provider(self, didFailToDisplay: adInfo.wrapped, error: error.map { SDKError($0) } ?? SDKError.unknown)
+
     }
     
     func didClick(with adInfo: ISAdInfo!) {
-        
+        guard let adInfo = adInfo else { return }
+        delegate?.provider(self, didClick: adInfo.wrapped)
     }
     
     func didClose(with adInfo: ISAdInfo!) {
-        
+        guard let adInfo = adInfo else { return }
+        delegate?.provider(self, didHide: adInfo.wrapped)
     }
+    
+    func didOpen(with adInfo: ISAdInfo!) {}
 }

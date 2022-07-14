@@ -45,7 +45,7 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
                 sellerId: "1"
             )
         )
-        
+
         IronSource.bid.register(
             adapter: GoogleMobileAdsDemandSourceAdapter.self,
             parameters: GoogleMobileAdsParameters(

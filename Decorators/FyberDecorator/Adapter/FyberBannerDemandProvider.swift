@@ -41,8 +41,6 @@ internal final class FyberBannerDemandProvider: NSObject {
 
 
 extension FyberBannerDemandProvider: AdViewDemandProvider {
-    var adView: AdView? { banner }
-    
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse
@@ -57,6 +55,10 @@ extension FyberBannerDemandProvider: AdViewDemandProvider {
     }
     
     func notify(_ event: AuctionEvent) {}
+    
+    func adView(for ad: Ad) -> AdView? {
+        return self.banner
+    }
 }
 
 

@@ -40,8 +40,6 @@ internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
 
 
 extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
-    var adView: AdView? { banner }
-    
     func request(
         pricefloor: Price,
         response: @escaping DemandProviderResponse
@@ -62,6 +60,10 @@ extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
     }
 
     func notify(_ event: AuctionEvent) {}
+    
+    func adView(for ad: Ad) -> AdView? {
+        return banner
+    }
     
     private func wrapped(ad: GADBannerView) -> Ad? {
         guard

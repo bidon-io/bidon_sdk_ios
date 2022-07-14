@@ -28,3 +28,17 @@ final class BNISAdInfo: NSObject, Ad {
 extension ISAdInfo {
     var wrapped: Ad { BNISAdInfo(self) }
 }
+
+
+typealias ISAdInfoSet = Set<ISAdInfo>
+
+
+extension ISAdInfoSet {
+    func info(with pricefloor: Price) -> ISAdInfo? {
+        guard !pricefloor.isUnknown else {
+            return self.max { $0.revenue.doubleValue < $1.revenue.doubleValue }
+        }
+    
+        return first { $0.revenue.doubleValue >= pricefloor }
+    }
+}

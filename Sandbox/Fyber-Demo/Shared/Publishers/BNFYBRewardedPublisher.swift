@@ -1,5 +1,5 @@
 //
-//  BNFYBRewardedDelegatePublisher.swift
+//  BNFYBRewardedPublisher.swift
 //  Fyber-Demo
 //
 //  Created by Stas Kochkin on 12.07.2022.
@@ -12,7 +12,7 @@ import FairBidSDK
 import MobileAdvertising
 
 
-struct BNFYBRewardedDelegatePublisher: Publisher {
+struct BNFYBRewardedPublisher: Publisher {
     typealias Output = AdEventModel
     typealias Failure = Never
     
@@ -101,7 +101,7 @@ where S : Subscriber, S.Input == AdEventModel {
 
 extension BNFYBRewarded {
     static func publisher() -> AnyPublisher<AdEventModel, Never> {
-        return BNFYBRewardedDelegatePublisher { delegate in
+        return BNFYBRewardedPublisher { delegate in
             self.delegate = delegate
         }
         .eraseToAnyPublisher()

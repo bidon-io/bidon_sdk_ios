@@ -1,5 +1,5 @@
 //
-//  BNFYBAuctionDelegatePublisher.swift
+//  BNFYBAuctionPublisher.swift
 //  Fyber-Demo
 //
 //  Created by Stas Kochkin on 12.07.2022.
@@ -12,7 +12,7 @@ import FairBidSDK
 import MobileAdvertising
 
 
-struct BNFYBAuctionDelegatePublisher: Publisher {
+struct BNFYBAuctionPublisher: Publisher {
     typealias Output = AdEventModel
     typealias Failure = Never
     
@@ -97,7 +97,7 @@ where S : Subscriber, S.Input == AdEventModel {
 
 extension BNFYBInterstitial {
     static func auctionPublisher() -> AnyPublisher<AdEventModel, Never> {
-        return BNFYBAuctionDelegatePublisher(adType: .interstitial) { delegate in
+        return BNFYBAuctionPublisher(adType: .interstitial) { delegate in
             self.auctionDelegate = delegate
         }
         .eraseToAnyPublisher()
@@ -107,7 +107,7 @@ extension BNFYBInterstitial {
 
 extension BNFYBRewarded {
     static func auctionPublisher() -> AnyPublisher<AdEventModel, Never> {
-        return BNFYBAuctionDelegatePublisher(adType: .rewardedVideo) { delegate in
+        return BNFYBAuctionPublisher(adType: .rewardedVideo) { delegate in
             self.auctionDelegate = delegate
         }
         .eraseToAnyPublisher()
@@ -117,7 +117,7 @@ extension BNFYBRewarded {
 
 extension BNFYBBanner {
     static func auctionPublisher() -> AnyPublisher<AdEventModel, Never> {
-        return BNFYBAuctionDelegatePublisher(adType: .banner) { delegate in
+        return BNFYBAuctionPublisher(adType: .banner) { delegate in
             self.auctionDelegate = delegate
         }
         .eraseToAnyPublisher()

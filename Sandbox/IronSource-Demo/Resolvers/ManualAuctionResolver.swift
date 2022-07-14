@@ -1,8 +1,8 @@
 //
-//  ManualResolver.swift
-//  Fyber-Demo
+//  ManualAuctionResolver.swift
+//  IronSource-Demo
 //
-//  Created by Stas Kochkin on 13.07.2022.
+//  Created by Stas Kochkin on 14.07.2022.
 //
 
 import Foundation

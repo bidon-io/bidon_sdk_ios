@@ -24,18 +24,15 @@ struct AdEventView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     model.adType.title
-                    Image(systemName: model.event.systemImageName)
+                    model.event.image
                         .foregroundColor(model.event.accentColor)
                     Spacer()
                 }
                 
-                
                 model.event.title
                     .foregroundColor(.primary)
                 
-                Text(model.event.subtitle)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+               model.event.subtitle
             }
             
             Spacer()
@@ -50,10 +47,12 @@ struct AdEventView: View {
 
 
 struct AdEventView_Previews: PreviewProvider {
+    typealias RewardedVideoEvent = ISRewardedVideoPublisher.Event
+    
     static var previews: some View {
         List {
-            AdEventView(model: .init(adType: .rewardedVideo, event: .didOpen))
-            AdEventView(model: .init(adType: .banner, event: .didFail(error: SDKError.message("Something went wrong"))))
+            AdEventView(model: .init(adType: .rewardedVideo, event: RewardedVideoEvent.didOpen))
+//            AdEventView(model: .init(adType: .banner, event: .didFail(error: SDKError.message("Something went wrong"))))
         }
         .listStyle(PlainListStyle())
     }

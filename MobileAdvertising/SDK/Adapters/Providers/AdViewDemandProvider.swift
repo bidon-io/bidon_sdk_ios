@@ -75,5 +75,5 @@ public protocol DemandProviderAdViewDelegate: AnyObject {
 public protocol AdViewDemandProvider: DemandProvider {
     var adViewDelegate: DemandProviderAdViewDelegate? { get set }
     
-    var adView: AdView? { get }
+    func adView(for ad: Ad) -> AdView? 
 }

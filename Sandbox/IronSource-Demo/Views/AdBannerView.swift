@@ -44,7 +44,7 @@ struct AdBannerView: UIViewRepresentable {
         
         func loadAd(_ size: ISBannerSize) {
             let controller = UIApplication.shared.topViewContoller!
-            IronSource.loadBanner(with: controller, size: size)
+            IronSource.bid.loadBanner(with: controller, size: size)
         }
         
         func dismant() {
@@ -76,7 +76,5 @@ struct AdBannerView: UIViewRepresentable {
         func bannerDidDismissScreen() {}
         
         func bannerWillLeaveApplication() {}
-        
-        
     }
 }

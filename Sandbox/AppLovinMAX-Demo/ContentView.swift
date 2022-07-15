@@ -41,19 +41,19 @@ fileprivate struct LogoProgressView: View {
     private var content: some View {
         VStack(spacing: 20) {
             Image(systemName: "brain.head.profile")
-                .imageScale(.large)
+                .font(.system(size: 24))
             ZStack {
                 Text("AppLovin MAX ❤️ Bidon")
                     .font(Font.system(
-                        size: 16,
+                        size: 24,
                         weight: .heavy,
                         design: .monospaced
                     ))
-                    .offset(x: 0.5, y: 0.5)
+                    .offset(x: 1.5, y: 1.5)
                 Text("AppLovin MAX ❤️ Bidon")
                     .foregroundColor(.primary)
                     .font(Font.system(
-                        size: 16,
+                        size: 24,
                         weight: .heavy,
                         design: .monospaced
                     ))

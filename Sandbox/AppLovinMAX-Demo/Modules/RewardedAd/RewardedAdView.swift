@@ -70,6 +70,7 @@ struct RewardedAdView: View {
                         }
                     }
                 }
+                .background(Color.secondary)
             }
         }
     }

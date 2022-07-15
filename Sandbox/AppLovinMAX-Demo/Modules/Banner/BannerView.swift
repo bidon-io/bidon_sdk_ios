@@ -73,30 +73,32 @@ struct BannerView: View {
             .padding(.horizontal)
             
             List {
-                Section(header: Text("Ad Unit Identifier")) {
-                    TextField("Ad Unit Identifier", text: $vm.adUnitIdentifier)
-                        .textFieldStyle(.automatic)
-                }
-                
-                Section(header: Text("Auto refresh")) {
-                    Toggle("Enabled", isOn: $vm.isAutorefresh)
-                    HStack {
-                        Text("Interval")
-                        Spacer()
-                        Text(String(format: "%1.0f", vm.autorefreshInterval) + "s")
-                            .foregroundColor(.secondary)
+                Group {
+                    Section(header: Text("Ad Unit Identifier")) {
+                        TextField("Ad Unit Identifier", text: $vm.adUnitIdentifier)
+                            .textFieldStyle(.automatic)
                     }
-                    Slider(
-                        value: Binding(
-                            get: { vm.autorefreshInterval / 5 },
-                            set: { vm.autorefreshInterval = 5 * $0 }
-                        ),
-                        in: (1...6)
-                    )
-                }
-                
-                Section(header: Text("Adaptive size")) {
-                    Toggle("Enabled", isOn: $vm.isAdaptive)
+                    
+                    Section(header: Text("Auto refresh")) {
+                        Toggle("Enabled", isOn: $vm.isAutorefresh)
+                        HStack {
+                            Text("Interval")
+                            Spacer()
+                            Text(String(format: "%1.0f", vm.autorefreshInterval) + "s")
+                                .foregroundColor(.secondary)
+                        }
+                        Slider(
+                            value: Binding(
+                                get: { vm.autorefreshInterval / 5 },
+                                set: { vm.autorefreshInterval = 5 * $0 }
+                            ),
+                            in: (1...6)
+                        )
+                    }
+                    
+                    Section(header: Text("Adaptive size")) {
+                        Toggle("Enabled", isOn: $vm.isAdaptive)
+                    }
                 }
             }
         }
@@ -107,5 +109,6 @@ struct BannerView: View {
 struct BannerView_Previews: PreviewProvider {
     static var previews: some View {
         BannerView()
+            .preferredColorScheme(.dark)
     }
 }

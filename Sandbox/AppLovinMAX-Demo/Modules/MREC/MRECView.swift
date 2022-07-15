@@ -98,6 +98,7 @@ struct MRECView: View {
                     )
                 }
             }
+            .background(Color.secondary)
         }
     }
 }

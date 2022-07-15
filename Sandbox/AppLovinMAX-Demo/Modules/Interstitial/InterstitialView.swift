@@ -64,6 +64,7 @@ struct InterstitialView: View {
                         }
                     }
                 }
+                .background(Color.secondary)
             }
         }
     }

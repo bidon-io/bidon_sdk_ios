@@ -42,8 +42,8 @@ struct AdPresentationView<Content: View, Ad: View>: View {
                     }
                     .listStyle(.plain)
                     .padding(.bottom, 110)
-                    .background(Color.white)
-                    
+                    .background(Color(UIColor.systemBackground))
+
                     VStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 3)
                             .fill(Color.secondary)

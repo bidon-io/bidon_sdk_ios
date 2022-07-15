@@ -18,7 +18,7 @@ struct BNLevelPlayBannerPublisher: Publisher {
     typealias Failure = Never
     
     enum Event {
-        case didLoad(view: UIView, ad: Ad)
+        case didLoad(ad: Ad)
         case didFailToLoadWithError(error: Error!)
         case didPresentScreen(ad: Ad)
         case didDismissScreen(ad: Ad)
@@ -74,7 +74,7 @@ where S : Subscriber, S.Input == AdEventModel {
     }
     
     func didLoad(_ bannerView: UIView!, with adInfo: Ad!) {
-        produce(.didLoad(view: bannerView, ad: adInfo))
+        produce(.didLoad(ad: adInfo))
     }
     
     func didFailToLoadWithError(_ error: Error!) {

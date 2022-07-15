@@ -137,6 +137,7 @@ private extension Price {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
         formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
         return formatter
     }()
     

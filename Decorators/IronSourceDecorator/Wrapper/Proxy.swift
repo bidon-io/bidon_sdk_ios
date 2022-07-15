@@ -93,6 +93,10 @@ import MobileAdvertising
         rewardedVideo.resolver = auctionResolver
     }
     
+    @objc public func setBannerAuctionResolver(_ auctionResolver: AuctionResolver) {
+        banner.resolver = auctionResolver
+    }
+    
     @objc public func showInterstitial(
         with viewController: UIViewController,
         placement: String? = nil
@@ -103,7 +107,6 @@ import MobileAdvertising
         )
     }
 
-    
     @objc public func showRewardedVideo(
         with viewController: UIViewController,
         placement: String? = nil
@@ -111,6 +114,16 @@ import MobileAdvertising
         rewardedVideo.show(
             from: viewController,
             placement: placement
+        )
+    }
+    
+    @objc public func loadBanner(
+        with rootViewController: UIViewController,
+        size: ISBannerSize
+    ) {
+        banner.loadBanner(
+            with: rootViewController,
+            size: size
         )
     }
     

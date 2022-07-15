@@ -36,14 +36,13 @@ struct AdPresentationView<Content: View, Ad: View>: View {
         VStack {
             ZStack(alignment: .bottom) {
                 GeometryReader { proxy in
-                    Color.white
                     List(events) { event in
                         AdEventView(model: event)
                     }
                     .listStyle(.plain)
                     .padding(.bottom, 110)
-                    .background(Color.white)
-                    
+                    .background(Color(UIColor.systemBackground))
+
                     VStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 3)
                             .fill(Color.secondary)

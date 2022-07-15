@@ -20,19 +20,21 @@ final class BNISBannerRouter: NSObject {
     var resolver: AuctionResolver = HigherRevenueAuctionResolver()
     
     private var postbid: [AdViewDemandProvider] {
-        IronSource.bid.bidon.adViewDemandProviders(.init(.banner))
+        IronSource.bid.bidon.adViewDemandProviders(context)
     }
     
     var auction: AuctionController!
+    
+    private var context = AdViewContext(.banner)
     
     override init() {
         super.init()
         
         weak var weakSelf = self
-        mediator.load = weakSelf?.loadAd
+        mediator.load = weakSelf?.performAuction
     }
     
-    func loadAd() {
+    func performAuction() {
         auction = try! AuctionControllerBuilder()
             .withMediator(mediator)
             .withPostbid(postbid)
@@ -41,6 +43,19 @@ final class BNISBannerRouter: NSObject {
             .build()
         
         auction.load()
+    }
+    
+    func loadBanner(
+        with rootViewController: UIViewController,
+        size: ISBannerSize
+    ) {
+        context = AdViewContext(
+            size.format,
+            isAdaptive: size.isAdaptive,
+            rootViewController: rootViewController
+        )
+        
+        IronSource.loadBanner(with: rootViewController, size: size)
     }
     
     func finish() {
@@ -58,13 +73,16 @@ final class BNISBannerRouter: NSObject {
                 return
             }
             
-            self.delegate?.bannerDidLoad(view)
-            self.levelPlayDelegate?.didLoad(view, with: ad)
+            let wrapped = BNISBannerView(adView: view)
+            wrapped.load = self.performAuction
+            
+            self.delegate?.bannerDidLoad(wrapped)
+            self.levelPlayDelegate?.didLoad(wrapped, with: ad)
         }
     }
     
     func destroy(_ view: UIView) {
-        (view as? ISBannerView).map { IronSource.destroyBanner($0) }
+        (view as? BNISBannerView)?.destroy()
     }
 }
 

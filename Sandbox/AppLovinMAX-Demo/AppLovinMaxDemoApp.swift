@@ -17,7 +17,7 @@ let applovin = ALSdk.shared(
     withKey: "05TMDQ5tZabpXQ45_UTbmEGNUtVAzSTzT6KmWQc5_CuWdzccS4DCITZoL3yIWUG3bbq60QC_d4WF28tUC4gVTF"
 )!
 
-var resolver: AuctionResolver = ManualAuctionResolver()
+var resolver: AuctionResolver = HigherRevenueAuctionResolver()
 
 
 @main

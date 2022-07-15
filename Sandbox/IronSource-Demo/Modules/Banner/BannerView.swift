@@ -24,7 +24,7 @@ struct BannerView: View {
             AdBannerView(size: vm.format.size)
                 .background(Color(.secondarySystemBackground))
                 .frame(maxWidth: .infinity)
-                .frame(height: 50)
+                .frame(height: CGFloat(vm.format.size.height))
                 .transition(.move(edge: .bottom))
                 .zIndex(1)
         }

@@ -132,6 +132,7 @@ final class HomeViewModel: ObservableObject {
             .sink {
                 IronSource.bid.setInterstitialAuctionResolver($0)
                 IronSource.bid.setRewardedVideoAuctionResolver($0)
+                IronSource.bid.setBannerAuctionResolver($0)
             }
             .store(in: &cancellables)
     }

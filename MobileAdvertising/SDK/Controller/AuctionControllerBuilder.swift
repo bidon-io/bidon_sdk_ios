@@ -20,7 +20,7 @@ public final class AuctionControllerBuilder {
     public func withMediator(_ mediator: DemandProvider) -> Self {
         self.mediation = ConcurentAuctionRound(
             id: "mediation",
-            timeout: .nan,
+            timeout: 10,
             providers: [mediator]
         )
         return self
@@ -30,7 +30,7 @@ public final class AuctionControllerBuilder {
     public func withPostbid(_ providers: [DemandProvider]) -> Self {
         self.postbid = ConcurentAuctionRound(
             id: "postbid",
-            timeout: .nan,
+            timeout: 5,
             providers: providers
         )
         return self

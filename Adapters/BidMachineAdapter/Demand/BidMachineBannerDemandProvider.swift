@@ -50,6 +50,11 @@ extension BidMachineBannerDemandProvider: AdViewDemandProvider {
         banner.populate(with: request)
     }
     
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
+    }
+    
     func notify(_ event: AuctionEvent) {
         switch (event) {
         case .win:

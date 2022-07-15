@@ -496,8 +496,8 @@
 			projectRoot = "";
 			targets = (
 				429EE28C286B38FE009439C6 /* AppLovinDecorator */,
-				42BA821B287B25AA001F1744 /* IronSourceDecorator */,
 				42BA8266287C64A5001F1744 /* FyberDecorator */,
+				42BA821B287B25AA001F1744 /* IronSourceDecorator */,
 			);
 		};
 /* End PBXProject section */

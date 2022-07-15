@@ -22,6 +22,7 @@ public enum SDKError: Error, CustomStringConvertible {
     case unknown
     
     case noFill
+    case cancelled
     case internalInconsistency
     case invalidPresentationState
     case unableToFindRootViewController
@@ -34,6 +35,8 @@ public enum SDKError: Error, CustomStringConvertible {
             return "Inconsistent state"
         case .unknown:
             return "Unknown"
+        case .cancelled:
+            return "Request has been cancelled"
         case .invalidPresentationState:
             return "Invalid presentation state"
         case .unableToFindRootViewController:

@@ -14,7 +14,8 @@ struct ConcurentAuctionRound: PerformableAuctionRound {
     var providers: [DemandProvider]
     
     private var group = DispatchGroup()
-    private var timer: Timer!
+    private var completion: (() -> ())?
+    private var isCancelled: Bool = false
     
     init(
         id: String,
@@ -40,14 +41,14 @@ struct ConcurentAuctionRound: PerformableAuctionRound {
                 demand(ad, provider)
             }
         }
-        
+                
         group.notify(queue: .main) {
             completion()
         }
     }
     
     func cancel() {
-        
+        providers.forEach { $0.cancel() }
     }
 }
 

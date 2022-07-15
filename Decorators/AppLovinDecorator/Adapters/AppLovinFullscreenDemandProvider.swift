@@ -85,6 +85,11 @@ extension AppLovinFullscreenDemandProvider: InterstitialDemandProvider {
         fullscreenAd.load()
     }
     
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
+    }
+    
     func show(ad: Ad, from viewController: UIViewController) {
         let args = displayArguments()
         fullscreenAd.show(args, from: viewController)

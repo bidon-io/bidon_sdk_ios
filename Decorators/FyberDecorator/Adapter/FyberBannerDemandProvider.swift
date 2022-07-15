@@ -54,6 +54,11 @@ extension FyberBannerDemandProvider: AdViewDemandProvider {
         FYBBanner.request(with: options)
     }
     
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
+    }
+    
     func notify(_ event: AuctionEvent) {}
     
     func adView(for ad: Ad) -> AdView? {

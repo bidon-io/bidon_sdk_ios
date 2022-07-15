@@ -53,6 +53,11 @@ extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
             request.notifyMediationLoss(ad.dsp, ecpm: ad.price as NSNumber)
         }
     }
+    
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
+    }
 }
 
  

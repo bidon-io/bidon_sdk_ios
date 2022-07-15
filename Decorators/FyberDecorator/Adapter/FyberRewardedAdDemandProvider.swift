@@ -52,6 +52,11 @@ extension FyberRewardedAdDemandProvider: RewardedAdDemandProvider {
         }
     }
     
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
+    }
+    
     func show(ad: Ad, from viewController: UIViewController) {
         FYBRewarded.show(placement)
     }

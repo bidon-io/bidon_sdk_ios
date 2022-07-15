@@ -61,6 +61,11 @@ extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
 
     func notify(_ event: AuctionEvent) {}
     
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
+    }
+    
     func adView(for ad: Ad) -> AdView? {
         return banner
     }

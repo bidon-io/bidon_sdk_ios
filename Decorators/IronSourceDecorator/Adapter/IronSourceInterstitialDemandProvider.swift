@@ -34,6 +34,8 @@ final class IronSourceInterstitialDemandProvider: NSObject, InterstitialDemandPr
         response(ad.wrapped, nil)
     }
     
+    func cancel() {}
+
     func notify(_ event: AuctionEvent) {}
     
     func show(ad: Ad, from viewController: UIViewController) {

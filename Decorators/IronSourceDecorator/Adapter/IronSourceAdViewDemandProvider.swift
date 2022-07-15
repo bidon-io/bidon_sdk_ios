@@ -39,6 +39,8 @@ extension IronSourceAdViewDemandProvider: AdViewDemandProvider {
         response(ad.wrapped, nil)
     }
     
+    func cancel() {}
+    
     func notify(_ event: AuctionEvent) {}
     
     func adView(for ad: Ad) -> AdView? {

@@ -30,6 +30,8 @@ public protocol DemandProvider: AnyObject {
     
     func request(pricefloor: Price, response: @escaping DemandProviderResponse)
     
+    func cancel()
+    
     func notify(_ event: AuctionEvent)
 }
 

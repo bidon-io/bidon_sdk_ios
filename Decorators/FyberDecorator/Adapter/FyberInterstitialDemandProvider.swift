@@ -51,6 +51,11 @@ extension FyberInterstitialDemandProvider: InterstitialDemandProvider {
         }
     }
     
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
+    }
+    
     func show(ad: Ad, from viewController: UIViewController) {
         FYBInterstitial.show(placement)
     }

@@ -11,6 +11,8 @@
 		42389DF4287339CE006024BA /* BidMachineInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */; };
 		42389DF628734EE1006024BA /* BNBidMachineAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF528734EE1006024BA /* BNBidMachineAdWrapper.swift */; };
 		429EE2B8286C7293009439C6 /* BidMachineDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */; };
+		42B4B3262881C8DD00AADB32 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B4B3252881C8DD00AADB32 /* MobileAdvertising.framework */; };
+		42B4B32A2881C8E600AADB32 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B4B3292881C8E600AADB32 /* MobileAdvertising.framework */; };
 		42BA81B52875ABA3001F1744 /* GoogleMobileAdsAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA81B42875ABA3001F1744 /* GoogleMobileAdsAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42BA81BA2875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81B92875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift */; };
 		42BA81C22875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81C12875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift */; };
@@ -39,6 +41,8 @@
 		42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineInterstitialDemandProvider.swift; sourceTree = "<group>"; };
 		42389DF528734EE1006024BA /* BNBidMachineAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNBidMachineAdWrapper.swift; sourceTree = "<group>"; };
 		429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineDemandSourceAdapter.swift; sourceTree = "<group>"; };
+		42B4B3252881C8DD00AADB32 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42B4B3292881C8E600AADB32 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BA81B22875ABA3001F1744 /* GoogleMobileAdsAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleMobileAdsAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BA81B42875ABA3001F1744 /* GoogleMobileAdsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleMobileAdsAdapter.h; sourceTree = "<group>"; };
 		42BA81B92875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsDemandSourceAdapter.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDB78F92108A97A7D4A9A885 /* Pods_BidMachineAdapter.framework in Frameworks */,
+				42B4B32A2881C8E600AADB32 /* MobileAdvertising.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44AE66DBE0C54F5CFA8F8946 /* Pods_GoogleMobileAdsAdapter.framework in Frameworks */,
+				42B4B3262881C8DD00AADB32 /* MobileAdvertising.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +171,8 @@
 		628D13BF18603C4DCE80EE71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42B4B3292881C8E600AADB32 /* MobileAdvertising.framework */,
+				42B4B3252881C8DD00AADB32 /* MobileAdvertising.framework */,
 				B0C5552E693F0A790789C7B5 /* Pods_AppLovinAdapter.framework */,
 				127A93BBF5FC060201BACB02 /* Pods_AppodealAdapter.framework */,
 				EAE052BEBE692143D8800C6B /* Pods_BidMachineAdapter.framework */,

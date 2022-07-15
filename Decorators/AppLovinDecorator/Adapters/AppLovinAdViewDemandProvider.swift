@@ -103,6 +103,11 @@ extension AppLovinAdViewDemandProvider: AdViewDemandProvider {
         ad.loadAd()
     }
     
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
+    }
+    
     func notify(_ event: AuctionEvent) {}
     
     func adView(for ad: Ad) -> AdView? {

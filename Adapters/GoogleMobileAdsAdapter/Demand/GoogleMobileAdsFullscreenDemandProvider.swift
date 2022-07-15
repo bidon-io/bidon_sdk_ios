@@ -16,6 +16,9 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BNGAD
     private let item: (Price) -> LineItem?
     
     private var _item: LineItem?
+    
+    private var response: DemandProviderResponse?
+
     private var fullscreenAd: FullscreenAd? {
         didSet {
             fullscreenAd?.fullScreenContentDelegate = self
@@ -75,6 +78,8 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
             return
         }
         
+        self.response = response
+        
         let request = GADRequest()
         FullscreenAd.request(
             adUnitID: item.adUnitId,
@@ -82,7 +87,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
         ) { [weak self] fullscreenAd, error in
             guard let self = self else { return }
             guard let fullscreenAd = fullscreenAd as? FullscreenAd, error == nil else {
-                response(nil, SDKError(error))
+                self.response?(nil, SDKError(error))
                 return
             }
             
@@ -90,8 +95,13 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
             self.fullscreenAd = fullscreenAd
             
             let wrapped = BNGADResponseInfoWrapper(fullscreenAd, item: item)
-            response(wrapped, nil)
+            self.response?(wrapped, nil)
         }
+    }
+    
+    func cancel() {
+        response?(nil, SDKError.cancelled)
+        response = nil
     }
     
     func show(ad: Ad, from viewController: UIViewController) {

@@ -91,6 +91,11 @@
 		422101802859E29A006596DA /* MobileAdvertising */ = {
 			isa = PBXGroup;
 			children = (
+				429EE2CB286D99AE009439C6 /* Controller */,
+				429EE2CA286D9995009439C6 /* Auction */,
+				429EE2C3286CA252009439C6 /* Adapters */,
+				429EE2B9286C82D9009439C6 /* Repository */,
+				42BA820528785464001F1744 /* Banner */,
 				422101962859E2B3006596DA /* SDK */,
 				422101812859E29A006596DA /* MobileAdvertising.h */,
 			);
@@ -100,11 +105,6 @@
 		422101962859E2B3006596DA /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				429EE2CB286D99AE009439C6 /* Controller */,
-				429EE2CA286D9995009439C6 /* Auction */,
-				429EE2C3286CA252009439C6 /* Adapters */,
-				429EE2B9286C82D9009439C6 /* Repository */,
-				42BA820528785464001F1744 /* Banner */,
 				422101972859E2C3006596DA /* SDK.swift */,
 				42389E162874665A006024BA /* UIApplication+Extensions.swift */,
 				4221019B2859E3D0006596DA /* Defines.swift */,

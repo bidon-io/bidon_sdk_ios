@@ -12,7 +12,7 @@ public typealias Price = Double
 
 
 public extension Price {
-    static let unknown = Double.nan
+    static let unknown: Price = 0
     
     var isUnknown: Bool {
         return isNaN || isZero || isInfinite

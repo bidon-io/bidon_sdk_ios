@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import MobileAdvertising
+import FyberDecorator
 
 
 struct AdEventView: View {
@@ -24,7 +25,7 @@ struct AdEventView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     model.adType.title
-                    model.event.bage
+                    model.event.image.foregroundColor(model.event.accentColor)
                     Spacer()
                 }
                 
@@ -48,7 +49,12 @@ struct AdEventView: View {
 struct AdEventView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            AdEventView(model: .init(adType: .rewardedVideo, event: .didClick(placement: "some placement")))
+            AdEventView(
+                model: .init(
+                    adType: .rewardedVideo,
+                    event: BNFYBRewardedPublisher.Event.rewardedDidClick(placement: "some placement")
+                )
+            )
         }
         .listStyle(PlainListStyle())
     }

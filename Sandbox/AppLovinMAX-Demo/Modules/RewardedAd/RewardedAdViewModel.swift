@@ -18,7 +18,26 @@ final class RewardedAdViewModel: AdViewModel {
     private var rewardedAd: BNMARewardedAd? {
         didSet {
             guard let rewardedAd = rewardedAd else { return }
-            subscribe(rewardedAd.publisher)
+            let publisher: AnyPublisher<AdEventModel, Never> = Publishers.MergeMany([
+                rewardedAd
+                    .publisher
+                    .map { AdEventModel(event: $0) }
+                    .eraseToAnyPublisher(),
+                rewardedAd
+                    .auctionPublisher
+                    .map { AdEventModel(event: $0) }
+                    .eraseToAnyPublisher(),
+                rewardedAd
+                    .adReviewPublisher
+                    .map { AdEventModel(event: $0) }
+                    .eraseToAnyPublisher(),
+                rewardedAd
+                    .revenuePublisher
+                    .map { AdEventModel(event: $0) }
+                    .eraseToAnyPublisher()
+            ]).eraseToAnyPublisher()
+            
+            subscribe(publisher)
         }
     }
     

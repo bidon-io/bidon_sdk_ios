@@ -18,7 +18,26 @@ final class InterstitialViewModel: AdViewModel {
     private var interstitial: BNMAInterstitialAd? {
         didSet {
             guard let interstitial = interstitial else { return }
-            subscribe(interstitial.publisher)
+            let publisher: AnyPublisher<AdEventModel, Never> = Publishers.MergeMany([
+                interstitial
+                    .publisher
+                    .map { AdEventModel(event: $0) }
+                    .eraseToAnyPublisher(),
+                interstitial
+                    .auctionPublisher
+                    .map { AdEventModel(event: $0) }
+                    .eraseToAnyPublisher(),
+                interstitial
+                    .adReviewPublisher
+                    .map { AdEventModel(event: $0) }
+                    .eraseToAnyPublisher(),
+                interstitial
+                    .revenuePublisher
+                    .map { AdEventModel(event: $0) }
+                    .eraseToAnyPublisher()
+            ]).eraseToAnyPublisher()
+            
+            subscribe(publisher)
         }
     }
     

@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import FyberDecorator
 
 
 class AdViewModel: ObservableObject {
@@ -23,29 +24,55 @@ class AdViewModel: ObservableObject {
     
     private func subscribe() {
         $events
-            .compactMap { $0.last }
-            .map { $0.event }
+            .compactMap { $0.last?.event as? BNFYBRewardedPublisher.Event }
             .sink { [unowned self] event in
                 var state = self.state
                 
                 switch event {
-                case .willRequest:
+                case .rewardedWillRequest:
                     state = .loading
-                case .isAvailable, .didLoad:
+                case .rewardedIsAvailable:
                     state = .ready
-                case .isUnavailable, .didFailToLoad:
+                case .rewardedIsUnavailable:
                     state = .failed
-                case .didShow:
+                case .rewardedDidShow:
                     state = .presenting
-                case .didDismiss:
+                case .rewardedDidFailToShow:
+                    state = .failed
+                case .rewardedDidDismiss:
                     state = .idle
                 default: break
                 }
                 
                 withAnimation { [unowned self] in
-                    if self.state != state {
-                        self.state = state
-                    }
+                    self.state = state
+                }
+            }
+            .store(in: &cancellables)
+        
+        $events
+            .compactMap { $0.last?.event as? BNFYBInterstitialPublisher.Event }
+            .sink { [unowned self] event in
+                var state = self.state
+                
+                switch event {
+                case .interstitialWillRequest:
+                    state = .loading
+                case .interstitialIsAvailable:
+                    state = .ready
+                case .interstitialIsUnavailable:
+                    state = .failed
+                case .interstitialDidShow:
+                    state = .presenting
+                case .interstitialDidFailToShow:
+                    state = .failed
+                case .interstitialDidDismiss:
+                    state = .idle
+                default: break
+                }
+                
+                withAnimation { [unowned self] in
+                    self.state = state
                 }
             }
             .store(in: &cancellables)

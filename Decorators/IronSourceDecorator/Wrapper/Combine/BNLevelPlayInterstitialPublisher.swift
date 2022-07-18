@@ -8,16 +8,16 @@
 import Foundation
 import Combine
 import IronSource
-import IronSourceDecorator
 import MobileAdvertising
 import SwiftUI
 
 
-struct BNLevelPlayInterstitialPublisher: Publisher {
-    typealias Output = AdEventModel
-    typealias Failure = Never
+@available(iOS 13, *)
+public struct BNLevelPlayInterstitialPublisher: Publisher {
+    public typealias Output = Event
+    public typealias Failure = Never
     
-    enum Event {
+    public enum Event {
         case didLoad(adInfo: Ad!)
         case didFailToLoadWithError(error: Error!)
         case didFailToShowWithError(error: Error!, adInfo: Ad!)
@@ -33,7 +33,7 @@ struct BNLevelPlayInterstitialPublisher: Publisher {
         self.delegate = delegate
     }
     
-    func receive<S>(subscriber: S)
+    public func receive<S>(subscriber: S)
     where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
         let subscription = BNLevelPlayInterstitialDelegateSubscription(
             subscriber: subscriber
@@ -46,9 +46,9 @@ struct BNLevelPlayInterstitialPublisher: Publisher {
 }
 
 
-final fileprivate
-class BNLevelPlayInterstitialDelegateSubscription<S>: NSObject, Subscription, BNLevelPlayInterstitialDelegate
-where S : Subscriber, S.Input == AdEventModel {
+@available(iOS 13, *)
+final fileprivate class BNLevelPlayInterstitialDelegateSubscription<S>: NSObject, Subscription, BNLevelPlayInterstitialDelegate
+where S : Subscriber, S.Input == BNLevelPlayInterstitialPublisher.Event {
     private var subscriber: S?
     
     var demand: Subscribers.Demand = .none
@@ -62,7 +62,7 @@ where S : Subscriber, S.Input == AdEventModel {
         guard let subscriber = subscriber else { return }
         
         demand -= 1
-        demand += subscriber.receive(AdEventModel(adType: .interstitial, event: event))
+        demand += subscriber.receive(event)
     }
     
     func cancel() {
@@ -104,69 +104,11 @@ where S : Subscriber, S.Input == AdEventModel {
 }
 
 
-extension IronSourceDecorator.Proxy {
-    var levelPlayInterstitialPublisher: AnyPublisher<AdEventModel, Never> {
+@available(iOS 13, *)
+public extension IronSourceDecorator.Proxy {
+    var levelPlayInterstitialPublisher: BNLevelPlayInterstitialPublisher {
         return BNLevelPlayInterstitialPublisher { [unowned self] delegate in
             self.setLevelPlayInterstitialDelegate(delegate)
         }
-        .eraseToAnyPublisher()
-    }
-}
-
-
-extension BNLevelPlayInterstitialPublisher.Event: AdEventViewRepresentable {
-    var title: Text {
-        let text: Text
-        
-        switch self {
-        case .didLoad:
-            text = Text("ad did load")
-        case .didFailToLoadWithError:
-            text = Text("ad did fail to load")
-        case .didFailToShowWithError:
-            text = Text("ad did fail to show")
-        case .didShow:
-            text = Text("ad did show")
-        case .didOpen:
-            text = Text("ad did open")
-        case .didClose:
-            text = Text("ad did close")
-        case .didClick:
-            text = Text("ad did click")
-        }
-        
-        return Text("(level play)").italic() + Text(" ") + text
-    }
-    
-    var subtitle: Text {
-        let text: String
-        switch self {
-        case .didLoad(let ad):
-            text = "Ad: " + (ad?.text ?? "-")
-        case .didFailToLoadWithError(let error):
-            text = "Error: " + (error?.localizedDescription ?? "-")
-        case .didFailToShowWithError(let error, let ad):
-            text = "Ad: " + (ad?.text ?? "-") + " error: " + (error?.localizedDescription ?? "-")
-        case .didOpen(let ad):
-            text = "Ad: " + (ad?.text ?? "-")
-        case .didClose(let ad):
-            text = "Ad: " + (ad?.text ?? "-")
-        case .didShow(let ad):
-            text = "Ad: " + (ad?.text ?? "-")
-        case .didClick(let ad):
-            text = "Ad: " + (ad?.text ?? "-")
-        }
-        
-        return Text(text)
-            .font(.caption)
-            .foregroundColor(.secondary)
-    }
-    
-    var image: Image {
-        Image(systemName: "gamecontroller")
-    }
-    
-    var accentColor: Color {
-        .red
     }
 }

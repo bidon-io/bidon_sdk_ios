@@ -8,16 +8,16 @@
 import Foundation
 import Combine
 import IronSource
-import IronSourceDecorator
 import SwiftUI
 import MobileAdvertising
 
 
-struct BNLevelPlayBannerPublisher: Publisher {
-    typealias Output = AdEventModel
-    typealias Failure = Never
+@available(iOS 13, *)
+public struct BNLevelPlayBannerPublisher: Publisher {
+    public typealias Output = Event
+    public typealias Failure = Never
     
-    enum Event {
+    public enum Event {
         case didLoad(ad: Ad)
         case didFailToLoadWithError(error: Error!)
         case didPresentScreen(ad: Ad)
@@ -32,7 +32,7 @@ struct BNLevelPlayBannerPublisher: Publisher {
         self.delegate = delegate
     }
     
-    func receive<S>(subscriber: S)
+    public func receive<S>(subscriber: S)
     where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
         let subscription = BNLevelPlayBannerDelegateSubscription(
             subscriber: subscriber
@@ -45,9 +45,9 @@ struct BNLevelPlayBannerPublisher: Publisher {
 }
 
 
-final fileprivate
-class BNLevelPlayBannerDelegateSubscription<S>: NSObject, Subscription, BNLevelPlayBannerDelegate
-where S : Subscriber, S.Input == AdEventModel {
+@available(iOS 13, *)
+final fileprivate  class BNLevelPlayBannerDelegateSubscription<S>: NSObject, Subscription, BNLevelPlayBannerDelegate
+where S : Subscriber, S.Input == BNLevelPlayBannerPublisher.Event {
     private var subscriber: S?
     
     var demand: Subscribers.Demand = .none
@@ -61,7 +61,7 @@ where S : Subscriber, S.Input == AdEventModel {
         guard let subscriber = subscriber else { return }
                     
         demand -= 1
-        demand += subscriber.receive(AdEventModel(adType: .banner, event: event))
+        demand += subscriber.receive(event)
     }
     
     func cancel() {
@@ -99,57 +99,11 @@ where S : Subscriber, S.Input == AdEventModel {
 }
 
 
-extension IronSourceDecorator.Proxy {
-    var levelPlayBannerPublisher: AnyPublisher<AdEventModel, Never> {
+@available(iOS 13, *)
+public extension IronSourceDecorator.Proxy {
+    var levelPlayBannerPublisher: BNLevelPlayBannerPublisher {
         return BNLevelPlayBannerPublisher { [unowned self] delegate in
             self.setLevelPlayBannerDelegate(delegate)
         }
-        .eraseToAnyPublisher()
-    }
-}
-
-
-extension BNLevelPlayBannerPublisher.Event: AdEventViewRepresentable {
-    var title: Text {
-        let text: Text
-        
-        switch self {
-        case .didLoad:
-            text = Text("ad did load")
-        case .didFailToLoadWithError:
-            text = Text("ad did fail to load")
-        case .didPresentScreen:
-            text = Text("ad did present screen")
-        case .didDismissScreen:
-            text = Text("ad did dismiss screen")
-        case .didLeaveApplication:
-            text = Text("ad did leave applcation")
-        case .didClick:
-            text = Text("ad did click")
-        }
-        
-        return Text("(level play)").italic() + Text(" ") + text
-    }
-    
-    var subtitle: Text {
-        let text: String
-        switch self {
-        case .didFailToLoadWithError(let error):
-            text = "Error: \(error?.localizedDescription ?? "-")"
-        default:
-            text = ""
-        }
-        
-        return Text(text)
-            .font(.caption)
-            .foregroundColor(.secondary)
-    }
-    
-    var image: Image {
-        Image(systemName: "gamecontroller")
-    }
-    
-    var accentColor: Color {
-        .red
     }
 }

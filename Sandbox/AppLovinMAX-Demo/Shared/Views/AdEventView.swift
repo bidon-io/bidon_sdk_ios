@@ -9,13 +9,6 @@ import Foundation
 import SwiftUI
 
 
-struct AdEventModel: Identifiable {
-    var id: UUID = UUID()
-    var time: Date = Date()
-    var event: AdEvent
-}
-
-
 struct AdEventView: View {
     var model: AdEventModel
     
@@ -33,7 +26,8 @@ struct AdEventView: View {
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 10) {
-                model.event.bage
+                model.event.image
+                    .foregroundColor(model.event.accentColor)
                 Text(AdEventView.formatter.string(from: model.time))
                     .font(.caption).foregroundColor(.secondary)
             }

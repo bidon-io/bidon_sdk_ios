@@ -16,6 +16,7 @@ extension FairBid {
     static let appId = "109613"
 }
 
+
 @main
 struct FyberDemoApp: App {
     @UIApplicationDelegateAdaptor(ApplicationDelegate.self) var delegate

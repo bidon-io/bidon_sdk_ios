@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import MobileAdvertising
+import IronSourceDecorator
 
 
 struct AdEventView: View {
@@ -52,7 +53,6 @@ struct AdEventView_Previews: PreviewProvider {
     static var previews: some View {
         List {
             AdEventView(model: .init(adType: .rewardedVideo, event: RewardedVideoEvent.didOpen))
-//            AdEventView(model: .init(adType: .banner, event: .didFail(error: SDKError.message("Something went wrong"))))
         }
         .listStyle(PlainListStyle())
     }

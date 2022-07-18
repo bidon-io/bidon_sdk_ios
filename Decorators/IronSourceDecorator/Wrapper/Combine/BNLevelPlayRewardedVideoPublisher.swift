@@ -8,16 +8,15 @@
 import Foundation
 import Combine
 import IronSource
-import IronSourceDecorator
 import MobileAdvertising
-import SwiftUI
 
 
-struct BNLevelPlayRewardedVideoPublisher: Publisher {
-    typealias Output = AdEventModel
-    typealias Failure = Never
+@available(iOS 13, *)
+public struct BNLevelPlayRewardedVideoPublisher: Publisher {
+    public typealias Output = Event
+    public typealias Failure = Never
     
-    enum Event {
+    public enum Event {
         case didReceiveReward(placementInfo: ISPlacementInfo!, adInfo: Ad!)
         case didFailToShowWithError(error: Error!, adInfo: Ad!)
         case didOpen(adInfo: Ad!)
@@ -33,7 +32,7 @@ struct BNLevelPlayRewardedVideoPublisher: Publisher {
         self.delegate = delegate
     }
     
-    func receive<S>(subscriber: S)
+    public func receive<S>(subscriber: S)
     where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
         let subscription = BNLevelPlayRewardedVideoDelegateSubscription(
             subscriber: subscriber
@@ -46,9 +45,9 @@ struct BNLevelPlayRewardedVideoPublisher: Publisher {
 }
 
 
-final fileprivate
-class BNLevelPlayRewardedVideoDelegateSubscription<S>: NSObject, Subscription, BNLevelPlayRewardedVideoDelegate
-where S : Subscriber, S.Input == AdEventModel {
+@available(iOS 13, *)
+final fileprivate class BNLevelPlayRewardedVideoDelegateSubscription<S>: NSObject, Subscription, BNLevelPlayRewardedVideoDelegate
+where S : Subscriber, S.Input == BNLevelPlayRewardedVideoPublisher.Event {
     private var subscriber: S?
     
     var demand: Subscribers.Demand = .none
@@ -62,7 +61,7 @@ where S : Subscriber, S.Input == AdEventModel {
         guard let subscriber = subscriber else { return }
         
         demand -= 1
-        demand += subscriber.receive(AdEventModel(adType: .rewardedVideo, event: event))
+        demand += subscriber.receive(event)
     }
     
     func cancel() {
@@ -103,70 +102,11 @@ where S : Subscriber, S.Input == AdEventModel {
     }
 }
 
-
-extension IronSourceDecorator.Proxy {
-    var levelPlayRewardedVideoPublisher: AnyPublisher<AdEventModel, Never> {
+@available(iOS 13, *)
+public extension IronSourceDecorator.Proxy {
+    var levelPlayRewardedVideoPublisher: BNLevelPlayRewardedVideoPublisher {
         return BNLevelPlayRewardedVideoPublisher { [unowned self] delegate in
             self.setLevelPlayRewardedVideoDelegate(delegate)
         }
-        .eraseToAnyPublisher()
-    }
-}
-
-
-extension BNLevelPlayRewardedVideoPublisher.Event: AdEventViewRepresentable {
-    var title: Text {
-        let text: Text
-        
-        switch self {
-        case .hasAvailableAd:
-            text = Text("has available ad")
-        case .hasNoAvailableAd:
-            text = Text("has no available ad")
-        case .didReceiveReward:
-            return Text("ad did receive reward")
-        case .didFailToShowWithError:
-            return Text("ad did fail to show")
-        case .didOpen:
-            return Text("ad did open")
-        case .didClose:
-            return Text("ad did close")
-        case .didClick:
-            return Text("ad did click")
-        }
-        
-        return Text("(level play)").italic() + Text(" ") + text
-    }
-    
-    var subtitle: Text {
-        let text: String
-        switch self {
-        case .hasAvailableAd(let ad):
-            text = "Ad: " + (ad?.text ?? "-")
-        case .didReceiveReward(let placement, let ad):
-            text = "Ad: " + (ad?.text ?? "-") + " placement: " + (placement?.debugDescription ?? "-")
-        case .didFailToShowWithError(let error, let ad):
-            text = "Ad: " + (ad?.text ?? "-") + " error: " + (error?.localizedDescription ?? "-")
-        case .didOpen(let ad):
-            text = "Ad: " + (ad?.text ?? "-")
-        case .didClose(let ad):
-            text = "Ad: " + (ad?.text ?? "-")
-        case .didClick(let placement, let ad):
-            text = "Ad: " + (ad?.text ?? "-") + " placement: " + (placement?.debugDescription ?? "-")
-        default:
-            text = ""
-        }
-        
-        return Text(text)
-            .font(.caption)
-            .foregroundColor(.secondary)
-    }
-    
-    var image: Image {
-        Image(systemName: "gamecontroller")
-    }
-    
-    var accentColor: Color {
-        .red
     }
 }

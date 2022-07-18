@@ -34,12 +34,36 @@ final class HomeViewModel: ObservableObject {
     
     private func subscribe() {
         Publishers.MergeMany([
-            IronSource.bid.rewardedVideoPublisher,
-            IronSource.bid.interstitialPublisher,
-            IronSource.bid.levelPlayRewardedVideoPublisher,
-            IronSource.bid.levelPlayInterstitialPublisher,
-            IronSource.bid.auctionRewardedVideoPublisher,
-            IronSource.bid.auctionInterstitialPublisher
+            IronSource
+                .bid
+                .rewardedVideoPublisher
+                .map { AdEventModel(adType: .rewardedVideo, event: $0) }
+                .eraseToAnyPublisher(),
+            IronSource
+                .bid
+                .interstitialPublisher
+                .map { AdEventModel(adType: .interstitial, event: $0) }
+                .eraseToAnyPublisher(),
+            IronSource
+                .bid
+                .levelPlayRewardedVideoPublisher
+                .map { AdEventModel(adType: .rewardedVideo, event: $0) }
+                .eraseToAnyPublisher(),
+            IronSource
+                .bid
+                .levelPlayInterstitialPublisher
+                .map { AdEventModel(adType: .interstitial, event: $0) }
+                .eraseToAnyPublisher(),
+            IronSource
+                .bid
+                .auctionRewardedVideoPublisher
+                .map { AdEventModel(adType: .rewardedVideo, event: $0) }
+                .eraseToAnyPublisher(),
+            IronSource
+                .bid
+                .auctionInterstitialPublisher
+                .map { AdEventModel(adType: .interstitial, event: $0) }
+                .eraseToAnyPublisher()
         ])
         .receive(on: DispatchQueue.main)
         .sink { event in

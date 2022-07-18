@@ -43,8 +43,16 @@ final class BannerViewModel: ObservableObject {
     
     func subscribe() {
         Publishers.MergeMany([
-            IronSource.bid.auctionBannerPublisher,
-            IronSource.bid.levelPlayBannerPublisher
+            IronSource
+                .bid
+                .auctionBannerPublisher
+                .map { AdEventModel(adType: .banner, event: $0) }
+                .eraseToAnyPublisher(),
+            IronSource
+                .bid
+                .levelPlayBannerPublisher
+                .map { AdEventModel(adType: .banner, event: $0) }
+                .eraseToAnyPublisher()
         ])
         .receive(on: DispatchQueue.main)
         .sink { event in

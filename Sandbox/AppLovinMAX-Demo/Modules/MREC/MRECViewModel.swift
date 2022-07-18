@@ -13,7 +13,7 @@ import SwiftUI
 
 
 final class MRECViewModel: AdViewModel {
-    private let eventPassthroughSubject = PassthroughSubject<AdEvent, Never>()
+    private let eventPassthroughSubject = PassthroughSubject<AdEventModel, Never>()
     
     @Published var adFormat: MAAdFormat = .mrec
     @Published var isAutorefresh: Bool = true
@@ -24,7 +24,7 @@ final class MRECViewModel: AdViewModel {
         subscribe(eventPassthroughSubject.eraseToAnyPublisher())
     }
     
-    func send(_ event: AdEvent) {
+    func send(_ event: AdEventModel) {
         eventPassthroughSubject.send(event)
     }
 }

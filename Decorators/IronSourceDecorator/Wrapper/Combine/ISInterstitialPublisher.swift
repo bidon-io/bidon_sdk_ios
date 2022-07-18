@@ -8,15 +8,15 @@
 import Foundation
 import Combine
 import IronSource
-import IronSourceDecorator
 import SwiftUI
 
 
-struct ISInterstitialPublisher: Publisher {
-    typealias Output = AdEventModel
-    typealias Failure = Never
+@available(iOS 13, *)
+public struct ISInterstitialPublisher: Publisher {
+    public typealias Output = Event
+    public typealias Failure = Never
     
-    enum Event {
+    public enum Event {
         case didLoad
         case didFailToLoadWithError(error: Error!)
         case didFailToShowWithError(error: Error!)
@@ -33,7 +33,7 @@ struct ISInterstitialPublisher: Publisher {
         self.delegate = delegate
     }
     
-    func receive<S>(subscriber: S)
+    public func receive<S>(subscriber: S)
     where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
         let subscription = ISInterstitialDelegateSubscribtion(
             subscriber: subscriber
@@ -45,10 +45,9 @@ struct ISInterstitialPublisher: Publisher {
     }
 }
 
-
-final fileprivate
-class ISInterstitialDelegateSubscribtion<S>: NSObject, Subscription, ISInterstitialDelegate
-where S : Subscriber, S.Input == AdEventModel {
+@available(iOS 13, *)
+final fileprivate class ISInterstitialDelegateSubscribtion<S>: NSObject, Subscription, ISInterstitialDelegate
+where S : Subscriber, S.Input == ISInterstitialPublisher.Event {
     private var subscriber: S?
     
     var demand: Subscribers.Demand = .none
@@ -62,7 +61,7 @@ where S : Subscriber, S.Input == AdEventModel {
         guard let subscriber = subscriber else { return }
                     
         demand -= 1
-        demand += subscriber.receive(AdEventModel(adType: .interstitial, event: event))
+        demand += subscriber.receive(event)
     }
     
     func cancel() {
@@ -104,59 +103,11 @@ where S : Subscriber, S.Input == AdEventModel {
 }
 
 
-extension IronSourceDecorator.Proxy {
-    var interstitialPublisher: AnyPublisher<AdEventModel, Never> {
+@available(iOS 13, *)
+public extension IronSourceDecorator.Proxy {
+    var interstitialPublisher: ISInterstitialPublisher {
         return ISInterstitialPublisher { [unowned self] delegate in
             self.setInterstitialDelegate(delegate)
         }
-        .eraseToAnyPublisher()
-    }
-}
-
-
-extension ISInterstitialPublisher.Event: AdEventViewRepresentable {
-    var title: Text {
-        switch self {
-        case .didLoad:
-            return Text("ad did load")
-        case .didFailToLoadWithError:
-            return Text("ad did fail to load")
-        case .didFailToShowWithError:
-            return Text("ad did fail to show")
-        case .didOpen:
-            return Text("ad did open")
-        case .didClose:
-            return Text("ad did close")
-        case .didStart:
-            return Text("ad did start")
-        case .didClick:
-            return Text("ad did click")
-        case .didShow:
-            return Text("ad did show")
-        }
-    }
-    
-    var subtitle: Text {
-        let text: String
-        switch self {
-        case .didFailToLoadWithError(let error):
-            text = "Error: \(error?.localizedDescription ?? "-")"
-        case .didFailToShowWithError(let error):
-            text = "Error: \(error?.localizedDescription ?? "-")"
-        default:
-            text = ""
-        }
-        
-        return Text(text)
-            .font(.caption)
-            .foregroundColor(.secondary)
-    }
-    
-    var image: Image {
-        Image(systemName: "arrow.down")
-    }
-    
-    var accentColor: Color {
-        .blue
     }
 }

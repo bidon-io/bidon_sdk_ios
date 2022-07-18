@@ -8,15 +8,15 @@
 import Foundation
 import Combine
 import IronSource
-import IronSourceDecorator
 import SwiftUI
 
 
-struct ISRewardedVideoPublisher: Publisher {
-    typealias Output = AdEventModel
-    typealias Failure = Never
+@available(iOS 13, *)
+public struct ISRewardedVideoPublisher: Publisher {
+    public typealias Output = Event
+    public typealias Failure = Never
     
-    enum Event {
+    public enum Event {
         case hasChangedAvailability(available: Bool)
         case didReceiveReward(placementInfo: ISPlacementInfo!)
         case didFailToShowWithError(error: Error!)
@@ -33,7 +33,7 @@ struct ISRewardedVideoPublisher: Publisher {
         self.delegate = delegate
     }
     
-    func receive<S>(subscriber: S)
+    public func receive<S>(subscriber: S)
     where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
         let subscription = ISRewardedVideoDelegateSubscribtion(
             subscriber: subscriber
@@ -46,9 +46,9 @@ struct ISRewardedVideoPublisher: Publisher {
 }
 
 
-final fileprivate
-class ISRewardedVideoDelegateSubscribtion<S>: NSObject, Subscription, ISRewardedVideoDelegate
-where S : Subscriber, S.Input == AdEventModel {
+@available(iOS 13, *)
+final fileprivate class ISRewardedVideoDelegateSubscribtion<S>: NSObject, Subscription, ISRewardedVideoDelegate
+where S : Subscriber, S.Input == ISRewardedVideoPublisher.Event {
     private var subscriber: S?
     
     var demand: Subscribers.Demand = .none
@@ -62,7 +62,7 @@ where S : Subscriber, S.Input == AdEventModel {
         guard let subscriber = subscriber else { return }
                     
         demand -= 1
-        demand += subscriber.receive(AdEventModel(adType: .rewardedVideo, event: event))
+        demand += subscriber.receive(event)
     }
     
     func cancel() {
@@ -108,61 +108,11 @@ where S : Subscriber, S.Input == AdEventModel {
 }
 
 
-extension IronSourceDecorator.Proxy {
-    var rewardedVideoPublisher: AnyPublisher<AdEventModel, Never> {
+@available(iOS 13, *)
+public extension IronSourceDecorator.Proxy {
+    var rewardedVideoPublisher: ISRewardedVideoPublisher {
         return ISRewardedVideoPublisher { [unowned self] delegate in
             self.setRewardedVideoDelegate(delegate)
         }
-        .eraseToAnyPublisher()
-    }
-}
-
-
-extension ISRewardedVideoPublisher.Event: AdEventViewRepresentable {
-    var title: Text {
-        switch self {
-        case .hasChangedAvailability(let available):
-            return Text("ad did change availability. ") + Text(available ? "ad is available" : "ad is not available").bold()
-        case .didReceiveReward:
-            return Text("ad did receive reward")
-        case .didFailToShowWithError:
-            return Text("ad did fail to show")
-        case .didOpen:
-            return Text("ad did open")
-        case .didClose:
-            return Text("ad did close")
-        case .didStart:
-            return Text("ad did start")
-        case .didEnd:
-            return Text("ad did end")
-        case .didClick:
-            return Text("ad did click")
-        }
-    }
-    
-    var subtitle: Text {
-        let text: String
-        switch self {
-        case .didReceiveReward(let placementInfo):
-            text = "Placement info: \(placementInfo?.debugDescription ?? "-")"
-        case .didClick(let placementInfo):
-            text = "Placement info: \(placementInfo?.debugDescription ?? "-")"
-        case .didFailToShowWithError(let error):
-            text = "Error: \(error?.localizedDescription ?? "-")"
-        default:
-            text = ""
-        }
-        
-        return Text(text)
-            .font(.caption)
-            .foregroundColor(.secondary)
-    }
-    
-    var image: Image {
-        Image(systemName: "arrow.down")
-    }
-    
-    var accentColor: Color {
-        .blue
     }
 }

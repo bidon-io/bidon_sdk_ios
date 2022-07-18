@@ -88,6 +88,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
             guard let self = self else { return }
             guard let fullscreenAd = fullscreenAd as? FullscreenAd, error == nil else {
                 self.response?(nil, SDKError(error))
+                self.response = nil
                 return
             }
             
@@ -96,6 +97,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
             
             let wrapped = BNGADResponseInfoWrapper(fullscreenAd, item: item)
             self.response?(wrapped, nil)
+            self.response = nil
         }
     }
     

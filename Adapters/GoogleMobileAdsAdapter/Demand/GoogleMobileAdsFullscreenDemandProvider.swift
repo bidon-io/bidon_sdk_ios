@@ -18,17 +18,26 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BNGAD
     private var _item: LineItem?
     
     private var response: DemandProviderResponse?
-
+    
     private var fullscreenAd: FullscreenAd? {
         didSet {
             fullscreenAd?.fullScreenContentDelegate = self
             fullscreenAd?.rewardDelegate = self
+            fullscreenAd?.paidEventHandler = { [weak self] _ in
+                guard
+                    let self = self,
+                    let fullscreenAd = self.fullscreenAd,
+                    let wrapped = self.wrapped(ad: fullscreenAd)
+                else { return }
+                
+                self.delegate?.provider(self, didPayRevenueFor: wrapped)
+            }
         }
     }
     
     weak var delegate: DemandProviderDelegate?
     weak var rewardDelegate: DemandProviderRewardDelegate?
-
+    
     init(item: @escaping (Price) -> LineItem?) {
         self.item = item
         super.init()
@@ -115,6 +124,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
             )
             return
         }
+        
         interstitial.present(fromRootViewController: viewController)
     }
     

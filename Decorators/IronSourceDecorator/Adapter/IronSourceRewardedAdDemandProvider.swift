@@ -64,6 +64,7 @@ extension IronSourceRewardedAdDemandProvider: LevelPlayRewardedVideoDelegate {
     
     func didOpen(with adInfo: ISAdInfo!) {
         guard let adInfo = adInfo else { return }
+        delegate?.provider(self, didPayRevenueFor: adInfo.wrapped)
         delegate?.provider(self, didPresent: adInfo.wrapped)
     }
     

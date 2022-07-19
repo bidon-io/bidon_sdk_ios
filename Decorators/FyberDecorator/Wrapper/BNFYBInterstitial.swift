@@ -177,4 +177,12 @@ extension BNFYBInterstitial: DemandProviderDelegate {
             impressionData: ad
         )
     }
+    
+    public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
+        FairBid.bid.trackAdRevenue(
+            ad,
+            round: auction.auctionRound(for: ad)?.id ?? "",
+            adType: .interstitial
+        )
+    }
 }

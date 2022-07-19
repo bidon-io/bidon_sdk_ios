@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		06E001938D0A7902420FE4A3 /* Pods_Fyber_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED1B5464312E014CCDDD41E /* Pods_Fyber_Demo.framework */; };
+		421D48D528870463007DE2E4 /* AppsFlyerAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D48D428870463007DE2E4 /* AppsFlyerAdapter.framework */; };
+		421D48D92887046B007DE2E4 /* AppsFlyerAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D48D82887046B007DE2E4 /* AppsFlyerAdapter.framework */; };
+		421D48DD28870472007DE2E4 /* AppsFlyerAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D48DC28870472007DE2E4 /* AppsFlyerAdapter.framework */; };
 		42389DFA28735618006024BA /* BidMachineAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42389DF728735618006024BA /* BidMachineAdapter.framework */; };
 		42389DFC28735618006024BA /* AppLovinDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42389DF828735618006024BA /* AppLovinDecorator.framework */; };
 		42389DFE28735618006024BA /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42389DF928735618006024BA /* MobileAdvertising.framework */; };
@@ -87,6 +90,9 @@
 /* Begin PBXFileReference section */
 		078D6AEA594DCCBBB0DED4F0 /* Pods-AppLovinMAX-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinMAX-Demo.release.xcconfig"; path = "Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		2E6460A243F6430A3EF6AF3F /* Pods-Fyber-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fyber-Demo.release.xcconfig"; path = "Target Support Files/Pods-Fyber-Demo/Pods-Fyber-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		421D48D428870463007DE2E4 /* AppsFlyerAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppsFlyerAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		421D48D82887046B007DE2E4 /* AppsFlyerAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppsFlyerAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		421D48DC28870472007DE2E4 /* AppsFlyerAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppsFlyerAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42389DF728735618006024BA /* BidMachineAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidMachineAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42389DF828735618006024BA /* AppLovinDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppLovinDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42389DF928735618006024BA /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +188,7 @@
 				42389DFA28735618006024BA /* BidMachineAdapter.framework in Frameworks */,
 				CF95B206081C3B7C4DC26915 /* Pods_AppLovinMAX_Demo.framework in Frameworks */,
 				42389DFC28735618006024BA /* AppLovinDecorator.framework in Frameworks */,
+				421D48D528870463007DE2E4 /* AppsFlyerAdapter.framework in Frameworks */,
 				42389DFE28735618006024BA /* MobileAdvertising.framework in Frameworks */,
 				42BA81BC2875AC91001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */,
 			);
@@ -194,6 +201,7 @@
 				42BA823D287B3395001F1744 /* BidMachineAdapter.framework in Frameworks */,
 				42BA8241287B3395001F1744 /* IronSourceDecorator.framework in Frameworks */,
 				5AD96AB751E760B75E33C1B3 /* Pods_IronSource_Demo.framework in Frameworks */,
+				421D48D92887046B007DE2E4 /* AppsFlyerAdapter.framework in Frameworks */,
 				42BA8243287B3395001F1744 /* MobileAdvertising.framework in Frameworks */,
 				42BA823F287B3395001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */,
 			);
@@ -206,6 +214,7 @@
 				42BA82C9287C824B001F1744 /* BidMachineAdapter.framework in Frameworks */,
 				06E001938D0A7902420FE4A3 /* Pods_Fyber_Demo.framework in Frameworks */,
 				42BA82CB287C824B001F1744 /* GoogleMobileAdsAdapter.framework in Frameworks */,
+				421D48DD28870472007DE2E4 /* AppsFlyerAdapter.framework in Frameworks */,
 				42BA82CF287C824B001F1744 /* MobileAdvertising.framework in Frameworks */,
 				42BA82CD287C824B001F1744 /* FyberDecorator.framework in Frameworks */,
 			);
@@ -547,6 +556,9 @@
 		D25A351439A02A755F92C24A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				421D48DC28870472007DE2E4 /* AppsFlyerAdapter.framework */,
+				421D48D82887046B007DE2E4 /* AppsFlyerAdapter.framework */,
+				421D48D428870463007DE2E4 /* AppsFlyerAdapter.framework */,
 				42BA82C5287C824B001F1744 /* BidMachineAdapter.framework */,
 				42BA82C6287C824B001F1744 /* GoogleMobileAdsAdapter.framework */,
 				42BA82C7287C824B001F1744 /* FyberDecorator.framework */,

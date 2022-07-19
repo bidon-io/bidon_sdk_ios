@@ -91,6 +91,10 @@ public final class AuctionController {
         }
     }
     
+    public func auctionRound(for ad: Ad) -> AuctionRound? {
+        return repository.round(for: ad)
+    }
+    
     func perform(round: ConcurentAuctionRound) {
         let pricefloor = repository.pricefloor
         
@@ -108,7 +112,7 @@ public final class AuctionController {
         round.perform(
             pricefloor: pricefloor,
             demand: { [weak self] ad, provider in
-                self?.receive(demand: ad, provider: provider)
+                self?.receive(demand: ad, provider: provider, round: round)
             },
             completion: { [weak self] in
                 guard let self = self else { return }
@@ -127,8 +131,21 @@ public final class AuctionController {
         )
     }
     
-    func receive(demand: Ad, provider: DemandProvider) {
-        repository.register(ad: demand, provider: provider)
-        delegate?.controller(self, didReceiveAd: demand, provider: provider)
+    func receive(
+        demand: Ad,
+        provider: DemandProvider,
+        round: AuctionRound
+    ) {
+        repository.register(
+            ad: demand,
+            provider: provider,
+            round: round
+        )
+        
+        delegate?.controller(
+            self,
+            didReceiveAd: demand,
+            provider: provider
+        )
     }
 }

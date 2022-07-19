@@ -9,6 +9,7 @@ import SwiftUI
 import FyberDecorator
 import FairBidSDK
 import BidMachineAdapter
+import AppsFlyerAdapter
 import GoogleMobileAdsAdapter
 
 
@@ -54,6 +55,14 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate {
                     LineItem(0.1, adUnitId: "ca-app-pub-3940256099942544/2934735716"),
                     LineItem(0.05, adUnitId: "ca-app-pub-3940256099942544/2934735716")
                 ]
+            )
+        )
+        
+        FairBid.bid.register(
+            adapter: AppsFlyerMobileMeasurementPartnerAdapter.self,
+            parameters: AppsFlyerParameters(
+                devKey: "some key",
+                appId: "some app id"
             )
         )
         

@@ -22,6 +22,7 @@ public protocol DemandProviderDelegate: AnyObject {
     func provider(_ provider: DemandProvider, didHide ad: Ad)
     func provider(_ provider: DemandProvider, didClick ad: Ad)
     func provider(_ provider: DemandProvider, didFailToDisplay ad: Ad, error: Error)
+    func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad)
 }
 
 

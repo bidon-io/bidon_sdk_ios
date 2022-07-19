@@ -62,13 +62,13 @@ extension IronSourceInterstitialDemandProvider: LevelPlayInterstitialDelegate {
     func didShow(with adInfo: ISAdInfo!) {
         guard let adInfo = adInfo else { return }
         ads.remove(adInfo)
+        delegate?.provider(self, didPayRevenueFor: adInfo.wrapped)
         delegate?.provider(self, didPresent: adInfo.wrapped)
     }
     
     func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
         guard let adInfo = adInfo else { return }
         delegate?.provider(self, didFailToDisplay: adInfo.wrapped, error: error.map { SDKError($0) } ?? SDKError.unknown)
-
     }
     
     func didClick(with adInfo: ISAdInfo!) {

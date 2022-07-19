@@ -320,7 +320,7 @@ private extension Price {
 
 extension Ad {
     var text: String {
-        "Ad #\(id.prefix(3))... from \(dsp), price: \(price.pretty)"
+        "Ad #\(id.prefix(3))... from \(networkName), price: \(price.pretty)"
     }
 }
 

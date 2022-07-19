@@ -10,7 +10,7 @@ import MobileAdvertising
 import AppLovinSDK
 
 
-internal final class AppLovinAdViewDemandProvider: NSObject, MAAdViewAdDelegate {
+internal final class AppLovinAdViewDemandProvider: NSObject, MAAdViewAdDelegate, MAAdRevenueDelegate {
     weak var delegate: DemandProviderDelegate?
     weak var adViewDelegate: DemandProviderAdViewDelegate?
     
@@ -32,6 +32,7 @@ internal final class AppLovinAdViewDemandProvider: NSObject, MAAdViewAdDelegate 
             sdk: sdk
         )
         
+        adView.revenueDelegate = self
         adView.delegate = self
         adView.backgroundColor = .clear
         adView.setExtraParameterForKey(
@@ -89,6 +90,10 @@ internal final class AppLovinAdViewDemandProvider: NSObject, MAAdViewAdDelegate 
     
     func didCollapse(_ ad: MAAd) {
         adViewDelegate?.provider(self, didDismissModalView: ad.wrapped)
+    }
+    
+    func didPayRevenue(for ad: MAAd) {
+        delegate?.provider(self, didPayRevenueFor: ad.wrapped)
     }
 }
 

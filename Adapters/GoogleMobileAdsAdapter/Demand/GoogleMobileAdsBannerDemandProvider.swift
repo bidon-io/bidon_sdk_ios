@@ -21,6 +21,14 @@ internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
     private lazy var banner: GADBannerView = {
         let banner = GADBannerView(adSize: context.adSize)
         banner.delegate = self
+        banner.paidEventHandler = { [weak self] _ in
+            guard
+                let self = self,
+                let wrapped = self.wrapped(ad: self.banner)
+            else { return }
+            
+            self.delegate?.provider(self, didPayRevenueFor: wrapped)
+        }
         return banner
     }()
     
@@ -35,7 +43,6 @@ internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
         self.item = item
         super.init()
     }
-
 }
 
 

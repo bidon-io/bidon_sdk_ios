@@ -121,6 +121,11 @@ extension FyberInterstitialDemandProvider: FYBInterstitialDelegate {
     ) {
         delegate?.provider(
             self,
+            didPayRevenueFor: FYBInterstitial.wrappedImpressionData(placementId)
+        )
+        
+        delegate?.provider(
+            self,
             didPresent: FYBInterstitial.wrappedImpressionData(placementId)
         )
     }

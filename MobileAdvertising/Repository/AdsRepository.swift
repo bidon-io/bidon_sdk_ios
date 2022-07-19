@@ -7,8 +7,12 @@
 
 import Foundation
 
+internal struct Demand {
+    var provider: DemandProvider
+    var round: AuctionRound
+}
 
-internal typealias AdsRepository = Repository<HashableAd, DemandProvider>
+internal typealias AdsRepository = Repository<HashableAd, Demand>
 
 
 extension AdsRepository {
@@ -24,13 +28,27 @@ extension AdsRepository {
         return objects.keys.map { $0.ad }
     }
     
-    func register(ad: Ad, provider: DemandProvider) {
+    func register(ad: Ad, provider: DemandProvider, round: AuctionRound) {
         let container = HashableAd(ad: ad)
-        self[container] = provider
+        self[container] = Demand(
+            provider: provider,
+            round: round
+        )
     }
     
     func provider(for ad: Ad) -> DemandProvider? {
         let container = HashableAd(ad: ad)
-        return self[container]
+        
+        return queue.sync { [unowned self] in
+            return (self.objects[container] as? Demand)?.provider
+        }
+    }
+    
+    func round(for ad: Ad) -> AuctionRound? {
+        let container = HashableAd(ad: ad)
+        
+        return queue.sync { [unowned self] in
+            return (self.objects[container] as? Demand)?.round
+        }
     }
 }

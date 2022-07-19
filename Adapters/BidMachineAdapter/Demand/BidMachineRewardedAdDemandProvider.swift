@@ -19,6 +19,7 @@ internal final class BidMachineRewardedAdDemandProvider: NSObject {
     private lazy var rewardedAd: BDMRewarded = {
         let rewardedAd = BDMRewarded()
         rewardedAd.delegate = self
+        rewardedAd.producerDelegate = self
         return rewardedAd
     }()
     
@@ -93,4 +94,13 @@ extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
     }
     
     func rewardedDidExpire(_ rewarded: BDMRewarded) {}
+}
+
+
+extension BidMachineRewardedAdDemandProvider: BDMAdEventProducerDelegate {
+    func didProduceImpression(_ producer: BDMAdEventProducer) {
+        delegate?.provider(self, didPayRevenueFor: rewardedAd.adObject.wrapped)
+    }
+    
+    func didProduceUserAction(_ producer: BDMAdEventProducer) {}
 }

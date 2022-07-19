@@ -45,6 +45,19 @@ import MobileAdvertising
             )
         }
     }
+    
+    internal func trackAdRevenue(
+        _ ad: Ad,
+        round: String,
+        adType: MobileAdvertising.AdType
+    ) {
+        bidon.trackAdRevenue(
+            ad,
+            mediation: .fyber,
+            auctionRound: round,
+            adType: adType
+        )
+    }
 }
 
 

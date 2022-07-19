@@ -34,6 +34,23 @@ import UIKit
         }
         group.notify(queue: .main, execute: completion)
     }
+    
+    public func trackAdRevenue(
+        _ ad: Ad,
+        mediation: Mediation,
+        auctionRound: String,
+        adType: AdType
+    ) {
+        let mmps: [MobileMeasurementPartnerAdapter] = repository.all()
+        mmps.forEach {
+            $0.trackAdRevenue(
+                ad,
+                mediation: mediation,
+                auctionRound: auctionRound,
+                adType: adType
+            )
+        }
+    }
 }
 
 

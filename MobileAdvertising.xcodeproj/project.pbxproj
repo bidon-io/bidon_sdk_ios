@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		421D48CB2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */; };
 		4221018D2859E29A006596DA /* MobileAdvertising.h in Headers */ = {isa = PBXBuildFile; fileRef = 422101812859E29A006596DA /* MobileAdvertising.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		422101982859E2C3006596DA /* SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422101972859E2C3006596DA /* SDK.swift */; };
 		4221019A2859E35C006596DA /* Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422101992859E35C006596DA /* Adapter.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileMeasurementPartnerAdapter.swift; sourceTree = "<group>"; };
 		4221017E2859E29A006596DA /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		422101812859E29A006596DA /* MobileAdvertising.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileAdvertising.h; sourceTree = "<group>"; };
 		422101972859E2C3006596DA /* SDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDK.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				42BA81DA28770B5D001F1744 /* Reward.swift */,
 				422101992859E35C006596DA /* Adapter.swift */,
 				429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */,
+				421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				422101982859E2C3006596DA /* SDK.swift in Sources */,
 				4221019A2859E35C006596DA /* Adapter.swift in Sources */,
 				42389DF22872F63F006024BA /* AuctionResolver.swift in Sources */,
+				421D48CB2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift in Sources */,
 				42389DEE2872F52A006024BA /* AdsRepository.swift in Sources */,
 				42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */,
 				42BA81DB28770B5D001F1744 /* Reward.swift in Sources */,

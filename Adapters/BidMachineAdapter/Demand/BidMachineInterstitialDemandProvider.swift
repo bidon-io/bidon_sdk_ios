@@ -19,6 +19,8 @@ internal final class BidMachineInterstitialDemandProvider: NSObject {
     private lazy var interstitial: BDMInterstitial = {
         let interstitial = BDMInterstitial()
         interstitial.delegate = self
+        interstitial.producerDelegate = self
+        
         return interstitial
     }()
     
@@ -91,3 +93,10 @@ extension BidMachineInterstitialDemandProvider: BDMInterstitialDelegate {
 }
     
 
+extension BidMachineInterstitialDemandProvider: BDMAdEventProducerDelegate {
+    func didProduceImpression(_ producer: BDMAdEventProducer) {
+        delegate?.provider(self, didPayRevenueFor: interstitial.adObject.wrapped)
+    }
+    
+    func didProduceUserAction(_ producer: BDMAdEventProducer) {}
+}

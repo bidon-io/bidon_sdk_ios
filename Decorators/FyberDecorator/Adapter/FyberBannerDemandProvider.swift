@@ -140,7 +140,15 @@ extension FyberBannerDemandProvider: FYBBannerDelegate {
         _ banner: FYBBannerAdView,
         impressionData: FYBImpressionData
     ) {
-        delegate?.provider(self, didPresent: banner.wrappedImpressionData)
+        delegate?.provider(
+            self,
+            didPayRevenueFor: banner.wrappedImpressionData
+        )
+        
+        delegate?.provider(
+            self,
+            didPresent: banner.wrappedImpressionData
+        )
     }
     
     func bannerDidClick(_ banner: FYBBannerAdView) {

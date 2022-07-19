@@ -10,6 +10,7 @@ import AppLovinSDK
 import AppLovinDecorator
 import BidMachineAdapter
 import GoogleMobileAdsAdapter
+import AppsFlyerAdapter
 import MobileAdvertising
 
 
@@ -61,6 +62,14 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
                     LineItem(0.1, adUnitId: "ca-app-pub-3940256099942544/2934735716"),
                     LineItem(0.05, adUnitId: "ca-app-pub-3940256099942544/2934735716")
                 ]
+            )
+        )
+        
+        applovin.bid.register(
+            adapter: AppsFlyerMobileMeasurementPartnerAdapter.self,
+            parameters: AppsFlyerParameters(
+                devKey: "some key",
+                appId: "some app id"
             )
         )
         

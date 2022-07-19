@@ -127,4 +127,12 @@ extension BNISInterstitialRouter: DemandProviderDelegate {
         delegate?.interstitialDidFailToShowWithError(error)
         levelPlayDelegate?.didFailToShowWithError(error, andAdInfo: ad)
     }
+    
+    func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
+        IronSource.bid.trackAdRevenue(
+            ad,
+            round: auction.auctionRound(for: ad),
+            adType: .interstitial
+        )
+    }
 }

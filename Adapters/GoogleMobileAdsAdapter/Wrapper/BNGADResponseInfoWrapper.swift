@@ -14,22 +14,25 @@ protocol ResponseInfoProvider {
     var info: GADResponseInfo? { get }
 }
 
+
 final internal class BNGADResponseInfoWrapper: NSObject, Ad {
     var id: String
     var price: Price
-    var dsp: String
     var wrapped: AnyObject
-    
+
+    let currency: Currency = .default
+    let networkName: String = "admob"
+    let dsp: String? = nil
+
     init(
         id: String,
         price: Price,
-        dsp: String,
         wrapped: AnyObject
     ) {
         self.id = id
         self.price = price
-        self.dsp = dsp
         self.wrapped = wrapped
+        
         super.init()
     }
     
@@ -40,7 +43,6 @@ final internal class BNGADResponseInfoWrapper: NSObject, Ad {
         self.init(
             id: provider.info?.responseIdentifier ?? item.adUnitId,
             price: item.pricefloor,
-            dsp: provider.info?.adNetworkClassName ?? "admob",
             wrapped: provider.info ?? NSNull()
         )
     }

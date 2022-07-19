@@ -15,9 +15,22 @@ final class BNBidMachineAdWrapper: NSObject, Ad {
     
     var wrapped: AnyObject { _wrapped }
     
-    var id: String { _wrapped.auctionInfo.bidID ?? _wrapped.auctionInfo.description }
-    var price: Price { _wrapped.auctionInfo.price?.doubleValue ?? .unknown }
-    var dsp: String { _wrapped.auctionInfo.demandSource ?? "" }
+    let currency: Currency = .default
+    
+    let networkName: String = "bidmachine"
+    
+    var id: String {
+        _wrapped.auctionInfo.bidID ?? _wrapped.auctionInfo.description
+    }
+    
+    var price: Price {
+        _wrapped.auctionInfo.price?.doubleValue ?? .unknown
+    }
+    
+    var dsp: String? {
+        _wrapped.auctionInfo.demandSource
+    }
+    
     
     init(_ wrapped: BDMAdProtocol) {
         self._wrapped = wrapped
@@ -31,7 +44,9 @@ final class BNEmptyBidMachineAdWrapper: NSObject, Ad {
     
     let id: String = "bidmachine"
     let price: Price = .unknown
-    let dsp: String = "bidmachine"
+    let networkName: String = "bidmachine"
+    let currency: Currency = .default
+    let dsp: String? = nil
 }
 
 

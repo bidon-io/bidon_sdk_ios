@@ -1,5 +1,10 @@
 PODS:
   - AppLovinSDK (11.4.2)
+  - AppsFlyer-AdRevenue (6.5.4):
+    - AppsFlyerFramework (~> 6)
+  - AppsFlyerFramework (6.7.0):
+    - AppsFlyerFramework/Main (= 6.7.0)
+  - AppsFlyerFramework/Main (6.7.0)
   - BDMIABAdapter (1.9.4.0):
     - BDMIABAdapter/IAB (= 1.9.4.0)
   - BDMIABAdapter/IAB (1.9.4.0):
@@ -126,6 +131,8 @@ PODS:
 
 DEPENDENCIES:
   - AppLovinSDK
+  - AppsFlyer-AdRevenue (~> 6.5.4)
+  - AppsFlyerFramework (~> 6.7.0)
   - BDMIABAdapter
   - BidMachine
   - FairBidSDK
@@ -141,6 +148,8 @@ SPEC REPOS:
     - StackIAB
   trunk:
     - AppLovinSDK
+    - AppsFlyer-AdRevenue
+    - AppsFlyerFramework
     - BidMachine
     - FairBidSDK
     - Google-Mobile-Ads-SDK
@@ -156,6 +165,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AppLovinSDK: 119a0b2a743f9d9c6002c58776b1013778a65084
+  AppsFlyer-AdRevenue: dc145404655ff980a9938c9db145144d4ebe7ffd
+  AppsFlyerFramework: ef26da0420194533b4ae45603208fe279bca6abd
   BDMIABAdapter: aa060c17b3f6e0abda98113001171ce3e0dd1cfb
   BidMachine: a6f15f38dc7245112840d2687cb523122808d15e
   FairBidSDK: 473c36188467896143fd3b372b6325ac25f101ee
@@ -173,6 +184,6 @@ SPEC CHECKSUMS:
   StackModules: d111b6d7441f5457980e85b0cbcc776cc4921afa
   StackProtobuf: 599ee5dfb2b6943e8f5769d92526ee6177b7bbc7
 
-PODFILE CHECKSUM: 7c87726d5a26ed6555326aae97214f5ed8bd8fa0
+PODFILE CHECKSUM: 96df872914520e9dd7fffbf2f23d0e5c0c003f62
 
 COCOAPODS: 1.11.3

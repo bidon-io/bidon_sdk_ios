@@ -21,6 +21,7 @@ internal final class BidMachineBannerDemandProvider: NSObject {
     private lazy var banner: BDMBannerView = {
         let banner = BDMBannerView()
         banner.delegate = self
+        banner.producerDelegate = self
         banner.rootViewController = context.rootViewController
         banner.frame = CGRect(
             origin: .zero,
@@ -98,6 +99,15 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     }
     
     func bannerViewDidExpire(_ bannerView: BDMBannerView) {}
+}
+
+
+extension BidMachineBannerDemandProvider: BDMAdEventProducerDelegate {
+    func didProduceImpression(_ producer: BDMAdEventProducer) {
+        delegate?.provider(self, didPayRevenueFor: banner.adObject.wrapped)
+    }
+    
+    func didProduceUserAction(_ producer: BDMAdEventProducer) {}
 }
 
 

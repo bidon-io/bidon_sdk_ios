@@ -22,6 +22,8 @@ protocol BNGADFullscreenAd: GADFullScreenPresentingAd, ResponseInfoProvider {
     
     var rewardDelegate: BNGADFullscreenAdRewardDelegate? { get set }
     
+    var paidEventHandler: GADPaidEventHandler? { get set }
+    
     func present(fromRootViewController rootViewController: UIViewController)
 }
 

@@ -44,6 +44,18 @@ extension MAError: Error {}
         }
     }
     
+    internal func trackAdRevenue(
+        _ ad: Ad,
+        adType: MobileAdvertising.AdType,
+        round: String
+    ) {
+        bidon.trackAdRevenue(
+            ad,
+            mediation: .applovin,
+            auctionRound: round,
+            adType: adType
+        )
+    }
 }
 
 

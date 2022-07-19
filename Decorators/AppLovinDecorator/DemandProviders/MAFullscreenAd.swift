@@ -20,6 +20,7 @@ internal protocol MAFullscreenAd: AnyObject {
 
     var adDelegate: MAAdDelegate? { get set }
     var rewardDelegate: MARewardedAdDelegate? { get set }
+    var revenueDelegate: MAAdRevenueDelegate? { get set }
     
     func load()
     
@@ -30,7 +31,7 @@ internal protocol MAFullscreenAd: AnyObject {
 }
 
 
-extension MAInterstitialAd: MAFullscreenAd {
+extension MAInterstitialAd: MAFullscreenAd {    
     static func ad(_ adUnitIdentifier: String, sdk: ALSdk?) -> Self {
         if let sdk = sdk {
             return self.init(adUnitIdentifier: adUnitIdentifier, sdk: sdk)

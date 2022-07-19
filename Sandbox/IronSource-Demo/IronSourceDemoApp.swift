@@ -11,6 +11,7 @@ import IronSource
 import IronSourceDecorator
 import BidMachineAdapter
 import GoogleMobileAdsAdapter
+import AppsFlyerAdapter
 
 
 fileprivate extension IronSource {
@@ -61,6 +62,14 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
                     LineItem(0.1, adUnitId: "ca-app-pub-3940256099942544/2934735716"),
                     LineItem(0.05, adUnitId: "ca-app-pub-3940256099942544/2934735716")
                 ]
+            )
+        )
+        
+        IronSource.bid.register(
+            adapter: AppsFlyerMobileMeasurementPartnerAdapter.self,
+            parameters: AppsFlyerParameters(
+                devKey: "some key",
+                appId: "some app id"
             )
         )
         

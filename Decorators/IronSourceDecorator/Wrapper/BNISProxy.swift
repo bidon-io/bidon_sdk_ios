@@ -130,6 +130,19 @@ import MobileAdvertising
     @objc public func destroyBanner(_ view: UIView) {
         banner.destroy(view)
     }
+    
+    internal func trackAdRevenue(
+        _ ad: Ad,
+        round: AuctionRound?,
+        adType: AdType
+    ) {
+        bidon.trackAdRevenue(
+            ad,
+            mediation: .ironsource,
+            auctionRound: round?.id ?? "",
+            adType: adType
+        )
+    }
 }
 
 

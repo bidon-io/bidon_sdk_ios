@@ -49,7 +49,7 @@ extension IronSourceAdViewDemandProvider: AdViewDemandProvider {
     }
 }
 
-
+// TODO: Revenue for banners
 extension IronSourceAdViewDemandProvider: LevelPlayBannerDelegate {
     func didLoad(_ bannerView: ISBannerView!, with adInfo: ISAdInfo!) {
         guard let adInfo = adInfo else { return }

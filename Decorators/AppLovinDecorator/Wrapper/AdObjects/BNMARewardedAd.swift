@@ -47,7 +47,6 @@ final public class BNMARewardedAd: NSObject {
         )
                 
         mediator.fullscreenAd.adReviewDelegate = self
-        mediator.fullscreenAd.revenueDelegate = self
         
         return mediator
     }()
@@ -247,6 +246,15 @@ extension BNMARewardedAd: DemandProviderDelegate {
         didClick ad: Ad
     ) {
         delegate?.didClick(ad)
+    }
+    
+    public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
+        sdk.bid.trackAdRevenue(
+            ad,
+            adType: .rewarded,
+            round: auction.auctionRound(for: ad)?.id ?? ""
+        )
+        revenueDelegate?.didPayRevenue(for: ad)
     }
     
     public func provider(

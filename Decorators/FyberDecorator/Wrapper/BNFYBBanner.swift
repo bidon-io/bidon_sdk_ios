@@ -24,7 +24,7 @@ import FairBidSDK
     @objc public static weak var auctionDelegate: BNFYBAuctionDelegate?
     
     @objc public static var resolver: AuctionResolver = HigherRevenueAuctionResolver()
-
+    
     private let placement: String
     private var shouldLayoutOnLoad: Bool = false
     
@@ -113,7 +113,7 @@ import FairBidSDK
     private func isAvailable() -> Bool {
         return !auction.isEmpty
     }
-
+    
     private func layoutIfNeeded() {
         guard
             shouldLayoutOnLoad,
@@ -243,13 +243,13 @@ extension BNFYBBanner: AuctionControllerDelegate {
             
             BNFYBBanner.delegate?.bannerDidLoad(view)
         }
-       
+        
         
         BNFYBBanner.auctionDelegate?.didCompleteAuction(
             winner,
             placement: placement
         )
-    
+        
         layoutIfNeeded()
     }
     
@@ -275,7 +275,16 @@ extension BNFYBBanner: DemandProviderDelegate {
         BNFYBBanner.delegate?.bannerDidClick(view)
     }
     
+    public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
+        FairBid.bid.trackAdRevenue(
+            ad,
+            round: auction.auctionRound(for: ad)?.id ?? "",
+            adType: .banner
+        )
+    }
+    
     public func provider(_ provider: DemandProvider, didHide ad: Ad) {}
+    
     public func provider(
         _ provider: DemandProvider,
         didFailToDisplay ad: Ad,

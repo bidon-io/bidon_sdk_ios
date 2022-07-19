@@ -9,6 +9,7 @@ import Foundation
 
 
 public typealias Price = Double
+public typealias Currency = String
 
 
 public extension Price {
@@ -20,10 +21,17 @@ public extension Price {
 }
 
 
+public extension Currency {
+    static var `default` = "USD"
+}
+
+
 @objc public protocol Ad {
     var id: String { get }
     var price: Price { get }
-    var dsp: String { get }
+    var currency: Currency { get }
+    var networkName: String { get }
+    var dsp: String? { get }
     
     var wrapped: AnyObject { get }
 }

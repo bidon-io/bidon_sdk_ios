@@ -122,6 +122,11 @@ extension FyberRewardedAdDemandProvider: FYBRewardedDelegate {
     ) {
         delegate?.provider(
             self,
+            didPayRevenueFor: FYBRewarded.wrappedImpressionData(placementId)
+        )
+        
+        delegate?.provider(
+            self,
             didPresent: FYBRewarded.wrappedImpressionData(placementId)
         )
     }

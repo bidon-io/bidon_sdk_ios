@@ -12,10 +12,12 @@ import MobileAdvertising
 
 final class BNISAdInfo: NSObject, Ad {
     let _wrapped: ISAdInfo
-    
+    let currency: Currency = .default
+    let dsp: String? = nil
+
     var id: String { _wrapped.auction_id }
     var price: Price { _wrapped.revenue.doubleValue }
-    var dsp: String { _wrapped.ad_network }
+    var networkName: String { _wrapped.ad_network }
     
     var wrapped: AnyObject { _wrapped }
     

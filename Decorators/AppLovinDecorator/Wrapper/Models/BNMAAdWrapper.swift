@@ -15,10 +15,24 @@ final class BNMAAdWrapper: NSObject, Ad {
     
     var wrapped: AnyObject { _wrapped }
     
-    var id: String { _wrapped.adUnitIdentifier }
-    var price: Price { _wrapped.revenue }
-    var dsp: String { _wrapped.networkName }
+    var id: String {
+        _wrapped.adUnitIdentifier
+    }
     
+    var price: Price {
+        _wrapped.revenue
+    }
+    
+    var networkName: String {
+        _wrapped.networkName
+    }
+    
+    var dsp: String? {
+        _wrapped.dspName
+    }
+    
+    let currency: Currency = .default
+        
     init(_ wrapped: MAAd) {
         self._wrapped = wrapped
         super.init()

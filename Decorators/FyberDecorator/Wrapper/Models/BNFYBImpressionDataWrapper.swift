@@ -15,7 +15,9 @@ final class BNFYBImpressionDataWrapper: NSObject, Ad {
     
     var id: String { _wrapped.creativeId ?? String(_wrapped.hash) }
     var price: Price { _wrapped.netPayout?.doubleValue ?? 0 }
-    var dsp: String { _wrapped.demandSource ?? "fyber" }
+    var currency: Currency { _wrapped.currency ?? .default }
+    var networkName: String { "fyber" }
+    var dsp: String? { _wrapped.demandSource }
     var wrapped: AnyObject { _wrapped }
     
     init(_ wrapped: FYBImpressionData) {
@@ -27,8 +29,11 @@ final class BNFYBImpressionDataWrapper: NSObject, Ad {
 
 final class EmptyFYBImpressionDataWrapper: NSObject, Ad {
     let id: String
-    var price: Price = 0
-    var dsp: String = ""
+    let price: Price = 0
+    let currency: Currency = .default
+    let networkName: String = "fyber"
+    let dsp: String? = nil
+    
     var wrapped: AnyObject = NSNull()
     
     init(placement: String) {

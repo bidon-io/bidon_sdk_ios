@@ -10,11 +10,12 @@ import MobileAdvertising
 import AppLovinSDK
 
 
-internal final class AppLovinFullscreenDemandProvider<FullscreenAd: MAFullscreenAd>: NSObject, MARewardedAdDelegate {
+internal final class AppLovinFullscreenDemandProvider<FullscreenAd: MAFullscreenAd>: NSObject, MARewardedAdDelegate, MAAdRevenueDelegate {
     lazy var fullscreenAd: FullscreenAd = {
         let ad = FullscreenAd.ad(adUnitIdentifier, sdk: sdk)
         ad.adDelegate = self
         ad.rewardDelegate = self
+        ad.revenueDelegate = self
         return ad
     }()
     
@@ -72,6 +73,10 @@ internal final class AppLovinFullscreenDemandProvider<FullscreenAd: MAFullscreen
             didReceiveReward: reward.wrapped,
             ad: ad.wrapped
         )
+    }
+    
+    func didPayRevenue(for ad: MAAd) {
+        delegate?.provider(self, didPayRevenueFor: ad.wrapped)
     }
 }
 

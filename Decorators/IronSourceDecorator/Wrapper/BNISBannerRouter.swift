@@ -143,4 +143,12 @@ extension BNISBannerRouter: DemandProviderAdViewDelegate {
         delegate?.bannerDidDismissScreen()
         levelPlayDelegate?.didDismissScreen(with: ad)
     }
+    
+    func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
+        IronSource.bid.trackAdRevenue(
+            ad,
+            round: auction.auctionRound(for: ad),
+            adType: .banner
+        )
+    }
 }

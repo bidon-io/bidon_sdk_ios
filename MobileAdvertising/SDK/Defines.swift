@@ -8,14 +8,6 @@
 import Foundation
 
 
-@objc public enum AdType: Int {
-    case banner = 0
-    case interstitial
-    case rewarded
-}
-
-
-
 public enum SDKError: Error, CustomStringConvertible {
     case generic(error: Error)
     case message(String)
@@ -63,5 +55,18 @@ public enum SDKError: Error, CustomStringConvertible {
     }
 }
 
+
+public enum AdType: String {
+    case banner
+    case interstitial
+    case rewarded
+}
+
+
+public enum Mediation {
+    case applovin
+    case fyber
+    case ironsource
+}
 
 

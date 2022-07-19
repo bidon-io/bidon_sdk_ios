@@ -31,6 +31,11 @@ def admob
   pod 'Google-Mobile-Ads-SDK'
 end
 
+def appsflyer
+  pod 'AppsFlyerFramework', '~> 6.7.0'
+  pod 'AppsFlyer-AdRevenue', '~> 6.5.4'
+end
+
 def ocmock
   pod 'OCMock', '~> 3.9.1'
 end
@@ -62,6 +67,10 @@ target 'GoogleMobileAdsAdapter' do
   admob
 end
 
+target 'AppsFlyerAdapter' do
+  project 'Adapters/Adapters.xcodeproj'
+  appsflyer
+end
 
 # Tests
 
@@ -83,6 +92,7 @@ target 'AppLovinMAX-Demo' do
   applovin
   bidmachine
   admob
+  appsflyer
 end
 
 target 'IronSource-Demo' do
@@ -90,6 +100,7 @@ target 'IronSource-Demo' do
   ironsource
   bidmachine
   admob
+  appsflyer
 end
 
 target 'Fyber-Demo' do
@@ -97,6 +108,7 @@ target 'Fyber-Demo' do
   fyber
   bidmachine
   admob
+  appsflyer
 end
 
 

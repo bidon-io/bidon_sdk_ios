@@ -202,4 +202,13 @@ extension BNMAInterstitialAd: DemandProviderDelegate {
     public func provider(_ provider: DemandProvider, didFailToDisplay ad: Ad, error: Error) {
         delegate?.didFail(toDisplay: ad, withError: error)
     }
+    
+    public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
+        sdk.bid.trackAdRevenue(
+            ad,
+            adType: .interstitial,
+            round: auction.auctionRound(for: ad)?.id ?? ""
+        )
+        revenueDelegate?.didPayRevenue(for: ad)
+    }
 }

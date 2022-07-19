@@ -14,7 +14,7 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
 
 
 @objc public final class GoogleMobileAdsDemandSourceAdapter: NSObject, DemandSourceAdapter {
-    @objc public let id: String = "admob"
+    @objc public let identifier: String = "admob"
     
     public let parameters: GoogleMobileAdsParameters
     

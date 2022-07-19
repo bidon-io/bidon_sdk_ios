@@ -69,6 +69,7 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+  - OCMock (3.9.1)
   - OMSDK_Appodeal (1.3.27)
   - PromisesObjC (2.1.1)
   - Protobuf (3.21.1)
@@ -130,6 +131,7 @@ DEPENDENCIES:
   - FairBidSDK
   - Google-Mobile-Ads-SDK
   - IronSourceSDK (= 7.2.3.1-APD)
+  - OCMock (~> 3.9.1)
 
 SPEC REPOS:
   https://github.com/appodeal/CocoaPods.git:
@@ -146,6 +148,7 @@ SPEC REPOS:
     - GoogleUserMessagingPlatform
     - GoogleUtilities
     - nanopb
+    - OCMock
     - PromisesObjC
     - Protobuf
     - StackModules
@@ -162,6 +165,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   IronSourceSDK: 9a6591fcf2aab3399a9ad1316d491f97d397f955
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  OCMock: 9491e4bec59e0b267d52a9184ff5605995e74be8
   OMSDK_Appodeal: e12d3006f60cae5700ff8effcb75a312f6a830a5
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Protobuf: 9e88c1e667d75aa2491d211f26ccddde4e8ad4cf
@@ -169,6 +173,6 @@ SPEC CHECKSUMS:
   StackModules: d111b6d7441f5457980e85b0cbcc776cc4921afa
   StackProtobuf: 599ee5dfb2b6943e8f5769d92526ee6177b7bbc7
 
-PODFILE CHECKSUM: fe8cb8784992e346a02e0ce672775483d2a54287
+PODFILE CHECKSUM: 7c87726d5a26ed6555326aae97214f5ed8bd8fa0
 
 COCOAPODS: 1.11.3

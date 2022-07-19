@@ -100,7 +100,7 @@ where S : Subscriber, S.Input == BNLevelPlayBannerPublisher.Event {
 
 
 @available(iOS 13, *)
-public extension IronSourceDecorator.Proxy {
+public extension IronSourceDecorator.BNISProxy {
     var levelPlayBannerPublisher: BNLevelPlayBannerPublisher {
         return BNLevelPlayBannerPublisher { [unowned self] delegate in
             self.setLevelPlayBannerDelegate(delegate)

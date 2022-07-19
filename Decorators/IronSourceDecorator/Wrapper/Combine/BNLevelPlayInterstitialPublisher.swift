@@ -105,7 +105,7 @@ where S : Subscriber, S.Input == BNLevelPlayInterstitialPublisher.Event {
 
 
 @available(iOS 13, *)
-public extension IronSourceDecorator.Proxy {
+public extension IronSourceDecorator.BNISProxy {
     var levelPlayInterstitialPublisher: BNLevelPlayInterstitialPublisher {
         return BNLevelPlayInterstitialPublisher { [unowned self] delegate in
             self.setLevelPlayInterstitialDelegate(delegate)

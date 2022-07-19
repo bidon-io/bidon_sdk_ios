@@ -10,7 +10,7 @@ import IronSource
 import MobileAdvertising
 
 
-@objc public final class Proxy: NSObject {
+@objc public final class BNISProxy: NSObject {
     internal lazy var bidon = SDK()
     internal lazy var interstitial = BNISInterstitialRouter()
     internal lazy var rewardedVideo = BNISRewardedVideoRouter()
@@ -134,6 +134,6 @@ import MobileAdvertising
 
 
 public extension IronSource {
-    @objc static let bid = Proxy()
+    @objc static let bid = BNISProxy()
 }
 

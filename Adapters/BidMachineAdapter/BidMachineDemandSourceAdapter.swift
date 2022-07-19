@@ -14,7 +14,7 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
 
 
 @objc public final class BidMachineDemandSourceAdapter: NSObject, DemandSourceAdapter {
-    @objc public let id: String = "bidmachine"
+    @objc public let identifier: String = "bidmachine"
     
     public let parameters: BidMachineParameters
     

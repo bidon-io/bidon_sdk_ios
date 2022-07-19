@@ -95,7 +95,7 @@ where S : Subscriber, S.Input == BNISAuctionPublisher.Event {
 
 
 @available(iOS 13, *)
-public extension IronSourceDecorator.Proxy {
+public extension IronSourceDecorator.BNISProxy {
     var auctionInterstitialPublisher: BNISAuctionPublisher {
         return BNISAuctionPublisher { [unowned self] delegate in
             self.setAuctionInterstitialDelegate(delegate)

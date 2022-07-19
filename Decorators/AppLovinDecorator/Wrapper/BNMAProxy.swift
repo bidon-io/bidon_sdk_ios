@@ -13,7 +13,7 @@ import MobileAdvertising
 extension MAError: Error {}
 
 
-@objc public final class Proxy: NSObject {
+@objc public final class BNMAProxy: NSObject {
     internal lazy var bidon = SDK()
     fileprivate weak var applovin: ALSdk?
     
@@ -32,6 +32,8 @@ extension MAError: Error {}
         )
     }
     
+    @objc public var adapters: [Adapter] { bidon.adapters }
+    
     @objc public func register(adapter: Adapter) throws {
         try bidon.register(adapter: adapter)
     }
@@ -41,6 +43,7 @@ extension MAError: Error {}
             self?.applovin?.initializeSdk(completionHandler: completionHandler)
         }
     }
+    
 }
 
 
@@ -49,11 +52,11 @@ extension MAError: Error {}
     
     private static var bidKey: UInt8 = 0
     
-    @objc var bid: Proxy {
-        if let proxy = objc_getAssociatedObject(self, &ALSdk.bidKey) as? Proxy {
+    @objc var bid: BNMAProxy {
+        if let proxy = objc_getAssociatedObject(self, &ALSdk.bidKey) as? BNMAProxy {
             return proxy
         } else {
-            let proxy = Proxy(sdk: self)
+            let proxy = BNMAProxy(sdk: self)
             objc_setAssociatedObject(self, &ALSdk.bidKey, proxy, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return proxy
         }

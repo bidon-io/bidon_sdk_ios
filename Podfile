@@ -31,6 +31,9 @@ def admob
   pod 'Google-Mobile-Ads-SDK'
 end
 
+def ocmock
+  pod 'OCMock', '~> 3.9.1'
+end
 
 # Targets 
 
@@ -64,8 +67,12 @@ end
 
 target 'Tests-ObjectiveC' do
   project 'Tests/Tests.xcodeproj'
+  ocmock
   applovin
+  fyber
+  ironsource
   bidmachine
+  admob
 end
 
 

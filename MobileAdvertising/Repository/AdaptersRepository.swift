@@ -15,6 +15,6 @@ extension AdaptersRepository {
     }
     
     func register(_ adapter: Adapter) {
-        self[adapter.id] = adapter
+        self[adapter.identifier] = adapter
     }
 }

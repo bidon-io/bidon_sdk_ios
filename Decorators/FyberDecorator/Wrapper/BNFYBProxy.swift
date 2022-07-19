@@ -10,7 +10,7 @@ import FairBidSDK
 import MobileAdvertising
 
 
-@objc public final class Proxy: NSObject {
+@objc public final class BNFYBProxy: NSObject {
     internal lazy var bidon = SDK()
     internal lazy var interstitialDelegateMediator = FyberInterstitialDemandProvider.Mediator()
     internal lazy var rewardedDelegateMediator = FyberRewardedAdDemandProvider.Mediator()
@@ -49,5 +49,5 @@ import MobileAdvertising
 
 
 @objc public extension FairBid {
-    @objc static let bid = Proxy()
+    @objc static let bid = BNFYBProxy()
 }

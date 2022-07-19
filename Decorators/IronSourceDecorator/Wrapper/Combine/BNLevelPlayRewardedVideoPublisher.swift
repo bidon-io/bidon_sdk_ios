@@ -103,7 +103,7 @@ where S : Subscriber, S.Input == BNLevelPlayRewardedVideoPublisher.Event {
 }
 
 @available(iOS 13, *)
-public extension IronSourceDecorator.Proxy {
+public extension IronSourceDecorator.BNISProxy {
     var levelPlayRewardedVideoPublisher: BNLevelPlayRewardedVideoPublisher {
         return BNLevelPlayRewardedVideoPublisher { [unowned self] delegate in
             self.setLevelPlayRewardedVideoDelegate(delegate)

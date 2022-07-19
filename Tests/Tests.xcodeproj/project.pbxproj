@@ -7,15 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		422101F8285A004C006596DA /* Tests_ObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 422101F7285A004C006596DA /* Tests_ObjectiveC.m */; };
+		421D48B92886C78E007DE2E4 /* BNMAInterstitialAdTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 421D48B82886C78E007DE2E4 /* BNMAInterstitialAdTestCase.m */; };
+		421D48BD2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 421D48BC2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m */; };
 		422101FE285A006C006596DA /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 422101FD285A006C006596DA /* MobileAdvertising.framework */; };
+		425EEA592886A20500694525 /* BidMachineAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA582886A20500694525 /* BidMachineAdapter.framework */; };
+		425EEA5B2886A20500694525 /* GoogleMobileAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA5A2886A20500694525 /* GoogleMobileAdsAdapter.framework */; };
+		425EEA5D2886A20500694525 /* AppLovinDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA5C2886A20500694525 /* AppLovinDecorator.framework */; };
+		425EEA5F2886A20500694525 /* FyberDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA5E2886A20500694525 /* FyberDecorator.framework */; };
+		425EEA612886A20500694525 /* IronSourceDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA602886A20500694525 /* IronSourceDecorator.framework */; };
+		425EEA632886A26500694525 /* BNMAProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 425EEA622886A26500694525 /* BNMAProxyTestCase.m */; };
 		45ED0C68C33A074815BB07ED /* Pods_Tests_ObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90EEE21636B0A0899134A07 /* Pods_Tests_ObjectiveC.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		421D48B82886C78E007DE2E4 /* BNMAInterstitialAdTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNMAInterstitialAdTestCase.m; sourceTree = "<group>"; };
+		421D48BB2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNMAMockAuctionDelegate.h; sourceTree = "<group>"; };
+		421D48BC2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNMAMockAuctionDelegate.m; sourceTree = "<group>"; };
 		422101F4285A004C006596DA /* Tests-ObjectiveC.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-ObjectiveC.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		422101F7285A004C006596DA /* Tests_ObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests_ObjectiveC.m; sourceTree = "<group>"; };
 		422101FD285A006C006596DA /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		425EEA582886A20500694525 /* BidMachineAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidMachineAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		425EEA5A2886A20500694525 /* GoogleMobileAdsAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleMobileAdsAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		425EEA5C2886A20500694525 /* AppLovinDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppLovinDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		425EEA5E2886A20500694525 /* FyberDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FyberDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		425EEA602886A20500694525 /* IronSourceDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IronSourceDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		425EEA622886A26500694525 /* BNMAProxyTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNMAProxyTestCase.m; sourceTree = "<group>"; };
 		AD68D69E88BAECD14AC5F688 /* Pods-Tests-ObjectiveC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-ObjectiveC.debug.xcconfig"; path = "Target Support Files/Pods-Tests-ObjectiveC/Pods-Tests-ObjectiveC.debug.xcconfig"; sourceTree = "<group>"; };
 		E90EEE21636B0A0899134A07 /* Pods_Tests_ObjectiveC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests_ObjectiveC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1D546EB346E2D4C1FD281A0 /* Pods-Tests-ObjectiveC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-ObjectiveC.release.xcconfig"; path = "Target Support Files/Pods-Tests-ObjectiveC/Pods-Tests-ObjectiveC.release.xcconfig"; sourceTree = "<group>"; };
@@ -26,6 +41,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				425EEA592886A20500694525 /* BidMachineAdapter.framework in Frameworks */,
+				425EEA5B2886A20500694525 /* GoogleMobileAdsAdapter.framework in Frameworks */,
+				425EEA5D2886A20500694525 /* AppLovinDecorator.framework in Frameworks */,
+				425EEA5F2886A20500694525 /* FyberDecorator.framework in Frameworks */,
+				425EEA612886A20500694525 /* IronSourceDecorator.framework in Frameworks */,
 				422101FE285A006C006596DA /* MobileAdvertising.framework in Frameworks */,
 				45ED0C68C33A074815BB07ED /* Pods_Tests_ObjectiveC.framework in Frameworks */,
 			);
@@ -34,6 +54,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		421D48B72886C742007DE2E4 /* AppLovin */ = {
+			isa = PBXGroup;
+			children = (
+				421D48BA2886C8AC007DE2E4 /* Delegates */,
+				425EEA622886A26500694525 /* BNMAProxyTestCase.m */,
+				421D48B82886C78E007DE2E4 /* BNMAInterstitialAdTestCase.m */,
+			);
+			path = AppLovin;
+			sourceTree = "<group>";
+		};
+		421D48BA2886C8AC007DE2E4 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				421D48BB2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.h */,
+				421D48BC2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		422101E6285A0007006596DA = {
 			isa = PBXGroup;
 			children = (
@@ -55,7 +94,7 @@
 		422101F6285A004C006596DA /* Tests-ObjectiveC */ = {
 			isa = PBXGroup;
 			children = (
-				422101F7285A004C006596DA /* Tests_ObjectiveC.m */,
+				421D48B72886C742007DE2E4 /* AppLovin */,
 			);
 			path = "Tests-ObjectiveC";
 			sourceTree = "<group>";
@@ -63,6 +102,11 @@
 		422101FC285A006C006596DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				425EEA582886A20500694525 /* BidMachineAdapter.framework */,
+				425EEA5A2886A20500694525 /* GoogleMobileAdsAdapter.framework */,
+				425EEA5C2886A20500694525 /* AppLovinDecorator.framework */,
+				425EEA5E2886A20500694525 /* FyberDecorator.framework */,
+				425EEA602886A20500694525 /* IronSourceDecorator.framework */,
 				422101FD285A006C006596DA /* MobileAdvertising.framework */,
 				E90EEE21636B0A0899134A07 /* Pods_Tests_ObjectiveC.framework */,
 			);
@@ -208,7 +252,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				422101F8285A004C006596DA /* Tests_ObjectiveC.m in Sources */,
+				421D48B92886C78E007DE2E4 /* BNMAInterstitialAdTestCase.m in Sources */,
+				421D48BD2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m in Sources */,
+				425EEA632886A26500694525 /* BNMAProxyTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

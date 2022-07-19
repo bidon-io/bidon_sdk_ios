@@ -104,7 +104,7 @@ where S : Subscriber, S.Input == ISInterstitialPublisher.Event {
 
 
 @available(iOS 13, *)
-public extension IronSourceDecorator.Proxy {
+public extension IronSourceDecorator.BNISProxy {
     var interstitialPublisher: ISInterstitialPublisher {
         return ISInterstitialPublisher { [unowned self] delegate in
             self.setInterstitialDelegate(delegate)

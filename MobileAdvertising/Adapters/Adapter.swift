@@ -9,7 +9,7 @@ import Foundation
 
 
 @objc public protocol Adapter {
-    var id: String { get }
+    var identifier: String { get }
 }
 
 

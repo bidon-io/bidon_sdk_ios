@@ -12,6 +12,10 @@ import UIKit
 @objc public final class SDK: NSObject {
     private var repository = AdaptersRepository()
     
+    @objc public var adapters: [Adapter] {
+        return repository.all()
+    }
+    
     @objc public func register(adapter: Adapter) throws {
         repository.register(adapter)
     }

@@ -27,12 +27,30 @@ import UIKit
     
     @objc public func initialize(completion: @escaping () -> ()) {
         let initializable: [InitializableAdapter] = repository.all()
+        
+        Logger.level = .verbose
+        Logger.add(OSLogDestination())
+        
         let group = DispatchGroup()
-        initializable.forEach {
+        
+        initializable.forEach { adapter in
             group.enter()
-            $0.initilize { _ in group.leave() }
+            Logger.verbose("Initialize adapter: \(adapter.identifier)")
+            
+            adapter.initilize { error in
+                if let error = error {
+                    Logger.warning("Failed to initialize adapter: \(adapter.identifier) with error: \(error)")
+                } else {
+                    Logger.verbose("Complete adapter initialization \(adapter.identifier)")
+                }
+                group.leave()
+            }
         }
-        group.notify(queue: .main, execute: completion)
+        
+        group.notify(queue: .main) {
+            Logger.verbose("Initialize mediation")
+            completion()
+        }
     }
     
     public func trackAdRevenue(

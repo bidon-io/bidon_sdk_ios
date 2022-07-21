@@ -33,7 +33,7 @@ Header bidding hasn't conquered the world. **Ad mediations** are still in place,
 
 To provide control over advertising auctions to Publishers, while making it fair and transparent. To allow **Publishers**: 
 
--   Aecide how to connect any type of the Demand partner, even multiple Ad Mediators
+-   Decide how to connect any type of the Demand partner, even multiple Ad Mediators
 -   Ability to remove any Demand partner
 -   Ability to A/B test different Demand partners, even Ad Mediators
 -   To let market players and the community contribute to the solution, to add new partners, new integrations, and new features which are demanded by the industry.

@@ -10,6 +10,9 @@
 #import <MobileAdvertising/MobileAdvertising.h>
 #import <AppLovinSDK/AppLovinSDK.h>
 #import <AppLovinDecorator/AppLovinDecorator.h>
+#import <GoogleMobileAdsAdapter/GoogleMobileAdsAdapter.h>
+#import <BidMachineAdapter/BidMachineAdapter.h>
+#import <AppsFlyerAdapter/AppsFlyerAdapter.h>
 
 
 @interface BNMAProxyTestCase : XCTestCase
@@ -39,6 +42,71 @@
     [self.sdk.bid registerWithAdapter:adapter error:&error];
     
     XCTAssertNil(error, @"Error while register adapter");
+    XCTAssertEqual(self.sdk.bid.adapters.count, 1);
+}
+
+- (void)testRegisterBidMachine {
+    NSError *error;
+    NSDictionary *parameters = @{
+        @"seller_id": @"BidMachine seller id"
+    };
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
+    BidMachineDemandSourceAdapter *adapter = [[BidMachineDemandSourceAdapter alloc] initWithRawParameters:data error:&error];
+    
+    [self.sdk.bid registerWithAdapter:(id<Adapter>)adapter error:&error];
+    
+    XCTAssertNil(error, @"Error while register bidmachine adapter");
+    XCTAssertEqual(self.sdk.bid.adapters.count, 1);
+}
+
+- (void)testRegisterGoogleMobileAds {
+    NSError *error;
+    NSDictionary *parameters = @{
+        @"line_items": @{
+            @"interstitial": @[
+                @{
+                    @"pricefloor": @0.01,
+                    @"ad_unit_id": @"AdMob interstitial ad unit id"
+                }
+            ],
+            @"rewarded_ad": @[
+                @{
+                    @"pricefloor": @0.01,
+                    @"ad_unit_id": @"AdMob rewarded ad unit id"
+                }
+            ],
+            @"banner": @[
+                @{
+                    @"pricefloor": @0.01,
+                    @"ad_unit_id": @"AdMob banner ad unit id"
+                }
+            ]
+        }
+    };
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
+    GoogleMobileAdsDemandSourceAdapter *adapter = [[GoogleMobileAdsDemandSourceAdapter alloc] initWithRawParameters:data error:&error];
+    
+    [self.sdk.bid registerWithAdapter:(id<Adapter>)adapter error:&error];
+    
+    XCTAssertNil(error, @"Error while register google mobile ads adapter");
+    XCTAssertEqual(self.sdk.bid.adapters.count, 1);
+}
+
+- (void)testRegisterAppsFlyer {
+    NSError *error;
+    NSDictionary *parameters = @{
+        @"dev_key": @"dev key",
+        @"app_id": @"app id"
+    };
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
+    AppsFlyerMobileMeasurementPartnerAdapter *adapter = [[AppsFlyerMobileMeasurementPartnerAdapter alloc] initWithRawParameters:data error:&error];
+    
+    [self.sdk.bid registerWithAdapter:(id<Adapter>)adapter error:&error];
+    
+    XCTAssertNil(error, @"Error while register apps flyer adapter");
     XCTAssertEqual(self.sdk.bid.adapters.count, 1);
 }
 

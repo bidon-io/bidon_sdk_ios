@@ -36,6 +36,7 @@ final class BNISBannerRouter: NSObject {
     
     func performAuction() {
         auction = try! AuctionControllerBuilder()
+            .withAdType(.banner)
             .withMediator(mediator)
             .withPostbid(postbid)
             .withResolver(resolver)

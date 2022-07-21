@@ -51,6 +51,7 @@ final public class BNMAInterstitialAd: NSObject {
     
     private lazy var auction: AuctionController = {
         return try! AuctionControllerBuilder()
+            .withAdType(.interstitial)
             .withMediator(mediator)
             .withPostbid(postbid)
             .withDelegate(self)

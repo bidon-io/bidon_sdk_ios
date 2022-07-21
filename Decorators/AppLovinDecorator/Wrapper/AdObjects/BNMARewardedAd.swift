@@ -53,6 +53,7 @@ final public class BNMARewardedAd: NSObject {
     
     private lazy var auction: AuctionController = {
         return try! AuctionControllerBuilder()
+            .withAdType(.rewarded)
             .withMediator(mediator)
             .withPostbid(postbid)
             .withDelegate(self)

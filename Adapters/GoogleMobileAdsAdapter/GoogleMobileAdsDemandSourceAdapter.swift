@@ -47,7 +47,10 @@ extension GoogleMobileAdsDemandSourceAdapter: ParameterizedAdapter {
     public typealias Parameters = GoogleMobileAdsParameters
     
     @objc public convenience init(rawParameters: Data) throws {
-        let parameters = try JSONDecoder().decode(
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let parameters = try decoder.decode(
             GoogleMobileAdsParameters.self,
             from: rawParameters
         )

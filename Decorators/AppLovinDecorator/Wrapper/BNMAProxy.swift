@@ -39,6 +39,8 @@ extension MAError: Error {}
     }
     
     @objc public func initializeSdk(completionHandler: ((ALSdkConfiguration) -> ())?) {
+        Logger.level = applovin?.settings.isVerboseLogging == true ? .verbose : .error
+        
         bidon.initialize { [weak self] in
             self?.applovin?.initializeSdk(completionHandler: completionHandler)
         }

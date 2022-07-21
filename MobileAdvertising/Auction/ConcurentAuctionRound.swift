@@ -41,7 +41,7 @@ struct ConcurentAuctionRound: PerformableAuctionRound {
                 demand(ad, provider)
             }
         }
-                
+        
         group.notify(queue: .main) {
             completion()
         }
@@ -60,5 +60,14 @@ extension ConcurentAuctionRound {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+}
+
+
+extension ConcurentAuctionRound: CustomStringConvertible {
+    var description: String {
+        return "Concurent auction round \(id). " +
+        "Timeout: \(timeout)s. Demand Providers: " +
+        providers.map { "\($0)" }.joined(separator: ", ")
     }
 }

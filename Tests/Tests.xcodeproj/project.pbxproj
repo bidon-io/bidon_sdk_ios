@@ -16,6 +16,7 @@
 		425EEA5F2886A20500694525 /* FyberDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA5E2886A20500694525 /* FyberDecorator.framework */; };
 		425EEA612886A20500694525 /* IronSourceDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA602886A20500694525 /* IronSourceDecorator.framework */; };
 		425EEA632886A26500694525 /* BNMAProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 425EEA622886A26500694525 /* BNMAProxyTestCase.m */; };
+		42B88EE428899F6C00FC206E /* AppsFlyerAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B88EE328899F6C00FC206E /* AppsFlyerAdapter.framework */; };
 		45ED0C68C33A074815BB07ED /* Pods_Tests_ObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90EEE21636B0A0899134A07 /* Pods_Tests_ObjectiveC.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		425EEA5E2886A20500694525 /* FyberDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FyberDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		425EEA602886A20500694525 /* IronSourceDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IronSourceDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		425EEA622886A26500694525 /* BNMAProxyTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNMAProxyTestCase.m; sourceTree = "<group>"; };
+		42B88EE328899F6C00FC206E /* AppsFlyerAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppsFlyerAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD68D69E88BAECD14AC5F688 /* Pods-Tests-ObjectiveC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-ObjectiveC.debug.xcconfig"; path = "Target Support Files/Pods-Tests-ObjectiveC/Pods-Tests-ObjectiveC.debug.xcconfig"; sourceTree = "<group>"; };
 		E90EEE21636B0A0899134A07 /* Pods_Tests_ObjectiveC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests_ObjectiveC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1D546EB346E2D4C1FD281A0 /* Pods-Tests-ObjectiveC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-ObjectiveC.release.xcconfig"; path = "Target Support Files/Pods-Tests-ObjectiveC/Pods-Tests-ObjectiveC.release.xcconfig"; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 				425EEA5D2886A20500694525 /* AppLovinDecorator.framework in Frameworks */,
 				425EEA5F2886A20500694525 /* FyberDecorator.framework in Frameworks */,
 				425EEA612886A20500694525 /* IronSourceDecorator.framework in Frameworks */,
+				42B88EE428899F6C00FC206E /* AppsFlyerAdapter.framework in Frameworks */,
 				422101FE285A006C006596DA /* MobileAdvertising.framework in Frameworks */,
 				45ED0C68C33A074815BB07ED /* Pods_Tests_ObjectiveC.framework in Frameworks */,
 			);
@@ -102,6 +105,7 @@
 		422101FC285A006C006596DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42B88EE328899F6C00FC206E /* AppsFlyerAdapter.framework */,
 				425EEA582886A20500694525 /* BidMachineAdapter.framework */,
 				425EEA5A2886A20500694525 /* GoogleMobileAdsAdapter.framework */,
 				425EEA5C2886A20500694525 /* AppLovinDecorator.framework */,

@@ -26,10 +26,14 @@ extension AppsFlyerMobileMeasurementPartnerAdapter: ParameterizedAdapter {
     public typealias Parameters = AppsFlyerParameters
     
     @objc public convenience init(rawParameters: Data) throws {
-        let parameters = try JSONDecoder().decode(
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let parameters = try decoder.decode(
             AppsFlyerParameters.self,
             from: rawParameters
         )
+        
         self.init(parameters: parameters)
     }
 }

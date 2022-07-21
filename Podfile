@@ -78,6 +78,7 @@ target 'Tests-ObjectiveC' do
   project 'Tests/Tests.xcodeproj'
   ocmock
   applovin
+  appsflyer
   fyber
   ironsource
   bidmachine

@@ -31,6 +31,7 @@ import FairBidSDK
     
     private lazy var auction: AuctionController = {
         return try! AuctionControllerBuilder()
+            .withAdType(.rewarded)
             .withMediator(mediator)
             .withPostbid(postbid)
             .withDelegate(self)

@@ -13,24 +13,37 @@ public final class AuctionControllerBuilder {
     private var postbid: ConcurentAuctionRound!
     private var resolver: AuctionResolver!
     private var delegate: AuctionControllerDelegate?
+    private var adType: AdType!
     
     public init() {}
     
     @discardableResult
-    public func withMediator(_ mediator: DemandProvider) -> Self {
+    public func withAdType(_ adType: AdType) -> Self {
+        self.adType = adType
+        return self
+    }
+
+    @discardableResult
+    public func withMediator(
+        _ mediator: DemandProvider,
+        timeout: TimeInterval = 10
+    ) -> Self {
         self.mediation = ConcurentAuctionRound(
             id: "mediation",
-            timeout: 10,
+            timeout: timeout,
             providers: [mediator]
         )
         return self
     }
     
     @discardableResult
-    public func withPostbid(_ providers: [DemandProvider]) -> Self {
+    public func withPostbid(
+        _ providers: [DemandProvider],
+        timeout: TimeInterval = 5
+    ) -> Self {
         self.postbid = ConcurentAuctionRound(
             id: "postbid",
-            timeout: 5,
+            timeout: timeout,
             providers: providers
         )
         return self
@@ -61,6 +74,7 @@ public final class AuctionControllerBuilder {
         return AuctionController(
             auction: auction,
             resover: resolver,
+            adType: adType,
             delegate: delegate
         )
     }

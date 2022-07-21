@@ -28,7 +28,6 @@ import UIKit
     @objc public func initialize(completion: @escaping () -> ()) {
         let initializable: [InitializableAdapter] = repository.all()
         
-        Logger.level = .verbose
         Logger.add(OSLogDestination())
         
         let group = DispatchGroup()
@@ -61,6 +60,8 @@ import UIKit
     ) {
         let mmps: [MobileMeasurementPartnerAdapter] = repository.all()
         mmps.forEach {
+            Logger.verbose("MMP '\($0.identifier)' tracks \(adType.rawValue) ad revenue: \(ad.description)")
+            
             $0.trackAdRevenue(
                 ad,
                 mediation: mediation,

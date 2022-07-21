@@ -41,10 +41,14 @@ extension BidMachineDemandSourceAdapter: ParameterizedAdapter {
     public typealias Parameters = BidMachineParameters
     
     @objc public convenience init(rawParameters: Data) throws {
-        let parameters = try JSONDecoder().decode(
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let parameters = try decoder.decode(
             BidMachineParameters.self,
             from: rawParameters
         )
+        
         self.init(parameters: parameters)
     }
 }
@@ -54,13 +58,18 @@ extension BidMachineDemandSourceAdapter: InitializableAdapter {
     public func initilize(
         _ completion: @escaping (Error?) -> ()
     ) {
-        let configuration = BDMSdkConfiguration()
         
+        guard !BDMSdk.shared().isInitialized else {
+            completion(SDKError.internalInconsistency)
+            return
+        }
+        
+        let configuration = BDMSdkConfiguration()
 #if DEBUG
         configuration.testMode = true
-        BDMSdk.shared().enableLogging = true
 #endif
         
+        BDMSdk.shared().enableLogging = Logger.level == .verbose
         BDMSdk.shared().startSession(
             withSellerID: parameters.sellerId,
             configuration: configuration

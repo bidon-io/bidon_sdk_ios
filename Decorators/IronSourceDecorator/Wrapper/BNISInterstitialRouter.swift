@@ -35,6 +35,7 @@ final class BNISInterstitialRouter: NSObject {
     
     func loadAd() {
         auction = try! AuctionControllerBuilder()
+            .withAdType(.interstitial)
             .withMediator(mediator)
             .withPostbid(postbid)
             .withResolver(resolver)

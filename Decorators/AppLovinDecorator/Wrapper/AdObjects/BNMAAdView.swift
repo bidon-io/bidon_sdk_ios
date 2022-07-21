@@ -57,6 +57,7 @@ import MobileAdvertising
     
     private lazy var auction: AuctionController = {
         return try! AuctionControllerBuilder()
+            .withAdType(.banner)
             .withMediator(mediator)
             .withPostbid(postbid)
             .withDelegate(self)

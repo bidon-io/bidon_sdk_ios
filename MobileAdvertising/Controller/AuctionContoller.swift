@@ -13,6 +13,7 @@ internal typealias ConcurentAuction = Auction<ConcurentAuctionRound>
 public final class AuctionController {
     private let auction: ConcurentAuction
     private let resolver: AuctionResolver
+    private let adType: AdType
     
     private weak var delegate: AuctionControllerDelegate?
     
@@ -26,11 +27,13 @@ public final class AuctionController {
     internal init(
         auction: ConcurentAuction,
         resover: AuctionResolver,
+        adType: AdType,
         delegate: AuctionControllerDelegate?
     ) {
         self.delegate = delegate
         self.auction = auction
         self.resolver = resover
+        self.adType = adType
     }
     
     public var isEmpty: Bool {
@@ -42,6 +45,8 @@ public final class AuctionController {
         
         winner = nil
         repository.clear()
+        
+        Logger.verbose("Auction controller will perform \(adType.rawValue) auction: \(auction)")
         
         delegate?.controllerDidStartAuction(self)
         auction.root.forEach(perform)
@@ -59,6 +64,8 @@ public final class AuctionController {
             completion?(provider, winner, nil)
             return
         }
+        
+        Logger.verbose("Complete auction")
         
         let ads = repository.ads
         active.forEach { $0.cancel() }
@@ -84,6 +91,8 @@ public final class AuctionController {
                 }
             }
             
+            Logger.verbose("Auction controller did resolve winner of \(self.adType.rawValue) auction is \(ad.description)")
+            
             self.winner = ad
             self.delegate?.controller(self, completeAuction: ad)
             
@@ -97,18 +106,21 @@ public final class AuctionController {
     
     func perform(round: ConcurentAuctionRound) {
         let pricefloor = repository.pricefloor
+        let adType = self.adType
         
         active.insert(round)
         delegate?.controller(self, didStartRound: round, pricefloor: pricefloor)
         
         if round.timeout.isNormal {
             let timer = Timer.scheduledTimer(withTimeInterval: round.timeout, repeats: false) { _ in
+                Logger.warning("Auction controller \(adType.rawValue) \(round) execution exceeded timeout.")
                 round.cancel()
             }
             RunLoop.current.add(timer, forMode: .default)
             self.roundTimer = timer
         }
         
+        Logger.verbose("Perform \(round)")
         round.perform(
             pricefloor: pricefloor,
             demand: { [weak self] ad, provider in
@@ -116,6 +128,8 @@ public final class AuctionController {
             },
             completion: { [weak self] in
                 guard let self = self else { return }
+                
+                Logger.verbose("Complete \(round)")
                 
                 self.delegate?.controller(self, didCompleteRound: round)
                 self.active.remove(round)
@@ -136,6 +150,8 @@ public final class AuctionController {
         provider: DemandProvider,
         round: AuctionRound
     ) {
+        Logger.verbose("Auction controller did receive \(adType.rawValue) ad: \(demand.description) in round '\(round)' from \(provider)")
+        
         repository.register(
             ad: demand,
             provider: provider,

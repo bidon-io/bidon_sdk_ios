@@ -40,6 +40,8 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         applovin.mediationProvider = ALMediationProviderMAX
+        applovin.settings.isVerboseLogging = true
+        
         applovin.bid.register(
             adapter: BidMachineDemandSourceAdapter.self,
             parameters: BidMachineParameters(

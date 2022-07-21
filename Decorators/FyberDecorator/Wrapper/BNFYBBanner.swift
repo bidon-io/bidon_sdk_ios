@@ -44,14 +44,13 @@ import FairBidSDK
     
     private var mediator: Mediator { Mediator(placement: placement) }
     
-    private lazy var auction: AuctionController = {
-        return try! AuctionControllerBuilder()
-            .withMediator(mediator)
-            .withPostbid(postbid)
-            .withDelegate(self)
-            .withResolver(BNFYBBanner.resolver)
-            .build()
-    }()
+    private lazy var auction: AuctionController = try! AuctionControllerBuilder()
+        .withAdType(.banner)
+        .withMediator(mediator)
+        .withPostbid(postbid)
+        .withDelegate(self)
+        .withResolver(BNFYBBanner.resolver)
+        .build()
     
     @objc public static func show(
         in view: UIView,

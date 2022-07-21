@@ -34,6 +34,7 @@ final class BNISRewardedVideoRouter: NSObject {
     
     func loadAd() {
         auction = try! AuctionControllerBuilder()
+            .withAdType(.rewarded)
             .withMediator(mediator)
             .withPostbid(postbid)
             .withResolver(resolver)

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Auction<Round: Equatable> {
+struct Auction<Round: Equatable & CustomStringConvertible> {
     enum AuctionError: Error {
         case roundNotFound
         case cycleDependency
@@ -61,5 +61,13 @@ struct Auction<Round: Equatable> {
             let seeds = edges[idx]
         else { return [] }
         return seeds.compactMap { rounds[$0] }
+    }
+}
+
+
+extension Auction: CustomStringConvertible {
+    var description: String {
+        let rounds = rounds.map { (root.contains($0) ? "(Root)" : "") + $0.description }.joined(separator: ", ")
+        return "Auction with rounds: [\(rounds)]"
     }
 }

@@ -37,6 +37,13 @@ public extension Currency {
 }
 
 
+extension Ad {
+    var description: String {
+        return "Ad Wrapper #\(id), network: \(networkName), dsp: \(dsp ?? "-"), revenue: \(price) \(currency). Wrapped \(wrapped)"
+    }
+}
+
+
 internal struct HashableAd: Hashable  {
     var ad: Ad
 

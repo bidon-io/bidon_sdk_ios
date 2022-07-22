@@ -76,15 +76,17 @@ final public class BNMAInterstitialAd: NSObject {
         super.init()
     }
     
-    @objc public func loadAd() {
+    @objc(loadAd) public func load() {
         auction.load()
     }
     
-    @objc public func show() {
+    @objc(showAd)
+    public func show() {
         show(forPlacement: nil)
     }
     
-    @objc public func show(
+    @objc(showAdForPlacement:)
+    public func show(
         forPlacement: String?
     ) {
         show(
@@ -93,7 +95,8 @@ final public class BNMAInterstitialAd: NSObject {
         )
     }
     
-    @objc public func show(
+    @objc(showAdForPlacement:customData:)
+    public func show(
         forPlacement: String?,
         customData: String?
     ) {
@@ -104,7 +107,8 @@ final public class BNMAInterstitialAd: NSObject {
         )
     }
     
-    @objc public func show(
+    @objc(showAdForPlacement:customData:viewController:)
+    public func show(
         forPlacement: String?,
         customData: String?,
         viewController: UIViewController?

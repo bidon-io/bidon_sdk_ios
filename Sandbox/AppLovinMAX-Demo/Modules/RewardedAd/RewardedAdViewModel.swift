@@ -48,7 +48,7 @@ final class RewardedAdViewModel: AdViewModel {
         )
         rewardedAd.resolver = resolver
         self.rewardedAd = rewardedAd
-        self.rewardedAd?.loadAd()
+        self.rewardedAd?.load()
     }
     
     func present() {

@@ -10,11 +10,28 @@ import MobileAdvertising
 
 
 @objc public protocol BNMAAdDelegate: AnyObject {
+    @objc(didLoadAd:)
     func didLoad(_ ad: Ad)
-    func didFailToLoadAd(forAdUnitIdentifier adUnitIdentifier: String, withError error: Error)
+    
+    @objc
+    func didFailToLoadAd(
+        forAdUnitIdentifier adUnitIdentifier: String,
+        withError error: Error
+    )
+    
+    @objc(didDisplayAd:)
     func didDisplay(_ ad: Ad)
+    
+    @objc(didHideAd:)
     func didHide(_ ad: Ad)
+    
+    @objc(didClickAd:)
     func didClick(_ ad: Ad)
-    func didFail(toDisplay ad: Ad, withError error: Error)
+    
+    @objc(didFailToDisplayAd:withError:)
+    func didFail(
+        toDisplay ad: Ad,
+        withError error: Error
+    )
 }
 

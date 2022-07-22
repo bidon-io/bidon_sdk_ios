@@ -10,5 +10,6 @@ import MobileAdvertising
 
 
 @objc public protocol BNMARewardedAdDelegate: BNMAAdDelegate {
+    @objc(didRewardUserForAd:withReward:)
     func didRewardUser(for ad: Ad, with reward: Reward)
 }

@@ -48,7 +48,7 @@ final class InterstitialViewModel: AdViewModel {
         )
         interstital.resolver = resolver
         self.interstitial = interstital
-        self.interstitial?.loadAd()
+        self.interstitial?.load()
     }
     
     func present() {

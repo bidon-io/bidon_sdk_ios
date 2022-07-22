@@ -75,7 +75,7 @@ final class ContentViewModel: ObservableObject {
     }()
     
     func appear() {
-        interstitial.loadAd()
+        interstitial.load()
     }
     
     func present() {

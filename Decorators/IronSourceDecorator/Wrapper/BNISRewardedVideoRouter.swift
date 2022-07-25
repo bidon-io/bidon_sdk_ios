@@ -18,12 +18,15 @@ final class BNISRewardedVideoRouter: NSObject {
     weak var auctionDelegate: BNISAuctionDelegate?
     
     var resolver: AuctionResolver = HigherRevenueAuctionResolver()
-    
+    var auction: AuctionController!
+
     private var postbid: [RewardedAdDemandProvider] {
         IronSource.bid.bidon.rewardedAdDemandProviders()
     }
     
-    var auction: AuctionController!
+    var isAvailable: Bool {
+        return auction.map { !$0.isEmpty } ?? false
+    }
     
     override init() {
         super.init()

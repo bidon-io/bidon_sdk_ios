@@ -10,6 +10,8 @@
 		421D48B92886C78E007DE2E4 /* BNMAInterstitialAdTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 421D48B82886C78E007DE2E4 /* BNMAInterstitialAdTestCase.m */; };
 		421D48BD2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 421D48BC2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m */; };
 		422101FE285A006C006596DA /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 422101FD285A006C006596DA /* MobileAdvertising.framework */; };
+		4258852C288EBF5500DE027D /* BNISProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4258852B288EBF5500DE027D /* BNISProxyTestCase.m */; };
+		42588530288EBFCF00DE027D /* AdaptersFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4258852F288EBFCF00DE027D /* AdaptersFactory.m */; };
 		425EEA592886A20500694525 /* BidMachineAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA582886A20500694525 /* BidMachineAdapter.framework */; };
 		425EEA5B2886A20500694525 /* GoogleMobileAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA5A2886A20500694525 /* GoogleMobileAdsAdapter.framework */; };
 		425EEA5D2886A20500694525 /* AppLovinDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425EEA5C2886A20500694525 /* AppLovinDecorator.framework */; };
@@ -26,6 +28,9 @@
 		421D48BC2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNMAMockAuctionDelegate.m; sourceTree = "<group>"; };
 		422101F4285A004C006596DA /* Tests-ObjectiveC.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-ObjectiveC.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		422101FD285A006C006596DA /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4258852B288EBF5500DE027D /* BNISProxyTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNISProxyTestCase.m; sourceTree = "<group>"; };
+		4258852E288EBFCF00DE027D /* AdaptersFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdaptersFactory.h; sourceTree = "<group>"; };
+		4258852F288EBFCF00DE027D /* AdaptersFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdaptersFactory.m; sourceTree = "<group>"; };
 		425EEA582886A20500694525 /* BidMachineAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidMachineAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		425EEA5A2886A20500694525 /* GoogleMobileAdsAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleMobileAdsAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		425EEA5C2886A20500694525 /* AppLovinDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppLovinDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,7 +102,9 @@
 		422101F6285A004C006596DA /* Tests-ObjectiveC */ = {
 			isa = PBXGroup;
 			children = (
+				4258852D288EBFB100DE027D /* Shared */,
 				421D48B72886C742007DE2E4 /* AppLovin */,
+				42588529288EBD3800DE027D /* IronSource */,
 			);
 			path = "Tests-ObjectiveC";
 			sourceTree = "<group>";
@@ -115,6 +122,31 @@
 				E90EEE21636B0A0899134A07 /* Pods_Tests_ObjectiveC.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42588529288EBD3800DE027D /* IronSource */ = {
+			isa = PBXGroup;
+			children = (
+				4258852A288EBD5800DE027D /* Delegates */,
+				4258852B288EBF5500DE027D /* BNISProxyTestCase.m */,
+			);
+			path = IronSource;
+			sourceTree = "<group>";
+		};
+		4258852A288EBD5800DE027D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		4258852D288EBFB100DE027D /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4258852E288EBFCF00DE027D /* AdaptersFactory.h */,
+				4258852F288EBFCF00DE027D /* AdaptersFactory.m */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		9E879BD8DED23500B1141F35 /* Pods */ = {
@@ -256,8 +288,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4258852C288EBF5500DE027D /* BNISProxyTestCase.m in Sources */,
 				421D48B92886C78E007DE2E4 /* BNMAInterstitialAdTestCase.m in Sources */,
 				421D48BD2886C8C9007DE2E4 /* BNMAMockAuctionDelegate.m in Sources */,
+				42588530288EBFCF00DE027D /* AdaptersFactory.m in Sources */,
 				425EEA632886A26500694525 /* BNMAProxyTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

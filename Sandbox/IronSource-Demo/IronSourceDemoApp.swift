@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import IronSource
 import IronSourceDecorator
+import MobileAdvertising
 import BidMachineAdapter
 import GoogleMobileAdsAdapter
 import AppsFlyerAdapter

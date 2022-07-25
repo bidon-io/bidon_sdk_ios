@@ -30,6 +30,8 @@ import MobileAdvertising
         try bidon.register(adapter: adapter)
     }
     
+    @objc public var adapters: [Adapter] { bidon.adapters }
+
     @objc public func initWithAppKey(
         _ appKey: String,
         adUnits: [String] = [IS_BANNER, IS_INTERSTITIAL, IS_OFFERWALL, IS_REWARDED_VIDEO],
@@ -105,6 +107,14 @@ import MobileAdvertising
             from: viewController,
             placement: placement
         )
+    }
+    
+    @objc public func hasInterstitial() -> Bool {
+        return interstitial.isAvailable
+    }
+    
+    @objc public func hasRewardedVideo() -> Bool {
+        return rewardedVideo.isAvailable
     }
 
     @objc public func showRewardedVideo(

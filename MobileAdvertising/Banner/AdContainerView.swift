@@ -53,12 +53,14 @@ import UIKit
                 let adView = adView
             else { return }
             
+            Logger.verbose("Banner \(self) did layout ad view \(adView), size: \(self.preferredSize())")
             self.manager.layout(view: adView, size: self.preferredSize())
             self.scheduleRefreshIfNeeded()
         }
     }
     
     private final func refresh() {
+        Logger.verbose("Banner \(self) will refresh ad view")
         fetch { [weak self] adView in
             guard
                 let self = self,
@@ -73,6 +75,7 @@ import UIKit
         guard isAutorefreshing, autorefreshInterval > 0, manager.isRefreshGranted
         else { return }
         weak var weakSelf = self
+        Logger.verbose("Banner \(self) did start refresh timer with interval: \(autorefreshInterval)s")
         loadAd()
         manager.schedule(autorefreshInterval, block: weakSelf?.refresh)
     }

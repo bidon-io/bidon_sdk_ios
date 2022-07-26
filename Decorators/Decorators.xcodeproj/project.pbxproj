@@ -10,6 +10,7 @@
 		2A3766B4DC348FB0061A4282 /* Pods_IronSourceDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3657819312D6CDE7D2FD950F /* Pods_IronSourceDecorator.framework */; };
 		421D48B02886B6DE007DE2E4 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D48AF2886B6DE007DE2E4 /* MobileAdvertising.framework */; };
 		421D48B42886B6E7007DE2E4 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D48B32886B6E7007DE2E4 /* MobileAdvertising.framework */; };
+		4234B12A2890119D00CFAB05 /* IronSourceSdk+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4234B1292890119D00CFAB05 /* IronSourceSdk+Extensions.swift */; };
 		42389DEA2872E2A2006024BA /* BNMAAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DE92872E2A2006024BA /* BNMAAdWrapper.swift */; };
 		42389E0C287436EA006024BA /* BNMAAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0B287436EA006024BA /* BNMAAdDelegate.swift */; };
 		42389E0E2874378C006024BA /* BNMAAdRevenueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0D2874378C006024BA /* BNMAAdRevenueDelegate.swift */; };
@@ -83,6 +84,7 @@
 		3657819312D6CDE7D2FD950F /* Pods_IronSourceDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSourceDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		421D48AF2886B6DE007DE2E4 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		421D48B32886B6E7007DE2E4 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4234B1292890119D00CFAB05 /* IronSourceSdk+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IronSourceSdk+Extensions.swift"; sourceTree = "<group>"; };
 		42389DE92872E2A2006024BA /* BNMAAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdWrapper.swift; sourceTree = "<group>"; };
 		42389E0B287436EA006024BA /* BNMAAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdDelegate.swift; sourceTree = "<group>"; };
 		42389E0D2874378C006024BA /* BNMAAdRevenueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdRevenueDelegate.swift; sourceTree = "<group>"; };
@@ -190,6 +192,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4234B1282890118500CFAB05 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4234B1292890119D00CFAB05 /* IronSourceSdk+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		42389E14287463AA006024BA /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +359,7 @@
 		42BA8223287B266C001F1744 /* Wrapper */ = {
 			isa = PBXGroup;
 			children = (
+				4234B1282890118500CFAB05 /* Extensions */,
 				42B4B3472885A97D00AADB32 /* Combine */,
 				42B97616287F0E45006F4EAA /* Delegates */,
 				42BA8253287B63B3001F1744 /* Models */,
@@ -742,6 +753,7 @@
 				42BA8257287C0DCC001F1744 /* IronSourceRewardedAdDemandProvider.swift in Sources */,
 				42B4B34F2885A9C100AADB32 /* BNLevelPlayInterstitialPublisher.swift in Sources */,
 				42B4B3242881951300AADB32 /* BNISBannerView.swift in Sources */,
+				4234B12A2890119D00CFAB05 /* IronSourceSdk+Extensions.swift in Sources */,
 				42BA8252287B5D3B001F1744 /* IronSourceInterstitialDemandProvider.swift in Sources */,
 				42B4B3532885A9C100AADB32 /* ISInterstitialPublisher.swift in Sources */,
 				42BA8225287B26BC001F1744 /* BNISProxy.swift in Sources */,

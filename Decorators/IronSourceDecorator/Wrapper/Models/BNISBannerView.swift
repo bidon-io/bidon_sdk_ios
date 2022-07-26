@@ -23,6 +23,7 @@ final class BNISBannerView: AdContainerView {
         
         super.init(frame: adView.frame)
         
+        self.autorefreshInterval = IronSource.bannerRefreshInterval
         self.isAutorefreshing = !(adView is ISBannerView)
     }
     

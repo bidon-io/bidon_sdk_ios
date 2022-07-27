@@ -16,13 +16,13 @@ public protocol InterstitialDemandProvider: DemandProvider {
 
 public extension InterstitialDemandProvider {
     func _show(ad: Ad, from viewController: UIViewController?) {
-        if let viewController = viewController ?? UIApplication.shared.topViewContoller {
+        if let viewController = viewController ?? UIApplication.shared.bn.topViewContoller {
             show(ad: ad, from: viewController)
         } else {
             delegate?.provider(
                 self,
                 didFailToDisplay: ad,
-                error: SDKError.unableToFindRootViewController
+                error: SdkError.unableToFindRootViewController
             )
         }
     }

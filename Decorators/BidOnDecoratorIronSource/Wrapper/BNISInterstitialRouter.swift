@@ -21,7 +21,7 @@ final class BNISInterstitialRouter: NSObject {
     var auction: AuctionController!
 
     private var postbid: [InterstitialDemandProvider] {
-        IronSource.bid.bidon.interstitialDemandProviders()
+        IronSource.bn.bidon.interstitialDemandProviders()
     }
     
     var isAvailable: Bool {
@@ -53,8 +53,8 @@ final class BNISInterstitialRouter: NSObject {
         placement: String? = nil
     ) {
         guard let auction = auction else {
-            delegate?.interstitialDidFailToShowWithError(SDKError("No ad for show"))
-            levelPlayDelegate?.didFailToShowWithError(SDKError("No ad for show"), andAdInfo: nil)
+            delegate?.interstitialDidFailToShowWithError(SdkError("No ad for show"))
+            levelPlayDelegate?.didFailToShowWithError(SdkError("No ad for show"), andAdInfo: nil)
             return
         }
         
@@ -67,7 +67,7 @@ final class BNISInterstitialRouter: NSObject {
         auction.finish { [weak self] provider, ad, error in
             guard let ad = ad else { return }
             guard let provider = provider as? InterstitialDemandProvider else {
-                self?.delegate?.interstitialDidFailToShowWithError(SDKError(error))
+                self?.delegate?.interstitialDidFailToShowWithError(SdkError(error))
                 return
             }
             
@@ -133,7 +133,7 @@ extension BNISInterstitialRouter: DemandProviderDelegate {
     }
     
     func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        IronSource.bid.trackAdRevenue(
+        IronSource.bn.trackAdRevenue(
             ad,
             round: auction.auctionRound(for: ad),
             adType: .interstitial

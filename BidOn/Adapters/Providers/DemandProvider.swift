@@ -43,7 +43,7 @@ extension DemandProvider {
         return try await withCheckedThrowingContinuation { continuation in
             request(pricefloor: pricefloor) { ad, error in
                 guard let ad = ad else {
-                    continuation.resume(throwing: SDKError(error))
+                    continuation.resume(throwing: SdkError(error))
                     return
                 }
                 continuation.resume(returning: ad)

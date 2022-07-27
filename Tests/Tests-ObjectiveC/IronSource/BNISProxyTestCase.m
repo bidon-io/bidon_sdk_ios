@@ -25,25 +25,25 @@
     NSError *error;
     
     id<Adapter> mockAdapter = [AdaptersFactory mockAdapterWithIdentifier:@"adapter id"];
-    [[IronSource bid] registerWithAdapter:mockAdapter error:&error];
+    [IronSource.bn registerWithAdapter:mockAdapter error:&error];
     XCTAssertNil(error, @"Error while register mock adapter");
     
     id<Adapter> bidmachineAdapter = (id<Adapter>)[AdaptersFactory bidmachineAdapterWithError:&error];
     XCTAssertNil(error, @"Error while creating bidmachine adapter");
 
-    [[IronSource bid] registerWithAdapter:bidmachineAdapter error:&error];
+    [IronSource.bn registerWithAdapter:bidmachineAdapter error:&error];
     XCTAssertNil(error, @"Error while register bidmachine adapter");
     
     id<Adapter> googleMobileAdsAdapter = (id<Adapter>)[AdaptersFactory googleMobileAdsAdapterWithError:&error];
     XCTAssertNil(error, @"Error while creating google mobile ads adapter");
     
-    [[IronSource bid] registerWithAdapter:googleMobileAdsAdapter error:&error];
+    [IronSource.bn registerWithAdapter:googleMobileAdsAdapter error:&error];
     XCTAssertNil(error, @"Error while register google mobile ads adapter");
     
     id<Adapter> appsFlyerAdapter = (id<Adapter>)[AdaptersFactory appsFlyerAdapterWithError:&error];
     XCTAssertNil(error, @"Error while creating appsflyer adapter");
     
-    [[IronSource bid] registerWithAdapter:appsFlyerAdapter error:&error];
+    [IronSource.bn registerWithAdapter:appsFlyerAdapter error:&error];
     XCTAssertNil(error, @"Error while register appsflyer adapter");
 }
 
@@ -52,8 +52,8 @@
         return [adapter.identifier isEqualToString:identifier];
     }];
     
-    XCTAssertEqual(IronSource.bid.adapters.count, 4);
-    XCTAssertEqual([IronSource.bid.adapters filteredArrayUsingPredicate:filter].count, 1);
+    XCTAssertEqual(IronSource.bn.adapters.count, 4);
+    XCTAssertEqual([IronSource.bn.adapters filteredArrayUsingPredicate:filter].count, 1);
 }
 
 - (void)testRegisteringDemand {

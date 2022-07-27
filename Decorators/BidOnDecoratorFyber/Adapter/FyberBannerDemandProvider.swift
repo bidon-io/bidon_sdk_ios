@@ -35,7 +35,7 @@ internal final class FyberBannerDemandProvider: NSObject {
         self.placement = placement
         super.init()
         
-        FairBid.bid.bannerDelegateMediator.append(self)
+        FairBid.bn.bannerDelegateMediator.append(self)
     }
 }
 
@@ -49,13 +49,13 @@ extension FyberBannerDemandProvider: AdViewDemandProvider {
         let options = FYBBannerOptions()
         
         options.placementId = placement
-        options.presentingViewController = UIApplication.shared.topViewContoller
+        options.presentingViewController = UIApplication.shared.bn.topViewContoller
         
         FYBBanner.request(with: options)
     }
     
     func cancel() {
-        response?(nil, SDKError.cancelled)
+        response?(nil, SdkError.cancelled)
         response = nil
     }
     
@@ -132,7 +132,7 @@ extension FyberBannerDemandProvider: FYBBannerDelegate {
         toLoad placementId: String,
         withError error: Error
     ) {
-        response?(nil, SDKError(error))
+        response?(nil, SdkError(error))
         response = nil
     }
     

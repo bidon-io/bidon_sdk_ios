@@ -27,7 +27,7 @@ final class IronSourceInterstitialDemandProvider: NSObject, InterstitialDemandPr
         response: @escaping DemandProviderResponse
     ) {
         guard let ad = ads.info(with: pricefloor) else {
-            response(nil, SDKError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
+            response(nil, SdkError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
             return
         }
         
@@ -68,7 +68,7 @@ extension IronSourceInterstitialDemandProvider: LevelPlayInterstitialDelegate {
     
     func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
         guard let adInfo = adInfo else { return }
-        delegate?.provider(self, didFailToDisplay: adInfo.wrapped, error: error.map { SDKError($0) } ?? SDKError.unknown)
+        delegate?.provider(self, didFailToDisplay: adInfo.wrapped, error: error.map { SdkError($0) } ?? SdkError.unknown)
     }
     
     func didClick(with adInfo: ISAdInfo!) {

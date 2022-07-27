@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 internal struct Demand {
     var provider: DemandProvider
     var round: AuctionRound

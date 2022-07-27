@@ -35,12 +35,12 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-        FairBid.bid.register(
+        FairBid.bn.register(
             adapter: BidMachineDemandSourceAdapter.self,
             parameters: BidMachineParameters(sellerId: "1")
         )
         
-        FairBid.bid.register(
+        FairBid.bn.register(
             adapter: GoogleMobileAdsDemandSourceAdapter.self,
             parameters: GoogleMobileAdsParameters(
                 interstitial: [
@@ -58,7 +58,7 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate {
             )
         )
         
-        FairBid.bid.register(
+        FairBid.bn.register(
             adapter: AppsFlyerMobileMeasurementPartnerAdapter.self,
             parameters: AppsFlyerParameters(
                 devKey: "some key",
@@ -69,7 +69,7 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate {
         let options = FYBStartOptions()
         options.logLevel = .verbose
         
-        FairBid.bid.start(
+        FairBid.bn.start(
             withAppId: FairBid.appId,
             options: options
         )

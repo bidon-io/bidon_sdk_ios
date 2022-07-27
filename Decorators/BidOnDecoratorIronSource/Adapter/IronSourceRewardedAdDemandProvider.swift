@@ -28,7 +28,7 @@ final class IronSourceRewardedAdDemandProvider: NSObject, RewardedAdDemandProvid
         response: @escaping DemandProviderResponse
     ) {
         guard let ad = ads.info(with: pricefloor) else {
-            response(nil, SDKError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
+            response(nil, SdkError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
             return
         }
         
@@ -58,7 +58,7 @@ extension IronSourceRewardedAdDemandProvider: LevelPlayRewardedVideoDelegate {
         delegate?.provider(
             self,
             didFailToDisplay: adInfo.wrapped,
-            error: error.map { SDKError($0) } ?? .unknown
+            error: error.map { SdkError($0) } ?? .unknown
         )
     }
     

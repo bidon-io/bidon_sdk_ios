@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 
-@objc open class AdContainerView: UIView {
+@objc(BOAdContainerView)
+open class AdContainerView: UIView {
     @objc public final var autorefreshInterval: TimeInterval = 5 {
         didSet { scheduleRefreshIfNeeded() }
     }

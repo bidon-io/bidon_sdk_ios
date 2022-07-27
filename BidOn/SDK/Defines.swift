@@ -8,7 +8,7 @@
 import Foundation
 
 
-public enum SDKError: Error, CustomStringConvertible {
+public enum SdkError: Error, CustomStringConvertible {
     case generic(error: Error)
     case message(String)
     case unknown
@@ -45,7 +45,7 @@ public enum SDKError: Error, CustomStringConvertible {
     }
     
     public init(_ error: Error?) {
-        if let error = error as? SDKError {
+        if let error = error as? SdkError {
             self = error
         } else if let error = error {
             self = .generic(error: error)

@@ -69,7 +69,7 @@ where S : Subscriber, S.Input == Void {
 }
 
 
-extension BNISProxy {
+extension IronSource.Proxy {
     func initializePublisher(
         _ appKey: String,
         adUnits: [String]

@@ -32,7 +32,7 @@ extension IronSourceAdViewDemandProvider: AdViewDemandProvider {
         response: @escaping DemandProviderResponse
     ) {
         guard let ad = ads.info(with: pricefloor) else {
-            response(nil, SDKError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
+            response(nil, SdkError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
             return
         }
     

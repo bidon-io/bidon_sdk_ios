@@ -34,7 +34,7 @@ final public class BNMARewardedAd: NSObject {
     }
     
     private var postbid: [RewardedAdDemandProvider] {
-        sdk.bid.bidon.rewardedAdDemandProviders()
+        sdk.bn.bidon.rewardedAdDemandProviders()
     }
     
     private lazy var mediator: Mediator = {
@@ -142,7 +142,7 @@ final public class BNMARewardedAd: NSObject {
         auction.finish { [weak self] provider, ad, error in
             guard let ad = ad else { return }
             guard let provider = provider as? RewardedAdDemandProvider else {
-                self?.delegate?.didFail(toDisplay: ad, withError: SDKError(error))
+                self?.delegate?.didFail(toDisplay: ad, withError: SdkError(error))
                 return
             }
             
@@ -255,7 +255,7 @@ extension BNMARewardedAd: DemandProviderDelegate {
     }
     
     public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        sdk.bid.trackAdRevenue(
+        sdk.bn.trackAdRevenue(
             ad,
             adType: .rewarded,
             round: auction.auctionRound(for: ad)?.id ?? ""

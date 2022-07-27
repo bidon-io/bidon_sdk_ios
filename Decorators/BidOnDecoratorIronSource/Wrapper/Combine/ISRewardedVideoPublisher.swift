@@ -109,7 +109,7 @@ where S : Subscriber, S.Input == ISRewardedVideoPublisher.Event {
 
 
 @available(iOS 13, *)
-public extension BNISProxy {
+public extension IronSource.Proxy {
     var rewardedVideoPublisher: ISRewardedVideoPublisher {
         return ISRewardedVideoPublisher { [unowned self] delegate in
             self.setRewardedVideoDelegate(delegate)

@@ -56,7 +56,7 @@ extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
     }
     
     func cancel() {
-        response?(nil, SDKError.cancelled)
+        response?(nil, SdkError.cancelled)
         response = nil
     }
 }

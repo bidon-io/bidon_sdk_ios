@@ -21,7 +21,7 @@ internal final class FyberInterstitialDemandProvider: NSObject {
         self.placement = placement
         super.init()
         
-        FairBid.bid.interstitialDelegateMediator.append(self)
+        FairBid.bn.interstitialDelegateMediator.append(self)
     }
     
     internal final class Mediator: NSObject {
@@ -52,7 +52,7 @@ extension FyberInterstitialDemandProvider: InterstitialDemandProvider {
     }
     
     func cancel() {
-        response?(nil, SDKError.cancelled)
+        response?(nil, SdkError.cancelled)
         response = nil
     }
     
@@ -111,7 +111,7 @@ extension FyberInterstitialDemandProvider: FYBInterstitialDelegate {
     }
     
     func interstitialIsUnavailable(_ placementId: String) {
-        response?(nil, SDKError("Interstitial is unavailable for placement: \(placementId)"))
+        response?(nil, SdkError("Interstitial is unavailable for placement: \(placementId)"))
         response = nil
     }
     

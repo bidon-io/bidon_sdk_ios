@@ -37,9 +37,9 @@ import FairBidSDK
         let ctx = AdViewContext(
             .default,
             isAdaptive: BNFYBBanner.isAdaptiveSize,
-            rootViewController: rootViewController ?? UIApplication.shared.topViewContoller
+            rootViewController: rootViewController ?? UIApplication.shared.bn.topViewContoller
         )
-        return FairBid.bid.bidon.adViewDemandProviders(ctx)
+        return FairBid.bn.bidon.adViewDemandProviders(ctx)
     }
     
     private var mediator: Mediator { Mediator(placement: placement) }
@@ -213,7 +213,7 @@ extension BNFYBBanner: AuctionControllerDelegate {
             let ad = auction.winner,
             let provider: AdViewDemandProvider = auction.provider(for: ad)
         else {
-            BNFYBBanner.delegate?.bannerDidFail(toLoad: placement, withError: SDKError("Invalid ad was recieved"))
+            BNFYBBanner.delegate?.bannerDidFail(toLoad: placement, withError: SdkError("Invalid ad was recieved"))
             return
         }
         
@@ -227,7 +227,7 @@ extension BNFYBBanner: AuctionControllerDelegate {
         } else {
             let options = FYBBannerOptions()
             options.placementId = placement
-            options.presentingViewController = UIApplication.shared.topViewContoller
+            options.presentingViewController = UIApplication.shared.bn.topViewContoller
             
             let view = BNFYBBannerAdView(options: options) { [weak self] in
                 self?.request()
@@ -275,7 +275,7 @@ extension BNFYBBanner: DemandProviderDelegate {
     }
     
     public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        FairBid.bid.trackAdRevenue(
+        FairBid.bn.trackAdRevenue(
             ad,
             round: auction.auctionRound(for: ad)?.id ?? "",
             adType: .banner

@@ -41,14 +41,14 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-        IronSource.bid.register(
+        IronSource.bn.register(
             adapter: BidMachineDemandSourceAdapter.self,
             parameters: BidMachineParameters(
                 sellerId: "1"
             )
         )
 
-        IronSource.bid.register(
+        IronSource.bn.register(
             adapter: GoogleMobileAdsDemandSourceAdapter.self,
             parameters: GoogleMobileAdsParameters(
                 interstitial: [
@@ -66,7 +66,7 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
             )
         )
         
-        IronSource.bid.register(
+        IronSource.bn.register(
             adapter: AppsFlyerMobileMeasurementPartnerAdapter.self,
             parameters: AppsFlyerParameters(
                 devKey: "some key",
@@ -76,7 +76,7 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
         
         ISIntegrationHelper.validateIntegration()
         
-        IronSource.bid.initializePublisher(
+        IronSource.bn.initializePublisher(
             IronSource.appKey,
             adUnits: [IS_BANNER, IS_INTERSTITIAL, IS_REWARDED_VIDEO]
         )

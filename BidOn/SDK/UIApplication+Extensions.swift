@@ -9,10 +9,17 @@ import Foundation
 import UIKit
 
 
-public extension UIApplication {
-    var topViewContoller: UIViewController? {
+public struct ApplicationDSL {
+    fileprivate let application: UIApplication
+    
+    fileprivate init(application: UIApplication) {
+        self.application = application
+    }
+    
+    public var topViewContoller: UIViewController? {
         if #available(iOS 13.0, *) {
-            return connectedScenes
+            return application
+                .connectedScenes
                 .filter { $0.activationState == .foregroundActive }
                 .compactMap { $0 as? UIWindowScene }
                 .map { $0.windows }
@@ -20,9 +27,14 @@ public extension UIApplication {
                 .first { $0.isKeyWindow }
                 .flatMap { $0.topPresentedViewController() }
         } else {
-            return keyWindow?.topPresentedViewController()
+            return application.keyWindow?.topPresentedViewController()
         }
      }
+}
+
+
+public extension UIApplication {
+    var bn: ApplicationDSL { .init(application: self) }
 }
 
 

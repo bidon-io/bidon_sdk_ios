@@ -66,7 +66,7 @@ public final class AuctionControllerBuilder {
             let mediation = mediation,
             let postbid = postbid,
             let resolver = resolver
-        else { throw SDKError.internalInconsistency }
+        else { throw SdkError.internalInconsistency }
         
         var auction = ConcurentAuction(rounds: [mediation, postbid])
         try auction.addEdge(from: mediation, to: postbid)

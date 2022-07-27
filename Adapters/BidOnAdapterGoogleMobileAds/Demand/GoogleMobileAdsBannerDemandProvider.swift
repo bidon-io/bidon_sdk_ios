@@ -52,7 +52,7 @@ extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
         response: @escaping DemandProviderResponse
     ) {
         guard let item = item(pricefloor) else {
-            response(nil, SDKError.message("Line item was not found for pricefloor \(pricefloor)"))
+            response(nil, SdkError.message("Line item was not found for pricefloor \(pricefloor)"))
             return
         }
         
@@ -69,7 +69,7 @@ extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
     func notify(_ event: AuctionEvent) {}
     
     func cancel() {
-        response?(nil, SDKError.cancelled)
+        response?(nil, SdkError.cancelled)
         response = nil
     }
     
@@ -100,7 +100,7 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         guard wrapped(ad: bannerView) != nil else { return }
-        response?(nil, SDKError(error))
+        response?(nil, SdkError(error))
     }
     
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {

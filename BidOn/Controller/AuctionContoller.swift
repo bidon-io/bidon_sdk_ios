@@ -73,8 +73,8 @@ public final class AuctionController {
         resolver.resolve(ads: ads) { [weak self] ad in
             guard let self = self else { return }
             guard let ad = ad else {
-                self.delegate?.controller(self, failedAuction: SDKError.internalInconsistency)
-                completion?(nil, nil, SDKError.internalInconsistency)
+                self.delegate?.controller(self, failedAuction: SdkError.internalInconsistency)
+                completion?(nil, nil, SdkError.internalInconsistency)
                 return
             }
             

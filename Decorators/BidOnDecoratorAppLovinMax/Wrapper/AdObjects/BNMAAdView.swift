@@ -52,7 +52,7 @@ import BidOn
         
         let ctx = AdViewContext(adFormat?.fmt ?? .banner, isAdaptive: isAdaptive)
         
-        return sdk.bid.bidon.adViewDemandProviders(ctx)
+        return sdk.bn.bidon.adViewDemandProviders(ctx)
     }
     
     private lazy var auction: AuctionController = {
@@ -220,7 +220,7 @@ extension BNMAAdView: DemandProviderDelegate {
     }
     
     public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        sdk.bid.trackAdRevenue(
+        sdk.bn.trackAdRevenue(
             ad,
             adType: .banner,
             round: auction.auctionRound(for: ad)?.id ?? ""

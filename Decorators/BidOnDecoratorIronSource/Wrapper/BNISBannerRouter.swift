@@ -20,7 +20,7 @@ final class BNISBannerRouter: NSObject {
     var resolver: AuctionResolver = HigherRevenueAuctionResolver()
     
     private var postbid: [AdViewDemandProvider] {
-        IronSource.bid.bidon.adViewDemandProviders(context)
+        IronSource.bn.bidon.adViewDemandProviders(context)
     }
     
     var auction: AuctionController!
@@ -68,7 +68,7 @@ final class BNISBannerRouter: NSObject {
                 let ad = ad,
                 let view = provider.adView(for: ad)
             else {
-                let wrapped = error.map { SDKError($0) } ?? .unknown
+                let wrapped = error.map { SdkError($0) } ?? .unknown
                 self?.delegate?.bannerDidFailToLoadWithError(wrapped)
                 self?.levelPlayDelegate?.didFailToLoadWithError(wrapped)
                 return
@@ -146,7 +146,7 @@ extension BNISBannerRouter: DemandProviderAdViewDelegate {
     }
     
     func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        IronSource.bid.trackAdRevenue(
+        IronSource.bn.trackAdRevenue(
             ad,
             round: auction.auctionRound(for: ad),
             adType: .banner

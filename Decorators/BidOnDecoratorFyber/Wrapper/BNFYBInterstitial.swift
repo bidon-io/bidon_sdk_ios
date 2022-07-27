@@ -24,7 +24,7 @@ import FairBidSDK
     private let placement: String
     
     private var postbid: [InterstitialDemandProvider] {
-        FairBid.bid.bidon.interstitialDemandProviders()
+        FairBid.bn.bidon.interstitialDemandProviders()
     }
     
     private var mediator: Mediator { Mediator(placement: placement) }
@@ -180,7 +180,7 @@ extension BNFYBInterstitial: DemandProviderDelegate {
     }
     
     public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        FairBid.bid.trackAdRevenue(
+        FairBid.bn.trackAdRevenue(
             ad,
             round: auction.auctionRound(for: ad)?.id ?? "",
             adType: .interstitial

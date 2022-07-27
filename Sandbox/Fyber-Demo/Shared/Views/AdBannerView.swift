@@ -26,7 +26,7 @@ struct AdBannerView: UIViewRepresentable {
         
         let options = FYBBannerOptions()
         options.placementId = placement
-        options.presentingViewController = UIApplication.shared.topViewContoller
+        options.presentingViewController = UIApplication.shared.bn.topViewContoller
         
         BNFYBBanner.show(
             in: view,

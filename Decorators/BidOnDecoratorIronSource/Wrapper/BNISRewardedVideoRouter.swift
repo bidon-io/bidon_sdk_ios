@@ -21,7 +21,7 @@ final class BNISRewardedVideoRouter: NSObject {
     var auction: AuctionController!
 
     private var postbid: [RewardedAdDemandProvider] {
-        IronSource.bid.bidon.rewardedAdDemandProviders()
+        IronSource.bn.bidon.rewardedAdDemandProviders()
     }
     
     var isAvailable: Bool {
@@ -52,8 +52,8 @@ final class BNISRewardedVideoRouter: NSObject {
         placement: String? = nil
     ) {
         guard let auction = auction else {
-            delegate?.rewardedVideoDidFailToShowWithError(SDKError("No ad for show"))
-            levelPlayDelegate?.didFailToShowWithError(SDKError("No ad for show"), andAdInfo: nil)
+            delegate?.rewardedVideoDidFailToShowWithError(SdkError("No ad for show"))
+            levelPlayDelegate?.didFailToShowWithError(SdkError("No ad for show"), andAdInfo: nil)
             return
         }
         
@@ -66,7 +66,7 @@ final class BNISRewardedVideoRouter: NSObject {
         auction.finish { [weak self] provider, ad, error in
             guard let ad = ad else { return }
             guard let provider = provider as? RewardedAdDemandProvider else {
-                self?.delegate?.rewardedVideoDidFailToShowWithError(SDKError(error))
+                self?.delegate?.rewardedVideoDidFailToShowWithError(SdkError(error))
                 return
             }
             
@@ -140,7 +140,7 @@ extension BNISRewardedVideoRouter: DemandProviderDelegate {
     }
     
     func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        IronSource.bid.trackAdRevenue(
+        IronSource.bn.trackAdRevenue(
             ad,
             round: auction.auctionRound(for: ad),
             adType: .rewarded

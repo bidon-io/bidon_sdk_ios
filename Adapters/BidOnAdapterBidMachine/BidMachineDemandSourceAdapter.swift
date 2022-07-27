@@ -60,7 +60,7 @@ extension BidMachineDemandSourceAdapter: InitializableAdapter {
     ) {
         
         guard !BDMSdk.shared().isInitialized else {
-            completion(SDKError.internalInconsistency)
+            completion(SdkError.internalInconsistency)
             return
         }
         

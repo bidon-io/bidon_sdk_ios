@@ -31,7 +31,7 @@ final public class BNMAInterstitialAd: NSObject {
     }
     
     private var postbid: [InterstitialDemandProvider] {
-        sdk.bid.bidon.interstitialDemandProviders()
+        sdk.bn.bidon.interstitialDemandProviders()
     }
     
     private lazy var mediator: Mediator = {
@@ -121,7 +121,7 @@ final public class BNMAInterstitialAd: NSObject {
         auction.finish { [weak self] provider, ad, error in
             guard let ad = ad else { return }
             guard let provider = provider as? InterstitialDemandProvider else {
-                self?.delegate?.didFail(toDisplay: ad, withError: SDKError(error))
+                self?.delegate?.didFail(toDisplay: ad, withError: SdkError(error))
                 return
             }
             
@@ -209,7 +209,7 @@ extension BNMAInterstitialAd: DemandProviderDelegate {
     }
     
     public func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        sdk.bid.trackAdRevenue(
+        sdk.bn.trackAdRevenue(
             ad,
             adType: .interstitial,
             round: auction.auctionRound(for: ad)?.id ?? ""

@@ -25,7 +25,7 @@ final class HomeViewModel: ObservableObject {
     
     @Published var resolution = Resolution.default
     
-    private var controller: UIViewController! { UIApplication.shared.topViewContoller }
+    private var controller: UIViewController! { UIApplication.shared.bn.topViewContoller }
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -35,32 +35,32 @@ final class HomeViewModel: ObservableObject {
     private func subscribe() {
         Publishers.MergeMany([
             IronSource
-                .bid
+                .bn
                 .rewardedVideoPublisher
                 .map { AdEventModel(adType: .rewardedVideo, event: $0) }
                 .eraseToAnyPublisher(),
             IronSource
-                .bid
+                .bn
                 .interstitialPublisher
                 .map { AdEventModel(adType: .interstitial, event: $0) }
                 .eraseToAnyPublisher(),
             IronSource
-                .bid
+                .bn
                 .levelPlayRewardedVideoPublisher
                 .map { AdEventModel(adType: .rewardedVideo, event: $0) }
                 .eraseToAnyPublisher(),
             IronSource
-                .bid
+                .bn
                 .levelPlayInterstitialPublisher
                 .map { AdEventModel(adType: .interstitial, event: $0) }
                 .eraseToAnyPublisher(),
             IronSource
-                .bid
+                .bn
                 .auctionRewardedVideoPublisher
                 .map { AdEventModel(adType: .rewardedVideo, event: $0) }
                 .eraseToAnyPublisher(),
             IronSource
-                .bid
+                .bn
                 .auctionInterstitialPublisher
                 .map { AdEventModel(adType: .interstitial, event: $0) }
                 .eraseToAnyPublisher()
@@ -154,9 +154,9 @@ final class HomeViewModel: ObservableObject {
         $resolution
             .map { $0.resolver }
             .sink {
-                IronSource.bid.setInterstitialAuctionResolver($0)
-                IronSource.bid.setRewardedVideoAuctionResolver($0)
-                IronSource.bid.setBannerAuctionResolver($0)
+                IronSource.bn.setInterstitialAuctionResolver($0)
+                IronSource.bn.setRewardedVideoAuctionResolver($0)
+                IronSource.bn.setBannerAuctionResolver($0)
             }
             .store(in: &cancellables)
     }
@@ -169,7 +169,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     func showInterstitial() {
-        IronSource.bid.showInterstitial(with: controller)
+        IronSource.bn.showInterstitial(with: controller)
     }
     
     func loadRewardedVideo() {
@@ -180,6 +180,6 @@ final class HomeViewModel: ObservableObject {
     }
     
     func showRewardedVideo() {
-        IronSource.bid.showRewardedVideo(with: controller)
+        IronSource.bn.showRewardedVideo(with: controller)
     }
 }

@@ -13,7 +13,7 @@
 		421D48EA28884D1F007DE2E4 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48E928884D1F007DE2E4 /* LogFormatter.swift */; };
 		421D48EC2888582B007DE2E4 /* OSLogDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48EB2888582B007DE2E4 /* OSLogDestination.swift */; };
 		4221018D2859E29A006596DA /* BidOn.h in Headers */ = {isa = PBXBuildFile; fileRef = 422101812859E29A006596DA /* BidOn.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		422101982859E2C3006596DA /* SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422101972859E2C3006596DA /* SDK.swift */; };
+		422101982859E2C3006596DA /* BidOnSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422101972859E2C3006596DA /* BidOnSdk.swift */; };
 		4221019A2859E35C006596DA /* Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422101992859E35C006596DA /* Adapter.swift */; };
 		4221019C2859E3D0006596DA /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4221019B2859E3D0006596DA /* Defines.swift */; };
 		42389DEC2872F497006024BA /* AdaptersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DEB2872F497006024BA /* AdaptersRepository.swift */; };
@@ -46,7 +46,7 @@
 		421D48EB2888582B007DE2E4 /* OSLogDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogDestination.swift; sourceTree = "<group>"; };
 		4221017E2859E29A006596DA /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		422101812859E29A006596DA /* BidOn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOn.h; sourceTree = "<group>"; };
-		422101972859E2C3006596DA /* SDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDK.swift; sourceTree = "<group>"; };
+		422101972859E2C3006596DA /* BidOnSdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidOnSdk.swift; sourceTree = "<group>"; };
 		422101992859E35C006596DA /* Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adapter.swift; sourceTree = "<group>"; };
 		4221019B2859E3D0006596DA /* Defines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		42389DEB2872F497006024BA /* AdaptersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptersRepository.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		422101962859E2B3006596DA /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				422101972859E2C3006596DA /* SDK.swift */,
+				422101972859E2C3006596DA /* BidOnSdk.swift */,
 				42389E162874665A006024BA /* UIApplication+Extensions.swift */,
 				4221019B2859E3D0006596DA /* Defines.swift */,
 			);
@@ -279,7 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				422101982859E2C3006596DA /* SDK.swift in Sources */,
+				422101982859E2C3006596DA /* BidOnSdk.swift in Sources */,
 				4221019A2859E35C006596DA /* Adapter.swift in Sources */,
 				42389DF22872F63F006024BA /* AuctionResolver.swift in Sources */,
 				421D48CB2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift in Sources */,

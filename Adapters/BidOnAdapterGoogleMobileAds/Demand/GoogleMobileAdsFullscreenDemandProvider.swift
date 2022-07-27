@@ -50,7 +50,7 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BNGAD
     
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         guard let wrapped = wrapped(ad: ad) else { return }
-        delegate?.provider(self, didFailToDisplay: wrapped, error: SDKError(error))
+        delegate?.provider(self, didFailToDisplay: wrapped, error: SdkError(error))
     }
     
     func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
@@ -83,7 +83,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
         response: @escaping DemandProviderResponse
     ) {
         guard let item = item(pricefloor) else {
-            response(nil, SDKError.message("Line item was not found for pricefloor \(pricefloor)"))
+            response(nil, SdkError.message("Line item was not found for pricefloor \(pricefloor)"))
             return
         }
         
@@ -96,7 +96,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
         ) { [weak self] fullscreenAd, error in
             guard let self = self else { return }
             guard let fullscreenAd = fullscreenAd as? FullscreenAd, error == nil else {
-                self.response?(nil, SDKError(error))
+                self.response?(nil, SdkError(error))
                 self.response = nil
                 return
             }
@@ -111,7 +111,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
     }
     
     func cancel() {
-        response?(nil, SDKError.cancelled)
+        response?(nil, SdkError.cancelled)
         response = nil
     }
     
@@ -120,7 +120,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
             delegate?.provider(
                 self,
                 didFailToDisplay: ad,
-                error: SDKError.invalidPresentationState
+                error: SdkError.invalidPresentationState
             )
             return
         }

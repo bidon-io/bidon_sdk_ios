@@ -39,16 +39,16 @@ struct AdBannerView: UIViewRepresentable {
         
         override init() {
             super.init()
-            IronSource.bid.setBannerDelegate(self)
+            IronSource.bn.setBannerDelegate(self)
         }
         
         func loadAd(_ size: ISBannerSize) {
-            let controller = UIApplication.shared.topViewContoller!
-            IronSource.bid.loadBanner(with: controller, size: size)
+            let controller = UIApplication.shared.bn.topViewContoller!
+            IronSource.bn.loadBanner(with: controller, size: size)
         }
         
         func dismant() {
-            adView.map { IronSource.bid.destroyBanner($0) }
+            adView.map { IronSource.bn.destroyBanner($0) }
         }
         
         func bannerDidLoad(_ bannerView: UIView) {

@@ -27,7 +27,7 @@
 }
 
 - (void)testSdkContainsProxy {
-    XCTAssertNotNil(self.sdk.bid, @"The proxy is nil");
+    XCTAssertNotNil(self.sdk.bn, @"The proxy is nil");
 }
 
 - (void)testRegisteringDemand {
@@ -35,10 +35,10 @@
     NSError *error;
     
     id<Adapter> adapter = [AdaptersFactory mockAdapterWithIdentifier:adapterID];
-    [self.sdk.bid registerWithAdapter:adapter error:&error];
+    [self.sdk.bn registerWithAdapter:adapter error:&error];
     
     XCTAssertNil(error, @"Error while register adapter");
-    XCTAssertEqual(self.sdk.bid.adapters.count, 1);
+    XCTAssertEqual(self.sdk.bn.adapters.count, 1);
 }
 
 - (void)testRegisterBidMachine {
@@ -46,10 +46,10 @@
     id<Adapter> adapter = (id<Adapter>)[AdaptersFactory bidmachineAdapterWithError:&error];
     XCTAssertNil(error, @"Error while creating bidmachine adapter");
 
-    [self.sdk.bid registerWithAdapter:(id<Adapter>)adapter error:&error];
+    [self.sdk.bn registerWithAdapter:(id<Adapter>)adapter error:&error];
     
     XCTAssertNil(error, @"Error while register bidmachine adapter");
-    XCTAssertEqual(self.sdk.bid.adapters.count, 1);
+    XCTAssertEqual(self.sdk.bn.adapters.count, 1);
 }
 
 - (void)testRegisterGoogleMobileAds {
@@ -57,10 +57,10 @@
     id<Adapter> adapter = (id<Adapter>)[AdaptersFactory googleMobileAdsAdapterWithError:&error];
     XCTAssertNil(error, @"Error while creating google mobile ads adapter");
     
-    [self.sdk.bid registerWithAdapter:(id<Adapter>)adapter error:&error];
+    [self.sdk.bn registerWithAdapter:(id<Adapter>)adapter error:&error];
     
     XCTAssertNil(error, @"Error while register google mobile ads adapter");
-    XCTAssertEqual(self.sdk.bid.adapters.count, 1);
+    XCTAssertEqual(self.sdk.bn.adapters.count, 1);
 }
 
 - (void)testRegisterAppsFlyer {
@@ -69,10 +69,10 @@
     id<Adapter> adapter = (id<Adapter>)[AdaptersFactory appsFlyerAdapterWithError:&error];
     XCTAssertNil(error, @"Error while creating appsflyer adapter");
     
-    [self.sdk.bid registerWithAdapter:(id<Adapter>)adapter error:&error];
+    [self.sdk.bn registerWithAdapter:(id<Adapter>)adapter error:&error];
     
     XCTAssertNil(error, @"Error while register apps flyer adapter");
-    XCTAssertEqual(self.sdk.bid.adapters.count, 1);
+    XCTAssertEqual(self.sdk.bn.adapters.count, 1);
 }
 
 - (void)testInitialization {
@@ -88,7 +88,7 @@
         [expectation fulfill];
     });
     
-    [self.sdk.bid initializeSdkWithCompletionHandler:^(ALSdkConfiguration *config) {
+    [self.sdk.bn initializeSdkWithCompletionHandler:^(ALSdkConfiguration *config) {
         receivedConfiguration = config;
     }];
     

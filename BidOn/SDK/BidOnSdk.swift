@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 
-@objc public final class SDK: NSObject {
+@objc
+public final class BidOnSdk: NSObject {
     private var repository = AdaptersRepository()
     
     @objc public var adapters: [Adapter] {
@@ -73,7 +74,7 @@ import UIKit
 }
 
 
-public extension SDK {
+public extension BidOnSdk {
     func interstitialDemandProviders() -> [InterstitialDemandProvider] {
         let sources: [InterstitialDemandSourceAdapter] = repository.all()
         return sources.compactMap { try? $0.interstitial() }

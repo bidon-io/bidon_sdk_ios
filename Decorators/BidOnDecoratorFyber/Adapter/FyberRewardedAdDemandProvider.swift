@@ -22,7 +22,7 @@ internal final class FyberRewardedAdDemandProvider: NSObject {
         self.placement = placement
         super.init()
         
-        FairBid.bid.rewardedDelegateMediator.append(self)
+        FairBid.bn.rewardedDelegateMediator.append(self)
     }
     
     internal final class Mediator: NSObject {
@@ -53,7 +53,7 @@ extension FyberRewardedAdDemandProvider: RewardedAdDemandProvider {
     }
     
     func cancel() {
-        response?(nil, SDKError.cancelled)
+        response?(nil, SdkError.cancelled)
         response = nil
     }
     
@@ -112,7 +112,7 @@ extension FyberRewardedAdDemandProvider: FYBRewardedDelegate {
     }
     
     func rewardedIsUnavailable(_ placementId: String) {
-        response?(nil, SDKError("Rewarded is unavailable for placement: \(placementId)"))
+        response?(nil, SdkError("Rewarded is unavailable for placement: \(placementId)"))
         response = nil
     }
     

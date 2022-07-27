@@ -42,14 +42,14 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
         applovin.mediationProvider = ALMediationProviderMAX
         applovin.settings.isVerboseLogging = true
         
-        applovin.bid.register(
+        applovin.bn.register(
             adapter: BidMachineDemandSourceAdapter.self,
             parameters: BidMachineParameters(
                 sellerId: "1"
             )
         )
         
-        applovin.bid.register(
+        applovin.bn.register(
             adapter: GoogleMobileAdsDemandSourceAdapter.self,
             parameters: GoogleMobileAdsParameters(
                 interstitial: [
@@ -67,7 +67,7 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
             )
         )
         
-        applovin.bid.register(
+        applovin.bn.register(
             adapter: AppsFlyerMobileMeasurementPartnerAdapter.self,
             parameters: AppsFlyerParameters(
                 devKey: "some key",
@@ -75,7 +75,7 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
             )
         )
         
-        applovin.bid.initializeSdk() { configuration in
+        applovin.bn.initializeSdk() { configuration in
             withAnimation { [unowned self] in
                 self.isInitialized = true
             }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import MobileAdvertising
+import BidOn
 
 
 enum Resolution: String, CaseIterable {

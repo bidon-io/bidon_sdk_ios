@@ -6,8 +6,8 @@
 //
 import Foundation
 import SwiftUI
-import AppLovinDecorator
-import MobileAdvertising
+import BidOnDecoratorAppLovinMax
+import BidOn
 
 
 struct InterstitialView: View {

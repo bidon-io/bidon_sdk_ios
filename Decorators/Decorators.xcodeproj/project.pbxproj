@@ -7,18 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A3766B4DC348FB0061A4282 /* Pods_IronSourceDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3657819312D6CDE7D2FD950F /* Pods_IronSourceDecorator.framework */; };
-		421D48B02886B6DE007DE2E4 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D48AF2886B6DE007DE2E4 /* MobileAdvertising.framework */; };
-		421D48B42886B6E7007DE2E4 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D48B32886B6E7007DE2E4 /* MobileAdvertising.framework */; };
 		4234B12A2890119D00CFAB05 /* IronSourceSdk+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4234B1292890119D00CFAB05 /* IronSourceSdk+Extensions.swift */; };
 		42389DEA2872E2A2006024BA /* BNMAAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DE92872E2A2006024BA /* BNMAAdWrapper.swift */; };
 		42389E0C287436EA006024BA /* BNMAAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0B287436EA006024BA /* BNMAAdDelegate.swift */; };
 		42389E0E2874378C006024BA /* BNMAAdRevenueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0D2874378C006024BA /* BNMAAdRevenueDelegate.swift */; };
 		42389E1028743ADE006024BA /* BNMAAdReviewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0F28743ADE006024BA /* BNMAAdReviewDelegate.swift */; };
-		429EE291286B38FE009439C6 /* AppLovinDecorator.h in Headers */ = {isa = PBXBuildFile; fileRef = 429EE290286B38FE009439C6 /* AppLovinDecorator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		429EE291286B38FE009439C6 /* BidOnDecoratorAppLovinMax.h in Headers */ = {isa = PBXBuildFile; fileRef = 429EE290286B38FE009439C6 /* BidOnDecoratorAppLovinMax.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		429EE2B2286B438A009439C6 /* BNMAInterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B1286B438A009439C6 /* BNMAInterstitialAd.swift */; };
 		429EE2B4286B59B9009439C6 /* BNMAProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B3286B59B9009439C6 /* BNMAProxy.swift */; };
-		429EE2B6286B5A81009439C6 /* MobileAdvertising.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429EE2B5286B5A81009439C6 /* MobileAdvertising.framework */; };
 		429EE2D9286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2D8286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift */; };
 		42A6B632287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B631287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift */; };
 		42A6B639287D7DE600C1DFB9 /* BNFYBAuctionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B638287D7DE600C1DFB9 /* BNFYBAuctionDelegate.swift */; };
@@ -63,37 +59,39 @@
 		42BA81F528772DB3001F1744 /* BNMAAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F428772DB3001F1744 /* BNMAAdView.swift */; };
 		42BA81F7287730E0001F1744 /* BNMAAdViewAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F6287730E0001F1744 /* BNMAAdViewAdDelegate.swift */; };
 		42BA81FB287734B0001F1744 /* AppLovinAdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81FA287734B0001F1744 /* AppLovinAdViewDemandProvider.swift */; };
-		42BA821F287B25AB001F1744 /* IronSourceDecorator.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA821E287B25AA001F1744 /* IronSourceDecorator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42BA821F287B25AB001F1744 /* BidOnDecoratorIronSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA821E287B25AA001F1744 /* BidOnDecoratorIronSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42BA8225287B26BC001F1744 /* BNISProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8224287B26BC001F1744 /* BNISProxy.swift */; };
 		42BA824F287B4F51001F1744 /* BNISInterstitialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA824E287B4F51001F1744 /* BNISInterstitialRouter.swift */; };
 		42BA8252287B5D3B001F1744 /* IronSourceInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8251287B5D3B001F1744 /* IronSourceInterstitialDemandProvider.swift */; };
 		42BA8255287B63D0001F1744 /* BNISAdInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8254287B63D0001F1744 /* BNISAdInfo.swift */; };
 		42BA8257287C0DCC001F1744 /* IronSourceRewardedAdDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8256287C0DCC001F1744 /* IronSourceRewardedAdDemandProvider.swift */; };
 		42BA8259287C0E8D001F1744 /* BNISRewardedVideoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8258287C0E8D001F1744 /* BNISRewardedVideoRouter.swift */; };
-		42BA826A287C64A5001F1744 /* FyberDecorator.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA8269287C64A5001F1744 /* FyberDecorator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42BA826A287C64A5001F1744 /* BidOnDecoratorFyber.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA8269287C64A5001F1744 /* BidOnDecoratorFyber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42BA8282287C65B6001F1744 /* BNFYBProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8281287C65B6001F1744 /* BNFYBProxy.swift */; };
 		42BA8284287C67B6001F1744 /* BNFYBInterstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8283287C67B6001F1744 /* BNFYBInterstitial.swift */; };
 		42BA8287287C68AD001F1744 /* FyberInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8286287C68AD001F1744 /* FyberInterstitialDemandProvider.swift */; };
 		42BA828C287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA828B287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift */; };
-		9C3F2FC8302DEA66C5792F64 /* Pods_AppLovinDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DFA6D8633E4FC45A275893 /* Pods_AppLovinDecorator.framework */; };
-		D233922F1C5641C7234D4D99 /* Pods_FyberDecorator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16007588FDD639D32D3754 /* Pods_FyberDecorator.framework */; };
+		42EC98812891419B003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98802891419B003BE6CF /* BidOn.framework */; };
+		42EC9885289141A3003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC9884289141A3003BE6CF /* BidOn.framework */; };
+		42EC9889289141AC003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC9888289141AC003BE6CF /* BidOn.framework */; };
+		78C4C8BF55E57F16569A59DF /* Pods_BidOnDecoratorIronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1347F3FC110DF93305700DDF /* Pods_BidOnDecoratorIronSource.framework */; };
+		B54097BDD19CD8960314CE57 /* Pods_BidOnDecoratorFyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17C11ED454BB86EE6EC88FF /* Pods_BidOnDecoratorFyber.framework */; };
+		C49D1417F611D561DC5BC5EB /* Pods_BidOnDecoratorAppLovinMax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA2C1C949B9272C08B399F8 /* Pods_BidOnDecoratorAppLovinMax.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		11727C61DD7A63F9C65F934F /* Pods-IronSourceDecorator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceDecorator.release.xcconfig"; path = "Target Support Files/Pods-IronSourceDecorator/Pods-IronSourceDecorator.release.xcconfig"; sourceTree = "<group>"; };
-		3657819312D6CDE7D2FD950F /* Pods_IronSourceDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSourceDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		421D48AF2886B6DE007DE2E4 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		421D48B32886B6E7007DE2E4 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		124D98BCE26361E223EEA284 /* Pods-BidOnDecoratorFyber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnDecoratorFyber.release.xcconfig"; path = "Target Support Files/Pods-BidOnDecoratorFyber/Pods-BidOnDecoratorFyber.release.xcconfig"; sourceTree = "<group>"; };
+		1347F3FC110DF93305700DDF /* Pods_BidOnDecoratorIronSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnDecoratorIronSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DA2C1C949B9272C08B399F8 /* Pods_BidOnDecoratorAppLovinMax.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnDecoratorAppLovinMax.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4234B1292890119D00CFAB05 /* IronSourceSdk+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IronSourceSdk+Extensions.swift"; sourceTree = "<group>"; };
 		42389DE92872E2A2006024BA /* BNMAAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdWrapper.swift; sourceTree = "<group>"; };
 		42389E0B287436EA006024BA /* BNMAAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdDelegate.swift; sourceTree = "<group>"; };
 		42389E0D2874378C006024BA /* BNMAAdRevenueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdRevenueDelegate.swift; sourceTree = "<group>"; };
 		42389E0F28743ADE006024BA /* BNMAAdReviewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdReviewDelegate.swift; sourceTree = "<group>"; };
-		429EE28D286B38FE009439C6 /* AppLovinDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppLovinDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		429EE290286B38FE009439C6 /* AppLovinDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppLovinDecorator.h; sourceTree = "<group>"; };
+		429EE28D286B38FE009439C6 /* BidOnDecoratorAppLovinMax.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnDecoratorAppLovinMax.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		429EE290286B38FE009439C6 /* BidOnDecoratorAppLovinMax.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnDecoratorAppLovinMax.h; sourceTree = "<group>"; };
 		429EE2B1286B438A009439C6 /* BNMAInterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAInterstitialAd.swift; sourceTree = "<group>"; };
 		429EE2B3286B59B9009439C6 /* BNMAProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAProxy.swift; sourceTree = "<group>"; };
-		429EE2B5286B5A81009439C6 /* MobileAdvertising.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MobileAdvertising.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		429EE2D8286EF59B009439C6 /* AppLovinFullscreenDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinFullscreenDemandProvider.swift; sourceTree = "<group>"; };
 		42A6B631287D63A900C1DFB9 /* BNFYBInterstitialDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBInterstitialDelegate.swift; sourceTree = "<group>"; };
 		42A6B638287D7DE600C1DFB9 /* BNFYBAuctionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBAuctionDelegate.swift; sourceTree = "<group>"; };
@@ -138,27 +136,29 @@
 		42BA81F428772DB3001F1744 /* BNMAAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdView.swift; sourceTree = "<group>"; };
 		42BA81F6287730E0001F1744 /* BNMAAdViewAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNMAAdViewAdDelegate.swift; sourceTree = "<group>"; };
 		42BA81FA287734B0001F1744 /* AppLovinAdViewDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinAdViewDemandProvider.swift; sourceTree = "<group>"; };
-		42BA821C287B25AA001F1744 /* IronSourceDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IronSourceDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42BA821E287B25AA001F1744 /* IronSourceDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IronSourceDecorator.h; sourceTree = "<group>"; };
+		42BA821C287B25AA001F1744 /* BidOnDecoratorIronSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnDecoratorIronSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA821E287B25AA001F1744 /* BidOnDecoratorIronSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnDecoratorIronSource.h; sourceTree = "<group>"; };
 		42BA8224287B26BC001F1744 /* BNISProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNISProxy.swift; sourceTree = "<group>"; };
 		42BA824E287B4F51001F1744 /* BNISInterstitialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNISInterstitialRouter.swift; sourceTree = "<group>"; };
 		42BA8251287B5D3B001F1744 /* IronSourceInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronSourceInterstitialDemandProvider.swift; sourceTree = "<group>"; };
 		42BA8254287B63D0001F1744 /* BNISAdInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNISAdInfo.swift; sourceTree = "<group>"; };
 		42BA8256287C0DCC001F1744 /* IronSourceRewardedAdDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronSourceRewardedAdDemandProvider.swift; sourceTree = "<group>"; };
 		42BA8258287C0E8D001F1744 /* BNISRewardedVideoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNISRewardedVideoRouter.swift; sourceTree = "<group>"; };
-		42BA8267287C64A5001F1744 /* FyberDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FyberDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42BA8269287C64A5001F1744 /* FyberDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FyberDecorator.h; sourceTree = "<group>"; };
+		42BA8267287C64A5001F1744 /* BidOnDecoratorFyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnDecoratorFyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42BA8269287C64A5001F1744 /* BidOnDecoratorFyber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnDecoratorFyber.h; sourceTree = "<group>"; };
 		42BA8281287C65B6001F1744 /* BNFYBProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBProxy.swift; sourceTree = "<group>"; };
 		42BA8283287C67B6001F1744 /* BNFYBInterstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBInterstitial.swift; sourceTree = "<group>"; };
 		42BA8286287C68AD001F1744 /* FyberInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FyberInterstitialDemandProvider.swift; sourceTree = "<group>"; };
 		42BA828B287C73F6001F1744 /* BNFYBImpressionDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNFYBImpressionDataWrapper.swift; sourceTree = "<group>"; };
-		49823ADA8D938D1B58EE3B13 /* Pods-IronSourceDecorator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceDecorator.debug.xcconfig"; path = "Target Support Files/Pods-IronSourceDecorator/Pods-IronSourceDecorator.debug.xcconfig"; sourceTree = "<group>"; };
-		68CBF590B4386AAFAB4CC698 /* Pods-AppLovinDecorator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinDecorator.release.xcconfig"; path = "Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator.release.xcconfig"; sourceTree = "<group>"; };
-		68DFA6D8633E4FC45A275893 /* Pods_AppLovinDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppLovinDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		697DAEC31605832889D2C4FD /* Pods-FyberDecorator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FyberDecorator.release.xcconfig"; path = "Target Support Files/Pods-FyberDecorator/Pods-FyberDecorator.release.xcconfig"; sourceTree = "<group>"; };
-		8869C938B40F735E03C3C677 /* Pods-FyberDecorator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FyberDecorator.debug.xcconfig"; path = "Target Support Files/Pods-FyberDecorator/Pods-FyberDecorator.debug.xcconfig"; sourceTree = "<group>"; };
-		CE16007588FDD639D32D3754 /* Pods_FyberDecorator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FyberDecorator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DE30FE2885C3640B22F331FE /* Pods-AppLovinDecorator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinDecorator.debug.xcconfig"; path = "Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator.debug.xcconfig"; sourceTree = "<group>"; };
+		42EC98802891419B003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42EC9884289141A3003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42EC9888289141AC003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		591D1DCA2955598B119A5D54 /* Pods-BidOnDecoratorIronSource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnDecoratorIronSource.debug.xcconfig"; path = "Target Support Files/Pods-BidOnDecoratorIronSource/Pods-BidOnDecoratorIronSource.debug.xcconfig"; sourceTree = "<group>"; };
+		8BE6127774F0B9CB41D4E7A1 /* Pods-BidOnDecoratorFyber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnDecoratorFyber.debug.xcconfig"; path = "Target Support Files/Pods-BidOnDecoratorFyber/Pods-BidOnDecoratorFyber.debug.xcconfig"; sourceTree = "<group>"; };
+		9DBA37E0C4B65561E3C963A4 /* Pods-BidOnDecoratorAppLovinMax.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnDecoratorAppLovinMax.release.xcconfig"; path = "Target Support Files/Pods-BidOnDecoratorAppLovinMax/Pods-BidOnDecoratorAppLovinMax.release.xcconfig"; sourceTree = "<group>"; };
+		AD2BB8EA44FBF5EBAB6C45CC /* Pods-BidOnDecoratorAppLovinMax.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnDecoratorAppLovinMax.debug.xcconfig"; path = "Target Support Files/Pods-BidOnDecoratorAppLovinMax/Pods-BidOnDecoratorAppLovinMax.debug.xcconfig"; sourceTree = "<group>"; };
+		B17C11ED454BB86EE6EC88FF /* Pods_BidOnDecoratorFyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnDecoratorFyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDAC0D3390FC0281A0A0CDDD /* Pods-BidOnDecoratorIronSource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnDecoratorIronSource.release.xcconfig"; path = "Target Support Files/Pods-BidOnDecoratorIronSource/Pods-BidOnDecoratorIronSource.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,8 +166,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C3F2FC8302DEA66C5792F64 /* Pods_AppLovinDecorator.framework in Frameworks */,
-				429EE2B6286B5A81009439C6 /* MobileAdvertising.framework in Frameworks */,
+				42EC9889289141AC003BE6CF /* BidOn.framework in Frameworks */,
+				C49D1417F611D561DC5BC5EB /* Pods_BidOnDecoratorAppLovinMax.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,8 +175,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A3766B4DC348FB0061A4282 /* Pods_IronSourceDecorator.framework in Frameworks */,
-				421D48B42886B6E7007DE2E4 /* MobileAdvertising.framework in Frameworks */,
+				42EC98812891419B003BE6CF /* BidOn.framework in Frameworks */,
+				78C4C8BF55E57F16569A59DF /* Pods_BidOnDecoratorIronSource.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,8 +184,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D233922F1C5641C7234D4D99 /* Pods_FyberDecorator.framework in Frameworks */,
-				421D48B02886B6DE007DE2E4 /* MobileAdvertising.framework in Frameworks */,
+				42EC9885289141A3003BE6CF /* BidOn.framework in Frameworks */,
+				B54097BDD19CD8960314CE57 /* Pods_BidOnDecoratorFyber.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,9 +216,9 @@
 		429EE281286B3481009439C6 = {
 			isa = PBXGroup;
 			children = (
-				429EE28F286B38FE009439C6 /* AppLovinDecorator */,
-				42BA8268287C64A5001F1744 /* FyberDecorator */,
-				42BA821D287B25AA001F1744 /* IronSourceDecorator */,
+				429EE28F286B38FE009439C6 /* BidOnDecoratorAppLovinMax */,
+				42BA8268287C64A5001F1744 /* BidOnDecoratorFyber */,
+				42BA821D287B25AA001F1744 /* BidOnDecoratorIronSource */,
 				429EE28E286B38FE009439C6 /* Products */,
 				B3D9F426D094669891C24479 /* Pods */,
 				6F4298EBCE471EE63C835613 /* Frameworks */,
@@ -228,21 +228,21 @@
 		429EE28E286B38FE009439C6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				429EE28D286B38FE009439C6 /* AppLovinDecorator.framework */,
-				42BA821C287B25AA001F1744 /* IronSourceDecorator.framework */,
-				42BA8267287C64A5001F1744 /* FyberDecorator.framework */,
+				429EE28D286B38FE009439C6 /* BidOnDecoratorAppLovinMax.framework */,
+				42BA821C287B25AA001F1744 /* BidOnDecoratorIronSource.framework */,
+				42BA8267287C64A5001F1744 /* BidOnDecoratorFyber.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		429EE28F286B38FE009439C6 /* AppLovinDecorator */ = {
+		429EE28F286B38FE009439C6 /* BidOnDecoratorAppLovinMax */ = {
 			isa = PBXGroup;
 			children = (
 				429EE2D7286EF540009439C6 /* DemandProviders */,
 				429EE2D6286EF4E8009439C6 /* Wrapper */,
-				429EE290286B38FE009439C6 /* AppLovinDecorator.h */,
+				429EE290286B38FE009439C6 /* BidOnDecoratorAppLovinMax.h */,
 			);
-			path = AppLovinDecorator;
+			path = BidOnDecoratorAppLovinMax;
 			sourceTree = "<group>";
 		};
 		429EE2D6286EF4E8009439C6 /* Wrapper */ = {
@@ -346,14 +346,14 @@
 			path = AdObjects;
 			sourceTree = "<group>";
 		};
-		42BA821D287B25AA001F1744 /* IronSourceDecorator */ = {
+		42BA821D287B25AA001F1744 /* BidOnDecoratorIronSource */ = {
 			isa = PBXGroup;
 			children = (
 				42BA8250287B5D1B001F1744 /* Adapter */,
 				42BA8223287B266C001F1744 /* Wrapper */,
-				42BA821E287B25AA001F1744 /* IronSourceDecorator.h */,
+				42BA821E287B25AA001F1744 /* BidOnDecoratorIronSource.h */,
 			);
-			path = IronSourceDecorator;
+			path = BidOnDecoratorIronSource;
 			sourceTree = "<group>";
 		};
 		42BA8223287B266C001F1744 /* Wrapper */ = {
@@ -391,14 +391,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		42BA8268287C64A5001F1744 /* FyberDecorator */ = {
+		42BA8268287C64A5001F1744 /* BidOnDecoratorFyber */ = {
 			isa = PBXGroup;
 			children = (
 				42BA8285287C688F001F1744 /* Adapter */,
 				42BA8280287C659B001F1744 /* Wrapper */,
-				42BA8269287C64A5001F1744 /* FyberDecorator.h */,
+				42BA8269287C64A5001F1744 /* BidOnDecoratorFyber.h */,
 			);
-			path = FyberDecorator;
+			path = BidOnDecoratorFyber;
 			sourceTree = "<group>";
 		};
 		42BA8280287C659B001F1744 /* Wrapper */ = {
@@ -438,12 +438,12 @@
 		6F4298EBCE471EE63C835613 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				421D48B32886B6E7007DE2E4 /* MobileAdvertising.framework */,
-				421D48AF2886B6DE007DE2E4 /* MobileAdvertising.framework */,
-				429EE2B5286B5A81009439C6 /* MobileAdvertising.framework */,
-				68DFA6D8633E4FC45A275893 /* Pods_AppLovinDecorator.framework */,
-				3657819312D6CDE7D2FD950F /* Pods_IronSourceDecorator.framework */,
-				CE16007588FDD639D32D3754 /* Pods_FyberDecorator.framework */,
+				42EC9888289141AC003BE6CF /* BidOn.framework */,
+				42EC9884289141A3003BE6CF /* BidOn.framework */,
+				42EC98802891419B003BE6CF /* BidOn.framework */,
+				3DA2C1C949B9272C08B399F8 /* Pods_BidOnDecoratorAppLovinMax.framework */,
+				B17C11ED454BB86EE6EC88FF /* Pods_BidOnDecoratorFyber.framework */,
+				1347F3FC110DF93305700DDF /* Pods_BidOnDecoratorIronSource.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -451,12 +451,12 @@
 		B3D9F426D094669891C24479 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DE30FE2885C3640B22F331FE /* Pods-AppLovinDecorator.debug.xcconfig */,
-				68CBF590B4386AAFAB4CC698 /* Pods-AppLovinDecorator.release.xcconfig */,
-				49823ADA8D938D1B58EE3B13 /* Pods-IronSourceDecorator.debug.xcconfig */,
-				11727C61DD7A63F9C65F934F /* Pods-IronSourceDecorator.release.xcconfig */,
-				8869C938B40F735E03C3C677 /* Pods-FyberDecorator.debug.xcconfig */,
-				697DAEC31605832889D2C4FD /* Pods-FyberDecorator.release.xcconfig */,
+				AD2BB8EA44FBF5EBAB6C45CC /* Pods-BidOnDecoratorAppLovinMax.debug.xcconfig */,
+				9DBA37E0C4B65561E3C963A4 /* Pods-BidOnDecoratorAppLovinMax.release.xcconfig */,
+				8BE6127774F0B9CB41D4E7A1 /* Pods-BidOnDecoratorFyber.debug.xcconfig */,
+				124D98BCE26361E223EEA284 /* Pods-BidOnDecoratorFyber.release.xcconfig */,
+				591D1DCA2955598B119A5D54 /* Pods-BidOnDecoratorIronSource.debug.xcconfig */,
+				FDAC0D3390FC0281A0A0CDDD /* Pods-BidOnDecoratorIronSource.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -469,7 +469,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				429EE291286B38FE009439C6 /* AppLovinDecorator.h in Headers */,
+				429EE291286B38FE009439C6 /* BidOnDecoratorAppLovinMax.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +477,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42BA821F287B25AB001F1744 /* IronSourceDecorator.h in Headers */,
+				42BA821F287B25AB001F1744 /* BidOnDecoratorIronSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,16 +485,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42BA826A287C64A5001F1744 /* FyberDecorator.h in Headers */,
+				42BA826A287C64A5001F1744 /* BidOnDecoratorFyber.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		429EE28C286B38FE009439C6 /* AppLovinDecorator */ = {
+		429EE28C286B38FE009439C6 /* BidOnDecoratorAppLovinMax */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 429EE294286B38FE009439C6 /* Build configuration list for PBXNativeTarget "AppLovinDecorator" */;
+			buildConfigurationList = 429EE294286B38FE009439C6 /* Build configuration list for PBXNativeTarget "BidOnDecoratorAppLovinMax" */;
 			buildPhases = (
 				A850C10BCA24D60189C1BAEF /* [CP] Check Pods Manifest.lock */,
 				429EE288286B38FE009439C6 /* Headers */,
@@ -507,14 +507,14 @@
 			);
 			dependencies = (
 			);
-			name = AppLovinDecorator;
+			name = BidOnDecoratorAppLovinMax;
 			productName = AppLovinDecorator;
-			productReference = 429EE28D286B38FE009439C6 /* AppLovinDecorator.framework */;
+			productReference = 429EE28D286B38FE009439C6 /* BidOnDecoratorAppLovinMax.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		42BA821B287B25AA001F1744 /* IronSourceDecorator */ = {
+		42BA821B287B25AA001F1744 /* BidOnDecoratorIronSource */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 42BA8220287B25AB001F1744 /* Build configuration list for PBXNativeTarget "IronSourceDecorator" */;
+			buildConfigurationList = 42BA8220287B25AB001F1744 /* Build configuration list for PBXNativeTarget "BidOnDecoratorIronSource" */;
 			buildPhases = (
 				C3149041D61E709FDDF0DCFF /* [CP] Check Pods Manifest.lock */,
 				42BA8217287B25AA001F1744 /* Headers */,
@@ -526,14 +526,14 @@
 			);
 			dependencies = (
 			);
-			name = IronSourceDecorator;
+			name = BidOnDecoratorIronSource;
 			productName = IronSourceDecorator;
-			productReference = 42BA821C287B25AA001F1744 /* IronSourceDecorator.framework */;
+			productReference = 42BA821C287B25AA001F1744 /* BidOnDecoratorIronSource.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		42BA8266287C64A5001F1744 /* FyberDecorator */ = {
+		42BA8266287C64A5001F1744 /* BidOnDecoratorFyber */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 42BA826B287C64A5001F1744 /* Build configuration list for PBXNativeTarget "FyberDecorator" */;
+			buildConfigurationList = 42BA826B287C64A5001F1744 /* Build configuration list for PBXNativeTarget "BidOnDecoratorFyber" */;
 			buildPhases = (
 				8B3B03D78BE0C7D15CEAE7D0 /* [CP] Check Pods Manifest.lock */,
 				42BA8262287C64A5001F1744 /* Headers */,
@@ -545,9 +545,9 @@
 			);
 			dependencies = (
 			);
-			name = FyberDecorator;
+			name = BidOnDecoratorFyber;
 			productName = FyberDecorator;
-			productReference = 42BA8267287C64A5001F1744 /* FyberDecorator.framework */;
+			productReference = 42BA8267287C64A5001F1744 /* BidOnDecoratorFyber.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -586,9 +586,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				429EE28C286B38FE009439C6 /* AppLovinDecorator */,
-				42BA8266287C64A5001F1744 /* FyberDecorator */,
-				42BA821B287B25AA001F1744 /* IronSourceDecorator */,
+				429EE28C286B38FE009439C6 /* BidOnDecoratorAppLovinMax */,
+				42BA8266287C64A5001F1744 /* BidOnDecoratorFyber */,
+				42BA821B287B25AA001F1744 /* BidOnDecoratorIronSource */,
 			);
 		};
 /* End PBXProject section */
@@ -624,15 +624,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BidOnDecoratorAppLovinMax/Pods-BidOnDecoratorAppLovinMax-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BidOnDecoratorAppLovinMax/Pods-BidOnDecoratorAppLovinMax-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovinDecorator/Pods-AppLovinDecorator-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BidOnDecoratorAppLovinMax/Pods-BidOnDecoratorAppLovinMax-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8B3B03D78BE0C7D15CEAE7D0 /* [CP] Check Pods Manifest.lock */ = {
@@ -650,7 +650,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FyberDecorator-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-BidOnDecoratorFyber-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -672,7 +672,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AppLovinDecorator-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-BidOnDecoratorAppLovinMax-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -694,7 +694,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IronSourceDecorator-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-BidOnDecoratorIronSource-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -803,7 +803,7 @@
 		};
 		429EE292286B38FE009439C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE30FE2885C3640B22F331FE /* Pods-AppLovinDecorator.debug.xcconfig */;
+			baseConfigurationReference = AD2BB8EA44FBF5EBAB6C45CC /* Pods-BidOnDecoratorAppLovinMax.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -873,8 +873,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.AppLovinDecorator;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.decorator.applovinmax;
+				PRODUCT_NAME = BidOnDecoratorAppLovinMax;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -889,7 +889,7 @@
 		};
 		429EE293286B38FE009439C6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68CBF590B4386AAFAB4CC698 /* Pods-AppLovinDecorator.release.xcconfig */;
+			baseConfigurationReference = 9DBA37E0C4B65561E3C963A4 /* Pods-BidOnDecoratorAppLovinMax.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -952,8 +952,8 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.AppLovinDecorator;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.decorator.applovinmax;
+				PRODUCT_NAME = BidOnDecoratorAppLovinMax;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -969,7 +969,7 @@
 		};
 		42BA8221287B25AB001F1744 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49823ADA8D938D1B58EE3B13 /* Pods-IronSourceDecorator.debug.xcconfig */;
+			baseConfigurationReference = 591D1DCA2955598B119A5D54 /* Pods-BidOnDecoratorIronSource.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1039,8 +1039,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.IronSourceDecorator;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.decorator.ironsource;
+				PRODUCT_NAME = BidOnDecoratorIronSource;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1055,7 +1055,7 @@
 		};
 		42BA8222287B25AB001F1744 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11727C61DD7A63F9C65F934F /* Pods-IronSourceDecorator.release.xcconfig */;
+			baseConfigurationReference = FDAC0D3390FC0281A0A0CDDD /* Pods-BidOnDecoratorIronSource.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1118,8 +1118,8 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.IronSourceDecorator;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.decorator.ironsource;
+				PRODUCT_NAME = BidOnDecoratorIronSource;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1135,7 +1135,7 @@
 		};
 		42BA826C287C64A5001F1744 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8869C938B40F735E03C3C677 /* Pods-FyberDecorator.debug.xcconfig */;
+			baseConfigurationReference = 8BE6127774F0B9CB41D4E7A1 /* Pods-BidOnDecoratorFyber.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1205,8 +1205,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.FyberDecorator;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.decorator.fyber;
+				PRODUCT_NAME = BidOnDecoratorFyber;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1221,7 +1221,7 @@
 		};
 		42BA826D287C64A5001F1744 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 697DAEC31605832889D2C4FD /* Pods-FyberDecorator.release.xcconfig */;
+			baseConfigurationReference = 124D98BCE26361E223EEA284 /* Pods-BidOnDecoratorFyber.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1284,8 +1284,8 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.FyberDecorator;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.decorator.fyber;
+				PRODUCT_NAME = BidOnDecoratorFyber;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1311,7 +1311,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		429EE294286B38FE009439C6 /* Build configuration list for PBXNativeTarget "AppLovinDecorator" */ = {
+		429EE294286B38FE009439C6 /* Build configuration list for PBXNativeTarget "BidOnDecoratorAppLovinMax" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				429EE292286B38FE009439C6 /* Debug */,
@@ -1320,7 +1320,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42BA8220287B25AB001F1744 /* Build configuration list for PBXNativeTarget "IronSourceDecorator" */ = {
+		42BA8220287B25AB001F1744 /* Build configuration list for PBXNativeTarget "BidOnDecoratorIronSource" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42BA8221287B25AB001F1744 /* Debug */,
@@ -1329,7 +1329,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42BA826B287C64A5001F1744 /* Build configuration list for PBXNativeTarget "FyberDecorator" */ = {
+		42BA826B287C64A5001F1744 /* Build configuration list for PBXNativeTarget "BidOnDecoratorFyber" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42BA826C287C64A5001F1744 /* Debug */,

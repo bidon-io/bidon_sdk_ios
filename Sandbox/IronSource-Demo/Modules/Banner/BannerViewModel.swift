@@ -7,7 +7,7 @@
 
 import Foundation
 import IronSource
-import IronSourceDecorator
+import BidOnDecoratorIronSource
 import Combine
 import SwiftUI
 

@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import MobileAdvertising
-import AppLovinDecorator
+import BidOn
+import BidOnDecoratorAppLovinMax
 
 
 protocol AdEventViewRepresentable {

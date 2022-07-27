@@ -7,11 +7,11 @@
 
 import SwiftUI
 import AppLovinSDK
-import AppLovinDecorator
-import BidMachineAdapter
-import GoogleMobileAdsAdapter
-import AppsFlyerAdapter
-import MobileAdvertising
+import BidOn
+import BidOnDecoratorAppLovinMax
+import BidOnAdapterBidMachine
+import BidOnAdapterGoogleMobileAds
+import BidOnAdapterAppsFlyer
 
 
 let applovin = ALSdk.shared(

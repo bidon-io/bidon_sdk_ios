@@ -7,8 +7,8 @@
 
 import Foundation
 import IronSource
-import IronSourceDecorator
-import MobileAdvertising
+import BidOnDecoratorIronSource
+import BidOn
 import Combine
 import SwiftUI
 

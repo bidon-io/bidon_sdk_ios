@@ -53,7 +53,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .navigationTitle("Fyber + Bidon")
+            .navigationTitle("Fyber + BidOn")
         }
     }
 }

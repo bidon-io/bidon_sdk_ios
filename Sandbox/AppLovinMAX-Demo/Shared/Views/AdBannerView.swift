@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 import Combine
 import AppLovinSDK
-import AppLovinDecorator
-import MobileAdvertising
+import BidOnDecoratorAppLovinMax
+import BidOn
 
 
 struct AdBannerView: UIViewRepresentable {

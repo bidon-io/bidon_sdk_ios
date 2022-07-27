@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import IronSource
-import MobileAdvertising
+import BidOn
 
 
 struct BannerView: View {

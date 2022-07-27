@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 import IronSource
-import IronSourceDecorator
+import BidOnDecoratorIronSource
 
 
 struct ISInitializationPublisher: Publisher {
@@ -69,7 +69,7 @@ where S : Subscriber, S.Input == Void {
 }
 
 
-extension IronSourceDecorator.BNISProxy {
+extension BNISProxy {
     func initializePublisher(
         _ appKey: String,
         adUnits: [String]

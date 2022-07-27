@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import MobileAdvertising
+import BidOn
 
 
 struct RewardedView: View {

@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import MobileAdvertising
-import FyberDecorator
+import BidOn
+import BidOnDecoratorFyber
 
 
 enum AdType {

@@ -1,5 +1,5 @@
 platform :ios, '10.0'
-workspace 'MobileAdvertising.xcworkspace'
+workspace 'BidOn.xcworkspace'
 
 source 'https://github.com/appodeal/CocoaPods.git'
 source 'https://cdn.cocoapods.org/'
@@ -42,32 +42,32 @@ end
 
 # Targets 
 
-target 'AppLovinDecorator' do
+target 'BidOnDecoratorAppLovinMax' do
   project 'Decorators/Decorators.xcodeproj'
   applovin
 end
 
-target 'IronSourceDecorator' do
+target 'BidOnDecoratorIronSource' do
   project 'Decorators/Decorators.xcodeproj'
   ironsource
 end
 
-target 'FyberDecorator' do
+target 'BidOnDecoratorFyber' do
   project 'Decorators/Decorators.xcodeproj'
   fyber
 end
 
-target 'BidMachineAdapter' do
+target 'BidOnAdapterBidMachine' do
   project 'Adapters/Adapters.xcodeproj'
   bidmachine
 end
 
-target 'GoogleMobileAdsAdapter' do
+target 'BidOnAdapterGoogleMobileAds' do
   project 'Adapters/Adapters.xcodeproj'
   admob
 end
 
-target 'AppsFlyerAdapter' do
+target 'BidOnAdapterAppsFlyer' do
   project 'Adapters/Adapters.xcodeproj'
   appsflyer
 end

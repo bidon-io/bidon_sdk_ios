@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import FyberDecorator
-import MobileAdvertising
+import BidOnDecoratorFyber
+import BidOn
 
 
 struct BannerView: View {

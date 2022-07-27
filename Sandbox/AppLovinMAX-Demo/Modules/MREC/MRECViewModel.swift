@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import AppLovinDecorator
+import BidOnDecoratorAppLovinMax
 import AppLovinSDK
 import SwiftUI
 

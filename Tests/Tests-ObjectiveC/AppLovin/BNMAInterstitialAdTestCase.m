@@ -7,9 +7,9 @@
 
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
-#import <MobileAdvertising/MobileAdvertising.h>
+#import <BidOn/BidOn.h>
+#import <BidOnDecoratorAppLovinMax/BidOnDecoratorAppLovinMax.h>
 #import <AppLovinSDK/AppLovinSDK.h>
-#import <AppLovinDecorator/AppLovinDecorator.h>
 
 #import "BNMAMockAuctionDelegate.h"
 

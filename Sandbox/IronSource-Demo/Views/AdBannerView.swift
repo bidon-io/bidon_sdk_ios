@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import IronSource
-import IronSourceDecorator
+import BidOnDecoratorIronSource
 
 
 struct AdBannerView: UIViewRepresentable {

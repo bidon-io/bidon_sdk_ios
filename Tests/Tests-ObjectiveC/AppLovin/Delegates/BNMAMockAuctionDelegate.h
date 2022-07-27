@@ -6,9 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MobileAdvertising/MobileAdvertising.h>
+#import <BidOn/BidOn.h>
 #import <AppLovinSDK/AppLovinSDK.h>
-#import <AppLovinDecorator/AppLovinDecorator.h>
+#import <BidOnDecoratorAppLovinMax/BidOnDecoratorAppLovinMax.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import MobileAdvertising
-import IronSourceDecorator
+import BidOn
+import BidOnDecoratorIronSource
 
 
 struct AdEventView: View {

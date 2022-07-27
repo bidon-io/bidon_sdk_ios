@@ -8,9 +8,9 @@
 #import <XCTest/XCTest.h>
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
-#import <MobileAdvertising/MobileAdvertising.h>
+#import <BidOn/BidOn.h>
 #import <IronSource/IronSource.h>
-#import <IronSourceDecorator/IronSourceDecorator.h>
+#import <BidOnDecoratorIronSource/BidOnDecoratorIronSource.h>
 #import "AdaptersFactory.h"
 
 

@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import MobileAdvertising
+import BidOn
 
 
 final class ManualAuctionResolver: AuctionResolver {

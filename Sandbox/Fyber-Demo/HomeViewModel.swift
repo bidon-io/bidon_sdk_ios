@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import FyberDecorator
+import BidOnDecoratorFyber
 import SwiftUI
 
 

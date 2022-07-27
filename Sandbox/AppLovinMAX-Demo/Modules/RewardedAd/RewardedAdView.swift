@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import AppLovinDecorator
-import MobileAdvertising
+import BidOnDecoratorAppLovinMax
+import BidOn
 
 
 struct RewardedAdView: View {

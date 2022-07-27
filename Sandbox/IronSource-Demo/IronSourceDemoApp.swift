@@ -8,11 +8,11 @@
 import SwiftUI
 import Combine
 import IronSource
-import IronSourceDecorator
-import MobileAdvertising
-import BidMachineAdapter
-import GoogleMobileAdsAdapter
-import AppsFlyerAdapter
+import BidOnDecoratorIronSource
+import BidOn
+import BidOnAdapterBidMachine
+import BidOnAdapterGoogleMobileAds
+import BidOnAdapterAppsFlyer
 
 
 fileprivate extension IronSource {

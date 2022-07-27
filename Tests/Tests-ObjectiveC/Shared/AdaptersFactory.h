@@ -6,10 +6,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MobileAdvertising/MobileAdvertising.h>
-#import <GoogleMobileAdsAdapter/GoogleMobileAdsAdapter.h>
-#import <BidMachineAdapter/BidMachineAdapter.h>
-#import <AppsFlyerAdapter/AppsFlyerAdapter.h>
+#import <BidOn/BidOn.h>
+#import <BidOnAdapterGoogleMobileAds/BidOnAdapterGoogleMobileAds.h>
+#import <BidOnAdapterBidMachine/BidOnAdapterBidMachine.h>
+#import <BidOnAdapterAppsFlyer/BidOnAdapterAppsFlyer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

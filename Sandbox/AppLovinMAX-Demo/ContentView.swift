@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import AppLovinDecorator
+import BidOnDecoratorAppLovinMax
 
 
 struct ContentView: View {
@@ -43,14 +43,14 @@ fileprivate struct LogoProgressView: View {
             Image(systemName: "brain.head.profile")
                 .font(.system(size: 24))
             ZStack {
-                Text("AppLovin MAX ❤️ Bidon")
+                Text("AppLovin MAX ❤️ BidOn")
                     .font(Font.system(
                         size: 24,
                         weight: .heavy,
                         design: .monospaced
                     ))
                     .offset(x: 1.5, y: 1.5)
-                Text("AppLovin MAX ❤️ Bidon")
+                Text("AppLovin MAX ❤️ BidOn")
                     .foregroundColor(.primary)
                     .font(Font.system(
                         size: 24,

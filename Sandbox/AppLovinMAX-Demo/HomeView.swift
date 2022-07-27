@@ -57,7 +57,7 @@ struct HomeView: View {
             .onChange(of: resolution) { resolution in
                 resolver = resolution.resolver
             }
-            .navigationTitle("AppLovin Max + Bidon")
+            .navigationTitle("AppLovin Max + BidOn")
         }
     }
 }

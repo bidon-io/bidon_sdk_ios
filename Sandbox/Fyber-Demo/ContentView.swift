@@ -47,14 +47,14 @@ fileprivate struct LogoProgressView: View {
             Image(systemName: "brain.head.profile")
                 .font(.system(size: 24))
             ZStack {
-                Text("Fyber ❤️ Bidon")
+                Text("Fyber ❤️ BidOn")
                     .font(Font.system(
                         size: 24,
                         weight: .heavy,
                         design: .monospaced
                     ))
                     .offset(x: 1.5, y: 1.5)
-                Text("Fyber ❤️ Bidon")
+                Text("Fyber ❤️ BidOn")
                     .foregroundColor(.primary)
                     .font(Font.system(
                         size: 24,

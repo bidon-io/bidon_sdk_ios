@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import FyberDecorator
+import BidOnDecoratorFyber
 import FairBidSDK
 import SwiftUI
 

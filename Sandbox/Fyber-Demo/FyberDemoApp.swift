@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-import FyberDecorator
+import BidOnDecoratorFyber
 import FairBidSDK
-import BidMachineAdapter
-import AppsFlyerAdapter
-import GoogleMobileAdsAdapter
+import BidOnAdapterBidMachine
+import BidOnAdapterAppsFlyer
+import BidOnAdapterGoogleMobileAds
 
 
 extension FairBid {

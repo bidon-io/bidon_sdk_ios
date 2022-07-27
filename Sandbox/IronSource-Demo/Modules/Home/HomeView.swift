@@ -53,7 +53,7 @@ struct HomeView: View {
             }
             .foregroundColor(.primary)
             .navigationBarHidden(false)
-            .navigationTitle("Iron Source + Bidon")
+            .navigationTitle("Iron Source + BidOn")
             .sheet(isPresented: $isLogsPresented) { content }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {

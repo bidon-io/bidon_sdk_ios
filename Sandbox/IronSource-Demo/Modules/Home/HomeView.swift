@@ -53,7 +53,7 @@ struct HomeView: View {
             }
             .foregroundColor(.primary)
             .navigationBarHidden(false)
-            .navigationTitle("Iron Source + BidOn")
+            .navigationTitle("IronSource + BidOn")
             .sheet(isPresented: $isLogsPresented) { content }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -67,6 +67,7 @@ struct HomeView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     var content: some View {
@@ -74,8 +75,9 @@ struct HomeView: View {
             List(vm.events) { event in
                 AdEventView(model: event)
             }
-            .listStyle(PlainListStyle())
+            .listStyle(.plain)
             .navigationTitle("Events")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -90,7 +92,8 @@ struct HomeView: View {
                     Spacer()
                     switch state {
                     case .loading:
-                        ProgressView().progressViewStyle(.circular)
+                        ProgressView()
+                            .progressViewStyle(.circular)
                     case .failed:
                         Image(systemName: "exclamationmark.circle")
                             .foregroundColor(.red)

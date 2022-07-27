@@ -56,7 +56,7 @@ final class BNISBannerRouter: NSObject {
             rootViewController: rootViewController
         )
         
-        IronSource.loadBanner(with: rootViewController, size: size)
+        mediator.loadBanner(with: rootViewController, size: size)
     }
     
     func finish() {
@@ -84,6 +84,7 @@ final class BNISBannerRouter: NSObject {
     
     func destroy(_ view: UIView) {
         (view as? BNISBannerView)?.destroy()
+        auction = nil
     }
 }
 

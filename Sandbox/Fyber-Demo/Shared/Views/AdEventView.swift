@@ -56,7 +56,7 @@ struct AdEventView_Previews: PreviewProvider {
                 )
             )
         }
-        .listStyle(PlainListStyle())
+        .listStyle(.plain)
     }
 }
 

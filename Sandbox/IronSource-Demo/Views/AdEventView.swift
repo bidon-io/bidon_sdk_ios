@@ -54,7 +54,7 @@ struct AdEventView_Previews: PreviewProvider {
         List {
             AdEventView(model: .init(adType: .rewardedVideo, event: RewardedVideoEvent.didOpen))
         }
-        .listStyle(PlainListStyle())
+        .listStyle(.plain)
     }
 }
 

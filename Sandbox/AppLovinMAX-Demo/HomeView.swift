@@ -59,6 +59,7 @@ struct HomeView: View {
             }
             .navigationTitle("AppLovin Max + BidOn")
         }
+        .navigationViewStyle(.stack)
     }
 }
 

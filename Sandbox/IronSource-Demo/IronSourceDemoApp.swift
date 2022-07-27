@@ -41,6 +41,9 @@ final class ApplicationDelegate: NSObject, UIApplicationDelegate, ObservableObje
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
+        
+        BidOn.Logger.level = .verbose
+        
         IronSource.bn.register(
             adapter: BidMachineDemandSourceAdapter.self,
             parameters: BidMachineParameters(

@@ -10,6 +10,7 @@ import Foundation
 
 internal typealias ConcurentAuction = Auction<ConcurentAuctionRound>
 
+
 public final class AuctionController {
     private let auction: ConcurentAuction
     private let resolver: AuctionResolver

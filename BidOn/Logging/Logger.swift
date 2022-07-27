@@ -8,7 +8,10 @@
 import Foundation
 
 
-public class Logger {
+@objc(BNLogger)
+public class Logger: NSObject {
+    
+    @objc(BNLoggerLevel)
     public enum Level: Int {
         case verbose = 0
         case debug = 1
@@ -18,9 +21,10 @@ public class Logger {
         case off = 5
     }
     
-    public enum Format {
-        case short
-        case full
+    @objc(BNLoggerFormat)
+    public enum Format: Int {
+        case short = 0
+        case full = 1
     }
     
     private static var destinations = Set<AnyLogDestination>()
@@ -31,8 +35,8 @@ public class Logger {
         destinations.insert(any)
     }
     
-    public static var level: Level = .off
-    public static var format: Format = .short
+    @objc public static var level: Level = .off
+    @objc public static var format: Format = .short
 
     public static func verbose(
         _ message: @autoclosure () -> Any,

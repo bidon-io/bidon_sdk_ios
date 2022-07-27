@@ -55,6 +55,7 @@ struct HomeView: View {
             }
             .navigationTitle("Fyber + BidOn")
         }
+        .navigationViewStyle(.stack)
     }
 }
 

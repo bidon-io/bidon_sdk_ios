@@ -17,12 +17,24 @@ final class IronSourceAdViewDemandProvider: NSObject {
     private var response: DemandProviderResponse?
     
     var load: (() -> ())?
-
+    
     private var ads = ISAdInfoSet()
     private var banners = NSMapTable<ISAdInfo, ISBannerView>(
         keyOptions: .weakMemory,
         valueOptions: .strongMemory
     )
+    
+    func loadBanner(
+        with rootViewController: UIViewController,
+        size: ISBannerSize
+    ) {
+        ads.forEach {
+            banners.object(forKey: $0).map(IronSource.destroyBanner)
+        }
+        ads.removeAll()
+        
+        IronSource.loadBanner(with: rootViewController, size: size)
+    }
 }
 
 
@@ -35,7 +47,7 @@ extension IronSourceAdViewDemandProvider: AdViewDemandProvider {
             response(nil, SdkError("An ad with a price higher than the pricefloor \(pricefloor) was not found"))
             return
         }
-    
+        
         response(ad.wrapped, nil)
     }
     

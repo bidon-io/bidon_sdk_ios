@@ -1,0 +1,20 @@
+default_platform(:ios)
+
+# Global variables
+$root_dir = File.expand_path(Dir.pwd + "/..")
+$build_dir = File.expand_path($root_dir + "/build")
+$schemes = [
+  "BidOn",
+  "BidOnAdapterAppsFlyer",
+  "BidOnAdapterBidMachine",
+  "BidOnAdapterGoogleMobileAds",
+  "BidOnDecoratorAppLovinMax",
+  "BidOnDecoratorFyber",
+  "BidOnDecoratorIronSource"
+]
+
+
+desc "Build all modules into xcframeworks"
+lane :build do |options|
+  binding.irb
+end

@@ -22,6 +22,9 @@
 		42389DF22872F63F006024BA /* AuctionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF12872F63F006024BA /* AuctionResolver.swift */; };
 		42389E1228745C6A006024BA /* InterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E1128745C6A006024BA /* InterstitialDemandProvider.swift */; };
 		42389E172874665A006024BA /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E162874665A006024BA /* UIApplication+Extensions.swift */; };
+		4299A424289BCDBC0062C580 /* Interstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A423289BCDBC0062C580 /* Interstitial.swift */; };
+		4299A427289BCF3F0062C580 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A426289BCF3F0062C580 /* HTTPClient.swift */; };
+		4299A429289BEDD10062C580 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A428289BEDD10062C580 /* NetworkRequest.swift */; };
 		429EE2C2286CA23F009439C6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C1286CA23F009439C6 /* Repository.swift */; };
 		429EE2C7286CA283009439C6 /* DemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */; };
 		429EE2C9286CA2B0009439C6 /* DemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C8286CA2B0009439C6 /* DemandProvider.swift */; };
@@ -36,6 +39,14 @@
 		42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */; };
 		42BA82072878547C001F1744 /* AdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82062878547C001F1744 /* AdContainerView.swift */; };
 		42BA820928785506001F1744 /* AdContainerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820828785506001F1744 /* AdContainerViewManager.swift */; };
+		42D047DE289D5A0D0096A8C6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047DD289D5A0D0096A8C6 /* Device.swift */; };
+		42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047DF289D5E5C0096A8C6 /* Session.swift */; };
+		42D047E2289D5EEE0096A8C6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047E1289D5EEE0096A8C6 /* App.swift */; };
+		42D047E4289D5F3E0096A8C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047E3289D5F3E0096A8C6 /* User.swift */; };
+		42D047E7289D5F9A0096A8C6 /* Geo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047E6289D5F9A0096A8C6 /* Geo.swift */; };
+		42D047EB289D60260096A8C6 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047EA289D60260096A8C6 /* DeviceManager.swift */; };
+		42D047ED289D670E0096A8C6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047EC289D670E0096A8C6 /* Environment.swift */; };
+		42D047EF289D6A380096A8C6 /* EnvironmentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047EE289D6A380096A8C6 /* EnvironmentRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +66,9 @@
 		42389DF12872F63F006024BA /* AuctionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionResolver.swift; sourceTree = "<group>"; };
 		42389E1128745C6A006024BA /* InterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialDemandProvider.swift; sourceTree = "<group>"; };
 		42389E162874665A006024BA /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		4299A423289BCDBC0062C580 /* Interstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interstitial.swift; sourceTree = "<group>"; };
+		4299A426289BCF3F0062C580 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		4299A428289BEDD10062C580 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		429EE2C1286CA23F009439C6 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandSourceAdapter.swift; sourceTree = "<group>"; };
 		429EE2C8286CA2B0009439C6 /* DemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandProvider.swift; sourceTree = "<group>"; };
@@ -69,6 +83,14 @@
 		42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewDemandProvider.swift; sourceTree = "<group>"; };
 		42BA82062878547C001F1744 /* AdContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContainerView.swift; sourceTree = "<group>"; };
 		42BA820828785506001F1744 /* AdContainerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContainerViewManager.swift; sourceTree = "<group>"; };
+		42D047DD289D5A0D0096A8C6 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		42D047DF289D5E5C0096A8C6 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		42D047E1289D5EEE0096A8C6 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		42D047E3289D5F3E0096A8C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		42D047E6289D5F9A0096A8C6 /* Geo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geo.swift; sourceTree = "<group>"; };
+		42D047EA289D60260096A8C6 /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		42D047EC289D670E0096A8C6 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		42D047EE289D6A380096A8C6 /* EnvironmentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,11 +134,9 @@
 		422101802859E29A006596DA /* BidOn */ = {
 			isa = PBXGroup;
 			children = (
-				421D48E4288841C6007DE2E4 /* Logging */,
-				429EE2CB286D99AE009439C6 /* Controller */,
-				429EE2CA286D9995009439C6 /* Auction */,
-				429EE2C3286CA252009439C6 /* Adapters */,
-				429EE2B9286C82D9009439C6 /* Repository */,
+				4299A41E289BC9120062C580 /* Shared */,
+				4299A41F289BC9560062C580 /* Modules */,
+				4299A422289BCDA90062C580 /* AdObjects */,
 				42BA820528785464001F1744 /* Banner */,
 				422101962859E2B3006596DA /* SDK */,
 				422101812859E29A006596DA /* BidOn.h */,
@@ -127,6 +147,7 @@
 		422101962859E2B3006596DA /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				42D047E9289D60160096A8C6 /* Managers */,
 				422101972859E2C3006596DA /* BidOnSdk.swift */,
 				42389E162874665A006024BA /* UIApplication+Extensions.swift */,
 				4221019B2859E3D0006596DA /* Defines.swift */,
@@ -145,11 +166,68 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
+		4299A41E289BC9120062C580 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4299A421289BCA0E0062C580 /* Models */,
+				429EE2C3286CA252009439C6 /* Adapters */,
+				429EE2B9286C82D9009439C6 /* Repository */,
+				4299A425289BCE460062C580 /* Networking */,
+				421D48E4288841C6007DE2E4 /* Logging */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		4299A41F289BC9560062C580 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				4299A420289BC9610062C580 /* Auction */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		4299A420289BC9610062C580 /* Auction */ = {
+			isa = PBXGroup;
+			children = (
+				429EE2CA286D9995009439C6 /* Models */,
+				429EE2CB286D99AE009439C6 /* Controller */,
+			);
+			path = Auction;
+			sourceTree = "<group>";
+		};
+		4299A421289BCA0E0062C580 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				42D047E8289D5FEC0096A8C6 /* Environment */,
+				42389DEF2872F57D006024BA /* Ad.swift */,
+				42BA81DA28770B5D001F1744 /* Reward.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4299A422289BCDA90062C580 /* AdObjects */ = {
+			isa = PBXGroup;
+			children = (
+				4299A423289BCDBC0062C580 /* Interstitial.swift */,
+			);
+			path = AdObjects;
+			sourceTree = "<group>";
+		};
+		4299A425289BCE460062C580 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4299A426289BCF3F0062C580 /* HTTPClient.swift */,
+				4299A428289BEDD10062C580 /* NetworkRequest.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		429EE2B9286C82D9009439C6 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
 				429EE2C1286CA23F009439C6 /* Repository.swift */,
 				42389DEB2872F497006024BA /* AdaptersRepository.swift */,
+				42D047EE289D6A380096A8C6 /* EnvironmentRepository.swift */,
 				42389DED2872F52A006024BA /* AdsRepository.swift */,
 			);
 			path = Repository;
@@ -159,8 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				42389E1328745CCC006024BA /* Providers */,
-				42389DEF2872F57D006024BA /* Ad.swift */,
-				42BA81DA28770B5D001F1744 /* Reward.swift */,
 				422101992859E35C006596DA /* Adapter.swift */,
 				429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */,
 				421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */,
@@ -168,14 +244,14 @@
 			path = Adapters;
 			sourceTree = "<group>";
 		};
-		429EE2CA286D9995009439C6 /* Auction */ = {
+		429EE2CA286D9995009439C6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				429EE2CE286D9B8D009439C6 /* Auction.swift */,
 				429EE2DA286F1C8C009439C6 /* ConcurentAuctionRound.swift */,
 				429EE2DC286F45F1009439C6 /* AuctionRound.swift */,
 			);
-			path = Auction;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		429EE2CB286D99AE009439C6 /* Controller */ = {
@@ -196,6 +272,27 @@
 				42BA820828785506001F1744 /* AdContainerViewManager.swift */,
 			);
 			path = Banner;
+			sourceTree = "<group>";
+		};
+		42D047E8289D5FEC0096A8C6 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				42D047EC289D670E0096A8C6 /* Environment.swift */,
+				42D047DD289D5A0D0096A8C6 /* Device.swift */,
+				42D047DF289D5E5C0096A8C6 /* Session.swift */,
+				42D047E1289D5EEE0096A8C6 /* App.swift */,
+				42D047E3289D5F3E0096A8C6 /* User.swift */,
+				42D047E6289D5F9A0096A8C6 /* Geo.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		42D047E9289D60160096A8C6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				42D047EA289D60260096A8C6 /* DeviceManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,10 +383,17 @@
 				42389DEE2872F52A006024BA /* AdsRepository.swift in Sources */,
 				421D48E8288844DA007DE2E4 /* LogDestination.swift in Sources */,
 				42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */,
+				42D047E2289D5EEE0096A8C6 /* App.swift in Sources */,
+				42D047EF289D6A380096A8C6 /* EnvironmentRepository.swift in Sources */,
+				4299A429289BEDD10062C580 /* NetworkRequest.swift in Sources */,
 				42BA81DB28770B5D001F1744 /* Reward.swift in Sources */,
 				421D48EA28884D1F007DE2E4 /* LogFormatter.swift in Sources */,
 				429EE2C9286CA2B0009439C6 /* DemandProvider.swift in Sources */,
+				4299A424289BCDBC0062C580 /* Interstitial.swift in Sources */,
+				42D047E4289D5F3E0096A8C6 /* User.swift in Sources */,
 				42BA81AA28758A90001F1744 /* AuctionControllerDelegate.swift in Sources */,
+				42D047ED289D670E0096A8C6 /* Environment.swift in Sources */,
+				42D047DE289D5A0D0096A8C6 /* Device.swift in Sources */,
 				42389DF02872F57D006024BA /* Ad.swift in Sources */,
 				42389E172874665A006024BA /* UIApplication+Extensions.swift in Sources */,
 				429EE2DB286F1C8C009439C6 /* ConcurentAuctionRound.swift in Sources */,
@@ -304,9 +408,13 @@
 				421D48E62888423B007DE2E4 /* Logger.swift in Sources */,
 				429EE2D1286DD0E2009439C6 /* AuctionContoller.swift in Sources */,
 				42BA82072878547C001F1744 /* AdContainerView.swift in Sources */,
+				4299A427289BCF3F0062C580 /* HTTPClient.swift in Sources */,
+				42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */,
 				42389DEC2872F497006024BA /* AdaptersRepository.swift in Sources */,
 				42BA81D7287702B6001F1744 /* RewardedAdDemandProvider.swift in Sources */,
+				42D047EB289D60260096A8C6 /* DeviceManager.swift in Sources */,
 				421D48EC2888582B007DE2E4 /* OSLogDestination.swift in Sources */,
+				42D047E7289D5F9A0096A8C6 /* Geo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

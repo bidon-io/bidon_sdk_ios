@@ -16,15 +16,20 @@ end
 
 def ironsource 
   pod 'IronSourceSDK', '7.2.3.1-APD'
-end 
-
-def fyber
-  pod 'FairBidSDK'
 end
 
 def bidmachine 
   pod 'BidMachine'
   pod 'BDMIABAdapter'
+  pod 'BDMCriteoAdapter'
+  pod 'BDMPangleAdapter'
+  pod 'BDMAmazonAdapter'
+  pod 'BDMSmaatoAdapter'
+  pod 'BDMVungleAdapter'
+  pod 'BDMAdColonyAdapter'
+  pod 'BDMMetaAudienceAdapter'
+  pod 'BDMMyTargetAdapter'
+  pod 'BDMTapjoyAdapter'
 end
 
 def admob
@@ -40,22 +45,7 @@ def ocmock
   pod 'OCMock', '~> 3.9.1'
 end
 
-# Targets 
-
-target 'BidOnDecoratorAppLovinMax' do
-  project 'Decorators/Decorators.xcodeproj'
-  applovin
-end
-
-target 'BidOnDecoratorIronSource' do
-  project 'Decorators/Decorators.xcodeproj'
-  ironsource
-end
-
-target 'BidOnDecoratorFyber' do
-  project 'Decorators/Decorators.xcodeproj'
-  fyber
-end
+# Targets
 
 target 'BidOnAdapterBidMachine' do
   project 'Adapters/Adapters.xcodeproj'
@@ -79,7 +69,6 @@ target 'Tests-ObjectiveC' do
   ocmock
   applovin
   appsflyer
-  fyber
   ironsource
   bidmachine
   admob
@@ -88,28 +77,14 @@ end
 
 # Demo 
 
-target 'AppLovinMAX-Demo' do
+target 'Sandbox' do
   project 'Sandbox/Sandbox.xcodeproj'
   applovin
-  bidmachine
-  admob
   appsflyer
-end
-
-target 'IronSource-Demo' do
-  project 'Sandbox/Sandbox.xcodeproj'
   ironsource
   bidmachine
   admob
-  appsflyer
 end
 
-target 'Fyber-Demo' do
-  project 'Sandbox/Sandbox.xcodeproj'
-  fyber
-  bidmachine
-  admob
-  appsflyer
-end
 
 

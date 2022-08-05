@@ -7,674 +7,102 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06E001938D0A7902420FE4A3 /* Pods_Fyber_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED1B5464312E014CCDDD41E /* Pods_Fyber_Demo.framework */; };
-		42389E0228742D43006024BA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0128742D43006024BA /* HomeView.swift */; };
-		42389E0428742E34006024BA /* InterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E0328742E34006024BA /* InterstitialView.swift */; };
-		42389E082874301F006024BA /* InterstitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E072874301F006024BA /* InterstitialViewModel.swift */; };
-		42389E1A28747D00006024BA /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E1928747D00006024BA /* RoundedCorners.swift */; };
-		429EE2A4286B39D1009439C6 /* AppLovinMaxDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2A3286B39D1009439C6 /* AppLovinMaxDemoApp.swift */; };
-		429EE2A6286B39D1009439C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2A5286B39D1009439C6 /* ContentView.swift */; };
-		429EE2A8286B39D2009439C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 429EE2A7286B39D2009439C6 /* Assets.xcassets */; };
-		429EE2AB286B39D2009439C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 429EE2AA286B39D2009439C6 /* Preview Assets.xcassets */; };
-		42A6B637287D69E500C1DFB9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B636287D69E500C1DFB9 /* HomeViewModel.swift */; };
-		42A6B646287D9BFE00C1DFB9 /* RewardedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B645287D9BFE00C1DFB9 /* RewardedViewModel.swift */; };
-		42A6B648287D9C2D00C1DFB9 /* RewardedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B647287D9C2D00C1DFB9 /* RewardedView.swift */; };
-		42A6B64C287DAA0700C1DFB9 /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B64B287DAA0700C1DFB9 /* AdBannerView.swift */; };
-		42A6B64F287DAC4900C1DFB9 /* BannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B64E287DAC4900C1DFB9 /* BannerViewModel.swift */; };
-		42A6B651287DAC8100C1DFB9 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B650287DAC8000C1DFB9 /* BannerView.swift */; };
-		42A6B65C287EEA4000C1DFB9 /* ManualAuctionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */; };
-		42A6B65E287EEA8200C1DFB9 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6B65D287EEA8200C1DFB9 /* Resolution.swift */; };
-		42B97613287F0383006F4EAA /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B97612287F0383006F4EAA /* Resolution.swift */; };
-		42B97615287F03C3006F4EAA /* ManualAuctionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B97614287F03C3006F4EAA /* ManualAuctionResolver.swift */; };
-		42B9762628801C32006F4EAA /* AdState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B9762528801C32006F4EAA /* AdState.swift */; };
-		42B976292880340A006F4EAA /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B976282880340A006F4EAA /* Resolution.swift */; };
-		42B9762B28803427006F4EAA /* ManualAuctionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B9762A28803427006F4EAA /* ManualAuctionResolver.swift */; };
-		42B9763C28806787006F4EAA /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B9763B28806787006F4EAA /* BannerView.swift */; };
-		42B9763E28806793006F4EAA /* BannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B9763D28806793006F4EAA /* BannerViewModel.swift */; };
-		42B97640288067C9006F4EAA /* AdPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B9763F288067C9006F4EAA /* AdPresentationView.swift */; };
-		42B97642288067F2006F4EAA /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B97641288067F2006F4EAA /* RoundedCorners.swift */; };
-		42B9764428806837006F4EAA /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B9764328806837006F4EAA /* AdBannerView.swift */; };
-		42BA81CF2876DD0B001F1744 /* AdEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81CE2876DD0B001F1744 /* AdEventModel.swift */; };
-		42BA81D12876DDC0001F1744 /* AdEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D02876DDC0001F1744 /* AdEventView.swift */; };
-		42BA81E628771C19001F1744 /* AdState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81E528771C19001F1744 /* AdState.swift */; };
-		42BA81E928771D9A001F1744 /* RewardedAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81E828771D9A001F1744 /* RewardedAdView.swift */; };
-		42BA81EB28771DBF001F1744 /* RewardedAdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81EA28771DBF001F1744 /* RewardedAdViewModel.swift */; };
-		42BA81ED28771E28001F1744 /* AdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81EC28771E28001F1744 /* AdViewModel.swift */; };
-		42BA81FF287824D1001F1744 /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81FE287824D1001F1744 /* AdBannerView.swift */; };
-		42BA820228784D9C001F1744 /* BannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820128784D9C001F1744 /* BannerViewModel.swift */; };
-		42BA820428784E41001F1744 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820328784E41001F1744 /* BannerView.swift */; };
-		42BA821228788D74001F1744 /* MRECViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821128788D74001F1744 /* MRECViewModel.swift */; };
-		42BA821428788DA3001F1744 /* MRECView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821328788DA3001F1744 /* MRECView.swift */; };
-		42BA821628789009001F1744 /* AdPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA821528789009001F1744 /* AdPresentationView.swift */; };
-		42BA822E287B30D6001F1744 /* IronSourceDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA822D287B30D6001F1744 /* IronSourceDemoApp.swift */; };
-		42BA8230287B30D6001F1744 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA822F287B30D6001F1744 /* ContentView.swift */; };
-		42BA8232287B30D7001F1744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42BA8231287B30D7001F1744 /* Assets.xcassets */; };
-		42BA8235287B30D7001F1744 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42BA8234287B30D7001F1744 /* Preview Assets.xcassets */; };
-		42BA8247287B3640001F1744 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8246287B3640001F1744 /* HomeViewModel.swift */; };
-		42BA824B287B3A4F001F1744 /* ISInitializationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA824A287B3A4F001F1744 /* ISInitializationPublisher.swift */; };
-		42BA824D287B44DA001F1744 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA824C287B44DA001F1744 /* HomeView.swift */; };
-		42BA825E287C4DE9001F1744 /* AdEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA825D287C4DE9001F1744 /* AdEventModel.swift */; };
-		42BA8261287C5B82001F1744 /* AdEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8260287C5B82001F1744 /* AdEventView.swift */; };
-		42BA8277287C64F8001F1744 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8276287C64F8001F1744 /* ContentView.swift */; };
-		42BA8279287C64FA001F1744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42BA8278287C64FA001F1744 /* Assets.xcassets */; };
-		42BA827C287C64FA001F1744 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42BA827B287C64FA001F1744 /* Preview Assets.xcassets */; };
-		42BA8292287C81A2001F1744 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA828E287C81A2001F1744 /* HomeView.swift */; };
-		42BA8299287C81E4001F1744 /* FyberDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8298287C81E4001F1744 /* FyberDemoApp.swift */; };
-		42BA82B6287C81F0001F1744 /* InterstitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA829F287C81F0001F1744 /* InterstitialViewModel.swift */; };
-		42BA82B7287C81F0001F1744 /* InterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82A0287C81F0001F1744 /* InterstitialView.swift */; };
-		42BA82BA287C81F0001F1744 /* AdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82A4287C81F0001F1744 /* AdViewModel.swift */; };
-		42BA82BD287C81F0001F1744 /* AdEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82AA287C81F0001F1744 /* AdEventModel.swift */; };
-		42BA82BE287C81F0001F1744 /* AdState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82AB287C81F0001F1744 /* AdState.swift */; };
-		42BA82C1287C81F0001F1744 /* AdPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82B0287C81F0001F1744 /* AdPresentationView.swift */; };
-		42BA82C2287C81F0001F1744 /* AdEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82B1287C81F0001F1744 /* AdEventView.swift */; };
-		42BA82C4287C81F0001F1744 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82B3287C81F0001F1744 /* RoundedCorners.swift */; };
-		42EC989F28914488003BE6CF /* BidOnAdapterAppsFlyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC989A28914488003BE6CF /* BidOnAdapterAppsFlyer.framework */; };
-		42EC98A128914488003BE6CF /* BidOnAdapterBidMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC989B28914488003BE6CF /* BidOnAdapterBidMachine.framework */; };
-		42EC98A328914488003BE6CF /* BidOnAdapterGoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC989C28914488003BE6CF /* BidOnAdapterGoogleMobileAds.framework */; };
-		42EC98A528914488003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC989D28914488003BE6CF /* BidOn.framework */; };
-		42EC98A728914488003BE6CF /* BidOnDecoratorAppLovinMax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC989E28914488003BE6CF /* BidOnDecoratorAppLovinMax.framework */; };
-		42EC98AF289144A3003BE6CF /* BidOnAdapterAppsFlyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98AA289144A3003BE6CF /* BidOnAdapterAppsFlyer.framework */; };
-		42EC98B1289144A3003BE6CF /* BidOnAdapterBidMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98AB289144A3003BE6CF /* BidOnAdapterBidMachine.framework */; };
-		42EC98B3289144A3003BE6CF /* BidOnAdapterGoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98AC289144A3003BE6CF /* BidOnAdapterGoogleMobileAds.framework */; };
-		42EC98B5289144A3003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98AD289144A3003BE6CF /* BidOn.framework */; };
-		42EC98B7289144A3003BE6CF /* BidOnDecoratorIronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98AE289144A3003BE6CF /* BidOnDecoratorIronSource.framework */; };
-		42EC98BF289144D4003BE6CF /* BidOnAdapterAppsFlyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98BA289144D4003BE6CF /* BidOnAdapterAppsFlyer.framework */; };
-		42EC98C1289144D4003BE6CF /* BidOnAdapterBidMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98BB289144D4003BE6CF /* BidOnAdapterBidMachine.framework */; };
-		42EC98C3289144D4003BE6CF /* BidOnAdapterGoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98BC289144D4003BE6CF /* BidOnAdapterGoogleMobileAds.framework */; };
-		42EC98C5289144D4003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98BD289144D4003BE6CF /* BidOn.framework */; };
-		42EC98C7289144D4003BE6CF /* BidOnDecoratorFyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98BE289144D4003BE6CF /* BidOnDecoratorFyber.framework */; };
-		5AD96AB751E760B75E33C1B3 /* Pods_IronSource_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B16B68E746E573C2D23FE99 /* Pods_IronSource_Demo.framework */; };
-		CF95B206081C3B7C4DC26915 /* Pods_AppLovinMAX_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */; };
+		4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A410289BC8B40062C580 /* SandboxApp.swift */; };
+		4299A413289BC8B40062C580 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A412289BC8B40062C580 /* ContentView.swift */; };
+		4299A415289BC8B60062C580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A414289BC8B60062C580 /* Assets.xcassets */; };
+		4299A418289BC8B60062C580 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A417289BC8B60062C580 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		078D6AEA594DCCBBB0DED4F0 /* Pods-AppLovinMAX-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinMAX-Demo.release.xcconfig"; path = "Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo.release.xcconfig"; sourceTree = "<group>"; };
-		2E6460A243F6430A3EF6AF3F /* Pods-Fyber-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fyber-Demo.release.xcconfig"; path = "Target Support Files/Pods-Fyber-Demo/Pods-Fyber-Demo.release.xcconfig"; sourceTree = "<group>"; };
-		42389E0128742D43006024BA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		42389E0328742E34006024BA /* InterstitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialView.swift; sourceTree = "<group>"; };
-		42389E072874301F006024BA /* InterstitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialViewModel.swift; sourceTree = "<group>"; };
-		42389E1928747D00006024BA /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
-		429EE2A0286B39D1009439C6 /* AppLovinMAX-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppLovinMAX-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		429EE2A3286B39D1009439C6 /* AppLovinMaxDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinMaxDemoApp.swift; sourceTree = "<group>"; };
-		429EE2A5286B39D1009439C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		429EE2A7286B39D2009439C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		429EE2AA286B39D2009439C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		42A6B636287D69E500C1DFB9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		42A6B645287D9BFE00C1DFB9 /* RewardedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedViewModel.swift; sourceTree = "<group>"; };
-		42A6B647287D9C2D00C1DFB9 /* RewardedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedView.swift; sourceTree = "<group>"; };
-		42A6B64B287DAA0700C1DFB9 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
-		42A6B64E287DAC4900C1DFB9 /* BannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewModel.swift; sourceTree = "<group>"; };
-		42A6B650287DAC8000C1DFB9 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
-		42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAuctionResolver.swift; sourceTree = "<group>"; };
-		42A6B65D287EEA8200C1DFB9 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
-		42B97612287F0383006F4EAA /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
-		42B97614287F03C3006F4EAA /* ManualAuctionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAuctionResolver.swift; sourceTree = "<group>"; };
-		42B9762528801C32006F4EAA /* AdState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdState.swift; sourceTree = "<group>"; };
-		42B976282880340A006F4EAA /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
-		42B9762A28803427006F4EAA /* ManualAuctionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAuctionResolver.swift; sourceTree = "<group>"; };
-		42B9763B28806787006F4EAA /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
-		42B9763D28806793006F4EAA /* BannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewModel.swift; sourceTree = "<group>"; };
-		42B9763F288067C9006F4EAA /* AdPresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPresentationView.swift; sourceTree = "<group>"; };
-		42B97641288067F2006F4EAA /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
-		42B9764328806837006F4EAA /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
-		42BA81C92875DF25001F1744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		42BA81CE2876DD0B001F1744 /* AdEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventModel.swift; sourceTree = "<group>"; };
-		42BA81D02876DDC0001F1744 /* AdEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventView.swift; sourceTree = "<group>"; };
-		42BA81E528771C19001F1744 /* AdState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdState.swift; sourceTree = "<group>"; };
-		42BA81E828771D9A001F1744 /* RewardedAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdView.swift; sourceTree = "<group>"; };
-		42BA81EA28771DBF001F1744 /* RewardedAdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdViewModel.swift; sourceTree = "<group>"; };
-		42BA81EC28771E28001F1744 /* AdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewModel.swift; sourceTree = "<group>"; };
-		42BA81FE287824D1001F1744 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
-		42BA820128784D9C001F1744 /* BannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewModel.swift; sourceTree = "<group>"; };
-		42BA820328784E41001F1744 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
-		42BA821128788D74001F1744 /* MRECViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRECViewModel.swift; sourceTree = "<group>"; };
-		42BA821328788DA3001F1744 /* MRECView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRECView.swift; sourceTree = "<group>"; };
-		42BA821528789009001F1744 /* AdPresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPresentationView.swift; sourceTree = "<group>"; };
-		42BA822B287B30D6001F1744 /* IronSource-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IronSource-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		42BA822D287B30D6001F1744 /* IronSourceDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronSourceDemoApp.swift; sourceTree = "<group>"; };
-		42BA822F287B30D6001F1744 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		42BA8231287B30D7001F1744 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		42BA8234287B30D7001F1744 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		42BA8246287B3640001F1744 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		42BA8248287B37F2001F1744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		42BA824A287B3A4F001F1744 /* ISInitializationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISInitializationPublisher.swift; sourceTree = "<group>"; };
-		42BA824C287B44DA001F1744 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		42BA825D287C4DE9001F1744 /* AdEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventModel.swift; sourceTree = "<group>"; };
-		42BA8260287C5B82001F1744 /* AdEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventView.swift; sourceTree = "<group>"; };
-		42BA8272287C64F8001F1744 /* Fyber-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fyber-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		42BA8276287C64F8001F1744 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		42BA8278287C64FA001F1744 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		42BA827B287C64FA001F1744 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		42BA828E287C81A2001F1744 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		42BA8298287C81E4001F1744 /* FyberDemoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FyberDemoApp.swift; sourceTree = "<group>"; };
-		42BA829F287C81F0001F1744 /* InterstitialViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialViewModel.swift; sourceTree = "<group>"; };
-		42BA82A0287C81F0001F1744 /* InterstitialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialView.swift; sourceTree = "<group>"; };
-		42BA82A4287C81F0001F1744 /* AdViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdViewModel.swift; sourceTree = "<group>"; };
-		42BA82AA287C81F0001F1744 /* AdEventModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdEventModel.swift; sourceTree = "<group>"; };
-		42BA82AB287C81F0001F1744 /* AdState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdState.swift; sourceTree = "<group>"; };
-		42BA82B0287C81F0001F1744 /* AdPresentationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdPresentationView.swift; sourceTree = "<group>"; };
-		42BA82B1287C81F0001F1744 /* AdEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdEventView.swift; sourceTree = "<group>"; };
-		42BA82B3287C81F0001F1744 /* RoundedCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
-		42BA82D2287C86E4001F1744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		42EC989A28914488003BE6CF /* BidOnAdapterAppsFlyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterAppsFlyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC989B28914488003BE6CF /* BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC989C28914488003BE6CF /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC989D28914488003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC989E28914488003BE6CF /* BidOnDecoratorAppLovinMax.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnDecoratorAppLovinMax.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98AA289144A3003BE6CF /* BidOnAdapterAppsFlyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterAppsFlyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98AB289144A3003BE6CF /* BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98AC289144A3003BE6CF /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98AD289144A3003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98AE289144A3003BE6CF /* BidOnDecoratorIronSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnDecoratorIronSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98BA289144D4003BE6CF /* BidOnAdapterAppsFlyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterAppsFlyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98BB289144D4003BE6CF /* BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98BC289144D4003BE6CF /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98BD289144D4003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42EC98BE289144D4003BE6CF /* BidOnDecoratorFyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnDecoratorFyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5ED1B5464312E014CCDDD41E /* Pods_Fyber_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fyber_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B16B68E746E573C2D23FE99 /* Pods_IronSource_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSource_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DF9358390C003732701C752 /* Pods-Fyber-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fyber-Demo.debug.xcconfig"; path = "Target Support Files/Pods-Fyber-Demo/Pods-Fyber-Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovinMAX-Demo.debug.xcconfig"; path = "Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppLovinMAX_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB9E126F407D4AED0211FE4F /* Pods-IronSource-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSource-Demo.debug.xcconfig"; path = "Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		F0260EF7A3BBC980251E0461 /* Pods-IronSource-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSource-Demo.release.xcconfig"; path = "Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		4299A40D289BC8B40062C580 /* Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4299A410289BC8B40062C580 /* SandboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandboxApp.swift; sourceTree = "<group>"; };
+		4299A412289BC8B40062C580 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4299A414289BC8B60062C580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4299A417289BC8B60062C580 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		429EE29D286B39D1009439C6 /* Frameworks */ = {
+		4299A40A289BC8B40062C580 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42EC989F28914488003BE6CF /* BidOnAdapterAppsFlyer.framework in Frameworks */,
-				42EC98A528914488003BE6CF /* BidOn.framework in Frameworks */,
-				42EC98A128914488003BE6CF /* BidOnAdapterBidMachine.framework in Frameworks */,
-				42EC98A728914488003BE6CF /* BidOnDecoratorAppLovinMax.framework in Frameworks */,
-				CF95B206081C3B7C4DC26915 /* Pods_AppLovinMAX_Demo.framework in Frameworks */,
-				42EC98A328914488003BE6CF /* BidOnAdapterGoogleMobileAds.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42BA8228287B30D6001F1744 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				42EC98AF289144A3003BE6CF /* BidOnAdapterAppsFlyer.framework in Frameworks */,
-				42EC98B5289144A3003BE6CF /* BidOn.framework in Frameworks */,
-				42EC98B7289144A3003BE6CF /* BidOnDecoratorIronSource.framework in Frameworks */,
-				42EC98B1289144A3003BE6CF /* BidOnAdapterBidMachine.framework in Frameworks */,
-				5AD96AB751E760B75E33C1B3 /* Pods_IronSource_Demo.framework in Frameworks */,
-				42EC98B3289144A3003BE6CF /* BidOnAdapterGoogleMobileAds.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42BA826F287C64F8001F1744 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				42EC98C7289144D4003BE6CF /* BidOnDecoratorFyber.framework in Frameworks */,
-				42EC98BF289144D4003BE6CF /* BidOnAdapterAppsFlyer.framework in Frameworks */,
-				42EC98C5289144D4003BE6CF /* BidOn.framework in Frameworks */,
-				42EC98C1289144D4003BE6CF /* BidOnAdapterBidMachine.framework in Frameworks */,
-				06E001938D0A7902420FE4A3 /* Pods_Fyber_Demo.framework in Frameworks */,
-				42EC98C3289144D4003BE6CF /* BidOnAdapterGoogleMobileAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		42389E0528742FFD006024BA /* Modules */ = {
+		4299A404289BC8B40062C580 = {
 			isa = PBXGroup;
 			children = (
-				42BA821028788D1E001F1744 /* MREC */,
-				42BA820028784CA7001F1744 /* Banner */,
-				42BA81E728771D88001F1744 /* RewardedAd */,
-				42389E062874300E006024BA /* Interstitial */,
-				42BA81EC28771E28001F1744 /* AdViewModel.swift */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		42389E062874300E006024BA /* Interstitial */ = {
-			isa = PBXGroup;
-			children = (
-				42389E0328742E34006024BA /* InterstitialView.swift */,
-				42389E072874301F006024BA /* InterstitialViewModel.swift */,
-			);
-			path = Interstitial;
-			sourceTree = "<group>";
-		};
-		42389E1828747CEE006024BA /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				42B97611287F0366006F4EAA /* Resolvers */,
-				42BA81E228771BE0001F1744 /* Models */,
-				42BA81E328771BE8001F1744 /* Views */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		429EE295286B399F009439C6 = {
-			isa = PBXGroup;
-			children = (
-				429EE2A2286B39D1009439C6 /* AppLovinMAX-Demo */,
-				42BA8273287C64F8001F1744 /* Fyber-Demo */,
-				42BA822C287B30D6001F1744 /* IronSource-Demo */,
-				429EE2A1286B39D1009439C6 /* Products */,
-				EC5257D01495BEB6BFA1EB2E /* Pods */,
-				D25A351439A02A755F92C24A /* Frameworks */,
+				4299A40F289BC8B40062C580 /* Sandbox */,
+				4299A40E289BC8B40062C580 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		429EE2A1286B39D1009439C6 /* Products */ = {
+		4299A40E289BC8B40062C580 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				429EE2A0286B39D1009439C6 /* AppLovinMAX-Demo.app */,
-				42BA822B287B30D6001F1744 /* IronSource-Demo.app */,
-				42BA8272287C64F8001F1744 /* Fyber-Demo.app */,
+				4299A40D289BC8B40062C580 /* Sandbox.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		429EE2A2286B39D1009439C6 /* AppLovinMAX-Demo */ = {
+		4299A40F289BC8B40062C580 /* Sandbox */ = {
 			isa = PBXGroup;
 			children = (
-				42BA81C92875DF25001F1744 /* Info.plist */,
-				42389E1828747CEE006024BA /* Shared */,
-				42389E0528742FFD006024BA /* Modules */,
-				429EE2A3286B39D1009439C6 /* AppLovinMaxDemoApp.swift */,
-				429EE2A5286B39D1009439C6 /* ContentView.swift */,
-				42389E0128742D43006024BA /* HomeView.swift */,
-				429EE2A7286B39D2009439C6 /* Assets.xcassets */,
-				429EE2A9286B39D2009439C6 /* Preview Content */,
+				4299A410289BC8B40062C580 /* SandboxApp.swift */,
+				4299A412289BC8B40062C580 /* ContentView.swift */,
+				4299A414289BC8B60062C580 /* Assets.xcassets */,
+				4299A416289BC8B60062C580 /* Preview Content */,
 			);
-			path = "AppLovinMAX-Demo";
+			path = Sandbox;
 			sourceTree = "<group>";
 		};
-		429EE2A9286B39D2009439C6 /* Preview Content */ = {
+		4299A416289BC8B60062C580 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				429EE2AA286B39D2009439C6 /* Preview Assets.xcassets */,
+				4299A417289BC8B60062C580 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		42A6B644287D9BDF00C1DFB9 /* RewardedVideo */ = {
-			isa = PBXGroup;
-			children = (
-				42A6B645287D9BFE00C1DFB9 /* RewardedViewModel.swift */,
-				42A6B647287D9C2D00C1DFB9 /* RewardedView.swift */,
-			);
-			path = RewardedVideo;
-			sourceTree = "<group>";
-		};
-		42A6B64D287DAC3C00C1DFB9 /* Banner */ = {
-			isa = PBXGroup;
-			children = (
-				42A6B64E287DAC4900C1DFB9 /* BannerViewModel.swift */,
-				42A6B650287DAC8000C1DFB9 /* BannerView.swift */,
-			);
-			path = Banner;
-			sourceTree = "<group>";
-		};
-		42A6B65A287EEA2900C1DFB9 /* Resolvers */ = {
-			isa = PBXGroup;
-			children = (
-				42A6B65B287EEA4000C1DFB9 /* ManualAuctionResolver.swift */,
-				42A6B65D287EEA8200C1DFB9 /* Resolution.swift */,
-			);
-			path = Resolvers;
-			sourceTree = "<group>";
-		};
-		42B97611287F0366006F4EAA /* Resolvers */ = {
-			isa = PBXGroup;
-			children = (
-				42B97612287F0383006F4EAA /* Resolution.swift */,
-				42B97614287F03C3006F4EAA /* ManualAuctionResolver.swift */,
-			);
-			path = Resolvers;
-			sourceTree = "<group>";
-		};
-		42B97627288033F4006F4EAA /* Resolvers */ = {
-			isa = PBXGroup;
-			children = (
-				42B976282880340A006F4EAA /* Resolution.swift */,
-				42B9762A28803427006F4EAA /* ManualAuctionResolver.swift */,
-			);
-			path = Resolvers;
-			sourceTree = "<group>";
-		};
-		42B9763828806755006F4EAA /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				42B9763A28806774006F4EAA /* Banner */,
-				42B9763928806762006F4EAA /* Home */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		42B9763928806762006F4EAA /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				42BA824C287B44DA001F1744 /* HomeView.swift */,
-				42BA8246287B3640001F1744 /* HomeViewModel.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		42B9763A28806774006F4EAA /* Banner */ = {
-			isa = PBXGroup;
-			children = (
-				42B9763B28806787006F4EAA /* BannerView.swift */,
-				42B9763D28806793006F4EAA /* BannerViewModel.swift */,
-			);
-			path = Banner;
-			sourceTree = "<group>";
-		};
-		42BA81E228771BE0001F1744 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				42BA81CE2876DD0B001F1744 /* AdEventModel.swift */,
-				42BA81E528771C19001F1744 /* AdState.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		42BA81E328771BE8001F1744 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				42389E1928747D00006024BA /* RoundedCorners.swift */,
-				42BA81D02876DDC0001F1744 /* AdEventView.swift */,
-				42BA81FE287824D1001F1744 /* AdBannerView.swift */,
-				42BA821528789009001F1744 /* AdPresentationView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		42BA81E728771D88001F1744 /* RewardedAd */ = {
-			isa = PBXGroup;
-			children = (
-				42BA81E828771D9A001F1744 /* RewardedAdView.swift */,
-				42BA81EA28771DBF001F1744 /* RewardedAdViewModel.swift */,
-			);
-			path = RewardedAd;
-			sourceTree = "<group>";
-		};
-		42BA820028784CA7001F1744 /* Banner */ = {
-			isa = PBXGroup;
-			children = (
-				42BA820128784D9C001F1744 /* BannerViewModel.swift */,
-				42BA820328784E41001F1744 /* BannerView.swift */,
-			);
-			path = Banner;
-			sourceTree = "<group>";
-		};
-		42BA821028788D1E001F1744 /* MREC */ = {
-			isa = PBXGroup;
-			children = (
-				42BA821128788D74001F1744 /* MRECViewModel.swift */,
-				42BA821328788DA3001F1744 /* MRECView.swift */,
-			);
-			path = MREC;
-			sourceTree = "<group>";
-		};
-		42BA822C287B30D6001F1744 /* IronSource-Demo */ = {
-			isa = PBXGroup;
-			children = (
-				42BA8248287B37F2001F1744 /* Info.plist */,
-				42BA825C287C4DD4001F1744 /* Models */,
-				42BA825F287C5B6E001F1744 /* Views */,
-				42BA8249287B39FD001F1744 /* Publishers */,
-				42B97627288033F4006F4EAA /* Resolvers */,
-				42B9763828806755006F4EAA /* Modules */,
-				42BA822D287B30D6001F1744 /* IronSourceDemoApp.swift */,
-				42BA822F287B30D6001F1744 /* ContentView.swift */,
-				42BA8231287B30D7001F1744 /* Assets.xcassets */,
-				42BA8233287B30D7001F1744 /* Preview Content */,
-			);
-			path = "IronSource-Demo";
-			sourceTree = "<group>";
-		};
-		42BA8233287B30D7001F1744 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				42BA8234287B30D7001F1744 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		42BA8249287B39FD001F1744 /* Publishers */ = {
-			isa = PBXGroup;
-			children = (
-				42BA824A287B3A4F001F1744 /* ISInitializationPublisher.swift */,
-			);
-			path = Publishers;
-			sourceTree = "<group>";
-		};
-		42BA825C287C4DD4001F1744 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				42BA825D287C4DE9001F1744 /* AdEventModel.swift */,
-				42B9762528801C32006F4EAA /* AdState.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		42BA825F287C5B6E001F1744 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				42BA8260287C5B82001F1744 /* AdEventView.swift */,
-				42B9763F288067C9006F4EAA /* AdPresentationView.swift */,
-				42B97641288067F2006F4EAA /* RoundedCorners.swift */,
-				42B9764328806837006F4EAA /* AdBannerView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		42BA8273287C64F8001F1744 /* Fyber-Demo */ = {
-			isa = PBXGroup;
-			children = (
-				42BA82D2287C86E4001F1744 /* Info.plist */,
-				42BA829A287C81F0001F1744 /* Modules */,
-				42BA82A8287C81F0001F1744 /* Shared */,
-				42BA8298287C81E4001F1744 /* FyberDemoApp.swift */,
-				42BA828E287C81A2001F1744 /* HomeView.swift */,
-				42A6B636287D69E500C1DFB9 /* HomeViewModel.swift */,
-				42BA8276287C64F8001F1744 /* ContentView.swift */,
-				42BA8278287C64FA001F1744 /* Assets.xcassets */,
-				42BA827A287C64FA001F1744 /* Preview Content */,
-			);
-			path = "Fyber-Demo";
-			sourceTree = "<group>";
-		};
-		42BA827A287C64FA001F1744 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				42BA827B287C64FA001F1744 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		42BA829A287C81F0001F1744 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				42A6B64D287DAC3C00C1DFB9 /* Banner */,
-				42A6B644287D9BDF00C1DFB9 /* RewardedVideo */,
-				42BA829E287C81F0001F1744 /* Interstitial */,
-				42BA82A4287C81F0001F1744 /* AdViewModel.swift */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		42BA829E287C81F0001F1744 /* Interstitial */ = {
-			isa = PBXGroup;
-			children = (
-				42BA829F287C81F0001F1744 /* InterstitialViewModel.swift */,
-				42BA82A0287C81F0001F1744 /* InterstitialView.swift */,
-			);
-			path = Interstitial;
-			sourceTree = "<group>";
-		};
-		42BA82A8287C81F0001F1744 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				42A6B65A287EEA2900C1DFB9 /* Resolvers */,
-				42BA82A9287C81F0001F1744 /* Models */,
-				42BA82AC287C81F0001F1744 /* Extensions */,
-				42BA82AF287C81F0001F1744 /* Views */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		42BA82A9287C81F0001F1744 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				42BA82AA287C81F0001F1744 /* AdEventModel.swift */,
-				42BA82AB287C81F0001F1744 /* AdState.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		42BA82AC287C81F0001F1744 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		42BA82AF287C81F0001F1744 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				42BA82B0287C81F0001F1744 /* AdPresentationView.swift */,
-				42BA82B1287C81F0001F1744 /* AdEventView.swift */,
-				42BA82B3287C81F0001F1744 /* RoundedCorners.swift */,
-				42A6B64B287DAA0700C1DFB9 /* AdBannerView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		D25A351439A02A755F92C24A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				42EC98BA289144D4003BE6CF /* BidOnAdapterAppsFlyer.framework */,
-				42EC98BB289144D4003BE6CF /* BidOnAdapterBidMachine.framework */,
-				42EC98BC289144D4003BE6CF /* BidOnAdapterGoogleMobileAds.framework */,
-				42EC98BD289144D4003BE6CF /* BidOn.framework */,
-				42EC98BE289144D4003BE6CF /* BidOnDecoratorFyber.framework */,
-				42EC98AA289144A3003BE6CF /* BidOnAdapterAppsFlyer.framework */,
-				42EC98AB289144A3003BE6CF /* BidOnAdapterBidMachine.framework */,
-				42EC98AC289144A3003BE6CF /* BidOnAdapterGoogleMobileAds.framework */,
-				42EC98AD289144A3003BE6CF /* BidOn.framework */,
-				42EC98AE289144A3003BE6CF /* BidOnDecoratorIronSource.framework */,
-				42EC989A28914488003BE6CF /* BidOnAdapterAppsFlyer.framework */,
-				42EC989B28914488003BE6CF /* BidOnAdapterBidMachine.framework */,
-				42EC989C28914488003BE6CF /* BidOnAdapterGoogleMobileAds.framework */,
-				42EC989D28914488003BE6CF /* BidOn.framework */,
-				42EC989E28914488003BE6CF /* BidOnDecoratorAppLovinMax.framework */,
-				D261E61AAAA7FAB643038526 /* Pods_AppLovinMAX_Demo.framework */,
-				8B16B68E746E573C2D23FE99 /* Pods_IronSource_Demo.framework */,
-				5ED1B5464312E014CCDDD41E /* Pods_Fyber_Demo.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EC5257D01495BEB6BFA1EB2E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */,
-				078D6AEA594DCCBBB0DED4F0 /* Pods-AppLovinMAX-Demo.release.xcconfig */,
-				EB9E126F407D4AED0211FE4F /* Pods-IronSource-Demo.debug.xcconfig */,
-				F0260EF7A3BBC980251E0461 /* Pods-IronSource-Demo.release.xcconfig */,
-				9DF9358390C003732701C752 /* Pods-Fyber-Demo.debug.xcconfig */,
-				2E6460A243F6430A3EF6AF3F /* Pods-Fyber-Demo.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		429EE29F286B39D1009439C6 /* AppLovinMAX-Demo */ = {
+		4299A40C289BC8B40062C580 /* Sandbox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 429EE2AE286B39D2009439C6 /* Build configuration list for PBXNativeTarget "AppLovinMAX-Demo" */;
+			buildConfigurationList = 4299A41B289BC8B60062C580 /* Build configuration list for PBXNativeTarget "Sandbox" */;
 			buildPhases = (
-				B0474D747F61B035E780D94F /* [CP] Check Pods Manifest.lock */,
-				429EE29C286B39D1009439C6 /* Sources */,
-				429EE29D286B39D1009439C6 /* Frameworks */,
-				429EE29E286B39D1009439C6 /* Resources */,
-				206D479DF9B4E35B3277572F /* [CP] Embed Pods Frameworks */,
-				B0304FECAC1B4247F052276B /* [CP] Copy Pods Resources */,
+				4299A409289BC8B40062C580 /* Sources */,
+				4299A40A289BC8B40062C580 /* Frameworks */,
+				4299A40B289BC8B40062C580 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "AppLovinMAX-Demo";
-			productName = "AppLovinMAX-Demo";
-			productReference = 429EE2A0286B39D1009439C6 /* AppLovinMAX-Demo.app */;
-			productType = "com.apple.product-type.application";
-		};
-		42BA822A287B30D6001F1744 /* IronSource-Demo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 42BA8236287B30D7001F1744 /* Build configuration list for PBXNativeTarget "IronSource-Demo" */;
-			buildPhases = (
-				20B6A6DB5DCFA8F7D69BD9DA /* [CP] Check Pods Manifest.lock */,
-				42BA8227287B30D6001F1744 /* Sources */,
-				42BA8228287B30D6001F1744 /* Frameworks */,
-				42BA8229287B30D6001F1744 /* Resources */,
-				3F28DE5DA9D14EB7517E310F /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "IronSource-Demo";
-			productName = "IronSource-Demo";
-			productReference = 42BA822B287B30D6001F1744 /* IronSource-Demo.app */;
-			productType = "com.apple.product-type.application";
-		};
-		42BA8271287C64F8001F1744 /* Fyber-Demo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 42BA827D287C64FA001F1744 /* Build configuration list for PBXNativeTarget "Fyber-Demo" */;
-			buildPhases = (
-				BFFD10BCEA3F768598E8599F /* [CP] Check Pods Manifest.lock */,
-				42BA826E287C64F8001F1744 /* Sources */,
-				42BA826F287C64F8001F1744 /* Frameworks */,
-				42BA8270287C64F8001F1744 /* Resources */,
-				CCEEA5393B79BEC6AE995824 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Fyber-Demo";
-			productName = "Fyber-Demo";
-			productReference = 42BA8272287C64F8001F1744 /* Fyber-Demo.app */;
+			name = Sandbox;
+			productName = Sandbox;
+			productReference = 4299A40D289BC8B40062C580 /* Sandbox.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		429EE296286B399F009439C6 /* Project object */ = {
+		4299A405289BC8B40062C580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1330;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
-					429EE29F286B39D1009439C6 = {
-						CreatedOnToolsVersion = 13.3.1;
-					};
-					42BA822A287B30D6001F1744 = {
-						CreatedOnToolsVersion = 13.3.1;
-					};
-					42BA8271287C64F8001F1744 = {
-						CreatedOnToolsVersion = 13.3.1;
+					4299A40C289BC8B40062C580 = {
+						CreatedOnToolsVersion = 13.4.1;
 					};
 				};
 			};
-			buildConfigurationList = 429EE299286B399F009439C6 /* Build configuration list for PBXProject "Sandbox" */;
+			buildConfigurationList = 4299A408289BC8B40062C580 /* Build configuration list for PBXProject "Sandbox" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -682,283 +110,45 @@
 				en,
 				Base,
 			);
-			mainGroup = 429EE295286B399F009439C6;
-			productRefGroup = 429EE2A1286B39D1009439C6 /* Products */;
+			mainGroup = 4299A404289BC8B40062C580;
+			productRefGroup = 4299A40E289BC8B40062C580 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				429EE29F286B39D1009439C6 /* AppLovinMAX-Demo */,
-				42BA822A287B30D6001F1744 /* IronSource-Demo */,
-				42BA8271287C64F8001F1744 /* Fyber-Demo */,
+				4299A40C289BC8B40062C580 /* Sandbox */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		429EE29E286B39D1009439C6 /* Resources */ = {
+		4299A40B289BC8B40062C580 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				429EE2AB286B39D2009439C6 /* Preview Assets.xcassets in Resources */,
-				429EE2A8286B39D2009439C6 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42BA8229287B30D6001F1744 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				42BA8235287B30D7001F1744 /* Preview Assets.xcassets in Resources */,
-				42BA8232287B30D7001F1744 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42BA8270287C64F8001F1744 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				42BA827C287C64FA001F1744 /* Preview Assets.xcassets in Resources */,
-				42BA8279287C64FA001F1744 /* Assets.xcassets in Resources */,
+				4299A418289BC8B60062C580 /* Preview Assets.xcassets in Resources */,
+				4299A415289BC8B60062C580 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		206D479DF9B4E35B3277572F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		20B6A6DB5DCFA8F7D69BD9DA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IronSource-Demo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3F28DE5DA9D14EB7517E310F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IronSource-Demo/Pods-IronSource-Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B0304FECAC1B4247F052276B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovinMAX-Demo/Pods-AppLovinMAX-Demo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B0474D747F61B035E780D94F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AppLovinMAX-Demo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BFFD10BCEA3F768598E8599F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Fyber-Demo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CCEEA5393B79BEC6AE995824 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fyber-Demo/Pods-Fyber-Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fyber-Demo/Pods-Fyber-Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fyber-Demo/Pods-Fyber-Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		429EE29C286B39D1009439C6 /* Sources */ = {
+		4299A409289BC8B40062C580 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42389E0428742E34006024BA /* InterstitialView.swift in Sources */,
-				42BA81ED28771E28001F1744 /* AdViewModel.swift in Sources */,
-				42BA820228784D9C001F1744 /* BannerViewModel.swift in Sources */,
-				42B97613287F0383006F4EAA /* Resolution.swift in Sources */,
-				42BA821628789009001F1744 /* AdPresentationView.swift in Sources */,
-				42BA81E928771D9A001F1744 /* RewardedAdView.swift in Sources */,
-				429EE2A6286B39D1009439C6 /* ContentView.swift in Sources */,
-				42389E082874301F006024BA /* InterstitialViewModel.swift in Sources */,
-				429EE2A4286B39D1009439C6 /* AppLovinMaxDemoApp.swift in Sources */,
-				42B97615287F03C3006F4EAA /* ManualAuctionResolver.swift in Sources */,
-				42BA81FF287824D1001F1744 /* AdBannerView.swift in Sources */,
-				42BA81E628771C19001F1744 /* AdState.swift in Sources */,
-				42BA81D12876DDC0001F1744 /* AdEventView.swift in Sources */,
-				42389E0228742D43006024BA /* HomeView.swift in Sources */,
-				42BA81CF2876DD0B001F1744 /* AdEventModel.swift in Sources */,
-				42BA81EB28771DBF001F1744 /* RewardedAdViewModel.swift in Sources */,
-				42BA820428784E41001F1744 /* BannerView.swift in Sources */,
-				42389E1A28747D00006024BA /* RoundedCorners.swift in Sources */,
-				42BA821228788D74001F1744 /* MRECViewModel.swift in Sources */,
-				42BA821428788DA3001F1744 /* MRECView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42BA8227287B30D6001F1744 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				42B9764428806837006F4EAA /* AdBannerView.swift in Sources */,
-				42B97642288067F2006F4EAA /* RoundedCorners.swift in Sources */,
-				42B9763E28806793006F4EAA /* BannerViewModel.swift in Sources */,
-				42BA8230287B30D6001F1744 /* ContentView.swift in Sources */,
-				42B976292880340A006F4EAA /* Resolution.swift in Sources */,
-				42BA822E287B30D6001F1744 /* IronSourceDemoApp.swift in Sources */,
-				42BA825E287C4DE9001F1744 /* AdEventModel.swift in Sources */,
-				42BA8247287B3640001F1744 /* HomeViewModel.swift in Sources */,
-				42B97640288067C9006F4EAA /* AdPresentationView.swift in Sources */,
-				42BA824D287B44DA001F1744 /* HomeView.swift in Sources */,
-				42BA8261287C5B82001F1744 /* AdEventView.swift in Sources */,
-				42B9762628801C32006F4EAA /* AdState.swift in Sources */,
-				42BA824B287B3A4F001F1744 /* ISInitializationPublisher.swift in Sources */,
-				42B9763C28806787006F4EAA /* BannerView.swift in Sources */,
-				42B9762B28803427006F4EAA /* ManualAuctionResolver.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42BA826E287C64F8001F1744 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				42A6B651287DAC8100C1DFB9 /* BannerView.swift in Sources */,
-				42BA82B7287C81F0001F1744 /* InterstitialView.swift in Sources */,
-				42A6B65E287EEA8200C1DFB9 /* Resolution.swift in Sources */,
-				42BA82C1287C81F0001F1744 /* AdPresentationView.swift in Sources */,
-				42BA82BA287C81F0001F1744 /* AdViewModel.swift in Sources */,
-				42BA8299287C81E4001F1744 /* FyberDemoApp.swift in Sources */,
-				42A6B64F287DAC4900C1DFB9 /* BannerViewModel.swift in Sources */,
-				42BA82BD287C81F0001F1744 /* AdEventModel.swift in Sources */,
-				42A6B65C287EEA4000C1DFB9 /* ManualAuctionResolver.swift in Sources */,
-				42BA8292287C81A2001F1744 /* HomeView.swift in Sources */,
-				42BA82C4287C81F0001F1744 /* RoundedCorners.swift in Sources */,
-				42A6B637287D69E500C1DFB9 /* HomeViewModel.swift in Sources */,
-				42A6B648287D9C2D00C1DFB9 /* RewardedView.swift in Sources */,
-				42BA82B6287C81F0001F1744 /* InterstitialViewModel.swift in Sources */,
-				42A6B646287D9BFE00C1DFB9 /* RewardedViewModel.swift in Sources */,
-				42A6B64C287DAA0700C1DFB9 /* AdBannerView.swift in Sources */,
-				42BA82C2287C81F0001F1744 /* AdEventView.swift in Sources */,
-				42BA8277287C64F8001F1744 /* ContentView.swift in Sources */,
-				42BA82BE287C81F0001F1744 /* AdState.swift in Sources */,
+				4299A413289BC8B40062C580 /* ContentView.swift in Sources */,
+				4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		429EE29A286B399F009439C6 /* Debug */ = {
+		4299A419289BC8B60062C580 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		429EE29B286B399F009439C6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Release;
-		};
-		429EE2AC286B39D2009439C6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2CC15C0DA6AA531ACD146DB /* Pods-AppLovinMAX-Demo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -980,20 +170,15 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_ASSET_PATHS = "\"AppLovinMAX-Demo/Preview Content\"";
-				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1010,41 +195,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "AppLovinMAX-Demo/Info.plist";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.AppLovinMAX-Demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		429EE2AD286B39D2009439C6 /* Release */ = {
+		4299A41A289BC8B60062C580 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 078D6AEA594DCCBBB0DED4F0 /* Pods-AppLovinMAX-Demo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1066,21 +230,16 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"AppLovinMAX-Demo/Preview Content\"";
-				DEVELOPMENT_TEAM = WG4VFF78ZM;
 				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1090,406 +249,98 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "AppLovinMAX-Demo/Info.plist";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.AppLovinMAX-Demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		42BA8237287B30D7001F1744 /* Debug */ = {
+		4299A41C289BC8B60062C580 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB9E126F407D4AED0211FE4F /* Pods-IronSource-Demo.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_ASSET_PATHS = "\"IronSource-Demo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Sandbox/Preview Content\"";
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "IronSource-Demo/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.IronSource-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.Sandbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		42BA8238287B30D7001F1744 /* Release */ = {
+		4299A41D289BC8B60062C580 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0260EF7A3BBC980251E0461 /* Pods-IronSource-Demo.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"IronSource-Demo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Sandbox/Preview Content\"";
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "IronSource-Demo/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.IronSource-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.Sandbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		42BA827E287C64FA001F1744 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9DF9358390C003732701C752 /* Pods-Fyber-Demo.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_ASSET_PATHS = "\"Fyber-Demo/Preview Content\"";
-				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Fyber-Demo/Info.plist";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.Fyber-Demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		42BA827F287C64FA001F1744 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E6460A243F6430A3EF6AF3F /* Pods-Fyber-Demo.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"Fyber-Demo/Preview Content\"";
-				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Fyber-Demo/Info.plist";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appodeal.Fyber-Demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		429EE299286B399F009439C6 /* Build configuration list for PBXProject "Sandbox" */ = {
+		4299A408289BC8B40062C580 /* Build configuration list for PBXProject "Sandbox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				429EE29A286B399F009439C6 /* Debug */,
-				429EE29B286B399F009439C6 /* Release */,
+				4299A419289BC8B60062C580 /* Debug */,
+				4299A41A289BC8B60062C580 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		429EE2AE286B39D2009439C6 /* Build configuration list for PBXNativeTarget "AppLovinMAX-Demo" */ = {
+		4299A41B289BC8B60062C580 /* Build configuration list for PBXNativeTarget "Sandbox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				429EE2AC286B39D2009439C6 /* Debug */,
-				429EE2AD286B39D2009439C6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		42BA8236287B30D7001F1744 /* Build configuration list for PBXNativeTarget "IronSource-Demo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				42BA8237287B30D7001F1744 /* Debug */,
-				42BA8238287B30D7001F1744 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		42BA827D287C64FA001F1744 /* Build configuration list for PBXNativeTarget "Fyber-Demo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				42BA827E287C64FA001F1744 /* Debug */,
-				42BA827F287C64FA001F1744 /* Release */,
+				4299A41C289BC8B60062C580 /* Debug */,
+				4299A41D289BC8B60062C580 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 429EE296286B399F009439C6 /* Project object */;
+	rootObject = 4299A405289BC8B40062C580 /* Project object */;
 }

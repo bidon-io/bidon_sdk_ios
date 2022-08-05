@@ -11,20 +11,10 @@ import UIKit
 
 @objc
 public final class BidOnSdk: NSObject {
-    private var repository = AdaptersRepository()
+    private lazy var repository = AdaptersRepository()
+    private lazy var environment = EnvironmentRepository()
     
-    @objc public var adapters: [Adapter] {
-        return repository.all()
-    }
-    
-    @objc public func register(adapter: Adapter) throws {
-        repository.register(adapter)
-    }
-    
-    public func register<T: ParameterizedAdapter>(adapter: T.Type, parameters: T.Parameters) {
-        let adapter = adapter.init(parameters: parameters)
-        repository.register(adapter)
-    }
+    @objc public static let sdkVersion = "0.1.0"
     
     @objc public func initialize(completion: @escaping () -> ()) {
         let initializable: [InitializableAdapter] = repository.all()
@@ -74,7 +64,7 @@ public final class BidOnSdk: NSObject {
 }
 
 
-public extension BidOnSdk {
+internal extension BidOnSdk {
     func interstitialDemandProviders() -> [InterstitialDemandProvider] {
         let sources: [InterstitialDemandSourceAdapter] = repository.all()
         return sources.compactMap { try? $0.interstitial() }

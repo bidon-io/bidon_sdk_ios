@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 public struct BidMachineParameters: Codable {
     public var sellerId: String
     

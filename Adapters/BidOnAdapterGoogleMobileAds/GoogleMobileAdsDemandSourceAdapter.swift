@@ -10,61 +10,39 @@ import GoogleMobileAds
 import BidOn
 
 
-internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter & AdViewDemandSourceAdapter
+internal typealias DemandSourceAdapter = InitializableAdapter & InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter // & AdViewDemandSourceAdapter
 
 
-@objc public final class GoogleMobileAdsDemandSourceAdapter: NSObject, DemandSourceAdapter {
-    @objc public let identifier: String = "admob"
+@objc
+public final class GoogleMobileAdsDemandSourceAdapter: NSObject, DemandSourceAdapter {
+    public let identifier: String = "admob"
+    public let name: String = "Google Mobile Ads"
+    public let version: String = "1"
+    public let sdkVersion: String = GADMobileAds.sharedInstance().sdkVersion
     
-    public let parameters: GoogleMobileAdsParameters
-    
-    public init(parameters: GoogleMobileAdsParameters) {
-        self.parameters = parameters
-        super.init()
+    public func initialize(
+        from decoder: Decoder,
+        completion: @escaping (Result<Void, SdkError>) -> Void
+    ) {
+        GADMobileAds.sharedInstance().start { _ in
+            completion(.success(()))
+        }
     }
     
+    
     public func interstitial() throws -> InterstitialDemandProvider {
-        GoogleMobileAdsFullscreenDemandProvider<GADInterstitialAd> { [weak self] price in
-            return self?.parameters.lineItems.interstitial?.item(for: price)
-        }
+        GoogleMobileAdsFullscreenDemandProvider<GADInterstitialAd>()
     }
     
     public func rewardedAd() throws -> RewardedAdDemandProvider {
-        GoogleMobileAdsFullscreenDemandProvider<GADRewardedAd> { [weak self] price in
-            return self?.parameters.lineItems.rewardedAd?.item(for: price)
-        }
+        GoogleMobileAdsFullscreenDemandProvider<GADRewardedAd>()
     }
     
-    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
-        GoogleMobileAdsBannerDemandProvider(context: context) { [weak self] price in
-            return self?.parameters.lineItems.banner?.item(for: price)
-        }
-    }
-}
-
-
-extension GoogleMobileAdsDemandSourceAdapter: ParameterizedAdapter {
-    public typealias Parameters = GoogleMobileAdsParameters
     
-    @objc public convenience init(rawParameters: Data) throws {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        let parameters = try decoder.decode(
-            GoogleMobileAdsParameters.self,
-            from: rawParameters
-        )
-        self.init(parameters: parameters)
-    }
+    //    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+    //        GoogleMobileAdsBannerDemandProvider(context: context) { [weak self] price in
+    //            return self?.parameters.lineItems.banner?.item(for: price)
+    //        }
+    //    }
 }
 
-
-extension GoogleMobileAdsDemandSourceAdapter: InitializableAdapter {
-    public func initilize(
-        _ completion: @escaping (Error?) -> ()
-    ) {
-        GADMobileAds.sharedInstance().start { _ in
-            completion(nil)
-        }
-    }
-}

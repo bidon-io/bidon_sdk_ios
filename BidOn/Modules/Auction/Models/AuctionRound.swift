@@ -7,20 +7,22 @@
 
 import Foundation
 
-typealias AuctionRoundDemand = (Ad, DemandProvider) -> ()
+typealias Demand = (ad: Ad, provider: DemandProvider)
+typealias AuctionRoundDemandResponse = (Result<Demand, SdkError>) -> ()
 typealias AuctionRoundCompletion = () -> ()
 
 
-public protocol AuctionRound {
+protocol AuctionRound {
     var id: String { get }
-    var providers: [DemandProvider] { get }
+    var timeout: TimeInterval { get }
+    var demands: [String] { get }
 }
 
 
 protocol PerformableAuctionRound: AuctionRound, Hashable {
     func perform(
         pricefloor: Price,
-        demand: @escaping AuctionRoundDemand,
+        demand: @escaping AuctionRoundDemandResponse,
         completion: @escaping AuctionRoundCompletion
     )
     

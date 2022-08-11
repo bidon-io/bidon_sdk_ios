@@ -11,13 +11,9 @@ import GoogleMobileAds
 import UIKit
 
 
-internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BNGADFullscreenAd>: NSObject, GADFullScreenContentDelegate, BNGADFullscreenAdRewardDelegate {
-    
-    private let item: (Price) -> LineItem?
-    
-    private var _item: LineItem?
-    
+internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BDGADFullscreenAd>: NSObject, GADFullScreenContentDelegate, BDGADFullscreenAdRewardDelegate {
     private var response: DemandProviderResponse?
+    private var lineItem: LineItem?
     
     private var fullscreenAd: FullscreenAd? {
         didSet {
@@ -38,10 +34,6 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BNGAD
     weak var delegate: DemandProviderDelegate?
     weak var rewardDelegate: DemandProviderRewardDelegate?
     
-    init(item: @escaping (Price) -> LineItem?) {
-        self.item = item
-        super.init()
-    }
     
     func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         guard let wrapped = wrapped(ad: ad) else { return }
@@ -77,44 +69,66 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BNGAD
 }
 
 
-extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
-    func request(
-        pricefloor: Price,
+extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
+    func bid(
+        _ lineItem: LineItem,
         response: @escaping DemandProviderResponse
     ) {
-        guard let item = item(pricefloor) else {
-            response(nil, SdkError.message("Line item was not found for pricefloor \(pricefloor)"))
-            return
-        }
-        
         self.response = response
         
         let request = GADRequest()
         FullscreenAd.request(
-            adUnitID: item.adUnitId,
+            adUnitID: lineItem.adUnitId,
             request: request
         ) { [weak self] fullscreenAd, error in
             guard let self = self else { return }
+            
             guard let fullscreenAd = fullscreenAd as? FullscreenAd, error == nil else {
-                self.response?(nil, SdkError(error))
+                self.response?(.failure(SdkError(error)))
                 self.response = nil
                 return
             }
             
-            self._item = item
+            self.lineItem = lineItem
             self.fullscreenAd = fullscreenAd
             
-            let wrapped = BNGADResponseInfoWrapper(fullscreenAd, item: item)
-            self.response?(wrapped, nil)
+            let wrapped = BDGADResponseInfoWrapper(
+                fullscreenAd,
+                lineItem: lineItem
+            )
+            
+            self.response?(.success(wrapped))
             self.response = nil
         }
     }
     
+    func load(ad: Ad) {
+        
+    }
+    
+    func notify(_ event: AuctionEvent) {}
+
     func cancel() {
-        response?(nil, SdkError.cancelled)
+        response?(.failure(SdkError.cancelled))
         response = nil
     }
     
+    private func wrapped(ad: GADFullScreenPresentingAd) -> Ad? {
+        guard
+            let fullscreenAd = fullscreenAd,
+            fullscreenAd === ad,
+            let lineItem = lineItem
+        else { return nil }
+        
+        return BDGADResponseInfoWrapper(
+            fullscreenAd,
+            lineItem: lineItem
+        )
+    }
+}
+
+
+extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
     func show(ad: Ad, from viewController: UIViewController) {
         guard let interstitial = fullscreenAd else {
             delegate?.provider(
@@ -126,21 +140,6 @@ extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
         }
         
         interstitial.present(fromRootViewController: viewController)
-    }
-    
-    func notify(_ event: AuctionEvent) {}
-    
-    private func wrapped(ad: GADFullScreenPresentingAd) -> Ad? {
-        guard
-            let fullscreenAd = fullscreenAd,
-            fullscreenAd === ad,
-            let item = _item
-        else { return nil }
-        
-        return BNGADResponseInfoWrapper(
-            fullscreenAd,
-            item: item
-        )
     }
 }
 

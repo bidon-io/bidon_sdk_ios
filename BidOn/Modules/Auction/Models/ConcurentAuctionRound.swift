@@ -1,5 +1,5 @@
 //
-//  ConcurentAuctionRound.swift
+//  ConcurrentAuctionRound.swift
 //  MobileAdvertising
 //
 //  Created by Stas Kochkin on 01.07.2022.
@@ -8,37 +8,64 @@
 import Foundation
 
 
-struct ConcurentAuctionRound: PerformableAuctionRound {
+struct ConcurrentAuctionRound: PerformableAuctionRound {
     var id: String
     var timeout: TimeInterval
-    var providers: [DemandProvider]
+    var demands: [String]
+    
+    private var lineItems: LineItems
+    private var providers: [String: DemandProvider]
     
     private var group = DispatchGroup()
     private var completion: (() -> ())?
     private var isCancelled: Bool = false
     
     init(
-        id: String,
-        timeout: TimeInterval,
-        providers: [DemandProvider]
+        round: AuctionRound,
+        lineItems: LineItems,
+        providers: [String: DemandProvider]
     ) {
-        self.id = id
-        self.timeout = timeout
+        self.id = round.id
+        self.timeout = round.timeout
+        self.demands = round.demands
+        self.lineItems = lineItems
         self.providers = providers
+    }
+    
+    private func provider(_ demand: String) -> DemandProvider? {
+        return providers[demand]
     }
     
     func perform(
         pricefloor: Price,
-        demand: @escaping AuctionRoundDemand,
+        demand: @escaping AuctionRoundDemandResponse,
         completion: @escaping AuctionRoundCompletion
     ) {
-        providers.forEach { provider in
+        demands.forEach { id in
             group.enter()
-            provider.request(pricefloor: pricefloor) { [weak provider] ad, error in
+            
+            let response: DemandProviderResponse = { result in
                 defer { group.leave() }
-                guard let provider = provider, let ad = ad
-                else { return }
-                demand(ad, provider)
+                guard let provider = provider(id) else { return }
+                switch result {
+                case .success(let ad):
+                    demand(.success((ad, provider)))
+                case .failure(let error):
+                    demand(.failure(SdkError(error)))
+                }
+            }
+            
+            switch provider(id) {
+            case let provider as ProgrammaticDemandProvider:
+                provider.bid(pricefloor, response: response)
+            case let provider as DirectDemandProvider:
+                if let lineItem = lineItems.item(for: id, pricefloor: pricefloor) {
+                    provider.bid(lineItem, response: response)
+                } else {
+                    response(.failure(SdkError("Line Item for demand '\(id)' with pricefloor \(pricefloor) was not found")))
+                }
+            default:
+                response(.failure(SdkError("Provider for demand '\(id)' was not found")))
             }
         }
         
@@ -48,13 +75,15 @@ struct ConcurentAuctionRound: PerformableAuctionRound {
     }
     
     func cancel() {
-        providers.forEach { $0.cancel() }
+        demands
+            .compactMap(provider)
+            .forEach { $0.cancel() }
     }
 }
 
 
-extension ConcurentAuctionRound {
-    static func == (lhs: ConcurentAuctionRound, rhs: ConcurentAuctionRound) -> Bool {
+extension ConcurrentAuctionRound {
+    static func == (lhs: ConcurrentAuctionRound, rhs: ConcurrentAuctionRound) -> Bool {
         return lhs.id == rhs.id
     }
     
@@ -64,10 +93,10 @@ extension ConcurentAuctionRound {
 }
 
 
-extension ConcurentAuctionRound: CustomStringConvertible {
+extension ConcurrentAuctionRound: CustomStringConvertible {
     var description: String {
-        return "Concurent auction round \(id). " +
-        "Timeout: \(timeout)s. Demand Providers: " +
-        providers.map { "\($0)" }.joined(separator: ", ")
+        return "Concurrent auction round \(id). " +
+        "Timeout: \(timeout)s. Demands: " +
+        demands.joined(separator: ", ")
     }
 }

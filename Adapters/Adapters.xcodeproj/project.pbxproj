@@ -18,10 +18,9 @@
 		42BA81B52875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42BA81BA2875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81B92875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift */; };
 		42BA81C22875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81C12875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift */; };
-		42BA81C52875D15C001F1744 /* GoogleMobileAdsParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81C42875D15C001F1744 /* GoogleMobileAdsParameters.swift */; };
-		42BA81C82875D5A6001F1744 /* BNGADResponseInfoWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81C72875D5A6001F1744 /* BNGADResponseInfoWrapper.swift */; };
-		42BA81DF28771290001F1744 /* BNGADFullscreenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81DE28771290001F1744 /* BNGADFullscreenAd.swift */; };
-		42BA81E12877188E001F1744 /* BNGADAdRewardWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81E02877188E001F1744 /* BNGADAdRewardWrapper.swift */; };
+		42BA81C82875D5A6001F1744 /* BDGADResponseInfoWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81C72875D5A6001F1744 /* BDGADResponseInfoWrapper.swift */; };
+		42BA81DF28771290001F1744 /* BDGADFullscreenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81DE28771290001F1744 /* BDGADFullscreenAd.swift */; };
+		42BA81E12877188E001F1744 /* BDGADAdRewardWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81E02877188E001F1744 /* BDGADAdRewardWrapper.swift */; };
 		42BA81EF2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81EE2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift */; };
 		42BA81F12877246F001F1744 /* EmptyReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F02877246F001F1744 /* EmptyReward.swift */; };
 		42BA81F328772515001F1744 /* BidMachineParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F228772515001F1744 /* BidMachineParameters.swift */; };
@@ -50,10 +49,9 @@
 		42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterGoogleMobileAds.h; sourceTree = "<group>"; };
 		42BA81B92875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsDemandSourceAdapter.swift; sourceTree = "<group>"; };
 		42BA81C12875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsFullscreenDemandProvider.swift; sourceTree = "<group>"; };
-		42BA81C42875D15C001F1744 /* GoogleMobileAdsParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsParameters.swift; sourceTree = "<group>"; };
-		42BA81C72875D5A6001F1744 /* BNGADResponseInfoWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNGADResponseInfoWrapper.swift; sourceTree = "<group>"; };
-		42BA81DE28771290001F1744 /* BNGADFullscreenAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNGADFullscreenAd.swift; sourceTree = "<group>"; };
-		42BA81E02877188E001F1744 /* BNGADAdRewardWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNGADAdRewardWrapper.swift; sourceTree = "<group>"; };
+		42BA81C72875D5A6001F1744 /* BDGADResponseInfoWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDGADResponseInfoWrapper.swift; sourceTree = "<group>"; };
+		42BA81DE28771290001F1744 /* BDGADFullscreenAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDGADFullscreenAd.swift; sourceTree = "<group>"; };
+		42BA81E02877188E001F1744 /* BDGADAdRewardWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDGADAdRewardWrapper.swift; sourceTree = "<group>"; };
 		42BA81EE2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineRewardedAdDemandProvider.swift; sourceTree = "<group>"; };
 		42BA81F02877246F001F1744 /* EmptyReward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReward.swift; sourceTree = "<group>"; };
 		42BA81F228772515001F1744 /* BidMachineParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineParameters.swift; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 				42BA81C02875AD7D001F1744 /* Demand */,
 				42BA81C62875D597001F1744 /* Wrapper */,
 				42BA81B92875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift */,
-				42BA81C42875D15C001F1744 /* GoogleMobileAdsParameters.swift */,
 				42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */,
 			);
 			path = BidOnAdapterGoogleMobileAds;
@@ -182,7 +179,7 @@
 			children = (
 				42BA81C12875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift */,
 				42BA820E287880DA001F1744 /* GoogleMobileAdsBannerDemandProvider.swift */,
-				42BA81DE28771290001F1744 /* BNGADFullscreenAd.swift */,
+				42BA81DE28771290001F1744 /* BDGADFullscreenAd.swift */,
 			);
 			path = Demand;
 			sourceTree = "<group>";
@@ -190,8 +187,8 @@
 		42BA81C62875D597001F1744 /* Wrapper */ = {
 			isa = PBXGroup;
 			children = (
-				42BA81C72875D5A6001F1744 /* BNGADResponseInfoWrapper.swift */,
-				42BA81E02877188E001F1744 /* BNGADAdRewardWrapper.swift */,
+				42BA81C72875D5A6001F1744 /* BDGADResponseInfoWrapper.swift */,
+				42BA81E02877188E001F1744 /* BDGADAdRewardWrapper.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -493,12 +490,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				42BA81BA2875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift in Sources */,
-				42BA81C52875D15C001F1744 /* GoogleMobileAdsParameters.swift in Sources */,
 				42BA820F287880DA001F1744 /* GoogleMobileAdsBannerDemandProvider.swift in Sources */,
-				42BA81E12877188E001F1744 /* BNGADAdRewardWrapper.swift in Sources */,
-				42BA81DF28771290001F1744 /* BNGADFullscreenAd.swift in Sources */,
+				42BA81E12877188E001F1744 /* BDGADAdRewardWrapper.swift in Sources */,
+				42BA81DF28771290001F1744 /* BDGADFullscreenAd.swift in Sources */,
 				42BA81C22875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift in Sources */,
-				42BA81C82875D5A6001F1744 /* BNGADResponseInfoWrapper.swift in Sources */,
+				42BA81C82875D5A6001F1744 /* BDGADResponseInfoWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

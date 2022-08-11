@@ -11,72 +11,94 @@ import UIKit
 
 @objc
 public final class BidOnSdk: NSObject {
-    private lazy var repository = AdaptersRepository()
-    private lazy var environment = EnvironmentRepository()
+    internal lazy var adaptersRepository = AdaptersRepository()
+    internal lazy var environmentRepository = EnvironmentRepository()
+    internal lazy var ext: [String : Any] = [:]
+    
+    @Injected(\.networkManager)
+    private var networkManager: NetworkManager
     
     @objc public static let sdkVersion = "0.1.0"
     
-    @objc public func initialize(completion: @escaping () -> ()) {
-        let initializable: [InitializableAdapter] = repository.all()
+    static let sharedSdk: BidOnSdk = BidOnSdk()
+    
+    private override init() {
+        super.init()
+    }
+    
+    @objc
+    public static var logLevel: Logger.Level {
+        get { Logger.level }
+        set { Logger.level = newValue }
+    }
+    
+    @objc
+    public static var baseURL: String {
+        get { sharedSdk.networkManager.baseURL }
+        set { sharedSdk.networkManager.baseURL = newValue }
+    }
+    
+    @objc
+    public static func initialize(
+        appKey: String,
+        completion: @escaping () -> () = {}
+    ) {
+        sharedSdk.initialize(
+            appKey: appKey,
+            completion: completion
+        )
+    }
+    
+    private func initialize(
+        appKey: String,
+        completion: @escaping () -> ()
+    ) {
         
-        Logger.add(OSLogDestination())
+        #warning("Incapsulate logic in tasks")
         
-        let group = DispatchGroup()
+        adaptersRepository.configure()
+        environmentRepository.configure(appKey: appKey)
         
-        initializable.forEach { adapter in
-            group.enter()
-            Logger.verbose("Initialize adapter: \(adapter.identifier)")
-            
-            adapter.initilize { error in
-                if let error = error {
-                    Logger.warning("Failed to initialize adapter: \(adapter.identifier) with error: \(error)")
-                } else {
-                    Logger.verbose("Complete adapter initialization \(adapter.identifier)")
-                }
-                group.leave()
-            }
+        let request = ConfigurationRequest { builder in
+            builder.withAdaptersRepository(adaptersRepository)
+            builder.withEnvironmentRepository(environmentRepository)
         }
         
-        group.notify(queue: .main) {
-            Logger.verbose("Initialize mediation")
-            completion()
+        networkManager.perform(request: request) { result in
+            switch result {
+            case .success(let response):
+                let group = DispatchGroup()
+                response.adaptersInitializationParameters.adapters.forEach { [unowned self] in
+                    if let adapter: InitializableAdapter = self.adaptersRepository[$0.key] {
+                        group.enter()
+                        adapter.initialize(from: $0.value) { result in
+                            Logger.info("Adapter \\($0.key)' initilized with result: \(result)")
+                            group.leave()
+                        }
+                    }
+                }
+                group.notify(queue: .main, execute: completion)
+            case .failure(let error):
+                Logger.error("Network error while initilizing BidOn SDK: \(error)")
+                DispatchQueue.main.async(execute: completion)
+            }
         }
     }
     
-    public func trackAdRevenue(
+    func trackAdRevenue(
         _ ad: Ad,
-        mediation: Mediation,
         auctionRound: String,
         adType: AdType
     ) {
-        let mmps: [MobileMeasurementPartnerAdapter] = repository.all()
+        let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
         mmps.forEach {
             Logger.verbose("MMP '\($0.identifier)' tracks \(adType.rawValue) ad revenue: \(ad.description)")
             
             $0.trackAdRevenue(
                 ad,
-                mediation: mediation,
                 auctionRound: auctionRound,
                 adType: adType
             )
         }
-    }
-}
-
-
-internal extension BidOnSdk {
-    func interstitialDemandProviders() -> [InterstitialDemandProvider] {
-        let sources: [InterstitialDemandSourceAdapter] = repository.all()
-        return sources.compactMap { try? $0.interstitial() }
-    }
-    
-    func rewardedAdDemandProviders() -> [RewardedAdDemandProvider] {
-        let sources: [RewardedAdDemandSourceAdapter] = repository.all()
-        return sources.compactMap { try? $0.rewardedAd() }
-    }
-    
-    func adViewDemandProviders(_ context: AdViewContext) -> [AdViewDemandProvider] {
-        let sources: [AdViewDemandSourceAdapter] = repository.all()
-        return sources.compactMap { try? $0.adView(context) }
     }
 }

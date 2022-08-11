@@ -13,48 +13,77 @@ import AppsFlyerAdRevenue
 
 @objc public final class AppsFlyerMobileMeasurementPartnerAdapter: NSObject {
     public let identifier: String = "appsflyer"
-    public let parameters: AppsFlyerParameters
+    public let name: String = "AppsFlyer"
+    public let version: String = "1"
+    public let sdkVersion: String = AppsFlyerLib.shared().getSDKVersion()
     
-    public init(parameters: AppsFlyerParameters) {
-        self.parameters = parameters
-        super.init()
-    }
+    var conversionData: [String: Any]?
+    
+    //    public init(parameters: AppsFlyerParameters) {
+    ////        self.parameters = parameters
+    //        super.init()
+    //    }
 }
 
 
-extension AppsFlyerMobileMeasurementPartnerAdapter: ParameterizedAdapter {
-    public typealias Parameters = AppsFlyerParameters
-    
-    @objc public convenience init(rawParameters: Data) throws {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+//extension AppsFlyerMobileMeasurementPartnerAdapter: ParameterizedAdapter {
+//    public typealias Parameters = AppsFlyerParameters
+//
+//    @objc public convenience init(rawParameters: Data) throws {
+//        let decoder = JSONDecoder()
+//        decoder.keyDecodingStrategy = .convertFromSnakeCase
+//
+//        let parameters = try decoder.decode(
+//            AppsFlyerParameters.self,
+//            from: rawParameters
+//        )
+//
+//        self.init(parameters: parameters)
+//    }
+//}
+
+
+//extension AppsFlyerMobileMeasurementPartnerAdapter: InitializableAdapter {
+//    public func initilize(_ completion: @escaping (Error?) -> ()) {
+//        AppsFlyerLib.shared().appsFlyerDevKey = parameters.devKey
+//        AppsFlyerLib.shared().appleAppID = parameters.appId
+//        AppsFlyerAdRevenue.start()
+//        AppsFlyerLib.shared().start { _, error in
+//            completion(error)
+//        }
+//    }
+//}
+
+
+extension AppsFlyerMobileMeasurementPartnerAdapter: ParametersEncodableAdapter {
+    public func encodeAdapterParameters(to encoder: Encoder) throws {
+        struct Parameters: Encodable {
+            var attributionId: String
+            var converstionData: String?
+        }
         
-        let parameters = try decoder.decode(
-            AppsFlyerParameters.self,
-            from: rawParameters
+        let attributionId = AppsFlyerLib.shared().getAppsFlyerUID()
+        let conversionData = self.conversionData
+            .flatMap { try? JSONSerialization.data(withJSONObject: $0, options: []) }
+            .flatMap { String(data: $0, encoding: .utf8) }
+        
+        let parameters = Parameters(
+            attributionId: attributionId,
+            converstionData: conversionData
         )
         
-        self.init(parameters: parameters)
-    }
-}
-
-
-extension AppsFlyerMobileMeasurementPartnerAdapter: InitializableAdapter {
-    public func initilize(_ completion: @escaping (Error?) -> ()) {
-        AppsFlyerLib.shared().appsFlyerDevKey = parameters.devKey
-        AppsFlyerLib.shared().appleAppID = parameters.appId
-        AppsFlyerAdRevenue.start()
-        AppsFlyerLib.shared().start { _, error in
-            completion(error)
-        }
+        try parameters.encode(to: encoder)
     }
 }
 
 
 extension AppsFlyerMobileMeasurementPartnerAdapter: MobileMeasurementPartnerAdapter {
+    public var attributionIdentifier: String? {
+        return AppsFlyerLib.shared().getAppsFlyerUID()
+    }
+    
     public func trackAdRevenue(
         _ ad: Ad,
-        mediation: Mediation,
         auctionRound: String,
         adType: AdType
     ) {
@@ -66,7 +95,7 @@ extension AppsFlyerMobileMeasurementPartnerAdapter: MobileMeasurementPartnerAdap
         
         AppsFlyerAdRevenue.shared().logAdRevenue(
             monetizationNetwork: ad.networkName,
-            mediationNetwork: mediation.appsFlyer,
+            mediationNetwork: .appodeal,
             eventRevenue: ad.price as NSNumber,
             revenueCurrency: ad.currency,
             additionalParameters: additionalParameters
@@ -74,13 +103,3 @@ extension AppsFlyerMobileMeasurementPartnerAdapter: MobileMeasurementPartnerAdap
     }
 }
 
-
-extension Mediation {
-    var appsFlyer: MediationNetworkType {
-        switch self {
-        case .applovin:     return .applovinMax
-        case .fyber:        return .fyber
-        case .ironsource:   return .ironSource
-        }
-    }
-}

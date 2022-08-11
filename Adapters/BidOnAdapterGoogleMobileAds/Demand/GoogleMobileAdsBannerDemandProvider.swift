@@ -12,11 +12,10 @@ import UIKit
 
 
 internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
-    private let item: (Price) -> LineItem?
     private let context: AdViewContext
     
     private var response: DemandProviderResponse?
-    private var _item: LineItem?
+    private var lineItem: LineItem?
     
     private lazy var banner: GADBannerView = {
         let banner = GADBannerView(adSize: context.adSize)
@@ -29,63 +28,60 @@ internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
             
             self.delegate?.provider(self, didPayRevenueFor: wrapped)
         }
-        return banner
+        return GADBannerView(adSize: GADAdSizeBanner)
     }()
     
     weak var delegate: DemandProviderDelegate?
     weak var adViewDelegate: DemandProviderAdViewDelegate?
 
-    init(
-        context: AdViewContext,
-        item: @escaping (Price) -> LineItem?
-    ) {
+    init(context: AdViewContext) {
         self.context = context
-        self.item = item
         super.init()
     }
 }
 
 
-extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
-    func request(
-        pricefloor: Price,
+extension GoogleMobileAdsBannerDemandProvider: DirectDemandProvider {
+    func bid(
+        _ lineItem: LineItem,
         response: @escaping DemandProviderResponse
     ) {
-        guard let item = item(pricefloor) else {
-            response(nil, SdkError.message("Line item was not found for pricefloor \(pricefloor)"))
-            return
-        }
-        
         self.response = response
-        self._item = item
-        
+
         let request = GADRequest()
-        banner.adUnitID = item.adUnitId
+        banner.adUnitID = lineItem.adUnitId
         banner.rootViewController = context.rootViewController
-        
+
         banner.load(request)
     }
-
-    func notify(_ event: AuctionEvent) {}
     
-    func cancel() {
-        response?(nil, SdkError.cancelled)
-        response = nil
+    func load(ad: Ad) {
+        
     }
     
+    func notify(_ event: AuctionEvent) {}
+
+    func cancel() {
+        response?(.failure(SdkError.cancelled))
+        response = nil
+    }
+}
+
+
+extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
     func adView(for ad: Ad) -> AdView? {
         return banner
     }
-    
+
     private func wrapped(ad: GADBannerView) -> Ad? {
         guard
             banner === ad,
-            let item = _item
+            let lineItem = lineItem
         else { return nil }
-        
-        return BNGADResponseInfoWrapper(
+
+        return BDGADResponseInfoWrapper(
             ad,
-            item: item
+            lineItem: lineItem
         )
     }
 }
@@ -94,25 +90,25 @@ extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
 extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
-        response?(wrapped, nil)
+        response?(.success(wrapped))
         response = nil
     }
-    
+
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         guard wrapped(ad: bannerView) != nil else { return }
-        response?(nil, SdkError(error))
+        response?(.failure(error))
     }
-    
+
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
         adViewDelegate?.provider(self, willPresentModalView: wrapped)
     }
-    
+
     func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
         adViewDelegate?.provider(self, didDismissModalView: wrapped)
     }
-    
+
     func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
         delegate?.provider(self, didClick: wrapped)
@@ -129,31 +125,9 @@ extension AdViewContext {
         default: return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(width)
         }
     }
-    
-    private var window: UIWindow? {
-        if let windon = rootViewController?.view.window {
-            return windon
-        }
-            
-        if #available(iOS 15, *) {
-            return UIApplication
-                .shared
-                .connectedScenes
-                .filter { $0.activationState == .foregroundActive }
-                .compactMap { $0 as? UIWindowScene }
-                .first?
-                .windows
-                .first
-        } else {
-            return UIApplication
-                .shared
-                .windows
-                .first
-        }
-    }
-    
+
     private var width: CGFloat {
-        guard let window = window else { return 0 }
+        guard let window = UIApplication.shared.bd.window else { return 0 }
         if #available(iOS 11, *) {
             return window.bounds.inset(by: window.safeAreaInsets).width
         } else {

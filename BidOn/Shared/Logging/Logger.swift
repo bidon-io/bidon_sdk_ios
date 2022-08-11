@@ -27,7 +27,12 @@ public class Logger: NSObject {
         case full = 1
     }
     
-    private static var destinations = Set<AnyLogDestination>()
+    private static var destinations: Set<AnyLogDestination> = {
+        let oslog = OSLogDestination()
+        let any = AnyLogDestination(oslog)
+        return Set([any])
+    }()
+    
     private static let queue = DispatchQueue(label: "com.ads.logger.queue")
     
     static func add(_ destination: LogDestination) {

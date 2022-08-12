@@ -37,15 +37,12 @@ struct HTTPClient {
     
     func request(
         _ route: String,
-        _ body: Data,
+        _ body: Data?,
         _ method: HTTPMethod,
         _ timeout: TimeInterval,
         _ headers: [HTTPHeader: String],
         completion: @escaping (Result<Data, HTTPError>) -> ()
     ) {
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        
         guard let url = URL(string: baseURL)?.appendingPathComponent(route) else {
             completion(.failure(.unsupportedURL))
             return
@@ -63,12 +60,7 @@ struct HTTPClient {
         }
         
         request.httpMethod = method.rawValue
-        
-        do {
-            request.httpBody = try encoder.encode(body)
-        } catch {
-            completion(.failure(.encoding(error)))
-        }
+        request.httpBody = body
         
         session.dataTask(with: request) { data, response, error in
             if let error = error {

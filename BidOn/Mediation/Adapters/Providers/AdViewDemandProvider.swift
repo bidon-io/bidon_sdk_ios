@@ -60,7 +60,7 @@ public enum AdViewFormat {
 }
 
 
-public protocol AdView: UIView {
+public protocol AdViewContainer: UIView {
     var isAdaptive: Bool { get }
 }
 
@@ -75,5 +75,5 @@ public protocol DemandProviderAdViewDelegate: AnyObject {
 public protocol AdViewDemandProvider: DemandProvider {
     var adViewDelegate: DemandProviderAdViewDelegate? { get set }
     
-    func adView(for ad: Ad) -> AdView? 
+    func container(for ad: Ad) -> AdViewContainer? 
 }

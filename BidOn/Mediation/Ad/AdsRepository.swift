@@ -16,10 +16,6 @@ extension AdsRepository {
         self.init("com.ads.ads-repository.queue")
     }
     
-    var pricefloor: Price {
-        objects.keys.reduce(Price.unknown) { max($0, $1.ad.price) }
-    }
-    
     var ads: [Ad] {
         return objects.keys.map { $0.ad }
     }
@@ -30,10 +26,14 @@ extension AdsRepository {
     }
     
     func provider(for ad: Ad) -> DemandProvider? {
+        return demand(for: ad)?.provider
+    }
+    
+    func demand(for ad: Ad) -> Demand? {
         let container = HashableAd(ad: ad)
         
         return queue.sync { [unowned self] in
-            return (self.objects[container] as? Demand)?.provider
+            return (self.objects[container] as? Demand)
         }
     }
 }

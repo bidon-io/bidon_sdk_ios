@@ -8,7 +8,10 @@
 import Foundation
 
 
-protocol AuctionController {}
+protocol AuctionController {
+    var id: String { get }
+    var waterfall: [Demand] { get }
+}
 
 
 protocol AuctionControllerDelegate: AnyObject {

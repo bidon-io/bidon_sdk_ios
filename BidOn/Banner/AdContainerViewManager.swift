@@ -42,7 +42,7 @@ final internal class AdContainerViewManager {
         timer = nil
     }
     
-    func layout(view: AdView, size: CGSize) {
+    func layout(view: AdViewContainer, size: CGSize) {
         guard
             let container = container,
             !container.subviews.contains(view)

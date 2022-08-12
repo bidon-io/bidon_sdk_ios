@@ -16,11 +16,12 @@ protocol ConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuil
 
 
 class BaseConcurrentAuctionControllerBuilder {
-    private(set) var resolver: AuctionResolver = HigherRevenueAuctionResolver()
+    private(set) var comparator: AuctionComparator = HigherPriceAuctionComparator()
     private(set) var delegate: AuctionControllerDelegate?
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
-
+    private(set) var auctionId: String = ""
+    
     private var rounds: [AuctionRound] = []
     private var lineItems: LineItems = []
     
@@ -41,8 +42,8 @@ class BaseConcurrentAuctionControllerBuilder {
     }
     
     @discardableResult
-    public func withResolver(_ resolver: AuctionResolver) -> Self {
-        self.resolver = resolver
+    public func withComparator(_ comparator: AuctionComparator) -> Self {
+        self.comparator = comparator
         return self
     }
     
@@ -59,6 +60,14 @@ class BaseConcurrentAuctionControllerBuilder {
     ) -> Self {
         self.rounds = rounds
         self.lineItems = lineItems
+        return self
+    }
+    
+    @discardableResult
+    public func withAuctionId(
+        _ auctionId: String
+    ) -> Self {
+        self.auctionId = auctionId
         return self
     }
     

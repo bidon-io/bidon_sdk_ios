@@ -57,9 +57,11 @@ struct ConcurrentAuctionRound: PerformableAuctionRound {
             
             switch provider(id) {
             case let provider as ProgrammaticDemandProvider:
+                Logger.verbose("Request programmatic bid for '\(id)' with pricefloor: \(pricefloor) through: \(provider)")
                 provider.bid(pricefloor, response: response)
             case let provider as DirectDemandProvider:
                 if let lineItem = lineItems.item(for: id, pricefloor: pricefloor) {
+                    Logger.verbose("Request direct bid for '\(id)' with item: \(lineItem) through: \(provider)")
                     provider.bid(lineItem, response: response)
                 } else {
                     response(.failure(SdkError("Line Item for demand '\(id)' with pricefloor \(pricefloor) was not found")))

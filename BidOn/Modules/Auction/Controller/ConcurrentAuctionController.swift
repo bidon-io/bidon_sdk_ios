@@ -12,8 +12,17 @@ internal typealias ConcurrentAuction = Auction<ConcurrentAuctionRound>
 
 
 final class ConcurrentAuctionController: AuctionController {
+    var waterfall: [Demand] {
+        repository
+            .ads
+            .sorted { comparator.compare($0, $1) }
+            .compactMap { repository.demand(for: $0) }
+    }
+    
+    let id: String
+    
     private let auction: ConcurrentAuction
-    private let resolver: AuctionResolver
+    private let comparator: AuctionComparator
     private let adType: AdType
     private let pricefloor: Price
     
@@ -24,84 +33,67 @@ final class ConcurrentAuctionController: AuctionController {
     
     private var roundTimer: Timer?
     
-    private(set) public var winner: Ad?
+    private var currentPrice: Price {
+        let current = repository
+            .ads
+            .sorted { comparator.compare($0, $1) }
+            .first?
+            .price
+        return current ?? pricefloor
+    }
     
     init<T>(_ build: (T) -> ()) where T: ConcurrentAuctionControllerBuilder {
         let builder = T()
         build(builder)
-    
-        self.resolver = builder.resolver
+        
+        self.id = builder.auctionId
+        self.comparator = builder.comparator
         self.auction = builder.auction
         self.pricefloor = builder.pricefloor
         self.adType = builder.adType
     }
     
-    public var isEmpty: Bool {
-        return repository.isEmpty
-    }
-    
-    public func load() {
+    func load() {
         guard active.isEmpty else { return }
         
-        winner = nil
         repository.clear()
         
-        Logger.verbose("Auction controller will perform \(adType.rawValue) auction: \(auction)")
+        Logger.verbose("\(adType.rawValue.capitalized) auction will perform: \(auction)")
         
         delegate?.controllerDidStartAuction(self)
         auction.root.forEach(perform)
     }
     
-    public func provider<T>(for ad: Ad) -> T? {
+    private func provider<T>(for ad: Ad) -> T? {
         return repository.provider(for: ad) as? T
     }
     
-    public func finish(
-        completion: ((DemandProvider?, Ad?, Error?) -> ())? = nil
-    ) {
-        if let winner = winner {
-            let provider = repository.provider(for: winner)
-            completion?(provider, winner, nil)
-            return
-        }
+    private func finish() {
+        Logger.verbose("\(adType.rawValue.capitalized) auction did complete")
         
-        Logger.verbose("Complete auction")
-        
-        let ads = repository.ads
         active.forEach { $0.cancel() }
         active.removeAll()
-        resolver.resolve(ads: ads) { [weak self] ad in
-            guard let self = self else { return }
-            guard let ad = ad else {
-                self.delegate?.controller(self, failedAuction: SdkError.internalInconsistency)
-                completion?(nil, nil, SdkError.internalInconsistency)
-                return
+        
+        let ads = repository.ads.sorted { comparator.compare($0, $1) }
+        
+        if let winner = ads.first {
+            ads.suffix(ads.count - 1).forEach {
+                let provider = repository.provider(for: $0)
+                provider?.notify(.lose(winner))
             }
             
-            var provider: DemandProvider?
+            let provider = repository.provider(for: winner)
+            provider?.notify(.win(winner))
             
-            ads.forEach { _ad in
-                let _provider = self.repository.provider(for: _ad)
-                
-                if _ad.id == ad.id {
-                    _provider?.notify(.win(ad))
-                    provider = _provider
-                } else {
-                    _provider?.notify(.lose(ad))
-                }
-            }
-            
-            Logger.verbose("Auction controller did resolve winner of \(self.adType.rawValue) auction is \(ad.description)")
-            
-            self.winner = ad
-            self.delegate?.controller(self, completeAuction: ad)
-            
-            completion?(provider, ad, nil)
+            Logger.verbose("\(adType.rawValue.capitalized) auction did found winner: \(winner.description)")
+            delegate?.controller(self, completeAuction: winner)
+        } else {
+            delegate?.controller(self, failedAuction: SdkError.internalInconsistency)
         }
     }
     
-    func perform(round: ConcurrentAuctionRound) {
-        let pricefloor = repository.pricefloor
+    private func perform(round: ConcurrentAuctionRound) {
+        let pricefloor = currentPrice
         let adType = self.adType
         
         active.insert(round)
@@ -109,7 +101,7 @@ final class ConcurrentAuctionController: AuctionController {
         
         if round.timeout.isNormal {
             let timer = Timer.scheduledTimer(withTimeInterval: round.timeout, repeats: false) { _ in
-                Logger.warning("Auction controller \(adType.rawValue) \(round) execution exceeded timeout.")
+                Logger.warning("\(adType.rawValue.capitalized) auction \(round) execution exceeded timeout.")
                 round.cancel()
             }
             RunLoop.current.add(timer, forMode: .default)
@@ -124,18 +116,18 @@ final class ConcurrentAuctionController: AuctionController {
                 case .success(let demand):
                     self?.receive(demand: demand)
                 case .failure(let error):
-                    Logger.debug("Error during round: \(error)")
+                    Logger.debug("\(adType.rawValue.capitalized) auction round: \(round) did receive error: \(error)")
                 }
             },
             completion: { [weak self] in
                 guard let self = self else { return }
                 
-                Logger.verbose("Complete \(round)")
+                Logger.verbose("\(adType.rawValue.capitalized) auction complete round: \(round)")
 
                 self.delegate?.controller(self, didCompleteRound: round)
                 self.active.remove(round)
                 self.roundTimer?.invalidate()
-
+                
                 let seeds = self.auction.seeds(of: round)
                 if seeds.isEmpty && self.active.isEmpty {
                     self.finish()
@@ -146,8 +138,13 @@ final class ConcurrentAuctionController: AuctionController {
         )
     }
     
-    func receive(demand: Demand) {
-        Logger.verbose("Auction controller did receive \(adType.rawValue) ad: \(demand.ad.description) from \(demand.provider)")
+    private func receive(demand: Demand) {
+        guard demand.ad.price > pricefloor else {
+            Logger.debug("\(adType.rawValue.capitalized) auction received bid: \(demand.ad.description) price is lower than pricefloor: \(pricefloor)")
+            return
+        }
+        
+        Logger.verbose("\(adType.rawValue.capitalized) auction did receive bid: \(demand.ad.description) from \(demand.provider)")
         
         repository.register(demand: demand)
         

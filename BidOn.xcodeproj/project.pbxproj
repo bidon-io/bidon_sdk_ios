@@ -19,7 +19,7 @@
 		42389DEC2872F497006024BA /* AdaptersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DEB2872F497006024BA /* AdaptersRepository.swift */; };
 		42389DEE2872F52A006024BA /* AdsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DED2872F52A006024BA /* AdsRepository.swift */; };
 		42389DF02872F57D006024BA /* Ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DEF2872F57D006024BA /* Ad.swift */; };
-		42389DF22872F63F006024BA /* AuctionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF12872F63F006024BA /* AuctionResolver.swift */; };
+		42389DF22872F63F006024BA /* AuctionComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF12872F63F006024BA /* AuctionComparator.swift */; };
 		42389E1228745C6A006024BA /* InterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E1128745C6A006024BA /* InterstitialDemandProvider.swift */; };
 		42389E172874665A006024BA /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389E162874665A006024BA /* UIApplication+Extensions.swift */; };
 		4243092A28A28F46002360B0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243092928A28F46002360B0 /* Request.swift */; };
@@ -47,6 +47,11 @@
 		426DD7A828A550CF00A1ADF5 /* InterstitialConcurrentAuctionControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7A728A550CF00A1ADF5 /* InterstitialConcurrentAuctionControllerBuilder.swift */; };
 		426DD7AA28A550F700A1ADF5 /* AdViewConcurrentAuctionControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7A928A550F700A1ADF5 /* AdViewConcurrentAuctionControllerBuilder.swift */; };
 		426DD7AC28A5511500A1ADF5 /* RewardedConcurrentAuctionControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7AB28A5511500A1ADF5 /* RewardedConcurrentAuctionControllerBuilder.swift */; };
+		426DD7B128A681A300A1ADF5 /* AdObjectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7B028A681A300A1ADF5 /* AdObjectDelegate.swift */; };
+		426DD7B328A68BF400A1ADF5 /* FullscreenAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7B228A68BF400A1ADF5 /* FullscreenAdDelegate.swift */; };
+		426DD7B628A68D9400A1ADF5 /* RewardedAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7B528A68D9400A1ADF5 /* RewardedAdDelegate.swift */; };
+		426DD7B828A68EC400A1ADF5 /* AdViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7B728A68EC400A1ADF5 /* AdViewDelegate.swift */; };
+		426DD7BC28A696C600A1ADF5 /* Waterfall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7BB28A696C600A1ADF5 /* Waterfall.swift */; };
 		428CCBF428A11190003123EF /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF328A11190003123EF /* EnvironmentManager.swift */; };
 		428CCBF728A12C8D003123EF /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF628A12C8D003123EF /* Date+Extensions.swift */; };
 		428CCBF928A13AD8003123EF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF828A13AD8003123EF /* NetworkManager.swift */; };
@@ -91,7 +96,7 @@
 		42389DEB2872F497006024BA /* AdaptersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptersRepository.swift; sourceTree = "<group>"; };
 		42389DED2872F52A006024BA /* AdsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsRepository.swift; sourceTree = "<group>"; };
 		42389DEF2872F57D006024BA /* Ad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad.swift; sourceTree = "<group>"; };
-		42389DF12872F63F006024BA /* AuctionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionResolver.swift; sourceTree = "<group>"; };
+		42389DF12872F63F006024BA /* AuctionComparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionComparator.swift; sourceTree = "<group>"; };
 		42389E1128745C6A006024BA /* InterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialDemandProvider.swift; sourceTree = "<group>"; };
 		42389E162874665A006024BA /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		4243092928A28F46002360B0 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -119,6 +124,11 @@
 		426DD7A728A550CF00A1ADF5 /* InterstitialConcurrentAuctionControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialConcurrentAuctionControllerBuilder.swift; sourceTree = "<group>"; };
 		426DD7A928A550F700A1ADF5 /* AdViewConcurrentAuctionControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewConcurrentAuctionControllerBuilder.swift; sourceTree = "<group>"; };
 		426DD7AB28A5511500A1ADF5 /* RewardedConcurrentAuctionControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedConcurrentAuctionControllerBuilder.swift; sourceTree = "<group>"; };
+		426DD7B028A681A300A1ADF5 /* AdObjectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdObjectDelegate.swift; sourceTree = "<group>"; };
+		426DD7B228A68BF400A1ADF5 /* FullscreenAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenAdDelegate.swift; sourceTree = "<group>"; };
+		426DD7B528A68D9400A1ADF5 /* RewardedAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdDelegate.swift; sourceTree = "<group>"; };
+		426DD7B728A68EC400A1ADF5 /* AdViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewDelegate.swift; sourceTree = "<group>"; };
+		426DD7BB28A696C600A1ADF5 /* Waterfall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waterfall.swift; sourceTree = "<group>"; };
 		428CCBF328A11190003123EF /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
 		428CCBF628A12C8D003123EF /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		428CCBF828A13AD8003123EF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -193,7 +203,7 @@
 				4299A41E289BC9120062C580 /* Shared */,
 				4299A425289BCE460062C580 /* Networking */,
 				4299A41F289BC9560062C580 /* Modules */,
-				4299A422289BCDA90062C580 /* AdObjects */,
+				4299A422289BCDA90062C580 /* Mediation */,
 				42BA820528785464001F1744 /* Banner */,
 				422101962859E2B3006596DA /* SDK */,
 				422101812859E29A006596DA /* BidOn.h */,
@@ -204,6 +214,7 @@
 		422101962859E2B3006596DA /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				426DD7B428A68BF700A1ADF5 /* Delegates */,
 				426DD7A228A5004200A1ADF5 /* Sdk.swift */,
 				422101972859E2C3006596DA /* BidOnSdk.swift */,
 				4299A423289BCDBC0062C580 /* Interstitial.swift */,
@@ -319,6 +330,44 @@
 			path = Wrappers;
 			sourceTree = "<group>";
 		};
+		426DD7AF28A6811800A1ADF5 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				42BA81AB28758AC6001F1744 /* ConcurrentAuctionControllerBuilder.swift */,
+				426DD7A728A550CF00A1ADF5 /* InterstitialConcurrentAuctionControllerBuilder.swift */,
+				426DD7A928A550F700A1ADF5 /* AdViewConcurrentAuctionControllerBuilder.swift */,
+				426DD7AB28A5511500A1ADF5 /* RewardedConcurrentAuctionControllerBuilder.swift */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		426DD7B428A68BF700A1ADF5 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				426DD7B028A681A300A1ADF5 /* AdObjectDelegate.swift */,
+				426DD7B228A68BF400A1ADF5 /* FullscreenAdDelegate.swift */,
+				426DD7B528A68D9400A1ADF5 /* RewardedAdDelegate.swift */,
+				426DD7B728A68EC400A1ADF5 /* AdViewDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		426DD7B928A6969C00A1ADF5 /* Waterfall */ = {
+			isa = PBXGroup;
+			children = (
+				426DD7BA28A696B800A1ADF5 /* Models */,
+			);
+			path = Waterfall;
+			sourceTree = "<group>";
+		};
+		426DD7BA28A696B800A1ADF5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				426DD7BB28A696C600A1ADF5 /* Waterfall.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		428CCBF528A12C30003123EF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				4243092F28A2B91B002360B0 /* Environment */,
+				426DD7B928A6969C00A1ADF5 /* Waterfall */,
 				4299A420289BC9610062C580 /* Auction */,
 			);
 			path = Modules;
@@ -354,12 +404,13 @@
 			isa = PBXGroup;
 			children = (
 				429EE2CA286D9995009439C6 /* Models */,
+				426DD7AF28A6811800A1ADF5 /* Builders */,
 				429EE2CB286D99AE009439C6 /* Controller */,
 			);
 			path = Auction;
 			sourceTree = "<group>";
 		};
-		4299A422289BCDA90062C580 /* AdObjects */ = {
+		4299A422289BCDA90062C580 /* Mediation */ = {
 			isa = PBXGroup;
 			children = (
 				4243093028A2BBC0002360B0 /* Ad */,
@@ -367,7 +418,7 @@
 				42BA81DA28770B5D001F1744 /* Reward.swift */,
 				426DD78C28A3EDD900A1ADF5 /* LineItem.swift */,
 			);
-			path = AdObjects;
+			path = Mediation;
 			sourceTree = "<group>";
 		};
 		4299A425289BCE460062C580 /* Networking */ = {
@@ -414,12 +465,8 @@
 			isa = PBXGroup;
 			children = (
 				429EE2D0286DD0E2009439C6 /* ConcurrentAuctionController.swift */,
-				42BA81AB28758AC6001F1744 /* ConcurrentAuctionControllerBuilder.swift */,
-				426DD7A728A550CF00A1ADF5 /* InterstitialConcurrentAuctionControllerBuilder.swift */,
-				426DD7A928A550F700A1ADF5 /* AdViewConcurrentAuctionControllerBuilder.swift */,
-				426DD7AB28A5511500A1ADF5 /* RewardedConcurrentAuctionControllerBuilder.swift */,
 				42BA81A928758A90001F1744 /* AuctionController.swift */,
-				42389DF12872F63F006024BA /* AuctionResolver.swift */,
+				42389DF12872F63F006024BA /* AuctionComparator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -528,14 +575,17 @@
 				4243093828A2BCBE002360B0 /* UserModel.swift in Sources */,
 				4221019A2859E35C006596DA /* Adapter.swift in Sources */,
 				4243093428A2BC4C002360B0 /* SessionModel.swift in Sources */,
-				42389DF22872F63F006024BA /* AuctionResolver.swift in Sources */,
+				42389DF22872F63F006024BA /* AuctionComparator.swift in Sources */,
+				426DD7B628A68D9400A1ADF5 /* RewardedAdDelegate.swift in Sources */,
 				426DD78B28A3E88100A1ADF5 /* AuctionRequest.swift in Sources */,
 				421D48CB2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift in Sources */,
 				42389DEE2872F52A006024BA /* AdsRepository.swift in Sources */,
 				421D48E8288844DA007DE2E4 /* LogDestination.swift in Sources */,
 				4243092A28A28F46002360B0 /* Request.swift in Sources */,
 				42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */,
+				426DD7B828A68EC400A1ADF5 /* AdViewDelegate.swift in Sources */,
 				42D047E2289D5EEE0096A8C6 /* App.swift in Sources */,
+				426DD7B128A681A300A1ADF5 /* AdObjectDelegate.swift in Sources */,
 				42D047EF289D6A380096A8C6 /* EnvironmentRepository.swift in Sources */,
 				42D047F1289D73F80096A8C6 /* GeoManager.swift in Sources */,
 				42BA81DB28770B5D001F1744 /* Reward.swift in Sources */,
@@ -557,6 +607,7 @@
 				4243093228A2BBFF002360B0 /* DeviceModel.swift in Sources */,
 				429EE2DB286F1C8C009439C6 /* ConcurentAuctionRound.swift in Sources */,
 				4243093E28A3AD07002360B0 /* AdaptersInitialisationParameters.swift in Sources */,
+				426DD7BC28A696C600A1ADF5 /* Waterfall.swift in Sources */,
 				42677B3F28A16EC4006F321D /* AdaptersInfoModel.swift in Sources */,
 				42BA820928785506001F1744 /* AdContainerViewManager.swift in Sources */,
 				426DD79128A3EF5C00A1ADF5 /* AuctionRoundModel.swift in Sources */,
@@ -580,6 +631,7 @@
 				42BA82072878547C001F1744 /* AdContainerView.swift in Sources */,
 				4299A427289BCF3F0062C580 /* HTTPClient.swift in Sources */,
 				42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */,
+				426DD7B328A68BF400A1ADF5 /* FullscreenAdDelegate.swift in Sources */,
 				42389DEC2872F497006024BA /* AdaptersRepository.swift in Sources */,
 				42BA81D7287702B6001F1744 /* RewardedAdDemandProvider.swift in Sources */,
 				42D047EB289D60260096A8C6 /* DeviceManager.swift in Sources */,

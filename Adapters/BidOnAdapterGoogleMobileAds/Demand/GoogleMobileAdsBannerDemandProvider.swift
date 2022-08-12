@@ -69,7 +69,7 @@ extension GoogleMobileAdsBannerDemandProvider: DirectDemandProvider {
 
 
 extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
-    func adView(for ad: Ad) -> AdView? {
+    func container(for ad: Ad) -> AdViewContainer? {
         return banner
     }
 
@@ -137,6 +137,6 @@ extension AdViewContext {
 }
 
 
-extension GADBannerView: AdView {
+extension GADBannerView: AdViewContainer {
     public var isAdaptive: Bool { return true }
 }

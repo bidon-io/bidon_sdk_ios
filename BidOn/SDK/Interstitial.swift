@@ -9,7 +9,7 @@ import Foundation
 
 
 @objc(BDInterstitial)
-public final class Interstitial: NSObject {
+public final class Interstitial: NSObject, FullscreenAd {
     fileprivate enum State {
         case idle
         case preparing
@@ -26,6 +26,8 @@ public final class Interstitial: NSObject {
        
     private var state: State = .idle
     
+    @objc public var delegate: FullscreenAdDelegate?
+    
     @objc public let placement: String
     
     @objc public init(placement: String = "") {
@@ -38,11 +40,14 @@ public final class Interstitial: NSObject {
             Logger.warning("Trying to load already loading interstitial")
             return
         }
+                
+        let auctionId: String = UUID().uuidString
         
         let request = AuctionRequest { (builder: InterstitialAuctionRequestBuilder) in
             builder.withPlacement(placement)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withAuctionId(auctionId)
             builder.withExt(sdk.ext)
         }
         
@@ -57,6 +62,8 @@ public final class Interstitial: NSObject {
                     builder.withAdaptersRepository(self.sdk.adaptersRepository)
                     builder.withRounds(response.rounds, lineItems: response.lineItems)
                     builder.withPricefloor(response.minPrice)
+                    builder.withDelegate(self)
+                    builder.withAuctionId(auctionId)
                 }
                 
                 auction.load()
@@ -65,9 +72,53 @@ public final class Interstitial: NSObject {
                 break
             case .failure(let error):
                 self.state = .idle
-                break
+                self.delegate?.adObject(self, didFailToLoadAd: error)
             }
         }
+    }
+}
+
+
+extension Interstitial: AuctionControllerDelegate {
+    func controllerDidStartAuction(_ controller: AuctionController) {}
+    
+    func controller(
+        _ contoller: AuctionController,
+        didStartRound round: AuctionRound,
+        pricefloor: Price
+    ) {
+        delegate?.adObject?(
+            self,
+            didStartAuctionRound: round.id,
+            pricefloor: pricefloor
+        )
+    }
+    
+    func controller(
+        _ controller: AuctionController,
+        didReceiveAd ad: Ad,
+        provider: DemandProvider
+    ) {
+        delegate?.adObject?(self, didReceiveBid: ad)
+    }
+    
+    func controller(
+        _ contoller: AuctionController,
+        didCompleteRound round: AuctionRound
+    ) {
+        delegate?.adObject?(
+            self,
+            didCompleteAuctionRound: round.id
+        )
+    }
+    
+    func controller(_ controller: AuctionController, completeAuction winner: Ad) {
+        delegate?.adObject?(self, didCompleteAuction: winner)
+    }
+    
+    func controller(_ controller: AuctionController, failedAuction error: Error) {
+        delegate?.adObject?(self, didCompleteAuction: nil)
+        delegate?.adObject(self, didFailToLoadAd: error)
     }
 }
 

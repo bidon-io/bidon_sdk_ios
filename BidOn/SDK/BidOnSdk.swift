@@ -68,11 +68,12 @@ public final class BidOnSdk: NSObject {
             switch result {
             case .success(let response):
                 let group = DispatchGroup()
-                response.adaptersInitializationParameters.adapters.forEach { [unowned self] in
-                    if let adapter: InitializableAdapter = self.adaptersRepository[$0.key] {
+                response.adaptersInitializationParameters.adapters.forEach { [unowned self] parameters in
+                    if let adapter: InitializableAdapter = self.adaptersRepository[parameters.key] {
                         group.enter()
-                        adapter.initialize(from: $0.value) { result in
-                            Logger.info("Adapter \\($0.key)' initilized with result: \(result)")
+                        let name = adapter.name
+                        adapter.initialize(from: parameters.value) { result in
+                            Logger.info("\(name) adapter initilized with result: \(result)")
                             group.leave()
                         }
                     }
@@ -102,3 +103,8 @@ public final class BidOnSdk: NSObject {
         }
     }
 }
+
+
+extension Result {
+    
+}//<Void, SdkError>

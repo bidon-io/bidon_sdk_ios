@@ -43,11 +43,11 @@ open class AdContainerView: UIView {
         refresh()
     }
     
-    open func fetch(_ completion: @escaping (AdView?) -> ()) {}
+    open func fetch(_ completion: @escaping (AdViewContainer?) -> ()) {}
     open func loadAd() {}
     open func preferredSize() -> CGSize { .zero }
     
-    final func layout(adView: AdView) {
+    final func layout(adView: AdViewContainer) {
         DispatchQueue.main.async { [weak self, weak adView] in
             guard
                 let self = self,

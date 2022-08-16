@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias Demand = (ad: Ad, provider: DemandProvider)
+
 typealias AuctionRoundDemandResponse = (Result<Demand, SdkError>) -> ()
 typealias AuctionRoundCompletion = () -> ()
 

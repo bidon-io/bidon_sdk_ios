@@ -17,7 +17,7 @@ internal typealias DemandSourceAdapter = InitializableAdapter & InterstitialDema
 public final class GoogleMobileAdsDemandSourceAdapter: NSObject, DemandSourceAdapter {
     public let identifier: String = "admob"
     public let name: String = "Google Mobile Ads"
-    public let version: String = "1"
+    public let adapterVersion: String = "1"
     public let sdkVersion: String = GADMobileAds.sharedInstance().sdkVersion
     
     public func initialize(

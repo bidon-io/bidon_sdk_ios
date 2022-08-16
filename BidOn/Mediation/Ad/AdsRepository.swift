@@ -8,7 +8,7 @@
 import Foundation
 
 
-internal typealias AdsRepository = Repository<HashableAd, Demand>
+internal typealias AdsRepository = Repository<HashableAd, DemandProvider>
 
 
 extension AdsRepository {
@@ -31,9 +31,8 @@ extension AdsRepository {
     
     func demand(for ad: Ad) -> Demand? {
         let container = HashableAd(ad: ad)
+        let provider: DemandProvider? = self[container]
         
-        return queue.sync { [unowned self] in
-            return (self.objects[container] as? Demand)
-        }
+        return provider.map { (ad, $0) }
     }
 }

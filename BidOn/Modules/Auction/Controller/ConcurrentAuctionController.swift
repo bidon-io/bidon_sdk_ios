@@ -12,11 +12,13 @@ internal typealias ConcurrentAuction = Auction<ConcurrentAuctionRound>
 
 
 final class ConcurrentAuctionController: AuctionController {
-    var waterfall: [Demand] {
-        repository
-            .ads
-            .sorted { comparator.compare($0, $1) }
-            .compactMap { repository.demand(for: $0) }
+    var waterfall: Waterfall {
+        Waterfall(
+            repository
+                .ads
+                .sorted { comparator.compare($0, $1) }
+                .compactMap { repository.demand(for: $0) }
+        )
     }
     
     let id: String
@@ -26,7 +28,7 @@ final class ConcurrentAuctionController: AuctionController {
     private let adType: AdType
     private let pricefloor: Price
     
-    private weak var delegate: AuctionControllerDelegate?
+    weak var delegate: AuctionControllerDelegate?
     
     private lazy var active = Set<ConcurrentAuctionRound>()
     private lazy var repository = AdsRepository()
@@ -47,6 +49,7 @@ final class ConcurrentAuctionController: AuctionController {
         build(builder)
         
         self.id = builder.auctionId
+        self.delegate = builder.delegate
         self.comparator = builder.comparator
         self.auction = builder.auction
         self.pricefloor = builder.pricefloor
@@ -123,7 +126,7 @@ final class ConcurrentAuctionController: AuctionController {
                 guard let self = self else { return }
                 
                 Logger.verbose("\(adType.rawValue.capitalized) auction complete round: \(round)")
-
+                
                 self.delegate?.controller(self, didCompleteRound: round)
                 self.active.remove(round)
                 self.roundTimer?.invalidate()

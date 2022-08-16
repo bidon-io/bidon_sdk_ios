@@ -26,14 +26,14 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BDGAD
                     let wrapped = self.wrapped(ad: fullscreenAd)
                 else { return }
                 
-                self.delegate?.provider(self, didPayRevenueFor: wrapped)
+                self.revenueDelegate?.provider(self, didPayRevenueFor: wrapped)
             }
         }
     }
     
     weak var delegate: DemandProviderDelegate?
+    weak var revenueDelegate: DemandProviderRevenueDelegate?
     weak var rewardDelegate: DemandProviderRewardDelegate?
-    
     
     func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         guard let wrapped = wrapped(ad: ad) else { return }
@@ -102,8 +102,16 @@ extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
         }
     }
     
-    func load(ad: Ad) {
+    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+        guard
+            let fullscreenAd = fullscreenAd,
+            ad.id == wrapped(ad: fullscreenAd)?.id
+        else {
+            response(.failure(SdkError("Invalid ad")))
+            return
+        }
         
+        response(.success(ad))
     }
     
     func notify(_ event: AuctionEvent) {}

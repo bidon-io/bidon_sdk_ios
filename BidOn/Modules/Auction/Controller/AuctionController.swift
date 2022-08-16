@@ -10,7 +10,10 @@ import Foundation
 
 protocol AuctionController {
     var id: String { get }
-    var waterfall: [Demand] { get }
+    var waterfall: Waterfall { get }
+    var delegate: AuctionControllerDelegate? { get }
+    
+    func load()
 }
 
 

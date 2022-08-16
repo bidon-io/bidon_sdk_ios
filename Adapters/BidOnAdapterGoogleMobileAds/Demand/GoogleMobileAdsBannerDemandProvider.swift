@@ -26,14 +26,15 @@ internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
                 let wrapped = self.wrapped(ad: self.banner)
             else { return }
             
-            self.delegate?.provider(self, didPayRevenueFor: wrapped)
+            self.revenueDelegate?.provider(self, didPayRevenueFor: wrapped)
         }
         return GADBannerView(adSize: GADAdSizeBanner)
     }()
     
     weak var delegate: DemandProviderDelegate?
+    weak var revenueDelegate: DemandProviderRevenueDelegate?
     weak var adViewDelegate: DemandProviderAdViewDelegate?
-
+    
     init(context: AdViewContext) {
         self.context = context
         super.init()
@@ -47,20 +48,25 @@ extension GoogleMobileAdsBannerDemandProvider: DirectDemandProvider {
         response: @escaping DemandProviderResponse
     ) {
         self.response = response
-
+        
         let request = GADRequest()
         banner.adUnitID = lineItem.adUnitId
         banner.rootViewController = context.rootViewController
-
+        
         banner.load(request)
     }
     
-    func load(ad: Ad) {
+    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+        guard ad.id == wrapped(ad: banner)?.id else {
+            response(.failure(SdkError("Invalid ad")))
+            return
+        }
         
+        response(.success(ad))
     }
     
     func notify(_ event: AuctionEvent) {}
-
+    
     func cancel() {
         response?(.failure(SdkError.cancelled))
         response = nil
@@ -72,13 +78,13 @@ extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
     func container(for ad: Ad) -> AdViewContainer? {
         return banner
     }
-
+    
     private func wrapped(ad: GADBannerView) -> Ad? {
         guard
             banner === ad,
             let lineItem = lineItem
         else { return nil }
-
+        
         return BDGADResponseInfoWrapper(
             ad,
             lineItem: lineItem
@@ -93,22 +99,22 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
         response?(.success(wrapped))
         response = nil
     }
-
+    
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         guard wrapped(ad: bannerView) != nil else { return }
         response?(.failure(error))
     }
-
+    
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
         adViewDelegate?.provider(self, willPresentModalView: wrapped)
     }
-
+    
     func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
         adViewDelegate?.provider(self, didDismissModalView: wrapped)
     }
-
+    
     func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
         guard let wrapped = wrapped(ad: bannerView) else { return }
         delegate?.provider(self, didClick: wrapped)
@@ -125,7 +131,7 @@ extension AdViewContext {
         default: return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(width)
         }
     }
-
+    
     private var width: CGFloat {
         guard let window = UIApplication.shared.bd.window else { return 0 }
         if #available(iOS 11, *) {

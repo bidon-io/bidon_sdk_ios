@@ -11,4 +11,5 @@ import Foundation
 #warning("Fill in all required fields")
 protocol User: Environment {
     var idfa: String { get }
+    var boo: String { get }
 }

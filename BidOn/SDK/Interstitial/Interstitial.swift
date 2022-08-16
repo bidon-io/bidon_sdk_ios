@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 @objc(BDInterstitial)
@@ -14,8 +15,9 @@ public final class Interstitial: NSObject, FullscreenAd {
         case idle
         case preparing
         case auction(controller: AuctionController)
-        case loading
-        case impression
+        case loading(controller: WaterfallController)
+        case ready(demand: Demand)
+        case impression(controller: FullscreenImpressionController)
     }
     
     @Injected(\.networkManager)
@@ -76,6 +78,18 @@ public final class Interstitial: NSObject, FullscreenAd {
             }
         }
     }
+    
+    @objc public func show(from rootViewController: UIViewController) {
+        switch state {
+        case .ready(let demand):
+            let controller = try! FullscreenImpressionController(demand: demand)
+            state = .impression(controller: controller)
+            controller.delegate = self
+            controller.show(from: rootViewController)
+        default:
+            delegate?.fullscreenAd(self, didFailToPresentAd: SdkError.invalidPresentationState)
+        }
+    }
 }
 
 
@@ -114,11 +128,50 @@ extension Interstitial: AuctionControllerDelegate {
     
     func controller(_ controller: AuctionController, completeAuction winner: Ad) {
         delegate?.adObject?(self, didCompleteAuction: winner)
+        let waterfall = DefaultWaterfallController(controller.waterfall, timeout: .unknown)
+        waterfall.delegate = self
+        state = .loading(controller: waterfall)
+        waterfall.load()
     }
     
     func controller(_ controller: AuctionController, failedAuction error: Error) {
+        state = .idle
         delegate?.adObject?(self, didCompleteAuction: nil)
         delegate?.adObject(self, didFailToLoadAd: error)
+    }
+}
+
+
+extension Interstitial: WaterfallControllerDelegate {
+    func controller(_ controller: WaterfallController, didLoadDemand demand: Demand) {
+        state = .ready(demand: demand)
+        delegate?.adObject(self, didLoadAd: demand.ad)
+    }
+    
+    func controller(_ controller: WaterfallController, didFailToLoad error: SdkError) {
+        state = .idle
+        delegate?.adObject(self, didFailToLoadAd: error)
+    }
+}
+
+
+extension Interstitial: FullscreenImpressionControllerDelegate {
+    func controller(_ controller: FullscreenImpressionController, didPresent ad: Ad) {
+        delegate?.fullscreenAd(self, willPresentAd: ad)
+    }
+    
+    func controller(_ controller: FullscreenImpressionController, didHide ad: Ad) {
+        state = .idle
+        delegate?.fullscreenAd(self, didDismissAd: ad)
+    }
+    
+    func controller(_ controller: FullscreenImpressionController, didClick ad: Ad) {
+        delegate?.adObject?(self, didRecordClick: ad)
+    }
+    
+    func controller(_ controller: FullscreenImpressionController, didFailToDisplay ad: Ad, error: Error) {
+        state = .idle
+        delegate?.fullscreenAd(self, didFailToPresentAd: error)
     }
 }
 

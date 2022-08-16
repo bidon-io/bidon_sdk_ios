@@ -31,6 +31,11 @@
 		4243093A28A2BCCC002360B0 /* GeoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243093928A2BCCC002360B0 /* GeoModel.swift */; };
 		4243093C28A3AC18002360B0 /* AdapterIdCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243093B28A3AC18002360B0 /* AdapterIdCodingKey.swift */; };
 		4243093E28A3AD07002360B0 /* AdaptersInitialisationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243093D28A3AD07002360B0 /* AdaptersInitialisationParameters.swift */; };
+		424F180828ABB4ED0082AEF3 /* Demand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F180728ABB4ED0082AEF3 /* Demand.swift */; };
+		424F180B28ABBD330082AEF3 /* WaterfallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F180A28ABBD330082AEF3 /* WaterfallController.swift */; };
+		424F180E28ABC14F0082AEF3 /* DefaultWaterfallContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F180D28ABC14F0082AEF3 /* DefaultWaterfallContoller.swift */; };
+		424F181128ABCC590082AEF3 /* ImpressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F181028ABCC590082AEF3 /* ImpressionController.swift */; };
+		424F181328ABCF470082AEF3 /* FullscreenImpressionControllerImpressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F181228ABCF470082AEF3 /* FullscreenImpressionControllerImpressionController.swift */; };
 		42677B3F28A16EC4006F321D /* AdaptersInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42677B3E28A16EC4006F321D /* AdaptersInfoModel.swift */; };
 		426DD78B28A3E88100A1ADF5 /* AuctionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD78A28A3E88100A1ADF5 /* AuctionRequest.swift */; };
 		426DD78D28A3EDD900A1ADF5 /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD78C28A3EDD900A1ADF5 /* LineItem.swift */; };
@@ -108,6 +113,11 @@
 		4243093928A2BCCC002360B0 /* GeoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoModel.swift; sourceTree = "<group>"; };
 		4243093B28A3AC18002360B0 /* AdapterIdCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterIdCodingKey.swift; sourceTree = "<group>"; };
 		4243093D28A3AD07002360B0 /* AdaptersInitialisationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptersInitialisationParameters.swift; sourceTree = "<group>"; };
+		424F180728ABB4ED0082AEF3 /* Demand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demand.swift; sourceTree = "<group>"; };
+		424F180A28ABBD330082AEF3 /* WaterfallController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallController.swift; sourceTree = "<group>"; };
+		424F180D28ABC14F0082AEF3 /* DefaultWaterfallContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWaterfallContoller.swift; sourceTree = "<group>"; };
+		424F181028ABCC590082AEF3 /* ImpressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressionController.swift; sourceTree = "<group>"; };
+		424F181228ABCF470082AEF3 /* FullscreenImpressionControllerImpressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenImpressionControllerImpressionController.swift; sourceTree = "<group>"; };
 		42677B3E28A16EC4006F321D /* AdaptersInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptersInfoModel.swift; sourceTree = "<group>"; };
 		426DD78A28A3E88100A1ADF5 /* AuctionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRequest.swift; sourceTree = "<group>"; };
 		426DD78C28A3EDD900A1ADF5 /* LineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
@@ -204,7 +214,6 @@
 				4299A425289BCE460062C580 /* Networking */,
 				4299A41F289BC9560062C580 /* Modules */,
 				4299A422289BCDA90062C580 /* Mediation */,
-				42BA820528785464001F1744 /* Banner */,
 				422101962859E2B3006596DA /* SDK */,
 				422101812859E29A006596DA /* BidOn.h */,
 			);
@@ -214,10 +223,11 @@
 		422101962859E2B3006596DA /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				424F180C28ABC0780082AEF3 /* Interstitial */,
+				42BA820528785464001F1744 /* Banner */,
 				426DD7B428A68BF700A1ADF5 /* Delegates */,
 				426DD7A228A5004200A1ADF5 /* Sdk.swift */,
 				422101972859E2C3006596DA /* BidOnSdk.swift */,
-				4299A423289BCDBC0062C580 /* Interstitial.swift */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -275,8 +285,35 @@
 			children = (
 				42389DEF2872F57D006024BA /* Ad.swift */,
 				42389DED2872F52A006024BA /* AdsRepository.swift */,
+				424F180728ABB4ED0082AEF3 /* Demand.swift */,
 			);
 			path = Ad;
+			sourceTree = "<group>";
+		};
+		424F180928ABBD1C0082AEF3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				424F180A28ABBD330082AEF3 /* WaterfallController.swift */,
+				424F180D28ABC14F0082AEF3 /* DefaultWaterfallContoller.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		424F180C28ABC0780082AEF3 /* Interstitial */ = {
+			isa = PBXGroup;
+			children = (
+				4299A423289BCDBC0062C580 /* Interstitial.swift */,
+			);
+			path = Interstitial;
+			sourceTree = "<group>";
+		};
+		424F180F28ABCC2D0082AEF3 /* Impression */ = {
+			isa = PBXGroup;
+			children = (
+				424F181028ABCC590082AEF3 /* ImpressionController.swift */,
+				424F181228ABCF470082AEF3 /* FullscreenImpressionControllerImpressionController.swift */,
+			);
+			path = Impression;
 			sourceTree = "<group>";
 		};
 		426DD79428A3FEBA00A1ADF5 /* Adapters */ = {
@@ -356,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				426DD7BA28A696B800A1ADF5 /* Models */,
+				424F180928ABBD1C0082AEF3 /* Controller */,
 			);
 			path = Waterfall;
 			sourceTree = "<group>";
@@ -394,8 +432,9 @@
 			isa = PBXGroup;
 			children = (
 				4243092F28A2B91B002360B0 /* Environment */,
-				426DD7B928A6969C00A1ADF5 /* Waterfall */,
 				4299A420289BC9610062C580 /* Auction */,
+				426DD7B928A6969C00A1ADF5 /* Waterfall */,
+				424F180F28ABCC2D0082AEF3 /* Impression */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -464,8 +503,8 @@
 		429EE2CB286D99AE009439C6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				429EE2D0286DD0E2009439C6 /* ConcurrentAuctionController.swift */,
 				42BA81A928758A90001F1744 /* AuctionController.swift */,
+				429EE2D0286DD0E2009439C6 /* ConcurrentAuctionController.swift */,
 				42389DF12872F63F006024BA /* AuctionComparator.swift */,
 			);
 			path = Controller;
@@ -573,6 +612,7 @@
 			files = (
 				422101982859E2C3006596DA /* BidOnSdk.swift in Sources */,
 				4243093828A2BCBE002360B0 /* UserModel.swift in Sources */,
+				424F180828ABB4ED0082AEF3 /* Demand.swift in Sources */,
 				4221019A2859E35C006596DA /* Adapter.swift in Sources */,
 				4243093428A2BC4C002360B0 /* SessionModel.swift in Sources */,
 				42389DF22872F63F006024BA /* AuctionComparator.swift in Sources */,
@@ -588,6 +628,7 @@
 				426DD7B128A681A300A1ADF5 /* AdObjectDelegate.swift in Sources */,
 				42D047EF289D6A380096A8C6 /* EnvironmentRepository.swift in Sources */,
 				42D047F1289D73F80096A8C6 /* GeoManager.swift in Sources */,
+				424F181128ABCC590082AEF3 /* ImpressionController.swift in Sources */,
 				42BA81DB28770B5D001F1744 /* Reward.swift in Sources */,
 				426DD79B28A4F47800A1ADF5 /* BaseRequestBuilder.swift in Sources */,
 				426DD7AA28A550F700A1ADF5 /* AdViewConcurrentAuctionControllerBuilder.swift in Sources */,
@@ -604,12 +645,14 @@
 				42389DF02872F57D006024BA /* Ad.swift in Sources */,
 				42389E172874665A006024BA /* UIApplication+Extensions.swift in Sources */,
 				4243093A28A2BCCC002360B0 /* GeoModel.swift in Sources */,
+				424F181328ABCF470082AEF3 /* FullscreenImpressionControllerImpressionController.swift in Sources */,
 				4243093228A2BBFF002360B0 /* DeviceModel.swift in Sources */,
 				429EE2DB286F1C8C009439C6 /* ConcurentAuctionRound.swift in Sources */,
 				4243093E28A3AD07002360B0 /* AdaptersInitialisationParameters.swift in Sources */,
 				426DD7BC28A696C600A1ADF5 /* Waterfall.swift in Sources */,
 				42677B3F28A16EC4006F321D /* AdaptersInfoModel.swift in Sources */,
 				42BA820928785506001F1744 /* AdContainerViewManager.swift in Sources */,
+				424F180E28ABC14F0082AEF3 /* DefaultWaterfallContoller.swift in Sources */,
 				426DD79128A3EF5C00A1ADF5 /* AuctionRoundModel.swift in Sources */,
 				426DD79D28A4F4AC00A1ADF5 /* ConfigurationRequestBuilder.swift in Sources */,
 				428CCBF728A12C8D003123EF /* Date+Extensions.swift in Sources */,
@@ -626,6 +669,7 @@
 				42389E1228745C6A006024BA /* InterstitialDemandProvider.swift in Sources */,
 				426DD79F28A4F4FC00A1ADF5 /* InterstitialAuctionRequestBuilder.swift in Sources */,
 				42BA81AC28758AC6001F1744 /* ConcurrentAuctionControllerBuilder.swift in Sources */,
+				424F180B28ABBD330082AEF3 /* WaterfallController.swift in Sources */,
 				421D48E62888423B007DE2E4 /* Logger.swift in Sources */,
 				429EE2D1286DD0E2009439C6 /* ConcurrentAuctionController.swift in Sources */,
 				42BA82072878547C001F1744 /* AdContainerView.swift in Sources */,

@@ -8,7 +8,20 @@
 import Foundation
 
 
-struct Waterfall<T: DemandProvider> {
+typealias Waterfall = Queue<Demand>
+
+
+struct Queue<T> {
+    private var elements: [T] = []
     
+    init<W>(_ sequence: W) where W: Sequence, W.Element == T {
+        self.elements = Array(sequence)
+    }
+    
+    mutating func next() -> T? {
+        guard !elements.isEmpty else { return nil }
+        
+        return elements.removeFirst()
+    }
 }
 

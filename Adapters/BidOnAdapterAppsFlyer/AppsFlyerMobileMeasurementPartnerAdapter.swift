@@ -14,7 +14,7 @@ import AppsFlyerAdRevenue
 @objc public final class AppsFlyerMobileMeasurementPartnerAdapter: NSObject {
     public let identifier: String = "appsflyer"
     public let name: String = "AppsFlyer"
-    public let version: String = "1"
+    public let adapterVersion: String = "1"
     public let sdkVersion: String = AppsFlyerLib.shared().getSDKVersion()
     
     var conversionData: [String: Any]?

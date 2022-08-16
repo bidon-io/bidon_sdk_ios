@@ -10,7 +10,7 @@ import BidMachine
 import BidOn
 
 
-final class BNBidMachineAdWrapper: NSObject, Ad {
+final class BidMachineAdWrapper: NSObject, Ad {
     private let _wrapped: BDMAdProtocol
     
     var wrapped: AnyObject { _wrapped }
@@ -39,7 +39,7 @@ final class BNBidMachineAdWrapper: NSObject, Ad {
 }
 
 
-final class BNEmptyBidMachineAdWrapper: NSObject, Ad {
+final class EmptyBidMachineAdWrapper: NSObject, Ad {
     let wrapped: AnyObject = NSNull()
     
     let id: String = "bidmachine"
@@ -55,9 +55,9 @@ extension Optional where Wrapped == BDMAdProtocol {
     var wrapped: Ad {
         switch self {
         case .none:
-            return BNEmptyBidMachineAdWrapper()
+            return EmptyBidMachineAdWrapper()
         case .some(let wrapped):
-            return BNBidMachineAdWrapper(wrapped)
+            return BidMachineAdWrapper(wrapped)
         }
     }
 }

@@ -11,7 +11,7 @@ import Foundation
 @objc public protocol Adapter {
     var identifier: String { get }
     var name: String { get }
-    var version: String { get }
+    var adapterVersion: String { get }
     var sdkVersion: String { get }
     
     init()

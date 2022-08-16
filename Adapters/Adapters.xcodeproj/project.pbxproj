@@ -13,7 +13,8 @@
 		421D48D32886DAB5007DE2E4 /* AppsFlyerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48D22886DAB5007DE2E4 /* AppsFlyerParameters.swift */; };
 		4221022E285A3318006596DA /* BidOnAdapterBidMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 4221022D285A3318006596DA /* BidOnAdapterBidMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42389DF4287339CE006024BA /* BidMachineInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */; };
-		42389DF628734EE1006024BA /* BNBidMachineAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF528734EE1006024BA /* BNBidMachineAdWrapper.swift */; };
+		42389DF628734EE1006024BA /* BidMachineAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF528734EE1006024BA /* BidMachineAdWrapper.swift */; };
+		424F181528ABE6230082AEF3 /* RequestWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F181428ABE6230082AEF3 /* RequestWrapper.swift */; };
 		429EE2B8286C7293009439C6 /* BidMachineDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */; };
 		42BA81B52875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42BA81BA2875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81B92875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift */; };
@@ -43,7 +44,8 @@
 		4221022B285A3318006596DA /* BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4221022D285A3318006596DA /* BidOnAdapterBidMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterBidMachine.h; sourceTree = "<group>"; };
 		42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineInterstitialDemandProvider.swift; sourceTree = "<group>"; };
-		42389DF528734EE1006024BA /* BNBidMachineAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNBidMachineAdWrapper.swift; sourceTree = "<group>"; };
+		42389DF528734EE1006024BA /* BidMachineAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineAdWrapper.swift; sourceTree = "<group>"; };
+		424F181428ABE6230082AEF3 /* RequestWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestWrapper.swift; sourceTree = "<group>"; };
 		429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineDemandSourceAdapter.swift; sourceTree = "<group>"; };
 		42BA81B22875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterGoogleMobileAds.h; sourceTree = "<group>"; };
@@ -147,7 +149,8 @@
 		42389E1528746473006024BA /* Wrapper */ = {
 			isa = PBXGroup;
 			children = (
-				42389DF528734EE1006024BA /* BNBidMachineAdWrapper.swift */,
+				42389DF528734EE1006024BA /* BidMachineAdWrapper.swift */,
+				424F181428ABE6230082AEF3 /* RequestWrapper.swift */,
 				42BA81F02877246F001F1744 /* EmptyReward.swift */,
 			);
 			path = Wrapper;
@@ -475,7 +478,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42389DF628734EE1006024BA /* BNBidMachineAdWrapper.swift in Sources */,
+				42389DF628734EE1006024BA /* BidMachineAdWrapper.swift in Sources */,
+				424F181528ABE6230082AEF3 /* RequestWrapper.swift in Sources */,
 				42BA820D2878779D001F1744 /* BidMachineBannerDemandProvider.swift in Sources */,
 				429EE2B8286C7293009439C6 /* BidMachineDemandSourceAdapter.swift in Sources */,
 				42BA81EF2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift in Sources */,

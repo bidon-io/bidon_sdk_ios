@@ -1,23 +1,32 @@
 //
-//  Interstitial.swift
+//  RewardedAd.swift
 //  BidOn
 //
-//  Created by Stas Kochkin on 04.08.2022.
+//  Created by Stas Kochkin on 25.08.2022.
 //
 
 import Foundation
 import UIKit
 
 
-@objc(BDInterstitial)
-public final class Interstitial: NSObject, FullscreenAd {
+protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate, AuctionControllerDelegate {
+    func didFailToLoad(_ error: Error)
+    func didLoad(_ ad: Ad)
+}
+
+
+final class FullscreenAdManager<RequestBuilderType, AuctionBuilderType, ImpressionControllerType>: NSObject where
+RequestBuilderType: AuctionRequestBuilder,
+AuctionBuilderType: ConcurrentAuctionControllerBuilder,
+ImpressionControllerType: FullscreenImpressionController, ImpressionControllerType.Context == UIViewController {
+    
     fileprivate enum State {
         case idle
         case preparing
         case auction(controller: AuctionController)
         case loading(controller: WaterfallController)
         case ready(demand: Demand)
-        case impression(controller: FullscreenImpressionController)
+        case impression(controller: ImpressionControllerType)
     }
     
     @Injected(\.networkManager)
@@ -25,33 +34,35 @@ public final class Interstitial: NSObject, FullscreenAd {
     
     @Injected(\.sdk)
     private var sdk: Sdk
-       
+    
     private var state: State = .idle
     
-    @objc public var delegate: FullscreenAdDelegate?
+    weak var delegate: FullscreenAdManagerDelegate?
     
-    @objc public let placement: String
+    let placement: String
     
-    @objc public init(placement: String = "") {
+    init(placement: String = "") {
         self.placement = placement
         super.init()
     }
     
-    @objc public func loadAd() {
+    func loadAd() {
         guard state.isIdle else {
-            Logger.warning("Trying to load already loading interstitial")
+            Logger.warning("Fullscreen ad manager is not idle. Loading attempt is prohibited.")
             return
         }
-                
+        
         let auctionId: String = UUID().uuidString
         
-        let request = AuctionRequest { (builder: InterstitialAuctionRequestBuilder) in
+        let request = AuctionRequest { (builder: RequestBuilderType) in
             builder.withPlacement(placement)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withAuctionId(auctionId)
             builder.withExt(sdk.ext)
         }
+        
+        Logger.verbose("Fullscreen ad manager performs request: \(request)")
         
         networkManager.perform(
             request: request
@@ -60,7 +71,9 @@ public final class Interstitial: NSObject, FullscreenAd {
             
             switch result {
             case .success(let response):
-                let auction = ConcurrentAuctionController { (builder: InterstitialConcurrentAuctionControllerBuilder) in
+                Logger.verbose("Fullscreen ad manager performs request: \(request)")
+                
+                let auction = ConcurrentAuctionController { (builder: AuctionBuilderType) in
                     builder.withAdaptersRepository(self.sdk.adaptersRepository)
                     builder.withRounds(response.rounds, lineItems: response.lineItems)
                     builder.withPricefloor(response.minPrice)
@@ -74,36 +87,37 @@ public final class Interstitial: NSObject, FullscreenAd {
                 break
             case .failure(let error):
                 self.state = .idle
-                self.delegate?.adObject(self, didFailToLoadAd: error)
+                Logger.warning("Fullscreen ad manager did fail to load ad with error: \(error)")
+                self.delegate?.didFailToLoad(error)
             }
         }
     }
     
-    @objc public func show(from rootViewController: UIViewController) {
+    func show(from rootViewController: UIViewController) {
         switch state {
         case .ready(let demand):
-            let controller = try! FullscreenImpressionController(demand: demand)
-            state = .impression(controller: controller)
+            let controller = try! ImpressionControllerType(demand: demand)
             controller.delegate = self
+            state = .impression(controller: controller)
             controller.show(from: rootViewController)
         default:
-            delegate?.fullscreenAd(self, didFailToPresentAd: SdkError.invalidPresentationState)
+            delegate?.didFailToPresent(nil, error: SdkError.internalInconsistency)
         }
     }
 }
 
 
-extension Interstitial: AuctionControllerDelegate {
+extension FullscreenAdManager: AuctionControllerDelegate {
     func controllerDidStartAuction(_ controller: AuctionController) {}
     
     func controller(
-        _ contoller: AuctionController,
+        _ controller: AuctionController,
         didStartRound round: AuctionRound,
         pricefloor: Price
     ) {
-        delegate?.adObject?(
-            self,
-            didStartAuctionRound: round.id,
+        delegate?.controller(
+            controller,
+            didStartRound: round,
             pricefloor: pricefloor
         )
     }
@@ -113,22 +127,34 @@ extension Interstitial: AuctionControllerDelegate {
         didReceiveAd ad: Ad,
         provider: DemandProvider
     ) {
-        delegate?.adObject?(self, didReceiveBid: ad)
+        delegate?.controller(
+            controller,
+            didReceiveAd: ad,
+            provider: provider
+        )
     }
     
     func controller(
-        _ contoller: AuctionController,
+        _ controller: AuctionController,
         didCompleteRound round: AuctionRound
     ) {
-        delegate?.adObject?(
-            self,
-            didCompleteAuctionRound: round.id
+        delegate?.controller(
+            controller,
+            didCompleteRound: round
         )
     }
     
     func controller(_ controller: AuctionController, completeAuction winner: Ad) {
-        delegate?.adObject?(self, didCompleteAuction: winner)
-        let waterfall = DefaultWaterfallController(controller.waterfall, timeout: .unknown)
+        delegate?.controller(
+            controller,
+            completeAuction: winner
+        )
+        
+        let waterfall = DefaultWaterfallController(
+            controller.waterfall,
+            timeout: .unknown
+        )
+        
         waterfall.delegate = self
         state = .loading(controller: waterfall)
         waterfall.load()
@@ -136,47 +162,52 @@ extension Interstitial: AuctionControllerDelegate {
     
     func controller(_ controller: AuctionController, failedAuction error: Error) {
         state = .idle
-        delegate?.adObject?(self, didCompleteAuction: nil)
-        delegate?.adObject(self, didFailToLoadAd: error)
+        
+        delegate?.controller(controller, failedAuction: error)
+        delegate?.didFailToLoad(error)
     }
 }
 
 
-extension Interstitial: WaterfallControllerDelegate {
+extension FullscreenAdManager: WaterfallControllerDelegate {
     func controller(_ controller: WaterfallController, didLoadDemand demand: Demand) {
         state = .ready(demand: demand)
-        delegate?.adObject(self, didLoadAd: demand.ad)
+        delegate?.didLoad(demand.ad)
     }
     
     func controller(_ controller: WaterfallController, didFailToLoad error: SdkError) {
         state = .idle
-        delegate?.adObject(self, didFailToLoadAd: error)
+        delegate?.didFailToLoad(error)
     }
 }
 
 
-extension Interstitial: FullscreenImpressionControllerDelegate {
-    func controller(_ controller: FullscreenImpressionController, didPresent ad: Ad) {
-        delegate?.fullscreenAd(self, willPresentAd: ad)
+extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
+    func didPresent(_ ad: Ad) {
+        delegate?.didPresent(ad)
     }
-    
-    func controller(_ controller: FullscreenImpressionController, didHide ad: Ad) {
+
+    func didHide(_ ad: Ad) {
         state = .idle
-        delegate?.fullscreenAd(self, didDismissAd: ad)
+        delegate?.didHide(ad)
     }
     
-    func controller(_ controller: FullscreenImpressionController, didClick ad: Ad) {
-        delegate?.adObject?(self, didRecordClick: ad)
+    func didClick(_ ad: Ad) {
+        delegate?.didClick(ad)
     }
-    
-    func controller(_ controller: FullscreenImpressionController, didFailToDisplay ad: Ad, error: Error) {
+
+    func didFailToPresent(_ ad: Ad?, error: Error) {
         state = .idle
-        delegate?.fullscreenAd(self, didFailToPresentAd: error)
+        delegate?.didFailToPresent(ad, error: error)
+    }
+    
+    func didReceiveReward(_ reward: Reward, ad: Ad) {
+        delegate?.didReceiveReward(reward, ad: ad)
     }
 }
 
 
-private extension Interstitial.State {
+private extension FullscreenAdManager.State {
     var isIdle: Bool {
         switch self {
         case .idle: return true

@@ -62,6 +62,11 @@ target 'BidOnAdapterAppsFlyer' do
   appsflyer
 end
 
+target 'BidOnAdapterAppLovin' do
+  project 'Adapters/Adapters.xcodeproj'
+  applovin
+end
+
 # Tests
 
 target 'Tests-ObjectiveC' do
@@ -72,6 +77,7 @@ target 'Tests-ObjectiveC' do
   ironsource
   bidmachine
   admob
+  applovin
 end
 
 
@@ -84,6 +90,7 @@ target 'Sandbox' do
   ironsource
   bidmachine
   admob
+  applovin
 end
 
 

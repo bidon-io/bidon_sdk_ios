@@ -46,7 +46,7 @@ extension AdObjectModel.InterfaceOrientation {
     }
     
     static var current: AdObjectModel.InterfaceOrientation {
-        let isLandscape = try? DispatchQueue.bd.perform { UIApplication.shared.bd.isLandscape }
-        return isLandscape.map { AdObjectModel.InterfaceOrientation($0) } ?? .portrait
+        let isLandscape = DispatchQueue.bd.blocking { UIApplication.shared.bd.isLandscape }
+        return AdObjectModel.InterfaceOrientation(isLandscape)
     }
 }

@@ -8,7 +8,6 @@
 import Foundation
 
 
-
 final class AdViewConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder, ConcurrentAuctionControllerBuilder {
     let adType: AdType = .banner
     

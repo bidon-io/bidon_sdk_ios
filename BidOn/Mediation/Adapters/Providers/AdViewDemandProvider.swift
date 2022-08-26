@@ -36,7 +36,7 @@ public struct AdViewContext {
             format: format,
             size: format.preferredSize,
             isAdaptive: isAdaptive,
-            rootViewController: rootViewController ?? UIApplication.shared.bd.topViewContoller
+            rootViewController: rootViewController ?? UIApplication.shared.bd.topViewcontroller
         )
     }
 }

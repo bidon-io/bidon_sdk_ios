@@ -14,29 +14,21 @@ extension DispatchQueue {
     
     struct DSL {
         @discardableResult
-        func perform<T>(_ block: @escaping () throws -> T) throws -> T {
+        func blocking<T>(_ block: @escaping () -> T) -> T {
             if Thread.current.isMainThread {
-                return try block()
+                return block()
             } else {
                 let semaphore = DispatchSemaphore(value: 0)
                 
-                var _result: T?
-                var _error: Error?
+                var _result: T!
                 
                 DispatchQueue.main.async {
-                    do {
-                    _result = try block()
-                    } catch {
-                        _error = error
-                    }
+                    _result = block()
                     semaphore.signal()
                 }
                 semaphore.wait()
-                
-                guard let result = _result
-                else { throw _error ?? SdkError.unknown }
-                
-                return result
+                                
+                return _result
             }
         }
     }

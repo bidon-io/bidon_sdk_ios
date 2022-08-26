@@ -8,14 +8,14 @@
 import Foundation
 
 @objc(BDFullscreenAd)
-public protocol FullscreenAd: AdObject {}
+public protocol FullscreenAdObject: AdObject {}
 
 
 @objc(BDFullscreenAdDelegate)
 public protocol FullscreenAdDelegate: AdObjectDelegate {
-    func fullscreenAd(_ fullscreenAd: FullscreenAd, willPresentAd ad: Ad)
+    func fullscreenAd(_ fullscreenAd: FullscreenAdObject, willPresentAd ad: Ad)
     
-    func fullscreenAd(_ fullscreenAd: FullscreenAd, didFailToPresentAd error: Error)
+    func fullscreenAd(_ fullscreenAd: FullscreenAdObject, didFailToPresentAd error: Error)
     
-    func fullscreenAd(_ fullscreenAd: FullscreenAd, didDismissAd ad: Ad)
+    func fullscreenAd(_ fullscreenAd: FullscreenAdObject, didDismissAd ad: Ad)
 }

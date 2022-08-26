@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-final internal class AdContainerViewManager {
+final internal class BannerViewManager {
     weak var container: UIView?
     
     private var timer: Timer?
@@ -20,7 +20,7 @@ final internal class AdContainerViewManager {
     }
     
     var isRefreshGranted: Bool { timer == nil && isAdPresented }
-    
+
     func schedule(
         _ interval: TimeInterval,
         block: (() -> ())?

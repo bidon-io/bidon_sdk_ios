@@ -15,15 +15,15 @@ public protocol InjectionKey {
 }
 
 
-struct InjectedValues {
+public struct InjectedValues {
     private static var current = InjectedValues()
     
-    static subscript<K>(key: K.Type) -> K.Value where K : InjectionKey {
+    public static subscript<K>(key: K.Type) -> K.Value where K : InjectionKey {
         get { key.currentValue }
         set { key.currentValue = newValue }
     }
     
-    static subscript<T>(_ keyPath: WritableKeyPath<InjectedValues, T>) -> T {
+    public static subscript<T>(_ keyPath: WritableKeyPath<InjectedValues, T>) -> T {
         get { current[keyPath: keyPath] }
         set { current[keyPath: keyPath] = newValue }
     }
@@ -31,14 +31,15 @@ struct InjectedValues {
 
 
 @propertyWrapper
-struct Injected<T> {
+public struct Injected<T> {
     private let keyPath: WritableKeyPath<InjectedValues, T>
-    var wrappedValue: T {
+    
+    public var wrappedValue: T {
         get { InjectedValues[keyPath] }
         set { InjectedValues[keyPath] = newValue }
     }
     
-    init(_ keyPath: WritableKeyPath<InjectedValues, T>) {
+    public init(_ keyPath: WritableKeyPath<InjectedValues, T>) {
         self.keyPath = keyPath
     }
 }

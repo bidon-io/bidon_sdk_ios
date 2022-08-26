@@ -21,7 +21,7 @@ protocol AuctionControllerDelegate: AnyObject {
     func controllerDidStartAuction(_ controller: AuctionController)
 
     func controller(
-        _ contoller: AuctionController,
+        _ controller: AuctionController,
         didStartRound round: AuctionRound,
         pricefloor: Price
     )
@@ -33,7 +33,7 @@ protocol AuctionControllerDelegate: AnyObject {
     )
 
     func controller(
-        _ contoller: AuctionController,
+        _ controller: AuctionController,
         didCompleteRound round: AuctionRound
     )
 

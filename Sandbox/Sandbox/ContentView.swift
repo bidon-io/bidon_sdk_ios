@@ -8,6 +8,7 @@
 import SwiftUI
 import BidOn
 
+
 struct ContentView: View {
     @EnvironmentObject var app: AppDelegate
     

@@ -12,6 +12,12 @@ protocol AuctionRequestBuilder: BaseRequestBuilder {
     var adObject: AdObjectModel { get }
     var adapters: AdaptersInfo { get }
     
+    @discardableResult
+    func withPlacement(_ placement: String) -> Self
+    
+    @discardableResult
+    func withAuctionId(_ auctionId: String) -> Self
+    
     init()
 }
 

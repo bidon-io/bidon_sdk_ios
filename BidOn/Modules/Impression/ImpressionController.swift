@@ -8,8 +8,10 @@
 import Foundation
 
 
-protocol ImpressionController {
+protocol ImpressionController: AnyObject {
     associatedtype Context
+
+    init(demand: Demand) throws
     
     func show(from context: Context)
 }

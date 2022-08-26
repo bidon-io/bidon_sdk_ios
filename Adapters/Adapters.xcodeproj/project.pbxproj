@@ -15,6 +15,13 @@
 		42389DF4287339CE006024BA /* BidMachineInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */; };
 		42389DF628734EE1006024BA /* BidMachineAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF528734EE1006024BA /* BidMachineAdWrapper.swift */; };
 		424F181528ABE6230082AEF3 /* RequestWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F181428ABE6230082AEF3 /* RequestWrapper.swift */; };
+		425E9C4828B76B0F00F4E4C7 /* BidOnAdapterAppLovin.h in Headers */ = {isa = PBXBuildFile; fileRef = 425E9C4728B76B0F00F4E4C7 /* BidOnAdapterAppLovin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		425E9C4D28B76B9000F4E4C7 /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425E9C4C28B76B9000F4E4C7 /* BidOn.framework */; };
+		425E9C5328B76CC100F4E4C7 /* AppLovinDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5228B76CC100F4E4C7 /* AppLovinDemandSourceAdapter.swift */; };
+		425E9C5528B770CD00F4E4C7 /* AppLovinParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5428B770CD00F4E4C7 /* AppLovinParameters.swift */; };
+		425E9C5828B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5728B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift */; };
+		425E9C5D28B7923400F4E4C7 /* AdServiceBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5C28B7923400F4E4C7 /* AdServiceBridge.swift */; };
+		425E9C5F28B79BAE00F4E4C7 /* ALAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5E28B79BAE00F4E4C7 /* ALAdWrapper.swift */; };
 		429EE2B8286C7293009439C6 /* BidMachineDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */; };
 		42BA81B52875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42BA81BA2875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81B92875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift */; };
@@ -32,6 +39,7 @@
 		42EC987D28914189003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC987C28914189003BE6CF /* BidOn.framework */; };
 		9AF35498147FF228FB35940E /* Pods_BidOnAdapterBidMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D01528D343C84B6819C7023 /* Pods_BidOnAdapterBidMachine.framework */; };
 		D6E2811911D38EA6D416840D /* Pods_BidOnAdapterAppsFlyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455710F6A00CC245DFFCEC8B /* Pods_BidOnAdapterAppsFlyer.framework */; };
+		D948B1F8C213F51D68AC7AE1 /* Pods_BidOnAdapterAppLovin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9509D1E2749A0A168F47EAC /* Pods_BidOnAdapterAppLovin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +54,14 @@
 		42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineInterstitialDemandProvider.swift; sourceTree = "<group>"; };
 		42389DF528734EE1006024BA /* BidMachineAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineAdWrapper.swift; sourceTree = "<group>"; };
 		424F181428ABE6230082AEF3 /* RequestWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestWrapper.swift; sourceTree = "<group>"; };
+		425E9C4528B76B0F00F4E4C7 /* BidOnAdapterAppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		425E9C4728B76B0F00F4E4C7 /* BidOnAdapterAppLovin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterAppLovin.h; sourceTree = "<group>"; };
+		425E9C4C28B76B9000F4E4C7 /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		425E9C5228B76CC100F4E4C7 /* AppLovinDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinDemandSourceAdapter.swift; sourceTree = "<group>"; };
+		425E9C5428B770CD00F4E4C7 /* AppLovinParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinParameters.swift; sourceTree = "<group>"; };
+		425E9C5728B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinInterstitialDemandProvider.swift; sourceTree = "<group>"; };
+		425E9C5C28B7923400F4E4C7 /* AdServiceBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdServiceBridge.swift; sourceTree = "<group>"; };
+		425E9C5E28B79BAE00F4E4C7 /* ALAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALAdWrapper.swift; sourceTree = "<group>"; };
 		429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineDemandSourceAdapter.swift; sourceTree = "<group>"; };
 		42BA81B22875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterGoogleMobileAds.h; sourceTree = "<group>"; };
@@ -66,8 +82,11 @@
 		5ACFA1A9D3D9DF1686E1EF11 /* Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterGoogleMobileAds/Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig"; sourceTree = "<group>"; };
 		84D05911DFEF219E28C72FBA /* Pods-BidOnAdapterBidMachine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterBidMachine.release.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterBidMachine/Pods-BidOnAdapterBidMachine.release.xcconfig"; sourceTree = "<group>"; };
 		8D01528D343C84B6819C7023 /* Pods_BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E97FBE0C6B88C127715A603 /* Pods-BidOnAdapterAppLovin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterAppLovin.release.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterAppLovin/Pods-BidOnAdapterAppLovin.release.xcconfig"; sourceTree = "<group>"; };
+		BB69C86D9638891BD3D2A879 /* Pods-BidOnAdapterAppLovin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterAppLovin.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterAppLovin/Pods-BidOnAdapterAppLovin.debug.xcconfig"; sourceTree = "<group>"; };
 		C0EF50FBFE5B9D0143A1ECB5 /* Pods-BidOnAdapterBidMachine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterBidMachine.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterBidMachine/Pods-BidOnAdapterBidMachine.debug.xcconfig"; sourceTree = "<group>"; };
 		CB0EA3B060C5712311032BC7 /* Pods-BidOnAdapterAppsFlyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterAppsFlyer.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterAppsFlyer/Pods-BidOnAdapterAppsFlyer.debug.xcconfig"; sourceTree = "<group>"; };
+		D9509D1E2749A0A168F47EAC /* Pods_BidOnAdapterAppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnAdapterAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F73FB5644BF8764EBA4AF20B /* Pods-BidOnAdapterAppsFlyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterAppsFlyer.release.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterAppsFlyer/Pods-BidOnAdapterAppsFlyer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +106,15 @@
 			files = (
 				9AF35498147FF228FB35940E /* Pods_BidOnAdapterBidMachine.framework in Frameworks */,
 				42EC98752891416F003BE6CF /* BidOn.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		425E9C4228B76B0F00F4E4C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				425E9C4D28B76B9000F4E4C7 /* BidOn.framework in Frameworks */,
+				D948B1F8C213F51D68AC7AE1 /* Pods_BidOnAdapterAppLovin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +146,7 @@
 				4221022C285A3318006596DA /* BidOnAdapterBidMachine */,
 				42BA81B32875ABA3001F1744 /* BidOnAdapterGoogleMobileAds */,
 				421D48C42886CF8C007DE2E4 /* BidOnAdapterAppsFlyer */,
+				425E9C4628B76B0F00F4E4C7 /* BidOnAdapterAppLovin */,
 				42210211285A32ED006596DA /* Products */,
 				8462A3B50D72D26B685AAD18 /* Pods */,
 				628D13BF18603C4DCE80EE71 /* Frameworks */,
@@ -130,6 +159,7 @@
 				4221022B285A3318006596DA /* BidOnAdapterBidMachine.framework */,
 				42BA81B22875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.framework */,
 				421D48C32886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.framework */,
+				425E9C4528B76B0F00F4E4C7 /* BidOnAdapterAppLovin.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +182,35 @@
 				42389DF528734EE1006024BA /* BidMachineAdWrapper.swift */,
 				424F181428ABE6230082AEF3 /* RequestWrapper.swift */,
 				42BA81F02877246F001F1744 /* EmptyReward.swift */,
+			);
+			path = Wrapper;
+			sourceTree = "<group>";
+		};
+		425E9C4628B76B0F00F4E4C7 /* BidOnAdapterAppLovin */ = {
+			isa = PBXGroup;
+			children = (
+				425E9C5628B7746700F4E4C7 /* Demand */,
+				425E9C5928B7777500F4E4C7 /* Wrapper */,
+				425E9C4728B76B0F00F4E4C7 /* BidOnAdapterAppLovin.h */,
+				425E9C5228B76CC100F4E4C7 /* AppLovinDemandSourceAdapter.swift */,
+				425E9C5428B770CD00F4E4C7 /* AppLovinParameters.swift */,
+			);
+			path = BidOnAdapterAppLovin;
+			sourceTree = "<group>";
+		};
+		425E9C5628B7746700F4E4C7 /* Demand */ = {
+			isa = PBXGroup;
+			children = (
+				425E9C5728B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift */,
+			);
+			path = Demand;
+			sourceTree = "<group>";
+		};
+		425E9C5928B7777500F4E4C7 /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				425E9C5C28B7923400F4E4C7 /* AdServiceBridge.swift */,
+				425E9C5E28B79BAE00F4E4C7 /* ALAdWrapper.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -199,12 +258,14 @@
 		628D13BF18603C4DCE80EE71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				425E9C4C28B76B9000F4E4C7 /* BidOn.framework */,
 				42EC987C28914189003BE6CF /* BidOn.framework */,
 				42EC98782891417F003BE6CF /* BidOn.framework */,
 				42EC98742891416F003BE6CF /* BidOn.framework */,
 				455710F6A00CC245DFFCEC8B /* Pods_BidOnAdapterAppsFlyer.framework */,
 				8D01528D343C84B6819C7023 /* Pods_BidOnAdapterBidMachine.framework */,
 				0471434C6149F069FDC832BC /* Pods_BidOnAdapterGoogleMobileAds.framework */,
+				D9509D1E2749A0A168F47EAC /* Pods_BidOnAdapterAppLovin.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -218,6 +279,8 @@
 				84D05911DFEF219E28C72FBA /* Pods-BidOnAdapterBidMachine.release.xcconfig */,
 				5ACFA1A9D3D9DF1686E1EF11 /* Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig */,
 				0456E548692C5EE25FCAA2BE /* Pods-BidOnAdapterGoogleMobileAds.release.xcconfig */,
+				BB69C86D9638891BD3D2A879 /* Pods-BidOnAdapterAppLovin.debug.xcconfig */,
+				8E97FBE0C6B88C127715A603 /* Pods-BidOnAdapterAppLovin.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -239,6 +302,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4221022E285A3318006596DA /* BidOnAdapterBidMachine.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		425E9C4028B76B0F00F4E4C7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				425E9C4828B76B0F00F4E4C7 /* BidOnAdapterAppLovin.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +363,26 @@
 			productReference = 4221022B285A3318006596DA /* BidOnAdapterBidMachine.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		425E9C4428B76B0F00F4E4C7 /* BidOnAdapterAppLovin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 425E9C4B28B76B0F00F4E4C7 /* Build configuration list for PBXNativeTarget "BidOnAdapterAppLovin" */;
+			buildPhases = (
+				1F333AC8F0108FF408785C9D /* [CP] Check Pods Manifest.lock */,
+				425E9C4028B76B0F00F4E4C7 /* Headers */,
+				425E9C4128B76B0F00F4E4C7 /* Sources */,
+				425E9C4228B76B0F00F4E4C7 /* Frameworks */,
+				425E9C4328B76B0F00F4E4C7 /* Resources */,
+				845C1E0C5D4E313B1FAB4907 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BidOnAdapterAppLovin;
+			productName = BidOnAdapterAppLovin;
+			productReference = 425E9C4528B76B0F00F4E4C7 /* BidOnAdapterAppLovin.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		42BA81B12875ABA3001F1744 /* BidOnAdapterGoogleMobileAds */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42BA81B82875ABA3001F1744 /* Build configuration list for PBXNativeTarget "BidOnAdapterGoogleMobileAds" */;
@@ -328,6 +419,10 @@
 						CreatedOnToolsVersion = 13.3.1;
 						LastSwiftMigration = 1330;
 					};
+					425E9C4428B76B0F00F4E4C7 = {
+						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
+					};
 					42BA81B12875ABA3001F1744 = {
 						CreatedOnToolsVersion = 13.3.1;
 						LastSwiftMigration = 1330;
@@ -350,6 +445,7 @@
 				4221022A285A3318006596DA /* BidOnAdapterBidMachine */,
 				42BA81B12875ABA3001F1744 /* BidOnAdapterGoogleMobileAds */,
 				421D48C22886CF8C007DE2E4 /* BidOnAdapterAppsFlyer */,
+				425E9C4428B76B0F00F4E4C7 /* BidOnAdapterAppLovin */,
 			);
 		};
 /* End PBXProject section */
@@ -369,6 +465,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		425E9C4328B76B0F00F4E4C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42BA81B02875ABA3001F1744 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -379,6 +482,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1F333AC8F0108FF408785C9D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BidOnAdapterAppLovin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		845C1E0C5D4E313B1FAB4907 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BidOnAdapterAppLovin/Pods-BidOnAdapterAppLovin-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BidOnAdapterAppLovin/Pods-BidOnAdapterAppLovin-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BidOnAdapterAppLovin/Pods-BidOnAdapterAppLovin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C6C8E64B9C7F6C21BF2C4703 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -486,6 +628,18 @@
 				42389DF4287339CE006024BA /* BidMachineInterstitialDemandProvider.swift in Sources */,
 				42BA81F12877246F001F1744 /* EmptyReward.swift in Sources */,
 				42BA81F328772515001F1744 /* BidMachineParameters.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		425E9C4128B76B0F00F4E4C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				425E9C5D28B7923400F4E4C7 /* AdServiceBridge.swift in Sources */,
+				425E9C5528B770CD00F4E4C7 /* AppLovinParameters.swift in Sources */,
+				425E9C5828B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift in Sources */,
+				425E9C5F28B79BAE00F4E4C7 /* ALAdWrapper.swift in Sources */,
+				425E9C5328B76CC100F4E4C7 /* AppLovinDemandSourceAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -849,6 +1003,172 @@
 			};
 			name = Release;
 		};
+		425E9C4928B76B0F00F4E4C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB69C86D9638891BD3D2A879 /* Pods-BidOnAdapterAppLovin.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.BidOnAdapterAppLovin;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		425E9C4A28B76B0F00F4E4C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E97FBE0C6B88C127715A603 /* Pods-BidOnAdapterAppLovin.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.BidOnAdapterAppLovin;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		42BA81B62875ABA3001F1744 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5ACFA1A9D3D9DF1686E1EF11 /* Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig */;
@@ -1041,6 +1361,15 @@
 			buildConfigurations = (
 				42210230285A3318006596DA /* Debug */,
 				42210231285A3318006596DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		425E9C4B28B76B0F00F4E4C7 /* Build configuration list for PBXNativeTarget "BidOnAdapterAppLovin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				425E9C4928B76B0F00F4E4C7 /* Debug */,
+				425E9C4A28B76B0F00F4E4C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

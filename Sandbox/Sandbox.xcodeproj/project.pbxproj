@@ -8,10 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		169F7C8E91CEF4CADB6E417E /* Pods_Sandbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A1E0483C51188FF09EB928 /* Pods_Sandbox.framework */; };
+		4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5528B90479001F38E5 /* AdEventsList.swift */; };
+		4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7328B8BD0500E8D886 /* InterstitialSection.swift */; };
+		4224AA7628B8BDB500E8D886 /* InterstitialSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7528B8BDB500E8D886 /* InterstitialSectionViewModel.swift */; };
+		4224AA7E28B8D59400E8D886 /* RewardedAdSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7D28B8D59400E8D886 /* RewardedAdSection.swift */; };
+		4224AA8028B8D5B300E8D886 /* RewardedAdSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7F28B8D5B300E8D886 /* RewardedAdSectionViewModel.swift */; };
+		4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA8228B8F92B00E8D886 /* AdEventModel.swift */; };
+		4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA8428B900AF00E8D886 /* AdEventView.swift */; };
 		4243091E28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091A28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework */; };
 		4243092028A25E9F002360B0 /* BidOnAdapterBidMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091B28A25E9F002360B0 /* BidOnAdapterBidMachine.framework */; };
 		4243092228A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091C28A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework */; };
 		4243092428A25E9F002360B0 /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091D28A25E9F002360B0 /* BidOn.framework */; };
+		425E9C4F28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425E9C4E28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework */; };
 		426DD7AE28A6584600A1ADF5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7AD28A6584600A1ADF5 /* HomeView.swift */; };
 		4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A410289BC8B40062C580 /* SandboxApp.swift */; };
 		4299A413289BC8B40062C580 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A412289BC8B40062C580 /* ContentView.swift */; };
@@ -21,11 +29,19 @@
 
 /* Begin PBXFileReference section */
 		2F533D98A3EB5DDDC412B52F /* Pods-Sandbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sandbox.release.xcconfig"; path = "Target Support Files/Pods-Sandbox/Pods-Sandbox.release.xcconfig"; sourceTree = "<group>"; };
+		4219DB5528B90479001F38E5 /* AdEventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventsList.swift; sourceTree = "<group>"; };
+		4224AA7328B8BD0500E8D886 /* InterstitialSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialSection.swift; sourceTree = "<group>"; };
+		4224AA7528B8BDB500E8D886 /* InterstitialSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialSectionViewModel.swift; sourceTree = "<group>"; };
+		4224AA7D28B8D59400E8D886 /* RewardedAdSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdSection.swift; sourceTree = "<group>"; };
+		4224AA7F28B8D5B300E8D886 /* RewardedAdSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdSectionViewModel.swift; sourceTree = "<group>"; };
+		4224AA8228B8F92B00E8D886 /* AdEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventModel.swift; sourceTree = "<group>"; };
+		4224AA8428B900AF00E8D886 /* AdEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventView.swift; sourceTree = "<group>"; };
 		4243091A28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterAppsFlyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243091B28A25E9F002360B0 /* BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243091C28A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243091D28A25E9F002360B0 /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243092728A27C46002360B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		425E9C4E28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		426DD7AD28A6584600A1ADF5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4299A40D289BC8B40062C580 /* Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4299A410289BC8B40062C580 /* SandboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandboxApp.swift; sourceTree = "<group>"; };
@@ -45,6 +61,7 @@
 				4243092028A25E9F002360B0 /* BidOnAdapterBidMachine.framework in Frameworks */,
 				4243091E28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework in Frameworks */,
 				4243092428A25E9F002360B0 /* BidOn.framework in Frameworks */,
+				425E9C4F28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework in Frameworks */,
 				169F7C8E91CEF4CADB6E417E /* Pods_Sandbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,9 +69,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4224AA7228B8BCE200E8D886 /* Interstitial */ = {
+			isa = PBXGroup;
+			children = (
+				4224AA7328B8BD0500E8D886 /* InterstitialSection.swift */,
+				4224AA7528B8BDB500E8D886 /* InterstitialSectionViewModel.swift */,
+			);
+			path = Interstitial;
+			sourceTree = "<group>";
+		};
+		4224AA7C28B8D57E00E8D886 /* RewardedAd */ = {
+			isa = PBXGroup;
+			children = (
+				4224AA7D28B8D59400E8D886 /* RewardedAdSection.swift */,
+				4224AA7F28B8D5B300E8D886 /* RewardedAdSectionViewModel.swift */,
+			);
+			path = RewardedAd;
+			sourceTree = "<group>";
+		};
+		4224AA8128B8F92000E8D886 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4224AA8228B8F92B00E8D886 /* AdEventModel.swift */,
+				4224AA8428B900AF00E8D886 /* AdEventView.swift */,
+				4219DB5528B90479001F38E5 /* AdEventsList.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		4243091928A25E9F002360B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				425E9C4E28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework */,
 				4243091A28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework */,
 				4243091B28A25E9F002360B0 /* BidOnAdapterBidMachine.framework */,
 				4243091C28A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework */,
@@ -85,6 +131,9 @@
 		4299A40F289BC8B40062C580 /* Sandbox */ = {
 			isa = PBXGroup;
 			children = (
+				4224AA8128B8F92000E8D886 /* Shared */,
+				4224AA7C28B8D57E00E8D886 /* RewardedAd */,
+				4224AA7228B8BCE200E8D886 /* Interstitial */,
 				4243092728A27C46002360B0 /* Info.plist */,
 				4299A410289BC8B40062C580 /* SandboxApp.swift */,
 				4299A412289BC8B40062C580 /* ContentView.swift */,
@@ -245,8 +294,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4224AA7E28B8D59400E8D886 /* RewardedAdSection.swift in Sources */,
 				426DD7AE28A6584600A1ADF5 /* HomeView.swift in Sources */,
+				4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */,
+				4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */,
 				4299A413289BC8B40062C580 /* ContentView.swift in Sources */,
+				4224AA8028B8D5B300E8D886 /* RewardedAdSectionViewModel.swift in Sources */,
+				4224AA7628B8BDB500E8D886 /* InterstitialSectionViewModel.swift in Sources */,
+				4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */,
+				4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */,
 				4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

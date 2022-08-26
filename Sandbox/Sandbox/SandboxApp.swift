@@ -9,6 +9,11 @@ import SwiftUI
 import BidOn
 
 
+struct Constants {
+    static let baseURL = "https://c3d5b3d8-63e7-4818-8ece-264c1df79e4f.mock.pstmn.io"
+}
+
+
 @main
 struct SandboxApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -30,7 +35,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     ) -> Bool {
         
         BidOnSdk.logLevel = .verbose
-        BidOnSdk.baseURL = "https://07f690ed-b816-459b-82fd-212270eb950a.mock.pstmn.io"
+        BidOnSdk.baseURL = Constants.baseURL
         BidOnSdk.initialize(appKey: "some app key") {
             withAnimation { [unowned self] in
                 self.isInitialized = true

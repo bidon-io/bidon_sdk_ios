@@ -35,7 +35,7 @@ public extension UIApplication {
             
         }
         
-        public var topViewContoller: UIViewController? {
+        public var topViewcontroller: UIViewController? {
             return window?.topPresentedViewController()
         }
         

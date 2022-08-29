@@ -47,11 +47,17 @@ final class BannerAdManager: NSObject {
         }
     }
     
+    func prepareForReuse() {
+        state = .idle
+    }
+    
     func loadAd(context: AdViewContext) {
         guard state.isIdle else {
             Logger.warning("Banner ad manager is not idle. Loading attempt is prohibited.")
             return
         }
+        
+        state = .preparing
         
         let auctionId: String = UUID().uuidString
         
@@ -98,19 +104,19 @@ final class BannerAdManager: NSObject {
 
 extension BannerAdManager: AuctionControllerDelegate {
     func controllerDidStartAuction(_ controller: AuctionController) {
-        
+        delegate?.controllerDidStartAuction(controller)
     }
     
     func controller(_ controller: AuctionController, didStartRound round: AuctionRound, pricefloor: Price) {
-        
+        delegate?.controller(controller, didStartRound: round, pricefloor: pricefloor)
     }
     
     func controller(_ controller: AuctionController, didReceiveAd ad: Ad, provider: DemandProvider) {
-        
+        delegate?.controller(controller, didReceiveAd: ad, provider: provider)
     }
     
     func controller(_ controller: AuctionController, didCompleteRound round: AuctionRound) {
-        
+        delegate?.controller(controller, didCompleteRound: round)
     }
     
     func controller(_ controller: AuctionController, completeAuction winner: Ad) {
@@ -119,13 +125,16 @@ extension BannerAdManager: AuctionControllerDelegate {
             timeout: .unknown
         )
         
-        waterfall.delegate = self
         state = .loading(controller: waterfall)
+
+        waterfall.delegate = self
         waterfall.load()
+        
+        delegate?.controller(controller, completeAuction: winner)
     }
     
     func controller(_ controller: AuctionController, failedAuction error: Error) {
-        
+        delegate?.controller(controller, failedAuction: error)
     }
 }
 

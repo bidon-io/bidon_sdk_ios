@@ -42,7 +42,7 @@ public struct AdViewContext {
 }
 
 
-public enum AdViewFormat {
+@objc public enum AdViewFormat: Int {
     case banner
     case leaderboard
     case mrec

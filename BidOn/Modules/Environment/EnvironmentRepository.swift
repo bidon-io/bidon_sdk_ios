@@ -18,6 +18,7 @@ extension EnvironmentRepository {
     
     func configure(appKey: String) {
         self[.device] = DeviceManager()
+        self[.app] = AppManager(key: appKey)
         
         let geo = GeoManager()
         if geo.isAvailable {

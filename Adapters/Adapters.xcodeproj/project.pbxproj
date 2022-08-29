@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		114D2ADEE74DD36DB9C36DB7 /* Pods_BidOnAdapterGoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0471434C6149F069FDC832BC /* Pods_BidOnAdapterGoogleMobileAds.framework */; };
+		4200679F28BCB069003B734D /* AppLovinRewardedDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200679E28BCB069003B734D /* AppLovinRewardedDemandProvider.swift */; };
+		420067A128BCBAF8003B734D /* ALEmptyReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A028BCBAF8003B734D /* ALEmptyReward.swift */; };
+		420067A328BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A228BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift */; };
 		421D48C62886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.h in Headers */ = {isa = PBXBuildFile; fileRef = 421D48C52886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		421D48CD2886D9F9007DE2E4 /* AppsFlyerMobileMeasurementPartnerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48CC2886D9F9007DE2E4 /* AppsFlyerMobileMeasurementPartnerAdapter.swift */; };
 		421D48D32886DAB5007DE2E4 /* AppsFlyerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48D22886DAB5007DE2E4 /* AppsFlyerParameters.swift */; };
@@ -45,6 +48,9 @@
 /* Begin PBXFileReference section */
 		0456E548692C5EE25FCAA2BE /* Pods-BidOnAdapterGoogleMobileAds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterGoogleMobileAds.release.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterGoogleMobileAds/Pods-BidOnAdapterGoogleMobileAds.release.xcconfig"; sourceTree = "<group>"; };
 		0471434C6149F069FDC832BC /* Pods_BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4200679E28BCB069003B734D /* AppLovinRewardedDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinRewardedDemandProvider.swift; sourceTree = "<group>"; };
+		420067A028BCBAF8003B734D /* ALEmptyReward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALEmptyReward.swift; sourceTree = "<group>"; };
+		420067A228BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinAdViewDemandProvider.swift; sourceTree = "<group>"; };
 		421D48C32886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterAppsFlyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		421D48C52886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterAppsFlyer.h; sourceTree = "<group>"; };
 		421D48CC2886D9F9007DE2E4 /* AppsFlyerMobileMeasurementPartnerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlyerMobileMeasurementPartnerAdapter.swift; sourceTree = "<group>"; };
@@ -202,6 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				425E9C5728B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift */,
+				4200679E28BCB069003B734D /* AppLovinRewardedDemandProvider.swift */,
+				420067A228BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift */,
 			);
 			path = Demand;
 			sourceTree = "<group>";
@@ -211,6 +219,7 @@
 			children = (
 				425E9C5C28B7923400F4E4C7 /* AdServiceBridge.swift */,
 				425E9C5E28B79BAE00F4E4C7 /* ALAdWrapper.swift */,
+				420067A028BCBAF8003B734D /* ALEmptyReward.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -635,10 +644,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				420067A128BCBAF8003B734D /* ALEmptyReward.swift in Sources */,
 				425E9C5D28B7923400F4E4C7 /* AdServiceBridge.swift in Sources */,
+				420067A328BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift in Sources */,
 				425E9C5528B770CD00F4E4C7 /* AppLovinParameters.swift in Sources */,
 				425E9C5828B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift in Sources */,
 				425E9C5F28B79BAE00F4E4C7 /* ALAdWrapper.swift in Sources */,
+				4200679F28BCB069003B734D /* AppLovinRewardedDemandProvider.swift in Sources */,
 				425E9C5328B76CC100F4E4C7 /* AppLovinDemandSourceAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

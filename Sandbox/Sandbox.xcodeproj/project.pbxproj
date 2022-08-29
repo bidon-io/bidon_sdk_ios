@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		169F7C8E91CEF4CADB6E417E /* Pods_Sandbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A1E0483C51188FF09EB928 /* Pods_Sandbox.framework */; };
+		4200679D28BCA8A3003B734D /* BannerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200679C28BCA8A3003B734D /* BannerSection.swift */; };
+		420067A528BCEF06003B734D /* BannerAdSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A428BCEF06003B734D /* BannerAdSectionViewModel.swift */; };
 		4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5528B90479001F38E5 /* AdEventsList.swift */; };
 		4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7328B8BD0500E8D886 /* InterstitialSection.swift */; };
 		4224AA7628B8BDB500E8D886 /* InterstitialSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7528B8BDB500E8D886 /* InterstitialSectionViewModel.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		2F533D98A3EB5DDDC412B52F /* Pods-Sandbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sandbox.release.xcconfig"; path = "Target Support Files/Pods-Sandbox/Pods-Sandbox.release.xcconfig"; sourceTree = "<group>"; };
+		4200679C28BCA8A3003B734D /* BannerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerSection.swift; sourceTree = "<group>"; };
+		420067A428BCEF06003B734D /* BannerAdSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdSectionViewModel.swift; sourceTree = "<group>"; };
 		4219DB5528B90479001F38E5 /* AdEventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventsList.swift; sourceTree = "<group>"; };
 		4224AA7328B8BD0500E8D886 /* InterstitialSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialSection.swift; sourceTree = "<group>"; };
 		4224AA7528B8BDB500E8D886 /* InterstitialSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialSectionViewModel.swift; sourceTree = "<group>"; };
@@ -69,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4200679B28BCA883003B734D /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				4200679C28BCA8A3003B734D /* BannerSection.swift */,
+				420067A428BCEF06003B734D /* BannerAdSectionViewModel.swift */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
 		4224AA7228B8BCE200E8D886 /* Interstitial */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				4224AA8128B8F92000E8D886 /* Shared */,
+				4200679B28BCA883003B734D /* Banner */,
 				4224AA7C28B8D57E00E8D886 /* RewardedAd */,
 				4224AA7228B8BCE200E8D886 /* Interstitial */,
 				4243092728A27C46002360B0 /* Info.plist */,
@@ -296,9 +310,11 @@
 			files = (
 				4224AA7E28B8D59400E8D886 /* RewardedAdSection.swift in Sources */,
 				426DD7AE28A6584600A1ADF5 /* HomeView.swift in Sources */,
+				420067A528BCEF06003B734D /* BannerAdSectionViewModel.swift in Sources */,
 				4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */,
 				4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */,
 				4299A413289BC8B40062C580 /* ContentView.swift in Sources */,
+				4200679D28BCA8A3003B734D /* BannerSection.swift in Sources */,
 				4224AA8028B8D5B300E8D886 /* RewardedAdSectionViewModel.swift in Sources */,
 				4224AA7628B8BDB500E8D886 /* InterstitialSectionViewModel.swift in Sources */,
 				4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */,
@@ -448,7 +464,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.Sandbox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasko.simplenumbers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -480,7 +496,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.Sandbox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasko.simplenumbers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

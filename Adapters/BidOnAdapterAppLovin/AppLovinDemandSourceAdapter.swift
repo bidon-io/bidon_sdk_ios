@@ -10,7 +10,7 @@ import AppLovinSDK
 import BidOn
 
 
-internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter // & RewardedAdDemandSourceAdapter & AdViewDemandSourceAdapter
+internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter & AdViewDemandSourceAdapter
 
 
 @objc public final class AppLovinDemandSourceAdapter: NSObject, DemandSourceAdapter {
@@ -27,6 +27,22 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter // & Re
         }
         
         return AppLovinInterstitialDemandProvider(sdk: sdk)
+    }
+    
+    public func rewardedAd() throws -> RewardedAdDemandProvider {
+        guard let sdk = self.sdk else {
+            throw SdkError("AppLovin SDK is not initialized yet")
+        }
+        
+        return AppLovinRewardedDemandProvider(sdk: sdk)
+    }
+    
+    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+        guard let sdk = self.sdk else {
+            throw SdkError("AppLovin SDK is not initialized yet")
+        }
+        
+        return AppLovinAdViewDemandProvider(sdk: sdk, context: context)
     }
 }
 

@@ -10,4 +10,5 @@ import Foundation
 #warning("Fill in all required fields")
 protocol App: Environment {
     var bundle: String { get }
+    var key: String { get }
 }

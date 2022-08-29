@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		420067A728BD0FBB003B734D /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A628BD0FBB003B734D /* AppManager.swift */; };
 		4219DB5828B90D5E001F38E5 /* BannerAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5728B90D5E001F38E5 /* BannerAdManager.swift */; };
 		4219DB5A28B90E67001F38E5 /* AdViewAuctionRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5928B90E67001F38E5 /* AdViewAuctionRequestBuilder.swift */; };
 		4219DB5C28B9198B001F38E5 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5B28B9198B001F38E5 /* BannerView.swift */; };
@@ -98,6 +99,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		420067A628BD0FBB003B734D /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		4219DB5728B90D5E001F38E5 /* BannerAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdManager.swift; sourceTree = "<group>"; };
 		4219DB5928B90E67001F38E5 /* AdViewAuctionRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewAuctionRequestBuilder.swift; sourceTree = "<group>"; };
 		4219DB5B28B9198B001F38E5 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				428CCBF328A11190003123EF /* EnvironmentManager.swift */,
 				42D047EA289D60260096A8C6 /* DeviceManager.swift */,
 				42D047F0289D73F80096A8C6 /* GeoManager.swift */,
+				420067A628BD0FBB003B734D /* AppManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				4243093428A2BC4C002360B0 /* SessionModel.swift in Sources */,
 				42389DF22872F63F006024BA /* AuctionComparator.swift in Sources */,
 				426DD7B628A68D9400A1ADF5 /* RewardedAdDelegate.swift in Sources */,
+				420067A728BD0FBB003B734D /* AppManager.swift in Sources */,
 				4224AA6F28B7E11200E8D886 /* FullscreenImpressionController.swift in Sources */,
 				426DD78B28A3E88100A1ADF5 /* AuctionRequest.swift in Sources */,
 				421D48CB2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift in Sources */,

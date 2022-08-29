@@ -10,7 +10,7 @@ import BidMachine
 import BidOn
 
 
-internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter // & RewardedAdDemandSourceAdapter & AdViewDemandSourceAdapter
+internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter & AdViewDemandSourceAdapter
 
 
 @objc public final class BidMachineDemandSourceAdapter: NSObject, DemandSourceAdapter {
@@ -22,14 +22,14 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter // & Re
     public func interstitial() throws -> InterstitialDemandProvider {
         return BidMachineInterstitialDemandProvider()
     }
-
-//    public func rewardedAd() throws -> RewardedAdDemandProvider {
-////        return BidMachineRewardedAdDemandProvider()
-//    }
-//
-//    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
-////        return BidMachineBannerDemandProvider(context: context)
-//    }
+    
+    public func rewardedAd() throws -> RewardedAdDemandProvider {
+        return BidMachineRewardedAdDemandProvider()
+    }
+    
+    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+        return BidMachineBannerDemandProvider(context: context)
+    }
 }
 
 
@@ -46,13 +46,13 @@ extension BidMachineDemandSourceAdapter: InitializableAdapter {
         var parameters: BidMachineParameters?
         
         do {
-           parameters = try BidMachineParameters(from: decoder)
+            parameters = try BidMachineParameters(from: decoder)
         } catch {
             completion(.failure(SdkError(error)))
         }
         
         guard let parameters = parameters else { return }
-
+        
         
         let configuration = BDMSdkConfiguration()
 #if DEBUG

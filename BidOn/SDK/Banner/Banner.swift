@@ -11,7 +11,7 @@ import UIKit
 
 @objc(BDBanner)
 public final class Banner: UIView, AdView {
-    @objc public var autorefreshInterval: TimeInterval = 5 {
+    @objc public var autorefreshInterval: TimeInterval = 15 {
         didSet { scheduleRefreshIfNeeded() }
     }
     
@@ -22,6 +22,8 @@ public final class Banner: UIView, AdView {
             viewManager.cancelRefreshTimer()
         }
     }
+    
+    @objc public var format: AdViewFormat = .banner
     
     @objc public var rootViewController: UIViewController?
 
@@ -48,14 +50,13 @@ public final class Banner: UIView, AdView {
     
     final override public func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        guard !viewManager.isAdPresented else { return }
-        refresh()
+        refreshIfNeeded()
     }
 
     @objc public func loadAd() {
         let ctx = AdViewContext(
-            format: .banner,
-            size: AdViewFormat.banner.preferredSize,
+            format: format,
+            size: format.preferredSize,
             isAdaptive: true,
             rootViewController: rootViewController
         )
@@ -71,29 +72,45 @@ public final class Banner: UIView, AdView {
             else { return }
             
             Logger.verbose("Banner \(self) did layout ad view \(adView), size:)")
-            self.viewManager.layout(view: adView, size: self.bounds.size)
+            
+            self.viewManager.layout(
+                view: adView,
+                size: self.format.preferredSize
+            )
+            
             self.scheduleRefreshIfNeeded()
         }
     }
     
-    private final func refresh() {
-        Logger.verbose("Banner \(self) will refresh ad view")
+    private final func refreshIfNeeded() {
         guard
             let provider = adManager.demand?.provider as? AdViewDemandProvider,
             let ad = adManager.demand?.ad,
             let adView = provider.container(for: ad)
         else { return }
-    
-        layout(adView: adView)
+        
+        if viewManager.isRefreshGranted {
+            Logger.verbose("Banner \(self) will refresh ad view")
+               
+            layout(adView: adView)
+        } else if !viewManager.isAdPresented {
+            Logger.verbose("Banner \(self) will display ad view")
+               
+            layout(adView: adView)
+        }
     }
     
     private final func scheduleRefreshIfNeeded() {
         guard isAutorefreshing, autorefreshInterval > 0, viewManager.isRefreshGranted
         else { return }
         weak var weakSelf = self
+        
         Logger.verbose("Banner \(self) did start refresh timer with interval: \(autorefreshInterval)s")
+        
+        adManager.prepareForReuse()
+        viewManager.schedule(autorefreshInterval, block: weakSelf?.refreshIfNeeded)
+        
         loadAd()
-        viewManager.schedule(autorefreshInterval, block: weakSelf?.refresh)
     }
 }
 
@@ -104,7 +121,7 @@ extension Banner: BannerAdManagerDelegate {
     }
     
     func didLoad(_ ad: Ad) {
-        refresh()
+        refreshIfNeeded()
     }
     
     func controllerDidStartAuction(_ controller: AuctionController) {

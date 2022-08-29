@@ -7,10 +7,13 @@
 
 import SwiftUI
 import BidOn
+import AppTrackingTransparency
 
 
 struct Constants {
     static let baseURL = "https://c3d5b3d8-63e7-4818-8ece-264c1df79e4f.mock.pstmn.io"
+//    static let baseURL = "https://b.appbaqend.com"
+    static let appKey = "3c53cae2cd969ecd82910e1f5610a3df24ea8b4b3ca52247"
 }
 
 
@@ -34,14 +37,18 @@ final class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         
-        BidOnSdk.logLevel = .verbose
-        BidOnSdk.baseURL = Constants.baseURL
-        BidOnSdk.initialize(appKey: "some app key") {
-            withAnimation { [unowned self] in
-                self.isInitialized = true
+        ATTrackingManager.requestTrackingAuthorization { _ in
+            DispatchQueue.main.async {
+                BidOnSdk.logLevel = .verbose
+                BidOnSdk.baseURL = Constants.baseURL
+                BidOnSdk.initialize(appKey: Constants.appKey) {
+                    withAnimation { [unowned self] in
+                        self.isInitialized = true
+                    }
+                }
             }
         }
-    
+         
         return true
     }
 }

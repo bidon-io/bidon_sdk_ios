@@ -21,6 +21,10 @@ final internal class BannerViewManager {
     
     var isRefreshGranted: Bool { timer == nil && isAdPresented }
 
+    deinit {
+        cancelRefreshTimer()
+    }
+    
     func schedule(
         _ interval: TimeInterval,
         block: (() -> ())?
@@ -48,8 +52,9 @@ final internal class BannerViewManager {
             !container.subviews.contains(view)
         else { return }
         
-        container.subviews.forEach { $0.removeFromSuperview() }
+        let viewsToRemove = container.subviews
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.alpha = 0
         container.addSubview(view)
         
         let constraints: [NSLayoutConstraint]
@@ -71,5 +76,15 @@ final internal class BannerViewManager {
         }
         
         NSLayoutConstraint.activate(constraints)
+        
+        UIView.animate(
+            withDuration: 0.25,
+            delay: 0, options: .curveEaseInOut,
+            animations: {
+                viewsToRemove.forEach { $0.alpha = 0 }
+                view.alpha = 1
+            }) { _ in
+                viewsToRemove.forEach { $0.removeFromSuperview() }
+            }
     }
 }

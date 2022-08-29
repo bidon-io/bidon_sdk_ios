@@ -52,6 +52,8 @@ ImpressionControllerType: FullscreenImpressionController, ImpressionControllerTy
             return
         }
         
+        state = .preparing
+        
         let auctionId: String = UUID().uuidString
         
         let request = AuctionRequest { (builder: RequestBuilderType) in

@@ -10,7 +10,7 @@ import GoogleMobileAds
 import BidOn
 
 
-internal typealias DemandSourceAdapter = InitializableAdapter & InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter // & AdViewDemandSourceAdapter
+internal typealias DemandSourceAdapter = InitializableAdapter & InterstitialDemandSourceAdapter & RewardedAdDemandSourceAdapter & AdViewDemandSourceAdapter
 
 
 @objc
@@ -31,18 +31,16 @@ public final class GoogleMobileAdsDemandSourceAdapter: NSObject, DemandSourceAda
     
     
     public func interstitial() throws -> InterstitialDemandProvider {
-        GoogleMobileAdsFullscreenDemandProvider<GADInterstitialAd>()
+        return GoogleMobileAdsFullscreenDemandProvider<GADInterstitialAd>()
     }
     
     public func rewardedAd() throws -> RewardedAdDemandProvider {
-        GoogleMobileAdsFullscreenDemandProvider<GADRewardedAd>()
+        return GoogleMobileAdsFullscreenDemandProvider<GADRewardedAd>()
     }
     
     
-    //    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
-    //        GoogleMobileAdsBannerDemandProvider(context: context) { [weak self] price in
-    //            return self?.parameters.lineItems.banner?.item(for: price)
-    //        }
-    //    }
+    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+        return GoogleMobileAdsBannerDemandProvider(context: context)
+    }
 }
 

@@ -18,17 +18,14 @@ internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
     private var lineItem: LineItem?
     
     private lazy var banner: GADBannerView = {
+        weak var weakSelf = self
         let banner = GADBannerView(adSize: context.adSize)
+        
         banner.delegate = self
-        banner.paidEventHandler = { [weak self] _ in
-            guard
-                let self = self,
-                let wrapped = self.wrapped(ad: self.banner)
-            else { return }
-            
-            self.revenueDelegate?.provider(self, didPayRevenueFor: wrapped)
-        }
-        return GADBannerView(adSize: GADAdSizeBanner)
+        banner.rootViewController = context.rootViewController
+        banner.paidEventHandler = weakSelf?.didReceievePaidEvent
+        
+        return banner
     }()
     
     weak var delegate: DemandProviderDelegate?
@@ -38,6 +35,14 @@ internal final class GoogleMobileAdsBannerDemandProvider: NSObject {
     init(context: AdViewContext) {
         self.context = context
         super.init()
+    }
+    
+    private func didReceievePaidEvent(_ value: GADAdValue) {
+        guard
+            let wrapped = wrapped(ad: banner)
+        else { return }
+        
+        revenueDelegate?.provider(self, didPayRevenueFor: wrapped)
     }
 }
 
@@ -51,8 +56,6 @@ extension GoogleMobileAdsBannerDemandProvider: DirectDemandProvider {
         
         let request = GADRequest()
         banner.adUnitID = lineItem.adUnitId
-        banner.rootViewController = context.rootViewController
-        
         banner.load(request)
     }
     
@@ -101,8 +104,8 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        guard wrapped(ad: bannerView) != nil else { return }
         response?(.failure(error))
+        response = nil
     }
     
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {

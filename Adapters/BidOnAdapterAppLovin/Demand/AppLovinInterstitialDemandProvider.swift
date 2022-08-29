@@ -11,7 +11,7 @@ import AppLovinSDK
 import UIKit
 
 
-extension ALInterstitialAd {
+private extension ALInterstitialAd {
     private static var adKey: UInt8 = 0
     
     var ad: Ad? {
@@ -71,9 +71,7 @@ extension AppLovinInterstitialDemandProvider: DirectDemandProvider {
         response(.success(ad))
     }
     
-    func cancel() {
-#warning("Implement cancel")
-    }
+    func cancel() {}
     
     func notify(_ event: AuctionEvent) {}
 }

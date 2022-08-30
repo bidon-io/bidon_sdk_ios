@@ -12,7 +12,7 @@ import UIKit
 
 
 internal final class BidMachineRewardedAdDemandProvider: NSObject {
-    private typealias Request = RequestWrapper<BDMRewardedRequest>
+    private typealias Request = BidMachineRequestWrapper<BDMRewardedRequest>
     
     private var response: DemandProviderResponse?
     
@@ -54,13 +54,13 @@ extension BidMachineRewardedAdDemandProvider: ProgrammaticDemandProvider {
 
 extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
     func load(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard let adObject = ad.wrapped as? BDMAdProtocol else {
+        guard let ad = ad as? BidMachineAd else {
             response(.failure(SdkError.internalInconsistency))
             return
         }
         
         self.response = response
-        rewardedAd.loadAd(adObject)
+        rewardedAd.loadAd(ad.wrapped)
     }
     
     func show(ad: Ad, from viewController: UIViewController) {
@@ -71,7 +71,9 @@ extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
 
 extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
     func rewardedReady(toPresent rewarded: BDMRewarded) {
-        response?(.success(rewarded.adObject.wrapped))
+        guard let adObject = rewarded.adObject else { return }
+
+        response?(.success(BidMachineAd(adObject)))
         response = nil
     }
     
@@ -81,23 +83,33 @@ extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
     }
     
     func rewarded(_ rewarded: BDMRewarded, failedToPresentWithError error: Error) {
-        delegate?.provider(self, didPresent: rewarded.adObject.wrapped)
+        guard let adObject = rewarded.adObject else { return }
+
+        delegate?.provider(self, didPresent: BidMachineAd(adObject))
     }
     
     func rewardedWillPresent(_ rewarded: BDMRewarded) {
-        delegate?.provider(self, didPresent: rewarded.adObject.wrapped)
+        guard let adObject = rewarded.adObject else { return }
+
+        delegate?.provider(self, didPresent: BidMachineAd(adObject))
     }
     
     func rewardedDidDismiss(_ rewarded: BDMRewarded) {
-        delegate?.provider(self, didHide: rewarded.adObject.wrapped)
+        guard let adObject = rewarded.adObject else { return }
+
+        delegate?.provider(self, didHide: BidMachineAd(adObject))
     }
     
     func rewardedRecieveUserInteraction(_ rewarded: BDMRewarded) {
-        delegate?.provider(self, didClick: rewarded.adObject.wrapped)
+        guard let adObject = rewarded.adObject else { return }
+
+        delegate?.provider(self, didClick: BidMachineAd(adObject))
     }
     
     func rewardedFinishRewardAction(_ rewarded: BDMRewarded) {
-        rewardDelegate?.provider(self, didReceiveReward: EmptyReward(), ad: rewarded.adObject.wrapped)
+        guard let adObject = rewarded.adObject else { return }
+
+        rewardDelegate?.provider(self, didReceiveReward: EmptyReward(), ad: BidMachineAd(adObject))
     }
     
     func rewardedDidExpire(_ rewarded: BDMRewarded) {}
@@ -106,7 +118,9 @@ extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
 
 extension BidMachineRewardedAdDemandProvider: BDMAdEventProducerDelegate {
     func didProduceImpression(_ producer: BDMAdEventProducer) {
-        revenueDelegate?.provider(self, didPayRevenueFor: rewardedAd.adObject.wrapped)
+        guard let adObject = rewardedAd.adObject else { return }
+
+        revenueDelegate?.provider(self, didPayRevenueFor: BidMachineAd(adObject))
     }
     
     func didProduceUserAction(_ producer: BDMAdEventProducer) {}

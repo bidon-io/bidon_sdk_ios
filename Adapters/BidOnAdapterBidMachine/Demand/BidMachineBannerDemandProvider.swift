@@ -12,7 +12,7 @@ import UIKit
 
 
 internal final class BidMachineBannerDemandProvider: NSObject {
-    private typealias Request = RequestWrapper<BDMBannerRequest>
+    private typealias Request = BidMachineRequestWrapper<BDMBannerRequest>
     
     private let context: AdViewContext
     
@@ -64,14 +64,14 @@ extension BidMachineBannerDemandProvider: ProgrammaticDemandProvider {
 
 extension BidMachineBannerDemandProvider: AdViewDemandProvider {
     func load(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard let adObject = ad.wrapped as? BDMAdProtocol else {
+        guard let ad = ad as? BidMachineAd else {
             response(.failure(SdkError.internalInconsistency))
             return
         }
         
         self.response = response
         banner.rootViewController = context.rootViewController
-        banner.loadAd(adObject)
+        banner.loadAd(ad.wrapped)
     }
     
     func container(for ad: Ad) -> AdViewContainer? {
@@ -82,7 +82,9 @@ extension BidMachineBannerDemandProvider: AdViewDemandProvider {
 
 extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     func bannerViewReady(toPresent bannerView: BDMBannerView) {
-        response?(.success(banner.adObject.wrapped))
+        guard let adObject = bannerView.adObject else { return }
+
+        response?(.success(BidMachineAd(adObject)))
         response = nil
     }
     
@@ -92,19 +94,27 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     }
     
     func bannerViewWillPresentScreen(_ bannerView: BDMBannerView) {
-        adViewDelegate?.provider(self, willPresentModalView: bannerView.adObject.wrapped)
+        guard let adObject = bannerView.adObject else { return }
+
+        adViewDelegate?.provider(self, willPresentModalView: BidMachineAd(adObject))
     }
     
     func bannerViewDidDismissScreen(_ bannerView: BDMBannerView) {
-        adViewDelegate?.provider(self, didDismissModalView: bannerView.adObject.wrapped)
+        guard let adObject = bannerView.adObject else { return }
+
+        adViewDelegate?.provider(self, didDismissModalView: BidMachineAd(adObject))
     }
     
     func bannerViewWillLeaveApplication(_ bannerView: BDMBannerView) {
-        adViewDelegate?.provider(self, willLeaveApplication: bannerView.adObject.wrapped)
+        guard let adObject = bannerView.adObject else { return }
+
+        adViewDelegate?.provider(self, willLeaveApplication: BidMachineAd(adObject))
     }
     
     func bannerViewRecieveUserInteraction(_ bannerView: BDMBannerView) {
-        delegate?.provider(self, didClick: bannerView.adObject.wrapped)
+        guard let adObject = bannerView.adObject else { return }
+
+        delegate?.provider(self, didClick: BidMachineAd(adObject))
     }
     
     func bannerViewDidExpire(_ bannerView: BDMBannerView) {}
@@ -113,7 +123,9 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
 
 extension BidMachineBannerDemandProvider: BDMAdEventProducerDelegate {
     func didProduceImpression(_ producer: BDMAdEventProducer) {
-        revenueDelegate?.provider(self, didPayRevenueFor: banner.adObject.wrapped)
+        guard let adObject = banner.adObject else { return }
+
+        revenueDelegate?.provider(self, didPayRevenueFor: BidMachineAd(adObject))
     }
     
     func didProduceUserAction(_ producer: BDMAdEventProducer) {}

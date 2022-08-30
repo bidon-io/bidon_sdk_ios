@@ -10,6 +10,7 @@ import Foundation
 
 internal typealias AdsRepository = Repository<HashableAd, DemandProvider>
 
+typealias AdRecord = (ad: Ad, provider: DemandProvider)
 
 extension AdsRepository {
     convenience init() {
@@ -20,16 +21,16 @@ extension AdsRepository {
         return objects.keys.map { $0.ad }
     }
     
-    func register(demand: Demand) {
-        let container = HashableAd(ad: demand.ad)
-        self[container] = demand.provider
+    func register(_ record: AdRecord) {
+        let container = HashableAd(ad: record.ad)
+        self[container] = record.provider
     }
     
     func provider(for ad: Ad) -> DemandProvider? {
-        return demand(for: ad)?.provider
+        return record(for: ad)?.1
     }
     
-    func demand(for ad: Ad) -> Demand? {
+    func record(for ad: Ad) -> AdRecord? {
         let container = HashableAd(ad: ad)
         let provider: DemandProvider? = self[container]
         

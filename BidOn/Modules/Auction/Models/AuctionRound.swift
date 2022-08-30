@@ -8,7 +8,7 @@
 import Foundation
 
 
-typealias AuctionRoundDemandResponse = (Result<Demand, SdkError>) -> ()
+typealias AuctionRoundDemandResponse = (Result<AdRecord, SdkError>) -> ()
 typealias AuctionRoundCompletion = () -> ()
 
 

@@ -13,15 +13,31 @@ internal typealias ConcurrentAuction = Auction<ConcurrentAuctionRound>
 
 final class ConcurrentAuctionController: AuctionController {
     var waterfall: Waterfall {
-        Waterfall(
+        struct DemandModel: Demand {
+            var auctionId: String
+            var auctionConfigurationId: Int
+            var ad: Ad
+            var provider: DemandProvider
+        }
+        
+        return Waterfall(
             repository
                 .ads
                 .sorted { comparator.compare($0, $1) }
-                .compactMap { repository.demand(for: $0) }
+                .compactMap { repository.record(for: $0) }
+                .map {
+                    DemandModel(
+                        auctionId: id,
+                        auctionConfigurationId: configurationId,
+                        ad: $0.0,
+                        provider: $0.1
+                    )
+                }
         )
     }
     
     let id: String
+    let configurationId: Int
     
     private let auction: ConcurrentAuction
     private let comparator: AuctionComparator
@@ -49,6 +65,7 @@ final class ConcurrentAuctionController: AuctionController {
         build(builder)
         
         self.id = builder.auctionId
+        self.configurationId = builder.auctionConfigurationId
         self.delegate = builder.delegate
         self.comparator = builder.comparator
         self.auction = builder.auction
@@ -88,7 +105,7 @@ final class ConcurrentAuctionController: AuctionController {
             let provider = repository.provider(for: winner)
             provider?.notify(.win(winner))
             
-            Logger.verbose("\(adType.rawValue.capitalized) auction did found winner: \(winner.description)")
+            Logger.verbose("\(adType.rawValue.capitalized) auction did found winner: \(winner)")
             delegate?.controller(self, completeAuction: winner)
         } else {
             delegate?.controller(self, failedAuction: SdkError.internalInconsistency)
@@ -116,8 +133,8 @@ final class ConcurrentAuctionController: AuctionController {
             pricefloor: pricefloor,
             demand: { [weak self] result in
                 switch result {
-                case .success(let demand):
-                    self?.receive(demand: demand)
+                case .success(let record):
+                    self?.receive(record)
                 case .failure(let error):
                     Logger.debug("\(adType.rawValue.capitalized) auction round: \(round) did receive error: \(error)")
                 }
@@ -141,20 +158,20 @@ final class ConcurrentAuctionController: AuctionController {
         )
     }
     
-    private func receive(demand: Demand) {
-        guard demand.ad.price > pricefloor else {
-            Logger.debug("\(adType.rawValue.capitalized) auction received bid: \(demand.ad.description) price is lower than pricefloor: \(pricefloor)")
+    private func receive(_ record: AdRecord) {
+        guard record.ad.price > pricefloor else {
+            Logger.debug("\(adType.rawValue.capitalized) auction received bid: \(record.ad) price is lower than pricefloor: \(pricefloor)")
             return
         }
         
-        Logger.verbose("\(adType.rawValue.capitalized) auction did receive bid: \(demand.ad.description) from \(demand.provider)")
+        Logger.verbose("\(adType.rawValue.capitalized) auction did receive bid: \(record.ad) from \(record.provider)")
         
-        repository.register(demand: demand)
+        repository.register(record)
         
         delegate?.controller(
             self,
-            didReceiveAd: demand.ad,
-            provider: demand.provider
+            didReceiveAd: record.ad,
+            provider: record.provider
         )
     }
 }

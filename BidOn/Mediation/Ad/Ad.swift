@@ -26,22 +26,21 @@ public extension Currency {
 }
 
 
+@objc(BNPricePrecision)
+public enum PricePrecision: Int {
+    case programmatic
+    case direct
+}
+
 @objc(BNAd)
 public protocol Ad {
     var id: String { get }
+    var adUnitId: String? { get }
     var price: Price { get }
+    var pricePrecision: PricePrecision { get }
     var currency: Currency { get }
     var networkName: String { get }
     var dsp: String? { get }
-    
-    var wrapped: AnyObject { get }
-}
-
-
-extension Ad {
-    var description: String {
-        return "Ad Wrapper #\(id), network: \(networkName), dsp: \(dsp ?? "-"), revenue: \(price) \(currency). Wrapped \(wrapped)"
-    }
 }
 
 

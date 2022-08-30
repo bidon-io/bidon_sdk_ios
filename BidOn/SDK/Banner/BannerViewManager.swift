@@ -9,6 +9,13 @@ import Foundation
 import UIKit
 
 
+
+protocol BannerViewManagerDelegate: AnyObject {
+    func manager(_ manager: BannerViewManager, didRecordImpression: Impression)
+    func manager(_ manager: BannerViewManager, didRecordClick impression: Impression)
+}
+
+
 final internal class BannerViewManager {
     weak var container: UIView?
     
@@ -18,6 +25,8 @@ final internal class BannerViewManager {
         guard let container = container else { return false }
         return !container.subviews.isEmpty
     }
+    
+    weak var delegate: BannerAdManagerDelegate?
     
     var isRefreshGranted: Bool { timer == nil && isAdPresented }
 
@@ -46,11 +55,17 @@ final internal class BannerViewManager {
         timer = nil
     }
     
-    func layout(view: AdViewContainer, size: CGSize) {
+    func layout(
+        view: AdViewContainer,
+        provider: AdViewDemandProvider,
+        size: CGSize
+    ) {
         guard
             let container = container,
             !container.subviews.contains(view)
         else { return }
+        
+        provider.adViewDelegate = self
         
         let viewsToRemove = container.subviews
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -86,5 +101,20 @@ final internal class BannerViewManager {
             }) { _ in
                 viewsToRemove.forEach { $0.removeFromSuperview() }
             }
+    }
+}
+
+
+extension BannerViewManager: DemandProviderAdViewDelegate {
+    func provider(_ provider: AdViewDemandProvider, willPresentModalView ad: Ad) {
+        
+    }
+    
+    func provider(_ provider: AdViewDemandProvider, didDismissModalView ad: Ad) {
+        
+    }
+    
+    func provider(_ provider: AdViewDemandProvider, willLeaveApplication ad: Ad) {
+        
     }
 }

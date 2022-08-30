@@ -32,7 +32,7 @@ internal final class AppLovinAdViewDemandProvider: NSObject {
     }()
     
     @Injected(\.bridge)
-    var bridge: AdServiceBridge
+    var bridge: AppLovinAdServiceBridge
     
     private var response: DemandProviderResponse?
     private var lineItem: LineItem?
@@ -56,7 +56,7 @@ internal final class AppLovinAdViewDemandProvider: NSObject {
             ad.zoneIdentifier == lineItem.adUnitId
         else { return nil }
         
-        return ALAdWrapper(ad, price: lineItem.pricefloor)
+        return AppLovinAd(lineItem, ad)
     }
 }
 
@@ -78,13 +78,13 @@ extension AppLovinAdViewDemandProvider: DirectDemandProvider {
         ad: Ad,
         response: @escaping DemandProviderResponse
     ) {
-        guard let ad = ad.wrapped as? ALAd, ad.zoneIdentifier == lineItem?.adUnitId else {
+        guard let ad = ad as? AppLovinAd, ad.wrapped.zoneIdentifier == lineItem?.adUnitId else {
             response(.failure(SdkError.internalInconsistency))
             return
         }
         
         self.response = response
-        adView.render(ad)
+        adView.render(ad.wrapped)
     }
     
     func cancel() {}

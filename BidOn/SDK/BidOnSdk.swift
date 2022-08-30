@@ -93,7 +93,7 @@ public final class BidOnSdk: NSObject {
     ) {
         let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
         mmps.forEach {
-            Logger.verbose("MMP '\($0.identifier)' tracks \(adType.rawValue) ad revenue: \(ad.description)")
+            Logger.verbose("MMP '\($0.identifier)' tracks \(adType.rawValue) ad revenue: \(ad)")
             
             $0.trackAdRevenue(
                 ad,
@@ -103,8 +103,3 @@ public final class BidOnSdk: NSObject {
         }
     }
 }
-
-
-extension Result {
-    
-}//<Void, SdkError>

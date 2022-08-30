@@ -11,7 +11,7 @@ import GoogleMobileAds
 import UIKit
 
 
-internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BDGADFullscreenAd>: NSObject, GADFullScreenContentDelegate, BDGADFullscreenAdRewardDelegate {
+internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: GoogleMobileAdsFullscreenAd>: NSObject, GADFullScreenContentDelegate, GoogleMobileAdsFullscreenAdRewardDelegate {
     private var response: DemandProviderResponse?
     private var lineItem: LineItem?
     
@@ -62,7 +62,7 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: BDGAD
         guard let wrapped = wrapped(ad: rewardedAd) else { return }
         rewardDelegate?.provider(
             self,
-            didReceiveReward: reward.wrapped,
+            didReceiveReward: GoogleMobileAdsReward(reward),
             ad: wrapped
         )
     }
@@ -92,10 +92,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
             self.lineItem = lineItem
             self.fullscreenAd = fullscreenAd
             
-            let wrapped = BDGADResponseInfoWrapper(
-                fullscreenAd,
-                lineItem: lineItem
-            )
+            let wrapped = GoogleMobileAdsAd(lineItem, fullscreenAd.responseInfo)
             
             self.response?(.success(wrapped))
             self.response = nil
@@ -128,10 +125,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
             let lineItem = lineItem
         else { return nil }
         
-        return BDGADResponseInfoWrapper(
-            fullscreenAd,
-            lineItem: lineItem
-        )
+        return GoogleMobileAdsAd(lineItem, fullscreenAd.responseInfo)
     }
 }
 

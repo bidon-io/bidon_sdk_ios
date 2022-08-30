@@ -12,13 +12,14 @@ import UIKit
 protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate, AuctionControllerDelegate {
     func didFailToLoad(_ error: Error)
     func didLoad(_ ad: Ad)
+    func didPayRevenue(_ ad: Ad)
 }
 
 
 final class FullscreenAdManager<RequestBuilderType, AuctionBuilderType, ImpressionControllerType>: NSObject where
 RequestBuilderType: AuctionRequestBuilder,
 AuctionBuilderType: ConcurrentAuctionControllerBuilder,
-ImpressionControllerType: FullscreenImpressionController, ImpressionControllerType.Context == UIViewController {
+ImpressionControllerType: FullscreenImpressionController {
     
     fileprivate enum State {
         case idle
@@ -53,14 +54,12 @@ ImpressionControllerType: FullscreenImpressionController, ImpressionControllerTy
         }
         
         state = .preparing
-        
-        let auctionId: String = UUID().uuidString
-        
+                
         let request = AuctionRequest { (builder: RequestBuilderType) in
             builder.withPlacement(placement)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
-            builder.withAuctionId(auctionId)
+            builder.withAuctionId(UUID().uuidString)
             builder.withExt(sdk.ext)
         }
         
@@ -80,7 +79,8 @@ ImpressionControllerType: FullscreenImpressionController, ImpressionControllerTy
                     builder.withRounds(response.rounds, lineItems: response.lineItems)
                     builder.withPricefloor(response.minPrice)
                     builder.withDelegate(self)
-                    builder.withAuctionId(auctionId)
+                    builder.withAuctionId(response.auctionId)
+                    builder.withAuctionConfigurationId(response.auctionConfigurationId)
                 }
                 
                 auction.load()
@@ -129,6 +129,7 @@ extension FullscreenAdManager: AuctionControllerDelegate {
         didReceiveAd ad: Ad,
         provider: DemandProvider
     ) {
+        provider.revenueDelegate = self
         delegate?.controller(
             controller,
             didReceiveAd: ad,
@@ -185,26 +186,33 @@ extension FullscreenAdManager: WaterfallControllerDelegate {
 
 
 extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
-    func didPresent(_ ad: Ad) {
-        delegate?.didPresent(ad)
-    }
-
-    func didHide(_ ad: Ad) {
+    func didFailToPresent(_ impression: Impression?, error: Error) {
         state = .idle
-        delegate?.didHide(ad)
+        delegate?.didFailToPresent(impression, error: error)
     }
     
-    func didClick(_ ad: Ad) {
-        delegate?.didClick(ad)
-    }
-
-    func didFailToPresent(_ ad: Ad?, error: Error) {
-        state = .idle
-        delegate?.didFailToPresent(ad, error: error)
+    func didPresent(_ impression: Impression) {
+        delegate?.didPresent(impression)
     }
     
-    func didReceiveReward(_ reward: Reward, ad: Ad) {
-        delegate?.didReceiveReward(reward, ad: ad)
+    func didHide(_ impression: Impression) {
+        state = .idle
+        delegate?.didHide(impression)
+    }
+    
+    func didClick(_ impression: Impression) {
+        delegate?.didClick(impression)
+    }
+    
+    func didReceiveReward(_ reward: Reward, impression: Impression) {
+        delegate?.didReceiveReward(reward, impression: impression)
+    }
+}
+
+
+extension FullscreenAdManager: DemandProviderRevenueDelegate {
+    func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
+        delegate?.didPayRevenue(ad)
     }
 }
 

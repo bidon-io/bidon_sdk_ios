@@ -9,19 +9,21 @@ import Foundation
 import GoogleMobileAds
 
 
-protocol BDGADFullscreenAdRewardDelegate: AnyObject {
+protocol GoogleMobileAdsFullscreenAdRewardDelegate: AnyObject {
     func rewardedAd(_ rewardedAd: GADRewardedAd, didReceiveReward reward: GADAdReward)
 }
 
 
-protocol BDGADFullscreenAd: GADFullScreenPresentingAd, ResponseInfoProvider {
+protocol GoogleMobileAdsFullscreenAd: GADFullScreenPresentingAd {
     static func request(
         adUnitID: String,
         request: GADRequest,
-        completion: @escaping (BDGADFullscreenAd?, Error?) -> ()
+        completion: @escaping (GoogleMobileAdsFullscreenAd?, Error?) -> ()
     )
     
-    var rewardDelegate: BDGADFullscreenAdRewardDelegate? { get set }
+    var responseInfo: GADResponseInfo { get }
+    
+    var rewardDelegate: GoogleMobileAdsFullscreenAdRewardDelegate? { get set }
     
     var paidEventHandler: GADPaidEventHandler? { get set }
     
@@ -29,11 +31,11 @@ protocol BDGADFullscreenAd: GADFullScreenPresentingAd, ResponseInfoProvider {
 }
 
 
-extension GADInterstitialAd: BDGADFullscreenAd {
+extension GADInterstitialAd: GoogleMobileAdsFullscreenAd {
     static func request(
         adUnitID: String,
         request: GADRequest,
-        completion: @escaping (BDGADFullscreenAd?, Error?) -> ()
+        completion: @escaping (GoogleMobileAdsFullscreenAd?, Error?) -> ()
     ) {
         load(
             withAdUnitID: adUnitID,
@@ -42,22 +44,20 @@ extension GADInterstitialAd: BDGADFullscreenAd {
         )
     }
     
-    var rewardDelegate: BDGADFullscreenAdRewardDelegate? {
+    var rewardDelegate: GoogleMobileAdsFullscreenAdRewardDelegate? {
         get { nil }
         set { }
     }
-    
-    var info: GADResponseInfo? { Optional(responseInfo) }
 }
 
 
-extension GADRewardedAd: BDGADFullscreenAd {
+extension GADRewardedAd: GoogleMobileAdsFullscreenAd {
     private static var rewardDelegateKey: UInt8 = 0
     
     static func request(
         adUnitID: String,
         request: GADRequest,
-        completion: @escaping (BDGADFullscreenAd?, Error?) -> ()
+        completion: @escaping (GoogleMobileAdsFullscreenAd?, Error?) -> ()
     ) {
         load(
             withAdUnitID: adUnitID,
@@ -66,13 +66,11 @@ extension GADRewardedAd: BDGADFullscreenAd {
         )
     }
     
-    var rewardDelegate: BDGADFullscreenAdRewardDelegate? {
-        get { objc_getAssociatedObject(self, &GADRewardedAd.rewardDelegateKey) as? BDGADFullscreenAdRewardDelegate }
+    var rewardDelegate: GoogleMobileAdsFullscreenAdRewardDelegate? {
+        get { objc_getAssociatedObject(self, &GADRewardedAd.rewardDelegateKey) as? GoogleMobileAdsFullscreenAdRewardDelegate }
         set { objc_setAssociatedObject(self, &GADRewardedAd.rewardDelegateKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
     }
     
-    var info: GADResponseInfo? { Optional(responseInfo) }
-
     func present(fromRootViewController rootViewController: UIViewController) {
         present(fromRootViewController: rootViewController) { [weak self] in
             guard let self = self else { return }

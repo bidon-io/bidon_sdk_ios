@@ -74,6 +74,11 @@ extension AdEventModel {
             subtitle = ad.text
             bage = "dollarsign.circle"
             color = .green
+        case .didStartAuction:
+            title = "Did start auction"
+            subtitle = ""
+            bage = "suit.diamond"
+            color = .purple
         case .didStartAuctionRound(let auctionRound, let pricefloor):
             title = "Did start auction round: \(auctionRound)"
             subtitle = "Pricefloor: " + pricefloor.pretty
@@ -150,6 +155,11 @@ extension AdEventModel {
             subtitle = ad.text
             bage = "dollarsign.circle"
             color = .green
+        case .didStartAuction:
+            title = "Did start auction"
+            subtitle = ""
+            bage = "suit.diamond"
+            color = .purple
         case .didStartAuctionRound(let auctionRound, let pricefloor):
             title = "Did start auction round: \(auctionRound)"
             subtitle = "Pricefloor: " + pricefloor.pretty

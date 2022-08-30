@@ -45,6 +45,8 @@ struct AuctionRequest: Request {
         var lineItems: [LineItemModel]
         var minPrice: Price
         var token: String?
+        var auctionId: String
+        var auctionConfigurationId: Int
     }
     
     init<T: AuctionRequestBuilder>(_ build: (T) -> ()) {

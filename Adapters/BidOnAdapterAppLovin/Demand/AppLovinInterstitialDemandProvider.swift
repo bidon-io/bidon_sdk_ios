@@ -14,19 +14,19 @@ import UIKit
 private extension ALInterstitialAd {
     private static var adKey: UInt8 = 0
     
-    var ad: Ad? {
-        get { objc_getAssociatedObject(self, &ALInterstitialAd.adKey) as? Ad }
+    var ad: AppLovinAd? {
+        get { objc_getAssociatedObject(self, &ALInterstitialAd.adKey) as? AppLovinAd }
         set { objc_setAssociatedObject(self, &ALInterstitialAd.adKey, newValue, .OBJC_ASSOCIATION_RETAIN) }
     }
     
     
     func show(_ ad: Ad) throws {
-        guard let wrapped = ad.wrapped as? ALAd else {
+        guard let ad = ad as? AppLovinAd else {
             throw SdkError.internalInconsistency
         }
         
         self.ad = ad
-        show(wrapped)
+        show(ad.wrapped)
     }
 }
 
@@ -35,7 +35,7 @@ internal final class AppLovinInterstitialDemandProvider: NSObject {
     private let sdk: ALSdk
     
     @Injected(\.bridge)
-    var bridge: AdServiceBridge
+    var bridge: AppLovinAdServiceBridge
     
     private lazy var interstitial: ALInterstitialAd = {
         let interstitial = ALInterstitialAd(sdk: sdk)
@@ -63,7 +63,7 @@ extension AppLovinInterstitialDemandProvider: DirectDemandProvider {
     }
     
     func load(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard ad.wrapped is ALAd else {
+        guard ad is AppLovinAd else {
             response(.failure(SdkError.internalInconsistency))
             return
         }
@@ -90,7 +90,7 @@ extension AppLovinInterstitialDemandProvider: InterstitialDemandProvider {
 
 extension AppLovinInterstitialDemandProvider: ALAdDisplayDelegate {
     func ad(_ ad: ALAd, wasDisplayedIn view: UIView) {
-        guard let wrapper = interstitial.ad, wrapper.wrapped === ad else { return }
+        guard let wrapper = interstitial.ad, wrapper === ad else { return }
         delegate?.provider(self, didPresent: wrapper)
     }
     

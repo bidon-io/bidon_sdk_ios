@@ -85,13 +85,11 @@ extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
     private func wrapped(ad: GADBannerView) -> Ad? {
         guard
             banner === ad,
+            let responseInfo = banner.responseInfo,
             let lineItem = lineItem
         else { return nil }
         
-        return BDGADResponseInfoWrapper(
-            ad,
-            lineItem: lineItem
-        )
+        return GoogleMobileAdsAd(lineItem, responseInfo)
     }
 }
 

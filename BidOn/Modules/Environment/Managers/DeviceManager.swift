@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 
 final class DeviceManager: Device {
     let make: String = "Apple"
+    
+    @MainThreadComputable(UIDevice.current.model)
+    var model: String
 }

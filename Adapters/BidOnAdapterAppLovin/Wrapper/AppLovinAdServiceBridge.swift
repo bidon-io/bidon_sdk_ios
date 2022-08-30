@@ -10,20 +10,20 @@ import BidOn
 import AppLovinSDK
 
 
-fileprivate struct AdServiceBridgeInjectionKey: InjectionKey {
-    static var currentValue: AdServiceBridge = AdServiceBridge()
+fileprivate struct AppLovinAdServiceBridgeInjectionKey: InjectionKey {
+    static var currentValue: AppLovinAdServiceBridge = AppLovinAdServiceBridge()
 }
 
 
 extension InjectedValues {
-    var bridge: AdServiceBridge {
-        get { Self[AdServiceBridgeInjectionKey.self] }
-        set { Self[AdServiceBridgeInjectionKey.self] = newValue }
+    var bridge: AppLovinAdServiceBridge {
+        get { Self[AppLovinAdServiceBridgeInjectionKey.self] }
+        set { Self[AppLovinAdServiceBridgeInjectionKey.self] = newValue }
     }
 }
 
 
-final class AdServiceBridge {
+final class AppLovinAdServiceBridge {
     final private class Delegate: NSObject, ALAdLoadDelegate {
         private let response: DemandProviderResponse
         private let lineItem: LineItem
@@ -39,7 +39,7 @@ final class AdServiceBridge {
         }
         
         func adService(_ adService: ALAdService, didLoad ad: ALAd) {
-            let wrapped = ALAdWrapper(ad, price: lineItem.pricefloor)
+            let wrapped = AppLovinAd(lineItem, ad)
             response(.success(wrapped))
         }
         

@@ -10,13 +10,25 @@ import UIKit
 
 
 
-class RewardedImpressionController: NSObject, FullscreenImpressionController {
-    typealias Context = UIViewController
+final class RewardedImpressionController: NSObject, FullscreenImpressionController {
+    private struct RewardedImpression: Impression {
+        var impressionId: String = UUID().uuidString
+        
+        var auctionId: String
+        var auctionConfigurationId: Int
+        var ad: Ad
+        
+        init(demand: Demand) {
+            self.auctionId = demand.auctionId
+            self.auctionConfigurationId = demand.auctionConfigurationId
+            self.ad = demand.ad
+        }
+    }
     
     weak var delegate: FullscreenImpressionControllerDelegate?
     
-    let provider: RewardedAdDemandProvider
-    let ad: Ad
+    private let provider: RewardedAdDemandProvider
+    private let impression: Impression
     
     required init(demand: Demand) throws {
         guard let provider = demand.provider as? RewardedAdDemandProvider else {
@@ -24,7 +36,7 @@ class RewardedImpressionController: NSObject, FullscreenImpressionController {
         }
         
         self.provider = provider
-        self.ad = demand.ad
+        self.impression = FullscreenImpression(demand: demand)
         
         super.init()
         
@@ -33,32 +45,32 @@ class RewardedImpressionController: NSObject, FullscreenImpressionController {
     }
     
     func show(from context: UIViewController) {
-        provider.show(ad: ad, from: context)
+        provider.show(ad: impression.ad, from: context)
     }
 }
 
 
 extension RewardedImpressionController: DemandProviderDelegate {
     func provider(_ provider: DemandProvider, didPresent ad: Ad) {
-        delegate?.didPresent(ad)
+        delegate?.didPresent(impression)
     }
     
     func provider(_ provider: DemandProvider, didHide ad: Ad) {
-        delegate?.didHide(ad)
+        delegate?.didHide(impression)
     }
     
     func provider(_ provider: DemandProvider, didClick ad: Ad) {
-        delegate?.didClick(ad)
+        delegate?.didClick(impression)
     }
     
     func provider(_ provider: DemandProvider, didFailToDisplay ad: Ad, error: Error) {
-        delegate?.didFailToPresent(ad, error: error)
+        delegate?.didFailToPresent(impression, error: error)
     }
 }
 
 
 extension RewardedImpressionController: DemandProviderRewardDelegate {
     func provider(_ provider: DemandProvider, didReceiveReward reward: Reward, ad: Ad) {
-        delegate?.didReceiveReward(reward, ad: ad)
+        delegate?.didReceiveReward(reward, impression: impression)
     }
 }

@@ -11,4 +11,5 @@ import Foundation
 #warning("Fill in all required fields")
 protocol Device: Environment {
     var make: String { get }
+    var model: String { get }
 }

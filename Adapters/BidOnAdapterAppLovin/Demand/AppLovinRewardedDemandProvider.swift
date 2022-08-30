@@ -34,7 +34,7 @@ internal final class AppLovinRewardedDemandProvider: NSObject {
             ad.zoneIdentifier == lineItem.adUnitId
         else { return nil }
         
-        return ALAdWrapper(ad, price: lineItem.pricefloor)
+        return AppLovinAd(lineItem, ad)
     }
 }
 
@@ -56,7 +56,7 @@ extension AppLovinRewardedDemandProvider: DirectDemandProvider {
     
     func load(ad: Ad, response: @escaping DemandProviderResponse) {
         guard
-            ad.wrapped is ALAd,
+            ad is AppLovinAd,
             let interstitial = interstitial,
             interstitial.isReadyForDisplay
         else {
@@ -80,14 +80,13 @@ extension AppLovinRewardedDemandProvider: RewardedAdDemandProvider {
     func show(ad: Ad, from viewController: UIViewController) {
         guard
             let interstitial = interstitial,
-            let ad = ad.wrapped as? ALAd,
-            ad.zoneIdentifier == lineItem?.adUnitId
+            let ad = ad as? AppLovinAd
         else {
             delegate?.provider(self, didFailToDisplay: ad, error: SdkError.invalidPresentationState)
             return
         }
         
-        interstitial.show(ad, andNotify: nil)
+        interstitial.show(ad.wrapped, andNotify: nil)
     }
 }
 
@@ -115,7 +114,7 @@ extension AppLovinRewardedDemandProvider: ALAdVideoPlaybackDelegate {
     ) {
         guard let wrapper = wrapper(ad) else { return }
         
-        rewardDelegate?.provider(self, didReceiveReward: ALEmptyReward(), ad: wrapper)
+        rewardDelegate?.provider(self, didReceiveReward: EmptyReward(), ad: wrapper)
     }
     
     func videoPlaybackBegan(in ad: ALAd) {}

@@ -36,6 +36,11 @@ public protocol AdObjectDelegate: AnyObject {
     )
     
     @objc optional
+    func adObjectDidStartAuction(
+        _ adObject: AdObject
+    )
+    
+    @objc optional
     func adObject(
         _ adObject: AdObject,
         didStartAuctionRound auctionRound: String,

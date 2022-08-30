@@ -27,6 +27,8 @@ public final class Banner: UIView, AdView {
     
     @objc public var rootViewController: UIViewController?
 
+    @objc public var delegate: AdViewDelegate?
+    
     private lazy var viewManager: BannerViewManager = {
         let manager = BannerViewManager()
         manager.container = self
@@ -64,7 +66,10 @@ public final class Banner: UIView, AdView {
         adManager.loadAd(context: ctx)
     }
     
-    private func layout(adView: AdViewContainer) {
+    private func layout(
+        adView: AdViewContainer,
+        provider: AdViewDemandProvider
+    ) {
         DispatchQueue.main.async { [weak self, weak adView] in
             guard
                 let self = self,
@@ -75,6 +80,7 @@ public final class Banner: UIView, AdView {
             
             self.viewManager.layout(
                 view: adView,
+                provider: provider,
                 size: self.format.preferredSize
             )
             
@@ -91,12 +97,12 @@ public final class Banner: UIView, AdView {
         
         if viewManager.isRefreshGranted {
             Logger.verbose("Banner \(self) will refresh ad view")
-               
-            layout(adView: adView)
+        
+            layout(adView: adView, provider: provider)
         } else if !viewManager.isAdPresented {
             Logger.verbose("Banner \(self) will display ad view")
                
-            layout(adView: adView)
+            layout(adView: adView, provider: provider)
         }
     }
     
@@ -117,34 +123,73 @@ public final class Banner: UIView, AdView {
 
 extension Banner: BannerAdManagerDelegate {
     func didFailToLoad(_ error: Error) {
-        
+        delegate?.adObject(self, didFailToLoadAd: error)
     }
     
     func didLoad(_ ad: Ad) {
+        delegate?.adObject(self, didLoadAd: ad)
         refreshIfNeeded()
     }
     
     func controllerDidStartAuction(_ controller: AuctionController) {
-        
+        delegate?.adObjectDidStartAuction?(self)
     }
     
-    func controller(_ controller: AuctionController, didStartRound round: AuctionRound, pricefloor: Price) {
-        
+    func controller(
+        _ controller: AuctionController,
+        didStartRound round: AuctionRound,
+        pricefloor: Price
+    ) {
+        delegate?.adObject?(
+            self,
+            didStartAuctionRound: round.id,
+            pricefloor: pricefloor
+        )
     }
     
-    func controller(_ controller: AuctionController, didReceiveAd ad: Ad, provider: DemandProvider) {
-        
+    func controller(
+        _ controller: AuctionController,
+        didReceiveAd ad: Ad,
+        provider: DemandProvider
+    ) {
+        provider.revenueDelegate = self
+        delegate?.adObject?(
+            self,
+            didReceiveBid: ad
+        )
     }
     
-    func controller(_ controller: AuctionController, didCompleteRound round: AuctionRound) {
-        
+    func controller(
+        _ controller: AuctionController,
+        didCompleteRound round: AuctionRound
+    ) {
+        delegate?.adObject?(
+            self,
+            didCompleteAuctionRound: round.id
+        )
     }
     
-    func controller(_ controller: AuctionController, completeAuction winner: Ad) {
-        
+    func controller(
+        _ controller: AuctionController,
+        completeAuction winner: Ad
+    ) {
+        delegate?.adObject?(self, didCompleteAuction: winner)
     }
     
-    func controller(_ controller: AuctionController, failedAuction error: Error) {
-        
+    func controller(
+        _ controller: AuctionController,
+        failedAuction error: Error
+    ) {
+        delegate?.adObject?(self, didCompleteAuction: nil)
+    }
+}
+
+
+extension Banner: DemandProviderRevenueDelegate {
+    public func provider(
+        _ provider: DemandProvider,
+        didPayRevenueFor ad: Ad
+    ) {
+        delegate?.adObject?(self, didPayRevenue: ad)
     }
 }

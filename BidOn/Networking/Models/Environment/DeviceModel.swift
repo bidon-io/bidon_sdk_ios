@@ -10,8 +10,10 @@ import Foundation
 
 struct DeviceModel: Device, Codable {
     var make: String
+    var model: String
     
     init(_ device: Device) {
         self.make = device.make
+        self.model = device.model
     }
 }

@@ -12,7 +12,7 @@ import UIKit
 
 
 internal final class BidMachineInterstitialDemandProvider: NSObject {
-    private typealias Request = RequestWrapper<BDMInterstitialRequest>
+    private typealias Request = BidMachineRequestWrapper<BDMInterstitialRequest>
     
     private var response: DemandProviderResponse?
     
@@ -54,13 +54,13 @@ extension BidMachineInterstitialDemandProvider: ProgrammaticDemandProvider {
 
 extension BidMachineInterstitialDemandProvider: InterstitialDemandProvider {
     func load(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard let adObject = ad.wrapped as? BDMAdProtocol else {
+        guard let ad = ad as? BidMachineAd else {
             response(.failure(SdkError.internalInconsistency))
             return
         }
         
         self.response = response
-        interstitial.loadAd(adObject)
+        interstitial.loadAd(ad.wrapped)
     }
     
     func show(ad: Ad, from viewController: UIViewController) {
@@ -71,7 +71,8 @@ extension BidMachineInterstitialDemandProvider: InterstitialDemandProvider {
 
 extension BidMachineInterstitialDemandProvider: BDMInterstitialDelegate {
     func interstitialReady(toPresent interstitial: BDMInterstitial) {
-        response?(.success(interstitial.adObject.wrapped))
+        guard let adObject = interstitial.adObject else { return }
+        response?(.success(BidMachineAd(adObject)))
         response = nil
     }
     
@@ -81,26 +82,36 @@ extension BidMachineInterstitialDemandProvider: BDMInterstitialDelegate {
     }
     
     func interstitial(_ interstitial: BDMInterstitial, failedToPresentWithError error: Error) {
-        delegate?.provider(self, didPresent: interstitial.adObject.wrapped)
+        guard let adObject = interstitial.adObject else { return }
+
+        delegate?.provider(self, didPresent: BidMachineAd(adObject))
     }
     
     func interstitialWillPresent(_ interstitial: BDMInterstitial) {
-        delegate?.provider(self, didPresent: interstitial.adObject.wrapped)
+        guard let adObject = interstitial.adObject else { return }
+
+        delegate?.provider(self, didPresent: BidMachineAd(adObject))
     }
     
     func interstitialDidDismiss(_ interstitial: BDMInterstitial) {
-        delegate?.provider(self, didHide: interstitial.adObject.wrapped)
+        guard let adObject = interstitial.adObject else { return }
+
+        delegate?.provider(self, didHide: BidMachineAd(adObject))
     }
     
     func interstitialRecieveUserInteraction(_ interstitial: BDMInterstitial) {
-        delegate?.provider(self, didClick: interstitial.adObject.wrapped)
+        guard let adObject = interstitial.adObject else { return }
+
+        delegate?.provider(self, didClick: BidMachineAd(adObject))
     }
 }
 
 
 extension BidMachineInterstitialDemandProvider: BDMAdEventProducerDelegate {
     func didProduceImpression(_ producer: BDMAdEventProducer) {
-        revenueDelegate?.provider(self, didPayRevenueFor: interstitial.adObject.wrapped)
+        guard let adObject = interstitial.adObject else { return }
+
+        revenueDelegate?.provider(self, didPayRevenueFor: BidMachineAd(adObject))
     }
     
     func didProduceUserAction(_ producer: BDMAdEventProducer) {}

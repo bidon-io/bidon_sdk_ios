@@ -21,7 +21,8 @@ class BaseConcurrentAuctionControllerBuilder {
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
     private(set) var auctionId: String = ""
-    
+    private(set) var auctionConfigurationId: Int = 0
+
     private var rounds: [AuctionRound] = []
     private var lineItems: LineItems = []
     
@@ -68,6 +69,14 @@ class BaseConcurrentAuctionControllerBuilder {
         _ auctionId: String
     ) -> Self {
         self.auctionId = auctionId
+        return self
+    }
+    
+    @discardableResult
+    public func withAuctionConfigurationId(
+        _ auctionConfigurationId: Int
+    ) -> Self {
+        self.auctionConfigurationId = auctionConfigurationId
         return self
     }
     

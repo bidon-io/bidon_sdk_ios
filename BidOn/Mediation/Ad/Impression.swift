@@ -1,16 +1,16 @@
 //
-//  Demand.swift
+//  Impression.swift
 //  BidOn
 //
-//  Created by Stas Kochkin on 16.08.2022.
+//  Created by Stas Kochkin on 30.08.2022.
 //
 
 import Foundation
 
 
-protocol Demand {
+protocol Impression {
+    var impressionId: String { get }
     var auctionId: String { get }
     var auctionConfigurationId: Int { get }
     var ad: Ad { get }
-    var provider: DemandProvider { get }
 }

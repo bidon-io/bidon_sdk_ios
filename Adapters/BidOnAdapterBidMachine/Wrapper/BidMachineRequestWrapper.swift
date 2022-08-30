@@ -11,7 +11,7 @@ import BidOn
 
 
 
-final class RequestWrapper<T: BDMAdRequestProtocol & BDMRequest>: NSObject, BDMRequestDelegate {
+final class BidMachineRequestWrapper<T: BDMAdRequestProtocol & BDMRequest>: NSObject, BDMRequestDelegate {
     let request: T
     
     private var response: DemandProviderResponse?
@@ -34,7 +34,7 @@ final class RequestWrapper<T: BDMAdRequestProtocol & BDMRequest>: NSObject, BDMR
     }
     
     func request(_ request: BDMRequest, completeWithAd adObject: BDMAdProtocol) {
-        response?(.success(BidMachineAdWrapper(adObject)))
+        response?(.success(BidMachineAd(adObject)))
         response = nil
     }
     

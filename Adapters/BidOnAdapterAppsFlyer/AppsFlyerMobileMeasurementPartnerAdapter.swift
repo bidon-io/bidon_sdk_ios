@@ -84,12 +84,10 @@ extension AppsFlyerMobileMeasurementPartnerAdapter: MobileMeasurementPartnerAdap
     
     public func trackAdRevenue(
         _ ad: Ad,
-        auctionRound: String,
         adType: AdType
     ) {
         let additionalParameters: [AnyHashable: Any] = [
             kAppsFlyerAdRevenueAdType: adType.rawValue,
-            "auction_round": auctionRound,
             "demand_source_name": ad.dsp
         ].compactMapValues { $0 }
         

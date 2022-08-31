@@ -45,7 +45,7 @@ extension BidMachineRewardedAdDemandProvider: ProgrammaticDemandProvider {
     func notify(_ event: AuctionEvent) {
         request.notify(event)
     }
-
+    
     func cancel() {
         request.cancel()
     }
@@ -72,7 +72,7 @@ extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
 extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
     func rewardedReady(toPresent rewarded: BDMRewarded) {
         guard let adObject = rewarded.adObject else { return }
-
+        
         response?(.success(BidMachineAd(adObject)))
         response = nil
     }
@@ -83,33 +83,23 @@ extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
     }
     
     func rewarded(_ rewarded: BDMRewarded, failedToPresentWithError error: Error) {
-        guard let adObject = rewarded.adObject else { return }
-
-        delegate?.provider(self, didPresent: BidMachineAd(adObject))
+        delegate?.providerDidFailToDisplay(self, error: error)
     }
     
     func rewardedWillPresent(_ rewarded: BDMRewarded) {
-        guard let adObject = rewarded.adObject else { return }
-
-        delegate?.provider(self, didPresent: BidMachineAd(adObject))
+        delegate?.providerWillPresent(self)
     }
     
     func rewardedDidDismiss(_ rewarded: BDMRewarded) {
-        guard let adObject = rewarded.adObject else { return }
-
-        delegate?.provider(self, didHide: BidMachineAd(adObject))
+        delegate?.providerDidHide(self)
     }
     
     func rewardedRecieveUserInteraction(_ rewarded: BDMRewarded) {
-        guard let adObject = rewarded.adObject else { return }
-
-        delegate?.provider(self, didClick: BidMachineAd(adObject))
+        delegate?.providerDidClick(self)
     }
     
     func rewardedFinishRewardAction(_ rewarded: BDMRewarded) {
-        guard let adObject = rewarded.adObject else { return }
-
-        rewardDelegate?.provider(self, didReceiveReward: EmptyReward(), ad: BidMachineAd(adObject))
+        rewardDelegate?.provider(self, didReceiveReward: EmptyReward())
     }
     
     func rewardedDidExpire(_ rewarded: BDMRewarded) {}
@@ -119,7 +109,7 @@ extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
 extension BidMachineRewardedAdDemandProvider: BDMAdEventProducerDelegate {
     func didProduceImpression(_ producer: BDMAdEventProducer) {
         guard let adObject = rewardedAd.adObject else { return }
-
+        
         revenueDelegate?.provider(self, didPayRevenueFor: BidMachineAd(adObject))
     }
     

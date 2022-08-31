@@ -82,7 +82,7 @@ extension AppLovinInterstitialDemandProvider: InterstitialDemandProvider {
         do {
             try interstitial.show(ad)
         } catch {
-            delegate?.provider(self, didFailToDisplay: ad, error: error)
+            delegate?.providerDidFailToDisplay(self, error: SdkError(error))
         }
     }
 }
@@ -90,17 +90,17 @@ extension AppLovinInterstitialDemandProvider: InterstitialDemandProvider {
 
 extension AppLovinInterstitialDemandProvider: ALAdDisplayDelegate {
     func ad(_ ad: ALAd, wasDisplayedIn view: UIView) {
-        guard let wrapper = interstitial.ad, wrapper === ad else { return }
-        delegate?.provider(self, didPresent: wrapper)
+        delegate?.providerWillPresent(self)
+        
+        guard let wrapper = interstitial.ad else { return }
+        revenueDelegate?.provider(self, didPayRevenueFor: wrapper)
     }
     
     func ad(_ ad: ALAd, wasHiddenIn view: UIView) {
-        guard let wrapper = interstitial.ad, wrapper.wrapped === ad else { return }
-        delegate?.provider(self, didHide: wrapper)
+        delegate?.providerDidHide(self)
     }
     
     func ad(_ ad: ALAd, wasClickedIn view: UIView) {
-        guard let wrapper = interstitial.ad, wrapper.wrapped === ad else { return }
-        delegate?.provider(self, didClick: wrapper)
+        delegate?.providerDidClick(self)
     }
 }

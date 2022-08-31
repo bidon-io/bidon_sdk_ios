@@ -99,6 +99,18 @@ final class BannerAdManager: NSObject {
             }
         }
     }
+    
+    private func trackMediationResult() {
+        let request = StatisticRequest { builder in
+            builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withExt(sdk.ext)
+            builder.withMediationResult(MediationObserver(id: UUID().uuidString, configurationId: 0))
+        }
+        
+        networkManager.perform(request: request) { result in
+            Logger.debug("Sent statistics with result: \(result)")
+        }
+    }
 }
 
 
@@ -141,11 +153,13 @@ extension BannerAdManager: AuctionControllerDelegate {
 
 extension BannerAdManager: WaterfallControllerDelegate {
     func controller(_ controller: WaterfallController, didLoadDemand demand: Demand) {
+        trackMediationResult()
         state = .ready(demand: demand)
         delegate?.didLoad(demand.ad)
     }
     
     func controller(_ controller: WaterfallController, didFailToLoad error: SdkError) {
+        trackMediationResult()
         state = .idle
         delegate?.didFailToLoad(error)
     }

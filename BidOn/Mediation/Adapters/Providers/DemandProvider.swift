@@ -18,10 +18,10 @@ public typealias DemandProviderResponse = (Result<Ad, Error>) -> ()
 
 
 public protocol DemandProviderDelegate: AnyObject {
-    func provider(_ provider: DemandProvider, didPresent ad: Ad)
-    func provider(_ provider: DemandProvider, didHide ad: Ad)
-    func provider(_ provider: DemandProvider, didClick ad: Ad)
-    func provider(_ provider: DemandProvider, didFailToDisplay ad: Ad, error: Error)
+    func providerWillPresent(_ provider: DemandProvider)
+    func providerDidHide(_ provider: DemandProvider)
+    func providerDidClick(_ provider: DemandProvider)
+    func providerDidFailToDisplay(_ provider: DemandProvider, error: Error)
 }
 
 

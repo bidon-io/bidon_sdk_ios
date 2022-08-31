@@ -29,12 +29,14 @@ public final class Banner: UIView, AdView {
 
     @objc public var delegate: AdViewDelegate?
     
+    @Injected(\.sdk)
+    private var sdk: Sdk
+    
     private lazy var viewManager: BannerViewManager = {
         let manager = BannerViewManager()
         manager.container = self
         return manager
     }()
-    
     
     private lazy var adManager: BannerAdManager = {
         let manager = BannerAdManager()
@@ -191,5 +193,6 @@ extension Banner: DemandProviderRevenueDelegate {
         didPayRevenueFor ad: Ad
     ) {
         delegate?.adObject?(self, didPayRevenue: ad)
+        sdk.trackAdRevenue(ad, adType: .banner)
     }
 }

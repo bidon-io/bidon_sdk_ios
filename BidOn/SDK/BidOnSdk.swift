@@ -88,7 +88,6 @@ public final class BidOnSdk: NSObject {
     
     func trackAdRevenue(
         _ ad: Ad,
-        auctionRound: String,
         adType: AdType
     ) {
         let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
@@ -97,7 +96,6 @@ public final class BidOnSdk: NSObject {
             
             $0.trackAdRevenue(
                 ad,
-                auctionRound: auctionRound,
                 adType: adType
             )
         }

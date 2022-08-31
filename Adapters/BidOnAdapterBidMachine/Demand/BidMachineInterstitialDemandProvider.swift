@@ -82,27 +82,19 @@ extension BidMachineInterstitialDemandProvider: BDMInterstitialDelegate {
     }
     
     func interstitial(_ interstitial: BDMInterstitial, failedToPresentWithError error: Error) {
-        guard let adObject = interstitial.adObject else { return }
-
-        delegate?.provider(self, didPresent: BidMachineAd(adObject))
+        delegate?.providerDidFailToDisplay(self, error: error)
     }
     
     func interstitialWillPresent(_ interstitial: BDMInterstitial) {
-        guard let adObject = interstitial.adObject else { return }
-
-        delegate?.provider(self, didPresent: BidMachineAd(adObject))
+        delegate?.providerWillPresent(self)
     }
     
     func interstitialDidDismiss(_ interstitial: BDMInterstitial) {
-        guard let adObject = interstitial.adObject else { return }
-
-        delegate?.provider(self, didHide: BidMachineAd(adObject))
+        delegate?.providerDidHide(self)
     }
     
     func interstitialRecieveUserInteraction(_ interstitial: BDMInterstitial) {
-        guard let adObject = interstitial.adObject else { return }
-
-        delegate?.provider(self, didClick: BidMachineAd(adObject))
+        delegate?.providerDidClick(self)
     }
 }
 

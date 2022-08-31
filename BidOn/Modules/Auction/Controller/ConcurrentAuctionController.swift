@@ -120,7 +120,10 @@ final class ConcurrentAuctionController: AuctionController {
         delegate?.controller(self, didStartRound: round, pricefloor: pricefloor)
         
         if round.timeout.isNormal {
-            let timer = Timer.scheduledTimer(withTimeInterval: round.timeout, repeats: false) { _ in
+            let timer = Timer.scheduledTimer(
+                withTimeInterval: Date.MeasurementUnits.milliseconds.convert(round.timeout, to: .milliseconds),
+                repeats: false
+            ) { _ in
                 Logger.warning("\(adType.rawValue.capitalized) auction \(round) execution exceeded timeout.")
                 round.cancel()
             }

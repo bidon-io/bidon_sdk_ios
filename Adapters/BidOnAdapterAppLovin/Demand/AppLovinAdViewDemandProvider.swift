@@ -109,21 +109,15 @@ extension AppLovinAdViewDemandProvider: ALAdViewEventDelegate {
     }
     
     func ad(_ ad: ALAd, didPresentFullscreenFor adView: ALAdView) {
-        guard let wrapper = wrapper(ad) else { return }
-        
-        adViewDelegate?.provider(self, willPresentModalView: wrapper)
+        adViewDelegate?.providerWillPresentModalView(self)
     }
     
     func ad(_ ad: ALAd, didDismissFullscreenFor adView: ALAdView) {
-        guard let wrapper = wrapper(ad) else { return }
-
-        adViewDelegate?.provider(self, didDismissModalView: wrapper)
+        adViewDelegate?.providerDidDismissModalView(self)
     }
     
     func ad(_ ad: ALAd, willLeaveApplicationFor adView: ALAdView) {
-        guard let wrapper = wrapper(ad) else { return }
-        
-        adViewDelegate?.provider(self, willLeaveApplication: wrapper)
+        adViewDelegate?.providerWillLeaveApplication(self)
     }
 }
 
@@ -134,18 +128,16 @@ extension AppLovinAdViewDemandProvider: ALAdDisplayDelegate {
         
         response?(.success(wrapper))
         response = nil
+        
+        revenueDelegate?.provider(self, didPayRevenueFor: wrapper)
     }
     
     func ad(_ ad: ALAd, wasHiddenIn view: UIView) {
-        guard let wrapper = wrapper(ad) else { return }
-        
-        delegate?.provider(self, didHide: wrapper)
+        delegate?.providerDidHide(self)
     }
     
-    func ad(_ ad: ALAd, wasClickedIn view: UIView) {
-        guard let wrapper = wrapper(ad) else { return }
-        
-        delegate?.provider(self, didClick: wrapper)
+    func ad(_ ad: ALAd, wasClickedIn view: UIView) {        
+        delegate?.providerDidClick(self)
     }
 }
 

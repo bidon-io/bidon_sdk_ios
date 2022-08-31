@@ -38,19 +38,19 @@ final class InterstitialImpressionController: NSObject, FullscreenImpressionCont
 
 
 extension InterstitialImpressionController: DemandProviderDelegate {
-    func provider(_ provider: DemandProvider, didPresent ad: Ad) {
-        delegate?.didPresent(impression)
+    func providerWillPresent(_ provider: DemandProvider) {
+        delegate?.willPresent(impression)
     }
     
-    func provider(_ provider: DemandProvider, didHide ad: Ad) {
+    func providerDidHide(_ provider: DemandProvider) {
         delegate?.didHide(impression)
     }
     
-    func provider(_ provider: DemandProvider, didClick ad: Ad) {
+    func providerDidClick(_ provider: DemandProvider) {
         delegate?.didClick(impression)
     }
     
-    func provider(_ provider: DemandProvider, didFailToDisplay ad: Ad, error: Error) {
+    func providerDidFailToDisplay(_ provider: DemandProvider, error: Error) {
         delegate?.didFailToPresent(impression, error: error)
     }
 }

@@ -19,11 +19,7 @@ public extension InterstitialDemandProvider {
         if let viewController = viewController ?? UIApplication.shared.bd.topViewcontroller {
             show(ad: ad, from: viewController)
         } else {
-            delegate?.provider(
-                self,
-                didFailToDisplay: ad,
-                error: SdkError.unableToFindRootViewController
-            )
+            delegate?.providerDidFailToDisplay(self, error: SdkError.unableToFindRootViewController)
         }
     }
 }

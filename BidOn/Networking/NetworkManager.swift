@@ -39,7 +39,6 @@ fileprivate final class PersistentNetworkManager: NetworkManager {
     @UserDefault(Constants.UserDefaultsKey.token, defaultValue: nil)
     private var token: String?
     
-    
     var baseURL: String = Constants.API.baseURL
     
     func perform<T: Request>(

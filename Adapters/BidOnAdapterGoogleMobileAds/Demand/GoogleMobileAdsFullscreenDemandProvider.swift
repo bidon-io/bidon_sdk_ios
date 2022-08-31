@@ -36,35 +36,26 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: Googl
     weak var rewardDelegate: DemandProviderRewardDelegate?
     
     func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        guard let wrapped = wrapped(ad: ad) else { return }
-        delegate?.provider(self, didPresent: wrapped)
+        delegate?.providerWillPresent(self)
     }
     
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        guard let wrapped = wrapped(ad: ad) else { return }
-        delegate?.provider(self, didFailToDisplay: wrapped, error: SdkError(error))
+        delegate?.providerDidFailToDisplay(self, error: error)
     }
     
     func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
-        guard let wrapped = wrapped(ad: ad) else { return }
-        delegate?.provider(self, didClick: wrapped)
+        delegate?.providerDidClick(self)
     }
     
     func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        guard let wrapped = wrapped(ad: ad) else { return }
-        delegate?.provider(self, didHide: wrapped)
+        delegate?.providerDidHide(self)
     }
     
     func rewardedAd(
         _ rewardedAd: GADRewardedAd,
         didReceiveReward reward: GADAdReward
     ) {
-        guard let wrapped = wrapped(ad: rewardedAd) else { return }
-        rewardDelegate?.provider(
-            self,
-            didReceiveReward: GoogleMobileAdsReward(reward),
-            ad: wrapped
-        )
+        rewardDelegate?.provider(self, didReceiveReward: GoogleMobileAdsReward(reward))
     }
 }
 
@@ -133,11 +124,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
 extension GoogleMobileAdsFullscreenDemandProvider: InterstitialDemandProvider {
     func show(ad: Ad, from viewController: UIViewController) {
         guard let interstitial = fullscreenAd else {
-            delegate?.provider(
-                self,
-                didFailToDisplay: ad,
-                error: SdkError.invalidPresentationState
-            )
+            delegate?.providerDidFailToDisplay(self, error: SdkError.invalidPresentationState)
             return
         }
         

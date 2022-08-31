@@ -82,7 +82,7 @@ extension AppLovinRewardedDemandProvider: RewardedAdDemandProvider {
             let interstitial = interstitial,
             let ad = ad as? AppLovinAd
         else {
-            delegate?.provider(self, didFailToDisplay: ad, error: SdkError.invalidPresentationState)
+            delegate?.providerDidFailToDisplay(self, error: SdkError.invalidPresentationState)
             return
         }
         
@@ -112,9 +112,7 @@ extension AppLovinRewardedDemandProvider: ALAdVideoPlaybackDelegate {
         atPlaybackPercent percentPlayed: NSNumber,
         fullyWatched wasFullyWatched: Bool
     ) {
-        guard let wrapper = wrapper(ad) else { return }
-        
-        rewardDelegate?.provider(self, didReceiveReward: EmptyReward(), ad: wrapper)
+        rewardDelegate?.provider(self, didReceiveReward: EmptyReward())
     }
     
     func videoPlaybackBegan(in ad: ALAd) {}
@@ -123,20 +121,17 @@ extension AppLovinRewardedDemandProvider: ALAdVideoPlaybackDelegate {
 
 extension AppLovinRewardedDemandProvider: ALAdDisplayDelegate {
     func ad(_ ad: ALAd, wasDisplayedIn view: UIView) {
-        guard let wrapper = wrapper(ad) else { return }
+        delegate?.providerWillPresent(self)
         
-        delegate?.provider(self, didPresent: wrapper)
+        guard let wrapper = wrapper(ad) else { return }
+        revenueDelegate?.provider(self, didPayRevenueFor: wrapper)
     }
     
     func ad(_ ad: ALAd, wasHiddenIn view: UIView) {
-        guard let wrapper = wrapper(ad) else { return }
-        
-        delegate?.provider(self, didHide: wrapper)
+        delegate?.providerDidHide(self)
     }
     
     func ad(_ ad: ALAd, wasClickedIn view: UIView) {
-        guard let wrapper = wrapper(ad) else { return }
-        
-        delegate?.provider(self, didClick: wrapper)
+        delegate?.providerDidClick(self)
     }
 }

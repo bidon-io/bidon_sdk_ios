@@ -12,6 +12,7 @@ enum Route: String {
     case config = "config"
     case auction = "auction"
     case stats = "stats"
+    case show = "show"
 }
 
 

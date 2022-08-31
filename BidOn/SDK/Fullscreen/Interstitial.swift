@@ -17,6 +17,9 @@ public final class Interstitial: NSObject, FullscreenAdObject {
     
     @objc public let placement: String
     
+    @Injected(\.sdk)
+    private var sdk: Sdk
+    
     private lazy var manager: Manager = {
         let manager = Manager(placement: placement)
         manager.delegate = self
@@ -51,7 +54,7 @@ extension Interstitial: FullscreenAdManagerDelegate {
         delegate?.fullscreenAd(self, didFailToPresentAd: error)
     }
     
-    func didPresent(_ impression: Impression) {
+    func willPresent(_ impression: Impression) {
         delegate?.fullscreenAd(self, willPresentAd: impression.ad)
         delegate?.adObject?(self, didRecordImpression: impression.ad)
     }
@@ -66,6 +69,8 @@ extension Interstitial: FullscreenAdManagerDelegate {
     
     func didPayRevenue(_ ad: Ad) {
         delegate?.adObject?(self, didPayRevenue: ad)
+        
+        sdk.trackAdRevenue(ad, adType: .interstitial)
     }
     
     func didReceiveReward(_ reward: Reward, impression: Impression) {}

@@ -25,6 +25,11 @@ protocol Sdk {
     var adaptersRepository: AdaptersRepository { get }
     var environmentRepository: EnvironmentRepository { get }
     var ext: [String: Any] { get }
+    
+    func trackAdRevenue(
+        _ ad: Ad,
+        adType: AdType
+    )
 }
 
 

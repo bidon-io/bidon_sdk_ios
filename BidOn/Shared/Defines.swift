@@ -65,7 +65,8 @@ public enum AdType: String {
 
 struct Constants {
     struct API {
-        static var baseURL = "https://a.appbaqend.com"
+        static var host = "b.appbaqend.com"
+        static var baseURL = "https://" + host
     }
     
     struct Adapters {

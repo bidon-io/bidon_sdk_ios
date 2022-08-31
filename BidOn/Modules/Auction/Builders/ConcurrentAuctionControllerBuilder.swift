@@ -22,20 +22,29 @@ class BaseConcurrentAuctionControllerBuilder {
     private(set) var adaptersRepository: AdaptersRepository!
     private(set) var auctionId: String = ""
     private(set) var auctionConfigurationId: Int = 0
-
+    
     private var rounds: [AuctionRound] = []
     private var lineItems: LineItems = []
     
     var auction: ConcurrentAuction {
-        return ConcurrentAuction(
-            rounds: rounds.map {
-                ConcurrentAuctionRound(
-                    round: $0,
-                    lineItems: lineItems,
-                    providers: providers($0.demands)
-                )
-            }
-        )
+        let concurentRounds: [ConcurrentAuctionRound] = rounds.map {
+            ConcurrentAuctionRound(
+                round: $0,
+                lineItems: lineItems,
+                providers: providers($0.demands)
+            )
+        }
+        
+        var auction = ConcurrentAuction(rounds: concurentRounds)
+        
+        for idx in (0..<concurentRounds.count) {
+            guard idx < (concurentRounds.count - 1) else { break }
+            let current = concurentRounds[idx]
+            let next = concurentRounds[idx + 1]
+            try? auction.addEdge(from: current, to: next)
+        }
+        
+        return auction
     }
     
     open func providers(_ demands: [String]) -> [String: DemandProvider] {

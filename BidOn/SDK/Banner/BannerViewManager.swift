@@ -106,15 +106,15 @@ final internal class BannerViewManager {
 
 
 extension BannerViewManager: DemandProviderAdViewDelegate {
-    func provider(_ provider: AdViewDemandProvider, willPresentModalView ad: Ad) {
+    func providerWillPresentModalView(_ provider: AdViewDemandProvider) {
         
     }
     
-    func provider(_ provider: AdViewDemandProvider, didDismissModalView ad: Ad) {
+    func providerDidDismissModalView(_ provider: AdViewDemandProvider) {
         
     }
     
-    func provider(_ provider: AdViewDemandProvider, willLeaveApplication ad: Ad) {
+    func providerWillLeaveApplication(_ provider: AdViewDemandProvider) {
         
     }
 }

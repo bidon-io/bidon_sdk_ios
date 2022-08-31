@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol FullscreenImpressionControllerDelegate: AnyObject {
-    func didPresent(_ impression: Impression)
+    func willPresent(_ impression: Impression)
     
     func didHide(_ impression: Impression)
     

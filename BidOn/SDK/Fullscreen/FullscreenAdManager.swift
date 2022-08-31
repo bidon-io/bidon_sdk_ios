@@ -84,8 +84,8 @@ ImpressionControllerType: FullscreenImpressionController {
                 }
                 
                 auction.load()
-                self.state = .auction(controller: auction)
                 
+                self.state = .auction(controller: auction)
                 break
             case .failure(let error):
                 self.state = .idle
@@ -104,6 +104,18 @@ ImpressionControllerType: FullscreenImpressionController {
             controller.show(from: rootViewController)
         default:
             delegate?.didFailToPresent(nil, error: SdkError.internalInconsistency)
+        }
+    }
+    
+    private func trackMediationResult() {
+        let request = StatisticRequest { builder in
+            builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withExt(sdk.ext)
+            builder.withMediationResult(MediationObserver(id: UUID().uuidString, configurationId: 0))
+        }
+        
+        networkManager.perform(request: request) { result in
+            Logger.debug("Sent statistics with result: \(result)")
         }
     }
 }
@@ -174,11 +186,13 @@ extension FullscreenAdManager: AuctionControllerDelegate {
 
 extension FullscreenAdManager: WaterfallControllerDelegate {
     func controller(_ controller: WaterfallController, didLoadDemand demand: Demand) {
+        trackMediationResult()
         state = .ready(demand: demand)
         delegate?.didLoad(demand.ad)
     }
     
     func controller(_ controller: WaterfallController, didFailToLoad error: SdkError) {
+        trackMediationResult()
         state = .idle
         delegate?.didFailToLoad(error)
     }
@@ -191,8 +205,16 @@ extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
         delegate?.didFailToPresent(impression, error: error)
     }
     
-    func didPresent(_ impression: Impression) {
-        delegate?.didPresent(impression)
+    func willPresent(_ impression: Impression) {
+        networkManager.perform(request: ImpressionRequest { builder in
+            builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withExt(sdk.ext)
+            builder.withImpression(impression)
+        }) { result in
+            Logger.debug("Sent show with result: \(result)")
+        }
+
+        delegate?.willPresent(impression)
     }
     
     func didHide(_ impression: Impression) {

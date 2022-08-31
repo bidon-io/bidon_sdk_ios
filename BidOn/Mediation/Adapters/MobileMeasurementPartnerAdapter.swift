@@ -13,7 +13,6 @@ public protocol MobileMeasurementPartnerAdapter: Adapter {
     
     func trackAdRevenue(
         _ ad: Ad,
-        auctionRound: String,
         adType: AdType
     )
 }

@@ -9,7 +9,7 @@ import Foundation
 
 
 struct MediationResultModel: MediationResult, Codable {
-    struct Demand: DemandResult, Codable {
+    struct DemandResultModel: DemandResult, Codable {
         var id: String
         var adUnitId: String?
         var format: String
@@ -27,27 +27,27 @@ struct MediationResultModel: MediationResult, Codable {
         }
     }
     
-    struct Round: RoundResult, Codable {
+    struct RoundResultModel: RoundResult, Codable {
         var id: String
         var pricefloor: Price
         var winnerPrice: Price
-        var demands: [Demand]
+        var demands: [DemandResultModel]
         
         init<T: RoundResult>(_ result: T) {
             self.id = result.id
             self.pricefloor = result.pricefloor
             self.winnerPrice = result.winnerPrice
-            self.demands = result.demands.map(Demand.init)
+            self.demands = result.demands.map(DemandResultModel.init)
         }
     }
     
     var auctionId: String
     var auctionConfigurationId: Int
-    var rounds: [Round]
+    var rounds: [RoundResultModel]
     
     init<T: MediationResult>(_ result: T) {
         self.auctionId = result.auctionId
         self.auctionConfigurationId = result.auctionConfigurationId
-        self.rounds = result.rounds.map(Round.init)
+        self.rounds = result.rounds.map(RoundResultModel.init)
     }
 }

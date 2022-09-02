@@ -8,8 +8,8 @@
 import Foundation
 
 
-final class AdViewConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder, ConcurrentAuctionControllerBuilder {
-    let adType: AdType = .banner
+final class AdViewConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder<AnyAdViewDemandProvider> {
+    override var adType: AdType { .banner }
     
     private var context: AdViewContext!
     
@@ -19,13 +19,15 @@ final class AdViewConcurrentAuctionControllerBuilder: BaseConcurrentAuctionContr
         return self
     }
     
-    override func providers(_ demands: [String]) -> [String: DemandProvider] {
+    override func providers(_ demands: [String]) -> [String: AnyAdViewDemandProvider] {
         demands.reduce([:]) { result, id in
             var result = result
             let adapter: AdViewDemandSourceAdapter? = adaptersRepository[id]
             
             do {
-                result[id] = try adapter?.adView(context)
+                if let provider = try adapter?.adView(context) {
+                    result[id] = try provider.wrapped()
+                }
             } catch {
                 Logger.debug("Error while creating banner in adapter: \(adapter.debugDescription)")
             }
@@ -35,3 +37,15 @@ final class AdViewConcurrentAuctionControllerBuilder: BaseConcurrentAuctionContr
     }
 }
 
+
+extension AdViewDemandProvider {
+    func wrapped() throws -> AnyAdViewDemandProvider {
+        if self is DirectDemandProvider {
+            return try AnyDirectDemandProvider(self)
+        } else if self is ProgrammaticDemandProvider {
+            return try AnyProgrammaticDemandProvider(self)
+        } else {
+            return try AnyDemandProvider(self)
+        }
+    }
+}

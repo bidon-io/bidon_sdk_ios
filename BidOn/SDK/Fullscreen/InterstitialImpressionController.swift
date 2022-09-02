@@ -18,12 +18,10 @@ final class InterstitialImpressionController: NSObject, FullscreenImpressionCont
     private let provider: InterstitialDemandProvider
     private let impression: Impression
     
-    required init(demand: Demand) throws {
-        guard let provider = demand.provider as? InterstitialDemandProvider else {
-            throw SdkError.internalInconsistency
-        }
+    required init(demand: AnyInterstitialDemand) {
+        let demand = demand.unwrapped()
         
-        self.provider = provider
+        self.provider = demand.provider
         self.impression = FullscreenImpression(demand: demand)
         
         super.init()

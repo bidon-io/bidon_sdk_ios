@@ -36,7 +36,7 @@ extension InjectedValues {
 fileprivate final class PersistentNetworkManager: NetworkManager {
     static let shared = PersistentNetworkManager()
     
-    @UserDefault(Constants.UserDefaultsKey.token, defaultValue: nil)
+    @UserDefaultOptional(Constants.UserDefaultsKey.token)
     private var token: String?
     
     var baseURL: String = Constants.API.baseURL

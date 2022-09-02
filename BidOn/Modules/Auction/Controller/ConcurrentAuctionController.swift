@@ -8,46 +8,27 @@
 import Foundation
 
 
-internal typealias ConcurrentAuction = Auction<ConcurrentAuctionRound>
-
-
-final class ConcurrentAuctionController: AuctionController {
-    var waterfall: Waterfall {
-        struct DemandModel: Demand {
-            var auctionId: String
-            var auctionConfigurationId: Int
-            var ad: Ad
-            var provider: DemandProvider
-        }
-        
-        return Waterfall(
-            repository
-                .ads
-                .sorted { comparator.compare($0, $1) }
-                .compactMap { repository.record(for: $0) }
-                .map {
-                    DemandModel(
-                        auctionId: id,
-                        auctionConfigurationId: configurationId,
-                        ad: $0.0,
-                        provider: $0.1
-                    )
-                }
-        )
-    }
+final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: AuctionController {
     
-    let id: String
-    let configurationId: Int
-    
-    private let auction: ConcurrentAuction
+    internal typealias DemandType = DemandModel<DemandProviderType>
+    internal typealias WaterfallType = Waterfall<DemandType>
+
+    private typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
+    private typealias AuctionType = Auction<RoundType>
+    private typealias BidType = Bid<DemandProviderType>
+
+    private let auction: AuctionType
     private let comparator: AuctionComparator
     private let adType: AdType
     private let pricefloor: Price
     
+    let id: String
+    let configurationId: Int
+    
     weak var delegate: AuctionControllerDelegate?
     
-    private lazy var active = Set<ConcurrentAuctionRound>()
-    private lazy var repository = AdsRepository()
+    private lazy var active = Set<RoundType>()
+    private lazy var repository = AdsRepository<DemandProviderType>()
     
     private var roundTimer: Timer?
     
@@ -60,7 +41,7 @@ final class ConcurrentAuctionController: AuctionController {
         return current ?? pricefloor
     }
     
-    init<T>(_ build: (T) -> ()) where T: ConcurrentAuctionControllerBuilder {
+    init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType> {
         let builder = T()
         build(builder)
         
@@ -112,7 +93,7 @@ final class ConcurrentAuctionController: AuctionController {
         }
     }
     
-    private func perform(round: ConcurrentAuctionRound) {
+    private func perform(round: RoundType) {
         let pricefloor = currentPrice
         let adType = self.adType
         
@@ -134,7 +115,7 @@ final class ConcurrentAuctionController: AuctionController {
         Logger.verbose("Perform \(round)")
         round.perform(
             pricefloor: pricefloor,
-            demand: { [weak self] result in
+            bid: { [weak self] result in
                 switch result {
                 case .success(let record):
                     self?.receive(record)
@@ -161,7 +142,7 @@ final class ConcurrentAuctionController: AuctionController {
         )
     }
     
-    private func receive(_ record: AdRecord) {
+    private func receive(_ record: BidType) {
         guard record.ad.price > pricefloor else {
             Logger.debug("\(adType.rawValue.capitalized) auction received bid: \(record.ad) price is lower than pricefloor: \(pricefloor)")
             return
@@ -175,6 +156,26 @@ final class ConcurrentAuctionController: AuctionController {
             self,
             didReceiveAd: record.ad,
             provider: record.provider
+        )
+    }
+}
+
+
+extension ConcurrentAuctionController: WaterfallProvider {
+    var waterfall: WaterfallType {
+        return WaterfallType(
+            repository
+                .ads
+                .sorted { comparator.compare($0, $1) }
+                .compactMap { repository.bid(for: $0) }
+                .compactMap { ad, provider in
+                    DemandType(
+                        auctionId: id,
+                        auctionConfigurationId: configurationId,
+                        ad: ad,
+                        provider: provider
+                    )
+                }
         )
     }
 }

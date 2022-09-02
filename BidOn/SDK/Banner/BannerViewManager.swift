@@ -78,7 +78,7 @@ final internal class BannerViewManager: NSObject {
     }
     
     func present(
-        demand: Demand,
+        demand: AdViewDemand,
         view: AdViewContainer,
         size: CGSize
     ) {
@@ -87,7 +87,7 @@ final internal class BannerViewManager: NSObject {
             !container.subviews.contains(view)
         else { return }
         
-        (demand.provider as! AdViewDemandProvider).adViewDelegate = self
+        demand.provider.adViewDelegate = self
         
         let viewsToRemove = container.subviews.compactMap { $0 as? AdViewContainer }
         view.translatesAutoresizingMaskIntoConstraints = false

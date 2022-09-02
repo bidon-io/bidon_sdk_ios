@@ -8,14 +8,17 @@
 import Foundation
 
 
-protocol ConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder {
-    var adType: AdType { get }
+//protocol ConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder {
+//    var adType: AdType { get }
+//
+//    init()
+//}
+
+
+class BaseConcurrentAuctionControllerBuilder<DemandProviderType: DemandProvider> {
+    typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
+    typealias AuctionType = Auction<RoundType>
     
-    init()
-}
-
-
-class BaseConcurrentAuctionControllerBuilder {
     private(set) var comparator: AuctionComparator = HigherPriceAuctionComparator()
     private(set) var delegate: AuctionControllerDelegate?
     private(set) var pricefloor: Price = .unknown
@@ -23,19 +26,21 @@ class BaseConcurrentAuctionControllerBuilder {
     private(set) var auctionId: String = ""
     private(set) var auctionConfigurationId: Int = 0
     
+    var adType: AdType { fatalError("Attempt of use ad type from base builder") }
+    
     private var rounds: [AuctionRound] = []
     private var lineItems: LineItems = []
     
-    var auction: ConcurrentAuction {
-        let concurentRounds: [ConcurrentAuctionRound] = rounds.map {
-            ConcurrentAuctionRound(
+    var auction: AuctionType {
+        let concurentRounds: [RoundType] = rounds.map {
+            RoundType(
                 round: $0,
                 lineItems: lineItems,
                 providers: providers($0.demands)
             )
         }
         
-        var auction = ConcurrentAuction(rounds: concurentRounds)
+        var auction = AuctionType(rounds: concurentRounds)
         
         for idx in (0..<concurentRounds.count) {
             guard idx < (concurentRounds.count - 1) else { break }
@@ -47,7 +52,9 @@ class BaseConcurrentAuctionControllerBuilder {
         return auction
     }
     
-    open func providers(_ demands: [String]) -> [String: DemandProvider] {
+    required init() {}
+    
+    open func providers(_ demands: [String]) -> [String: DemandProviderType] {
         return [:]
     }
     

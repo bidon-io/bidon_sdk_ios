@@ -8,7 +8,7 @@
 import Foundation
 
 
-typealias AuctionRoundDemandResponse = (Result<AdRecord, SdkError>) -> ()
+typealias AuctionRoundBidResponse<DemandProviderType: DemandProvider> = (Result<Bid<DemandProviderType>, SdkError>) -> ()
 typealias AuctionRoundCompletion = () -> ()
 
 
@@ -20,9 +20,11 @@ protocol AuctionRound {
 
 
 protocol PerformableAuctionRound: AuctionRound, Hashable {
+    associatedtype DemandProviderType: DemandProvider
+    
     func perform(
         pricefloor: Price,
-        demand: @escaping AuctionRoundDemandResponse,
+        bid: @escaping AuctionRoundBidResponse<DemandProviderType>,
         completion: @escaping AuctionRoundCompletion
     )
     

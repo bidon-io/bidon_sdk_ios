@@ -8,9 +8,8 @@
 import Foundation
 
 
-protocol AuctionController {
+protocol AuctionController {    
     var id: String { get }
-    var waterfall: Waterfall { get }
     var delegate: AuctionControllerDelegate? { get }
     
     func load()

@@ -42,20 +42,3 @@ public protocol Ad {
     var networkName: String { get }
     var dsp: String? { get }
 }
-
-
-internal struct HashableAd: Hashable  {
-    var ad: Ad
-
-    init(ad: Ad) {
-        self.ad = ad
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(ad.id)
-    }
-    
-    static func == (lhs: HashableAd, rhs: HashableAd) -> Bool {
-        return lhs.ad.id == rhs.ad.id
-    }
-}

@@ -9,33 +9,15 @@ import Foundation
 import UIKit
 
 
-
 final class RewardedImpressionController: NSObject, FullscreenImpressionController {
-    private struct RewardedImpression: Impression {
-        var impressionId: String = UUID().uuidString
-        
-        var auctionId: String
-        var auctionConfigurationId: Int
-        var ad: Ad
-        
-        init(demand: Demand) {
-            self.auctionId = demand.auctionId
-            self.auctionConfigurationId = demand.auctionConfigurationId
-            self.ad = demand.ad
-        }
-    }
-    
     weak var delegate: FullscreenImpressionControllerDelegate?
     
     private let provider: RewardedAdDemandProvider
     private let impression: Impression
     
-    required init(demand: Demand) throws {
-        guard let provider = demand.provider as? RewardedAdDemandProvider else {
-            throw SdkError.internalInconsistency
-        }
-        
-        self.provider = provider
+    required init(demand: AnyRewardedAdDemand) {
+        let demand = demand.unwrapped()
+        self.provider = demand.provider
         self.impression = FullscreenImpression(demand: demand)
         
         super.init()

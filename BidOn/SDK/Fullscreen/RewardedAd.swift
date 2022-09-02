@@ -11,7 +11,12 @@ import UIKit
 
 @objc(BDRewardedAd)
 public final class RewardedAd: NSObject, RewardedAdObject {
-    private typealias Manager = FullscreenAdManager<RewardedAuctionRequestBuilder, RewardedConcurrentAuctionControllerBuilder, RewardedImpressionController>
+    private typealias Manager = FullscreenAdManager<
+        AnyRewardedAdDemandProvider,
+        RewardedAuctionRequestBuilder,
+        RewardedConcurrentAuctionControllerBuilder,
+        RewardedImpressionController
+    >
     
     @objc public var delegate: RewardedAdDelegate?
     

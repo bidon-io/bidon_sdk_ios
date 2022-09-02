@@ -16,17 +16,27 @@ protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate, Au
 }
 
 
-final class FullscreenAdManager<RequestBuilderType, AuctionBuilderType, ImpressionControllerType>: NSObject where
-RequestBuilderType: AuctionRequestBuilder,
-AuctionBuilderType: ConcurrentAuctionControllerBuilder,
-ImpressionControllerType: FullscreenImpressionController {
+final class FullscreenAdManager<
+    DemandProviderType,
+    AuctionRequestBuilderType,
+    AuctionControllerBuilderType,
+    ImpressionControllerType
+>: NSObject where
+DemandProviderType: DemandProvider,
+AuctionRequestBuilderType: AuctionRequestBuilder,
+AuctionControllerBuilderType: BaseConcurrentAuctionControllerBuilder<DemandProviderType>,
+ImpressionControllerType: FullscreenImpressionController,
+ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
+    
+    fileprivate typealias DemandType = DemandModel<DemandProviderType>
+    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType>
     
     fileprivate enum State {
         case idle
         case preparing
-        case auction(controller: AuctionController)
-        case loading(controller: WaterfallController)
-        case ready(demand: Demand)
+        case auction(controller: AuctionControllerType)
+        case loading(controller: WaterfallController<DemandType>)
+        case ready(demand: DemandType)
         case impression(controller: ImpressionControllerType)
     }
     
@@ -54,8 +64,8 @@ ImpressionControllerType: FullscreenImpressionController {
         }
         
         state = .preparing
-                
-        let request = AuctionRequest { (builder: RequestBuilderType) in
+        
+        let request = AuctionRequest { (builder: AuctionRequestBuilderType) in
             builder.withPlacement(placement)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
@@ -74,7 +84,7 @@ ImpressionControllerType: FullscreenImpressionController {
             case .success(let response):
                 Logger.verbose("Fullscreen ad manager performs request: \(request)")
                 
-                let auction = ConcurrentAuctionController { (builder: AuctionBuilderType) in
+                let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
                     builder.withAdaptersRepository(self.sdk.adaptersRepository)
                     builder.withRounds(response.rounds, lineItems: response.lineItems)
                     builder.withPricefloor(response.minPrice)
@@ -160,40 +170,41 @@ extension FullscreenAdManager: AuctionControllerDelegate {
     }
     
     func controller(_ controller: AuctionController, completeAuction winner: Ad) {
+        guard let controller = controller as? AuctionControllerType else { return }
+        
         delegate?.controller(
             controller,
             completeAuction: winner
         )
         
-        let waterfall = DefaultWaterfallController(
+        let waterfall = WaterfallController<DemandType>(
             controller.waterfall,
             timeout: .unknown
         )
         
-        waterfall.delegate = self
         state = .loading(controller: waterfall)
-        waterfall.load()
+        waterfall.load { [weak self] result in
+            guard let self = self else { return }
+            
+            self.trackMediationResult()
+            
+            switch result {
+            case .success(let demand):
+                self.state = .ready(demand: demand)
+                self.delegate?.didLoad(demand.ad)
+            case .failure(let error):
+                self.state = .idle
+                self.delegate?.didFailToLoad(error)
+            }
+        }
     }
     
     func controller(_ controller: AuctionController, failedAuction error: Error) {
+        trackMediationResult()
+        
         state = .idle
         
         delegate?.controller(controller, failedAuction: error)
-        delegate?.didFailToLoad(error)
-    }
-}
-
-
-extension FullscreenAdManager: WaterfallControllerDelegate {
-    func controller(_ controller: WaterfallController, didLoadDemand demand: Demand) {
-        trackMediationResult()
-        state = .ready(demand: demand)
-        delegate?.didLoad(demand.ad)
-    }
-    
-    func controller(_ controller: WaterfallController, didFailToLoad error: SdkError) {
-        trackMediationResult()
-        state = .idle
         delegate?.didFailToLoad(error)
     }
 }
@@ -213,7 +224,7 @@ extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
         }) { result in
             Logger.debug("Sent show with result: \(result)")
         }
-
+        
         delegate?.willPresent(impression)
     }
     

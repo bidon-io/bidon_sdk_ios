@@ -16,12 +16,15 @@ protocol BannerAdManagerDelegate: AuctionControllerDelegate {
 
 
 final class BannerAdManager: NSObject {
+    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<AnyAdViewDemandProvider>
+    fileprivate typealias WaterfallControllerType = WaterfallController<AnyAdViewDemand>
+    
     fileprivate enum State {
         case idle
         case preparing
-        case auction(controller: AuctionController)
-        case loading(controller: WaterfallController)
-        case ready(demand: Demand)
+        case auction(controller: AuctionControllerType)
+        case loading(controller: WaterfallControllerType)
+        case ready(demand: AdViewDemand)
     }
     
     @Injected(\.networkManager)
@@ -41,7 +44,7 @@ final class BannerAdManager: NSObject {
         super.init()
     }
     
-    var demand: Demand? {
+    var demand: AdViewDemand? {
         switch state {
         case .ready(let demand): return demand
         default: return nil
@@ -81,7 +84,7 @@ final class BannerAdManager: NSObject {
             case .success(let response):
                 Logger.verbose("Banner ad manager performs request: \(request)")
                 
-                let auction = ConcurrentAuctionController { (builder: AdViewConcurrentAuctionControllerBuilder) in
+                let auction = AuctionControllerType { (builder: AdViewConcurrentAuctionControllerBuilder) in
                     builder.withAdaptersRepository(self.sdk.adaptersRepository)
                     builder.withRounds(response.rounds, lineItems: response.lineItems)
                     builder.withPricefloor(response.minPrice)
@@ -133,39 +136,38 @@ extension BannerAdManager: AuctionControllerDelegate {
     }
     
     func controller(_ controller: AuctionController, completeAuction winner: Ad) {
-        let waterfall = DefaultWaterfallController(
+        guard let controller = controller as? AuctionControllerType else { return }
+        
+        delegate?.controller(controller, completeAuction: winner)
+        
+        let waterfall = WaterfallControllerType(
             controller.waterfall,
             timeout: .unknown
         )
         
         state = .loading(controller: waterfall)
-
-        waterfall.delegate = self
-        waterfall.load()
         
-        delegate?.controller(controller, completeAuction: winner)
+        waterfall.load { [weak self] result in
+            guard let self = self else { return }
+            
+            self.trackMediationResult()
+            switch result {
+            case .success(let demand):
+                self.state = .ready(demand: demand.unwrapped())
+                self.delegate?.didLoad(demand.ad)
+            case .failure(let error):
+                self.state = .idle
+                self.delegate?.didFailToLoad(error)
+            }
+        }
     }
     
     func controller(_ controller: AuctionController, failedAuction error: Error) {
+        trackMediationResult()
+        state = .idle
         delegate?.controller(controller, failedAuction: error)
     }
 }
-
-
-extension BannerAdManager: WaterfallControllerDelegate {
-    func controller(_ controller: WaterfallController, didLoadDemand demand: Demand) {
-        trackMediationResult()
-        state = .ready(demand: demand)
-        delegate?.didLoad(demand.ad)
-    }
-    
-    func controller(_ controller: WaterfallController, didFailToLoad error: SdkError) {
-        trackMediationResult()
-        state = .idle
-        delegate?.didFailToLoad(error)
-    }
-}
-
 
 private extension BannerAdManager.State {
     var isIdle: Bool {

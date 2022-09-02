@@ -23,7 +23,9 @@ protocol FullscreenImpressionControllerDelegate: AnyObject {
 
 
 protocol FullscreenImpressionController: AnyObject {
-    init(demand: Demand) throws
+    associatedtype DemandType: Demand
+    
+    init(demand: DemandType)
     
     func show(from rootViewController: UIViewController)
     
@@ -38,7 +40,7 @@ struct FullscreenImpression: Impression {
     var auctionConfigurationId: Int
     var ad: Ad
     
-    init(demand: Demand) {
+    init<T: Demand>(demand: T) {
         self.auctionId = demand.auctionId
         self.auctionConfigurationId = demand.auctionConfigurationId
         self.ad = demand.ad

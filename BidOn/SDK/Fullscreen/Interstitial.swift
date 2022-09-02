@@ -11,7 +11,12 @@ import UIKit
 
 @objc(BDInterstitial)
 public final class Interstitial: NSObject, FullscreenAdObject {
-    private typealias Manager = FullscreenAdManager<InterstitialAuctionRequestBuilder, InterstitialConcurrentAuctionControllerBuilder, InterstitialImpressionController>
+    private typealias Manager = FullscreenAdManager<
+        AnyInterstitialDemandProvider,
+        InterstitialAuctionRequestBuilder,
+        InterstitialConcurrentAuctionControllerBuilder,
+        InterstitialImpressionController
+    >
     
     @objc public var delegate: FullscreenAdDelegate?
     

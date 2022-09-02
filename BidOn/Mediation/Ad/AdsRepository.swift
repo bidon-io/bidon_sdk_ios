@@ -8,11 +8,29 @@
 import Foundation
 
 
-internal typealias AdsRepository = Repository<HashableAd, DemandProvider>
+internal typealias AdsRepository<DemandProviderType: DemandProvider> = Repository<HashableAd, DemandProviderType>
 
-typealias AdRecord = (ad: Ad, provider: DemandProvider)
+typealias Bid<DemandProviderType: DemandProvider> = (ad: Ad, provider: DemandProviderType)
 
-extension AdsRepository {
+
+internal struct HashableAd: Hashable  {
+    var ad: Ad
+
+    init(ad: Ad) {
+        self.ad = ad
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ad.id)
+    }
+    
+    static func == (lhs: HashableAd, rhs: HashableAd) -> Bool {
+        return lhs.ad.id == rhs.ad.id
+    }
+}
+
+
+extension Repository where Key == HashableAd, Value: DemandProvider  {
     convenience init() {
         self.init("com.ads.ads-repository.queue")
     }
@@ -21,18 +39,18 @@ extension AdsRepository {
         return objects.keys.map { $0.ad }
     }
     
-    func register(_ record: AdRecord) {
-        let container = HashableAd(ad: record.ad)
-        self[container] = record.provider
+    func register(_ bid: Bid<Value>) {
+        let container = HashableAd(ad: bid.ad)
+        self[container] = bid.provider
     }
     
-    func provider(for ad: Ad) -> DemandProvider? {
-        return record(for: ad)?.1
+    func provider(for ad: Ad) -> Value? {
+        return bid(for: ad)?.1
     }
     
-    func record(for ad: Ad) -> AdRecord? {
+    func bid(for ad: Ad) -> Bid<Value>? {
         let container = HashableAd(ad: ad)
-        let provider: DemandProvider? = self[container]
+        let provider: Value? = self[container]
         
         return provider.map { (ad, $0) }
     }

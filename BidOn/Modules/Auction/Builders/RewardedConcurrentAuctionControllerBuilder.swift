@@ -8,21 +8,36 @@
 import Foundation
 
 
-final class RewardedConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder, ConcurrentAuctionControllerBuilder {
-    let adType: AdType = .rewarded
+final class RewardedConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder<AnyRewardedAdDemandProvider> {
+    override var adType: AdType { .rewarded }
     
-    override func providers(_ demands: [String]) -> [String: DemandProvider] {
+    override func providers(_ demands: [String]) -> [String: AnyRewardedAdDemandProvider] {
         demands.reduce([:]) { result, id in
             var result = result
             let adapter: RewardedAdDemandSourceAdapter? = adaptersRepository[id]
             
             do {
-                result[id] = try adapter?.rewardedAd()
+                if let provider = try adapter?.rewardedAd() {
+                    result[id] = try provider.wrapped()
+                }
             } catch {
                 Logger.debug("Error while creating rewarded in adapter: \(adapter.debugDescription)")
             }
             
             return result
+        }
+    }
+}
+
+
+private extension RewardedAdDemandProvider {
+    func wrapped() throws -> AnyRewardedAdDemandProvider {
+        if self is DirectDemandProvider {
+            return try AnyDirectDemandProvider(self)
+        } else if self is ProgrammaticDemandProvider {
+            return try AnyProgrammaticDemandProvider(self)
+        } else {
+            return try AnyDemandProvider(self)
         }
     }
 }

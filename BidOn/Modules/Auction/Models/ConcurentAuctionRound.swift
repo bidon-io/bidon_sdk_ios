@@ -8,13 +8,13 @@
 import Foundation
 
 
-struct ConcurrentAuctionRound: PerformableAuctionRound {
+struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAuctionRound {
     var id: String
     var timeout: TimeInterval
     var demands: [String]
     
     private var lineItems: LineItems
-    private var providers: [String: DemandProvider]
+    private var providers: [String: DemandProviderType]
     
     private var group = DispatchGroup()
     private var completion: (() -> ())?
@@ -23,7 +23,7 @@ struct ConcurrentAuctionRound: PerformableAuctionRound {
     init(
         round: AuctionRound,
         lineItems: LineItems,
-        providers: [String: DemandProvider]
+        providers: [String: DemandProviderType]
     ) {
         self.id = round.id
         self.timeout = round.timeout
@@ -32,13 +32,13 @@ struct ConcurrentAuctionRound: PerformableAuctionRound {
         self.providers = providers
     }
     
-    private func provider(_ demand: String) -> DemandProvider? {
+    private func provider(_ demand: String) -> DemandProviderType? {
         return providers[demand]
     }
     
     func perform(
         pricefloor: Price,
-        demand: @escaping AuctionRoundDemandResponse,
+        bid: @escaping AuctionRoundBidResponse<DemandProviderType>,
         completion: @escaping AuctionRoundCompletion
     ) {
         demands.forEach { id in
@@ -47,11 +47,12 @@ struct ConcurrentAuctionRound: PerformableAuctionRound {
             let response: DemandProviderResponse = { result in
                 defer { group.leave() }
                 guard let provider = provider(id) else { return }
+                
                 switch result {
                 case .success(let ad):
-                    demand(.success((ad, provider)))
+                    bid(.success((ad, provider)))
                 case .failure(let error):
-                    demand(.failure(SdkError(error)))
+                    bid(.failure(SdkError(error)))
                 }
             }
             

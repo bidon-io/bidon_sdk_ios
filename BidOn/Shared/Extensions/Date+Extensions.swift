@@ -36,13 +36,14 @@ extension Date {
     }
     
     private static var monotonicTimestamp: TimeInterval {
-        let now = time_t()
+        var now = time_t()
         var boottime = timeval()
         var size = MemoryLayout<timeval>.stride
         
         sysctlbyname("kern.boottime", &boottime, &size, nil, 0)
+        time(&now)
         
-        guard boottime.tv_sec != 0 else { return -1 }
+        guard boottime.tv_sec != 0 else { return .zero }
         
         return TimeInterval(now - boottime.tv_sec)
     }

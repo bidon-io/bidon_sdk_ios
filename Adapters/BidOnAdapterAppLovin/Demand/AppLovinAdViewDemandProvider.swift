@@ -109,15 +109,15 @@ extension AppLovinAdViewDemandProvider: ALAdViewEventDelegate {
     }
     
     func ad(_ ad: ALAd, didPresentFullscreenFor adView: ALAdView) {
-        adViewDelegate?.providerWillPresentModalView(self)
+        adViewDelegate?.providerWillPresentModalView(self, adView: adView)
     }
     
     func ad(_ ad: ALAd, didDismissFullscreenFor adView: ALAdView) {
-        adViewDelegate?.providerDidDismissModalView(self)
+        adViewDelegate?.providerDidDismissModalView(self, adView: adView)
     }
     
     func ad(_ ad: ALAd, willLeaveApplicationFor adView: ALAdView) {
-        adViewDelegate?.providerWillLeaveApplication(self)
+        adViewDelegate?.providerWillLeaveApplication(self, adView: adView)
     }
 }
 

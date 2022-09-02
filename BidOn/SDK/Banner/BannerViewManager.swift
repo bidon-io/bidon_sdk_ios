@@ -11,22 +11,44 @@ import UIKit
 
 
 protocol BannerViewManagerDelegate: AnyObject {
-    func manager(_ manager: BannerViewManager, didRecordImpression: Impression)
+    func manager(_ manager: BannerViewManager, didRecordImpression impression: Impression)
     func manager(_ manager: BannerViewManager, didRecordClick impression: Impression)
+    func manager(_ manager: BannerViewManager, willPresentModalView impression: Impression)
+    func manager(_ manager: BannerViewManager, didDismissModalView impression: Impression)
+    func manager(_ manager: BannerViewManager, willLeaveApplication impression: Impression)
 }
 
 
-final internal class BannerViewManager {
+final internal class BannerViewManager: NSObject {
+    static var impressionKey: UInt8 = 0
+
+    fileprivate struct AdViewImpression: Impression {
+        var impressionId: String = UUID().uuidString
+        var auctionId: String
+        var auctionConfigurationId: Int
+        var ad: Ad
+        
+        init(
+            auctionId: String,
+            auctionConfigurationId: Int,
+            ad: Ad
+        ) {
+            self.auctionId = auctionId
+            self.auctionConfigurationId = auctionConfigurationId
+            self.ad = ad
+        }
+    }
+    
     weak var container: UIView?
     
     private var timer: Timer?
-    
+        
     var isAdPresented: Bool {
         guard let container = container else { return false }
         return !container.subviews.isEmpty
     }
     
-    weak var delegate: BannerAdManagerDelegate?
+    weak var delegate: BannerViewManagerDelegate?
     
     var isRefreshGranted: Bool { timer == nil && isAdPresented }
 
@@ -55,9 +77,9 @@ final internal class BannerViewManager {
         timer = nil
     }
     
-    func layout(
+    func present(
+        demand: Demand,
         view: AdViewContainer,
-        provider: AdViewDemandProvider,
         size: CGSize
     ) {
         guard
@@ -65,9 +87,9 @@ final internal class BannerViewManager {
             !container.subviews.contains(view)
         else { return }
         
-        provider.adViewDelegate = self
+        (demand.provider as! AdViewDemandProvider).adViewDelegate = self
         
-        let viewsToRemove = container.subviews
+        let viewsToRemove = container.subviews.compactMap { $0 as? AdViewContainer }
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alpha = 0
         container.addSubview(view)
@@ -98,23 +120,85 @@ final internal class BannerViewManager {
             animations: {
                 viewsToRemove.forEach { $0.alpha = 0 }
                 view.alpha = 1
-            }) { _ in
-                viewsToRemove.forEach { $0.removeFromSuperview() }
+            }) { [weak self] _ in
+                viewsToRemove.forEach { $0.destroy() }
+                self?.trackImpression(adView: view)
             }
+                
+        view.impression = AdViewImpression(
+            auctionId: demand.auctionId,
+            auctionConfigurationId: demand.auctionConfigurationId,
+            ad: demand.ad
+        )
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didReceiveTap))
+        recognizer.delegate = self
+        view.addGestureRecognizer(recognizer)
+    }
+    
+    
+    @objc private
+    func didReceiveTap(_ recognizer: UITapGestureRecognizer) {
+        guard
+            let adView = recognizer.view as? AdViewContainer,
+            let impression = adView.impression
+        else { return }
+        
+        delegate?.manager(self, didRecordClick: impression)
+    }
+    
+    private func trackImpression(adView: AdViewContainer) {
+        guard let impression = adView.impression else { return }
+        delegate?.manager(self, didRecordImpression: impression)
     }
 }
 
 
 extension BannerViewManager: DemandProviderAdViewDelegate {
-    func providerWillPresentModalView(_ provider: AdViewDemandProvider) {
-        
+    func providerWillPresentModalView(
+        _ provider: AdViewDemandProvider,
+        adView: AdViewContainer
+    ) {
+        guard let impression = adView.impression else { return }
+        delegate?.manager(self, willPresentModalView: impression)
     }
     
-    func providerDidDismissModalView(_ provider: AdViewDemandProvider) {
-        
+    func providerDidDismissModalView(
+        _ provider: AdViewDemandProvider,
+        adView: AdViewContainer
+    ) {
+        guard let impression = adView.impression else { return }
+        delegate?.manager(self, didDismissModalView: impression)
     }
     
-    func providerWillLeaveApplication(_ provider: AdViewDemandProvider) {
-        
+    func providerWillLeaveApplication(
+        _ provider: AdViewDemandProvider,
+        adView: AdViewContainer
+    ) {
+        guard let impression = adView.impression else { return }
+        delegate?.manager(self, willLeaveApplication: impression)
+    }
+}
+
+
+extension BannerViewManager: UIGestureRecognizerDelegate {
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
+        return true
+    }
+}
+
+
+private extension AdViewContainer {
+    var impression: Impression? {
+        get { objc_getAssociatedObject(self, &BannerViewManager.impressionKey) as? Impression }
+        set { objc_setAssociatedObject(self, &BannerViewManager.impressionKey, newValue, .OBJC_ASSOCIATION_RETAIN) }
+    }
+    
+    func destroy() {
+        impression = nil
+        removeFromSuperview()
     }
 }

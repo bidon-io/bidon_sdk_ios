@@ -35,7 +35,8 @@ struct HomeView: View {
                         BannerView(
                             format: vm.bannerSettings.format,
                             isAutorefreshing: vm.bannerSettings.isAutorefreshing,
-                            autorefreshInterval: vm.bannerSettings.autorefreshInterval
+                            autorefreshInterval: vm.bannerSettings.autorefreshInterval,
+                            onEvent: vm.banner.receive
                         )
                         .frame(height: vm.bannerHeight)
                     }
@@ -44,6 +45,7 @@ struct HomeView: View {
                 .navigationTitle("BidOn v\(BidOnSdk.sdkVersion)")
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 

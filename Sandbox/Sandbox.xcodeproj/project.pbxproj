@@ -27,6 +27,9 @@
 		4299A413289BC8B40062C580 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A412289BC8B40062C580 /* ContentView.swift */; };
 		4299A415289BC8B60062C580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A414289BC8B60062C580 /* Assets.xcassets */; };
 		4299A418289BC8B60062C580 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A417289BC8B60062C580 /* Preview Assets.xcassets */; };
+		42BE439028C0E7B3000528E3 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438F28C0E7B3000528E3 /* Permission.swift */; };
+		42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439128C0E7CB000528E3 /* LocationPermission.swift */; };
+		42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		4299A412289BC8B40062C580 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4299A414289BC8B60062C580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4299A417289BC8B60062C580 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		42BE438F28C0E7B3000528E3 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		42BE439128C0E7CB000528E3 /* LocationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermission.swift; sourceTree = "<group>"; };
+		42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparencyPermission.swift; sourceTree = "<group>"; };
 		64A1E0483C51188FF09EB928 /* Pods_Sandbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sandbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F846B990A6AF5B081BB0BD12 /* Pods-Sandbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sandbox.debug.xcconfig"; path = "Target Support Files/Pods-Sandbox/Pods-Sandbox.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +109,7 @@
 		4224AA8128B8F92000E8D886 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				42BE438E28C0E79D000528E3 /* Permissions */,
 				4224AA8228B8F92B00E8D886 /* AdEventModel.swift */,
 				4224AA8428B900AF00E8D886 /* AdEventView.swift */,
 				4219DB5528B90479001F38E5 /* AdEventsList.swift */,
@@ -164,6 +171,16 @@
 				4299A417289BC8B60062C580 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		42BE438E28C0E79D000528E3 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				42BE438F28C0E7B3000528E3 /* Permission.swift */,
+				42BE439128C0E7CB000528E3 /* LocationPermission.swift */,
+				42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */,
+			);
+			path = Permissions;
 			sourceTree = "<group>";
 		};
 		F0B2D09956E1F0C8C9B7BECA /* Pods */ = {
@@ -314,12 +331,15 @@
 				4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */,
 				4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */,
 				4299A413289BC8B40062C580 /* ContentView.swift in Sources */,
+				42BE439028C0E7B3000528E3 /* Permission.swift in Sources */,
 				4200679D28BCA8A3003B734D /* BannerSection.swift in Sources */,
 				4224AA8028B8D5B300E8D886 /* RewardedAdSectionViewModel.swift in Sources */,
 				4224AA7628B8BDB500E8D886 /* InterstitialSectionViewModel.swift in Sources */,
 				4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */,
 				4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */,
 				4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */,
+				42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */,
+				42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +473,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sandbox/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(PRODUCT_NAME) is using location for better ad personalization";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "$(PRODUCT_NAME) is using advertising identifier for better ad personalization";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -485,6 +507,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sandbox/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(PRODUCT_NAME) is using location for better ad personalization";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "$(PRODUCT_NAME) is using advertising identifier for better ad personalization";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

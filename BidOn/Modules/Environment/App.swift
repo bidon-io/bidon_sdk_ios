@@ -7,8 +7,12 @@
 
 import Foundation
 
-#warning("Fill in all required fields")
-protocol App: Environment {
+
+protocol App {
     var bundle: String { get }
+    var version: String { get }
     var key: String { get }
+    var framework: String { get }
+    var frameworkVersion: String? { get }
+    var pluginVersion: String? { get }
 }

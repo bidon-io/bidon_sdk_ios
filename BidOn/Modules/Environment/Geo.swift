@@ -8,7 +8,13 @@
 import Foundation
 
 
-#warning("Fill in all required fields")
-protocol Geo: Environment {
+protocol Geo {
     var lat: Double { get }
+    var lon: Double { get }
+    var accuracy: UInt { get }
+    var lastfix: UInt { get }
+    var country: String? { get }
+    var city: String? { get }
+    var zip: String? { get }
+    var utcoffset: Int { get }
 }

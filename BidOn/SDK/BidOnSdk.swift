@@ -54,34 +54,40 @@ public final class BidOnSdk: NSObject {
         completion: @escaping () -> ()
     ) {
         
-        #warning("Incapsulate logic in tasks")
+#warning("Incapsulate logic in tasks")
         
         adaptersRepository.configure()
-        environmentRepository.configure(appKey: appKey)
         
-        let request = ConfigurationRequest { builder in
-            builder.withAdaptersRepository(adaptersRepository)
-            builder.withEnvironmentRepository(environmentRepository)
-        }
-        
-        networkManager.perform(request: request) { result in
-            switch result {
-            case .success(let response):
-                let group = DispatchGroup()
-                response.adaptersInitializationParameters.adapters.forEach { [unowned self] parameters in
-                    if let adapter: InitializableAdapter = self.adaptersRepository[parameters.key] {
-                        group.enter()
-                        let name = adapter.name
-                        adapter.initialize(from: parameters.value) { result in
-                            Logger.info("\(name) adapter initilized with result: \(result)")
-                            group.leave()
+        environmentRepository.configure(
+            EnvironmentRepository.Parameters(
+                appKey: appKey,
+                framework: .native
+            )
+        ) { [unowned self] in
+            let request = ConfigurationRequest { builder in
+                builder.withAdaptersRepository(self.adaptersRepository)
+                builder.withEnvironmentRepository(self.environmentRepository)
+            }
+            
+            self.networkManager.perform(request: request) { result in
+                switch result {
+                case .success(let response):
+                    let group = DispatchGroup()
+                    response.adaptersInitializationParameters.adapters.forEach { [unowned self] parameters in
+                        if let adapter: InitializableAdapter = self.adaptersRepository[parameters.key] {
+                            group.enter()
+                            let name = adapter.name
+                            adapter.initialize(from: parameters.value) { result in
+                                Logger.info("\(name) adapter initilized with result: \(result)")
+                                group.leave()
+                            }
                         }
                     }
+                    group.notify(queue: .main, execute: completion)
+                case .failure(let error):
+                    Logger.error("Network error while initilizing BidOn SDK: \(error)")
+                    DispatchQueue.main.async(execute: completion)
                 }
-                group.notify(queue: .main, execute: completion)
-            case .failure(let error):
-                Logger.error("Network error while initilizing BidOn SDK: \(error)")
-                DispatchQueue.main.async(execute: completion)
             }
         }
     }

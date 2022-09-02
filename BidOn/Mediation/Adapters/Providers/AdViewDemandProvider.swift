@@ -66,9 +66,9 @@ public protocol AdViewContainer: UIView {
 
 
 public protocol DemandProviderAdViewDelegate: AnyObject {
-    func providerWillPresentModalView(_ provider: AdViewDemandProvider)
-    func providerDidDismissModalView(_ provider: AdViewDemandProvider)
-    func providerWillLeaveApplication(_ provider: AdViewDemandProvider)
+    func providerWillPresentModalView(_ provider: AdViewDemandProvider, adView: AdViewContainer)
+    func providerDidDismissModalView(_ provider: AdViewDemandProvider, adView: AdViewContainer)
+    func providerWillLeaveApplication(_ provider: AdViewDemandProvider, adView: AdViewContainer)
 }
 
 

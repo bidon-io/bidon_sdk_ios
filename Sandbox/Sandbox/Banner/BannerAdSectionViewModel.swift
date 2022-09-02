@@ -15,4 +15,10 @@ final class BannerAdSectionViewModel: ObservableObject {
     @Published var format: AdViewFormat = .banner
     @Published var isAutorefreshing: Bool = true
     @Published var autorefreshInterval: TimeInterval = 15
+    @Published var events: [AdEventModel] = []
+    
+    func receive(_ event: BannerPublisher.Event) {
+        let event = AdEventModel(event)
+        events.append(event)
+    }
 }

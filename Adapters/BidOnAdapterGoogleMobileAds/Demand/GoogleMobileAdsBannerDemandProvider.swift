@@ -107,11 +107,11 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     }
     
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
-        adViewDelegate?.providerWillPresentModalView(self)
+        adViewDelegate?.providerWillPresentModalView(self, adView: bannerView)
     }
     
     func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
-        adViewDelegate?.providerDidDismissModalView(self)
+        adViewDelegate?.providerDidDismissModalView(self, adView: bannerView)
     }
     
     func bannerViewDidRecordClick(_ bannerView: GADBannerView) {

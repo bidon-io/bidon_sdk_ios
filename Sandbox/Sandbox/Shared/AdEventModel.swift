@@ -184,6 +184,82 @@ extension AdEventModel {
     }
 }
 
+
+extension AdEventModel {
+    init(_ event: BannerPublisher.Event) {
+        date = Date()
+        adType = .banner
+        
+        switch event {
+        case .didLoadAd(let ad):
+            title = "Did load ad"
+            subtitle = ad.text
+            bage = "staroflife"
+            color = .secondary
+        case .didFailToLoadAd(let error):
+            title = "Did fail to load ad"
+            subtitle = error.localizedDescription
+            bage = "staroflife"
+            color = .red
+        case .willPresentModalView(let ad):
+            title = "Will present modal view ad"
+            subtitle = ad.text
+            bage = "staroflife"
+            color = .secondary
+        case .didDismissModalView(let ad):
+            title = "Did dismiss modal view ad"
+            subtitle = ad.text
+            bage = "staroflife"
+            color = .secondary
+        case .willLeaveApplication(let ad):
+            title = "Will leave application"
+            subtitle = ad.text
+            bage = "staroflife"
+            color = .secondary
+        case .didRecordClick(let ad):
+            title = "Did record click"
+            subtitle = ad.text
+            bage = "star"
+            color = .blue
+        case .didRecordImpression(let ad):
+            title = "Did record impression"
+            subtitle = ad.text
+            bage = "star"
+            color = .blue
+        case .didPayRevenue(let ad):
+            title = "Did pay revenue"
+            subtitle = ad.text
+            bage = "dollarsign.circle"
+            color = .green
+        case .didStartAuction:
+            title = "Did start auction"
+            subtitle = ""
+            bage = "suit.diamond"
+            color = .purple
+        case .didStartAuctionRound(let auctionRound, let pricefloor):
+            title = "Did start auction round: \(auctionRound)"
+            subtitle = "Pricefloor: " + pricefloor.pretty
+            bage = "suit.diamond"
+            color = .purple
+        case .didReceiveBid(let ad):
+            title = "Did receive bid"
+            subtitle = ad.text
+            bage = "suit.diamond"
+            color = .purple
+        case .didCompleteAuctionRound(let auctionRound):
+            title = "Did complete auction round: \(auctionRound)"
+            subtitle = ""
+            bage = "suit.diamond"
+            color = .purple
+        case .didCompleteAuction(let winner):
+            title = "Did complete auction"
+            subtitle = winner.map { "Winner is \($0.text)" } ?? "No winner"
+            bage = "suit.diamond"
+            color = .purple
+        }
+    }
+}
+
 extension AdType {
     var title: String {
         switch self {

@@ -8,6 +8,7 @@
 import Foundation
 
 
+// TODO: Make demand provider generic
 protocol Demand {
     var auctionId: String { get }
     var auctionConfigurationId: Int { get }

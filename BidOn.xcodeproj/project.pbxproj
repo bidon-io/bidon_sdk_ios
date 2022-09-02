@@ -99,6 +99,9 @@
 		42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */; };
 		42BA82072878547C001F1744 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82062878547C001F1744 /* Banner.swift */; };
 		42BA820928785506001F1744 /* BannerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820828785506001F1744 /* BannerViewManager.swift */; };
+		42BE438B28C0AE93000528E3 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438A28C0AE93000528E3 /* UserManager.swift */; };
+		42BE438D28C0B0E3000528E3 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438C28C0B0E3000528E3 /* SessionManager.swift */; };
+		42BE439628C203AF000528E3 /* BannerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439528C203AF000528E3 /* BannerPublisher.swift */; };
 		42D047DE289D5A0D0096A8C6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047DD289D5A0D0096A8C6 /* Device.swift */; };
 		42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047DF289D5E5C0096A8C6 /* Session.swift */; };
 		42D047E2289D5EEE0096A8C6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047E1289D5EEE0096A8C6 /* App.swift */; };
@@ -205,6 +208,9 @@
 		42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewDemandProvider.swift; sourceTree = "<group>"; };
 		42BA82062878547C001F1744 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		42BA820828785506001F1744 /* BannerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewManager.swift; sourceTree = "<group>"; };
+		42BE438A28C0AE93000528E3 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		42BE438C28C0B0E3000528E3 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		42BE439528C203AF000528E3 /* BannerPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerPublisher.swift; sourceTree = "<group>"; };
 		42D047DD289D5A0D0096A8C6 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		42D047DF289D5E5C0096A8C6 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		42D047E1289D5EEE0096A8C6 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -286,6 +292,7 @@
 			children = (
 				4224AA7828B8C5F800E8D886 /* InterstitialPublisher.swift */,
 				4224AA7A28B8C87900E8D886 /* RewardedAdPublisher.swift */,
+				42BE439528C203AF000528E3 /* BannerPublisher.swift */,
 			);
 			path = Publishers;
 			sourceTree = "<group>";
@@ -605,6 +612,8 @@
 				42D047EA289D60260096A8C6 /* DeviceManager.swift */,
 				42D047F0289D73F80096A8C6 /* GeoManager.swift */,
 				420067A628BD0FBB003B734D /* AppManager.swift */,
+				42BE438A28C0AE93000528E3 /* UserManager.swift */,
+				42BE438C28C0B0E3000528E3 /* SessionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -741,6 +750,7 @@
 				42389E172874665A006024BA /* UIApplication+Extensions.swift in Sources */,
 				4243093A28A2BCCC002360B0 /* GeoModel.swift in Sources */,
 				428FFC7628BF95AC0090B126 /* ImpressionRequest.swift in Sources */,
+				42BE438D28C0B0E3000528E3 /* SessionManager.swift in Sources */,
 				424F181328ABCF470082AEF3 /* InterstitialImpressionController.swift in Sources */,
 				4243093228A2BBFF002360B0 /* DeviceModel.swift in Sources */,
 				4224AA7B28B8C87900E8D886 /* RewardedAdPublisher.swift in Sources */,
@@ -773,7 +783,9 @@
 				424F180B28ABBD330082AEF3 /* WaterfallController.swift in Sources */,
 				421D48E62888423B007DE2E4 /* Logger.swift in Sources */,
 				429EE2D1286DD0E2009439C6 /* ConcurrentAuctionController.swift in Sources */,
+				42BE439628C203AF000528E3 /* BannerPublisher.swift in Sources */,
 				42BA82072878547C001F1744 /* Banner.swift in Sources */,
+				42BE438B28C0AE93000528E3 /* UserManager.swift in Sources */,
 				4299A427289BCF3F0062C580 /* HTTPClient.swift in Sources */,
 				42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */,
 				426DD7B328A68BF400A1ADF5 /* FullscreenAdDelegate.swift in Sources */,

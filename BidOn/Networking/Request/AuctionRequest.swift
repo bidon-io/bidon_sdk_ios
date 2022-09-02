@@ -21,6 +21,7 @@ protocol AuctionRequestBuilder: BaseRequestBuilder {
     init()
 }
 
+
 struct AuctionRequest: Request {
     var route: Route = .auction
     var method: HTTPClient.HTTPMethod = .post

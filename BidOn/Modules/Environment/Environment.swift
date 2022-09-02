@@ -6,15 +6,3 @@
 //
 
 import Foundation
-
-
-enum EnvironmentType: String {
-    case device
-    case session
-    case app
-    case user
-    case geo
-}
-
-
-protocol Environment {}

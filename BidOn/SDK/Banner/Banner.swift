@@ -32,9 +32,13 @@ public final class Banner: UIView, AdView {
     @Injected(\.sdk)
     private var sdk: Sdk
     
+    @Injected(\.networkManager)
+    private var networkManager: NetworkManager
+    
     private lazy var viewManager: BannerViewManager = {
         let manager = BannerViewManager()
         manager.container = self
+        manager.delegate = self
         return manager
     }()
     
@@ -68,43 +72,26 @@ public final class Banner: UIView, AdView {
         adManager.loadAd(context: ctx)
     }
     
-    private func layout(
-        adView: AdViewContainer,
-        provider: AdViewDemandProvider
-    ) {
-        DispatchQueue.main.async { [weak self, weak adView] in
-            guard
-                let self = self,
-                let adView = adView
-            else { return }
-            
-            Logger.verbose("Banner \(self) did layout ad view \(adView), size:)")
-            
-            self.viewManager.layout(
-                view: adView,
-                provider: provider,
-                size: self.format.preferredSize
-            )
-            
-            self.scheduleRefreshIfNeeded()
-        }
-    }
-    
     private final func refreshIfNeeded() {
         guard
-            let provider = adManager.demand?.provider as? AdViewDemandProvider,
-            let ad = adManager.demand?.ad,
-            let adView = provider.container(for: ad)
+            let demand = adManager.demand,
+            let provider = demand.provider as? AdViewDemandProvider,
+            let adView = provider.container(for: demand.ad)
         else { return }
         
-        if viewManager.isRefreshGranted {
+        defer { scheduleRefreshIfNeeded() }
+        if viewManager.isRefreshGranted || !viewManager.isAdPresented {
             Logger.verbose("Banner \(self) will refresh ad view")
-        
-            layout(adView: adView, provider: provider)
-        } else if !viewManager.isAdPresented {
-            Logger.verbose("Banner \(self) will display ad view")
-               
-            layout(adView: adView, provider: provider)
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                
+                self.viewManager.present(
+                    demand: demand,
+                    view: adView,
+                    size: self.format.preferredSize
+                )
+            }
         }
     }
     
@@ -187,6 +174,37 @@ extension Banner: BannerAdManagerDelegate {
 }
 
 
+extension Banner: BannerViewManagerDelegate {
+    func manager(_ manager: BannerViewManager, didRecordImpression impression: Impression) {
+        networkManager.perform(request: ImpressionRequest { builder in
+            builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withExt(sdk.ext)
+            builder.withImpression(impression)
+        }) { result in
+            Logger.debug("Sent show with result: \(result)")
+        }
+        
+        delegate?.adObject?(self, didRecordImpression: impression.ad)
+    }
+    
+    func manager(_ manager: BannerViewManager, didRecordClick impression: Impression) {
+        delegate?.adObject?(self, didRecordClick: impression.ad)
+    }
+    
+    func manager(_ manager: BannerViewManager, willPresentModalView impression: Impression) {
+        delegate?.adView(self, willPresentScreen: impression.ad)
+    }
+    
+    func manager(_ manager: BannerViewManager, didDismissModalView impression: Impression) {
+        delegate?.adView(self, didDismissScreen: impression.ad)
+    }
+    
+    func manager(_ manager: BannerViewManager, willLeaveApplication impression: Impression) {
+        delegate?.adView(self, willLeaveApplication: impression.ad)
+    }
+}
+
+
 extension Banner: DemandProviderRevenueDelegate {
     public func provider(
         _ provider: DemandProvider,
@@ -196,3 +214,5 @@ extension Banner: DemandProviderRevenueDelegate {
         sdk.trackAdRevenue(ad, adType: .banner)
     }
 }
+
+

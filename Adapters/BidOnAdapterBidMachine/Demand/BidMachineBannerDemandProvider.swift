@@ -94,15 +94,15 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     }
     
     func bannerViewWillPresentScreen(_ bannerView: BDMBannerView) {
-        adViewDelegate?.providerWillPresentModalView(self)
+        adViewDelegate?.providerWillPresentModalView(self, adView: bannerView)
     }
     
     func bannerViewDidDismissScreen(_ bannerView: BDMBannerView) {
-        adViewDelegate?.providerDidDismissModalView(self)
+        adViewDelegate?.providerDidDismissModalView(self, adView: bannerView)
     }
     
     func bannerViewWillLeaveApplication(_ bannerView: BDMBannerView) {
-        adViewDelegate?.providerWillLeaveApplication(self)
+        adViewDelegate?.providerWillLeaveApplication(self, adView: bannerView)
     }
     
     func bannerViewRecieveUserInteraction(_ bannerView: BDMBannerView) {

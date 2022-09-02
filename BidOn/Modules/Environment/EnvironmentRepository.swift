@@ -8,21 +8,70 @@
 import Foundation
 
 
-internal typealias EnvironmentRepository = Repository<EnvironmentType, Environment>
+internal typealias EnvironmentRepository = Repository<EnvironmentRepositoryKey, EnvironmentManager>
+
+
+enum EnvironmentRepositoryKey: String {
+    case device
+    case session
+    case app
+    case user
+    case geo
+}
 
 
 extension EnvironmentRepository {
+    struct Parameters {
+        var appKey: String
+        var framework: Framework
+        var frameworkVersion: String?
+        var pluginVersion: String?
+    }
+    
     convenience init() {
         self.init("com.ads.adapters-repository.queue")
     }
     
-    func configure(appKey: String) {
+    func configure(_ parameters: Parameters, completion: @escaping () -> ()) {
         self[.device] = DeviceManager()
-        self[.app] = AppManager(key: appKey)
+        self[.session] = SessionManager()
+        self[.app] = AppManager(
+            key: parameters.appKey,
+            framework: parameters.framework,
+            frameworkVersion: parameters.frameworkVersion,
+            pluginVersion: parameters.pluginVersion
+        )
+        self[.user] = UserManager()
         
         let geo = GeoManager()
-        if geo.isAvailable {
-            self[.geo] = geo
+        self[.geo] = geo
+        
+        guard geo.isAvailable else {
+            completion()
+            return
+        }
+        
+        geo.prepare(completion: completion)
+    }
+
+    
+    func environment<T: EnvironmentManager>(_ type: T.Type) -> T? {
+        guard let key = EnvironmentRepositoryKey(type) else { return nil }
+        let env: T? = self[key]
+        return env
+    }
+}
+
+
+extension EnvironmentRepositoryKey {
+    init?<T: EnvironmentManager>(_ type: T.Type) {
+        switch type {
+        case is DeviceManager.Type: self = .device
+        case is SessionManager.Type: self = .session
+        case is AppManager.Type: self = .app
+        case is UserManager.Type: self = .user
+        case is GeoManager.Type: self = .geo
+        default: return nil
         }
     }
 }

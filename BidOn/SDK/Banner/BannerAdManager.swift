@@ -14,6 +14,7 @@ protocol BannerAdManagerDelegate: AuctionControllerDelegate {
     func didLoad(_ ad: Ad)
 }
 
+
 final class BannerAdManager: NSObject {
     fileprivate enum State {
         case idle

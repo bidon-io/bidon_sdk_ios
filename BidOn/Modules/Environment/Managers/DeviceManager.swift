@@ -13,7 +13,7 @@ import SystemConfiguration
 import Network
 
 
-final class DeviceManager: Device {
+final class DeviceManager: Device, EnvironmentManager {
     @MainThreadComputable(DeviceManager.userAgent)
     var userAgent: String
     
@@ -79,7 +79,9 @@ final class DeviceManager: Device {
         }
     }
     
-    var conectionType: ConnectionType = .unknown
+    var conectionType: ConnectionType {
+        Reachability().connectionType
+    }
 }
 
 
@@ -111,7 +113,47 @@ struct Reachability {
     }
     
     var connectionType: ConnectionType {
-        guard let flags = flags else { return .unknown }
-        return .unknown
+        guard
+            let flags = flags,
+            flags.contains(.reachable)
+        else { return .unknown }
+        
+        guard !flags.contains(.isWWAN) else {
+            return .wifi
+        }
+        
+        let technology: String?
+        
+        if #available(iOS 12, *) {
+            technology = CTTelephonyNetworkInfo().serviceCurrentRadioAccessTechnology?.values.first
+        } else {
+            technology = CTTelephonyNetworkInfo().currentRadioAccessTechnology
+        }
+        
+        if #available(iOS 14.1, *) {
+            switch technology {
+            case CTRadioAccessTechnologyGPRS, CTRadioAccessTechnologyEdge:
+                return .cellular2G
+            case CTRadioAccessTechnologyWCDMA, CTRadioAccessTechnologyHSDPA, CTRadioAccessTechnologyHSUPA, CTRadioAccessTechnologyCDMA1x, CTRadioAccessTechnologyCDMAEVDORevA, CTRadioAccessTechnologyCDMAEVDORevB:
+                return .cellular3G
+            case CTRadioAccessTechnologyLTE:
+                return .cellular4G
+            case CTRadioAccessTechnologyNRNSA, CTRadioAccessTechnologyNR:
+                return .cellular5G
+            default:
+                return .cellularUnknown
+            }
+        } else {
+            switch technology {
+            case CTRadioAccessTechnologyGPRS, CTRadioAccessTechnologyEdge:
+                return .cellular2G
+            case CTRadioAccessTechnologyWCDMA, CTRadioAccessTechnologyHSDPA, CTRadioAccessTechnologyHSUPA, CTRadioAccessTechnologyCDMA1x, CTRadioAccessTechnologyCDMAEVDORevA, CTRadioAccessTechnologyCDMAEVDORevB:
+                return .cellular3G
+            case CTRadioAccessTechnologyLTE:
+                return .cellular4G
+            default:
+                return .cellularUnknown
+            }
+        }
     }
 }

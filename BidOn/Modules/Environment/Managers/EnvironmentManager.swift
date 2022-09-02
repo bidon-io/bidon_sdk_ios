@@ -10,6 +10,5 @@ import Foundation
 
 typealias EnvironmentManagerCompletion = () -> ()
 
-protocol EnvironmentManager {
-    func prepare(completion: @escaping EnvironmentManagerCompletion)
-}
+
+protocol EnvironmentManager {}

@@ -56,6 +56,14 @@ public enum SdkError: Error, CustomStringConvertible {
 }
 
 
+@objc(BDFramework)
+public enum Framework: UInt {
+    case native
+    case unity
+    case reactNative
+    case flutter
+}
+
 public enum AdType: String {
     case banner
     case interstitial
@@ -64,6 +72,8 @@ public enum AdType: String {
 
 
 struct Constants {
+    static let zeroUUID: String = "00000000-0000-0000-0000-000000000000"
+    
     struct API {
         static var host = "b.appbaqend.com"
         static var baseURL = "https://" + host
@@ -80,5 +90,7 @@ struct Constants {
     
     struct UserDefaultsKey {
         static var token = "BidOnToken"
+        static var idg = "BidOnIdg"
+        static var coppa = "BidOnCoppa"
     }
 }

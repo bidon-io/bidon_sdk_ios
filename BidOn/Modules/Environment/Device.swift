@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 enum ConnectionType: Int, Codable {
     case unknown = 0
     case ethernet = 1
@@ -19,7 +20,7 @@ enum ConnectionType: Int, Codable {
 }
 
 
-protocol Device: Environment {
+protocol Device {
     var userAgent: String { get }
     var make: String { get }
     var model: String { get }

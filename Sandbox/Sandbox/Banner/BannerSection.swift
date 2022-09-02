@@ -26,6 +26,8 @@ struct BannerAdSection: View {
                         Spacer()
                     }
                 }
+                
+                NavigationLink("Events", destination: AdEventsList(events: vm.events))
             }
             
             Section(header: Text("Banner Format")) {

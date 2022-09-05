@@ -30,6 +30,12 @@
 		42BE439028C0E7B3000528E3 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438F28C0E7B3000528E3 /* Permission.swift */; };
 		42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439128C0E7CB000528E3 /* LocationPermission.swift */; };
 		42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */; };
+		42C59B9E28C61F1100544EDF /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C59B9D28C61F1100544EDF /* HostView.swift */; };
+		42EDA0AC28C5EEE300BF74DE /* InitializationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0AB28C5EEE300BF74DE /* InitializationVIew.swift */; };
+		42EDA0AE28C5EF6000BF74DE /* InitializationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0AD28C5EF6000BF74DE /* InitializationViewModel.swift */; };
+		42EDA0B028C5FA3800BF74DE /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0AF28C5FA3800BF74DE /* ContentViewModel.swift */; };
+		42EDA0B228C612B000BF74DE /* OverlayProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0B128C612B000BF74DE /* OverlayProgressView.swift */; };
+		42EDA0B428C6178600BF74DE /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0B328C6178600BF74DE /* PermissionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +64,12 @@
 		42BE438F28C0E7B3000528E3 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		42BE439128C0E7CB000528E3 /* LocationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermission.swift; sourceTree = "<group>"; };
 		42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparencyPermission.swift; sourceTree = "<group>"; };
+		42C59B9D28C61F1100544EDF /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
+		42EDA0AB28C5EEE300BF74DE /* InitializationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationVIew.swift; sourceTree = "<group>"; };
+		42EDA0AD28C5EF6000BF74DE /* InitializationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationViewModel.swift; sourceTree = "<group>"; };
+		42EDA0AF28C5FA3800BF74DE /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		42EDA0B128C612B000BF74DE /* OverlayProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayProgressView.swift; sourceTree = "<group>"; };
+		42EDA0B328C6178600BF74DE /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		64A1E0483C51188FF09EB928 /* Pods_Sandbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sandbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F846B990A6AF5B081BB0BD12 /* Pods-Sandbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sandbox.debug.xcconfig"; path = "Target Support Files/Pods-Sandbox/Pods-Sandbox.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,12 +164,14 @@
 			isa = PBXGroup;
 			children = (
 				4224AA8128B8F92000E8D886 /* Shared */,
+				42EDA0AA28C5EECA00BF74DE /* Initialization */,
 				4200679B28BCA883003B734D /* Banner */,
 				4224AA7C28B8D57E00E8D886 /* RewardedAd */,
 				4224AA7228B8BCE200E8D886 /* Interstitial */,
 				4243092728A27C46002360B0 /* Info.plist */,
 				4299A410289BC8B40062C580 /* SandboxApp.swift */,
 				4299A412289BC8B40062C580 /* ContentView.swift */,
+				42EDA0AF28C5FA3800BF74DE /* ContentViewModel.swift */,
 				426DD7AD28A6584600A1ADF5 /* HomeView.swift */,
 				4299A414289BC8B60062C580 /* Assets.xcassets */,
 				4299A416289BC8B60062C580 /* Preview Content */,
@@ -181,6 +195,26 @@
 				42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */,
 			);
 			path = Permissions;
+			sourceTree = "<group>";
+		};
+		42C59B9C28C61EF600544EDF /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				42EDA0B328C6178600BF74DE /* PermissionView.swift */,
+				42C59B9D28C61F1100544EDF /* HostView.swift */,
+			);
+			path = Rows;
+			sourceTree = "<group>";
+		};
+		42EDA0AA28C5EECA00BF74DE /* Initialization */ = {
+			isa = PBXGroup;
+			children = (
+				42C59B9C28C61EF600544EDF /* Rows */,
+				42EDA0AB28C5EEE300BF74DE /* InitializationVIew.swift */,
+				42EDA0AD28C5EF6000BF74DE /* InitializationViewModel.swift */,
+				42EDA0B128C612B000BF74DE /* OverlayProgressView.swift */,
+			);
+			path = Initialization;
 			sourceTree = "<group>";
 		};
 		F0B2D09956E1F0C8C9B7BECA /* Pods */ = {
@@ -331,12 +365,18 @@
 				4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */,
 				4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */,
 				4299A413289BC8B40062C580 /* ContentView.swift in Sources */,
+				42EDA0AC28C5EEE300BF74DE /* InitializationVIew.swift in Sources */,
 				42BE439028C0E7B3000528E3 /* Permission.swift in Sources */,
+				42EDA0AE28C5EF6000BF74DE /* InitializationViewModel.swift in Sources */,
 				4200679D28BCA8A3003B734D /* BannerSection.swift in Sources */,
 				4224AA8028B8D5B300E8D886 /* RewardedAdSectionViewModel.swift in Sources */,
 				4224AA7628B8BDB500E8D886 /* InterstitialSectionViewModel.swift in Sources */,
 				4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */,
+				42C59B9E28C61F1100544EDF /* HostView.swift in Sources */,
 				4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */,
+				42EDA0B028C5FA3800BF74DE /* ContentViewModel.swift in Sources */,
+				42EDA0B428C6178600BF74DE /* PermissionView.swift in Sources */,
+				42EDA0B228C612B000BF74DE /* OverlayProgressView.swift in Sources */,
 				4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */,
 				42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */,
 				42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */,

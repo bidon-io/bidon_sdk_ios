@@ -113,6 +113,7 @@
 		42D047EF289D6A380096A8C6 /* EnvironmentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047EE289D6A380096A8C6 /* EnvironmentRepository.swift */; };
 		42D047F1289D73F80096A8C6 /* GeoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047F0289D73F80096A8C6 /* GeoManager.swift */; };
 		42D3E72F28BE059F00936B3E /* Impression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D3E72E28BE059F00936B3E /* Impression.swift */; };
+		42EDA0A828C5EBF900BF74DE /* AuctionRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0A728C5EBF900BF74DE /* AuctionRequestBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -223,6 +224,7 @@
 		42D047EE289D6A380096A8C6 /* EnvironmentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentRepository.swift; sourceTree = "<group>"; };
 		42D047F0289D73F80096A8C6 /* GeoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoManager.swift; sourceTree = "<group>"; };
 		42D3E72E28BE059F00936B3E /* Impression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Impression.swift; sourceTree = "<group>"; };
+		42EDA0A728C5EBF900BF74DE /* AuctionRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRequestBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,12 +327,11 @@
 		4243092828A28F35002360B0 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				426DD79928A4F46000A1ADF5 /* Builders */,
-				4243092928A28F46002360B0 /* Request.swift */,
-				4243092B28A28FEA002360B0 /* ConfigurationRequest.swift */,
-				426DD78A28A3E88100A1ADF5 /* AuctionRequest.swift */,
-				428FFC6828BF7A820090B126 /* StatisticRequest.swift */,
-				428FFC7528BF95AC0090B126 /* ImpressionRequest.swift */,
+				4272C97928C5EB72002D3E0E /* Base */,
+				4272C97B28C5EBB2002D3E0E /* Configuration */,
+				4272C97A28C5EB8B002D3E0E /* Auction */,
+				42EDA0A928C5EC2C00BF74DE /* Statistic */,
+				426DD79928A4F46000A1ADF5 /* Impression */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -419,18 +420,13 @@
 			path = Environment;
 			sourceTree = "<group>";
 		};
-		426DD79928A4F46000A1ADF5 /* Builders */ = {
+		426DD79928A4F46000A1ADF5 /* Impression */ = {
 			isa = PBXGroup;
 			children = (
-				426DD79A28A4F47800A1ADF5 /* BaseRequestBuilder.swift */,
-				426DD79C28A4F4AC00A1ADF5 /* ConfigurationRequestBuilder.swift */,
-				426DD79E28A4F4FC00A1ADF5 /* InterstitialAuctionRequestBuilder.swift */,
-				425E9C6328B7B43000F4E4C7 /* RewardedAuctionRequestBuilder.swift */,
-				4219DB5928B90E67001F38E5 /* AdViewAuctionRequestBuilder.swift */,
-				428FFC6F28BF83AF0090B126 /* StatisticRequestBuilder.swift */,
+				428FFC7528BF95AC0090B126 /* ImpressionRequest.swift */,
 				428FFC7728BF95FC0090B126 /* ImpressionRequestBuilder.swift */,
 			);
-			path = Builders;
+			path = Impression;
 			sourceTree = "<group>";
 		};
 		426DD7A428A502E500A1ADF5 /* Wrappers */ = {
@@ -481,6 +477,36 @@
 				426DD7BB28A696C600A1ADF5 /* Waterfall.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4272C97928C5EB72002D3E0E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				4243092928A28F46002360B0 /* Request.swift */,
+				426DD79A28A4F47800A1ADF5 /* BaseRequestBuilder.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		4272C97A28C5EB8B002D3E0E /* Auction */ = {
+			isa = PBXGroup;
+			children = (
+				426DD78A28A3E88100A1ADF5 /* AuctionRequest.swift */,
+				42EDA0A728C5EBF900BF74DE /* AuctionRequestBuilder.swift */,
+				426DD79E28A4F4FC00A1ADF5 /* InterstitialAuctionRequestBuilder.swift */,
+				425E9C6328B7B43000F4E4C7 /* RewardedAuctionRequestBuilder.swift */,
+				4219DB5928B90E67001F38E5 /* AdViewAuctionRequestBuilder.swift */,
+			);
+			path = Auction;
+			sourceTree = "<group>";
+		};
+		4272C97B28C5EBB2002D3E0E /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				4243092B28A28FEA002360B0 /* ConfigurationRequest.swift */,
+				426DD79C28A4F4AC00A1ADF5 /* ConfigurationRequestBuilder.swift */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		428CCBF528A12C30003123EF /* Extensions */ = {
@@ -619,6 +645,15 @@
 				42BE438C28C0B0E3000528E3 /* SessionManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		42EDA0A928C5EC2C00BF74DE /* Statistic */ = {
+			isa = PBXGroup;
+			children = (
+				428FFC6828BF7A820090B126 /* StatisticRequest.swift */,
+				428FFC6F28BF83AF0090B126 /* StatisticRequestBuilder.swift */,
+			);
+			path = Statistic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -805,6 +840,7 @@
 				428CCBF928A13AD8003123EF /* NetworkManager.swift in Sources */,
 				426DD7A328A5004200A1ADF5 /* Sdk.swift in Sources */,
 				428CCBF428A11190003123EF /* EnvironmentManager.swift in Sources */,
+				42EDA0A828C5EBF900BF74DE /* AuctionRequestBuilder.swift in Sources */,
 				4224AA6D28B7D1F600E8D886 /* RewardedAd.swift in Sources */,
 				426DD78F28A3EED400A1ADF5 /* AdObjectModel.swift in Sources */,
 			);

@@ -75,11 +75,9 @@ public final class Banner: UIView, AdView {
     private final func refreshIfNeeded() {
         guard
             let demand = adManager.demand,
-            let provider = demand.provider as? AdViewDemandProvider,
-            let adView = provider.container(for: demand.ad)
+            let adView = demand.provider.container(for: demand.ad)
         else { return }
         
-        defer { scheduleRefreshIfNeeded() }
         if viewManager.isRefreshGranted || !viewManager.isAdPresented {
             Logger.verbose("Banner \(self) will refresh ad view")
 
@@ -96,8 +94,7 @@ public final class Banner: UIView, AdView {
     }
     
     private final func scheduleRefreshIfNeeded() {
-        guard isAutorefreshing, autorefreshInterval > 0, viewManager.isRefreshGranted
-        else { return }
+        guard isAutorefreshing, autorefreshInterval > 0, viewManager.isRefreshGranted else { return }
         weak var weakSelf = self
         
         Logger.verbose("Banner \(self) did start refresh timer with interval: \(autorefreshInterval)s")
@@ -184,6 +181,7 @@ extension Banner: BannerViewManagerDelegate {
             Logger.debug("Sent show with result: \(result)")
         }
         
+        scheduleRefreshIfNeeded()
         delegate?.adObject?(self, didRecordImpression: impression.ad)
     }
     

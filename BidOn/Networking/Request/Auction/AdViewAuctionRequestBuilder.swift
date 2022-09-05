@@ -12,6 +12,8 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
     private(set) var placement: String!
     private(set) var auctionId: String!
 
+    var adType: AdType { .banner}
+    
     var adapters: AdaptersInfo {
         let banners: [AdViewDemandSourceAdapter] = adaptersRepository.all()
         let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()

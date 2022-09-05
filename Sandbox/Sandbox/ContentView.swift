@@ -10,78 +10,31 @@ import BidOn
 
 
 struct ContentView: View {
-    @EnvironmentObject var app: AppDelegate
+    @StateObject var vm = ContentViewModel()
     
     var body: some View {
-        if app.isInitialized {
+        if vm.isInitialized {
             HomeView()
-        } else {
-            LogoProgressView()
                 .transition(
                     .asymmetric(
-                        insertion: .identity,
-                        removal: .scale(scale: 1.2).combined(with: .opacity)
+                        insertion: .move(edge: .leading),
+                        removal: .move(edge: .trailing)
                     )
                 )
-        }
-    }
-}
-
-
-fileprivate struct LogoProgressView: View {
-    let font = Font.system(
-        size: 24,
-        weight: .heavy,
-        design: .monospaced
-    )
-    
-    @State private var isAnimating: Bool = false
-    
-    var body: some View {
-        if #available(iOS 15, *) {
-            content
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [.blue, .pink, .red],
-                        startPoint: isAnimating ? .bottomLeading : .topTrailing,
-                        endPoint: isAnimating ? .topTrailing : .bottomLeading
-                    )
-                )
+                .zIndex(1)
         } else {
-            content
-                .foregroundColor(.red)
-        }
-    }
-    
-    private var content: some View {
-        VStack(spacing: 20) {
-            if isAnimating {
-                Image(systemName: "cube.transparent")
-                    .font(.system(size: 32))
-                    .transition(.scale.combined(with: .opacity))
-            } else {
-                Image(systemName: "cube.transparent.fill")
-                    .font(.system(size: 32))
-                    .transition(.scale.combined(with: .opacity))
-            }
-            
-            ZStack {
-                Text("BidOn")
-                    .font(font)
-                    .offset(x: 1.5, y: 1.5)
-                Text("BidOn")
-                    .foregroundColor(.white)
-                    .font(font)
-            }
-        }
-        .onAppear {
-            withAnimation(.linear(duration: 1.25).repeatForever(autoreverses: true)) {
-                isAnimating.toggle()
-            }
+            InitializationView()
+                .environmentObject(vm.initializationViewModel)
+                .transition(
+                    .asymmetric(
+                        insertion: .scale(scale: 1.2),
+                        removal: .move(edge: .trailing)
+                    )
+                )
+                .zIndex(1)
         }
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

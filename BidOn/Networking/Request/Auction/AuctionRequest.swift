@@ -8,20 +8,6 @@
 import Foundation
 
 
-protocol AuctionRequestBuilder: BaseRequestBuilder {
-    var adObject: AdObjectModel { get }
-    var adapters: AdaptersInfo { get }
-    
-    @discardableResult
-    func withPlacement(_ placement: String) -> Self
-    
-    @discardableResult
-    func withAuctionId(_ auctionId: String) -> Self
-    
-    init()
-}
-
-
 struct AuctionRequest: Request {
     var route: Route = .auction
     var method: HTTPClient.HTTPMethod = .post

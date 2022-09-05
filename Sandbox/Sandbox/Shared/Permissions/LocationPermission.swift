@@ -20,6 +20,16 @@ private extension CLLocationManager {
 
 
 final class LocationPermission: NSObject, Permission {
+    var name: String = "Location"
+    
+    var state: PermissionState {
+        switch CLLocationManager().authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse: return .accepted
+        case .denied, .restricted: return .denied
+        default: return .notDetermined
+        }
+    }
+    
     private var continuation: CheckedContinuation<Void, Never>?
     
     private lazy var locationManager: CLLocationManager = {

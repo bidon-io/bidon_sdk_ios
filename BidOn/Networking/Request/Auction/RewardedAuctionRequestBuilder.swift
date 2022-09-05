@@ -1,17 +1,19 @@
 //
-//  InterstitialAuctionRequestBuilder.swift
+//  RewardedAuctionRequestBuilder.swift
 //  BidOn
 //
-//  Created by Stas Kochkin on 11.08.2022.
+//  Created by Stas Kochkin on 25.08.2022.
 //
 
 import Foundation
 
 
-final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
+final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
 
+    var adType: AdType { .rewarded }
+    
     var adapters: AdaptersInfo {
         let interstitials: [InterstitialDemandSourceAdapter] = adaptersRepository.all()
         let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
@@ -35,7 +37,8 @@ final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionReques
         AdObjectModel(
             placement: placement,
             auctionId: auctionId,
-            interstitial: AdObjectModel.InterstitialModel()
+            rewarded: AdObjectModel.RewardedModel()
         )
     }
 }
+

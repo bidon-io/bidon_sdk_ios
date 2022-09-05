@@ -17,13 +17,11 @@ struct AdaptersInfo: Encodable {
         enum CodingKeys: String, CodingKey {
             case version
             case sdkVersion
-            case status
         }
         
         func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             
-            try container.encode(adapter.identifier, forKey: .status)
             try container.encode(adapter.adapterVersion, forKey: .version)
             try container.encode(adapter.sdkVersion, forKey: .sdkVersion)
             

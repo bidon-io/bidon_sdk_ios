@@ -8,9 +8,12 @@
 import Foundation
 
 
-final class WaterfallController<DemandType>: NSObject where DemandType: Demand, DemandType.Provider: DemandProvider {
+final class WaterfallController<DemandType, MediationObserverType>: NSObject, MediationController
+where DemandType: Demand, DemandType.Provider: DemandProvider, MediationObserverType: MediationObserver {
     private var waterfall: Waterfall<DemandType>
 
+    let observer: MediationObserverType
+    
     private let queue = DispatchQueue(
         label: "com.ads.waterfall.queue",
         qos: .default
@@ -18,9 +21,11 @@ final class WaterfallController<DemandType>: NSObject where DemandType: Demand, 
     
     init(
         _ waterfall: Waterfall<DemandType>,
+        observer: MediationObserverType,
         timeout: TimeInterval
     ) {
         self.waterfall = waterfall
+        self.observer = observer
         super.init()
     }
     

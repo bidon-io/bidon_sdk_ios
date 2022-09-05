@@ -8,7 +8,8 @@
 import Foundation
 
 
-final class InterstitialConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder<AnyInterstitialDemandProvider> {
+final class InterstitialConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyInterstitialDemandProvider, MediationObserverType> {
+    
     override var adType: AdType { .interstitial }
     
     override func providers(_ demands: [String]) -> [String: AnyInterstitialDemandProvider] {

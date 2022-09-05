@@ -2,38 +2,22 @@
 //  MediationObserver.swift
 //  BidOn
 //
-//  Created by Stas Kochkin on 31.08.2022.
+//  Created by Stas Kochkin on 05.09.2022.
 //
 
 import Foundation
 
 
-final class MediationObserver: MediationResult {
-    struct DemandResulttObservationInfo: DemandResult {
-        var id: String
-        var adUnitId: String?
-        var format: String
-        var status: DemandMediationStatus
-        var startTimestamp: TimeInterval
-        var finishTimestamp: TimeInterval
-    }
+
+protocol MediationController {
+    associatedtype Observer: MediationObserver
     
-    struct RoundResultObservationInfo: RoundResult {
-        typealias DemandResultType = DemandResulttObservationInfo
-        
-        var id: String
-        var pricefloor: Price
-        var winnerPrice: Price
-        var demands: [MediationObserver.DemandResulttObservationInfo]
-    }
+    var observer: Observer { get }
+}
+
+
+protocol MediationObserver {
+    associatedtype MediationLogType: MediationLog
     
-    let auctionId: String
-    let auctionConfigurationId: Int
-    
-    private(set) var rounds: [RoundResultObservationInfo] = []
-    
-    init(id: String, configurationId: Int) {
-        self.auctionId = id
-        self.auctionConfigurationId = configurationId
-    }
+    var log: MediationLogType { get }
 }

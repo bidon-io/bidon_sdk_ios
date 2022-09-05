@@ -8,14 +8,9 @@
 import Foundation
 
 
-//protocol ConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder {
-//    var adType: AdType { get }
-//
-//    init()
-//}
-
-
-class BaseConcurrentAuctionControllerBuilder<DemandProviderType: DemandProvider> {
+class BaseConcurrentAuctionControllerBuilder<DemandProviderType, MediationObserverType>
+where DemandProviderType: DemandProvider, MediationObserverType: MediationObserver {
+    
     typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
     typealias AuctionType = Auction<RoundType>
     
@@ -23,6 +18,7 @@ class BaseConcurrentAuctionControllerBuilder<DemandProviderType: DemandProvider>
     private(set) var delegate: AuctionControllerDelegate?
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
+    private(set) var observer: MediationObserverType!
     private(set) var auctionId: String = ""
     private(set) var auctionConfigurationId: Int = 0
     
@@ -81,18 +77,20 @@ class BaseConcurrentAuctionControllerBuilder<DemandProviderType: DemandProvider>
     }
     
     @discardableResult
-    public func withAuctionId(
-        _ auctionId: String
+    public func withObserver(
+        _ observer: MediationObserverType
     ) -> Self {
-        self.auctionId = auctionId
+        self.observer = observer
         return self
     }
     
     @discardableResult
-    public func withAuctionConfigurationId(
-        _ auctionConfigurationId: Int
+    public func withAuctionId(
+        _ auctionId: String,
+        configurationId: Int
     ) -> Self {
-        self.auctionConfigurationId = auctionConfigurationId
+        self.auctionId = auctionId
+        self.auctionConfigurationId = configurationId
         return self
     }
     

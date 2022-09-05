@@ -8,7 +8,7 @@
 import Foundation
 
 
-final class AdViewConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder<AnyAdViewDemandProvider> {
+final class AdViewConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyAdViewDemandProvider, MediationObserverType> {
     override var adType: AdType { .banner }
     
     private var context: AdViewContext!

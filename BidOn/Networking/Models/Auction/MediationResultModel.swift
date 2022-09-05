@@ -8,16 +8,16 @@
 import Foundation
 
 
-struct MediationResultModel: MediationResult, Codable {
-    struct DemandResultModel: DemandResult, Codable {
+struct MediationResultModel: MediationLog, Codable {
+    struct DemandResultModel: DemandLog, Codable {
         var id: String
         var adUnitId: String?
         var format: String
-        var status: DemandMediationStatus
+        var status: DemandResult
         var startTimestamp: TimeInterval
         var finishTimestamp: TimeInterval
         
-        init<T: DemandResult>(_ demand: T) {
+        init<T: DemandLog>(_ demand: T) {
             self.id = demand.id
             self.adUnitId = demand.adUnitId
             self.format = demand.format
@@ -27,13 +27,13 @@ struct MediationResultModel: MediationResult, Codable {
         }
     }
     
-    struct RoundResultModel: RoundResult, Codable {
+    struct RoundResultModel: RoundLog, Codable {
         var id: String
         var pricefloor: Price
         var winnerPrice: Price
         var demands: [DemandResultModel]
         
-        init<T: RoundResult>(_ result: T) {
+        init<T: RoundLog>(_ result: T) {
             self.id = result.id
             self.pricefloor = result.pricefloor
             self.winnerPrice = result.winnerPrice
@@ -45,7 +45,7 @@ struct MediationResultModel: MediationResult, Codable {
     var auctionConfigurationId: Int
     var rounds: [RoundResultModel]
     
-    init<T: MediationResult>(_ result: T) {
+    init<T: MediationLog>(_ result: T) {
         self.auctionId = result.auctionId
         self.auctionConfigurationId = result.auctionConfigurationId
         self.rounds = result.rounds.map(RoundResultModel.init)

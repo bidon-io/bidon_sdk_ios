@@ -8,7 +8,8 @@
 import Foundation
 
 
-final class RewardedConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder<AnyRewardedAdDemandProvider> {
+final class RewardedConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyRewardedAdDemandProvider, MediationObserverType> {
+    
     override var adType: AdType { .rewarded }
     
     override func providers(_ demands: [String]) -> [String: AnyRewardedAdDemandProvider] {

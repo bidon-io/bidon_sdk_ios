@@ -17,42 +17,36 @@ import AppsFlyerAdRevenue
     public let adapterVersion: String = "1"
     public let sdkVersion: String = AppsFlyerLib.shared().getSDKVersion()
     
-    var conversionData: [String: Any]?
-    
-    //    public init(parameters: AppsFlyerParameters) {
-    ////        self.parameters = parameters
-    //        super.init()
-    //    }
+    private(set) var conversionData: [AnyHashable: Any]?
 }
 
 
-//extension AppsFlyerMobileMeasurementPartnerAdapter: ParameterizedAdapter {
-//    public typealias Parameters = AppsFlyerParameters
-//
-//    @objc public convenience init(rawParameters: Data) throws {
-//        let decoder = JSONDecoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//
-//        let parameters = try decoder.decode(
-//            AppsFlyerParameters.self,
-//            from: rawParameters
-//        )
-//
-//        self.init(parameters: parameters)
-//    }
-//}
-
-
-//extension AppsFlyerMobileMeasurementPartnerAdapter: InitializableAdapter {
-//    public func initilize(_ completion: @escaping (Error?) -> ()) {
-//        AppsFlyerLib.shared().appsFlyerDevKey = parameters.devKey
-//        AppsFlyerLib.shared().appleAppID = parameters.appId
-//        AppsFlyerAdRevenue.start()
-//        AppsFlyerLib.shared().start { _, error in
-//            completion(error)
-//        }
-//    }
-//}
+extension AppsFlyerMobileMeasurementPartnerAdapter: InitializableAdapter {
+    public func initialize(from decoder: Decoder, completion: @escaping (Result<Void, SdkError>) -> Void) {
+        var parameters: AppsFlyerParameters?
+        
+        do {
+            parameters = try AppsFlyerParameters(from: decoder)
+        } catch {
+            completion(.failure(SdkError(error)))
+        }
+        
+        guard let parameters = parameters else { return }
+        
+        AppsFlyerLib.shared().appsFlyerDevKey = parameters.devKey
+        AppsFlyerLib.shared().appleAppID = parameters.appId
+        AppsFlyerLib.shared().delegate = self
+        
+        AppsFlyerAdRevenue.start()
+        AppsFlyerLib.shared().start { _, error in
+            if let error = error {
+                completion(.failure(SdkError(error)))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+}
 
 
 extension AppsFlyerMobileMeasurementPartnerAdapter: ParametersEncodableAdapter {
@@ -101,3 +95,11 @@ extension AppsFlyerMobileMeasurementPartnerAdapter: MobileMeasurementPartnerAdap
     }
 }
 
+
+extension AppsFlyerMobileMeasurementPartnerAdapter: AppsFlyerLibDelegate {
+    public func onConversionDataFail(_ error: Error) {}
+    
+    public func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
+        conversionData = conversionInfo
+    }
+}

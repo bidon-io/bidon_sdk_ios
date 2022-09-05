@@ -24,18 +24,18 @@ final class FullscreenAdManager<
 >: NSObject where
 DemandProviderType: DemandProvider,
 AuctionRequestBuilderType: AuctionRequestBuilder,
-AuctionControllerBuilderType: BaseConcurrentAuctionControllerBuilder<DemandProviderType>,
+AuctionControllerBuilderType: BaseConcurrentAuctionControllerBuilder<DemandProviderType, DefaultMediationObserver>,
 ImpressionControllerType: FullscreenImpressionController,
 ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
     
     fileprivate typealias DemandType = DemandModel<DemandProviderType>
-    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType>
+    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType, DefaultMediationObserver>
     
     fileprivate enum State {
         case idle
         case preparing
         case auction(controller: AuctionControllerType)
-        case loading(controller: WaterfallController<DemandType>)
+        case loading(controller: WaterfallController<DemandType, DefaultMediationObserver>)
         case ready(demand: DemandType)
         case impression(controller: ImpressionControllerType)
     }
@@ -89,8 +89,8 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
                     builder.withRounds(response.rounds, lineItems: response.lineItems)
                     builder.withPricefloor(response.minPrice)
                     builder.withDelegate(self)
-                    builder.withAuctionId(response.auctionId)
-                    builder.withAuctionConfigurationId(response.auctionConfigurationId)
+                    builder.withAuctionId(response.auctionId, configurationId: response.auctionConfigurationId)
+                    builder.withObserver(DefaultMediationObserver(id: response.auctionId, configurationId: response.auctionConfigurationId))
                 }
                 
                 auction.load()
@@ -108,7 +108,7 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
     func show(from rootViewController: UIViewController) {
         switch state {
         case .ready(let demand):
-            let controller = try! ImpressionControllerType(demand: demand)
+            let controller = ImpressionControllerType(demand: demand)
             controller.delegate = self
             state = .impression(controller: controller)
             controller.show(from: rootViewController)
@@ -117,11 +117,11 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
         }
     }
     
-    private func trackMediationResult() {
+    private func trackStatistics<T: MediationLog>(_ log: T) {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
-            builder.withMediationResult(MediationObserver(id: UUID().uuidString, configurationId: 0))
+            builder.withMediationResult(log)
         }
         
         networkManager.perform(request: request) { result in
@@ -177,8 +177,9 @@ extension FullscreenAdManager: AuctionControllerDelegate {
             completeAuction: winner
         )
         
-        let waterfall = WaterfallController<DemandType>(
+        let waterfall = WaterfallController<DemandType, DefaultMediationObserver>(
             controller.waterfall,
+            observer: controller.observer,
             timeout: .unknown
         )
         
@@ -186,7 +187,7 @@ extension FullscreenAdManager: AuctionControllerDelegate {
         waterfall.load { [weak self] result in
             guard let self = self else { return }
             
-            self.trackMediationResult()
+            self.trackStatistics(controller.observer.log)
             
             switch result {
             case .success(let demand):
@@ -200,7 +201,9 @@ extension FullscreenAdManager: AuctionControllerDelegate {
     }
     
     func controller(_ controller: AuctionController, failedAuction error: Error) {
-        trackMediationResult()
+        guard let controller = controller as? AuctionControllerType else { return }
+
+        trackStatistics(controller.observer.log)
         
         state = .idle
         

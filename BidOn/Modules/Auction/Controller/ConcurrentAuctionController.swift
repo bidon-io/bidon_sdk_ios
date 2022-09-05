@@ -8,7 +8,8 @@
 import Foundation
 
 
-final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: AuctionController {
+final class ConcurrentAuctionController<DemandProviderType, MediationObserverType>: AuctionController, MediationController
+where DemandProviderType: DemandProvider, MediationObserverType: MediationObserver {
     
     internal typealias DemandType = DemandModel<DemandProviderType>
     internal typealias WaterfallType = Waterfall<DemandType>
@@ -24,6 +25,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
     
     let id: String
     let configurationId: Int
+    let observer: MediationObserverType
     
     weak var delegate: AuctionControllerDelegate?
     
@@ -41,7 +43,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         return current ?? pricefloor
     }
     
-    init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType> {
+    init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType, MediationObserverType> {
         let builder = T()
         build(builder)
         
@@ -52,6 +54,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         self.auction = builder.auction
         self.pricefloor = builder.pricefloor
         self.adType = builder.adType
+        self.observer = builder.observer
     }
     
     func load() {

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 protocol BannerAdManagerDelegate: AuctionControllerDelegate {
     func didFailToLoad(_ error: Error)
     func didLoad(_ ad: Ad)
@@ -16,8 +15,8 @@ protocol BannerAdManagerDelegate: AuctionControllerDelegate {
 
 
 final class BannerAdManager: NSObject {
-    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<AnyAdViewDemandProvider>
-    fileprivate typealias WaterfallControllerType = WaterfallController<AnyAdViewDemand>
+    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<AnyAdViewDemandProvider, DefaultMediationObserver>
+    fileprivate typealias WaterfallControllerType = WaterfallController<AnyAdViewDemand, DefaultMediationObserver>
     
     fileprivate enum State {
         case idle
@@ -62,14 +61,12 @@ final class BannerAdManager: NSObject {
         }
         
         state = .preparing
-        
-        let auctionId: String = UUID().uuidString
-        
+                
         let request = AuctionRequest { (builder: AdViewAuctionRequestBuilder) in
             builder.withPlacement(placement)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
-            builder.withAuctionId(auctionId)
+            builder.withAuctionId(UUID().uuidString)
             builder.withExt(sdk.ext)
         }
         
@@ -90,7 +87,8 @@ final class BannerAdManager: NSObject {
                     builder.withPricefloor(response.minPrice)
                     builder.withDelegate(self)
                     builder.withContext(context)
-                    builder.withAuctionId(auctionId)
+                    builder.withAuctionId(response.auctionId, configurationId: response.auctionConfigurationId)
+                    builder.withObserver(DefaultMediationObserver(id: response.auctionId, configurationId: response.auctionConfigurationId))
                 }
                 
                 auction.load()
@@ -108,7 +106,7 @@ final class BannerAdManager: NSObject {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
-            builder.withMediationResult(MediationObserver(id: UUID().uuidString, configurationId: 0))
+//            builder.withMediationResult(MediationObserver(id: UUID().uuidString, configurationId: 0))
         }
         
         networkManager.perform(request: request) { result in
@@ -142,6 +140,7 @@ extension BannerAdManager: AuctionControllerDelegate {
         
         let waterfall = WaterfallControllerType(
             controller.waterfall,
+            observer: controller.observer,
             timeout: .unknown
         )
         

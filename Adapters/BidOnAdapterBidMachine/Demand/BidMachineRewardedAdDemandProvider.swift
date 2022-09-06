@@ -78,12 +78,12 @@ extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
     }
     
     func rewarded(_ rewarded: BDMRewarded, failedWithError error: Error) {
-        response?(.failure(error))
+        response?(.failure(SdkError(error)))
         response = nil
     }
     
     func rewarded(_ rewarded: BDMRewarded, failedToPresentWithError error: Error) {
-        delegate?.providerDidFailToDisplay(self, error: error)
+        delegate?.providerDidFailToDisplay(self, error: SdkError(error))
     }
     
     func rewardedWillPresent(_ rewarded: BDMRewarded) {

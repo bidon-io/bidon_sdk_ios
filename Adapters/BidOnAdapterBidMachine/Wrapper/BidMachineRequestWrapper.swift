@@ -29,7 +29,7 @@ final class BidMachineRequestWrapper<T: BDMAdRequestProtocol & BDMRequest>: NSOb
     }
     
     func request(_ request: BDMRequest, failedWithError error: Error) {
-        response?(.failure(error))
+        response?(.failure(SdkError(error)))
         response = nil
     }
     

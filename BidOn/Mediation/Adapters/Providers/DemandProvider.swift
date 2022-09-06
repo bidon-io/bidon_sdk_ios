@@ -14,14 +14,14 @@ public enum AuctionEvent {
 }
 
 
-public typealias DemandProviderResponse = (Result<Ad, Error>) -> ()
+public typealias DemandProviderResponse = (Result<Ad, SdkError>) -> ()
 
 
 public protocol DemandProviderDelegate: AnyObject {
     func providerWillPresent(_ provider: DemandProvider)
     func providerDidHide(_ provider: DemandProvider)
     func providerDidClick(_ provider: DemandProvider)
-    func providerDidFailToDisplay(_ provider: DemandProvider, error: Error)
+    func providerDidFailToDisplay(_ provider: DemandProvider, error: SdkError)
 }
 
 

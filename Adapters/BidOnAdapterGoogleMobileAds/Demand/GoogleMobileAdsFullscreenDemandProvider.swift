@@ -40,7 +40,7 @@ internal final class GoogleMobileAdsFullscreenDemandProvider<FullscreenAd: Googl
     }
     
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        delegate?.providerDidFailToDisplay(self, error: error)
+        delegate?.providerDidFailToDisplay(self, error: SdkError(error))
     }
     
     func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {

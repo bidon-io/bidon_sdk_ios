@@ -36,8 +36,8 @@ final class DefaultMediationObserver: MediationObserver {
     }
 
     
-    private let auctionId: String
-    private let auctionConfigurationId: Int
+    let auctionId: String
+    let auctionConfigurationId: Int
     
     var log: ObservationData {
         .init(

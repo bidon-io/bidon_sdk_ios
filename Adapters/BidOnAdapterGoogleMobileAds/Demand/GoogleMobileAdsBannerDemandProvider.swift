@@ -102,7 +102,7 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        response?(.failure(error))
+        response?(.failure(SdkError(error)))
         response = nil
     }
     

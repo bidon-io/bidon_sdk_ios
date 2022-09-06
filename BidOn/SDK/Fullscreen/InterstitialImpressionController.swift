@@ -48,7 +48,7 @@ extension InterstitialImpressionController: DemandProviderDelegate {
         delegate?.didClick(impression)
     }
     
-    func providerDidFailToDisplay(_ provider: DemandProvider, error: Error) {
+    func providerDidFailToDisplay(_ provider: DemandProvider, error: SdkError) {
         delegate?.didFailToPresent(impression, error: error)
     }
 }

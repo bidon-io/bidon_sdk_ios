@@ -9,8 +9,13 @@ import Foundation
 import UIKit
 
 
-protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate, AuctionControllerDelegate {
-    func didFailToLoad(_ error: Error)
+protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate {
+    func didStartAuction()
+    func didStartAuctionRound(_ round: AuctionRound, pricefloor: Price)
+    func didReceiveBid(_ ad: Ad)
+    func didCompleteAuctionRound(_ round: AuctionRound)
+    func didCompleteAuction(_ winner: Ad?)
+    func didFailToLoad(_ error: SdkError)
     func didLoad(_ ad: Ad)
     func didPayRevenue(_ ad: Ad)
 }
@@ -30,12 +35,16 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
     
     fileprivate typealias DemandType = DemandModel<DemandProviderType>
     fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType, DefaultMediationObserver>
-    
+    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<DemandType, DefaultMediationObserver>
+
+    private typealias AuctionInfo = AuctionRequest.ResponseBody
+    private typealias DemandEventType = DemandEvent<DemandProviderType>
+
     fileprivate enum State {
         case idle
         case preparing
         case auction(controller: AuctionControllerType)
-        case loading(controller: WaterfallController<DemandType, DefaultMediationObserver>)
+        case loading(controller: DefaultWaterfallController<DemandType, DefaultMediationObserver>)
         case ready(demand: DemandType)
         case impression(controller: ImpressionControllerType)
     }
@@ -63,6 +72,11 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
             return
         }
         
+        fetchAuctionInfo()
+    }
+    
+    
+    private func fetchAuctionInfo() {
         state = .preparing
         
         let request = AuctionRequest { (builder: AuctionRequestBuilderType) in
@@ -82,25 +96,11 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
             
             switch result {
             case .success(let response):
-                Logger.verbose("Fullscreen ad manager performs request: \(request)")
-                
-                let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
-                    builder.withAdaptersRepository(self.sdk.adaptersRepository)
-                    builder.withRounds(response.rounds, lineItems: response.lineItems)
-                    builder.withPricefloor(response.minPrice)
-                    builder.withDelegate(self)
-                    builder.withAuctionId(response.auctionId, configurationId: response.auctionConfigurationId)
-                    builder.withObserver(DefaultMediationObserver(id: response.auctionId, configurationId: response.auctionConfigurationId))
-                }
-                
-                auction.load()
-                
-                self.state = .auction(controller: auction)
-                break
+                self.performAuction(response)
             case .failure(let error):
                 self.state = .idle
                 Logger.warning("Fullscreen ad manager did fail to load ad with error: \(error)")
-                self.delegate?.didFailToLoad(error)
+                self.delegate?.didFailToLoad(SdkError(error))
             }
         }
     }
@@ -117,7 +117,88 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
         }
     }
     
-    private func trackStatistics<T: MediationLog>(_ log: T) {
+    private func performAuction(_ auctionInfo: AuctionInfo) {
+        Logger.verbose("Fullscreen ad manager will start auction: \(auctionInfo)")
+
+        let observer = DefaultMediationObserver(
+            id: auctionInfo.auctionId,
+            configurationId: auctionInfo.auctionConfigurationId
+        )
+        
+        let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
+            builder.withAdaptersRepository(sdk.adaptersRepository)
+            builder.withRounds(auctionInfo.rounds, lineItems: auctionInfo.lineItems)
+            builder.withPricefloor(auctionInfo.minPrice)
+            builder.withObserver(observer)
+        }
+        
+        weak var weakSelf = self
+        auction.eventHandler = weakSelf?.handleAuctionEvent
+        
+        auction.load { [unowned observer, weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let waterfall):
+                self.loadWaterfall(
+                    waterfall,
+                    observer: observer
+                )
+                self.delegate?.didCompleteAuction(waterfall.first()?.ad)
+            case .failure(let error):
+                self.sendAuctionStatistics(observer.log)
+                self.state = .idle
+                
+                self.delegate?.didCompleteAuction(nil)
+                self.delegate?.didFailToLoad(error)
+            }
+        }
+        
+        state = .auction(controller: auction)
+    }
+        
+    private func loadWaterfall(
+        _ waterfall: AuctionControllerType.WaterfallType,
+        observer: AuctionControllerType.Observer
+    ) {
+        let waterfall = WaterfallControllerType(
+            waterfall,
+            observer: observer,
+            timeout: .unknown
+        )
+        
+        state = .loading(controller: waterfall)
+        waterfall.load { [unowned observer, weak self] result in
+            guard let self = self else { return }
+            
+            self.sendAuctionStatistics(observer.log)
+            
+            switch result {
+            case .success(let demand):
+                self.state = .ready(demand: demand)
+                self.delegate?.didLoad(demand.ad)
+            case .failure(let error):
+                self.state = .idle
+                self.delegate?.didFailToLoad(error)
+            }
+        }
+    }
+    
+    private func handleAuctionEvent(_ auctionEvent: DemandEventType) {
+        switch auctionEvent {
+        case .didStartAuction:
+            delegate?.didStartAuction()
+        case .didStartRound(let round, let pricefloor):
+            delegate?.didStartAuctionRound(round, pricefloor: pricefloor)
+        case .didReceiveBid(let bid):
+            bid.provider.revenueDelegate = self
+            delegate?.didReceiveBid(bid.ad)
+        case .didCompleteRound(let round):
+            delegate?.didCompleteAuctionRound(round)
+        }
+    }
+    
+    private func sendAuctionStatistics<T: MediationLog>(_ log: T) {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
@@ -131,90 +212,8 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
 }
 
 
-extension FullscreenAdManager: AuctionControllerDelegate {
-    func controllerDidStartAuction(_ controller: AuctionController) {}
-    
-    func controller(
-        _ controller: AuctionController,
-        didStartRound round: AuctionRound,
-        pricefloor: Price
-    ) {
-        delegate?.controller(
-            controller,
-            didStartRound: round,
-            pricefloor: pricefloor
-        )
-    }
-    
-    func controller(
-        _ controller: AuctionController,
-        didReceiveAd ad: Ad,
-        provider: DemandProvider
-    ) {
-        provider.revenueDelegate = self
-        delegate?.controller(
-            controller,
-            didReceiveAd: ad,
-            provider: provider
-        )
-    }
-    
-    func controller(
-        _ controller: AuctionController,
-        didCompleteRound round: AuctionRound
-    ) {
-        delegate?.controller(
-            controller,
-            didCompleteRound: round
-        )
-    }
-    
-    func controller(_ controller: AuctionController, completeAuction winner: Ad) {
-        guard let controller = controller as? AuctionControllerType else { return }
-        
-        delegate?.controller(
-            controller,
-            completeAuction: winner
-        )
-        
-        let waterfall = WaterfallController<DemandType, DefaultMediationObserver>(
-            controller.waterfall,
-            observer: controller.observer,
-            timeout: .unknown
-        )
-        
-        state = .loading(controller: waterfall)
-        waterfall.load { [weak self] result in
-            guard let self = self else { return }
-            
-            self.trackStatistics(controller.observer.log)
-            
-            switch result {
-            case .success(let demand):
-                self.state = .ready(demand: demand)
-                self.delegate?.didLoad(demand.ad)
-            case .failure(let error):
-                self.state = .idle
-                self.delegate?.didFailToLoad(error)
-            }
-        }
-    }
-    
-    func controller(_ controller: AuctionController, failedAuction error: Error) {
-        guard let controller = controller as? AuctionControllerType else { return }
-
-        trackStatistics(controller.observer.log)
-        
-        state = .idle
-        
-        delegate?.controller(controller, failedAuction: error)
-        delegate?.didFailToLoad(error)
-    }
-}
-
-
 extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
-    func didFailToPresent(_ impression: Impression?, error: Error) {
+    func didFailToPresent(_ impression: Impression?, error: SdkError) {
         state = .idle
         delegate?.didFailToPresent(impression, error: error)
     }

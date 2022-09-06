@@ -8,41 +8,25 @@
 import Foundation
 
 
-protocol AuctionController {    
-    var id: String { get }
-    var delegate: AuctionControllerDelegate? { get }
-    
-    func load()
+enum DemandEvent<DemandProviderType: DemandProvider> {
+    case didStartAuction
+    case didStartRound(round: AuctionRound, pricefloor: Price)
+    case didReceiveBid(bid: Bid<DemandProviderType>)
+    case didCompleteRound(round: AuctionRound)
 }
 
 
-protocol AuctionControllerDelegate: AnyObject {
-    func controllerDidStartAuction(_ controller: AuctionController)
-
-    func controller(
-        _ controller: AuctionController,
-        didStartRound round: AuctionRound,
-        pricefloor: Price
-    )
-
-    func controller(
-        _ controller: AuctionController,
-        didReceiveAd ad: Ad,
-        provider: DemandProvider
-    )
-
-    func controller(
-        _ controller: AuctionController,
-        didCompleteRound round: AuctionRound
-    )
-
-    func controller(
-        _ controller: AuctionController,
-        completeAuction winner: Ad
-    )
-
-    func controller(
-        _ controller: AuctionController,
-        failedAuction error: Error
-    )
+protocol AuctionController {
+    associatedtype DemandProviderType: DemandProvider
+    associatedtype DemandType: Demand where DemandType.Provider == DemandProviderType
+    
+    typealias WaterfallType = Waterfall<DemandType>
+    typealias DemandEventType = DemandEvent<DemandProviderType>
+    
+    typealias Completion = (Result<WaterfallType, SdkError>) -> ()
+    typealias DemandEventHandler = (DemandEventType) -> ()
+    
+    var eventHandler: DemandEventHandler? { get set }
+    
+    func load(completion: @escaping Completion)
 }

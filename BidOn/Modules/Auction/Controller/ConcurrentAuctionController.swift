@@ -8,12 +8,13 @@
 import Foundation
 
 
-final class ConcurrentAuctionController<DemandProviderType, MediationObserverType>: AuctionController, MediationController
-where DemandProviderType: DemandProvider, MediationObserverType: MediationObserver {
+final class ConcurrentAuctionController<T, M>: AuctionController, MediationController
+where T: DemandProvider, M: MediationObserver {
     
-    internal typealias DemandType = DemandModel<DemandProviderType>
-    internal typealias WaterfallType = Waterfall<DemandType>
-
+    typealias DemandType = DemandModel<T>
+    typealias DemandProviderType = T
+    typealias Observer = M
+    
     private typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
     private typealias AuctionType = Auction<RoundType>
     private typealias BidType = Bid<DemandProviderType>
@@ -23,16 +24,15 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     private let adType: AdType
     private let pricefloor: Price
     
-    let id: String
-    let configurationId: Int
-    let observer: MediationObserverType
-    
-    weak var delegate: AuctionControllerDelegate?
-    
+    let observer: Observer
+        
     private lazy var active = Set<RoundType>()
     private lazy var repository = AdsRepository<DemandProviderType>()
     
     private var roundTimer: Timer?
+    private var completion: Completion?
+    
+    var eventHandler: DemandEventHandler?
     
     private var currentPrice: Price {
         let current = repository
@@ -43,13 +43,10 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
         return current ?? pricefloor
     }
     
-    init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType, MediationObserverType> {
+    init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType, Observer> {
         let builder = T()
         build(builder)
         
-        self.id = builder.auctionId
-        self.configurationId = builder.auctionConfigurationId
-        self.delegate = builder.delegate
         self.comparator = builder.comparator
         self.auction = builder.auction
         self.pricefloor = builder.pricefloor
@@ -57,14 +54,19 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
         self.observer = builder.observer
     }
     
-    func load() {
-        guard active.isEmpty else { return }
+    func load(completion: @escaping Completion) {
+        guard active.isEmpty else {
+            completion(.failure(.internalInconsistency))
+            return
+        }
+        
+        self.completion = completion
         
         repository.clear()
         
         Logger.verbose("\(adType.rawValue.capitalized) auction will perform: \(auction)")
         
-        delegate?.controllerDidStartAuction(self)
+        eventHandler?(.didStartAuction)
         auction.root.forEach(perform)
     }
     
@@ -80,6 +82,8 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
         
         let ads = repository.ads.sorted { comparator.compare($0, $1) }
         
+        defer { completion = nil }
+        
         if let winner = ads.first {
             ads.suffix(ads.count - 1).forEach {
                 let provider = repository.provider(for: $0)
@@ -90,9 +94,10 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
             provider?.notify(.win(winner))
             
             Logger.verbose("\(adType.rawValue.capitalized) auction did found winner: \(winner)")
-            delegate?.controller(self, completeAuction: winner)
+            
+            completion?(.success(waterfall))
         } else {
-            delegate?.controller(self, failedAuction: SdkError.internalInconsistency)
+            completion?(.failure(SdkError.internalInconsistency))
         }
     }
     
@@ -101,7 +106,7 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
         let adType = self.adType
         
         active.insert(round)
-        delegate?.controller(self, didStartRound: round, pricefloor: pricefloor)
+        eventHandler?(.didStartRound(round: round, pricefloor: pricefloor))
         
         if round.timeout.isNormal {
             let timer = Timer.scheduledTimer(
@@ -131,7 +136,7 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
                 
                 Logger.verbose("\(adType.rawValue.capitalized) auction complete round: \(round)")
                 
-                self.delegate?.controller(self, didCompleteRound: round)
+                self.eventHandler?(.didCompleteRound(round: round))
                 self.active.remove(round)
                 self.roundTimer?.invalidate()
                 
@@ -155,16 +160,17 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
         
         repository.register(record)
         
-        delegate?.controller(
-            self,
-            didReceiveAd: record.ad,
-            provider: record.provider
-        )
+        #warning("Event")
+//        delegate?.controller(
+//            self,
+//            didReceiveAd: record.ad,
+//            provider: record.provider
+//        )
     }
 }
 
 
-extension ConcurrentAuctionController: WaterfallProvider {
+private extension ConcurrentAuctionController {
     var waterfall: WaterfallType {
         return WaterfallType(
             repository
@@ -173,8 +179,8 @@ extension ConcurrentAuctionController: WaterfallProvider {
                 .compactMap { repository.bid(for: $0) }
                 .compactMap { ad, provider in
                     DemandType(
-                        auctionId: id,
-                        auctionConfigurationId: configurationId,
+                        auctionId: observer.auctionId,
+                        auctionConfigurationId: observer.auctionConfigurationId,
                         ad: ad,
                         provider: provider
                     )

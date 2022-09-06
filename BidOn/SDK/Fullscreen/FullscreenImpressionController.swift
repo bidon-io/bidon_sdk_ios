@@ -16,7 +16,7 @@ protocol FullscreenImpressionControllerDelegate: AnyObject {
     
     func didClick(_ impression: Impression)
     
-    func didFailToPresent(_ impression: Impression?, error: Error)
+    func didFailToPresent(_ impression: Impression?, error: SdkError)
     
     func didReceiveReward(_ reward: Reward, impression: Impression)
 }

@@ -77,12 +77,12 @@ extension BidMachineInterstitialDemandProvider: BDMInterstitialDelegate {
     }
     
     func interstitial(_ interstitial: BDMInterstitial, failedWithError error: Error) {
-        response?(.failure(error))
+        response?(.failure(SdkError(error)))
         response = nil
     }
     
     func interstitial(_ interstitial: BDMInterstitial, failedToPresentWithError error: Error) {
-        delegate?.providerDidFailToDisplay(self, error: error)
+        delegate?.providerDidFailToDisplay(self, error: SdkError(error))
     }
     
     func interstitialWillPresent(_ interstitial: BDMInterstitial) {

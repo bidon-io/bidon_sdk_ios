@@ -15,12 +15,9 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     typealias AuctionType = Auction<RoundType>
     
     private(set) var comparator: AuctionComparator = HigherPriceAuctionComparator()
-    private(set) var delegate: AuctionControllerDelegate?
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
     private(set) var observer: MediationObserverType!
-    private(set) var auctionId: String = ""
-    private(set) var auctionConfigurationId: Int = 0
     
     var adType: AdType { fatalError("Attempt of use ad type from base builder") }
     
@@ -61,12 +58,6 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     }
     
     @discardableResult
-    public func withDelegate(_ delegate: AuctionControllerDelegate) -> Self {
-        self.delegate = delegate
-        return self
-    }
-    
-    @discardableResult
     public func withRounds(
         _ rounds: [AuctionRound],
         lineItems: LineItems
@@ -81,16 +72,6 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
         _ observer: MediationObserverType
     ) -> Self {
         self.observer = observer
-        return self
-    }
-    
-    @discardableResult
-    public func withAuctionId(
-        _ auctionId: String,
-        configurationId: Int
-    ) -> Self {
-        self.auctionId = auctionId
-        self.auctionConfigurationId = configurationId
         return self
     }
     

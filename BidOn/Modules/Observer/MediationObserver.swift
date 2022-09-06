@@ -8,7 +8,6 @@
 import Foundation
 
 
-
 protocol MediationController {
     associatedtype Observer: MediationObserver
     
@@ -18,6 +17,9 @@ protocol MediationController {
 
 protocol MediationObserver {
     associatedtype MediationLogType: MediationLog
+    
+    var auctionId: String { get }
+    var auctionConfigurationId: Int { get }
     
     var log: MediationLogType { get }
 }

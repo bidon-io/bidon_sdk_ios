@@ -89,7 +89,7 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     }
     
     func bannerView(_ bannerView: BDMBannerView, failedWithError error: Error) {
-        response?(.failure(error))
+        response?(.failure(SdkError(error)))
         response = nil
     }
     

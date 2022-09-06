@@ -11,11 +11,11 @@ import UIKit
 
 
 protocol BannerViewManagerDelegate: AnyObject {
-    func manager(_ manager: BannerViewManager, didRecordImpression impression: Impression)
-    func manager(_ manager: BannerViewManager, didRecordClick impression: Impression)
-    func manager(_ manager: BannerViewManager, willPresentModalView impression: Impression)
-    func manager(_ manager: BannerViewManager, didDismissModalView impression: Impression)
-    func manager(_ manager: BannerViewManager, willLeaveApplication impression: Impression)
+    func viewManager(_ viewManager: BannerViewManager, didRecordImpression impression: Impression)
+    func viewManager(_ viewManager: BannerViewManager, didRecordClick impression: Impression)
+    func viewManager(_ viewManager: BannerViewManager, willPresentModalView impression: Impression)
+    func viewManager(_ viewManager: BannerViewManager, didDismissModalView impression: Impression)
+    func viewManager(_ viewManager: BannerViewManager, willLeaveApplication impression: Impression)
 }
 
 
@@ -144,12 +144,12 @@ final internal class BannerViewManager: NSObject {
             let impression = adView.impression
         else { return }
         
-        delegate?.manager(self, didRecordClick: impression)
+        delegate?.viewManager(self, didRecordClick: impression)
     }
     
     private func trackImpression(adView: AdViewContainer) {
         guard let impression = adView.impression else { return }
-        delegate?.manager(self, didRecordImpression: impression)
+        delegate?.viewManager(self, didRecordImpression: impression)
     }
 }
 
@@ -160,7 +160,7 @@ extension BannerViewManager: DemandProviderAdViewDelegate {
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }
-        delegate?.manager(self, willPresentModalView: impression)
+        delegate?.viewManager(self, willPresentModalView: impression)
     }
     
     func providerDidDismissModalView(
@@ -168,7 +168,7 @@ extension BannerViewManager: DemandProviderAdViewDelegate {
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }
-        delegate?.manager(self, didDismissModalView: impression)
+        delegate?.viewManager(self, didDismissModalView: impression)
     }
     
     func providerWillLeaveApplication(
@@ -176,7 +176,7 @@ extension BannerViewManager: DemandProviderAdViewDelegate {
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }
-        delegate?.manager(self, willLeaveApplication: impression)
+        delegate?.viewManager(self, willLeaveApplication: impression)
     }
 }
 

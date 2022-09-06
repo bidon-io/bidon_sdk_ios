@@ -18,6 +18,10 @@ struct Queue<T> {
         self.elements = Array(sequence)
     }
     
+    func first() -> T? {
+        return elements.first
+    }
+    
     mutating func next() -> T? {
         guard !elements.isEmpty else { return nil }
         

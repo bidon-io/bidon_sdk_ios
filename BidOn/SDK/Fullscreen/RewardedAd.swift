@@ -47,7 +47,27 @@ public final class RewardedAd: NSObject, RewardedAdObject {
 
 
 extension RewardedAd: FullscreenAdManagerDelegate {
-    func didFailToLoad(_ error: Error) {
+    func didStartAuction() {
+        delegate?.adObjectDidStartAuction?(self)
+    }
+    
+    func didStartAuctionRound(_ round: AuctionRound, pricefloor: Price) {
+        delegate?.adObject?(self, didStartAuctionRound: round.id, pricefloor: pricefloor)
+    }
+    
+    func didReceiveBid(_ ad: Ad) {
+        delegate?.adObject?(self, didReceiveBid: ad)
+    }
+    
+    func didCompleteAuctionRound(_ round: AuctionRound) {
+        delegate?.adObject?(self, didCompleteAuctionRound: round.id)
+    }
+    
+    func didCompleteAuction(_ winner: Ad?) {
+        delegate?.adObject?(self, didCompleteAuction: winner)
+    }
+    
+    func didFailToLoad(_ error: SdkError) {
         delegate?.adObject(self, didFailToLoadAd: error)
     }
     
@@ -55,7 +75,7 @@ extension RewardedAd: FullscreenAdManagerDelegate {
         delegate?.adObject(self, didLoadAd: ad)
     }
     
-    func didFailToPresent(_ impression: Impression?, error: Error) {
+    func didFailToPresent(_ impression: Impression?, error: SdkError) {
         delegate?.fullscreenAd(self, didFailToPresentAd: error)
     }
     
@@ -74,38 +94,9 @@ extension RewardedAd: FullscreenAdManagerDelegate {
     
     func didPayRevenue(_ ad: Ad) {
         delegate?.adObject?(self, didPayRevenue: ad)
-        
-        sdk.trackAdRevenue(ad, adType: .rewarded)
     }
     
     func didReceiveReward(_ reward: Reward, impression: Impression) {
         delegate?.rewardedAd(self, didRewardUser: reward)
-    }
-}
-
-
-extension RewardedAd: AuctionControllerDelegate {
-    func controllerDidStartAuction(_ controller: AuctionController) {
-        delegate?.adObjectDidStartAuction?(self)
-    }
-    
-    func controller(_ controller: AuctionController, didStartRound round: AuctionRound, pricefloor: Price) {
-        delegate?.adObject?(self, didStartAuctionRound: round.id, pricefloor: pricefloor)
-    }
-    
-    func controller(_ controller: AuctionController, didReceiveAd ad: Ad, provider: DemandProvider) {
-        delegate?.adObject?(self, didReceiveBid: ad)
-    }
-    
-    func controller(_ controller: AuctionController, didCompleteRound round: AuctionRound) {
-        delegate?.adObject?(self, didCompleteAuctionRound: round.id)
-    }
-    
-    func controller(_ controller: AuctionController, completeAuction winner: Ad) {
-        delegate?.adObject?(self, didCompleteAuction: winner)
-    }
-    
-    func controller(_ controller: AuctionController, failedAuction error: Error) {
-        delegate?.adObject?(self, didCompleteAuction: nil)
     }
 }

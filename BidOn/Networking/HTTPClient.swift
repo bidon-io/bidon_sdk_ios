@@ -36,14 +36,14 @@ struct HTTPClient {
     }
     
     func request(
-        _ route: String,
+        _ route: Route,
         _ body: Data?,
         _ method: HTTPMethod,
         _ timeout: TimeInterval,
         _ headers: [HTTPHeader: String],
         completion: @escaping (Result<Data, HTTPError>) -> ()
     ) {
-        guard let url = URL(string: baseURL)?.appendingPathComponent(route) else {
+        guard let url = URL(string: baseURL).map({ route.url($0) }) else {
             completion(.failure(.unsupportedURL))
             return
         }

@@ -17,7 +17,7 @@ extension BidMachineAd {
     convenience init(_ ad: BDMAdProtocol) {
         self.init(
             ad.auctionInfo.bidID ?? ad.auctionInfo.description,
-            "bidmachine",
+            BidMachineDemandSourceAdapter.identifier,
             ad.auctionInfo.demandSource,
             ad.auctionInfo.price?.doubleValue ?? .unknown,
             ad

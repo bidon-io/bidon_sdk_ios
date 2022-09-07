@@ -11,10 +11,14 @@ import UIKit
 
 @objc(BDRewardedAd)
 public final class RewardedAd: NSObject, RewardedAdObject {
+    typealias RewardedMediationObserver = DefaultMediationObserver<AnyRewardedAdDemandProvider>
+    typealias RewardedAuctionControllerBuilder = RewardedConcurrentAuctionControllerBuilder<RewardedMediationObserver>
+
     private typealias Manager = FullscreenAdManager<
         AnyRewardedAdDemandProvider,
+        RewardedMediationObserver,
         RewardedAuctionRequestBuilder,
-        RewardedConcurrentAuctionControllerBuilder<DefaultMediationObserver>,
+        RewardedAuctionControllerBuilder,
         RewardedImpressionController
     >
     
@@ -25,11 +29,11 @@ public final class RewardedAd: NSObject, RewardedAdObject {
     @Injected(\.sdk)
     private var sdk: Sdk
     
-    private lazy var manager: Manager = {
-        let manager = Manager(placement: placement)
-        manager.delegate = self
-        return manager
-    }()
+    private lazy var manager = Manager(
+        adType: .rewarded,
+        placement: placement,
+        delegate: self
+    )
     
     @objc public init(placement: String = "") {
         self.placement = placement

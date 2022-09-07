@@ -9,7 +9,7 @@ import Foundation
 
 
 struct AuctionRequest: Request {
-    var route: Route = .auction
+    var route: Route
     var method: HTTPClient.HTTPMethod = .post
     var headers: [HTTPClient.HTTPHeader: String] = .default()
     var timeout: TimeInterval = 10
@@ -40,6 +40,7 @@ struct AuctionRequest: Request {
         let builder = T()
         build(builder)
         
+        self.route = .complex(.auction, .adType(builder.adType))
         self.body = RequestBody(
             device: builder.device,
             session: builder.session,

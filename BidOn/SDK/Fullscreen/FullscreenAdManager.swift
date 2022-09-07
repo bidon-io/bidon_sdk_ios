@@ -23,28 +23,29 @@ protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate {
 
 final class FullscreenAdManager<
     DemandProviderType,
+    ObserverType,
     AuctionRequestBuilderType,
     AuctionControllerBuilderType,
     ImpressionControllerType
 >: NSObject where
-DemandProviderType: DemandProvider,
 AuctionRequestBuilderType: AuctionRequestBuilder,
-AuctionControllerBuilderType: BaseConcurrentAuctionControllerBuilder<DemandProviderType, DefaultMediationObserver>,
+ObserverType: MediationObserver,
+ObserverType.DemandProviderType == DemandProviderType,
+AuctionControllerBuilderType: BaseConcurrentAuctionControllerBuilder<DemandProviderType, ObserverType>,
 ImpressionControllerType: FullscreenImpressionController,
 ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
     
     fileprivate typealias DemandType = DemandModel<DemandProviderType>
-    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType, DefaultMediationObserver>
-    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<DemandType, DefaultMediationObserver>
-
+    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType, ObserverType>
+    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<DemandType, ObserverType>
+    
     private typealias AuctionInfo = AuctionRequest.ResponseBody
-    private typealias DemandEventType = DemandEvent<DemandProviderType>
-
+    
     fileprivate enum State {
         case idle
         case preparing
         case auction(controller: AuctionControllerType)
-        case loading(controller: DefaultWaterfallController<DemandType, DefaultMediationObserver>)
+        case loading(controller: WaterfallControllerType)
         case ready(demand: DemandType)
         case impression(controller: ImpressionControllerType)
     }
@@ -57,11 +58,18 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
     
     private var state: State = .idle
     
-    weak var delegate: FullscreenAdManagerDelegate?
+    private weak var delegate: FullscreenAdManagerDelegate?
     
-    let placement: String
+    private let placement: String
+    private let adType: AdType
     
-    init(placement: String = "") {
+    init(
+        adType: AdType,
+        placement: String,
+        delegate: FullscreenAdManagerDelegate?
+    ) {
+        self.delegate = delegate
+        self.adType = adType
         self.placement = placement
         super.init()
     }
@@ -74,7 +82,6 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
         
         fetchAuctionInfo()
     }
-    
     
     private func fetchAuctionInfo() {
         state = .preparing
@@ -119,11 +126,14 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
     
     private func performAuction(_ auctionInfo: AuctionInfo) {
         Logger.verbose("Fullscreen ad manager will start auction: \(auctionInfo)")
-
-        let observer = DefaultMediationObserver(
-            id: auctionInfo.auctionId,
-            configurationId: auctionInfo.auctionConfigurationId
+        
+        let observer = ObserverType(
+            auctionId: auctionInfo.auctionId,
+            auctionConfigurationId: auctionInfo.auctionConfigurationId,
+            adType: adType
         )
+        
+        observer.delegate = self
         
         let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
@@ -131,9 +141,6 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
             builder.withPricefloor(auctionInfo.minPrice)
             builder.withObserver(observer)
         }
-        
-        weak var weakSelf = self
-        auction.eventHandler = weakSelf?.handleAuctionEvent
         
         auction.load { [unowned observer, weak self] result in
             guard let self = self else { return }
@@ -144,19 +151,17 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
                     waterfall,
                     observer: observer
                 )
-                self.delegate?.didCompleteAuction(waterfall.first()?.ad)
             case .failure(let error):
-                self.sendAuctionStatistics(observer.log)
+                self.sendAuctionStatistics(observer.report)
                 self.state = .idle
                 
-                self.delegate?.didCompleteAuction(nil)
                 self.delegate?.didFailToLoad(error)
             }
         }
         
         state = .auction(controller: auction)
     }
-        
+    
     private func loadWaterfall(
         _ waterfall: AuctionControllerType.WaterfallType,
         observer: AuctionControllerType.Observer
@@ -171,7 +176,7 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
         waterfall.load { [unowned observer, weak self] result in
             guard let self = self else { return }
             
-            self.sendAuctionStatistics(observer.log)
+            self.sendAuctionStatistics(observer.report)
             
             switch result {
             case .success(let demand):
@@ -184,30 +189,41 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
         }
     }
     
-    private func handleAuctionEvent(_ auctionEvent: DemandEventType) {
-        switch auctionEvent {
-        case .didStartAuction:
-            delegate?.didStartAuction()
-        case .didStartRound(let round, let pricefloor):
-            delegate?.didStartAuctionRound(round, pricefloor: pricefloor)
-        case .didReceiveBid(let bid):
-            bid.provider.revenueDelegate = self
-            delegate?.didReceiveBid(bid.ad)
-        case .didCompleteRound(let round):
-            delegate?.didCompleteAuctionRound(round)
-        }
-    }
-    
-    private func sendAuctionStatistics<T: MediationLog>(_ log: T) {
+    private func sendAuctionStatistics<T: MediationAttemptReport>(_ report: T) {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
-            builder.withMediationResult(log)
+            builder.withAdType(adType)
+            builder.withMediationReport(report)
         }
         
         networkManager.perform(request: request) { result in
             Logger.debug("Sent statistics with result: \(result)")
         }
+    }
+}
+
+
+extension FullscreenAdManager: MediationObserverDelegate {
+    func didStartAuction(_ auctionId: String) {
+        delegate?.didStartAuction()
+    }
+    
+    func didStartAuctionRound(_ auctionRound: AuctionRound, pricefloor: Price) {
+        delegate?.didStartAuctionRound(auctionRound, pricefloor: pricefloor)
+    }
+    
+    func didReceiveBid(_ ad: Ad, provider: DemandProvider) {
+        provider.revenueDelegate = self
+        delegate?.didReceiveBid(ad)
+    }
+    
+    func didFinishAuctionRound(_ auctionRound: AuctionRound) {
+        delegate?.didCompleteAuctionRound(auctionRound)
+    }
+    
+    func didFinishAuction(_ auctionId: String, winner: Ad?) {
+        delegate?.didCompleteAuction(winner)
     }
 }
 

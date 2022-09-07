@@ -54,24 +54,25 @@ extension AppLovinRewardedDemandProvider: DirectDemandProvider {
         self.response = response
     }
     
-    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
         guard
             ad is AppLovinAd,
             let interstitial = interstitial,
             interstitial.isReadyForDisplay
         else {
-            response(.failure(SdkError.internalInconsistency))
+            response(.failure(.noFill))
             return
         }
         
         response(.success(ad))
     }
     
-    func cancel() {
+    func cancel(_ reason: DemandProviderCancellationReason) {
         interstitial = nil
         response = nil
     }
     
+    // MARK: Noop
     func notify(_ event: AuctionEvent) {}
 }
 
@@ -100,7 +101,7 @@ extension AppLovinRewardedDemandProvider: ALAdLoadDelegate {
     }
     
     func adService(_ adService: ALAdService, didFailToLoadAdWithError code: Int32) {
-        response?(.failure(SdkError.noFill))
+        response?(.failure(.noFill))
         response = nil
     }
 }

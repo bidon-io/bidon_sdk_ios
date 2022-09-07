@@ -8,8 +8,8 @@
 import Foundation
 
 
-struct MediationResultModel: MediationLog, Codable {
-    struct DemandResultModel: DemandLog, Codable {
+struct MediationAttemptReportModel: MediationAttemptReport, Codable {
+    struct DemandReportModel: DemandReport, Codable {
         var id: String
         var adUnitId: String?
         var format: String
@@ -17,7 +17,7 @@ struct MediationResultModel: MediationLog, Codable {
         var startTimestamp: TimeInterval
         var finishTimestamp: TimeInterval
         
-        init<T: DemandLog>(_ demand: T) {
+        init<T: DemandReport>(_ demand: T) {
             self.id = demand.id
             self.adUnitId = demand.adUnitId
             self.format = demand.format
@@ -27,27 +27,29 @@ struct MediationResultModel: MediationLog, Codable {
         }
     }
     
-    struct RoundResultModel: RoundLog, Codable {
+    struct RoundReportModel: RoundReport, Codable {
         var id: String
         var pricefloor: Price
-        var winnerPrice: Price
-        var demands: [DemandResultModel]
+        var winnerPrice: Price?
+        var winnerId: String?
+        var demands: [DemandReportModel]
         
-        init<T: RoundLog>(_ result: T) {
+        init<T: RoundReport>(_ result: T) {
             self.id = result.id
             self.pricefloor = result.pricefloor
             self.winnerPrice = result.winnerPrice
-            self.demands = result.demands.map(DemandResultModel.init)
+            self.winnerId = result.winnerId
+            self.demands = result.demands.map(DemandReportModel.init)
         }
     }
     
     var auctionId: String
     var auctionConfigurationId: Int
-    var rounds: [RoundResultModel]
+    var rounds: [RoundReportModel]
     
-    init<T: MediationLog>(_ result: T) {
+    init<T: MediationAttemptReport>(_ result: T) {
         self.auctionId = result.auctionId
         self.auctionConfigurationId = result.auctionConfigurationId
-        self.rounds = result.rounds.map(RoundResultModel.init)
+        self.rounds = result.rounds.map(RoundReportModel.init)
     }
 }

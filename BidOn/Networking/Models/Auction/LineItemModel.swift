@@ -13,3 +13,10 @@ struct LineItemModel: Decodable, LineItem {
     var pricefloor: Price
     var adUnitId: String
 }
+
+
+extension LineItemModel: CustomStringConvertible {
+    var description: String {
+        return "Line"
+    }
+}

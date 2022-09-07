@@ -63,7 +63,7 @@ fileprivate final class PersistentNetworkManager: NetworkManager {
         guard let data = data else { return }
         
         client.request(
-            request.route.rawValue,
+            request.route,
             data,
             request.method,
             request.timeout,

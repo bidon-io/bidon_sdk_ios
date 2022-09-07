@@ -52,8 +52,8 @@ extension BidMachineBannerDemandProvider: ProgrammaticDemandProvider {
         request.bid(pricefloor, response: response)
     }
     
-    func cancel() {
-        request.cancel()
+    func cancel(_ reason: DemandProviderCancellationReason) {
+        request.cancel(reason)
     }
     
     func notify(_ event: AuctionEvent) {
@@ -63,9 +63,9 @@ extension BidMachineBannerDemandProvider: ProgrammaticDemandProvider {
 
 
 extension BidMachineBannerDemandProvider: AdViewDemandProvider {
-    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
         guard let ad = ad as? BidMachineAd else {
-            response(.failure(SdkError.internalInconsistency))
+            response(.failure(.unscpecifiedException))
             return
         }
         
@@ -89,7 +89,7 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     }
     
     func bannerView(_ bannerView: BDMBannerView, failedWithError error: Error) {
-        response?(.failure(SdkError(error)))
+        response?(.failure(.noFill))
         response = nil
     }
     

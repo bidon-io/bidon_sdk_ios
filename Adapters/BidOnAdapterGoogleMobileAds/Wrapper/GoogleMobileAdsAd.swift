@@ -20,7 +20,7 @@ extension GoogleMobileAdsAd {
     ) {
         self.init(
             response.responseIdentifier ?? lineItem.adUnitId,
-            "admob",
+            GoogleMobileAdsDemandSourceAdapter.identifier,
             nil,
             lineItem,
             response

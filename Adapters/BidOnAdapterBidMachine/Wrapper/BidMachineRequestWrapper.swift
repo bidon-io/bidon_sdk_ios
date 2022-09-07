@@ -29,7 +29,7 @@ final class BidMachineRequestWrapper<T: BDMAdRequestProtocol & BDMRequest>: NSOb
     }
     
     func request(_ request: BDMRequest, failedWithError error: Error) {
-        response?(.failure(SdkError(error)))
+        response?(.failure(MediationError(bdmError: error)))
         response = nil
     }
     
@@ -47,9 +47,12 @@ final class BidMachineRequestWrapper<T: BDMAdRequestProtocol & BDMRequest>: NSOb
         }
     }
     
-    func cancel() {
-        response?(.failure(SdkError.cancelled))
-        response = nil
+    func cancel(_ reason: DemandProviderCancellationReason) {
+        defer { response = nil }
+        switch reason {
+        case .timeoutReached: response?(.failure(.bidTimeoutReached))
+        case .lifecycle: response?(.failure(.auctionCancelled))
+        }
     }
 }
 

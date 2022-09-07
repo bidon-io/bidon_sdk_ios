@@ -59,9 +59,9 @@ extension GoogleMobileAdsBannerDemandProvider: DirectDemandProvider {
         banner.load(request)
     }
     
-    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
         guard ad.id == wrapped(ad: banner)?.id else {
-            response(.failure(SdkError("Invalid ad")))
+            response(.failure(.unscpecifiedException))
             return
         }
         
@@ -70,9 +70,12 @@ extension GoogleMobileAdsBannerDemandProvider: DirectDemandProvider {
     
     func notify(_ event: AuctionEvent) {}
     
-    func cancel() {
-        response?(.failure(SdkError.cancelled))
-        response = nil
+    func cancel(_ reason: DemandProviderCancellationReason) {
+        defer { response = nil }
+        switch reason {
+        case .timeoutReached: response?(.failure(.bidTimeoutReached))
+        case .lifecycle: response?(.failure(.auctionCancelled))
+        }
     }
 }
 
@@ -102,7 +105,7 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        response?(.failure(SdkError(error)))
+        response?(.failure(MediationError(gadError: error)))
         response = nil
     }
     

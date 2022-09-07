@@ -21,6 +21,22 @@ public extension Price {
 }
 
 
+internal extension Price {
+    private static let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
+        
+        return formatter
+    }()
+    
+    var pretty: String {
+        isUnknown ? "-" : Price.formatter.string(from: self as NSNumber) ?? "-"
+    }
+}
+
+
 public extension Currency {
     static var `default` = "USD"
 }
@@ -31,6 +47,7 @@ public enum PricePrecision: Int {
     case programmatic
     case direct
 }
+
 
 @objc(BNAd)
 public protocol Ad {

@@ -19,7 +19,6 @@ private extension ALInterstitialAd {
         set { objc_setAssociatedObject(self, &ALInterstitialAd.adKey, newValue, .OBJC_ASSOCIATION_RETAIN) }
     }
     
-    
     func show(_ ad: Ad) throws {
         guard let ad = ad as? AppLovinAd else {
             throw SdkError.internalInconsistency
@@ -62,17 +61,18 @@ extension AppLovinInterstitialDemandProvider: DirectDemandProvider {
         )
     }
     
-    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
         guard ad is AppLovinAd else {
-            response(.failure(SdkError.internalInconsistency))
+            response(.failure(.unscpecifiedException))
             return
         }
         
         response(.success(ad))
     }
     
-    func cancel() {}
-    
+    // MARK: Noop
+    #warning("Cancel")
+    func cancel(_ reason: DemandProviderCancellationReason) {}
     func notify(_ event: AuctionEvent) {}
 }
 

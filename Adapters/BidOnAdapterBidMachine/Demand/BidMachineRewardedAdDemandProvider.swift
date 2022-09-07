@@ -46,16 +46,16 @@ extension BidMachineRewardedAdDemandProvider: ProgrammaticDemandProvider {
         request.notify(event)
     }
     
-    func cancel() {
-        request.cancel()
+    func cancel(_ reason: DemandProviderCancellationReason) {
+        request.cancel(reason)
     }
 }
 
 
 extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
-    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
         guard let ad = ad as? BidMachineAd else {
-            response(.failure(SdkError.internalInconsistency))
+            response(.failure(.unscpecifiedException))
             return
         }
         
@@ -78,7 +78,7 @@ extension BidMachineRewardedAdDemandProvider: BDMRewardedDelegate {
     }
     
     func rewarded(_ rewarded: BDMRewarded, failedWithError error: Error) {
-        response?(.failure(SdkError(error)))
+        response?(.failure(.noFill))
         response = nil
     }
     

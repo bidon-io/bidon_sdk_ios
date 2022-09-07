@@ -14,7 +14,9 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
 
 
 @objc public final class AppLovinDemandSourceAdapter: NSObject, DemandSourceAdapter {
-    public let identifier: String = "applovin"
+    @objc public static let identifier = "applovin"
+    
+    public let identifier: String = AppLovinDemandSourceAdapter.identifier
     public let name: String = "AppLovin"
     public let adapterVersion: String = "1"
     public let sdkVersion: String = ALSdk.version()

@@ -64,13 +64,14 @@ public enum Framework: UInt {
     case flutter
 }
 
+
 public enum AdType: String {
     case banner
     case interstitial
     case rewarded
 }
 
-
+                            
 struct Constants {
     static let zeroUUID: String = "00000000-0000-0000-0000-000000000000"
     
@@ -92,5 +93,16 @@ struct Constants {
         static var token = "BidOnToken"
         static var idg = "BidOnIdg"
         static var coppa = "BidOnCoppa"
+    }
+}
+
+
+extension AdType: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .banner: return "Banner"
+        case .interstitial: return "Interstitial"
+        case .rewarded: return "Rewarded Ad"
+        }
     }
 }

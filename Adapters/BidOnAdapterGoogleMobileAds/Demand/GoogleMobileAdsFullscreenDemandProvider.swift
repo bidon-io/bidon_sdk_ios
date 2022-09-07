@@ -74,8 +74,8 @@ extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
         ) { [weak self] fullscreenAd, error in
             guard let self = self else { return }
             
-            guard let fullscreenAd = fullscreenAd as? FullscreenAd, error == nil else {
-                self.response?(.failure(SdkError(error)))
+            guard let fullscreenAd = fullscreenAd as? FullscreenAd else {
+                self.response?(.failure(.unknownAdapter))
                 self.response = nil
                 return
             }
@@ -90,12 +90,12 @@ extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
         }
     }
     
-    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
         guard
             let fullscreenAd = fullscreenAd,
             ad.id == wrapped(ad: fullscreenAd)?.id
         else {
-            response(.failure(SdkError("Invalid ad")))
+            response(.failure(.noFill))
             return
         }
         
@@ -103,10 +103,13 @@ extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
     }
     
     func notify(_ event: AuctionEvent) {}
-
-    func cancel() {
-        response?(.failure(SdkError.cancelled))
-        response = nil
+    
+    func cancel(_ reason: DemandProviderCancellationReason) {
+        defer { response = nil }
+        switch reason {
+        case .timeoutReached: response?(.failure(.bidTimeoutReached))
+        case .lifecycle: response?(.failure(.auctionCancelled))
+        }
     }
     
     private func wrapped(ad: GADFullScreenPresentingAd) -> Ad? {

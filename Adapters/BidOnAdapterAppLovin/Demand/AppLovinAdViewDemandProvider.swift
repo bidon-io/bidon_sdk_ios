@@ -74,12 +74,12 @@ extension AppLovinAdViewDemandProvider: DirectDemandProvider {
         )
     }
     
-    func load(
+    func fill(
         ad: Ad,
         response: @escaping DemandProviderResponse
     ) {
         guard let ad = ad as? AppLovinAd, ad.wrapped.zoneIdentifier == lineItem?.adUnitId else {
-            response(.failure(SdkError.internalInconsistency))
+            response(.failure(.unscpecifiedException))
             return
         }
         
@@ -87,8 +87,9 @@ extension AppLovinAdViewDemandProvider: DirectDemandProvider {
         adView.render(ad.wrapped)
     }
     
-    func cancel() {}
-    
+    // MARK: Noop
+    #warning("Cancel")
+    func cancel(_ reason: DemandProviderCancellationReason) {}
     func notify(_ event: AuctionEvent) {}
 }
 
@@ -104,7 +105,7 @@ extension AppLovinAdViewDemandProvider: ALAdViewEventDelegate {
     func ad(_ ad: ALAd, didFailToDisplayIn adView: ALAdView, withError code: ALAdViewDisplayErrorCode) {
         guard ad.zoneIdentifier == lineItem?.adUnitId else { return }
         
-        response?(.failure(SdkError.noFill))
+        response?(.failure(.noFill))
         response = nil
     }
     
@@ -136,7 +137,7 @@ extension AppLovinAdViewDemandProvider: ALAdDisplayDelegate {
         delegate?.providerDidHide(self)
     }
     
-    func ad(_ ad: ALAd, wasClickedIn view: UIView) {        
+    func ad(_ ad: ALAd, wasClickedIn view: UIView) {
         delegate?.providerDidClick(self)
     }
 }

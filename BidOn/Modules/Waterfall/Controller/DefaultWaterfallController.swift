@@ -39,7 +39,6 @@ where T: Demand, T.Provider: DemandProvider, M: MediationObserver {
             guard let self = self else { return }
             guard let demand = self.waterfall.next() else {
                 DispatchQueue.main.async {
-                    Logger.verbose("No bid to load")
                     completion(.failure(.noFill))
                 }
                 return
@@ -48,7 +47,7 @@ where T: Demand, T.Provider: DemandProvider, M: MediationObserver {
             Logger.verbose("Provider \(demand.provider) will load bid: \(demand.ad)")
             
             DispatchQueue.main.async {
-                demand.provider.load(ad: demand.ad) { [weak self] result in
+                demand.provider.fill(ad: demand.ad) { [weak self] result in
                     guard let self = self else { return }
                     switch result {
                     case .success:

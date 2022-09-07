@@ -10,16 +10,15 @@ import Foundation
 
 final class InterstitialConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyInterstitialDemandProvider, MediationObserverType> {
     
-    override var adType: AdType { .interstitial }
-    
-    override func providers(_ demands: [String]) -> [String: AnyInterstitialDemandProvider] {
+    override func providers(_ demands: [String]) -> [AnyAdapter: AnyInterstitialDemandProvider] {
         demands.reduce([:]) { result, id in
             var result = result
             let adapter: InterstitialDemandSourceAdapter? = adaptersRepository[id]
             
             do {
-                if let provider = try adapter?.interstitial() {
-                    result[id] = try provider.wrapped()
+                if let adapter = adapter {
+                    let any = AnyAdapter(adapter: adapter)
+                    result[any] = try adapter.interstitial().wrapped()
                 }
             } catch {
                 Logger.debug("Error while creating interstitial in adapter: \(adapter.debugDescription)")

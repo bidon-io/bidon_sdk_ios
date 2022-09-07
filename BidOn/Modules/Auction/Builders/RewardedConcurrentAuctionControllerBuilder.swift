@@ -10,16 +10,15 @@ import Foundation
 
 final class RewardedConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyRewardedAdDemandProvider, MediationObserverType> {
     
-    override var adType: AdType { .rewarded }
-    
-    override func providers(_ demands: [String]) -> [String: AnyRewardedAdDemandProvider] {
+    override func providers(_ demands: [String]) -> [AnyAdapter: AnyRewardedAdDemandProvider] {
         demands.reduce([:]) { result, id in
             var result = result
             let adapter: RewardedAdDemandSourceAdapter? = adaptersRepository[id]
             
             do {
-                if let provider = try adapter?.rewardedAd() {
-                    result[id] = try provider.wrapped()
+                if let adapter = adapter {
+                    let any = AnyAdapter(adapter: adapter)
+                    result[any] = try adapter.rewardedAd().wrapped()
                 }
             } catch {
                 Logger.debug("Error while creating rewarded in adapter: \(adapter.debugDescription)")

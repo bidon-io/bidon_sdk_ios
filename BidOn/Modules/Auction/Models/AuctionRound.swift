@@ -8,7 +8,9 @@
 import Foundation
 
 
-typealias AuctionRoundBidResponse<DemandProviderType: DemandProvider> = (Result<Bid<DemandProviderType>, SdkError>) -> ()
+typealias AuctionRoundBidRequest = (Adapter, LineItem?) -> ()
+typealias AuctionRoundBidResult<T: DemandProvider> = Result<Bid<T>, MediationError>
+typealias AuctionRoundBidResponse<T: DemandProvider> = (Adapter, AuctionRoundBidResult<T>) -> ()
 typealias AuctionRoundCompletion = () -> ()
 
 
@@ -24,9 +26,11 @@ protocol PerformableAuctionRound: AuctionRound, Hashable {
     
     func perform(
         pricefloor: Price,
-        bid: @escaping AuctionRoundBidResponse<DemandProviderType>,
+        request: @escaping AuctionRoundBidRequest,
+        response: @escaping AuctionRoundBidResponse<DemandProviderType>,
         completion: @escaping AuctionRoundCompletion
     )
     
-    func cancel()
+    func timeoutReached()
+    func destroy()
 }

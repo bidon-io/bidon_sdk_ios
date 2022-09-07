@@ -9,11 +9,19 @@ import Foundation
 
 
 final class StatisticRequestBuilder: BaseRequestBuilder {
-    private(set) var stats: MediationResultModel!
+    private(set) var stats: MediationAttemptReportModel!
+    
+    var adType: AdType!
     
     @discardableResult
-    func withMediationResult<T: MediationLog>(_ result: T) -> Self {
-        self.stats = MediationResultModel(result)
+    func withMediationReport<T: MediationAttemptReport>(_ report: T) -> Self {
+        self.stats = MediationAttemptReportModel(report)
+        return self
+    }
+    
+    @discardableResult
+    func withAdType(_ adType: AdType) -> Self {
+        self.adType = adType
         return self
     }
 }

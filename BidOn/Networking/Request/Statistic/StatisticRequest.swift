@@ -9,7 +9,7 @@ import Foundation
 
 
 struct StatisticRequest: Request {
-    var route: Route = .stats
+    var route: Route
     var method: HTTPClient.HTTPMethod = .post
     var headers: [HTTPClient.HTTPHeader: String] = .default()
     var timeout: TimeInterval = 10
@@ -23,7 +23,7 @@ struct StatisticRequest: Request {
         var geo: GeoModel?
         var ext: String?
         var token: String?
-        var stats: MediationResultModel
+        var stats: MediationAttemptReportModel
     }
     
     struct ResponseBody: Decodable, Tokenized {
@@ -35,6 +35,7 @@ struct StatisticRequest: Request {
         let builder = StatisticRequestBuilder()
         build(builder)
         
+        self.route = .complex(.stats, .adType(builder.adType))
         self.body = RequestBody(
             device: builder.device,
             session: builder.session,

@@ -46,16 +46,16 @@ extension BidMachineInterstitialDemandProvider: ProgrammaticDemandProvider {
         request.notify(event)
     }
     
-    func cancel() {
-        request.cancel()
+    func cancel(_ reason: DemandProviderCancellationReason) {
+        request.cancel(reason)
     }
 }
 
 
 extension BidMachineInterstitialDemandProvider: InterstitialDemandProvider {
-    func load(ad: Ad, response: @escaping DemandProviderResponse) {
+    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
         guard let ad = ad as? BidMachineAd else {
-            response(.failure(SdkError.internalInconsistency))
+            response(.failure(.unscpecifiedException))
             return
         }
         
@@ -77,7 +77,7 @@ extension BidMachineInterstitialDemandProvider: BDMInterstitialDelegate {
     }
     
     func interstitial(_ interstitial: BDMInterstitial, failedWithError error: Error) {
-        response?(.failure(SdkError(error)))
+        response?(.failure(.noFill))
         response = nil
     }
     

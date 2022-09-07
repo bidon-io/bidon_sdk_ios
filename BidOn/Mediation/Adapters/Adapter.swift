@@ -8,7 +8,7 @@
 import Foundation
 
 
-@objc public protocol Adapter {
+public protocol Adapter {
     var identifier: String { get }
     var name: String { get }
     var adapterVersion: String { get }
@@ -29,30 +29,3 @@ public protocol InitializableAdapter: Adapter {
         completion: @escaping (Result<Void, SdkError>) -> Void
     )
 }
-
-
-//public protocol AdapterInfoProvider: Adapter  {
-//    func encode(_ container: inout KeyedEncodingContainer<DynamicCodingKey>) throws
-//}
-
-
-//public protocol InitializableAdapter: Adapter {
-//    func initilize(_ completion: @escaping (Error?) -> ())
-//}
-//
-//
-//extension InitializableAdapter {
-//    @available(iOS 13, *)
-//    public func initialize() async throws {
-//        return try await withCheckedThrowingContinuation { continuation in
-//            initilize { error in
-//                if let error = error {
-//                    continuation.resume(throwing: error)
-//                } else {
-//                    continuation.resume()
-//                }
-//            }
-//        }
-//    }
-//}
-

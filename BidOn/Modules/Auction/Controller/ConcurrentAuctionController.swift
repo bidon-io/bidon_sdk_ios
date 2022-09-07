@@ -9,38 +9,38 @@ import Foundation
 
 
 final class ConcurrentAuctionController<T, M>: AuctionController, MediationController
-where T: DemandProvider, M: MediationObserver {
+where M: MediationObserver, T == M.DemandProviderType {
     
     typealias DemandType = DemandModel<T>
     typealias DemandProviderType = T
     typealias Observer = M
     
+    private typealias Event = MediationEvent<DemandProviderType>
     private typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
     private typealias AuctionType = Auction<RoundType>
-    private typealias BidType = Bid<DemandProviderType>
-
+    private typealias RoundResultType = AuctionRoundBidResult<DemandProviderType>
+    
     private let auction: AuctionType
     private let comparator: AuctionComparator
-    private let adType: AdType
     private let pricefloor: Price
     
     let observer: Observer
-        
+    
     private lazy var active = Set<RoundType>()
     private lazy var repository = AdsRepository<DemandProviderType>()
     
     private var roundTimer: Timer?
     private var completion: Completion?
-    
-    var eventHandler: DemandEventHandler?
-    
+      
     private var currentPrice: Price {
-        let current = repository
+        return currentWinner?.price ?? pricefloor
+    }
+    
+    private var currentWinner: Ad? {
+        return repository
             .ads
             .sorted { comparator.compare($0, $1) }
-            .first?
-            .price
-        return current ?? pricefloor
+            .first
     }
     
     init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType, Observer> {
@@ -50,7 +50,6 @@ where T: DemandProvider, M: MediationObserver {
         self.comparator = builder.comparator
         self.auction = builder.auction
         self.pricefloor = builder.pricefloor
-        self.adType = builder.adType
         self.observer = builder.observer
     }
     
@@ -64,9 +63,7 @@ where T: DemandProvider, M: MediationObserver {
         
         repository.clear()
         
-        Logger.verbose("\(adType.rawValue.capitalized) auction will perform: \(auction)")
-        
-        eventHandler?(.didStartAuction)
+        observer.log(.auctionStart)
         auction.root.forEach(perform)
     }
     
@@ -75,97 +72,128 @@ where T: DemandProvider, M: MediationObserver {
     }
     
     private func finish() {
-        Logger.verbose("\(adType.rawValue.capitalized) auction did complete")
-        
-        active.forEach { $0.cancel() }
+        active.forEach { $0.destroy() }
         active.removeAll()
-        
-        let ads = repository.ads.sorted { comparator.compare($0, $1) }
-        
+    
         defer { completion = nil }
         
-        if let winner = ads.first {
-            ads.suffix(ads.count - 1).forEach {
-                let provider = repository.provider(for: $0)
-                provider?.notify(.lose(winner))
+        if let winner = currentWinner {
+            repository.ads.forEach { ad in
+                let provider = repository.provider(for: ad)
+                provider?.notify(ad.id == winner.id ? .win(winner) : .lose(winner))
             }
             
-            let provider = repository.provider(for: winner)
-            provider?.notify(.win(winner))
-            
-            Logger.verbose("\(adType.rawValue.capitalized) auction did found winner: \(winner)")
-            
+            let event = Event.auctionFinish(winner: winner)
+            observer.log(event)
             completion?(.success(waterfall))
         } else {
+            let event = Event.auctionFinish(winner: nil)
+            observer.log(event)
+            
             completion?(.failure(SdkError.internalInconsistency))
         }
     }
     
     private func perform(round: RoundType) {
         let pricefloor = currentPrice
-        let adType = self.adType
         
         active.insert(round)
-        eventHandler?(.didStartRound(round: round, pricefloor: pricefloor))
+        
+        let event = Event.roundStart(
+            round: round,
+            pricefloor: pricefloor
+        )
+        
+        observer.log(event)
         
         if round.timeout.isNormal {
             let timer = Timer.scheduledTimer(
                 withTimeInterval: Date.MeasurementUnits.milliseconds.convert(round.timeout, to: .milliseconds),
                 repeats: false
-            ) { _ in
-                Logger.warning("\(adType.rawValue.capitalized) auction \(round) execution exceeded timeout.")
-                round.cancel()
-            }
+            ) { _ in round.timeoutReached() }
             RunLoop.current.add(timer, forMode: .default)
             self.roundTimer = timer
         }
-        
-        Logger.verbose("Perform \(round)")
+                
         round.perform(
             pricefloor: pricefloor,
-            bid: { [weak self] result in
-                switch result {
-                case .success(let record):
-                    self?.receive(record)
-                case .failure(let error):
-                    Logger.debug("\(adType.rawValue.capitalized) auction round: \(round) did receive error: \(error)")
-                }
+            request: { [weak self] in
+                self?.receive(
+                    round: round, request: $0, lineItem: $1)
+            },
+            response: { [weak self] in
+                self?.receive(round: round, response: $0, result: $1)
             },
             completion: { [weak self] in
-                guard let self = self else { return }
-                
-                Logger.verbose("\(adType.rawValue.capitalized) auction complete round: \(round)")
-                
-                self.eventHandler?(.didCompleteRound(round: round))
-                self.active.remove(round)
-                self.roundTimer?.invalidate()
-                
-                let seeds = self.auction.seeds(of: round)
-                if seeds.isEmpty && self.active.isEmpty {
-                    self.finish()
-                } else {
-                    seeds.forEach(self.perform)
-                }
+                self?.complete(round: round)
             }
         )
     }
     
-    private func receive(_ record: BidType) {
-        guard record.ad.price > pricefloor else {
-            Logger.debug("\(adType.rawValue.capitalized) auction received bid: \(record.ad) price is lower than pricefloor: \(pricefloor)")
-            return
+    private func receive(
+        round: AuctionRound,
+        request adapter: Adapter,
+        lineItem: LineItem?
+    ) {
+        let event = Event.bidRequest(
+            round: round,
+            adapter: adapter,
+            lineItem: lineItem
+        )
+        
+        observer.log(event)
+    }
+    
+    private func receive(
+        round: AuctionRound,
+        response adapter: Adapter,
+        result: RoundResultType
+    ) {
+        switch result {
+        case .failure(let error):
+            let event = Event.bidError(
+                round: round,
+                adapter: adapter,
+                error: error
+            )
+            observer.log(event)
+        case .success(let bid):
+            guard bid.ad.price > pricefloor else {
+                let event = Event.bidError(
+                    round: round,
+                    adapter: adapter,
+                    error: .belowPricefloor
+                )
+                observer.log(event)
+                return
+            }
+            
+            let event = Event.bidResponse(
+                round: round,
+                adapter: adapter,
+                bid: bid
+            )
+            observer.log(event)
+            repository.register(bid)
         }
+    }
+    
+    private func complete(round: RoundType) {
+        let event = Event.roundFinish(
+            round: round,
+            winner: currentWinner
+        )
+        observer.log(event)
         
-        Logger.verbose("\(adType.rawValue.capitalized) auction did receive bid: \(record.ad) from \(record.provider)")
+        active.remove(round)
+        roundTimer?.invalidate()
         
-        repository.register(record)
-        
-        #warning("Event")
-//        delegate?.controller(
-//            self,
-//            didReceiveAd: record.ad,
-//            provider: record.provider
-//        )
+        let seeds = auction.seeds(of: round)
+        if seeds.isEmpty && active.isEmpty {
+            finish()
+        } else {
+            seeds.forEach(perform)
+        }
     }
 }
 

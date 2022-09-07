@@ -14,7 +14,30 @@ public enum AuctionEvent {
 }
 
 
-public typealias DemandProviderResponse = (Result<Ad, SdkError>) -> ()
+public enum MediationError: Error {
+    case noBid
+    case noFill
+    case unknownAdapter
+    case adapterNotInitialized
+    case bidTimeoutReached
+    case fillTiemoutReached
+    case networkError
+    case incorrectAdUnitId
+    case noApproperiateAdUnitId
+    case auctionCancelled
+    case adFormatNotSupported
+    case unscpecifiedException
+    case belowPricefloor
+}
+
+
+public enum DemandProviderCancellationReason {
+    case timeoutReached
+    case lifecycle
+}
+
+
+public typealias DemandProviderResponse = (Result<Ad, MediationError>) -> ()
 
 
 public protocol DemandProviderDelegate: AnyObject {
@@ -35,10 +58,10 @@ public protocol DemandProvider: AnyObject {
     
     var revenueDelegate: DemandProviderRevenueDelegate? { get set }
     
-    func load(ad: Ad, response: @escaping DemandProviderResponse)
+    func fill(ad: Ad, response: @escaping DemandProviderResponse)
 
-    func cancel()
-
+    func cancel(_ reason: DemandProviderCancellationReason)
+    
     func notify(_ event: AuctionEvent)
 }
 
@@ -51,5 +74,3 @@ public protocol ProgrammaticDemandProvider: DemandProvider {
 public protocol DirectDemandProvider: DemandProvider {
     func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse)
 }
-
-

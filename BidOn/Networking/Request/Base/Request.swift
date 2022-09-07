@@ -8,11 +8,13 @@
 import Foundation
 
 
-enum Route: String {
-    case config = "config"
-    case auction = "auction"
-    case stats = "stats"
-    case show = "show"
+indirect enum Route {
+    case config
+    case auction
+    case stats
+    case show
+    case adType(AdType)
+    case complex(Route, Route)
 }
 
 
@@ -41,4 +43,18 @@ protocol Request {
     var headers: [HTTPClient.HTTPHeader: String] { get }
     var timeout: TimeInterval { get }
     var body: RequestBody? { get }
+}
+
+
+extension Route {
+    func url(_ base: URL) -> URL {
+        switch self {
+        case .auction: return base.appendingPathComponent("auction")
+        case .config: return base.appendingPathComponent("config")
+        case .stats: return base.appendingPathComponent("stats")
+        case .show: return base.appendingPathComponent("show")
+        case .adType(let adType): return base.appendingPathComponent(adType.rawValue)
+        case .complex(let left, let right): return right.url(left.url(base))
+        }
+    }
 }

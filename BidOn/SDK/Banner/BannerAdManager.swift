@@ -14,18 +14,18 @@ protocol BannerAdManagerDelegate: AnyObject {
     func adManager(_ adManager: BannerAdManager, didFailToLoad error: SdkError)
     func adManager(_ adManager: BannerAdManager, didLoad demand: AdViewDemand)
     func adManager(_ adManager: BannerAdManager, didStartAuctionRound round: AuctionRound, pricefloor: Price)
-    func adManager(_ adManager: BannerAdManager, didReceiveBid ad: Ad, provider: AdViewDemandProvider)
+    func adManager(_ adManager: BannerAdManager, didReceiveBid ad: Ad, provider: DemandProvider)
     func adManager(_ adManager: BannerAdManager, didCompleteAuctionRound round: AuctionRound)
-    func adManager(_ adManager: BannerAdManager, didCompleteAuction demand: AdViewDemand?)
+    func adManager(_ adManager: BannerAdManager, didCompleteAuction winner: Ad?)
 }
 
 
 final class BannerAdManager: NSObject {
-    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<AnyAdViewDemandProvider, DefaultMediationObserver>
-    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<AnyAdViewDemand, DefaultMediationObserver>
-    
     private typealias AuctionInfo = AuctionRequest.ResponseBody
-    private typealias DemandEventType = DemandEvent<AnyAdViewDemandProvider>
+    
+    fileprivate typealias BannerMediationObserver = DefaultMediationObserver<AnyAdViewDemandProvider>
+    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<AnyAdViewDemandProvider, BannerMediationObserver>
+    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<AnyAdViewDemand, BannerMediationObserver>
     
     fileprivate enum State {
         case idle
@@ -107,10 +107,13 @@ final class BannerAdManager: NSObject {
     ) {
         Logger.verbose("Banner ad manager will start auction: \(auctionInfo)")
         
-        let observer = DefaultMediationObserver(
-            id: auctionInfo.auctionId,
-            configurationId: auctionInfo.auctionConfigurationId
+        let observer = BannerMediationObserver(
+            auctionId: auctionInfo.auctionId,
+            auctionConfigurationId: auctionInfo.auctionConfigurationId,
+            adType: .banner
         )
+        
+        observer.delegate = self
         
         let auction = AuctionControllerType { (builder: AdViewConcurrentAuctionControllerBuilder) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
@@ -119,10 +122,7 @@ final class BannerAdManager: NSObject {
             builder.withContext(context)
             builder.withObserver(observer)
         }
-                
-        weak var weakSelf = self
-        auction.eventHandler = weakSelf?.handleAuctionEvent
-        
+                        
         auction.load { [unowned observer, weak self] result in
             guard let self = self else { return }
             
@@ -132,12 +132,9 @@ final class BannerAdManager: NSObject {
                     waterfall,
                     observer: observer
                 )
-                self.delegate?.adManager(self, didCompleteAuction: waterfall.first()?.unwrapped())
             case .failure(let error):
-                self.sendAuctionStatistics(observer.log)
+                self.sendAuctionStatistics(observer.report)
                 self.state = .idle
-                
-                self.delegate?.adManager(self, didCompleteAuction: nil)
                 self.delegate?.adManager(self, didFailToLoad: error)
             }
         }
@@ -160,7 +157,7 @@ final class BannerAdManager: NSObject {
         waterfall.load { [weak self, unowned observer]  result in
             guard let self = self else { return }
             
-            self.sendAuctionStatistics(observer.log)
+            self.sendAuctionStatistics(observer.report)
             
             switch result {
             case .success(let demand):
@@ -174,24 +171,12 @@ final class BannerAdManager: NSObject {
         }
     }
     
-    private func handleAuctionEvent(_ auctionEvent: DemandEventType) {
-        switch auctionEvent {
-        case .didStartAuction:
-            delegate?.adManagerDidStartAuction(self)
-        case .didStartRound(let round, let pricefloor):
-            delegate?.adManager(self, didStartAuctionRound: round, pricefloor: pricefloor)
-        case .didReceiveBid(let bid):
-            delegate?.adManager(self, didReceiveBid: bid.ad, provider: bid.provider.wrapped)
-        case .didCompleteRound(let round):
-            delegate?.adManager(self, didCompleteAuctionRound: round)
-        }
-    }
-    
-    private func sendAuctionStatistics<T: MediationLog>(_ log: T) {
+    private func sendAuctionStatistics<T: MediationAttemptReport>(_ report: T) {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
-            builder.withMediationResult(log)
+            builder.withAdType(.banner)
+            builder.withMediationReport(report)
         }
         
         networkManager.perform(request: request) { result in
@@ -199,6 +184,30 @@ final class BannerAdManager: NSObject {
         }
     }
 }
+
+
+extension BannerAdManager: MediationObserverDelegate {
+    func didStartAuction(_ auctionId: String) {
+        delegate?.adManagerDidStartAuction(self)
+    }
+    
+    func didStartAuctionRound(_ auctionRound: AuctionRound, pricefloor: Price) {
+        delegate?.adManager(self, didStartAuctionRound: auctionRound, pricefloor: pricefloor)
+    }
+    
+    func didReceiveBid(_ ad: Ad, provider: DemandProvider) {
+        delegate?.adManager(self, didReceiveBid: ad, provider: provider)
+    }
+    
+    func didFinishAuctionRound(_ auctionRound: AuctionRound) {
+        delegate?.adManager(self, didCompleteAuctionRound: auctionRound)
+    }
+    
+    func didFinishAuction(_ auctionId: String, winner: Ad?) {
+        delegate?.adManager(self, didCompleteAuction: winner)
+    }
+}
+
 
 private extension BannerAdManager.State {
     var isIdle: Bool {

@@ -18,9 +18,7 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
     private(set) var observer: MediationObserverType!
-    
-    var adType: AdType { fatalError("Attempt of use ad type from base builder") }
-    
+        
     private var rounds: [AuctionRound] = []
     private var lineItems: LineItems = []
     
@@ -47,7 +45,7 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     
     required init() {}
     
-    open func providers(_ demands: [String]) -> [String: DemandProviderType] {
+    open func providers(_ demands: [String]) -> [AnyAdapter: DemandProviderType] {
         return [:]
     }
     

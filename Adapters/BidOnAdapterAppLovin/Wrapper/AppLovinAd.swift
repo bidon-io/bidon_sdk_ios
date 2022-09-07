@@ -12,11 +12,12 @@ import BidOn
 
 typealias AppLovinAd = DirectAdWrapper<ALAd>
 
+
 extension AppLovinAd {
     convenience init(_ lineItem: LineItem, _ ad: ALAd) {
         self.init(
             ad.adIdNumber.stringValue,
-            "applovin",
+            AppLovinDemandSourceAdapter.identifier,
             nil,
             lineItem,
             ad

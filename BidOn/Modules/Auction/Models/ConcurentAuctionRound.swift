@@ -14,7 +14,7 @@ struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAu
     var demands: [String]
     
     private var lineItems: LineItems
-    private var providers: [String: DemandProviderType]
+    private var providers: [AnyAdapter: DemandProviderType]
     
     private var group = DispatchGroup()
     private var completion: (() -> ())?
@@ -23,7 +23,7 @@ struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAu
     init(
         round: AuctionRound,
         lineItems: LineItems,
-        providers: [String: DemandProviderType]
+        providers: [AnyAdapter: DemandProviderType]
     ) {
         self.id = round.id
         self.timeout = round.timeout
@@ -32,47 +32,64 @@ struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAu
         self.providers = providers
     }
     
-    private func provider(_ demand: String) -> DemandProviderType? {
-        return providers[demand]
+    private func pair(_ demand: String) -> (adapter: AnyAdapter, provider: DemandProviderType)? {
+        return providers
+            .first { adapter, provider in
+                adapter.identifier == demand
+            }
+            .map { ($0.key, $0.value) }
     }
     
     func perform(
         pricefloor: Price,
-        bid: @escaping AuctionRoundBidResponse<DemandProviderType>,
+        request: @escaping AuctionRoundBidRequest,
+        response: @escaping AuctionRoundBidResponse<DemandProviderType>,
         completion: @escaping AuctionRoundCompletion
     ) {
-        demands.forEach { id in
+        for demand in demands {
             group.enter()
             
-            let response: DemandProviderResponse = { result in
+            guard let provider = pair(demand) else {
+                let adapter = AnyAdapter(demand: demand)
+                request(adapter, nil)
+                response(adapter, .failure(.unknownAdapter))
+                group.leave()
+                continue
+            }
+            
+            let providerResponseHandler: DemandProviderResponse = { result in
                 defer { group.leave() }
-                guard let provider = provider(id) else { return }
                 
                 switch result {
                 case .success(let ad):
-                    bid(.success((ad, provider)))
+                    let bid = (ad, provider.provider)
+                    response(provider.adapter, .success(bid))
                 case .failure(let error):
-                    bid(.failure(SdkError(error)))
+                    response(provider.adapter, .failure(error))
                 }
             }
             
-            switch provider(id) {
-            case let provider as ProgrammaticDemandProvider:
-                Logger.verbose("Request programmatic bid for '\(id)' with pricefloor: \(pricefloor) through: \(provider)")
-                DispatchQueue.main.async { [unowned provider] in
-                    provider.bid(pricefloor, response: response)
+            switch provider.provider {
+            case let programmatic as ProgrammaticDemandProvider:
+                DispatchQueue.main.async {
+                    request(provider.adapter, nil)
+                    programmatic.bid(pricefloor, response: providerResponseHandler)
                 }
-            case let provider as DirectDemandProvider:
-                if let lineItem = lineItems.item(for: id, pricefloor: pricefloor) {
-                    Logger.verbose("Request direct bid for '\(id)' with item: \(lineItem) through: \(provider)")
-                    DispatchQueue.main.async { [unowned provider] in
-                        provider.bid(lineItem, response: response)
+            case let direct as DirectDemandProvider:
+                if let lineItem = lineItems.item(for: provider.adapter.identifier, pricefloor: pricefloor) {
+                    DispatchQueue.main.async {
+                        request(provider.adapter, lineItem)
+                        direct.bid(lineItem, response: providerResponseHandler)
                     }
                 } else {
-                    response(.failure(SdkError("Line Item for demand '\(id)' with pricefloor \(pricefloor) was not found")))
+                    request(provider.adapter, nil)
+                    response(provider.adapter, .failure(.noApproperiateAdUnitId))
+                    group.leave()
                 }
             default:
-                response(.failure(SdkError("Provider for demand '\(id)' was not found")))
+                request(provider.adapter, nil)
+                response(provider.adapter, .failure(.unknownAdapter))
+                group.leave()
             }
         }
         
@@ -81,10 +98,16 @@ struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAu
         }
     }
     
-    func cancel() {
+    func destroy() {
         demands
-            .compactMap(provider)
-            .forEach { $0.cancel() }
+            .compactMap(pair)
+            .forEach { $0.provider.cancel(.lifecycle) }
+    }
+    
+    func timeoutReached() {
+        demands
+            .compactMap(pair)
+            .forEach { $0.provider.cancel(.timeoutReached) }
     }
 }
 

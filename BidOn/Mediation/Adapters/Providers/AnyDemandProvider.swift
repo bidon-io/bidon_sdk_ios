@@ -19,12 +19,12 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
         set { _setRevenueDelegate(newValue) }
     }
     
-    func load(ad: Ad, response: @escaping DemandProviderResponse) {
-        _load(ad, response)
+    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
+        _fill(ad, response)
     }
     
-    func cancel() {
-        _cancel()
+    func cancel(_ reason: DemandProviderCancellationReason) {
+        _cancel(reason)
     }
     
     func notify(_ event: AuctionEvent) {
@@ -39,8 +39,8 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
     private let _revenueDelegate: () -> DemandProviderRevenueDelegate?
     private let _setRevenueDelegate: (DemandProviderRevenueDelegate?) -> ()
     
-    private let _load: (Ad, @escaping DemandProviderResponse) -> ()
-    private let _cancel: () -> ()
+    private let _fill: (Ad, @escaping DemandProviderResponse) -> ()
+    private let _cancel: (DemandProviderCancellationReason) -> ()
     private let _notify: (AuctionEvent) -> ()
     
     init(_ wrapped: W) throws {
@@ -54,9 +54,9 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
         _revenueDelegate = { wrapped.revenueDelegate }
         _setRevenueDelegate = { wrapped.revenueDelegate = $0 }
         
-        _load = { wrapped.load(ad: $0, response: $1) }
+        _fill = { wrapped.fill(ad: $0, response: $1) }
         
-        _cancel = { wrapped.cancel() }
+        _cancel = { wrapped.cancel($0) }
         
         _notify = { wrapped.notify($0) }
     }

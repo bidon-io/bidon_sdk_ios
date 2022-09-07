@@ -44,7 +44,7 @@ final class AppLovinAdServiceBridge {
         }
         
         func adService(_ adService: ALAdService, didFailToLoadAdWithError code: Int32) {
-            response(.failure(SdkError.noFill))
+            response(.failure(MediationError(alErrorCode: code)))
         }
     }
         
@@ -62,5 +62,19 @@ final class AppLovinAdServiceBridge {
             forZoneIdentifier: lineItem.adUnitId,
             andNotify: delegate
         )
+    }
+}
+
+
+private extension MediationError {
+    init(alErrorCode: Int32) {
+        switch alErrorCode {
+        case kALErrorCodeNoFill: self = .noFill
+        case kALErrorCodeSdkDisabled: self = .adapterNotInitialized
+        case kALErrorCodeAdRequestNetworkTimeout: self = .networkError
+        case kALErrorCodeNotConnectedToInternet: self = .networkError
+        case kALErrorCodeInvalidZone: self = .incorrectAdUnitId
+        default: self = .noBid
+        }
     }
 }

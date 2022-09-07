@@ -11,10 +11,14 @@ import UIKit
 
 @objc(BDInterstitial)
 public final class Interstitial: NSObject, FullscreenAdObject {
+    private typealias InterstitialMediationObserver = DefaultMediationObserver<AnyInterstitialDemandProvider>
+    private typealias InterstitialAuctionControllerBuilder = InterstitialConcurrentAuctionControllerBuilder<InterstitialMediationObserver>
+
     private typealias Manager = FullscreenAdManager<
         AnyInterstitialDemandProvider,
+        InterstitialMediationObserver,
         InterstitialAuctionRequestBuilder,
-        InterstitialConcurrentAuctionControllerBuilder<DefaultMediationObserver>,
+        InterstitialAuctionControllerBuilder,
         InterstitialImpressionController
     >
     
@@ -25,11 +29,11 @@ public final class Interstitial: NSObject, FullscreenAdObject {
     @Injected(\.sdk)
     private var sdk: Sdk
     
-    private lazy var manager: Manager = {
-        let manager = Manager(placement: placement)
-        manager.delegate = self
-        return manager
-    }()
+    private lazy var manager = Manager(
+        adType: .interstitial,
+        placement: placement,
+        delegate: self
+    )
     
     @objc public init(placement: String = "") {
         self.placement = placement

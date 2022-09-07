@@ -133,7 +133,7 @@ extension Banner: BannerAdManagerDelegate {
     func adManager(
         _ adManager: BannerAdManager,
         didReceiveBid ad: Ad,
-        provider: AdViewDemandProvider
+        provider: DemandProvider
     ) {
         provider.revenueDelegate = self
         delegate?.adObject?(self, didReceiveBid: ad)
@@ -143,8 +143,8 @@ extension Banner: BannerAdManagerDelegate {
         delegate?.adObject?(self, didCompleteAuctionRound: round.id)
     }
 
-    func adManager(_ adManager: BannerAdManager, didCompleteAuction demand: AdViewDemand?) {
-        delegate?.adObject?(self, didCompleteAuction: demand?.ad)
+    func adManager(_ adManager: BannerAdManager, didCompleteAuction winner: Ad?) {
+        delegate?.adObject?(self, didCompleteAuction: winner)
     }
 }
 

@@ -23,10 +23,11 @@ enum DemandResult: UInt, Codable {
     case auctionCancelled = 12
     case adFormatNotSupported = 13
     case unscpecifiedException = 14
+    case belowPricefloor = 15
 }
 
 
-protocol DemandLog {
+protocol DemandReport {
     var id: String { get }
     var adUnitId: String? { get }
     var format: String { get }
@@ -36,22 +37,23 @@ protocol DemandLog {
 }
 
 
-protocol RoundLog {
-    associatedtype DemandLogType: DemandLog
+protocol RoundReport {
+    associatedtype DemandReportType: DemandReport
     
     var id: String { get }
     var pricefloor: Price { get }
-    var winnerPrice: Price { get }
-    var demands: [DemandLogType] { get }
+    var winnerPrice: Price? { get }
+    var winnerId: String? { get }
+    var demands: [DemandReportType] { get }
 }
 
 
-protocol MediationLog {
-    associatedtype RoundLogType: RoundLog
+protocol MediationAttemptReport {
+    associatedtype RoundReportType: RoundReport
     
     var auctionId: String { get }
     var auctionConfigurationId: Int { get }
-    var rounds: [RoundLogType] { get }
+    var rounds: [RoundReportType] { get }
 }
 
 

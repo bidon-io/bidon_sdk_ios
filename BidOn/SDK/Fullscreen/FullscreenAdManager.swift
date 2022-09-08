@@ -239,6 +239,7 @@ extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
             builder.withImpression(impression)
+            builder.withAdType(adType)
         }) { result in
             Logger.debug("Sent show with result: \(result)")
         }

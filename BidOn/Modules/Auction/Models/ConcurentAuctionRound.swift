@@ -32,10 +32,10 @@ struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAu
         self.providers = providers
     }
     
-    private func pair(_ demand: String) -> (adapter: AnyAdapter, provider: DemandProviderType)? {
+    private func pair(_ networkId: String) -> (adapter: AnyAdapter, provider: DemandProviderType)? {
         return providers
             .first { adapter, provider in
-                adapter.identifier == demand
+                adapter.identifier == networkId
             }
             .map { ($0.key, $0.value) }
     }
@@ -46,11 +46,11 @@ struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAu
         response: @escaping AuctionRoundBidResponse<DemandProviderType>,
         completion: @escaping AuctionRoundCompletion
     ) {
-        for demand in demands {
+        for networkId in demands {
             group.enter()
             
-            guard let provider = pair(demand) else {
-                let adapter = AnyAdapter(demand: demand)
+            guard let provider = pair(networkId) else {
+                let adapter = AnyAdapter(identifier: networkId)
                 request(adapter, nil)
                 response(adapter, .failure(.unknownAdapter))
                 group.leave()

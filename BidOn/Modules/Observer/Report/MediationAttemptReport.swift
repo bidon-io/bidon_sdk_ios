@@ -9,6 +9,7 @@ import Foundation
 
 
 enum DemandResult: UInt, Codable {
+    case unknown = 0
     case win = 1
     case lose = 2
     case noBid = 3
@@ -28,22 +29,24 @@ enum DemandResult: UInt, Codable {
 
 
 protocol DemandReport {
-    var id: String { get }
+    var networkId: String { get }
     var adUnitId: String? { get }
-    var format: String { get }
     var status: DemandResult { get }
-    var startTimestamp: TimeInterval { get }
-    var finishTimestamp: TimeInterval { get }
+    var price: Price { get }
+    var bidStartTimestamp: TimeInterval { get }
+    var bidFinishTimestamp: TimeInterval { get }
+    var fillStartTimestamp: TimeInterval { get }
+    var fillFinishTimestamp: TimeInterval { get }
 }
 
 
 protocol RoundReport {
     associatedtype DemandReportType: DemandReport
     
-    var id: String { get }
+    var roundId: String { get }
     var pricefloor: Price { get }
     var winnerPrice: Price? { get }
-    var winnerId: String? { get }
+    var winnerNetworkId: String? { get }
     var demands: [DemandReportType] { get }
 }
 

@@ -40,7 +40,8 @@ struct AuctionRequest: Request {
         let builder = T()
         build(builder)
         
-        self.route = .complex(.auction, .adType(builder.adType))
+        self.route = .complex(.adType(builder.adType), .auction)
+        
         self.body = RequestBody(
             device: builder.device,
             session: builder.session,

@@ -21,8 +21,8 @@ struct AnyAdapter: Adapter, Hashable {
         self.sdkVersion = adapter.sdkVersion
     }
     
-    init(demand: String) {
-        self.identifier = demand
+    init(identifier: String) {
+        self.identifier = identifier
         self.name = "Unknown"
         self.adapterVersion = ""
         self.sdkVersion = ""

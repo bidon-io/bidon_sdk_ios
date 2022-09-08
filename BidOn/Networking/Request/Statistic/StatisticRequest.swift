@@ -35,7 +35,7 @@ struct StatisticRequest: Request {
         let builder = StatisticRequestBuilder()
         build(builder)
         
-        self.route = .complex(.stats, .adType(builder.adType))
+        self.route = .complex(.adType(builder.adType), .stats)
         self.body = RequestBody(
             device: builder.device,
             session: builder.session,

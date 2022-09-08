@@ -9,7 +9,7 @@ import Foundation
 
 
 struct ImpressionRequest: Request {
-    var route: Route = .show
+    var route: Route
     var method: HTTPClient.HTTPMethod = .post
     var headers: [HTTPClient.HTTPHeader: String] = .default()
     var timeout: TimeInterval = 10
@@ -34,6 +34,8 @@ struct ImpressionRequest: Request {
     init(_ build: (ImpressionRequestBuilder) -> ()) {
         let builder = ImpressionRequestBuilder()
         build(builder)
+    
+        self.route = .complex(.adType(builder.adType), .show)
         
         self.body = RequestBody(
             device: builder.device,

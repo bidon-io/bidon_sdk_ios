@@ -155,6 +155,7 @@ extension Banner: BannerViewManagerDelegate {
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
             builder.withImpression(impression)
+            builder.withAdType(.banner)
         }) { result in
             Logger.debug("Sent show with result: \(result)")
         }

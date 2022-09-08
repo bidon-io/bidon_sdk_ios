@@ -15,7 +15,6 @@ struct ConfigurationRequest: Request {
     var timeout: TimeInterval = 10
     var body: RequestBody?
     
-    
     struct RequestBody: Encodable, Tokenized {
         var device: DeviceModel?
         var session: SessionModel?

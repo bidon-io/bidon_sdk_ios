@@ -19,7 +19,8 @@ public final class Interstitial: NSObject, FullscreenAdObject {
         InterstitialMediationObserver,
         InterstitialAuctionRequestBuilder,
         InterstitialAuctionControllerBuilder,
-        InterstitialImpressionController
+        InterstitialImpressionController,
+        InterstitialImpressionRequestBuilder
     >
     
     @objc public var delegate: FullscreenAdDelegate?

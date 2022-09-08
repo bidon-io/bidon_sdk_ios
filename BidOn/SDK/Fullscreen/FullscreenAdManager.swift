@@ -26,14 +26,16 @@ final class FullscreenAdManager<
     ObserverType,
     AuctionRequestBuilderType,
     AuctionControllerBuilderType,
-    ImpressionControllerType
+    ImpressionControllerType,
+    ImpressionRequestBuilderType
 >: NSObject where
 AuctionRequestBuilderType: AuctionRequestBuilder,
 ObserverType: MediationObserver,
 ObserverType.DemandProviderType == DemandProviderType,
 AuctionControllerBuilderType: BaseConcurrentAuctionControllerBuilder<DemandProviderType, ObserverType>,
 ImpressionControllerType: FullscreenImpressionController,
-ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
+ImpressionControllerType.DemandType == DemandModel<DemandProviderType>,
+ImpressionRequestBuilderType: ImpressionRequestBuilder {
     
     fileprivate typealias DemandType = DemandModel<DemandProviderType>
     fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType, ObserverType>
@@ -201,6 +203,19 @@ ImpressionControllerType.DemandType == DemandModel<DemandProviderType> {
             Logger.debug("Sent statistics with result: \(result)")
         }
     }
+    
+    private func sendImpression(_ impression: Impression, path: Route) {
+        let request = ImpressionRequest { (builder: ImpressionRequestBuilderType) in
+            builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withExt(sdk.ext)
+            builder.withImpression(impression)
+            builder.withPath(path)
+        }
+        
+        networkManager.perform(request: request) { result in
+            Logger.debug("Sent impression action '\(path)' with result: \(result)")
+        }
+    }
 }
 
 
@@ -235,15 +250,7 @@ extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
     }
     
     func willPresent(_ impression: Impression) {
-        networkManager.perform(request: ImpressionRequest { builder in
-            builder.withEnvironmentRepository(sdk.environmentRepository)
-            builder.withExt(sdk.ext)
-            builder.withImpression(impression)
-            builder.withAdType(adType)
-        }) { result in
-            Logger.debug("Sent show with result: \(result)")
-        }
-        
+        sendImpression(impression, path: .show)
         delegate?.willPresent(impression)
     }
     
@@ -253,10 +260,12 @@ extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
     }
     
     func didClick(_ impression: Impression) {
+        sendImpression(impression, path: .click)
         delegate?.didClick(impression)
     }
     
     func didReceiveReward(_ reward: Reward, impression: Impression) {
+        sendImpression(impression, path: .reward)
         delegate?.didReceiveReward(reward, impression: impression)
     }
 }

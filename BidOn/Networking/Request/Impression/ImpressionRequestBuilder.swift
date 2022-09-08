@@ -8,19 +8,102 @@
 import Foundation
 
 
-final class ImpressionRequestBuilder: BaseRequestBuilder {
-    private(set) var imp: ImpressionModel!
-    private(set) var adType: AdType!
+protocol ImpressionRequestBuilder: BaseRequestBuilder {
+    var imp: ImpressionModel { get }
+    var route: Route { get }
+    
+    @discardableResult
+    func withImpression(_ impression: Impression) -> Self
+    
+    @discardableResult
+    func withPath(_ path: Route) -> Self
+    
+    init()
+}
+
+
+final class InterstitialImpressionRequestBuilder: BaseRequestBuilder, ImpressionRequestBuilder {
+    var imp: ImpressionModel {
+        ImpressionModel(
+            _imp,
+            interstitial: AdObjectModel.InterstitialModel()
+        )
+    }
+    
+    var route: Route {
+        _route
+    }
+    
+    private var _imp: Impression!
+    private var _route: Route!
     
     @discardableResult
     func withImpression(_ impression: Impression) -> Self {
-        self.imp = ImpressionModel(impression)
+        self._imp = impression
         return self
     }
     
     @discardableResult
-    func withAdType(_ adType: AdType) -> Self {
-        self.adType = adType
+    func withPath(_ path: Route) -> Self {
+        self._route = .complex(.adType(.interstitial), path)
+        return self
+    }
+}
+
+
+final class RewardedImpressionRequestBuilder: BaseRequestBuilder, ImpressionRequestBuilder {
+    var imp: ImpressionModel {
+        ImpressionModel(
+            _imp,
+            rewarded: AdObjectModel.RewardedModel()
+        )
+    }
+    
+    var route: Route {
+        _route
+    }
+    
+    private var _imp: Impression!
+    private var _route: Route!
+    
+    @discardableResult
+    func withImpression(_ impression: Impression) -> Self {
+        self._imp = impression
+        return self
+    }
+    
+    @discardableResult
+    func withPath(_ path: Route) -> Self {
+        self._route = .complex(.adType(.rewarded), path)
+        return self
+    }
+}
+
+
+final class AdViewImpressionRequestBuilder: BaseRequestBuilder, ImpressionRequestBuilder {
+    var imp: ImpressionModel {
+        ImpressionModel(
+            _imp,
+            banner: AdObjectModel.BannerModel()
+        )
+    }
+    
+    var route: Route {
+        _route
+    }
+    
+    private var _imp: Impression!
+    private var _route: Route!
+    
+    @discardableResult
+    func withImpression(_ impression: Impression) -> Self {
+        self._imp = impression
+        return self
+    }
+    
+    @discardableResult
+    func withPath(_ path: Route) -> Self {
+        self._route = .complex(.adType(.banner), path)
         return self
     }
 }

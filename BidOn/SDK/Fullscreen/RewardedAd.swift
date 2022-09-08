@@ -19,7 +19,8 @@ public final class RewardedAd: NSObject, RewardedAdObject {
         RewardedMediationObserver,
         RewardedAuctionRequestBuilder,
         RewardedAuctionControllerBuilder,
-        RewardedImpressionController
+        RewardedImpressionController,
+        RewardedImpressionRequestBuilder
     >
     
     @objc public var delegate: RewardedAdDelegate?

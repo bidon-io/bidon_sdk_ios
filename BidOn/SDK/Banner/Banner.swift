@@ -151,15 +151,6 @@ extension Banner: BannerAdManagerDelegate {
 
 extension Banner: BannerViewManagerDelegate {
     func viewManager(_ viewManager: BannerViewManager, didRecordImpression impression: Impression) {
-        networkManager.perform(request: ImpressionRequest { builder in
-            builder.withEnvironmentRepository(sdk.environmentRepository)
-            builder.withExt(sdk.ext)
-            builder.withImpression(impression)
-            builder.withAdType(.banner)
-        }) { result in
-            Logger.debug("Sent show with result: \(result)")
-        }
-        
         scheduleRefreshIfNeeded()
         delegate?.adObject?(self, didRecordImpression: impression.ad)
     }

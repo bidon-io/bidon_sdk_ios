@@ -31,11 +31,11 @@ struct ImpressionRequest: Request {
         var success: Bool
     }
     
-    init(_ build: (ImpressionRequestBuilder) -> ()) {
-        let builder = ImpressionRequestBuilder()
+    init<T: ImpressionRequestBuilder>(_ build: (T) -> ()) {
+        let builder = T()
         build(builder)
     
-        self.route = .complex(.adType(builder.adType), .show)
+        self.route = builder.route
         
         self.body = RequestBody(
             device: builder.device,

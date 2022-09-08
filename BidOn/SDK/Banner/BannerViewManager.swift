@@ -39,6 +39,12 @@ final internal class BannerViewManager: NSObject {
         }
     }
     
+    @Injected(\.networkManager)
+    private var networkManager: NetworkManager
+    
+    @Injected(\.sdk)
+    private var sdk: Sdk
+    
     weak var container: UIView?
     
     private var timer: Timer?
@@ -136,6 +142,28 @@ final internal class BannerViewManager: NSObject {
         view.addGestureRecognizer(recognizer)
     }
     
+    private func sendImpression(
+        _ impression: Impression,
+        path: Route
+    ) {
+        let request = ImpressionRequest { (builder: AdViewImpressionRequestBuilder) in
+            builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withExt(sdk.ext)
+            builder.withImpression(impression)
+            builder.withPath(path)
+        }
+        
+        networkManager.perform(request: request) { result in
+            Logger.debug("Sent impression action '\(path)' with result: \(result)")
+        }
+    }
+    
+    private func trackImpression(adView: AdViewContainer) {
+        guard let impression = adView.impression else { return }
+        
+        sendImpression(impression, path: .show)
+        delegate?.viewManager(self, didRecordImpression: impression)
+    }
     
     @objc private
     func didReceiveTap(_ recognizer: UITapGestureRecognizer) {
@@ -144,12 +172,9 @@ final internal class BannerViewManager: NSObject {
             let impression = adView.impression
         else { return }
         
+        sendImpression(impression, path: .click)
+        
         delegate?.viewManager(self, didRecordClick: impression)
-    }
-    
-    private func trackImpression(adView: AdViewContainer) {
-        guard let impression = adView.impression else { return }
-        delegate?.viewManager(self, didRecordImpression: impression)
     }
 }
 

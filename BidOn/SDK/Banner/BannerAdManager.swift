@@ -133,7 +133,7 @@ final class BannerAdManager: NSObject {
                     observer: observer
                 )
             case .failure(let error):
-                self.sendAuctionStatistics(observer.report)
+                self.sendMediationAttemptReport(observer.report)
                 self.state = .idle
                 self.delegate?.adManager(self, didFailToLoad: error)
             }
@@ -157,7 +157,7 @@ final class BannerAdManager: NSObject {
         waterfall.load { [weak self, unowned observer]  result in
             guard let self = self else { return }
             
-            self.sendAuctionStatistics(observer.report)
+            self.sendMediationAttemptReport(observer.report)
             
             switch result {
             case .success(let demand):
@@ -171,7 +171,7 @@ final class BannerAdManager: NSObject {
         }
     }
     
-    private func sendAuctionStatistics<T: MediationAttemptReport>(_ report: T) {
+    private func sendMediationAttemptReport<T: MediationAttemptReport>(_ report: T) {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)

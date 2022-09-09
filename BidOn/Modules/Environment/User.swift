@@ -8,11 +8,16 @@
 import Foundation
 
 
-enum TrackingAuthorizationStatus: UInt, Codable {
-    case notDetermined = 0
-    case restricted = 1
-    case denied = 2
-    case authorized = 3
+enum TrackingAuthorizationStatus: String, Codable {
+    case notDetermined
+    case restricted
+    case denied
+    case authorized 
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue.camelCaseToSnakeCase().uppercased())
+    }
 }
 
 

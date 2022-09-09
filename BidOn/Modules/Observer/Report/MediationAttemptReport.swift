@@ -8,23 +8,28 @@
 import Foundation
 
 
-enum DemandResult: UInt, Codable {
-    case unknown = 0
-    case win = 1
-    case lose = 2
-    case noBid = 3
-    case noFill = 4
-    case unknownAdapter = 5
-    case adapterNotInitialized = 6
-    case bidTimeoutReached = 7
-    case fillTiemoutReached = 8
-    case networkError = 9
-    case incorrectAdUnitId = 10
-    case noApproperiateAdUnitId = 11
-    case auctionCancelled = 12
-    case adFormatNotSupported = 13
-    case unscpecifiedException = 14
-    case belowPricefloor = 15
+enum DemandResult: String, Codable {
+    case unknown
+    case win
+    case lose
+    case noBid
+    case noFill
+    case unknownAdapter
+    case adapterNotInitialized
+    case bidTimeoutReached
+    case fillTiemoutReached
+    case networkError
+    case incorrectAdUnitId
+    case noApproperiateAdUnitId
+    case auctionCancelled
+    case adFormatNotSupported
+    case unscpecifiedException
+    case belowPricefloor
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue.camelCaseToSnakeCase().uppercased())
+    }
 }
 
 

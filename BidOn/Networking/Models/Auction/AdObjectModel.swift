@@ -10,9 +10,9 @@ import UIKit
 
 
 struct AdObjectModel: Encodable {
-    enum InterfaceOrientation: Int, Encodable {
-        case portrait = 0
-        case landscape = 1
+    enum InterfaceOrientation: String, Encodable {
+        case portrait
+        case landscape
     }
     
     struct BannerModel: Encodable {
@@ -40,5 +40,13 @@ extension AdObjectModel.InterfaceOrientation {
     static var current: AdObjectModel.InterfaceOrientation {
         let isLandscape = DispatchQueue.bd.blocking { UIApplication.shared.bd.isLandscape }
         return AdObjectModel.InterfaceOrientation(isLandscape)
+    }
+}
+
+
+extension AdObjectModel.InterfaceOrientation {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue.uppercased())
     }
 }

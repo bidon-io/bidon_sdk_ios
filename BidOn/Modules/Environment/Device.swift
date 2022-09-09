@@ -8,15 +8,20 @@
 import Foundation
 
 
-enum ConnectionType: Int, Codable {
-    case unknown = 0
-    case ethernet = 1
-    case wifi = 2
-    case cellularUnknown = 3
-    case cellular2G = 4
-    case cellular3G = 5
-    case cellular4G = 6
-    case cellular5G = 7
+enum ConnectionType: String, Codable {
+    case unknown
+    case ethernet
+    case wifi
+    case cellularUnknown
+    case cellular2G
+    case cellular3G
+    case cellular4G
+    case cellular5G
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue.camelCaseToSnakeCase().uppercased())
+    }
 }
 
 

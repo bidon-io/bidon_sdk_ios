@@ -32,7 +32,6 @@ public extension UIApplication {
             } else {
                 return application.keyWindow
             }
-            
         }
         
         public var topViewcontroller: UIViewController? {

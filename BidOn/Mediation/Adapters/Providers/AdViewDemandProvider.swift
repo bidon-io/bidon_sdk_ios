@@ -37,7 +37,7 @@ public struct AdViewContext {
 }
 
 
-@objc public enum AdViewFormat: Int, Codable {
+@objc public enum AdViewFormat: Int, Codable, CustomStringConvertible {
     case banner
     case leaderboard
     case mrec
@@ -57,6 +57,40 @@ public struct AdViewContext {
             CGSize(width: 728, height: 90)
         }
     }
+    
+    public var description: String {
+        return stringValue.capitalized
+    }
+    
+    var stringValue: String {
+        switch self {
+        case .banner: return "banner"
+        case .leaderboard: return "leaderboard"
+        case .mrec: return "mrec"
+        case .adaptive: return "adaptive"
+        }
+    }
+    
+    init(_ stringValue: String) throws {
+        switch stringValue {
+        case "banner": self = .banner
+        case "leaderboard": self = .leaderboard
+        case "mrec": self = .mrec
+        case "adaptive": self = .adaptive
+        default: throw SdkError("Unable to create with '\(stringValue)'")
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(stringValue.uppercased())
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let stringValue = try container.decode(String.self)
+        try self.init(stringValue)
+    }
 }
 
 
@@ -75,5 +109,5 @@ public protocol DemandProviderAdViewDelegate: AnyObject {
 public protocol AdViewDemandProvider: DemandProvider {
     var adViewDelegate: DemandProviderAdViewDelegate? { get set }
     
-    func container(for ad: Ad) -> AdViewContainer? 
+    func container(for ad: Ad) -> AdViewContainer?
 }

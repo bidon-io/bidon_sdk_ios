@@ -125,10 +125,10 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
 
 extension AdViewContext {
     var adSize: GADAdSize {
-        switch (format, isAdaptive) {
-        case (.mrec, _): return GADAdSizeMediumRectangle
-        case (.banner, false): return GADAdSizeBanner
-        case (.leaderboard, false): return GADAdSizeLeaderboard
+        switch format {
+        case .mrec: return GADAdSizeMediumRectangle
+        case .banner: return GADAdSizeBanner
+        case .leaderboard: return GADAdSizeLeaderboard
         default: return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(width)
         }
     }

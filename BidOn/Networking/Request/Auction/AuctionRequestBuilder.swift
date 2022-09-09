@@ -26,13 +26,13 @@ protocol AuctionRequestBuilder: BaseRequestBuilder {
 final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
-
+    
     var adType: AdType { .interstitial }
     
     var adapters: AdaptersInfo {
         let interstitials: [InterstitialDemandSourceAdapter] = adaptersRepository.all()
         let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
-
+        
         return AdaptersInfo(adapters: interstitials + mmps)
     }
     
@@ -61,13 +61,13 @@ final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionReques
 final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
-
+    
     var adType: AdType { .rewarded }
     
     var adapters: AdaptersInfo {
         let interstitials: [InterstitialDemandSourceAdapter] = adaptersRepository.all()
         let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
-
+        
         return AdaptersInfo(adapters: interstitials + mmps)
     }
     
@@ -96,13 +96,14 @@ final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBui
 final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
-
+    private(set) var format: AdViewFormat!
+    
     var adType: AdType { .banner}
     
     var adapters: AdaptersInfo {
         let banners: [AdViewDemandSourceAdapter] = adaptersRepository.all()
         let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
-
+        
         return AdaptersInfo(adapters: banners + mmps)
     }
     
@@ -118,11 +119,19 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
         return self
     }
     
+    @discardableResult
+    func withFormat(_ format: AdViewFormat) -> Self {
+        self.format = format
+        return self
+    }
+    
     var adObject: AdObjectModel {
         AdObjectModel(
             placement: placement,
             auctionId: auctionId,
-            banner: AdObjectModel.BannerModel()
+            banner: AdObjectModel.BannerModel(
+                format: format
+            )
         )
     }
 }

@@ -17,7 +17,7 @@ internal final class BidMachineBannerDemandProvider: NSObject {
     private let context: AdViewContext
     
     private var response: DemandProviderResponse?
-
+    
     private lazy var request: Request = {
         let request = BDMBannerRequest()
         request.adSize = BDMBannerAdSize(context.format)
@@ -83,7 +83,7 @@ extension BidMachineBannerDemandProvider: AdViewDemandProvider {
 extension BidMachineBannerDemandProvider: BDMBannerDelegate {
     func bannerViewReady(toPresent bannerView: BDMBannerView) {
         guard let adObject = bannerView.adObject else { return }
-
+        
         response?(.success(BidMachineAd(adObject)))
         response = nil
     }
@@ -116,7 +116,7 @@ extension BidMachineBannerDemandProvider: BDMBannerDelegate {
 extension BidMachineBannerDemandProvider: BDMAdEventProducerDelegate {
     func didProduceImpression(_ producer: BDMAdEventProducer) {
         guard let adObject = banner.adObject else { return }
-
+        
         revenueDelegate?.provider(self, didPayRevenueFor: BidMachineAd(adObject))
     }
     
@@ -127,12 +127,10 @@ extension BidMachineBannerDemandProvider: BDMAdEventProducerDelegate {
 extension BDMBannerAdSize {
     init(_ format: AdViewFormat) {
         switch format {
-        case .banner:
-            self = .size320x50
-        case .leaderboard:
-            self = .size728x90
-        case .mrec:
-            self = .size300x250
+        case .adaptive: self = .sizeUnknown
+        case .banner: self = .size320x50
+        case .leaderboard: self = .size728x90
+        case .mrec: self = .size300x250
         }
     }
 }

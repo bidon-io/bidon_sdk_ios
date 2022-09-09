@@ -146,6 +146,7 @@ extension AppLovinAdViewDemandProvider: ALAdDisplayDelegate {
 private extension AdViewContext {
     var appLovinAdSize: ALAdSize {
         switch format {
+        case .adaptive:     return UIDevice.bd.isPhone ? .banner : .leader
         case .banner:       return .banner
         case .leaderboard:  return .leader
         case .mrec:         return .mrec

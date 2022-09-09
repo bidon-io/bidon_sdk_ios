@@ -8,7 +8,6 @@
 import Foundation
 
 
-// TODO: Make demand provider generic
 protocol Demand {
     associatedtype Provider
     

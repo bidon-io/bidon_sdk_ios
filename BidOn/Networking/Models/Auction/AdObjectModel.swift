@@ -16,20 +16,12 @@ struct AdObjectModel: Encodable {
     }
     
     struct BannerModel: Encodable {
-        
+        var format: AdViewFormat
     }
     
-    struct InterstitialModel: Encodable {
-        enum Format: Int, Encodable {
-            case `static` = 0
-            case video = 1
-        }
-        var formats: [Format] = [.static, .video]
-    }
+    struct InterstitialModel: Encodable {}
     
-    struct RewardedModel: Encodable {
-        
-    }
+    struct RewardedModel: Encodable {}
     
     var orientation: InterfaceOrientation = .current
     var placement: String

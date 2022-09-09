@@ -30,15 +30,21 @@ struct HomeView: View {
                     
                     if vm.isBannerPresented {
                         Divider()
-                            .padding(.bottom)
                         
-                        BannerView(
-                            format: vm.bannerSettings.format,
-                            isAutorefreshing: vm.bannerSettings.isAutorefreshing,
-                            autorefreshInterval: vm.bannerSettings.autorefreshInterval,
-                            onEvent: vm.banner.receive
-                        )
+                        ZStack {
+                            BannerView(
+                                format: vm.bannerSettings.format,
+                                isAutorefreshing: vm.bannerSettings.isAutorefreshing,
+                                autorefreshInterval: vm.bannerSettings.autorefreshInterval,
+                                onEvent: vm.banner.receive
+                            )
+                            
+                            if vm.isBannerLoading {
+                               ProgressView()
+                            }
+                        }
                         .frame(height: vm.bannerHeight)
+                        
                     }
                 }
                 .listStyle(.insetGrouped)
@@ -60,6 +66,7 @@ final class HomeViewModel: ObservableObject {
     @Published var banner = BannerAdSectionViewModel()
     
     @Published var isBannerPresented: Bool = false
+    @Published var isBannerLoading: Bool = false
     @Published var bannerHeight: CGFloat = 0
     @Published var bannerSettings = BannerSettings(
         format: .banner,
@@ -82,6 +89,13 @@ final class HomeViewModel: ObservableObject {
         banner.$format.map { $0.preferredSize.height }.sink { height in
             withAnimation { [unowned self] in
                 self.bannerHeight = height
+            }
+        }
+        .store(in: &cancellables)
+        
+        banner.$isLoading.sink { isBannerLoading in
+            withAnimation { [unowned self] in
+                self.isBannerLoading = isBannerLoading
             }
         }
         .store(in: &cancellables)

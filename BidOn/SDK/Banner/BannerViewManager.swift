@@ -27,15 +27,18 @@ final internal class BannerViewManager: NSObject {
         var auctionId: String
         var auctionConfigurationId: Int
         var ad: Ad
+        var format: AdViewFormat
         
         init(
             auctionId: String,
             auctionConfigurationId: Int,
-            ad: Ad
+            ad: Ad,
+            format: AdViewFormat
         ) {
             self.auctionId = auctionId
             self.auctionConfigurationId = auctionConfigurationId
             self.ad = ad
+            self.format = format
         }
     }
     
@@ -48,7 +51,7 @@ final internal class BannerViewManager: NSObject {
     weak var container: UIView?
     
     private var timer: Timer?
-        
+    
     var isAdPresented: Bool {
         guard let container = container else { return false }
         return !container.subviews.isEmpty
@@ -86,7 +89,7 @@ final internal class BannerViewManager: NSObject {
     func present(
         demand: AdViewDemand,
         view: AdViewContainer,
-        size: CGSize
+        context: AdViewContext
     ) {
         guard
             let container = container,
@@ -113,8 +116,8 @@ final internal class BannerViewManager: NSObject {
             constraints = [
                 view.centerXAnchor.constraint(equalTo: container.centerXAnchor),
                 view.centerYAnchor.constraint(equalTo: container.centerYAnchor),
-                view.widthAnchor.constraint(equalToConstant: size.width),
-                view.heightAnchor.constraint(equalToConstant: size.height)
+                view.widthAnchor.constraint(equalToConstant: context.format.preferredSize.width),
+                view.heightAnchor.constraint(equalToConstant: context.format.preferredSize.height)
             ]
         }
         
@@ -134,7 +137,8 @@ final internal class BannerViewManager: NSObject {
         view.impression = AdViewImpression(
             auctionId: demand.auctionId,
             auctionConfigurationId: demand.auctionConfigurationId,
-            ad: demand.ad
+            ad: demand.ad,
+            format: context.format
         )
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(didReceiveTap))
@@ -143,13 +147,14 @@ final internal class BannerViewManager: NSObject {
     }
     
     private func sendImpression(
-        _ impression: Impression,
+        _ impression: AdViewImpression,
         path: Route
     ) {
         let request = ImpressionRequest { (builder: AdViewImpressionRequestBuilder) in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
             builder.withImpression(impression)
+            builder.withFormat(impression.format)
             builder.withPath(path)
         }
         
@@ -217,8 +222,8 @@ extension BannerViewManager: UIGestureRecognizerDelegate {
 
 
 private extension AdViewContainer {
-    var impression: Impression? {
-        get { objc_getAssociatedObject(self, &BannerViewManager.impressionKey) as? Impression }
+    var impression: BannerViewManager.AdViewImpression? {
+        get { objc_getAssociatedObject(self, &BannerViewManager.impressionKey) as? BannerViewManager.AdViewImpression }
         set { objc_setAssociatedObject(self, &BannerViewManager.impressionKey, newValue, .OBJC_ASSOCIATION_RETAIN) }
     }
     

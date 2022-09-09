@@ -21,7 +21,7 @@ public struct BannerView: UIViewRepresentable {
     public var onEvent: Event?
     
     public init(
-        format: AdViewFormat = .banner,
+        format: AdViewFormat = .adaptive,
         isAutorefreshing: Bool = true,
         autorefreshInterval: TimeInterval = 15,
         onEvent: Event? = nil

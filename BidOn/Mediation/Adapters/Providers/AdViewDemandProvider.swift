@@ -12,40 +12,36 @@ import UIKit
 public struct AdViewContext {
     public var format: AdViewFormat
     public var size: CGSize
-    public var isAdaptive: Bool
     public var rootViewController: UIViewController?
     
     public init(
         format: AdViewFormat,
         size: CGSize,
-        isAdaptive: Bool,
         rootViewController: UIViewController?
     ) {
         self.format = format
         self.size = size
-        self.isAdaptive = isAdaptive
         self.rootViewController = rootViewController
     }
     
     public init(
         _ format: AdViewFormat,
-        isAdaptive: Bool = false,
         rootViewController: UIViewController? = nil
     ) {
         self = .init(
             format: format,
             size: format.preferredSize,
-            isAdaptive: isAdaptive,
             rootViewController: rootViewController ?? UIApplication.shared.bd.topViewcontroller
         )
     }
 }
 
 
-@objc public enum AdViewFormat: Int {
+@objc public enum AdViewFormat: Int, Codable {
     case banner
     case leaderboard
     case mrec
+    case adaptive
     
     public var preferredSize: CGSize {
         switch self {
@@ -55,6 +51,10 @@ public struct AdViewContext {
             return CGSize(width: 728, height: 90)
         case .mrec:
             return CGSize(width: 300, height: 250)
+        case .adaptive:
+            return UIDevice.bd.isPhone ?
+            CGSize(width: 320, height: 50) :
+            CGSize(width: 728, height: 90)
         }
     }
 }

@@ -84,7 +84,9 @@ final class AdViewImpressionRequestBuilder: BaseRequestBuilder, ImpressionReques
     var imp: ImpressionModel {
         ImpressionModel(
             _imp,
-            banner: AdObjectModel.BannerModel()
+            banner: AdObjectModel.BannerModel(
+                format: _format
+            )
         )
     }
     
@@ -94,10 +96,17 @@ final class AdViewImpressionRequestBuilder: BaseRequestBuilder, ImpressionReques
     
     private var _imp: Impression!
     private var _route: Route!
+    private var _format: AdViewFormat!
     
     @discardableResult
     func withImpression(_ impression: Impression) -> Self {
         self._imp = impression
+        return self
+    }
+    
+    @discardableResult
+    func withFormat(_ format: AdViewFormat) -> Self {
+        self._format = format
         return self
     }
     

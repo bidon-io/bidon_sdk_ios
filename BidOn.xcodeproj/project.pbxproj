@@ -102,6 +102,7 @@
 		42BE439628C203AF000528E3 /* BannerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439528C203AF000528E3 /* BannerPublisher.swift */; };
 		42BE439A28C24626000528E3 /* AnyDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439928C24626000528E3 /* AnyDemandProvider.swift */; };
 		42C59BA028C64F4400544EDF /* MediationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C59B9F28C64F4400544EDF /* MediationObserver.swift */; };
+		42CCB99128CB365400DBAE97 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CCB99028CB365400DBAE97 /* UIDevice+Extensions.swift */; };
 		42D047DE289D5A0D0096A8C6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047DD289D5A0D0096A8C6 /* Device.swift */; };
 		42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047DF289D5E5C0096A8C6 /* Session.swift */; };
 		42D047E2289D5EEE0096A8C6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047E1289D5EEE0096A8C6 /* App.swift */; };
@@ -213,6 +214,7 @@
 		42BE439528C203AF000528E3 /* BannerPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerPublisher.swift; sourceTree = "<group>"; };
 		42BE439928C24626000528E3 /* AnyDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDemandProvider.swift; sourceTree = "<group>"; };
 		42C59B9F28C64F4400544EDF /* MediationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediationObserver.swift; sourceTree = "<group>"; };
+		42CCB99028CB365400DBAE97 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		42D047DD289D5A0D0096A8C6 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		42D047DF289D5E5C0096A8C6 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		42D047E1289D5EEE0096A8C6 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				42389E162874665A006024BA /* UIApplication+Extensions.swift */,
+				42CCB99028CB365400DBAE97 /* UIDevice+Extensions.swift */,
 				428CCBF628A12C8D003123EF /* Date+Extensions.swift */,
 				426DD79728A4008F00A1ADF5 /* GCD.swift */,
 			);
@@ -780,6 +783,7 @@
 				426DD7AA28A550F700A1ADF5 /* AdViewConcurrentAuctionControllerBuilder.swift in Sources */,
 				4238BBA728CA0EA9002DC473 /* DefaultMediationAttemptReport.swift in Sources */,
 				426DD7A628A5042A00A1ADF5 /* UserDefault.swift in Sources */,
+				42CCB99128CB365400DBAE97 /* UIDevice+Extensions.swift in Sources */,
 				421D48EA28884D1F007DE2E4 /* LogFormatter.swift in Sources */,
 				424D295D28BE35B800F6F2D6 /* ProgrammaticAdWrapper.swift in Sources */,
 				424D296428BE630500F6F2D6 /* MainThreadComputable.swift in Sources */,

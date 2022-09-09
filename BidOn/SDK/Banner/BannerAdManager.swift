@@ -80,6 +80,7 @@ final class BannerAdManager: NSObject {
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withAuctionId(UUID().uuidString)
+            builder.withFormat(context.format)
             builder.withExt(sdk.ext)
         }
         

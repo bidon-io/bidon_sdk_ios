@@ -81,16 +81,17 @@ struct BannerAdSection: View {
 
 
 extension AdViewFormat: CaseIterable {
-    public static var allCases: [AdViewFormat] = [.banner, .leaderboard, .mrec]
+    public static var allCases: [AdViewFormat] = [.adaptive, .banner, .leaderboard, .mrec]
 }
 
 
 extension AdViewFormat: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .banner: return "Banner"
-        case .leaderboard: return "Leaderboard"
-        case .mrec: return "MREC"
+        case .adaptive:     return "Adaptive"
+        case .banner:       return "Banner"
+        case .leaderboard:  return "Leaderboard"
+        case .mrec:         return "MREC"
         }
     }
 }

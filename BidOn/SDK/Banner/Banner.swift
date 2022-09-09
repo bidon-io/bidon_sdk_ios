@@ -35,6 +35,14 @@ public final class Banner: UIView, AdView {
     @Injected(\.networkManager)
     private var networkManager: NetworkManager
     
+    private var context: AdViewContext {
+        return AdViewContext(
+            format: format,
+            size: format.preferredSize,
+            rootViewController: rootViewController
+        )
+    }
+    
     private lazy var viewManager: BannerViewManager = {
         let manager = BannerViewManager()
         manager.container = self
@@ -62,14 +70,7 @@ public final class Banner: UIView, AdView {
     }
     
     @objc public func loadAd() {
-        let ctx = AdViewContext(
-            format: format,
-            size: format.preferredSize,
-            isAdaptive: true,
-            rootViewController: rootViewController
-        )
-        
-        adManager.loadAd(context: ctx)
+        adManager.loadAd(context: context)
     }
     
     private final func refreshIfNeeded() {
@@ -87,7 +88,7 @@ public final class Banner: UIView, AdView {
                 self.viewManager.present(
                     demand: demand,
                     view: adView,
-                    size: self.format.preferredSize
+                    context: self.context
                 )
             }
         }

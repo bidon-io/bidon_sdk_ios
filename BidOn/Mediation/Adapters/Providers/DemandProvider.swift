@@ -14,16 +14,16 @@ public enum AuctionEvent {
 }
 
 
-public enum MediationError: Error {
+public enum MediationError: String, Error {
     case noBid
     case noFill
     case unknownAdapter
     case adapterNotInitialized
     case bidTimeoutReached
-    case fillTiemoutReached
+    case fillTimeoutReached
     case networkError
     case incorrectAdUnitId
-    case noApproperiateAdUnitId
+    case noAppropriateAdUnitId
     case auctionCancelled
     case adFormatNotSupported
     case unscpecifiedException

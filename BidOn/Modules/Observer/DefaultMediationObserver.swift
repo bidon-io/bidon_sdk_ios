@@ -138,7 +138,7 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
                 observation.status = .win
             }
             demandObservations.update(
-                condition: { $0.adId != ad.id && $0.status == .unknown }
+                condition: { $0.adId != ad.id && $0.status.isUnknown }
             ) { observation in
                 observation.status = .lose
             }
@@ -151,27 +151,6 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
             }
         case .fillStart, .fillFinish:
             break
-        }
-    }
-}
-
-
-private extension DemandResult {
-    init(_ error: MediationError) {
-        switch error {
-        case .noBid: self = .noBid
-        case .noFill: self = .noFill
-        case .unknownAdapter: self = .unknown
-        case .adapterNotInitialized: self = .adapterNotInitialized
-        case .bidTimeoutReached: self = .bidTimeoutReached
-        case .fillTiemoutReached: self = .fillTiemoutReached
-        case .networkError: self = .networkError
-        case .incorrectAdUnitId: self = .incorrectAdUnitId
-        case .noApproperiateAdUnitId: self = .noApproperiateAdUnitId
-        case .auctionCancelled: self = .auctionCancelled
-        case .adFormatNotSupported: self = .adFormatNotSupported
-        case .unscpecifiedException: self = .unscpecifiedException
-        case .belowPricefloor: self = .belowPricefloor
         }
     }
 }

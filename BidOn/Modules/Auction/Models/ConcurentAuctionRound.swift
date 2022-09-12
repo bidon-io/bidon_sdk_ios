@@ -83,7 +83,7 @@ struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAu
                     }
                 } else {
                     request(provider.adapter, nil)
-                    response(provider.adapter, .failure(.noApproperiateAdUnitId))
+                    response(provider.adapter, .failure(.noAppropriateAdUnitId))
                     group.leave()
                 }
             default:

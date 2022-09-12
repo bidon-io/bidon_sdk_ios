@@ -8,31 +8,6 @@
 import Foundation
 
 
-enum DemandResult: String, Codable {
-    case unknown
-    case win
-    case lose
-    case noBid
-    case noFill
-    case unknownAdapter
-    case adapterNotInitialized
-    case bidTimeoutReached
-    case fillTiemoutReached
-    case networkError
-    case incorrectAdUnitId
-    case noApproperiateAdUnitId
-    case auctionCancelled
-    case adFormatNotSupported
-    case unscpecifiedException
-    case belowPricefloor
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue.camelCaseToSnakeCase().uppercased())
-    }
-}
-
-
 protocol DemandReport {
     var networkId: String { get }
     var adUnitId: String? { get }

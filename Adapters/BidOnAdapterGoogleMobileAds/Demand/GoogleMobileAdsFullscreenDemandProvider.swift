@@ -75,7 +75,7 @@ extension GoogleMobileAdsFullscreenDemandProvider: DirectDemandProvider {
             guard let self = self else { return }
             
             guard let fullscreenAd = fullscreenAd as? FullscreenAd else {
-                self.response?(.failure(.unknownAdapter))
+                self.response?(.failure(MediationError(gadError: error)))
                 self.response = nil
                 return
             }

@@ -27,6 +27,7 @@
 		4299A413289BC8B40062C580 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A412289BC8B40062C580 /* ContentView.swift */; };
 		4299A415289BC8B60062C580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A414289BC8B60062C580 /* Assets.xcassets */; };
 		4299A418289BC8B60062C580 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A417289BC8B60062C580 /* Preview Assets.xcassets */; };
+		429F4D8828CF6AA700765BD7 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429F4D8728CF6AA700765BD7 /* Wave.swift */; };
 		42BE439028C0E7B3000528E3 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438F28C0E7B3000528E3 /* Permission.swift */; };
 		42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439128C0E7CB000528E3 /* LocationPermission.swift */; };
 		42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */; };
@@ -34,7 +35,7 @@
 		42EDA0AC28C5EEE300BF74DE /* InitializationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0AB28C5EEE300BF74DE /* InitializationVIew.swift */; };
 		42EDA0AE28C5EF6000BF74DE /* InitializationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0AD28C5EF6000BF74DE /* InitializationViewModel.swift */; };
 		42EDA0B028C5FA3800BF74DE /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0AF28C5FA3800BF74DE /* ContentViewModel.swift */; };
-		42EDA0B228C612B000BF74DE /* OverlayProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0B128C612B000BF74DE /* OverlayProgressView.swift */; };
+		42EDA0B228C612B000BF74DE /* AppProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0B128C612B000BF74DE /* AppProgressView.swift */; };
 		42EDA0B428C6178600BF74DE /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0B328C6178600BF74DE /* PermissionView.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		4299A412289BC8B40062C580 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4299A414289BC8B60062C580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4299A417289BC8B60062C580 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		429F4D8728CF6AA700765BD7 /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		42BE438F28C0E7B3000528E3 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		42BE439128C0E7CB000528E3 /* LocationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermission.swift; sourceTree = "<group>"; };
 		42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparencyPermission.swift; sourceTree = "<group>"; };
@@ -68,7 +70,7 @@
 		42EDA0AB28C5EEE300BF74DE /* InitializationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationVIew.swift; sourceTree = "<group>"; };
 		42EDA0AD28C5EF6000BF74DE /* InitializationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationViewModel.swift; sourceTree = "<group>"; };
 		42EDA0AF28C5FA3800BF74DE /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
-		42EDA0B128C612B000BF74DE /* OverlayProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayProgressView.swift; sourceTree = "<group>"; };
+		42EDA0B128C612B000BF74DE /* AppProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProgressView.swift; sourceTree = "<group>"; };
 		42EDA0B328C6178600BF74DE /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		64A1E0483C51188FF09EB928 /* Pods_Sandbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sandbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F846B990A6AF5B081BB0BD12 /* Pods-Sandbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sandbox.debug.xcconfig"; path = "Target Support Files/Pods-Sandbox/Pods-Sandbox.debug.xcconfig"; sourceTree = "<group>"; };
@@ -121,10 +123,9 @@
 		4224AA8128B8F92000E8D886 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				429F4D8628CF6A9C00765BD7 /* Views */,
+				429F4D8528CF6A7F00765BD7 /* Events */,
 				42BE438E28C0E79D000528E3 /* Permissions */,
-				4224AA8228B8F92B00E8D886 /* AdEventModel.swift */,
-				4224AA8428B900AF00E8D886 /* AdEventView.swift */,
-				4219DB5528B90479001F38E5 /* AdEventsList.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -187,6 +188,25 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		429F4D8528CF6A7F00765BD7 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				4224AA8228B8F92B00E8D886 /* AdEventModel.swift */,
+				4224AA8428B900AF00E8D886 /* AdEventView.swift */,
+				4219DB5528B90479001F38E5 /* AdEventsList.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		429F4D8628CF6A9C00765BD7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				42EDA0B128C612B000BF74DE /* AppProgressView.swift */,
+				429F4D8728CF6AA700765BD7 /* Wave.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		42BE438E28C0E79D000528E3 /* Permissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,7 +232,6 @@
 				42C59B9C28C61EF600544EDF /* Rows */,
 				42EDA0AB28C5EEE300BF74DE /* InitializationVIew.swift */,
 				42EDA0AD28C5EF6000BF74DE /* InitializationViewModel.swift */,
-				42EDA0B128C612B000BF74DE /* OverlayProgressView.swift */,
 			);
 			path = Initialization;
 			sourceTree = "<group>";
@@ -376,9 +395,10 @@
 				4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */,
 				42EDA0B028C5FA3800BF74DE /* ContentViewModel.swift in Sources */,
 				42EDA0B428C6178600BF74DE /* PermissionView.swift in Sources */,
-				42EDA0B228C612B000BF74DE /* OverlayProgressView.swift in Sources */,
+				42EDA0B228C612B000BF74DE /* AppProgressView.swift in Sources */,
 				4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */,
 				42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */,
+				429F4D8828CF6AA700765BD7 /* Wave.swift in Sources */,
 				42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

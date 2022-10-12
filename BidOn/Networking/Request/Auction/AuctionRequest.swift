@@ -10,8 +10,8 @@ import Foundation
 
 struct AuctionRequest: Request {
     var route: Route
-    var method: HTTPClient.HTTPMethod = .post
-    var headers: [HTTPClient.HTTPHeader: String] = .default()
+    var method: HTTPTask.HTTPMethod = .post
+    var headers: [HTTPTask.HTTPHeader: String] = .default()
     var timeout: TimeInterval = 10
     var body: RequestBody?
     

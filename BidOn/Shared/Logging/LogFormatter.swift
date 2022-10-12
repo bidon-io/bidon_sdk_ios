@@ -32,7 +32,7 @@ struct LogFormatter {
 #if DEBUG
             return String(format: "%@ [BidOn] [%@] [Function: %@] [File: %@] [Line: %d] %@", date, level.stringValue, function, file, line, "\(message)")
 #else
-            return String(format: "%@ [BidOn] [%@] %@", date, level.stringValue, message)
+            return String(format: "%@ [BidOn] [%@] %@", date, level.stringValue, "\(message)")
 #endif
         case .short:
             return String(format: "[BidOn] [%@] %@", level.stringValue, "\(message)")

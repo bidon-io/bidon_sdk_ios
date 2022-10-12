@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol NetworkManager {
-    typealias Completion<W: Request> = (Result<W.ResponseBody, HTTPClient.HTTPError>) -> ()
+    typealias Completion<W: Request> = (Result<W.ResponseBody, HTTPTask.HTTPError>) -> ()
     
     var baseURL: String { get set }
     
@@ -43,9 +43,8 @@ fileprivate final class PersistentNetworkManager: NetworkManager {
     
     func perform<T: Request>(
         request: T,
-        completion: @escaping (Result<T.ResponseBody, HTTPClient.HTTPError>) -> ()
+        completion: @escaping (Result<T.ResponseBody, HTTPTask.HTTPError>) -> ()
     ) {
-        let client = HTTPClient(baseURL: baseURL)
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         
@@ -62,29 +61,33 @@ fileprivate final class PersistentNetworkManager: NetworkManager {
         
         guard let data = data else { return }
         
-        client.request(
-            request.route,
-            data,
-            request.method,
-            request.timeout,
-            request.headers
-        ) { [unowned self] result in
+        HTTPTask(
+            baseURL: baseURL,
+            route: request.route,
+            body: data,
+            method: request.method,
+            timeout: request.timeout,
+            headers: request.headers
+        ) { result in
             // TODO: Cache logic
-            switch result {
-            case .success(let raw):
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let response = try decoder.decode(T.ResponseBody.self, from: raw)
-                    self.token = response.token
-                    
-                    completion(.success(response))
-                } catch {
-                    completion(.failure(.decoding(error)))
+            DispatchQueue.main.async { [unowned self] in
+                switch result {
+                case .success(let raw):
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    do {
+                        let response = try decoder.decode(T.ResponseBody.self, from: raw)
+                        self.token = response.token
+                        
+                        completion(.success(response))
+                    } catch {
+                        completion(.failure(.decoding(error)))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-            case .failure(let error):
-                completion(.failure(error))
             }
         }
+        .resume()
     }
 }

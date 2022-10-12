@@ -1,12 +1,13 @@
 //
 //  BannerView.swift
-//  BidOn
+//  Sandbox
 //
-//  Created by Stas Kochkin on 26.08.2022.
+//  Created by Stas Kochkin on 12.10.2022.
 //
 
 import Foundation
 import SwiftUI
+import UIKit
 import Combine
 
 

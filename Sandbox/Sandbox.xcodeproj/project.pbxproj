@@ -28,6 +28,7 @@
 		4299A415289BC8B60062C580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A414289BC8B60062C580 /* Assets.xcassets */; };
 		4299A418289BC8B60062C580 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A417289BC8B60062C580 /* Preview Assets.xcassets */; };
 		429F4D8828CF6AA700765BD7 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429F4D8728CF6AA700765BD7 /* Wave.swift */; };
+		42A4C86C28F6E02500A7FE40 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4C86B28F6E02500A7FE40 /* BannerView.swift */; };
 		42BE439028C0E7B3000528E3 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438F28C0E7B3000528E3 /* Permission.swift */; };
 		42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439128C0E7CB000528E3 /* LocationPermission.swift */; };
 		42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */; };
@@ -63,6 +64,7 @@
 		4299A414289BC8B60062C580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4299A417289BC8B60062C580 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		429F4D8728CF6AA700765BD7 /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
+		42A4C86B28F6E02500A7FE40 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		42BE438F28C0E7B3000528E3 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		42BE439128C0E7CB000528E3 /* LocationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermission.swift; sourceTree = "<group>"; };
 		42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparencyPermission.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				42EDA0B128C612B000BF74DE /* AppProgressView.swift */,
 				429F4D8728CF6AA700765BD7 /* Wave.swift */,
+				42A4C86B28F6E02500A7FE40 /* BannerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				4224AA8028B8D5B300E8D886 /* RewardedAdSectionViewModel.swift in Sources */,
 				4224AA7628B8BDB500E8D886 /* InterstitialSectionViewModel.swift in Sources */,
 				4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */,
+				42A4C86C28F6E02500A7FE40 /* BannerView.swift in Sources */,
 				42C59B9E28C61F1100544EDF /* HostView.swift in Sources */,
 				4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */,
 				42EDA0B028C5FA3800BF74DE /* ContentViewModel.swift in Sources */,

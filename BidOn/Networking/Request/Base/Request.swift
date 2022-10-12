@@ -20,8 +20,8 @@ indirect enum Route {
 }
 
 
-extension HTTPClient.HTTPHeaders {
-    static func `default`() -> HTTPClient.HTTPHeaders {
+extension HTTPTask.HTTPHeaders {
+    static func `default`() -> HTTPTask.HTTPHeaders {
         return [
             .contentType : "application/json",
             .accept: "application/json",
@@ -41,8 +41,8 @@ protocol Request {
     associatedtype ResponseBody: Decodable & Tokenized
     
     var route: Route { get }
-    var method: HTTPClient.HTTPMethod { get }
-    var headers: [HTTPClient.HTTPHeader: String] { get }
+    var method: HTTPTask.HTTPMethod { get }
+    var headers: [HTTPTask.HTTPHeader: String] { get }
     var timeout: TimeInterval { get }
     var body: RequestBody? { get }
 }

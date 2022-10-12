@@ -8,10 +8,7 @@
 import Foundation
 
 
-
-struct HTTPClient {
-    var baseURL: String
-    
+struct HTTPTask {
     typealias HTTPHeaders = [HTTPHeader: String]
     
     enum HTTPMethod: String {
@@ -35,14 +32,15 @@ struct HTTPClient {
         case retryAfter = "Retry-After"
     }
     
-    func request(
-        _ route: Route,
-        _ body: Data?,
-        _ method: HTTPMethod,
-        _ timeout: TimeInterval,
-        _ headers: [HTTPHeader: String],
-        completion: @escaping (Result<Data, HTTPError>) -> ()
-    ) {
+    var baseURL: String
+    var route: Route
+    var body: Data?
+    var method: HTTPMethod
+    var timeout: TimeInterval
+    var headers: HTTPHeaders
+    var completion: (Result<Data, HTTPError>) -> ()
+    
+    func resume() {
         guard let url = URL(string: baseURL).map({ route.url($0) }) else {
             completion(.failure(.unsupportedURL))
             return
@@ -62,12 +60,7 @@ struct HTTPClient {
         request.httpMethod = method.rawValue
         request.httpBody = body
         
-        session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(.networking(error)))
-                return
-            }
-            
+        let task = session.dataTask(with: request) { data, response, error in
             guard let response = response as? HTTPURLResponse else {
                 completion(.failure(.invalidResponse))
                 return
@@ -75,10 +68,25 @@ struct HTTPClient {
             
             if response.statusCode >= 200, response.statusCode < 300, let data = data {
                 completion(.success(data))
+            } else if let retryAfter = response.retryAfterSeconds, retryAfter > 0 {
+                completion(.failure(.rateLimitted(retryAfterSeconds: retryAfter)))
+            } else if let error = error {
+                completion(.failure(.networking(error)))
             } else {
                 completion(.failure(.invalidResponse))
             }
         }
-        .resume()
+    
+        task.resume()
+    }
+}
+
+
+private extension HTTPURLResponse {
+    var retryAfterSeconds: TimeInterval? {
+        return allHeaderFields[HTTPTask.HTTPHeader.retryAfter.rawValue]
+            .flatMap { $0 as? String }
+            .flatMap { Double($0) }
+            .map { Date.MeasurementUnits.milliseconds.convert($0, to: .seconds) }
     }
 }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		420067A728BD0FBB003B734D /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A628BD0FBB003B734D /* AppManager.swift */; };
 		4219DB5828B90D5E001F38E5 /* BannerAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5728B90D5E001F38E5 /* BannerAdManager.swift */; };
-		4219DB5C28B9198B001F38E5 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5B28B9198B001F38E5 /* BannerView.swift */; };
 		421D48CB2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */; };
 		421D48E62888423B007DE2E4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48E52888423B007DE2E4 /* Logger.swift */; };
 		421D48E8288844DA007DE2E4 /* LogDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48E7288844DA007DE2E4 /* LogDestination.swift */; };
@@ -82,7 +81,7 @@
 		428FFC7A28BF96360090B126 /* ImpressionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FFC7928BF96360090B126 /* ImpressionModel.swift */; };
 		428FFC7C28BFACC20090B126 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FFC7B28BFACC20090B126 /* Atomic.swift */; };
 		4299A424289BCDBC0062C580 /* Interstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A423289BCDBC0062C580 /* Interstitial.swift */; };
-		4299A427289BCF3F0062C580 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A426289BCF3F0062C580 /* HTTPClient.swift */; };
+		4299A427289BCF3F0062C580 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A426289BCF3F0062C580 /* HTTPTask.swift */; };
 		429EE2C2286CA23F009439C6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C1286CA23F009439C6 /* Repository.swift */; };
 		429EE2C7286CA283009439C6 /* DemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */; };
 		429EE2C9286CA2B0009439C6 /* DemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C8286CA2B0009439C6 /* DemandProvider.swift */; };
@@ -122,7 +121,6 @@
 /* Begin PBXFileReference section */
 		420067A628BD0FBB003B734D /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		4219DB5728B90D5E001F38E5 /* BannerAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdManager.swift; sourceTree = "<group>"; };
-		4219DB5B28B9198B001F38E5 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileMeasurementPartnerAdapter.swift; sourceTree = "<group>"; };
 		421D48E52888423B007DE2E4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		421D48E7288844DA007DE2E4 /* LogDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDestination.swift; sourceTree = "<group>"; };
@@ -196,7 +194,7 @@
 		428FFC7928BF96360090B126 /* ImpressionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressionModel.swift; sourceTree = "<group>"; };
 		428FFC7B28BFACC20090B126 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		4299A423289BCDBC0062C580 /* Interstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interstitial.swift; sourceTree = "<group>"; };
-		4299A426289BCF3F0062C580 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		4299A426289BCF3F0062C580 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		429EE2C1286CA23F009439C6 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandSourceAdapter.swift; sourceTree = "<group>"; };
 		429EE2C8286CA2B0009439C6 /* DemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandProvider.swift; sourceTree = "<group>"; };
@@ -205,6 +203,7 @@
 		429EE2DA286F1C8C009439C6 /* ConcurentAuctionRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurentAuctionRound.swift; sourceTree = "<group>"; };
 		429EE2DC286F45F1009439C6 /* AuctionRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRound.swift; sourceTree = "<group>"; };
 		429F4D8328CF56C900765BD7 /* DemandResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandResult.swift; sourceTree = "<group>"; };
+		42A4C86928F6DF3400A7FE40 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		42AAEA0428CB80E10093DB23 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		42BA81A928758A90001F1744 /* AuctionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionController.swift; sourceTree = "<group>"; };
 		42BA81AB28758AC6001F1744 /* ConcurrentAuctionControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentAuctionControllerBuilder.swift; sourceTree = "<group>"; };
@@ -260,6 +259,7 @@
 			children = (
 				422101802859E29A006596DA /* BidOn */,
 				4221017F2859E29A006596DA /* Products */,
+				42A4C86828F6DF3400A7FE40 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -522,6 +522,15 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		427CE9C828D0883D008BD8D9 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				4299A426289BCF3F0062C580 /* HTTPTask.swift */,
+				428CCBF828A13AD8003123EF /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		428CCBF528A12C30003123EF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,10 +601,9 @@
 		4299A425289BCE460062C580 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				427CE9C828D0883D008BD8D9 /* Manager */,
 				4243092828A28F35002360B0 /* Request */,
 				4243091628A25603002360B0 /* Models */,
-				4299A426289BCF3F0062C580 /* HTTPClient.swift */,
-				428CCBF828A13AD8003123EF /* NetworkManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -640,11 +648,18 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		42A4C86828F6DF3400A7FE40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42A4C86928F6DF3400A7FE40 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		42BA820528785464001F1744 /* Banner */ = {
 			isa = PBXGroup;
 			children = (
 				42BA82062878547C001F1744 /* Banner.swift */,
-				4219DB5B28B9198B001F38E5 /* BannerView.swift */,
 				4219DB5728B90D5E001F38E5 /* BannerAdManager.swift */,
 				42BA820828785506001F1744 /* BannerViewManager.swift */,
 			);
@@ -780,7 +795,6 @@
 				425E9C6228B7B19800F4E4C7 /* FullscreenAdManager.swift in Sources */,
 				42D047E2289D5EEE0096A8C6 /* App.swift in Sources */,
 				426DD7B128A681A300A1ADF5 /* AdObjectDelegate.swift in Sources */,
-				4219DB5C28B9198B001F38E5 /* BannerView.swift in Sources */,
 				42D047EF289D6A380096A8C6 /* EnvironmentRepository.swift in Sources */,
 				42D047F1289D73F80096A8C6 /* GeoManager.swift in Sources */,
 				428FFC7028BF83AF0090B126 /* StatisticRequestBuilder.swift in Sources */,
@@ -845,7 +859,7 @@
 				42BE439628C203AF000528E3 /* BannerPublisher.swift in Sources */,
 				42BA82072878547C001F1744 /* Banner.swift in Sources */,
 				42BE438B28C0AE93000528E3 /* UserManager.swift in Sources */,
-				4299A427289BCF3F0062C580 /* HTTPClient.swift in Sources */,
+				4299A427289BCF3F0062C580 /* HTTPTask.swift in Sources */,
 				42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */,
 				426DD7B328A68BF400A1ADF5 /* FullscreenAdDelegate.swift in Sources */,
 				42389DEC2872F497006024BA /* AdaptersRepository.swift in Sources */,
@@ -1015,6 +1029,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.sdk;
 				PRODUCT_NAME = BidOn;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1048,6 +1063,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.sdk;
 				PRODUCT_NAME = BidOn;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

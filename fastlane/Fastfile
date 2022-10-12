@@ -1,20 +1,95 @@
-default_platform(:ios)
+default_platform :ios
 
 # Global variables
 $root_dir = File.expand_path(Dir.pwd + "/..")
 $build_dir = File.expand_path($root_dir + "/build")
-$schemes = [
+$scheme = "Release"
+$targets = [
   "BidOn",
   "BidOnAdapterAppsFlyer",
   "BidOnAdapterBidMachine",
   "BidOnAdapterGoogleMobileAds",
-  "BidOnDecoratorAppLovinMax",
-  "BidOnDecoratorFyber",
-  "BidOnDecoratorIronSource"
+  "BidOnAdapterAppLovin"
 ]
 
+# Defenitions ###
+def build_universal(scheme)
+  xcargs = [
+    "GCC_GENERATE_DEBUGGING_SYMBOLS=NO",
+    "STRIP_INSTALLED_PRODUCT=YES",
+    "LINK_FRAMEWORKS_AUTOMATICALLY=NO",
+    "OTHER_CFLAGS=\"-fembed-bitcode -Qunused-arguments\"",
+    "ONLY_ACTIVE_ARCH=NO",
+    "BUILD_LIBRARY_FOR_DISTRIBUTION=YES",
+    "DEPLOYMENT_POSTPROCESSING=YES",
+    "MACH_O_TYPE=staticlib",
+    "IPHONEOS_DEPLOYMENT_TARGET=10.0",
+    "DEBUG_INFORMATION_FORMAT=\"dwarf\"",
+    "SKIP_INSTALL=NO",
+    "SKIP_INSTALL=NO",
+    "CODE_SIGN_IDENTITY=\"\"",
+    "CODE_SIGNING_REQUIRED=NO",
+    "CODE_SIGN_ENTITLEMENTS=\"\""
+  ]
 
-desc "Build all modules into xcframeworks"
-lane :build do |options|
-  binding.irb
+  xcodebuild(
+    archive: true,
+    archive_path: "#{$build_dir}/#{scheme}/archives/ios.xcarchive",
+    scheme: scheme,
+    workspace: "BidOn.xcworkspace",
+    sdk: "iphoneos",
+    xcargs: (xcargs + [ "VALID_ARCHS=\"arm64 armv7\"" ]).join(" ")
+  )
+
+  xcodebuild(
+    archive: true,
+    archive_path: "#{$build_dir}/#{scheme}/archives/ios-sim.xcarchive",
+    scheme: scheme,
+    workspace: "BidOn.xcworkspace",
+    sdk: "iphonesimulator",
+    xcargs: (xcargs + [ "VALID_ARCHS=\"x86_64 arm64\"" ]).join(" ")
+  )
+end
+
+
+def xcframework(scheme, target, framework, version)
+  create_xcframework(
+    frameworks: [
+      "#{$build_dir}/#{scheme}/archives/ios-sim.xcarchive/Products/Library/Frameworks/#{framework}.framework",
+      "#{$build_dir}/#{scheme}/archives/ios.xcarchive/Products/Library/Frameworks/#{framework}.framework"
+    ],
+    output: "#{$build_dir}/#{scheme}/#{target}-#{version}/#{framework}.xcframework"
+  )
+end
+
+
+platform :ios do
+  before_all do
+    clean_build_artifacts
+    FileUtils.rm_rf($build_dir)
+    FileUtils.mkdir($build_dir)
+    FileUtils.mkdir($build_dir + "/Podspecs")
+  end
+
+  desc "Build all modules into xcframeworks"
+  lane :sdk do |options|
+    raise "No SDK version specified".red if options[:version].nil?
+    raise "No adapters versions specified".red if options[:adapters_version].nil?
+
+    version = options[:version]
+    adapters_version = options[:adapters_version]
+
+    cocoapods(use_bundle_exec: true)
+    build_universal($scheme)
+
+    $targets.each do |target|
+      ver = target.start_with?("BidOnAdapter") ? adapters_version : version
+      xcframework($scheme, target, target, ver)
+
+      zip(
+        path: "#{$build_dir}/#{$scheme}/#{target}-#{ver}",
+        output_path: "#{$build_dir}/#{$scheme}/#{target}-#{ver}/#{target}.zip"
+      )
+    end
+  end
 end

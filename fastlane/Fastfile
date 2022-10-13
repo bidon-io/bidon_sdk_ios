@@ -3,6 +3,7 @@ default_platform :ios
 # Global variables
 $root_dir = File.expand_path(Dir.pwd + "/..")
 $build_dir = File.expand_path($root_dir + "/build")
+$podspecs_dir = $build_dir + '/Podspecs'
 $scheme = "Release"
 $targets = [
   "BidOn",
@@ -65,10 +66,10 @@ end
 
 platform :ios do
   before_all do
-    clean_build_artifacts
-    FileUtils.rm_rf($build_dir)
-    FileUtils.mkdir($build_dir)
-    FileUtils.mkdir($build_dir + "/Podspecs")
+    # clean_build_artifacts
+    # FileUtils.rm_rf($build_dir)
+    # FileUtils.mkdir($build_dir)
+    # FileUtils.mkdir($podspecs_dir)
   end
 
   desc "Build all modules into xcframeworks"
@@ -79,16 +80,27 @@ platform :ios do
     version = options[:version]
     adapters_version = options[:adapters_version]
 
-    cocoapods(use_bundle_exec: true)
-    build_universal($scheme)
+    # cocoapods(use_bundle_exec: true)
+    # build_universal($scheme)
 
     $targets.each do |target|
-      ver = target.start_with?("BidOnAdapter") ? adapters_version : version
-      xcframework($scheme, target, target, ver)
+      is_adapter = target.start_with?("BidOnAdapter")
+      ver = is_adapter ? adapters_version : version
+      
+      # xcframework($scheme, target, target, ver)
 
-      zip(
-        path: "#{$build_dir}/#{$scheme}/#{target}-#{ver}",
-        output_path: "#{$build_dir}/#{$scheme}/#{target}-#{ver}/#{target}.zip"
+      # zip(
+      #   path: "#{$build_dir}/#{$scheme}/#{target}-#{ver}",
+      #   output_path: "#{$build_dir}/#{$scheme}/#{target}-#{ver}/#{target}.zip"
+      # )
+
+      podspec(
+        name: target,
+        version: ver,
+        podfile: $root_dir + '/Podfile',
+        path: $podspecs_dir,
+        vendored_frameworks: [ "#{target}-#{ver}/#{target}.xcframework" ],
+        is_adapter: is_adapter
       )
     end
   end

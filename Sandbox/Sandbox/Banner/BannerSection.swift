@@ -16,6 +16,13 @@ struct BannerAdSection: View {
     var body: some View {
         Group {
             Section(header: Text("Banner")) {
+                Stepper(
+                    "Pricefloor: \(vm.pricefloor.pretty)",
+                    value: $vm.pricefloor,
+                    in: (0.0...100.0),
+                    step: 0.1
+                )
+                
                 Button(action: {
                     withAnimation {
                         vm.isPresented.toggle()
@@ -74,6 +81,7 @@ struct BannerAdSection: View {
                         .font(.caption)
                 }
             }
+            .disabled(true)
         }
         .foregroundColor(.primary)
     }
@@ -84,14 +92,3 @@ extension AdViewFormat: CaseIterable {
     public static var allCases: [AdViewFormat] = [.adaptive, .banner, .leaderboard, .mrec]
 }
 
-
-extension AdViewFormat: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case .adaptive:     return "Adaptive"
-        case .banner:       return "Banner"
-        case .leaderboard:  return "Leaderboard"
-        case .mrec:         return "MREC"
-        }
-    }
-}

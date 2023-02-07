@@ -63,16 +63,25 @@ final class BannerAdManager: NSObject {
         state = .idle
     }
     
-    func loadAd(context: AdViewContext) {
+    func loadAd(
+        context: AdViewContext,
+        pricefloor: Price
+    ) {
         guard state.isIdle else {
             Logger.warning("Banner ad manager is not idle. Loading attempt is prohibited.")
             return
         }
         
-        fetchAuctionInfo(context)
+        fetchAuctionInfo(
+            context,
+            pricefloor: pricefloor
+        )
     }
     
-    private func fetchAuctionInfo(_ context: AdViewContext) {
+    private func fetchAuctionInfo(
+        _ context: AdViewContext,
+        pricefloor: Price
+    ) {
         state = .preparing
 
         let request = AuctionRequest { (builder: AdViewAuctionRequestBuilder) in
@@ -81,6 +90,7 @@ final class BannerAdManager: NSObject {
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withAuctionId(UUID().uuidString)
             builder.withFormat(context.format)
+            builder.withMinPrice(pricefloor)
             builder.withExt(sdk.ext)
         }
         

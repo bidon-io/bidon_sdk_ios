@@ -41,8 +41,8 @@ public final class RewardedAd: NSObject, RewardedAdObject {
         super.init()
     }
     
-    @objc public func loadAd() {
-        manager.loadAd()
+    @objc public func loadAd(with pricefloor: Price) {
+        manager.loadAd(pricefloor: pricefloor)
     }
     
     @objc public func show(from rootViewController: UIViewController) {

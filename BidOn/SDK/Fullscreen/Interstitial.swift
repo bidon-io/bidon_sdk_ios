@@ -41,8 +41,8 @@ public final class Interstitial: NSObject, FullscreenAdObject {
         super.init()
     }
     
-    @objc public func loadAd() {
-        manager.loadAd()
+    @objc public func loadAd(with pricefloor: Price) {
+        manager.loadAd(pricefloor: pricefloor)
     }
     
     @objc public func show(from rootViewController: UIViewController) {
@@ -99,8 +99,6 @@ extension Interstitial: FullscreenAdManagerDelegate {
     
     func didPayRevenue(_ ad: Ad) {
         delegate?.adObject?(self, didPayRevenue: ad)
-        
-        sdk.trackAdRevenue(ad, adType: .interstitial)
     }
     
     func didReceiveReward(_ reward: Reward, impression: Impression) {}

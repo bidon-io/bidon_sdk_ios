@@ -260,6 +260,7 @@ extension AdEventModel {
     }
 }
 
+
 extension AdType {
     var title: String {
         switch self {
@@ -270,7 +271,8 @@ extension AdType {
     }
 }
 
-private extension Price {
+
+internal extension Price {
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current

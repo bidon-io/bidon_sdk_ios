@@ -76,20 +76,21 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         super.init()
     }
     
-    func loadAd() {
+    func loadAd(pricefloor: Price) {
         guard state.isIdle else {
             Logger.warning("Fullscreen ad manager is not idle. Loading attempt is prohibited.")
             return
         }
         
-        fetchAuctionInfo()
+        fetchAuctionInfo(pricefloor)
     }
     
-    private func fetchAuctionInfo() {
+    private func fetchAuctionInfo(_ pricefloor: Price) {
         state = .preparing
         
         let request = AuctionRequest { (builder: AuctionRequestBuilderType) in
             builder.withPlacement(placement)
+            builder.withMinPrice(pricefloor)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withAuctionId(UUID().uuidString)

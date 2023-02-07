@@ -7,7 +7,6 @@ $podspecs_dir = $build_dir + '/Podspecs'
 $scheme = "Release"
 $targets = [
   "BidOn",
-  "BidOnAdapterAppsFlyer",
   "BidOnAdapterBidMachine",
   "BidOnAdapterGoogleMobileAds",
   "BidOnAdapterAppLovin"

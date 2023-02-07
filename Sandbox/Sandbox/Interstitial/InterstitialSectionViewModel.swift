@@ -22,6 +22,7 @@ final class InterstitialSectionViewModel: ObservableObject {
     
     @Published var state: State = .idle
     @Published var events: [AdEventModel] = []
+    @Published var pricefloor: Price = 0.1
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -36,7 +37,7 @@ final class InterstitialSectionViewModel: ObservableObject {
             self.state = .loading
         }
         
-        interstitial.loadAd()
+        interstitial.loadAd(with: pricefloor)
     }
     
     func subsctibe(_ interstitial: Interstitial) {

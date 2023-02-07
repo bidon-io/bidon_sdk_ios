@@ -8,9 +8,8 @@
 import Foundation
 
 
-@objc(BNLogger)
+@objc(BDNLogger)
 public class Logger: NSObject {
-    
     @objc(BNLoggerLevel)
     public enum Level: Int {
         case verbose = 0

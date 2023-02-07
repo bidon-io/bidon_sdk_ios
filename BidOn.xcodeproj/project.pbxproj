@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		420067A728BD0FBB003B734D /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A628BD0FBB003B734D /* AppManager.swift */; };
 		4219DB5828B90D5E001F38E5 /* BannerAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5728B90D5E001F38E5 /* BannerAdManager.swift */; };
-		421D48CB2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */; };
 		421D48E62888423B007DE2E4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48E52888423B007DE2E4 /* Logger.swift */; };
 		421D48E8288844DA007DE2E4 /* LogDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48E7288844DA007DE2E4 /* LogDestination.swift */; };
 		421D48EA28884D1F007DE2E4 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48E928884D1F007DE2E4 /* LogFormatter.swift */; };
@@ -121,7 +120,6 @@
 /* Begin PBXFileReference section */
 		420067A628BD0FBB003B734D /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		4219DB5728B90D5E001F38E5 /* BannerAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdManager.swift; sourceTree = "<group>"; };
-		421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileMeasurementPartnerAdapter.swift; sourceTree = "<group>"; };
 		421D48E52888423B007DE2E4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		421D48E7288844DA007DE2E4 /* LogDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDestination.swift; sourceTree = "<group>"; };
 		421D48E928884D1F007DE2E4 /* LogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
@@ -623,7 +621,6 @@
 				422101992859E35C006596DA /* Adapter.swift */,
 				42244DA728C8E8FF00E9C416 /* AnyAdapter.swift */,
 				429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */,
-				421D48CA2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -780,7 +777,6 @@
 				420067A728BD0FBB003B734D /* AppManager.swift in Sources */,
 				4224AA6F28B7E11200E8D886 /* FullscreenImpressionController.swift in Sources */,
 				426DD78B28A3E88100A1ADF5 /* AuctionRequest.swift in Sources */,
-				421D48CB2886D44A007DE2E4 /* MobileMeasurementPartnerAdapter.swift in Sources */,
 				4219DB5828B90D5E001F38E5 /* BannerAdManager.swift in Sources */,
 				42E6184228C7490C00B837D4 /* WaterfallController.swift in Sources */,
 				4224AA7928B8C5F800E8D886 /* InterstitialPublisher.swift in Sources */,

@@ -14,6 +14,13 @@ struct InterstitialSection: View {
     
     var body: some View {
         Section(header: Text("Interstitial")) {
+            Stepper(
+                "Pricefloor: \(vm.pricefloor.pretty)",
+                value: $vm.pricefloor,
+                in: (0.0...100.0),
+                step: 0.1
+            )
+        
             Button(action: vm.load) {
                 HStack {
                     Text("Load")

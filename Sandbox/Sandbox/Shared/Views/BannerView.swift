@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 import Combine
+import BidOn
 
 
 @available(iOS 13, *)
@@ -19,18 +20,21 @@ public struct BannerView: UIViewRepresentable {
     public var format: AdViewFormat
     public var isAutorefreshing: Bool
     public var autorefreshInterval: TimeInterval
+    public var pricefloor: Price
     public var onEvent: Event?
     
     public init(
         format: AdViewFormat = .adaptive,
         isAutorefreshing: Bool = true,
         autorefreshInterval: TimeInterval = 15,
+        pricefloor: Price = 0.1,
         onEvent: Event? = nil
     ) {
         self.format = format
         self.isAutorefreshing = isAutorefreshing
         self.autorefreshInterval = autorefreshInterval
         self.onEvent = onEvent
+        self.pricefloor = pricefloor
     }
     
     public func makeUIView(context: Context) -> Banner {
@@ -38,7 +42,7 @@ public struct BannerView: UIViewRepresentable {
         
         context.coordinator.subscribe(banner)
         banner.format = format
-        banner.loadAd()
+        banner.loadAd(with: pricefloor)
         
         return banner
     }
@@ -47,6 +51,7 @@ public struct BannerView: UIViewRepresentable {
         uiView.format = format
         uiView.isAutorefreshing = isAutorefreshing
         uiView.autorefreshInterval = autorefreshInterval
+        uiView.loadAd(with: pricefloor)
     }
     
     public func makeCoordinator() -> Coordinator {

@@ -10,9 +10,6 @@
 		114D2ADEE74DD36DB9C36DB7 /* Pods_BidOnAdapterGoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0471434C6149F069FDC832BC /* Pods_BidOnAdapterGoogleMobileAds.framework */; };
 		4200679F28BCB069003B734D /* AppLovinRewardedDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200679E28BCB069003B734D /* AppLovinRewardedDemandProvider.swift */; };
 		420067A328BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A228BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift */; };
-		421D48C62886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.h in Headers */ = {isa = PBXBuildFile; fileRef = 421D48C52886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		421D48CD2886D9F9007DE2E4 /* AppsFlyerMobileMeasurementPartnerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48CC2886D9F9007DE2E4 /* AppsFlyerMobileMeasurementPartnerAdapter.swift */; };
-		421D48D32886DAB5007DE2E4 /* AppsFlyerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421D48D22886DAB5007DE2E4 /* AppsFlyerParameters.swift */; };
 		4221022E285A3318006596DA /* BidOnAdapterBidMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 4221022D285A3318006596DA /* BidOnAdapterBidMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42244DA228C89A4900E9C416 /* MediationError+GADErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42244DA128C89A4900E9C416 /* MediationError+GADErrorCode.swift */; };
 		42244DA428C8B6DF00E9C416 /* MediationError+ BDMErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42244DA328C8B6DF00E9C416 /* MediationError+ BDMErrorCode.swift */; };
@@ -39,9 +36,7 @@
 		42BA820F287880DA001F1744 /* GoogleMobileAdsBannerDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820E287880DA001F1744 /* GoogleMobileAdsBannerDemandProvider.swift */; };
 		42EC98752891416F003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98742891416F003BE6CF /* BidOn.framework */; };
 		42EC98792891417F003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98782891417F003BE6CF /* BidOn.framework */; };
-		42EC987D28914189003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC987C28914189003BE6CF /* BidOn.framework */; };
 		9AF35498147FF228FB35940E /* Pods_BidOnAdapterBidMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D01528D343C84B6819C7023 /* Pods_BidOnAdapterBidMachine.framework */; };
-		D6E2811911D38EA6D416840D /* Pods_BidOnAdapterAppsFlyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455710F6A00CC245DFFCEC8B /* Pods_BidOnAdapterAppsFlyer.framework */; };
 		D948B1F8C213F51D68AC7AE1 /* Pods_BidOnAdapterAppLovin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9509D1E2749A0A168F47EAC /* Pods_BidOnAdapterAppLovin.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,10 +45,6 @@
 		0471434C6149F069FDC832BC /* Pods_BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4200679E28BCB069003B734D /* AppLovinRewardedDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinRewardedDemandProvider.swift; sourceTree = "<group>"; };
 		420067A228BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinAdViewDemandProvider.swift; sourceTree = "<group>"; };
-		421D48C32886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterAppsFlyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		421D48C52886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterAppsFlyer.h; sourceTree = "<group>"; };
-		421D48CC2886D9F9007DE2E4 /* AppsFlyerMobileMeasurementPartnerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlyerMobileMeasurementPartnerAdapter.swift; sourceTree = "<group>"; };
-		421D48D22886DAB5007DE2E4 /* AppsFlyerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlyerParameters.swift; sourceTree = "<group>"; };
 		4221022B285A3318006596DA /* BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4221022D285A3318006596DA /* BidOnAdapterBidMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterBidMachine.h; sourceTree = "<group>"; };
 		42244DA128C89A4900E9C416 /* MediationError+GADErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediationError+GADErrorCode.swift"; sourceTree = "<group>"; };
@@ -84,28 +75,16 @@
 		42EC98742891416F003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EC98782891417F003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EC987C28914189003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		455710F6A00CC245DFFCEC8B /* Pods_BidOnAdapterAppsFlyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnAdapterAppsFlyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ACFA1A9D3D9DF1686E1EF11 /* Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterGoogleMobileAds/Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig"; sourceTree = "<group>"; };
 		84D05911DFEF219E28C72FBA /* Pods-BidOnAdapterBidMachine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterBidMachine.release.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterBidMachine/Pods-BidOnAdapterBidMachine.release.xcconfig"; sourceTree = "<group>"; };
 		8D01528D343C84B6819C7023 /* Pods_BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E97FBE0C6B88C127715A603 /* Pods-BidOnAdapterAppLovin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterAppLovin.release.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterAppLovin/Pods-BidOnAdapterAppLovin.release.xcconfig"; sourceTree = "<group>"; };
 		BB69C86D9638891BD3D2A879 /* Pods-BidOnAdapterAppLovin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterAppLovin.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterAppLovin/Pods-BidOnAdapterAppLovin.debug.xcconfig"; sourceTree = "<group>"; };
 		C0EF50FBFE5B9D0143A1ECB5 /* Pods-BidOnAdapterBidMachine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterBidMachine.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterBidMachine/Pods-BidOnAdapterBidMachine.debug.xcconfig"; sourceTree = "<group>"; };
-		CB0EA3B060C5712311032BC7 /* Pods-BidOnAdapterAppsFlyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterAppsFlyer.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterAppsFlyer/Pods-BidOnAdapterAppsFlyer.debug.xcconfig"; sourceTree = "<group>"; };
 		D9509D1E2749A0A168F47EAC /* Pods_BidOnAdapterAppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnAdapterAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F73FB5644BF8764EBA4AF20B /* Pods-BidOnAdapterAppsFlyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterAppsFlyer.release.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterAppsFlyer/Pods-BidOnAdapterAppsFlyer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		421D48C02886CF8C007DE2E4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6E2811911D38EA6D416840D /* Pods_BidOnAdapterAppsFlyer.framework in Frameworks */,
-				42EC987D28914189003BE6CF /* BidOn.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		42210228285A3318006596DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -136,23 +115,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		421D48C42886CF8C007DE2E4 /* BidOnAdapterAppsFlyer */ = {
-			isa = PBXGroup;
-			children = (
-				421D48CC2886D9F9007DE2E4 /* AppsFlyerMobileMeasurementPartnerAdapter.swift */,
-				421D48D22886DAB5007DE2E4 /* AppsFlyerParameters.swift */,
-				421D48C52886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.h */,
-			);
-			path = BidOnAdapterAppsFlyer;
-			sourceTree = "<group>";
-		};
 		422101FF285A00CF006596DA = {
 			isa = PBXGroup;
 			children = (
 				4221022C285A3318006596DA /* BidOnAdapterBidMachine */,
 				42BA81B32875ABA3001F1744 /* BidOnAdapterGoogleMobileAds */,
 				425E9C4628B76B0F00F4E4C7 /* BidOnAdapterAppLovin */,
-				421D48C42886CF8C007DE2E4 /* BidOnAdapterAppsFlyer */,
 				42210211285A32ED006596DA /* Products */,
 				8462A3B50D72D26B685AAD18 /* Pods */,
 				628D13BF18603C4DCE80EE71 /* Frameworks */,
@@ -164,7 +132,6 @@
 			children = (
 				4221022B285A3318006596DA /* BidOnAdapterBidMachine.framework */,
 				42BA81B22875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.framework */,
-				421D48C32886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.framework */,
 				425E9C4528B76B0F00F4E4C7 /* BidOnAdapterAppLovin.framework */,
 			);
 			name = Products;
@@ -271,7 +238,6 @@
 				42EC987C28914189003BE6CF /* BidOn.framework */,
 				42EC98782891417F003BE6CF /* BidOn.framework */,
 				42EC98742891416F003BE6CF /* BidOn.framework */,
-				455710F6A00CC245DFFCEC8B /* Pods_BidOnAdapterAppsFlyer.framework */,
 				8D01528D343C84B6819C7023 /* Pods_BidOnAdapterBidMachine.framework */,
 				0471434C6149F069FDC832BC /* Pods_BidOnAdapterGoogleMobileAds.framework */,
 				D9509D1E2749A0A168F47EAC /* Pods_BidOnAdapterAppLovin.framework */,
@@ -282,8 +248,6 @@
 		8462A3B50D72D26B685AAD18 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CB0EA3B060C5712311032BC7 /* Pods-BidOnAdapterAppsFlyer.debug.xcconfig */,
-				F73FB5644BF8764EBA4AF20B /* Pods-BidOnAdapterAppsFlyer.release.xcconfig */,
 				C0EF50FBFE5B9D0143A1ECB5 /* Pods-BidOnAdapterBidMachine.debug.xcconfig */,
 				84D05911DFEF219E28C72FBA /* Pods-BidOnAdapterBidMachine.release.xcconfig */,
 				5ACFA1A9D3D9DF1686E1EF11 /* Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig */,
@@ -298,14 +262,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		421D48BE2886CF8C007DE2E4 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				421D48C62886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		42210226285A3318006596DA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,25 +289,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		421D48C22886CF8C007DE2E4 /* BidOnAdapterAppsFlyer */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 421D48C92886CF8C007DE2E4 /* Build configuration list for PBXNativeTarget "BidOnAdapterAppsFlyer" */;
-			buildPhases = (
-				C7B1062FCA20D46BE7D3DF0B /* [CP] Check Pods Manifest.lock */,
-				421D48BE2886CF8C007DE2E4 /* Headers */,
-				421D48BF2886CF8C007DE2E4 /* Sources */,
-				421D48C02886CF8C007DE2E4 /* Frameworks */,
-				421D48C12886CF8C007DE2E4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BidOnAdapterAppsFlyer;
-			productName = AppsFlyerAdapter;
-			productReference = 421D48C32886CF8C007DE2E4 /* BidOnAdapterAppsFlyer.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		4221022A285A3318006596DA /* BidOnAdapterBidMachine */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4221022F285A3318006596DA /* Build configuration list for PBXNativeTarget "BidOnAdapterBidMachine" */;
@@ -420,10 +357,6 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
-					421D48C22886CF8C007DE2E4 = {
-						CreatedOnToolsVersion = 13.3.1;
-						LastSwiftMigration = 1330;
-					};
 					4221022A285A3318006596DA = {
 						CreatedOnToolsVersion = 13.3.1;
 						LastSwiftMigration = 1330;
@@ -453,20 +386,12 @@
 			targets = (
 				4221022A285A3318006596DA /* BidOnAdapterBidMachine */,
 				42BA81B12875ABA3001F1744 /* BidOnAdapterGoogleMobileAds */,
-				421D48C22886CF8C007DE2E4 /* BidOnAdapterAppsFlyer */,
 				425E9C4428B76B0F00F4E4C7 /* BidOnAdapterAppLovin */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		421D48C12886CF8C007DE2E4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		42210229285A3318006596DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,28 +477,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C7B1062FCA20D46BE7D3DF0B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BidOnAdapterAppsFlyer-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DCA648DC04E304122F83DF0C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -616,15 +519,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		421D48BF2886CF8C007DE2E4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				421D48D32886DAB5007DE2E4 /* AppsFlyerParameters.swift in Sources */,
-				421D48CD2886D9F9007DE2E4 /* AppsFlyerMobileMeasurementPartnerAdapter.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		42210227285A3318006596DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -671,174 +565,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		421D48C72886CF8C007DE2E4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB0EA3B060C5712311032BC7 /* Pods-BidOnAdapterAppsFlyer.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.adapter.appsflyer;
-				PRODUCT_NAME = BidOnAdapterAppsFlyer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		421D48C82886CF8C007DE2E4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F73FB5644BF8764EBA4AF20B /* Pods-BidOnAdapterAppsFlyer.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.adapter.appsflyer;
-				PRODUCT_NAME = BidOnAdapterAppsFlyer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		42210204285A00CF006596DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1358,15 +1084,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		421D48C92886CF8C007DE2E4 /* Build configuration list for PBXNativeTarget "BidOnAdapterAppsFlyer" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				421D48C72886CF8C007DE2E4 /* Debug */,
-				421D48C82886CF8C007DE2E4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		42210203285A00CF006596DA /* Build configuration list for PBXProject "Adapters" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -14,11 +14,12 @@ import SwiftUI
 final class BannerAdSectionViewModel: ObservableObject {
     @Published var isPresented: Bool = false
     @Published var format: AdViewFormat = .adaptive
-    @Published var isAutorefreshing: Bool = true
+    @Published var isAutorefreshing: Bool = false
     @Published var autorefreshInterval: TimeInterval = 15
     @Published var events: [AdEventModel] = []
     @Published var isLoading: Bool = false
-    
+    @Published var pricefloor: Price = 0.1
+
     func receive(_ event: BannerPublisher.Event) {
         switch event {
         case .didStartAuction: isLoading = true

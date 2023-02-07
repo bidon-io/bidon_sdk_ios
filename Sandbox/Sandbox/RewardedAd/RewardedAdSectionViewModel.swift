@@ -22,7 +22,8 @@ final class RewardedAdSectionViewModel: ObservableObject {
     
     @Published var state: State = .idle
     @Published var events: [AdEventModel] = []
-    
+    @Published var pricefloor: Price = 0.1
+
     private var cancellables = Set<AnyCancellable>()
     
     private lazy var rewardedAd: RewardedAd = {
@@ -36,7 +37,7 @@ final class RewardedAdSectionViewModel: ObservableObject {
             self.state = .loading
         }
         
-        rewardedAd.loadAd()
+        rewardedAd.loadAd(with: pricefloor)
     }
     
     func subsctibe(_ rewardedAd: RewardedAd) {

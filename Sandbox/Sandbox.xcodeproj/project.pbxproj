@@ -17,7 +17,6 @@
 		4224AA8028B8D5B300E8D886 /* RewardedAdSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7F28B8D5B300E8D886 /* RewardedAdSectionViewModel.swift */; };
 		4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA8228B8F92B00E8D886 /* AdEventModel.swift */; };
 		4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA8428B900AF00E8D886 /* AdEventView.swift */; };
-		4243091E28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091A28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework */; };
 		4243092028A25E9F002360B0 /* BidOnAdapterBidMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091B28A25E9F002360B0 /* BidOnAdapterBidMachine.framework */; };
 		4243092228A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091C28A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework */; };
 		4243092428A25E9F002360B0 /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091D28A25E9F002360B0 /* BidOn.framework */; };
@@ -51,7 +50,6 @@
 		4224AA7F28B8D5B300E8D886 /* RewardedAdSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdSectionViewModel.swift; sourceTree = "<group>"; };
 		4224AA8228B8F92B00E8D886 /* AdEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventModel.swift; sourceTree = "<group>"; };
 		4224AA8428B900AF00E8D886 /* AdEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventView.swift; sourceTree = "<group>"; };
-		4243091A28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterAppsFlyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243091B28A25E9F002360B0 /* BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243091C28A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243091D28A25E9F002360B0 /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +83,6 @@
 			files = (
 				4243092228A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework in Frameworks */,
 				4243092028A25E9F002360B0 /* BidOnAdapterBidMachine.framework in Frameworks */,
-				4243091E28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework in Frameworks */,
 				4243092428A25E9F002360B0 /* BidOn.framework in Frameworks */,
 				425E9C4F28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework in Frameworks */,
 				169F7C8E91CEF4CADB6E417E /* Pods_Sandbox.framework in Frameworks */,
@@ -136,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				425E9C4E28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework */,
-				4243091A28A25E9F002360B0 /* BidOnAdapterAppsFlyer.framework */,
 				4243091B28A25E9F002360B0 /* BidOnAdapterBidMachine.framework */,
 				4243091C28A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework */,
 				4243091D28A25E9F002360B0 /* BidOn.framework */,

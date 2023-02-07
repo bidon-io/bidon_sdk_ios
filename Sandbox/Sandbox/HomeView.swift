@@ -36,6 +36,7 @@ struct HomeView: View {
                                 format: vm.bannerSettings.format,
                                 isAutorefreshing: vm.bannerSettings.isAutorefreshing,
                                 autorefreshInterval: vm.bannerSettings.autorefreshInterval,
+                                pricefloor: vm.bannerSettings.pricefloor,
                                 onEvent: vm.banner.receive
                             )
                             
@@ -61,6 +62,7 @@ final class HomeViewModel: ObservableObject {
         var format: AdViewFormat
         var isAutorefreshing: Bool
         var autorefreshInterval: TimeInterval
+        var pricefloor: Price
     }
     
     @Published var banner = BannerAdSectionViewModel()
@@ -70,8 +72,9 @@ final class HomeViewModel: ObservableObject {
     @Published var bannerHeight: CGFloat = 0
     @Published var bannerSettings = BannerSettings(
         format: .banner,
-        isAutorefreshing: true,
-        autorefreshInterval: 15
+        isAutorefreshing: false,
+        autorefreshInterval: 15,
+        pricefloor: 0.1
     )
     
     private var cancellables = Set<AnyCancellable>()
@@ -100,16 +103,18 @@ final class HomeViewModel: ObservableObject {
         }
         .store(in: &cancellables)
         
-        Publishers.CombineLatest3(
+        Publishers.CombineLatest4(
             banner.$format,
             banner.$isAutorefreshing,
-            banner.$autorefreshInterval
+            banner.$autorefreshInterval,
+            banner.$pricefloor
         )
         .sink { [unowned self] in
             self.bannerSettings = BannerSettings(
                 format: $0.0,
                 isAutorefreshing: $0.1,
-                autorefreshInterval: $0.2
+                autorefreshInterval: $0.2,
+                pricefloor: $0.3
             )
         }
         .store(in: &cancellables)

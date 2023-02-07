@@ -69,8 +69,8 @@ public final class Banner: UIView, AdView {
         refreshIfNeeded()
     }
     
-    @objc public func loadAd() {
-        adManager.loadAd(context: context)
+    @objc public func loadAd(with pricefloor: Price) {
+        adManager.loadAd(context: context, pricefloor: pricefloor)
     }
     
     private final func refreshIfNeeded() {
@@ -103,7 +103,7 @@ public final class Banner: UIView, AdView {
         adManager.prepareForReuse()
         viewManager.schedule(autorefreshInterval, block: weakSelf?.refreshIfNeeded)
         
-        loadAd()
+        loadAd(with: .zero)
     }
 }
 
@@ -180,7 +180,6 @@ extension Banner: DemandProviderRevenueDelegate {
         didPayRevenueFor ad: Ad
     ) {
         delegate?.adObject?(self, didPayRevenue: ad)
-        sdk.trackAdRevenue(ad, adType: .banner)
     }
 }
 

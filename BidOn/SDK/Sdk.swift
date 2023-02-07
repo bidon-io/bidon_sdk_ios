@@ -9,7 +9,7 @@ import Foundation
 
 
 fileprivate struct SdkInjectionKey: InjectionKey {
-    static var currentValue: Sdk = BidOnSdk.sharedSdk
+    static var currentValue: Sdk = BidOnSdk.shared
 }
 
 
@@ -25,11 +25,6 @@ protocol Sdk {
     var adaptersRepository: AdaptersRepository { get }
     var environmentRepository: EnvironmentRepository { get }
     var ext: [String: Any] { get }
-    
-    func trackAdRevenue(
-        _ ad: Ad,
-        adType: AdType
-    )
 }
 
 

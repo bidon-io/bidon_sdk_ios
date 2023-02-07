@@ -57,10 +57,6 @@ target 'BidOnAdapterGoogleMobileAds' do
   admob
 end
 
-target 'BidOnAdapterAppsFlyer' do
-  project 'Adapters/Adapters.xcodeproj'
-  appsflyer
-end
 
 target 'BidOnAdapterAppLovin' do
   project 'Adapters/Adapters.xcodeproj'
@@ -73,7 +69,6 @@ target 'Tests-ObjectiveC' do
   project 'Tests/Tests.xcodeproj'
   ocmock
   applovin
-  appsflyer
   ironsource
   bidmachine
   admob

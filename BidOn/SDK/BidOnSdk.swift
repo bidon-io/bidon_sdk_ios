@@ -20,7 +20,7 @@ public final class BidOnSdk: NSObject {
     
     @objc public static let sdkVersion = "0.1.0"
     
-    static let sharedSdk: BidOnSdk = BidOnSdk()
+    static let shared: BidOnSdk = BidOnSdk()
     
     private override init() {
         super.init()
@@ -34,8 +34,22 @@ public final class BidOnSdk: NSObject {
     
     @objc
     public static var baseURL: String {
-        get { sharedSdk.networkManager.baseURL }
-        set { sharedSdk.networkManager.baseURL = newValue }
+        get { shared.networkManager.baseURL }
+        set { shared.networkManager.baseURL = newValue }
+    }
+    
+    @objc
+    public static func registerDefaultAdapters() {
+        shared.adaptersRepository.configure()
+    }
+    
+    @objc
+    public static func registerAdapter(className: String) {
+        shared.adaptersRepository.register(className: className)
+    }
+    
+    public static func registerAdapter(adapter: Adapter) {
+        shared.adaptersRepository.register(adapter: adapter)
     }
     
     @objc
@@ -43,7 +57,7 @@ public final class BidOnSdk: NSObject {
         appKey: String,
         completion: @escaping () -> () = {}
     ) {
-        sharedSdk.initialize(
+        shared.initialize(
             appKey: appKey,
             completion: completion
         )
@@ -55,9 +69,6 @@ public final class BidOnSdk: NSObject {
     ) {
         
 #warning("Incapsulate logic in tasks")
-        
-        adaptersRepository.configure()
-        
         environmentRepository.configure(
             EnvironmentRepository.Parameters(
                 appKey: appKey,
@@ -89,21 +100,6 @@ public final class BidOnSdk: NSObject {
                     DispatchQueue.main.async(execute: completion)
                 }
             }
-        }
-    }
-    
-    func trackAdRevenue(
-        _ ad: Ad,
-        adType: AdType
-    ) {
-        let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
-        mmps.forEach {
-            Logger.verbose("MMP '\($0.identifier)' tracks \(adType.rawValue) ad revenue: \(ad)")
-            
-            $0.trackAdRevenue(
-                ad,
-                adType: adType
-            )
         }
     }
 }

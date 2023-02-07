@@ -51,9 +51,12 @@ final class InitializationViewModel: ObservableObject {
         withAnimation { [unowned self] in
             self.isInitializing = true
         }
-        
+        // Register default adapters
+        BidOnSdk.registerDefaultAdapters()
+        // Configure BidOn
         BidOnSdk.baseURL = host.baseURL
         BidOnSdk.logLevel = logLevel
+        // Initialize
         BidOnSdk.initialize(appKey: Constants.appKey) {
             withAnimation { [unowned self] in
                 self.isInitializing = false

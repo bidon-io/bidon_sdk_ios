@@ -9,8 +9,6 @@ import SwiftUI
 import BidOn
 import AppTrackingTransparency
 
-
-
 @main
 struct SandboxApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate

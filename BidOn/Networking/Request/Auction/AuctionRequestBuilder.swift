@@ -12,12 +12,16 @@ protocol AuctionRequestBuilder: BaseRequestBuilder {
     var adObject: AdObjectModel { get }
     var adapters: AdaptersInfo { get }
     var adType: AdType { get }
+    var minPrice: Price { get }
     
     @discardableResult
     func withPlacement(_ placement: String) -> Self
     
     @discardableResult
     func withAuctionId(_ auctionId: String) -> Self
+    
+    @discardableResult
+    func withMinPrice(_ minPrice: Price) -> Self
     
     init()
 }
@@ -26,14 +30,13 @@ protocol AuctionRequestBuilder: BaseRequestBuilder {
 final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
-    
+    private(set) var minPrice: Price = .zero
+
     var adType: AdType { .interstitial }
     
     var adapters: AdaptersInfo {
         let interstitials: [InterstitialDemandSourceAdapter] = adaptersRepository.all()
-        let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
-        
-        return AdaptersInfo(adapters: interstitials + mmps)
+        return AdaptersInfo(adapters: interstitials)
     }
     
     @discardableResult
@@ -45,6 +48,12 @@ final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionReques
     @discardableResult
     func withAuctionId(_ auctionId: String) -> Self {
         self.auctionId = auctionId
+        return self
+    }
+    
+    @discardableResult
+    func withMinPrice(_ minPrice: Price) -> Self {
+        self.minPrice = minPrice
         return self
     }
     
@@ -61,14 +70,13 @@ final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionReques
 final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
-    
+    private(set) var minPrice: Price = .zero
+
     var adType: AdType { .rewarded }
     
     var adapters: AdaptersInfo {
         let interstitials: [InterstitialDemandSourceAdapter] = adaptersRepository.all()
-        let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
-        
-        return AdaptersInfo(adapters: interstitials + mmps)
+        return AdaptersInfo(adapters: interstitials)
     }
     
     @discardableResult
@@ -80,6 +88,12 @@ final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBui
     @discardableResult
     func withAuctionId(_ auctionId: String) -> Self {
         self.auctionId = auctionId
+        return self
+    }
+    
+    @discardableResult
+    func withMinPrice(_ minPrice: Price) -> Self {
+        self.minPrice = minPrice
         return self
     }
     
@@ -97,14 +111,13 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
     private(set) var placement: String!
     private(set) var auctionId: String!
     private(set) var format: AdViewFormat!
-    
+    private(set) var minPrice: Price = .zero
+
     var adType: AdType { .banner}
     
     var adapters: AdaptersInfo {
         let banners: [AdViewDemandSourceAdapter] = adaptersRepository.all()
-        let mmps: [MobileMeasurementPartnerAdapter] = adaptersRepository.all()
-        
-        return AdaptersInfo(adapters: banners + mmps)
+        return AdaptersInfo(adapters: banners)
     }
     
     @discardableResult
@@ -122,6 +135,12 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
     @discardableResult
     func withFormat(_ format: AdViewFormat) -> Self {
         self.format = format
+        return self
+    }
+    
+    @discardableResult
+    func withMinPrice(_ minPrice: Price) -> Self {
+        self.minPrice = minPrice
         return self
     }
     

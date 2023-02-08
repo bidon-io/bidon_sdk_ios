@@ -7,11 +7,11 @@
 
 import Foundation
 
-@objc(BDFullscreenAd)
+@objc(BDNFullscreenAd)
 public protocol FullscreenAdObject: AdObject {}
 
 
-@objc(BDFullscreenAdDelegate)
+@objc(BDNFullscreenAdDelegate)
 public protocol FullscreenAdDelegate: AdObjectDelegate {
     func fullscreenAd(_ fullscreenAd: FullscreenAdObject, willPresentAd ad: Ad)
     

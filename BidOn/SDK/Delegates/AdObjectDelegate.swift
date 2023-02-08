@@ -7,11 +7,13 @@
 
 import Foundation
 
-@objc(BDAdObject)
-public protocol AdObject {}
+@objc(BDNAdObject)
+public protocol AdObject {
+    var isReady: Bool { get }
+}
 
 
-@objc(BDAdObjectDelegate)
+@objc(BDNAdObjectDelegate)
 public protocol AdObjectDelegate: AnyObject {
     func adObject(
         _ adObject: AdObject,

@@ -10,7 +10,7 @@ import Foundation
 
 @objc(BDNLogger)
 public class Logger: NSObject {
-    @objc(BNLoggerLevel)
+    @objc(BDNLoggerLevel)
     public enum Level: Int {
         case verbose = 0
         case debug = 1

@@ -65,6 +65,13 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
     private let placement: String
     private let adType: AdType
     
+    var isReady: Bool {
+        switch state {
+        case .ready: return true
+        default: return false
+        }
+    }
+    
     init(
         adType: AdType,
         placement: String,

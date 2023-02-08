@@ -272,7 +272,6 @@ SPEC REPOS:
     - BDMSmaatoAdapter
     - BDMTapjoyAdapter
     - BDMVungleAdapter
-    - BidMachine
     - IronSourceSDK
     - OMSDK_Appodeal
     - StackIAB
@@ -322,7 +321,7 @@ SPEC CHECKSUMS:
   BDMSmaatoAdapter: 15a609822d38fe13409863775bff28f7059c7031
   BDMTapjoyAdapter: 669e0e8c7095be3eb61168628ee716d474619f22
   BDMVungleAdapter: 6378405890c8a13b7b3a1c14ef7ce3b0b5bb2ef9
-  BidMachine: f01ca68dce8215e1710773218b8346fce1f00238
+  BidMachine: 5f51a2fe53ecde9f6e17c64fd012d1f4b48129df
   BURelyFoundation_Global: 5b03b5340630fa62fb9cd6eac52c5f57d4b0c17b
   CriteoPublisherSdk: 26f16f975d6c0392ee7060626268e2f2d7ed2d82
   FBAudienceNetwork: e0fcc9091fced34910ed0b6da06f129db46ac9e6

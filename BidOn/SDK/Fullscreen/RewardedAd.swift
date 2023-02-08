@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-@objc(BDRewardedAd)
+@objc(BDNRewardedAd)
 public final class RewardedAd: NSObject, RewardedAdObject {
     typealias RewardedMediationObserver = DefaultMediationObserver<AnyRewardedAdDemandProvider>
     typealias RewardedAuctionControllerBuilder = RewardedConcurrentAuctionControllerBuilder<RewardedMediationObserver>
@@ -27,6 +27,8 @@ public final class RewardedAd: NSObject, RewardedAdObject {
     
     @objc public let placement: String
     
+    @objc public var isReady: Bool { return manager.isReady }
+
     @Injected(\.sdk)
     private var sdk: Sdk
     

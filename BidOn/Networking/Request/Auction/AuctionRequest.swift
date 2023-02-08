@@ -23,7 +23,6 @@ struct AuctionRequest: Request {
         var geo: GeoModel?
         var ext: String?
         var token: String?
-        var minPrice: Price
         var adObject: AdObjectModel
         var adapters: AdaptersInfo
     }
@@ -50,7 +49,6 @@ struct AuctionRequest: Request {
             user: builder.user,
             geo: builder.geo,
             ext: builder.encodedExt,
-            minPrice: builder.minPrice,
             adObject: builder.adObject,
             adapters: builder.adapters
         )

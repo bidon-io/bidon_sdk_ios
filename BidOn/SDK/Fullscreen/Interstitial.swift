@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-@objc(BDInterstitial)
+@objc(BDNInterstitial)
 public final class Interstitial: NSObject, FullscreenAdObject {
     private typealias InterstitialMediationObserver = DefaultMediationObserver<AnyInterstitialDemandProvider>
     private typealias InterstitialAuctionControllerBuilder = InterstitialConcurrentAuctionControllerBuilder<InterstitialMediationObserver>
@@ -26,6 +26,8 @@ public final class Interstitial: NSObject, FullscreenAdObject {
     @objc public var delegate: FullscreenAdDelegate?
     
     @objc public let placement: String
+    
+    @objc public var isReady: Bool { return manager.isReady }
     
     @Injected(\.sdk)
     private var sdk: Sdk

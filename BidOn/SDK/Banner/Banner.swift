@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-@objc(BDBanner)
+@objc(BDNBanner)
 public final class Banner: UIView, AdView {
     @objc public var autorefreshInterval: TimeInterval = 15 {
         didSet { scheduleRefreshIfNeeded() }
@@ -28,6 +28,8 @@ public final class Banner: UIView, AdView {
     @objc public var rootViewController: UIViewController?
     
     @objc public var delegate: AdViewDelegate?
+    
+    @objc public var isReady: Bool { return adManager.demand != nil }
     
     @Injected(\.sdk)
     private var sdk: Sdk

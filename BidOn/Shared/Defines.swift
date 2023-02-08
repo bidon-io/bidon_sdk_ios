@@ -56,7 +56,7 @@ public enum SdkError: Error, CustomStringConvertible {
 }
 
 
-@objc(BDFramework)
+@objc(BDNFramework)
 public enum Framework: UInt {
     case native
     case unity

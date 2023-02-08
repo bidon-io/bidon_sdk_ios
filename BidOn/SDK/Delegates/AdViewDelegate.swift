@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 
-@objc(BDAdView)
+@objc(BDNAdView)
 public protocol AdView: AdObject {}
 
 
-@objc(BDAdViewDelegate)
+@objc(BDNAdViewDelegate)
 public protocol AdViewDelegate: AdObjectDelegate {
     func adView(
         _ adView: AdView & UIView,

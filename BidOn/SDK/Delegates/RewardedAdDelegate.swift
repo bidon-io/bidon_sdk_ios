@@ -7,11 +7,11 @@
 
 import Foundation
 
-@objc(BDRewardedAd)
+@objc(BDNRewardedAd)
 public protocol RewardedAdObject: FullscreenAdObject {}
 
 
-@objc(BDRewardedAdDelegate)
+@objc(BDNRewardedAdDelegate)
 public protocol RewardedAdDelegate: FullscreenAdDelegate {
     func rewardedAd(
         _ rewardedAd: RewardedAdObject,

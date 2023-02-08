@@ -40,12 +40,10 @@ To provide control over advertising auctions to Publishers, while making it fair
 
 ## Getting started
 
-Choose your mediation solution:
-
--   [AppLovin MAX](/docs/applovinmax.md)
--   [IronSource](/docs/ironsource.md)
--   [Fyber](/docs/fyber.md)
-
+-   [Integration](/docs/integration.md)
+-   [Ad Formats](/docs/ad-formats)
+-   [Advanced](/docs/advanced.md)
+  
 ## Join us
 
 Bidon is committed to a welcoming and inclusive environment where everyone can

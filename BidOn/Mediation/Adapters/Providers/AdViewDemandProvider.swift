@@ -37,7 +37,8 @@ public struct AdViewContext {
 }
 
 
-@objc public enum AdViewFormat: Int, Codable, CustomStringConvertible {
+@objc(BDNAdViewFormat)
+public enum AdViewFormat: Int, Codable, CustomStringConvertible {
     case banner
     case leaderboard
     case mrec

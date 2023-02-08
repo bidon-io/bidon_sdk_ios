@@ -48,7 +48,7 @@ module Fastlane
           spec.license = { :type => "Copyright", :text => "Copyright #{Time.new.year}. Appodeal, Inc." }
           spec.author = { "Appodeal, Inc" => "https://appodeal.com" }
           spec.platform = :ios, "10.0"
-          spec.source = { :http => "https://s3-us-west-1.amazonaws.com/appodeal-ios/Appodeal/Modular/#{spec.name}/#{spec.version}/#{spec.name}.zip" }
+          spec.source = { :http => "https://s3-us-west-1.amazonaws.com/appodeal-ios/BidOn/#{spec.name}/#{spec.version}/#{spec.name}.zip" }
           spec.swift_versions = "4.0", "4.2", "5.0"
         
           spec.vendored_frameworks = params[:vendored_frameworks]

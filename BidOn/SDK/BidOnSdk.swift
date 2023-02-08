@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-@objc
+@objc(BDNSdk)
 public final class BidOnSdk: NSObject {
     internal lazy var adaptersRepository = AdaptersRepository()
     internal lazy var environmentRepository = EnvironmentRepository()

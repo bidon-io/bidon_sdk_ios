@@ -61,6 +61,7 @@ final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionReques
         AdObjectModel(
             placement: placement,
             auctionId: auctionId,
+            minPrice: minPrice,
             interstitial: AdObjectModel.InterstitialModel()
         )
     }
@@ -101,6 +102,7 @@ final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBui
         AdObjectModel(
             placement: placement,
             auctionId: auctionId,
+            minPrice: minPrice,
             rewarded: AdObjectModel.RewardedModel()
         )
     }
@@ -148,6 +150,7 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
         AdObjectModel(
             placement: placement,
             auctionId: auctionId,
+            minPrice: minPrice,
             banner: AdObjectModel.BannerModel(
                 format: format
             )

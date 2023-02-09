@@ -56,4 +56,11 @@
 
 - (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd willPresentAd:(id<BNAd>)ad {}
 
+- (void)adObject:(id<BDNAdObject>)adObject didPayRevenue:(id<BNAd>)ad {
+    double revenue = [ad revenue];
+    NSString *networkName = [ad networkName];
+    NSString *adUnitId = [ad adUnitId];
+    NSString *currency = [ad currency];
+}
+
 @end

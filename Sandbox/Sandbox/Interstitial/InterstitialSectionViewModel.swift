@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 import BidOn
+import AppsFlyerAdRevenue
 
 
 final class InterstitialSectionViewModel: ObservableObject {
@@ -66,6 +67,11 @@ final class InterstitialSectionViewModel: ObservableObject {
                     withAnimation { [unowned self] in
                         self.state = .idle
                     }
+                case .didPayRevenue(let ad):
+                    AppsFlyerAdRevenue.shared().log(
+                        ad,
+                        from: .interstitial
+                    )
                 default: break
                 }
                 

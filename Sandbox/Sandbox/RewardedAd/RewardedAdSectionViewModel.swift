@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import AppsFlyerAdRevenue
 import BidOn
 
 
@@ -66,6 +67,11 @@ final class RewardedAdSectionViewModel: ObservableObject {
                     withAnimation { [unowned self] in
                         self.state = .idle
                     }
+                case .didPayRevenue(let ad):
+                    AppsFlyerAdRevenue.shared().log(
+                        ad,
+                        from: .rewarded
+                    )
                 default: break
                 }
                 

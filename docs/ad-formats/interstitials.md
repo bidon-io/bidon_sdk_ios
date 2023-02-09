@@ -1,5 +1,7 @@
 # Interstitials
 
+This page is describes how to implement interstitial ads though the BidOn SDK.
+
 ## Loading an Interstitial Ad
 
 To load an interstitial ad, instantiate an `BDNInterstitial` with `placement` configured in the app settings. Implement `BDNFullscreenAdDelegate` that you are notified when your ad is ready and of other ad-related events. In the load method you will need to specify the pricefloor. This argument can be ad revenue value from mediaton.

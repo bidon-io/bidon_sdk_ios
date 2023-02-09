@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 import BidOn
 import AppTrackingTransparency
+import AppsFlyerLib
+import AppsFlyerAdRevenue
+
 
 @main
 struct SandboxApp: App {
@@ -22,45 +26,52 @@ struct SandboxApp: App {
 
 
 final class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
+    private var cancellables = Set<AnyCancellable>()
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
+        setupAppsFlyer()
         return true
     }
-}
-
-
-
-class ViewController: UIViewController {
-    var banner: BidOn.Banner!
     
-    func loadBanner() {
-        banner = BidOn.Banner(frame: .zero)
-        banner.rootViewController = self
-        banner.format = .banner
-        banner.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(banner)
-        NSLayoutConstraint.activate([
-            banner.heightAnchor.constraint(equalToConstant: 50),
-            banner.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            banner.leftAnchor.constraint(equalTo: view.leftAnchor),
-            banner.rightAnchor.constraint(equalTo: view.rightAnchor)
-        ])
+    private func setupAppsFlyer() {
+        AppsFlyerLib.shared().appsFlyerDevKey = Constants.AppsFlyer.devKey
+        AppsFlyerLib.shared().appleAppID = Constants.AppsFlyer.appId
         
-        banner.loadAd(with: 0.1)
+        unowned let unownedSelf = self
+        NotificationCenter
+            .default
+            .publisher(for: UIApplication.didBecomeActiveNotification)
+            .sink(receiveValue: unownedSelf.receiveApplicationDidBecomeActive)
+            .store(in: &cancellables)
+    }
+    
+    private func receiveApplicationDidBecomeActive(notification: Notification) {
+        AppsFlyerLib.shared().start()
+        AppsFlyerAdRevenue.start()
     }
 }
 
 
-extension ViewController: BidOn.AdViewDelegate {
-    func adView(_ adView: UIView & BidOn.AdView, willPresentScreen ad: BidOn.Ad) {}
-    
-    func adView(_ adView: UIView & BidOn.AdView, didDismissScreen ad: BidOn.Ad) {}
-    
-    func adView(_ adView: UIView & BidOn.AdView, willLeaveApplication ad: BidOn.Ad) {}
-    
-    func adObject(_ adObject: BidOn.AdObject, didLoadAd ad: BidOn.Ad) {}
-    
-    func adObject(_ adObject: BidOn.AdObject, didFailToLoadAd error: Error) {}
+extension AppsFlyerAdRevenue {
+    func log(
+        _ ad: BidOn.Ad,
+        from type: BidOn.AdType,
+        placement: String = ""
+    ) {
+        var additionalParameters: [AnyHashable: Any] = [:]
+        additionalParameters[kAppsFlyerAdRevenueAdType] = type.rawValue
+        additionalParameters[kAppsFlyerAdRevenueAdUnit] = ad.adUnitId
+        additionalParameters[kAppsFlyerAdRevenuePlacement] = placement
+        
+        logAdRevenue(
+            monetizationNetwork: ad.networkName,
+            mediationNetwork: .appodeal,
+            eventRevenue: ad.revenue as NSNumber,
+            revenueCurrency: ad.currency,
+            additionalParameters: additionalParameters
+        )
+    }
 }

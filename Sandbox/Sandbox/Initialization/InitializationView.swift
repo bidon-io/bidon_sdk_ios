@@ -67,7 +67,7 @@ struct InitializationView: View {
                         VStack(alignment: .leading) {
                             Text("BidOn SDK: ") + Text("v\(BidOnSdk.sdkVersion)").bold()
                             Text("Bundle ID: ") + Text(Bundle.main.bundleIdentifier ?? "").bold()
-                            Text("App Key: ") + Text(Constants.appKey).bold()
+                            Text("App Key: ") + Text(Constants.BidOn.appKey).bold()
                             Text("App Version: ") + Text(appVersion).bold()
                         }
                         .lineLimit(1)

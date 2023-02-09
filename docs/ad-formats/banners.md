@@ -1,5 +1,7 @@
 # Banners
 
+This page is describes how to implement banner ads though the BidOn SDK.
+
 ## Loading an Banners
 
 To load banner, create a `BDNBanner`.  Implement `BDNAdViewDelegate` that you are notified when your ad is ready and of other ad-related events. This argument can be ad revenue value from mediaton.

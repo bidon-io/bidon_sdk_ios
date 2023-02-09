@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import BidOn
+import AppsFlyerAdRevenue
 import SwiftUI
 
 
@@ -19,11 +20,16 @@ final class BannerAdSectionViewModel: ObservableObject {
     @Published var events: [AdEventModel] = []
     @Published var isLoading: Bool = false
     @Published var pricefloor: Price = 0.1
-
+    
     func receive(_ event: BannerPublisher.Event) {
         switch event {
         case .didStartAuction: isLoading = true
         case .didFailToLoadAd, .didLoadAd: isLoading = false
+        case .didPayRevenue(let ad):
+            AppsFlyerAdRevenue.shared().log(
+                ad,
+                from: .banner
+            )
         default: break
         }
         

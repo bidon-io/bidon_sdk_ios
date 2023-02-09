@@ -80,6 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
 ## Configure Ad Types
 
-- [Interstitials](/ad-formats/interstitials.md)
-- [Rewarded Ads](/ad-formats/rewarded.md)
-- [Banners](/ad-formats/banner.md)
+- [Interstitials](/docs/ad-formats/interstitials.md)
+- [Rewarded Ads](/docs/ad-formats/rewarded.md)
+- [Banners](/docs/ad-formats/banners.md)

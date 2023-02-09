@@ -11,12 +11,6 @@ import BidOn
 import SwiftUI
 
 
-struct Constants {
-    static let baseURL = "https://b.appbaqend.com"
-    static let appKey = "3c53cae2cd969ecd82910e1f5610a3df24ea8b4b3ca52247"
-}
-
-
 final class InitializationViewModel: ObservableObject {
     let permissions: [PermissionView.Model] = [
         AppTrackingTransparencyPermission(),
@@ -28,7 +22,7 @@ final class InitializationViewModel: ObservableObject {
     let hosts: [HostView.Model] = [
         .init(
             name: "Production",
-            baseURL: "https://b.appbaqend.com"
+            baseURL: Constants.BidOn.baseURL
         ),
         .init(
             name: "Mock",
@@ -44,7 +38,7 @@ final class InitializationViewModel: ObservableObject {
     
     @Published var host = HostView.Model(
         name: "Production",
-        baseURL: "https://b.appbaqend.com"
+        baseURL: Constants.BidOn.baseURL
     )
     
     func initialize() {
@@ -57,7 +51,7 @@ final class InitializationViewModel: ObservableObject {
         BidOnSdk.baseURL = host.baseURL
         BidOnSdk.logLevel = logLevel
         // Initialize
-        BidOnSdk.initialize(appKey: Constants.appKey) {
+        BidOnSdk.initialize(appKey: Constants.BidOn.appKey) {
             withAnimation { [unowned self] in
                 self.isInitializing = false
                 self.isInitialized = true

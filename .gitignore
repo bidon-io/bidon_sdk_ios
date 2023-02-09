@@ -46,3 +46,6 @@ Pods/
 
 # Gem
 /Gemfile.lock
+
+# Secrets
+/Sandbox/**/Constants.swift

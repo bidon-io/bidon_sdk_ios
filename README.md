@@ -15,11 +15,9 @@
   
 **Transparent and evolving**
 
--   Solid language foundations that are easy to learn, especially if you have
-    used C++
--   Easy, tool-based upgrades between Carbon versions
--   Safer fundamentals, and an incremental path towards a memory-safe subset
-
+- Take a full control over an ad auction
+- Custom integrations are highly welcome
+  
 **Welcoming open-source community**
 
 -   Clear goals and priorities with robust governance

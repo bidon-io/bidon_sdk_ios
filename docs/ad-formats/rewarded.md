@@ -1,5 +1,7 @@
 # Rewarded Ads
 
+This page is describes how to implement rewarded ads though the BidOn SDK.
+
 ## Loading an Rewarded Ad
 
 To load an interstitial ad, instantiate an `BDNRewardedAd` with `placement` configured in the app settings. Implement `BDNRewardedAdDelegate` that you are notified when your ad is ready and of other ad-related events. In the load method you will need to specify the pricefloor. This argument can be ad revenue value from mediaton.

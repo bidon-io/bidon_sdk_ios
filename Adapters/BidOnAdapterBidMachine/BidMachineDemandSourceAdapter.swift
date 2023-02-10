@@ -19,18 +19,18 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
     public let identifier: String = BidMachineDemandSourceAdapter.identifier
     public let name: String = "BidMachine"
     public let adapterVersion: String = "1"
-    public let sdkVersion: String = kBDMVersion
+    public let sdkVersion: String = BidMachineSdk.sdkVersion
     
     public func interstitial() throws -> InterstitialDemandProvider {
         return BidMachineInterstitialDemandProvider()
     }
     
     public func rewardedAd() throws -> RewardedAdDemandProvider {
-        return BidMachineRewardedAdDemandProvider()
+        BidMachineRewardedAdDemandProvider()
     }
     
     public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
-        return BidMachineBannerDemandProvider(context: context)
+        BidMachineAdViewDemandProvider()
     }
 }
 
@@ -40,34 +40,34 @@ extension BidMachineDemandSourceAdapter: InitializableAdapter {
         from decoder: Decoder,
         completion: @escaping (Result<Void, SdkError>) -> Void
     ) {
-        guard !BDMSdk.shared().isInitialized else {
+        guard !BidMachineSdk.shared.isInitialized else {
             completion(.failure(SdkError.internalInconsistency))
             return
         }
         
-        var parameters: BidMachineParameters?
+        struct Parameters: Codable {
+            var sellerId: String
+        }
+        
+        var parameters: Parameters?
         
         do {
-            parameters = try BidMachineParameters(from: decoder)
+            parameters = try Parameters(from: decoder)
         } catch {
             completion(.failure(SdkError(error)))
         }
         
         guard let parameters = parameters else { return }
         
-        
-        let configuration = BDMSdkConfiguration()
+        BidMachineSdk.shared.populate { builder in
+            builder.withLoggingMode(Logger.level == .verbose)
 #if DEBUG
-        configuration.testMode = true
+            builder.withTestMode(true)
 #endif
-        
-        BDMSdk.shared().enableLogging = Logger.level == .verbose
-        BDMSdk.shared().startSession(
-            withSellerID: parameters.sellerId,
-            configuration: configuration
-        ) {
-            completion(.success(()))
         }
+        
+        BidMachineSdk.shared.initializeSdk(parameters.sellerId)
+        completion(.success(()))
     }
 }
 

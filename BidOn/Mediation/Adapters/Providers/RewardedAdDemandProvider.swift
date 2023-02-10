@@ -7,12 +7,14 @@
 
 import Foundation
 
+
 public protocol DemandProviderRewardDelegate: AnyObject {
     func provider(
         _ provider: DemandProvider,
         didReceiveReward reward: Reward
     )
 }
+
 
 public protocol RewardedAdDemandProvider: InterstitialDemandProvider {
     var rewardDelegate: DemandProviderRewardDelegate? { get set }

@@ -12,7 +12,7 @@ public final class DirectAdWrapper<Wrapped: AnyObject>: Ad {
     public let id: String
     
     public let price: Price
-
+    
     public let currency: Currency
     
     public let networkName: String
@@ -26,11 +26,11 @@ public final class DirectAdWrapper<Wrapped: AnyObject>: Ad {
     public let pricePrecision: PricePrecision = .direct
     
     public init(
-        _ id: String,
-        _ networkName: String,
-        _ dsp: String?,
-        _ lineItem: LineItem,
-        _ wrapped: Wrapped
+        id: String,
+        networkName: String,
+        dsp: String?,
+        lineItem: LineItem,
+        wrapped: Wrapped
     ) {
         self.id = id
         self.price = lineItem.pricefloor

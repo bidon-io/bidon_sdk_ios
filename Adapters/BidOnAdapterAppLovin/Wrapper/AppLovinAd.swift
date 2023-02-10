@@ -16,11 +16,11 @@ typealias AppLovinAd = DirectAdWrapper<ALAd>
 extension AppLovinAd {
     convenience init(_ lineItem: LineItem, _ ad: ALAd) {
         self.init(
-            ad.adIdNumber.stringValue,
-            AppLovinDemandSourceAdapter.identifier,
-            nil,
-            lineItem,
-            ad
+            id: ad.adIdNumber.stringValue,
+            networkName: AppLovinDemandSourceAdapter.identifier,
+            dsp: nil,
+            lineItem: lineItem,
+            wrapped: ad
         )
     }
 }

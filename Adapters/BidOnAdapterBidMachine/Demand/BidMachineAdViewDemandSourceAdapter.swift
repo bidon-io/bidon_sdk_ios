@@ -1,5 +1,5 @@
 //
-//  BidMachineRewardedAdDemandProvider.swift
+//  BidMachineAdViewDemandSourceAdapter.swift
 //  BidOnAdapterBidMachine
 //
 //  Created by Stas Kochkin on 10.02.2023.
@@ -11,84 +11,71 @@ import BidMachine
 import BidOn
 
 
-final class BidMachineRewardedAdDemandProvider: NSObject, RewardedAdDemandProvider {
+final class BidMachineAdViewDemandProvider: NSObject, AdViewDemandProvider {
     weak var delegate: DemandProviderDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
-    weak var rewardDelegate: DemandProviderRewardDelegate?
+    weak var adViewDelegate: DemandProviderAdViewDelegate?
     
     private var response: DemandProviderResponse?
     
-    private var rewardedAd: BidMachineRewarded? {
+    private var adView: BidMachineBanner? {
         didSet {
-            rewardedAd?.delegate = self
-            rewardedAd?.controller = UIApplication.shared.bd.topViewcontroller
+            adView?.delegate = self
+            adView?.controller = UIApplication.shared.bd.topViewcontroller
         }
     }
     
     func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard let rewardedAd = rewardedAd, rewardedAd.auctionInfo.bidId == ad.id else {
+        guard let adView = adView, adView.auctionInfo.bidId == ad.id else {
             response(.failure(.unknownAdapter))
             return
         }
         
         self.response = response
-        rewardedAd.loadAd()
+        adView.loadAd()
     }
     
     func cancel(_ reason: DemandProviderCancellationReason) {}
     
     func notify(_ event: AuctionEvent) {
-        guard let rewardedAd = rewardedAd else { return }
+        guard let adView = adView else { return }
         switch event {
         case .win(let ad):
-            if rewardedAd.auctionInfo.bidId == ad.id {
-                BidMachineSdk.shared.notifyMediationWin(rewardedAd)
+            if adView.auctionInfo.bidId == ad.id {
+                BidMachineSdk.shared.notifyMediationWin(adView)
             }
         case .lose(let ad):
             BidMachineSdk.shared.notifyMediationLoss(
                 ad.networkName,
                 ad.price,
-                rewardedAd
+                adView
             )
         }
     }
     
-    func show(
-        ad: Ad,
-        from viewController: UIViewController
-    ) {
-        guard
-            let rewardedAd = rewardedAd,
-            rewardedAd.auctionInfo.bidId == ad.id,
-            rewardedAd.canShow
-        else {
-            delegate?.providerDidFailToDisplay(self, error: .invalidPresentationState)
-            return
-        }
-        
-        rewardedAd.controller = viewController
-        rewardedAd.presentAd()
+    func container(for ad: Ad) -> AdViewContainer? {
+        return adView
     }
 }
 
 
-extension BidMachineRewardedAdDemandProvider: ProgrammaticDemandProvider {
+extension BidMachineAdViewDemandProvider: ProgrammaticDemandProvider {
     func bid(_ pricefloor: Price, response: @escaping DemandProviderResponse) {
         do {
-            let configuration = try BidMachineSdk.shared.requestConfiguration(.rewarded)
+            let configuration = try BidMachineSdk.shared.requestConfiguration(.banner)
             configuration.populate { builder in
                 builder.appendPriceFloor(pricefloor, UUID().uuidString)
             }
             
-            BidMachineSdk.shared.rewarded { [weak self] rewardedAd, error in
-                guard let rewardedAd = rewardedAd, error == nil else {
+            BidMachineSdk.shared.banner { [weak self] adView, error in
+                guard let adView = adView, error == nil else {
                     response(.failure(.noBid))
                     return
                 }
                 
-                self?.rewardedAd = rewardedAd
+                self?.adView = adView
                 
-                let wrapper = AuctionResponseWrapper(rewardedAd.auctionInfo)
+                let wrapper = AuctionResponseWrapper(adView.auctionInfo)
                 response(.success(wrapper))
             }
         } catch {
@@ -98,7 +85,7 @@ extension BidMachineRewardedAdDemandProvider: ProgrammaticDemandProvider {
 }
 
 
-extension BidMachineRewardedAdDemandProvider: BidMachineAdDelegate {
+extension BidMachineAdViewDemandProvider: BidMachineAdDelegate {
     func didLoadAd(_ ad: BidMachineAdProtocol) {
         let wrapper = AuctionResponseWrapper(ad.auctionInfo)
         response?(.success(wrapper))
@@ -109,22 +96,9 @@ extension BidMachineRewardedAdDemandProvider: BidMachineAdDelegate {
         response?(.failure(.noFill))
     }
     
-    func didPresentAd(_ ad: BidMachineAdProtocol) {
-        delegate?.providerWillPresent(self)
-    }
-    
     func didTrackImpression(_ ad: BidMachineAdProtocol) {
         let wrapper = AuctionResponseWrapper(ad.auctionInfo)
         revenueDelegate?.provider(self, didPayRevenueFor: wrapper)
-    }
-    
-    func didFailPresentAd(_ ad: BidMachineAdProtocol, _ error: Error) {
-        delegate?.providerDidFailToDisplay(self, error: .generic(error: error))
-    }
-    
-    func didDismissAd(_ ad: BidMachineAdProtocol) {
-        rewardDelegate?.provider(self, didReceiveReward: EmptyReward())
-        delegate?.providerDidHide(self)
     }
     
     func didUserInteraction(_ ad: BidMachineAdProtocol) {
@@ -132,8 +106,16 @@ extension BidMachineRewardedAdDemandProvider: BidMachineAdDelegate {
     }
     
     // Noop
+    func didFailPresentAd(_ ad: BidMachineAdProtocol, _ error: Error) {}
+    func didPresentAd(_ ad: BidMachine.BidMachineAdProtocol) {}
+    func didDismissAd(_ ad: BidMachineAdProtocol) {}
     func willPresentScreen(_ ad: BidMachineAdProtocol) {}
     func didDismissScreen(_ ad: BidMachineAdProtocol) {}
     func didExpired(_ ad: BidMachineAdProtocol) {}
     func didTrackInteraction(_ ad: BidMachineAdProtocol) {}
+}
+
+
+extension BidMachineBanner: AdViewContainer {
+    public var isAdaptive: Bool { false }
 }

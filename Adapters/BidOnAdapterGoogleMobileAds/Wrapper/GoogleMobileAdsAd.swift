@@ -19,11 +19,11 @@ extension GoogleMobileAdsAd {
         _ response: GADResponseInfo
     ) {
         self.init(
-            response.responseIdentifier ?? lineItem.adUnitId,
-            GoogleMobileAdsDemandSourceAdapter.identifier,
-            nil,
-            lineItem,
-            response
+            id: response.responseIdentifier ?? lineItem.adUnitId,
+            networkName: GoogleMobileAdsDemandSourceAdapter.identifier,
+            dsp: nil,
+            lineItem: lineItem,
+            wrapped: response
         )
     }
 }

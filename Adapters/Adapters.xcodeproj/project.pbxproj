@@ -12,11 +12,7 @@
 		420067A328BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A228BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift */; };
 		4221022E285A3318006596DA /* BidOnAdapterBidMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 4221022D285A3318006596DA /* BidOnAdapterBidMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42244DA228C89A4900E9C416 /* MediationError+GADErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42244DA128C89A4900E9C416 /* MediationError+GADErrorCode.swift */; };
-		42244DA428C8B6DF00E9C416 /* MediationError+ BDMErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42244DA328C8B6DF00E9C416 /* MediationError+ BDMErrorCode.swift */; };
-		42389DF4287339CE006024BA /* BidMachineInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */; };
-		42389DF628734EE1006024BA /* BidMachineAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DF528734EE1006024BA /* BidMachineAd.swift */; };
 		424D295F28BE416400F6F2D6 /* GoogleMobileAdsAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D295E28BE416400F6F2D6 /* GoogleMobileAdsAd.swift */; };
-		424F181528ABE6230082AEF3 /* BidMachineRequestWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F181428ABE6230082AEF3 /* BidMachineRequestWrapper.swift */; };
 		425E9C4828B76B0F00F4E4C7 /* BidOnAdapterAppLovin.h in Headers */ = {isa = PBXBuildFile; fileRef = 425E9C4728B76B0F00F4E4C7 /* BidOnAdapterAppLovin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		425E9C4D28B76B9000F4E4C7 /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425E9C4C28B76B9000F4E4C7 /* BidOn.framework */; };
 		425E9C5328B76CC100F4E4C7 /* AppLovinDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5228B76CC100F4E4C7 /* AppLovinDemandSourceAdapter.swift */; };
@@ -30,12 +26,14 @@
 		42BA81C22875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81C12875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift */; };
 		42BA81DF28771290001F1744 /* GoogleMobileAdsFullscreenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81DE28771290001F1744 /* GoogleMobileAdsFullscreenAd.swift */; };
 		42BA81E12877188E001F1744 /* GoogleMobileAdsReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81E02877188E001F1744 /* GoogleMobileAdsReward.swift */; };
-		42BA81EF2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81EE2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift */; };
-		42BA81F328772515001F1744 /* BidMachineParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F228772515001F1744 /* BidMachineParameters.swift */; };
-		42BA820D2878779D001F1744 /* BidMachineBannerDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820C2878779D001F1744 /* BidMachineBannerDemandProvider.swift */; };
 		42BA820F287880DA001F1744 /* GoogleMobileAdsBannerDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820E287880DA001F1744 /* GoogleMobileAdsBannerDemandProvider.swift */; };
 		42EC98752891416F003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98742891416F003BE6CF /* BidOn.framework */; };
 		42EC98792891417F003BE6CF /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EC98782891417F003BE6CF /* BidOn.framework */; };
+		42F71CF8299670DC002FC80D /* BidMachineInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F71CF7299670DC002FC80D /* BidMachineInterstitialDemandProvider.swift */; };
+		42F71CFA29967AEE002FC80D /* AuctionResponseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F71CF929967AEE002FC80D /* AuctionResponseWrapper.swift */; };
+		42F71CFC29969E3B002FC80D /* BidMachineRewardedAdDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F71CFB29969E3B002FC80D /* BidMachineRewardedAdDemandProvider.swift */; };
+		42F71CFE2996AE04002FC80D /* EmptyReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F71CFD2996AE04002FC80D /* EmptyReward.swift */; };
+		42F71D002996B0B5002FC80D /* BidMachineAdViewDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F71CFF2996B0B5002FC80D /* BidMachineAdViewDemandSourceAdapter.swift */; };
 		9AF35498147FF228FB35940E /* Pods_BidOnAdapterBidMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D01528D343C84B6819C7023 /* Pods_BidOnAdapterBidMachine.framework */; };
 		D948B1F8C213F51D68AC7AE1 /* Pods_BidOnAdapterAppLovin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9509D1E2749A0A168F47EAC /* Pods_BidOnAdapterAppLovin.framework */; };
 /* End PBXBuildFile section */
@@ -48,11 +46,7 @@
 		4221022B285A3318006596DA /* BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4221022D285A3318006596DA /* BidOnAdapterBidMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterBidMachine.h; sourceTree = "<group>"; };
 		42244DA128C89A4900E9C416 /* MediationError+GADErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediationError+GADErrorCode.swift"; sourceTree = "<group>"; };
-		42244DA328C8B6DF00E9C416 /* MediationError+ BDMErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediationError+ BDMErrorCode.swift"; sourceTree = "<group>"; };
-		42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineInterstitialDemandProvider.swift; sourceTree = "<group>"; };
-		42389DF528734EE1006024BA /* BidMachineAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineAd.swift; sourceTree = "<group>"; };
 		424D295E28BE416400F6F2D6 /* GoogleMobileAdsAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsAd.swift; sourceTree = "<group>"; };
-		424F181428ABE6230082AEF3 /* BidMachineRequestWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineRequestWrapper.swift; sourceTree = "<group>"; };
 		425E9C4528B76B0F00F4E4C7 /* BidOnAdapterAppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		425E9C4728B76B0F00F4E4C7 /* BidOnAdapterAppLovin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterAppLovin.h; sourceTree = "<group>"; };
 		425E9C4C28B76B9000F4E4C7 /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,13 +62,15 @@
 		42BA81C12875AE92001F1744 /* GoogleMobileAdsFullscreenDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsFullscreenDemandProvider.swift; sourceTree = "<group>"; };
 		42BA81DE28771290001F1744 /* GoogleMobileAdsFullscreenAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsFullscreenAd.swift; sourceTree = "<group>"; };
 		42BA81E02877188E001F1744 /* GoogleMobileAdsReward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsReward.swift; sourceTree = "<group>"; };
-		42BA81EE2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineRewardedAdDemandProvider.swift; sourceTree = "<group>"; };
-		42BA81F228772515001F1744 /* BidMachineParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineParameters.swift; sourceTree = "<group>"; };
-		42BA820C2878779D001F1744 /* BidMachineBannerDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineBannerDemandProvider.swift; sourceTree = "<group>"; };
 		42BA820E287880DA001F1744 /* GoogleMobileAdsBannerDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsBannerDemandProvider.swift; sourceTree = "<group>"; };
 		42EC98742891416F003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EC98782891417F003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EC987C28914189003BE6CF /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42F71CF7299670DC002FC80D /* BidMachineInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineInterstitialDemandProvider.swift; sourceTree = "<group>"; };
+		42F71CF929967AEE002FC80D /* AuctionResponseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionResponseWrapper.swift; sourceTree = "<group>"; };
+		42F71CFB29969E3B002FC80D /* BidMachineRewardedAdDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineRewardedAdDemandProvider.swift; sourceTree = "<group>"; };
+		42F71CFD2996AE04002FC80D /* EmptyReward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReward.swift; sourceTree = "<group>"; };
+		42F71CFF2996B0B5002FC80D /* BidMachineAdViewDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineAdViewDemandSourceAdapter.swift; sourceTree = "<group>"; };
 		5ACFA1A9D3D9DF1686E1EF11 /* Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterGoogleMobileAds/Pods-BidOnAdapterGoogleMobileAds.debug.xcconfig"; sourceTree = "<group>"; };
 		84D05911DFEF219E28C72FBA /* Pods-BidOnAdapterBidMachine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BidOnAdapterBidMachine.release.xcconfig"; path = "Target Support Files/Pods-BidOnAdapterBidMachine/Pods-BidOnAdapterBidMachine.release.xcconfig"; sourceTree = "<group>"; };
 		8D01528D343C84B6819C7023 /* Pods_BidOnAdapterBidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BidOnAdapterBidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,7 +139,6 @@
 				42BA81BF2875AD70001F1744 /* Demand */,
 				42389E1528746473006024BA /* Wrapper */,
 				429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */,
-				42BA81F228772515001F1744 /* BidMachineParameters.swift */,
 				4221022D285A3318006596DA /* BidOnAdapterBidMachine.h */,
 			);
 			path = BidOnAdapterBidMachine;
@@ -152,9 +147,8 @@
 		42389E1528746473006024BA /* Wrapper */ = {
 			isa = PBXGroup;
 			children = (
-				42389DF528734EE1006024BA /* BidMachineAd.swift */,
-				424F181428ABE6230082AEF3 /* BidMachineRequestWrapper.swift */,
-				42244DA328C8B6DF00E9C416 /* MediationError+ BDMErrorCode.swift */,
+				42F71CF929967AEE002FC80D /* AuctionResponseWrapper.swift */,
+				42F71CFD2996AE04002FC80D /* EmptyReward.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -204,9 +198,9 @@
 		42BA81BF2875AD70001F1744 /* Demand */ = {
 			isa = PBXGroup;
 			children = (
-				42389DF3287339CE006024BA /* BidMachineInterstitialDemandProvider.swift */,
-				42BA81EE2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift */,
-				42BA820C2878779D001F1744 /* BidMachineBannerDemandProvider.swift */,
+				42F71CF7299670DC002FC80D /* BidMachineInterstitialDemandProvider.swift */,
+				42F71CFB29969E3B002FC80D /* BidMachineRewardedAdDemandProvider.swift */,
+				42F71CFF2996B0B5002FC80D /* BidMachineAdViewDemandSourceAdapter.swift */,
 			);
 			path = Demand;
 			sourceTree = "<group>";
@@ -523,14 +517,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42389DF628734EE1006024BA /* BidMachineAd.swift in Sources */,
-				424F181528ABE6230082AEF3 /* BidMachineRequestWrapper.swift in Sources */,
-				42BA820D2878779D001F1744 /* BidMachineBannerDemandProvider.swift in Sources */,
-				42244DA428C8B6DF00E9C416 /* MediationError+ BDMErrorCode.swift in Sources */,
+				42F71CFA29967AEE002FC80D /* AuctionResponseWrapper.swift in Sources */,
 				429EE2B8286C7293009439C6 /* BidMachineDemandSourceAdapter.swift in Sources */,
-				42BA81EF2877236E001F1744 /* BidMachineRewardedAdDemandProvider.swift in Sources */,
-				42389DF4287339CE006024BA /* BidMachineInterstitialDemandProvider.swift in Sources */,
-				42BA81F328772515001F1744 /* BidMachineParameters.swift in Sources */,
+				42F71CFC29969E3B002FC80D /* BidMachineRewardedAdDemandProvider.swift in Sources */,
+				42F71CF8299670DC002FC80D /* BidMachineInterstitialDemandProvider.swift in Sources */,
+				42F71CFE2996AE04002FC80D /* EmptyReward.swift in Sources */,
+				42F71D002996B0B5002FC80D /* BidMachineAdViewDemandSourceAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

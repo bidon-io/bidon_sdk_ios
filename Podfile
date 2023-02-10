@@ -19,17 +19,17 @@ def ironsource
 end
 
 def bidmachine 
-  pod 'BidMachine'
-  pod 'BDMIABAdapter'
-  pod 'BDMCriteoAdapter'
-  pod 'BDMPangleAdapter'
-  pod 'BDMAmazonAdapter'
-  pod 'BDMSmaatoAdapter'
-  pod 'BDMVungleAdapter'
-  pod 'BDMAdColonyAdapter'
-  pod 'BDMMetaAudienceAdapter'
-  pod 'BDMMyTargetAdapter'
-  pod 'BDMTapjoyAdapter'
+  pod 'BidMachine', '~> 2.0.0'
+  pod 'BidMachineAdColonyAdapter'
+  pod 'BidMachineAmazonAdapter'
+  pod 'BidMachineCriteoAdapter'
+  pod 'BidMachineMetaAudienceAdapter'
+  pod 'BidMachineMyTargetAdapter'
+  pod 'BidMachineSmaatoAdapter'
+  pod 'BidMachineTapjoyAdapter'
+  pod 'BidMachineVungleAdapter'
+  pod 'BidMachinePangleAdapter'
+  pod 'BidMachineNotsyAdapter'
 end
 
 def admob
@@ -77,7 +77,6 @@ end
 
 
 # Demo 
-
 target 'Sandbox' do
   project 'Sandbox/Sandbox.xcodeproj'
   applovin
@@ -89,4 +88,16 @@ target 'Sandbox' do
 end
 
 
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+    end
+
+    installer.pods_project.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '5.0'
+      config.build_settings['IOS_DEPLOYMENT_TARGET'] = '11.0'
+    end
+  end
+end
 

@@ -69,7 +69,7 @@ extension AppsFlyerAdRevenue {
         logAdRevenue(
             monetizationNetwork: ad.networkName,
             mediationNetwork: .appodeal,
-            eventRevenue: ad.revenue as NSNumber,
+            eventRevenue: ad.price as NSNumber,
             revenueCurrency: ad.currency,
             additionalParameters: additionalParameters
         )

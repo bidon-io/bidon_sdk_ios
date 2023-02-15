@@ -40,7 +40,7 @@ struct PermissionView: View {
                             .foregroundColor(.secondary)
                     case .accepted:
                         Image(systemName: "checkmark")
-                            .foregroundColor(.blue)
+                            .foregroundColor(.accentColor)
                     case .denied:
                         Image(systemName: "exclamationmark.circle")
                             .foregroundColor(.red)

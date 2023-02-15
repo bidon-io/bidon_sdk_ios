@@ -22,7 +22,8 @@ final class ContentViewModel: ObservableObject {
     
     private func subscribe() {
         initializationViewModel
-            .$isInitialized
+            .$initializationState
+            .map { $0 == .initialized } 
             .receive(on: DispatchQueue.main)
             .sink { isInitialized in
                 withAnimation { [unowned self] in

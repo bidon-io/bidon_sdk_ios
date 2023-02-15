@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 workspace 'BidOn.xcworkspace'
 
 source 'https://github.com/appodeal/CocoaPods.git'
@@ -14,12 +14,8 @@ def applovin
   pod 'AppLovinSDK'
 end
 
-def ironsource 
-  pod 'IronSourceSDK', '7.2.3.1-APD'
-end
-
 def bidmachine 
-  pod 'BidMachine', '~> 2.0.0'
+  pod 'BidMachine', '~> 2.0.0.0'
   pod 'BidMachineAdColonyAdapter'
   pod 'BidMachineAmazonAdapter'
   pod 'BidMachineCriteoAdapter'
@@ -37,12 +33,30 @@ def admob
 end
 
 def appsflyer
-  pod 'AppsFlyerFramework', '~> 6.7.0'
-  pod 'AppsFlyer-AdRevenue', '~> 6.5.4'
+  pod 'AppsFlyerFramework', '~> 6.9.0'
+  pod 'AppsFlyer-AdRevenue', '~> 6.9.0'
 end
 
 def ocmock
   pod 'OCMock', '~> 3.9.1'
+end
+
+def appodeal_mediation
+  pod 'Appodeal', '~> 3.0.2'
+  pod 'APDAdColonyAdapter'
+  pod 'APDAdjustAdapter'
+  pod 'APDAppLovinAdapter'
+  pod 'APDAppsFlyerAdapter'
+  pod 'APDBidMachineAdapter'
+  pod 'APDGoogleAdMobAdapter'
+  pod 'APDIABAdapter'
+  pod 'APDIronSourceAdapter'
+  pod 'APDMetaAudienceNetworkAdapter'
+  pod 'APDMyTargetAdapter'
+  pod 'APDStackAnalyticsAdapter'
+  pod 'APDUnityAdapter'
+  pod 'APDVungleAdapter'
+  pod 'APDYandexAdapter'
 end
 
 # Targets
@@ -69,7 +83,6 @@ target 'Tests-ObjectiveC' do
   project 'Tests/Tests.xcodeproj'
   ocmock
   applovin
-  ironsource
   bidmachine
   admob
   applovin
@@ -81,10 +94,10 @@ target 'Sandbox' do
   project 'Sandbox/Sandbox.xcodeproj'
   applovin
   appsflyer
-  ironsource
   bidmachine
   admob
   applovin
+  appodeal_mediation
 end
 
 

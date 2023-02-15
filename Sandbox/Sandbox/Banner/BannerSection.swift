@@ -49,7 +49,7 @@ struct BannerAdSection: View {
                             Spacer()
                             if vm.format == format {
                                 Image(systemName: "checkmark")
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.accentColor)
                             }
                         }
                     }

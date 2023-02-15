@@ -10,13 +10,6 @@ import BidOn
 import SwiftUI
 
 
-enum AdType {
-    case banner
-    case interstitial
-    case rewardedAd
-}
-
-
 struct AdEventModel: Identifiable {
     var id: UUID = UUID()
     var date: Date
@@ -63,12 +56,12 @@ extension AdEventModel {
             title = "Did record click"
             subtitle = ad.text
             bage = "star"
-            color = .blue
+            color = .accentColor
         case .didRecordImpression(let ad):
             title = "Did record impression"
             subtitle = ad.text
             bage = "star"
-            color = .blue
+            color = .accentColor
         case .didPayRevenue(let ad):
             title = "Did pay revenue"
             subtitle = ad.text
@@ -144,12 +137,12 @@ extension AdEventModel {
             title = "Did record click"
             subtitle = ad.text
             bage = "star"
-            color = .blue
+            color = .accentColor
         case .didRecordImpression(let ad):
             title = "Did record impression"
             subtitle = ad.text
             bage = "star"
-            color = .blue
+            color = .accentColor
         case .didPayRevenue(let ad):
             title = "Did pay revenue"
             subtitle = ad.text
@@ -220,12 +213,12 @@ extension AdEventModel {
             title = "Did record click"
             subtitle = ad.text
             bage = "star"
-            color = .blue
+            color = .accentColor
         case .didRecordImpression(let ad):
             title = "Did record impression"
             subtitle = ad.text
             bage = "star"
-            color = .blue
+            color = .accentColor
         case .didPayRevenue(let ad):
             title = "Did pay revenue"
             subtitle = ad.text
@@ -272,7 +265,7 @@ extension AdType {
 }
 
 
-internal extension Price {
+extension Price {
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
@@ -288,7 +281,7 @@ internal extension Price {
 }
 
 
-private extension Ad {
+extension Ad {
     var text: String {
         "Ad #\(id.prefix(3))... from \(networkName), price: \(price.pretty)"
     }

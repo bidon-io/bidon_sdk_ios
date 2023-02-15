@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct RewardedAdSection: View {
-    @StateObject var vm = RewardedAdSectionViewModel()
+    @StateObject var vm = FullscreenAdSectionViewModel(adType: .rewardedAd)
     
     var body: some View {
         Section(header: Text("Rewarded Ad")) {
@@ -20,14 +20,17 @@ struct RewardedAdSection: View {
                 in: (0.0...100.0),
                 step: 0.1
             )
-            
-            Button(action: vm.load) {
+        
+            Button(action: load) {
                 HStack {
                     Text("Load")
                     Spacer()
                     switch vm.state {
                     case .loading:
                         ProgressView()
+                    case .ready:
+                        Image(systemName: "circle.fill")
+                            .foregroundColor(.green)
                     case .error:
                         Image(systemName: "exclamationmark.circle")
                             .foregroundColor(.red)
@@ -36,15 +39,16 @@ struct RewardedAdSection: View {
                     }
                 }
             }
+            .disabled(vm.state == .loading || vm.state == .ready)
             
-            Button(action: vm.show) {
+            Button(action: show) {
                 HStack {
                     Text("Show")
                     Spacer()
                     switch vm.state {
                     case .presenting:
                         Image(systemName: "play.circle")
-                            .foregroundColor(.blue)
+                            .foregroundColor(.accentColor)
                     case .presentationError:
                         Image(systemName: "exclamationmark.circle")
                             .foregroundColor(.red)
@@ -54,8 +58,23 @@ struct RewardedAdSection: View {
                 }
             }
             
-            NavigationLink("Events", destination: AdEventsList(events: vm.events))
+            NavigationLink(
+                "Events",
+                destination: AdEventsList(events: vm.events)
+            )
         }
         .foregroundColor(.primary)
+    }
+    
+    private func load() {
+        Task {
+            await vm.load()
+        }
+    }
+    
+    private func show() {
+        Task {
+            await vm.show()
+        }
     }
 }

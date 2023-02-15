@@ -48,6 +48,10 @@ public final class BidOnSdk: NSObject {
         shared.adaptersRepository.register(className: className)
     }
     
+    public static func registeredAdapters() -> [Adapter] {
+        return shared.adaptersRepository.all()
+    }
+    
     public static func registerAdapter(adapter: Adapter) {
         shared.adaptersRepository.register(adapter: adapter)
     }

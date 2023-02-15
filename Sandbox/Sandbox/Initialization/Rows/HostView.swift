@@ -40,7 +40,7 @@ struct HostView: View {
                 
                 if selected == host {
                     Image(systemName: "checkmark")
-                        .foregroundColor(.blue)
+                        .foregroundColor(.accentColor)
                 }
             }
         }

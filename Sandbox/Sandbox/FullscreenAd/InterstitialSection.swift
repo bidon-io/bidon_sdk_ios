@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct InterstitialSection: View {
-    @StateObject var vm = InterstitialSectionViewModel()
+    @StateObject var vm = FullscreenAdSectionViewModel(adType: .interstitial)
     
     var body: some View {
         Section(header: Text("Interstitial")) {
@@ -21,13 +21,16 @@ struct InterstitialSection: View {
                 step: 0.1
             )
         
-            Button(action: vm.load) {
+            Button(action: load) {
                 HStack {
                     Text("Load")
                     Spacer()
                     switch vm.state {
                     case .loading:
                         ProgressView()
+                    case .ready:
+                        Image(systemName: "circle.fill")
+                            .foregroundColor(.green)
                     case .error:
                         Image(systemName: "exclamationmark.circle")
                             .foregroundColor(.red)
@@ -36,15 +39,16 @@ struct InterstitialSection: View {
                     }
                 }
             }
+            .disabled(vm.state == .loading || vm.state == .ready)
             
-            Button(action: vm.show) {
+            Button(action: show) {
                 HStack {
                     Text("Show")
                     Spacer()
                     switch vm.state {
                     case .presenting:
                         Image(systemName: "play.circle")
-                            .foregroundColor(.blue)
+                            .foregroundColor(.accentColor)
                     case .presentationError:
                         Image(systemName: "exclamationmark.circle")
                             .foregroundColor(.red)
@@ -60,5 +64,17 @@ struct InterstitialSection: View {
             )
         }
         .foregroundColor(.primary)
+    }
+    
+    private func load() {
+        Task {
+            await vm.load()
+        }
+    }
+    
+    private func show() {
+        Task {
+            await vm.show()
+        }
     }
 }

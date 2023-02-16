@@ -21,8 +21,8 @@ struct DeviceModel: Device, Codable {
     var pixelRatio: Float
     var javaScript: Int
     var language: String
-    var carrier: String?
-    var mccncc: String?
+    var carrier: String
+    var mccncc: String
     var conectionType: ConnectionType
     
     init(_ device: Device) {

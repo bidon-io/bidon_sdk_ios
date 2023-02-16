@@ -421,7 +421,6 @@ SPEC REPOS:
     - OMSDK_Appodeal
     - StackAnalytics
     - StackConsentManager
-    - StackIAB
     - StackModules
     - StackProtobuf
   trunk:
@@ -520,7 +519,7 @@ SPEC CHECKSUMS:
   smaato-ios-sdk: f2c145efd3e3e322795d892c9a88eb499339262a
   StackAnalytics: bfcaf7c3ff97066e72cdcf183e1adee461b72808
   StackConsentManager: ac09704d4a8ddfc1091fd8eb6a9e02dc5f797574
-  StackIAB: 724e9e66d6416004ae732a749ffe67d6786dff1f
+  StackIAB: 14cfe2625ac9f1d010cea89470f32cf220107e8c
   StackModules: 6f8d879dceefcd58c1cae4f4e75baf922e2a9e77
   StackProtobuf: 4ad74d637102b57b3d595bedf6ff8ff3bc6032b2
   TapjoySDK: 3dcd899e69eb3e36f231390c95c7105730619bcb

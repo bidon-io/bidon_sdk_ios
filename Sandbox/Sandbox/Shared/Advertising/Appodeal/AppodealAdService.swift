@@ -83,7 +83,7 @@ final class AppodealAdService: NSObject, AdService {
 
 extension AppodealAdService: APDActivityDelegate {
     func didReceive(_ activityLog: APDActivityLog) {
-        var receiver: AppodealAdWrapper?
+        var receiver: AdWrapper?
         
         switch activityLog.adType {
         case .interstitialAd: receiver = interstitial
@@ -103,7 +103,7 @@ extension AppodealAdService: APDActivityDelegate {
 
 extension AppodealAdService: AppodealAdRevenueDelegate {
     func didReceiveRevenue(forAd ad: AppodealAdRevenue) {
-        var receiver: AppodealAdWrapper?
+        var receiver: AdWrapper?
         
         switch ad.adType {
         case .interstitial: receiver = interstitial

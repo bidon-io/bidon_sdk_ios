@@ -12,8 +12,8 @@ import Combine
 import SwiftUI
 
 
-final class AppodealRewardedAdWrapper: AppodealDefaultFullscreenAdWrapper {
-    var bidOnRewardedAd: BidOn.RewardedAd?
+final class AppodealRewardedAdWrapper: BaseFullscreenAdWrapper {
+    private var bidOnRewardedAd: BidOn.RewardedAd?
     
     override init() {
         super.init()

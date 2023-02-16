@@ -13,13 +13,13 @@ import AppsFlyerAdRevenue
 import BidOn
 
 
-final class AdverstisingServiceProvider: ObservableObject {
+final class AdServiceProvider: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
-    static let shared = AdverstisingServiceProvider()
+    static let shared = AdServiceProvider()
     
     var service: AdService = AppodealAdService()
-
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil

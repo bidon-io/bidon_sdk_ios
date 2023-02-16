@@ -101,7 +101,8 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withAuctionId(UUID().uuidString)
-            builder.withExt(sdk.ext)
+            #warning("Ext doesn't send")
+//            builder.withExt(sdk.ext)
         }
         
         Logger.verbose("Fullscreen ad manager performs request: \(request)")

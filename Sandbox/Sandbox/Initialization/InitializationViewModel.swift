@@ -52,6 +52,17 @@ final class InitializationViewModel: ObservableObject, AdResponder {
         didSet { adService.bidOnURL = host.baseURL }
     }
     
+    @Published var mediation: Mediation = .appodeal {
+        didSet {
+            switch mediation {
+            case .none:
+                AdServiceProvider.shared.service = RawAdService()
+            case .appodeal:
+                AdServiceProvider.shared.service = AppodealAdService()
+            }
+        }
+    }
+    
     @Published var adapters: [BidOn.Adapter] = .default()
     
     @MainActor

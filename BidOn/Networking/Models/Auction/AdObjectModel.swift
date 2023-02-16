@@ -24,7 +24,7 @@ struct AdObjectModel: Encodable {
     struct RewardedModel: Encodable {}
     
     var orientation: InterfaceOrientation = .current
-    var placement: String
+    var placementId: String
     var auctionId: String
     var minPrice: Price
     var banner: BannerModel?

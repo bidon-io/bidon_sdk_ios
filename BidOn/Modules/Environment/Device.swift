@@ -38,7 +38,7 @@ protocol Device {
     var pixelRatio: Float { get }
     var javaScript: Int { get }
     var language: String { get }
-    var carrier: String? { get }
-    var mccncc: String? { get }
+    var carrier: String { get }
+    var mccncc: String { get }
     var conectionType: ConnectionType { get }
 }

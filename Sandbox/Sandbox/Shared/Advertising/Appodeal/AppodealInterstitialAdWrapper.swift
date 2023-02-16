@@ -12,7 +12,7 @@ import Combine
 import SwiftUI
 
 
-final class AppodealInterstitialAdWrapper: AppodealDefaultFullscreenAdWrapper {
+final class AppodealInterstitialAdWrapper: BaseFullscreenAdWrapper {
     private var bidOnInterstitial: BidOn.Interstitial?
     
     override init() {

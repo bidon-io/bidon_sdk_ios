@@ -56,16 +56,18 @@ final class DeviceManager: Device, EnvironmentManager {
         Locale.preferredLanguages.first ?? ""
     }
     
-    var carrier: String? {
-        currentCarrier?.carrierName
+    var carrier: String {
+        currentCarrier?.carrierName ?? ""
     }
     
-    var mccncc: String? {
-        guard let carrier = currentCarrier else { return nil }
-        return [
+    var mccncc: String {
+        guard let carrier = currentCarrier else { return "" }
+        let codes = [
             carrier.mobileCountryCode,
             carrier.mobileNetworkCode
         ]
+        
+        return codes
             .compactMap { $0 }
             .joined(separator: "-")
     }

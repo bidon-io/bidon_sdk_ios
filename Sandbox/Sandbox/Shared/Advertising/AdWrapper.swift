@@ -13,7 +13,7 @@ import BidOn
 
 
 
-protocol AppodealAdWrapper {
+protocol AdWrapper {
     var adEventSubject: PassthroughSubject<AdEventModel, Never> { get }
     
     var adType: AdType { get }
@@ -22,12 +22,12 @@ protocol AppodealAdWrapper {
 }
 
 
-protocol AppodealFullscreenAdWrapper: AppodealAdWrapper {
+protocol FullscreenAdWrapper: AdWrapper {
     func show() async throws
 }
 
 
-extension AppodealAdWrapper {
+extension AdWrapper {
     func send(
         event title: String,
         detail: String,
@@ -48,7 +48,7 @@ extension AppodealAdWrapper {
 }
 
 
-class AppodealDefaultFullscreenAdWrapper: NSObject, AppodealFullscreenAdWrapper {
+class BaseFullscreenAdWrapper: NSObject, FullscreenAdWrapper {
     final let adEventSubject = PassthroughSubject<AdEventModel, Never>()
     
     private var loadingContinuation: CheckedContinuation<Void, Error>?
@@ -107,7 +107,7 @@ class AppodealDefaultFullscreenAdWrapper: NSObject, AppodealFullscreenAdWrapper 
 }
 
 
-extension AppodealDefaultFullscreenAdWrapper: BidOn.RewardedAdDelegate {
+extension BaseFullscreenAdWrapper: BidOn.RewardedAdDelegate {
     func adObject(_ adObject: BidOn.AdObject, didLoadAd ad: BidOn.Ad) {
         send(
             event: "BidOn did load ad",

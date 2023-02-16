@@ -10,7 +10,8 @@ import BidOn
 import Combine
 
 
-enum Mediation: String {
+enum Mediation: String, CaseIterable {
+    case none
     case appodeal
 }
 
@@ -61,7 +62,7 @@ extension AdService {
 
 extension AdResponder {
     var adService: AdService {
-        AdverstisingServiceProvider.shared.service
+        AdServiceProvider.shared.service
     }
 }
 

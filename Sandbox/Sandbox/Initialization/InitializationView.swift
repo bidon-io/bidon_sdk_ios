@@ -27,6 +27,10 @@ struct InitializationView: View {
                     .edgesIgnoringSafeArea(.all)
                 VStack {
                     List {
+                        Section(header: Text("Mediation")) {
+                            SelectMediationView(mediation: $vm.mediation)
+                        }
+                        
                         Section(header: Text("Base URL")) {
                             ForEach(vm.hosts) { host in
                                 HostView(host: host, selected: $vm.host)
@@ -63,6 +67,7 @@ struct InitializationView: View {
                             AdaptersView(adapters: $vm.adapters)
                         }
                     }
+                    .padding(.bottom, 200)
                     .disabled(!vm.initializationState.isIdle)
                     .listStyle(.automatic)
                 }
@@ -85,7 +90,7 @@ struct InitializationView: View {
                         .disabled(!vm.initializationState.isIdle)
                         
                         VStack(alignment: .leading) {
-                            Text("Mediation: ") + Text(AdverstisingServiceProvider.shared.service.mediation.rawValue.capitalized + " v" + AdverstisingServiceProvider.shared.service.verstion).bold()
+                            Text("Mediation: ") + Text(AdServiceProvider.shared.service.mediation.rawValue.capitalized + " v" + AdServiceProvider.shared.service.verstion).bold()
                             Text("BidOn SDK: ") + Text("v\(BidOnSdk.sdkVersion)").bold()
                             Text("Bundle ID: ") + Text(Bundle.main.bundleIdentifier ?? "").bold()
                             Text("App Key: ") + Text(Constants.BidOn.appKey).bold()
@@ -97,6 +102,13 @@ struct InitializationView: View {
                         .padding(.horizontal)
                         .padding(.bottom)
                     }
+                    .padding(.vertical)
+                    .frame(height: 200)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color(UIColor.systemBackground))
+                            .edgesIgnoringSafeArea(.bottom)
+                    )
                 }
                 
                 if vm.initializationState.isAnimating {

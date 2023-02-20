@@ -13,7 +13,7 @@ public typealias Currency = String
 
 
 public extension Price {
-    static let unknown: Price = 0
+    static let unknown: Price = 0.0
     
     var isUnknown: Bool {
         return isNaN || isZero || isInfinite
@@ -42,17 +42,19 @@ public extension Currency {
 }
 
 
-@objc(BNPricePrecision)
+@objc(BDNPricePrecision)
 public enum PricePrecision: Int {
     case programmatic
     case direct
 }
 
 
-@objc(BNAd)
+@objc(BDNAd)
 public protocol Ad {
+#warning("Add round id, auction id")
     var id: String { get }
     var adUnitId: String? { get }
+    #warning("Price or eCPM")
     var price: Price { get }
     var pricePrecision: PricePrecision { get }
     var currency: Currency { get }

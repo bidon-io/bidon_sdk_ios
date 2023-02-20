@@ -10,12 +10,12 @@ import UIKit
 
 
 public struct AdViewContext {
-    public var format: AdViewFormat
+    public var format: BannerFormat
     public var size: CGSize
     public var rootViewController: UIViewController?
     
     public init(
-        format: AdViewFormat,
+        format: BannerFormat,
         size: CGSize,
         rootViewController: UIViewController?
     ) {
@@ -25,7 +25,7 @@ public struct AdViewContext {
     }
     
     public init(
-        _ format: AdViewFormat,
+        _ format: BannerFormat,
         rootViewController: UIViewController? = nil
     ) {
         self = .init(
@@ -37,8 +37,8 @@ public struct AdViewContext {
 }
 
 
-@objc(BDNAdViewFormat)
-public enum AdViewFormat: Int, Codable, CustomStringConvertible {
+@objc(BDNBannerFormat)
+public enum BannerFormat: Int, Codable, CustomStringConvertible {
     case banner
     case leaderboard
     case mrec

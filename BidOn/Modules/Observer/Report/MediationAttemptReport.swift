@@ -13,10 +13,10 @@ protocol DemandReport {
     var adUnitId: String? { get }
     var status: DemandResult { get }
     var price: Price { get }
-    var bidStartTimestamp: TimeInterval { get }
-    var bidFinishTimestamp: TimeInterval { get }
-    var fillStartTimestamp: TimeInterval { get }
-    var fillFinishTimestamp: TimeInterval { get }
+    var bidStartTimestamp: UInt? { get }
+    var bidFinishTimestamp: UInt? { get }
+    var fillStartTimestamp: UInt? { get }
+    var fillFinishTimestamp: UInt? { get }
 }
 
 

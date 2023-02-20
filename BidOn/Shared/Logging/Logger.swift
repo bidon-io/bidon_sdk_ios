@@ -20,7 +20,7 @@ public class Logger: NSObject {
         case off = 5
     }
     
-    @objc(BNLoggerFormat)
+    @objc(BDNLoggerFormat)
     public enum Format: Int {
         case short = 0
         case full = 1

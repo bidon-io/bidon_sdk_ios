@@ -23,11 +23,13 @@ struct ImpressionRequest: Request {
         var geo: GeoModel?
         var ext: String?
         var token: String?
+        var segmentId: String?
         var show: ImpressionModel
     }
     
     struct ResponseBody: Decodable, Tokenized {
         var token: String?
+        var segmentId: String?
         var success: Bool
     }
     

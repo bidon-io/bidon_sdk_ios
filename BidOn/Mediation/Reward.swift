@@ -8,7 +8,7 @@
 import Foundation
 
 
-@objc(BNReward)
+@objc(BDNReward)
 public protocol Reward {
     var label: String { get }
     var amount: Int { get }

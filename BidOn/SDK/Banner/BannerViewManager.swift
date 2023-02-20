@@ -27,13 +27,13 @@ final internal class BannerViewManager: NSObject {
         var auctionId: String
         var auctionConfigurationId: Int
         var ad: Ad
-        var format: AdViewFormat
+        var format: BannerFormat
         
         init(
             auctionId: String,
             auctionConfigurationId: Int,
             ad: Ad,
-            format: AdViewFormat
+            format: BannerFormat
         ) {
             self.auctionId = auctionId
             self.auctionConfigurationId = auctionConfigurationId

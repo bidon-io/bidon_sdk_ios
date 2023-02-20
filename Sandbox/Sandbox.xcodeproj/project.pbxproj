@@ -24,7 +24,7 @@
 		4276A234299549DA00EE3991 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4276A233299549DA00EE3991 /* Constants.swift */; };
 		427B1BCD299A69A1007D4E93 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BCC299A69A1007D4E93 /* AdService.swift */; };
 		427B1BCF299A7AD7007D4E93 /* AppodealAdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BCE299A7AD7007D4E93 /* AppodealAdService.swift */; };
-		427B1BD2299A7E6E007D4E93 /* AdvertisingServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BD1299A7E6E007D4E93 /* AdvertisingServiceProvider.swift */; };
+		427B1BD2299A7E6E007D4E93 /* AdServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BD1299A7E6E007D4E93 /* AdServiceProvider.swift */; };
 		427B1BD5299A866F007D4E93 /* Appodeal+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BD4299A866F007D4E93 /* Appodeal+Extenstions.swift */; };
 		427B1BD7299BBA83007D4E93 /* LogLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BD6299BBA83007D4E93 /* LogLevelView.swift */; };
 		427B1BD9299BC585007D4E93 /* AdaptersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BD8299BC585007D4E93 /* AdaptersView.swift */; };
@@ -36,12 +36,15 @@
 		427B1BE6299E403F007D4E93 /* RawInterstitialAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BE5299E403F007D4E93 /* RawInterstitialAdWrapper.swift */; };
 		427B1BE8299E40D5007D4E93 /* RawRewardedAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BE7299E40D5007D4E93 /* RawRewardedAdWrapper.swift */; };
 		427B1BEA299E43AB007D4E93 /* SelectMediationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BE9299E43AB007D4E93 /* SelectMediationView.swift */; };
+		427B1C0A299FDE94007D4E93 /* AdBannerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1C09299FDE94007D4E93 /* AdBannerWrapperView.swift */; };
+		427B1C0D29A377AA007D4E93 /* BaseAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1C0C29A377AA007D4E93 /* BaseAdWrapper.swift */; };
+		427B1C0F29A377D4007D4E93 /* BaseFullscreenAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1C0E29A377D4007D4E93 /* BaseFullscreenAdWrapper.swift */; };
 		4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A410289BC8B40062C580 /* SandboxApp.swift */; };
 		4299A413289BC8B40062C580 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A412289BC8B40062C580 /* ContentView.swift */; };
 		4299A415289BC8B60062C580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A414289BC8B60062C580 /* Assets.xcassets */; };
 		4299A418289BC8B60062C580 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4299A417289BC8B60062C580 /* Preview Assets.xcassets */; };
 		429F4D8828CF6AA700765BD7 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429F4D8728CF6AA700765BD7 /* Wave.swift */; };
-		42A4C86C28F6E02500A7FE40 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4C86B28F6E02500A7FE40 /* BannerView.swift */; };
+		42A4C86C28F6E02500A7FE40 /* RawBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4C86B28F6E02500A7FE40 /* RawBannerView.swift */; };
 		42BE439028C0E7B3000528E3 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438F28C0E7B3000528E3 /* Permission.swift */; };
 		42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439128C0E7CB000528E3 /* LocationPermission.swift */; };
 		42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */; };
@@ -72,7 +75,7 @@
 		4276A233299549DA00EE3991 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		427B1BCC299A69A1007D4E93 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
 		427B1BCE299A7AD7007D4E93 /* AppodealAdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppodealAdService.swift; sourceTree = "<group>"; };
-		427B1BD1299A7E6E007D4E93 /* AdvertisingServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisingServiceProvider.swift; sourceTree = "<group>"; };
+		427B1BD1299A7E6E007D4E93 /* AdServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdServiceProvider.swift; sourceTree = "<group>"; };
 		427B1BD4299A866F007D4E93 /* Appodeal+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Appodeal+Extenstions.swift"; sourceTree = "<group>"; };
 		427B1BD6299BBA83007D4E93 /* LogLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevelView.swift; sourceTree = "<group>"; };
 		427B1BD8299BC585007D4E93 /* AdaptersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptersView.swift; sourceTree = "<group>"; };
@@ -84,13 +87,16 @@
 		427B1BE5299E403F007D4E93 /* RawInterstitialAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawInterstitialAdWrapper.swift; sourceTree = "<group>"; };
 		427B1BE7299E40D5007D4E93 /* RawRewardedAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawRewardedAdWrapper.swift; sourceTree = "<group>"; };
 		427B1BE9299E43AB007D4E93 /* SelectMediationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMediationView.swift; sourceTree = "<group>"; };
+		427B1C09299FDE94007D4E93 /* AdBannerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerWrapperView.swift; sourceTree = "<group>"; };
+		427B1C0C29A377AA007D4E93 /* BaseAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAdWrapper.swift; sourceTree = "<group>"; };
+		427B1C0E29A377D4007D4E93 /* BaseFullscreenAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFullscreenAdWrapper.swift; sourceTree = "<group>"; };
 		4299A40D289BC8B40062C580 /* Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4299A410289BC8B40062C580 /* SandboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandboxApp.swift; sourceTree = "<group>"; };
 		4299A412289BC8B40062C580 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4299A414289BC8B60062C580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4299A417289BC8B60062C580 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		429F4D8728CF6AA700765BD7 /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
-		42A4C86B28F6E02500A7FE40 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		42A4C86B28F6E02500A7FE40 /* RawBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawBannerView.swift; sourceTree = "<group>"; };
 		42BE438F28C0E7B3000528E3 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		42BE439128C0E7CB000528E3 /* LocationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermission.swift; sourceTree = "<group>"; };
 		42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparencyPermission.swift; sourceTree = "<group>"; };
@@ -166,11 +172,13 @@
 		427B1BD0299A7E5A007D4E93 /* Advertising */ = {
 			isa = PBXGroup;
 			children = (
+				427B1C0B29A37799007D4E93 /* Base */,
 				427B1BD3299A8656007D4E93 /* Appodeal */,
 				427B1BE2299E3D85007D4E93 /* Raw */,
 				427B1BCC299A69A1007D4E93 /* AdService.swift */,
 				427B1BE0299D2F70007D4E93 /* AdWrapper.swift */,
-				427B1BD1299A7E6E007D4E93 /* AdvertisingServiceProvider.swift */,
+				427B1C09299FDE94007D4E93 /* AdBannerWrapperView.swift */,
+				427B1BD1299A7E6E007D4E93 /* AdServiceProvider.swift */,
 			);
 			path = Advertising;
 			sourceTree = "<group>";
@@ -193,8 +201,18 @@
 				427B1BE3299E3DA7007D4E93 /* RawAdService.swift */,
 				427B1BE5299E403F007D4E93 /* RawInterstitialAdWrapper.swift */,
 				427B1BE7299E40D5007D4E93 /* RawRewardedAdWrapper.swift */,
+				42A4C86B28F6E02500A7FE40 /* RawBannerView.swift */,
 			);
 			path = Raw;
+			sourceTree = "<group>";
+		};
+		427B1C0B29A37799007D4E93 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				427B1C0C29A377AA007D4E93 /* BaseAdWrapper.swift */,
+				427B1C0E29A377D4007D4E93 /* BaseFullscreenAdWrapper.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		4299A404289BC8B40062C580 = {
@@ -256,7 +274,6 @@
 			children = (
 				42EDA0B128C612B000BF74DE /* AppProgressView.swift */,
 				429F4D8728CF6AA700765BD7 /* Wave.swift */,
-				42A4C86B28F6E02500A7FE40 /* BannerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -438,13 +455,14 @@
 				427B1BDD299BE2D3007D4E93 /* AppodealInterstitialAdWrapper.swift in Sources */,
 				427B1BE6299E403F007D4E93 /* RawInterstitialAdWrapper.swift in Sources */,
 				427B1BE1299D2F70007D4E93 /* AdWrapper.swift in Sources */,
-				427B1BD2299A7E6E007D4E93 /* AdvertisingServiceProvider.swift in Sources */,
+				427B1BD2299A7E6E007D4E93 /* AdServiceProvider.swift in Sources */,
 				4224AA7E28B8D59400E8D886 /* RewardedAdSection.swift in Sources */,
 				426DD7AE28A6584600A1ADF5 /* HomeView.swift in Sources */,
 				420067A528BCEF06003B734D /* BannerAdSectionViewModel.swift in Sources */,
 				427B1BE8299E40D5007D4E93 /* RawRewardedAdWrapper.swift in Sources */,
 				4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */,
 				4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */,
+				427B1C0D29A377AA007D4E93 /* BaseAdWrapper.swift in Sources */,
 				4299A413289BC8B40062C580 /* ContentView.swift in Sources */,
 				427B1BEA299E43AB007D4E93 /* SelectMediationView.swift in Sources */,
 				42EDA0AC28C5EEE300BF74DE /* InitializationView.swift in Sources */,
@@ -452,12 +470,13 @@
 				42EDA0AE28C5EF6000BF74DE /* InitializationViewModel.swift in Sources */,
 				4200679D28BCA8A3003B734D /* BannerSection.swift in Sources */,
 				427B1BCF299A7AD7007D4E93 /* AppodealAdService.swift in Sources */,
+				427B1C0A299FDE94007D4E93 /* AdBannerWrapperView.swift in Sources */,
 				427B1BCD299A69A1007D4E93 /* AdService.swift in Sources */,
 				4224AA7628B8BDB500E8D886 /* FullscreenAdSectionViewModel.swift in Sources */,
 				427B1BDF299D1237007D4E93 /* AppodealRewardedAdWrapper.swift in Sources */,
 				4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */,
 				427B1BD7299BBA83007D4E93 /* LogLevelView.swift in Sources */,
-				42A4C86C28F6E02500A7FE40 /* BannerView.swift in Sources */,
+				42A4C86C28F6E02500A7FE40 /* RawBannerView.swift in Sources */,
 				427B1BDB299BE282007D4E93 /* AppodealDefaultAdInitializationWrapper.swift in Sources */,
 				42C59B9E28C61F1100544EDF /* HostView.swift in Sources */,
 				4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */,
@@ -469,6 +488,7 @@
 				4299A411289BC8B40062C580 /* SandboxApp.swift in Sources */,
 				42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */,
 				429F4D8828CF6AA700765BD7 /* Wave.swift in Sources */,
+				427B1C0F29A377D4007D4E93 /* BaseFullscreenAdWrapper.swift in Sources */,
 				42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */,
 				427B1BD9299BC585007D4E93 /* AdaptersView.swift in Sources */,
 				4276A234299549DA00EE3991 /* Constants.swift in Sources */,

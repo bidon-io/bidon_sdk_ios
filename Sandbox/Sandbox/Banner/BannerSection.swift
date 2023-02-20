@@ -38,14 +38,14 @@ struct BannerAdSection: View {
             }
             
             Section(header: Text("Banner Format")) {
-                ForEach(AdViewFormat.allCases, id: \.self) { format in
+                ForEach(AdBannerWrapperFormat.allCases, id: \.rawValue) { format in
                     Button(action: {
                         withAnimation {
                             vm.format = format
                         }
                     }) {
                         HStack {
-                            Text(format.description)
+                            Text(format.rawValue.capitalized)
                             Spacer()
                             if vm.format == format {
                                 Image(systemName: "checkmark")
@@ -81,14 +81,13 @@ struct BannerAdSection: View {
                         .font(.caption)
                 }
             }
-            .disabled(true)
         }
         .foregroundColor(.primary)
     }
 }
 
 
-extension AdViewFormat: CaseIterable {
-    public static var allCases: [AdViewFormat] = [.adaptive, .banner, .leaderboard, .mrec]
+extension BannerFormat: CaseIterable {
+    public static var allCases: [BannerFormat] = [.adaptive, .banner, .leaderboard, .mrec]
 }
 

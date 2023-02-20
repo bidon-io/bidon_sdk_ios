@@ -16,10 +16,10 @@ fileprivate struct DemandObservation {
     var status: DemandResult = .unknown
     var price: Price = .unknown
     var isRoundWinner: Bool = false
-    var bidRequestTimestamp: TimeInterval = Date.timestamp(.wall, units: .milliseconds)
-    var bidResponeTimestamp: TimeInterval = .zero
-    var fillRequestTimestamp: TimeInterval = .zero
-    var fillResponseTimestamp: TimeInterval = .zero
+    var bidRequestTimestamp: TimeInterval? = Date.timestamp(.wall, units: .milliseconds)
+    var bidResponeTimestamp: TimeInterval?
+    var fillRequestTimestamp: TimeInterval?
+    var fillResponseTimestamp: TimeInterval?
 }
 
 
@@ -162,10 +162,10 @@ private extension DefaultDemandReport {
         self.adUnitId = observation.adUnitId
         self.price = observation.price
         self.status = observation.status
-        self.bidStartTimestamp = observation.bidRequestTimestamp
-        self.bidFinishTimestamp = observation.bidResponeTimestamp
-        self.fillStartTimestamp = observation.fillRequestTimestamp
-        self.fillFinishTimestamp = observation.fillResponseTimestamp
+        self.bidStartTimestamp = observation.bidRequestTimestamp?.uint
+        self.bidFinishTimestamp = observation.bidResponeTimestamp?.uint
+        self.fillStartTimestamp = observation.fillRequestTimestamp?.uint
+        self.fillFinishTimestamp = observation.fillResponseTimestamp?.uint
     }
 }
 

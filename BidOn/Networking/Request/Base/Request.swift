@@ -33,6 +33,7 @@ extension HTTPTask.HTTPHeaders {
 
 protocol Tokenized {
     var token: String? { get set }
+    var segmentId: String? { get set }
 }
 
 

@@ -31,7 +31,7 @@ final class RawRewardedAdWrapper: BaseFullscreenAdWrapper {
         }
         
         if let rewardedAd = bidOnRewardedAd, rewardedAd.isReady {
-            rewardedAd.show(from: controller)
+            rewardedAd.showAd(from: controller)
         } else {
             resumeShowingContinuation(throwing: RawAdServiceError.invalidPresentationState)
         }

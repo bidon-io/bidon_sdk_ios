@@ -24,28 +24,28 @@ struct HomeView: View {
                     List {
                         InterstitialSection()
                         RewardedAdSection()
-//                        BannerAdSection()
-//                            .environmentObject(vm.banner)
+                        BannerAdSection()
+                            .environmentObject(vm.banner)
                     }
                     
-//                    if vm.isBannerPresented {
-//                        Divider()
-//
-//                        ZStack {
-//                            BannerView(
-//                                format: vm.bannerSettings.format,
-//                                isAutorefreshing: vm.bannerSettings.isAutorefreshing,
-//                                autorefreshInterval: vm.bannerSettings.autorefreshInterval,
-//                                pricefloor: vm.bannerSettings.pricefloor,
-//                                onEvent: vm.banner.receive
-//                            )
-//
-//                            if vm.isBannerLoading {
-//                               ProgressView()
-//                            }
-//                        }
-//                        .frame(height: vm.bannerHeight)
-//                    }
+                    if vm.isBannerPresented {
+                        Divider()
+                        
+                        ZStack {
+                            AnyAdBannerWrapperView(
+                                format: vm.bannerSettings.format,
+                                isAutorefreshing: vm.bannerSettings.isAutorefreshing,
+                                autorefreshInterval: vm.bannerSettings.autorefreshInterval,
+                                pricefloor: vm.bannerSettings.pricefloor,
+                                onEvent: vm.banner.receive
+                            )
+                            
+                            if vm.isBannerLoading {
+                                ProgressView()
+                            }
+                        }
+                        .frame(height: vm.bannerHeight)
+                    }
                 }
                 .listStyle(.insetGrouped)
                 .navigationTitle("BidOn v\(BidOnSdk.sdkVersion)")
@@ -58,7 +58,7 @@ struct HomeView: View {
 
 final class HomeViewModel: ObservableObject {
     struct BannerSettings {
-        var format: AdViewFormat
+        var format: AdBannerWrapperFormat
         var isAutorefreshing: Bool
         var autorefreshInterval: TimeInterval
         var pricefloor: Price

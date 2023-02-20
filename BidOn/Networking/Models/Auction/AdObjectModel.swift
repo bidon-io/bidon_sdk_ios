@@ -16,7 +16,7 @@ struct AdObjectModel: Encodable {
     }
     
     struct BannerModel: Encodable {
-        var format: AdViewFormat
+        var format: BannerFormat
     }
     
     struct InterstitialModel: Encodable {}

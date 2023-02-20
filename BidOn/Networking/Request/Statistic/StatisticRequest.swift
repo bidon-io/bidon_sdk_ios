@@ -23,11 +23,13 @@ struct StatisticRequest: Request {
         var geo: GeoModel?
         var ext: String?
         var token: String?
+        var segmentId: String?
         var stats: MediationAttemptReportModel
     }
     
     struct ResponseBody: Decodable, Tokenized {
         var token: String?
+        var segmentId: String?
         var success: Bool
     }
     

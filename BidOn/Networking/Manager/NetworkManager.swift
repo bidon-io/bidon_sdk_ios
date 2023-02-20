@@ -39,6 +39,8 @@ fileprivate final class PersistentNetworkManager: NetworkManager {
     @UserDefaultOptional(Constants.UserDefaultsKey.token)
     private var token: String?
     
+    private var segmentId: String?
+    
     var baseURL: String = Constants.API.baseURL
     
     func perform<T: Request>(
@@ -50,6 +52,7 @@ fileprivate final class PersistentNetworkManager: NetworkManager {
         
         var body = request.body
         body?.token = token
+        body?.segmentId = segmentId
         
         var data: Data?
         
@@ -77,7 +80,9 @@ fileprivate final class PersistentNetworkManager: NetworkManager {
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     do {
                         let response = try decoder.decode(T.ResponseBody.self, from: raw)
+                        
                         self.token = response.token
+                        self.segmentId = response.segmentId ?? ""
                         
                         completion(.success(response))
                     } catch {

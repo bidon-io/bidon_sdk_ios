@@ -23,16 +23,19 @@ struct ConfigurationRequest: Request {
         var geo: GeoModel?
         var ext: String?
         var token: String?
+        var segmentId: String?
         var adapters: AdaptersInfo
     }
     
     struct ResponseBody: Decodable, Tokenized {
         var adaptersInitializationParameters: AdaptersInitialisationParameters
         var token: String?
-        
+        var segmentId: String?
+
         enum CodingKeys: String, CodingKey {
             case adaptersInitializationParameters = "init"
             case token = "token"
+            case segmentId = "segment_id"
         }
     }
     

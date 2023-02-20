@@ -31,9 +31,9 @@ public struct BannerPublisher: Publisher {
         case willLeaveApplication(ad: Ad)
     }
     
-    private var banner: Banner
+    private var banner: BannerView
     
-    init(_ banner: Banner) {
+    init(_ banner: BannerView) {
         self.banner = banner
     }
     
@@ -160,7 +160,7 @@ where S : Subscriber, S.Failure == Never, S.Input == BannerPublisher.Event {
 
 
 @available(iOS 13, *)
-public extension Banner {
+public extension BannerView {
     var publisher: BannerPublisher {
         return BannerPublisher(self)
     }

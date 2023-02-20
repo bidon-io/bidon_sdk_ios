@@ -23,6 +23,7 @@ struct AuctionRequest: Request {
         var geo: GeoModel?
         var ext: String?
         var token: String?
+        var segmentId: String?
         var adObject: AdObjectModel
         var adapters: AdaptersInfo
     }
@@ -32,6 +33,7 @@ struct AuctionRequest: Request {
         var lineItems: [LineItemModel]
         var minPrice: Price
         var token: String?
+        var segmentId: String?
         var auctionId: String
         var auctionConfigurationId: Int
     }

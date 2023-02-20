@@ -33,8 +33,8 @@ struct DefaultDemandReport: DemandReport {
     var adUnitId: String? = nil
     var price: Price
     var status: DemandResult = .unknown
-    var bidStartTimestamp: TimeInterval = Date.timestamp(.wall, units: .milliseconds)
-    var bidFinishTimestamp: TimeInterval = .zero
-    var fillStartTimestamp: TimeInterval = .zero
-    var fillFinishTimestamp: TimeInterval = .zero
+    var bidStartTimestamp: UInt? = Date.timestamp(.wall, units: .milliseconds).uint
+    var bidFinishTimestamp: UInt?
+    var fillStartTimestamp: UInt?
+    var fillFinishTimestamp: UInt?
 }

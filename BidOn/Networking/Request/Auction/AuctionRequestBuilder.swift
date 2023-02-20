@@ -112,7 +112,7 @@ final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBui
 final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
-    private(set) var format: AdViewFormat!
+    private(set) var format: BannerFormat!
     private(set) var minPrice: Price = .zero
 
     var adType: AdType { .banner}
@@ -135,7 +135,7 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
     }
     
     @discardableResult
-    func withFormat(_ format: AdViewFormat) -> Self {
+    func withFormat(_ format: BannerFormat) -> Self {
         self.format = format
         return self
     }

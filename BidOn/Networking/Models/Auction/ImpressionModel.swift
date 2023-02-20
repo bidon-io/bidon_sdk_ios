@@ -19,6 +19,18 @@ struct ImpressionModel: Encodable {
     var interstitial: AdObjectModel.InterstitialModel?
     var rewarded: AdObjectModel.RewardedModel?
     
+    enum CodingKeys: String, CodingKey {
+        case impressionId = "imp_id"
+        case auctionId = "auction_id"
+        case auctionConfigurationId = "auction_configuration_id"
+        case demandId = "demand_id"
+        case adUnitId = "ad_unit_id"
+        case ecpm = "ecpm"
+        case banner = "banner"
+        case interstitial = "interstitial"
+        case rewarded = "rewarded"
+    }
+    
     init(
         _ imp: Impression,
         banner: AdObjectModel.BannerModel? = nil,

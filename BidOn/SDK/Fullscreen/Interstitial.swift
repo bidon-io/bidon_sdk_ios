@@ -38,16 +38,20 @@ public final class Interstitial: NSObject, FullscreenAdObject {
         delegate: self
     )
     
-    @objc public init(placement: String = "") {
+    @objc public init(
+        placement: String = BidOnSdk.defaultPlacement
+    ) {
         self.placement = placement
         super.init()
     }
     
-    @objc public func loadAd(with pricefloor: Price) {
+    @objc public func loadAd(
+        with pricefloor: Price = BidOnSdk.defaultMinPrice
+    ) {
         manager.loadAd(pricefloor: pricefloor)
     }
     
-    @objc public func show(from rootViewController: UIViewController) {
+    @objc public func showAd(from rootViewController: UIViewController) {
         manager.show(from: rootViewController)
     }
 }

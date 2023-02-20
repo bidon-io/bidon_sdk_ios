@@ -95,7 +95,7 @@
 		42BA81D7287702B6001F1744 /* RewardedAdDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81D6287702B6001F1744 /* RewardedAdDemandProvider.swift */; };
 		42BA81DB28770B5D001F1744 /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81DA28770B5D001F1744 /* Reward.swift */; };
 		42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */; };
-		42BA82072878547C001F1744 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82062878547C001F1744 /* Banner.swift */; };
+		42BA82072878547C001F1744 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA82062878547C001F1744 /* BannerView.swift */; };
 		42BA820928785506001F1744 /* BannerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820828785506001F1744 /* BannerViewManager.swift */; };
 		42BE438B28C0AE93000528E3 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438A28C0AE93000528E3 /* UserManager.swift */; };
 		42BE438D28C0B0E3000528E3 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438C28C0B0E3000528E3 /* SessionManager.swift */; };
@@ -208,7 +208,7 @@
 		42BA81D6287702B6001F1744 /* RewardedAdDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdDemandProvider.swift; sourceTree = "<group>"; };
 		42BA81DA28770B5D001F1744 /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
 		42BA81F8287732F5001F1744 /* AdViewDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewDemandProvider.swift; sourceTree = "<group>"; };
-		42BA82062878547C001F1744 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
+		42BA82062878547C001F1744 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		42BA820828785506001F1744 /* BannerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewManager.swift; sourceTree = "<group>"; };
 		42BE438A28C0AE93000528E3 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		42BE438C28C0B0E3000528E3 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
@@ -656,7 +656,7 @@
 		42BA820528785464001F1744 /* Banner */ = {
 			isa = PBXGroup;
 			children = (
-				42BA82062878547C001F1744 /* Banner.swift */,
+				42BA82062878547C001F1744 /* BannerView.swift */,
 				4219DB5728B90D5E001F38E5 /* BannerAdManager.swift */,
 				42BA820828785506001F1744 /* BannerViewManager.swift */,
 			);
@@ -853,7 +853,7 @@
 				421D48E62888423B007DE2E4 /* Logger.swift in Sources */,
 				429EE2D1286DD0E2009439C6 /* ConcurrentAuctionController.swift in Sources */,
 				42BE439628C203AF000528E3 /* BannerPublisher.swift in Sources */,
-				42BA82072878547C001F1744 /* Banner.swift in Sources */,
+				42BA82072878547C001F1744 /* BannerView.swift in Sources */,
 				42BE438B28C0AE93000528E3 /* UserManager.swift in Sources */,
 				4299A427289BCF3F0062C580 /* HTTPTask.swift in Sources */,
 				42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */,

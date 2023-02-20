@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 
-@objc(BDNBanner)
-public final class Banner: UIView, AdView {
+@objc(BDNBannerView)
+public final class BannerView: UIView, AdView {
     @objc public var autorefreshInterval: TimeInterval = 15 {
         didSet { scheduleRefreshIfNeeded() }
     }
@@ -23,7 +23,9 @@ public final class Banner: UIView, AdView {
         }
     }
     
-    @objc public var format: AdViewFormat = .banner
+    @objc public let placement: String
+    
+    @objc public var format: BannerFormat = .banner
     
     @objc public var rootViewController: UIViewController?
     
@@ -58,7 +60,11 @@ public final class Banner: UIView, AdView {
         return manager
     }()
     
-    public override init(frame: CGRect) {
+    public init(
+        frame: CGRect,
+        placement: String = BidOnSdk.defaultPlacement
+    ) {
+        self.placement = placement
         super.init(frame: frame)
     }
     
@@ -71,7 +77,9 @@ public final class Banner: UIView, AdView {
         refreshIfNeeded()
     }
     
-    @objc public func loadAd(with pricefloor: Price) {
+    @objc public func loadAd(
+        with pricefloor: Price = BidOnSdk.defaultMinPrice
+    ) {
         adManager.loadAd(context: context, pricefloor: pricefloor)
     }
     
@@ -110,7 +118,7 @@ public final class Banner: UIView, AdView {
 }
 
 
-extension Banner: BannerAdManagerDelegate {
+extension BannerView: BannerAdManagerDelegate {
     func adManager(_ adManager: BannerAdManager, didFailToLoad error: SdkError) {
         delegate?.adObject(self, didFailToLoadAd: error)
     }
@@ -152,7 +160,7 @@ extension Banner: BannerAdManagerDelegate {
 }
 
 
-extension Banner: BannerViewManagerDelegate {
+extension BannerView: BannerViewManagerDelegate {
     func viewManager(_ viewManager: BannerViewManager, didRecordImpression impression: Impression) {
         scheduleRefreshIfNeeded()
         delegate?.adObject?(self, didRecordImpression: impression.ad)
@@ -176,7 +184,7 @@ extension Banner: BannerViewManagerDelegate {
 }
 
 
-extension Banner: DemandProviderRevenueDelegate {
+extension BannerView: DemandProviderRevenueDelegate {
     public func provider(
         _ provider: DemandProvider,
         didPayRevenueFor ad: Ad

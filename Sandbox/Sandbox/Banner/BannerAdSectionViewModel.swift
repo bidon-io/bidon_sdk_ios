@@ -14,26 +14,16 @@ import SwiftUI
 
 final class BannerAdSectionViewModel: ObservableObject {
     @Published var isPresented: Bool = false
-    @Published var format: AdViewFormat = .adaptive
+    @Published var format: AdBannerWrapperFormat = .adaptive
     @Published var isAutorefreshing: Bool = false
     @Published var autorefreshInterval: TimeInterval = 15
     @Published var events: [AdEventModel] = []
     @Published var isLoading: Bool = false
     @Published var pricefloor: Price = 0.1
     
-    func receive(_ event: BannerPublisher.Event) {
-        switch event {
-        case .didStartAuction: isLoading = true
-        case .didFailToLoadAd, .didLoadAd: isLoading = false
-        case .didPayRevenue(let ad):
-            AppsFlyerAdRevenue.shared().log(
-                ad,
-                from: .banner
-            )
-        default: break
+    func receive(_ event: AdEventModel) {
+        withAnimation { [unowned self] in
+            self.events.append(event)
         }
-        
-        let event = AdEventModel(event)
-        events.append(event)
     }
 }

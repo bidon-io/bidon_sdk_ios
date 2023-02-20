@@ -34,6 +34,7 @@ final class RawAdService: NSObject, AdService {
     
     override init() {
         super.init()
+        
         BidOnSdk.logLevel = BidOn.Logger.Level(.debug)
     }
     

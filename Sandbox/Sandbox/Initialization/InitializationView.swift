@@ -82,7 +82,7 @@ struct InitializationView: View {
                                     .fill(vm.initializationState.accentColor)
                                 Text(vm.initializationState.text)
                                     .bold()
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.accentColor)
                             }
                             .frame(height: 44)
                         }
@@ -97,7 +97,7 @@ struct InitializationView: View {
                             Text("App Version: ") + Text(appVersion).bold()
                         }
                         .lineLimit(1)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white)
                         .font(.caption)
                         .padding(.horizontal)
                         .padding(.bottom)
@@ -106,7 +106,7 @@ struct InitializationView: View {
                     .frame(height: 200)
                     .background(
                         RoundedRectangle(cornerRadius: 16)
-                            .fill(Color(UIColor.systemBackground))
+                            .fill(Color.accentColor)
                             .edgesIgnoringSafeArea(.bottom)
                     )
                 }
@@ -145,7 +145,7 @@ private extension Bundle {
 
 private extension InitializationViewModel.InitializationState {
     var isAnimating: Bool {
-        return self == .initilizing
+        return self == .initializing
     }
     
     var isIdle: Bool {
@@ -154,16 +154,16 @@ private extension InitializationViewModel.InitializationState {
     
     var text: String {
         switch self {
-        case .idle: return "Initilize"
-        case .initilizing: return "Initilizing..."
+        case .idle: return "Initialize"
+        case .initializing: return "Initializing..."
         case .initialized: return "Initialized"
         }
     }
     
     var accentColor: Color {
         switch self {
-        case .idle: return Color.accentColor
-        case .initilizing: return Color.gray
+        case .idle: return Color.white
+        case .initializing: return Color.gray
         case .initialized: return Color.green
         }
     }

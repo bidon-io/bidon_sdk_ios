@@ -49,6 +49,7 @@ extension Date {
     }
 }
 
+
 extension Date.MeasurementUnits {
     func convert(
         _ timestamp: TimeInterval,
@@ -59,5 +60,12 @@ extension Date.MeasurementUnits {
         case (.seconds, .milliseconds): return timestamp * 1000
         default: return timestamp
         }
+    }
+}
+
+
+extension TimeInterval {
+    var uint: UInt {
+        UInt(self)
     }
 }

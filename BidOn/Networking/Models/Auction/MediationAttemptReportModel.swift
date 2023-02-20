@@ -14,10 +14,10 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
         var adUnitId: String?
         var status: DemandResult
         var price: Price
-        var bidStartTimestamp: TimeInterval
-        var bidFinishTimestamp: TimeInterval
-        var fillStartTimestamp: TimeInterval
-        var fillFinishTimestamp: TimeInterval
+        var bidStartTimestamp: UInt?
+        var bidFinishTimestamp: UInt?
+        var fillStartTimestamp: UInt?
+        var fillFinishTimestamp: UInt?
         
         init<T: DemandReport>(_ report: T) {
             self.networkId = report.networkId

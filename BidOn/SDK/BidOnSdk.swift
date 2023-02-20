@@ -20,6 +20,12 @@ public final class BidOnSdk: NSObject {
     
     @objc public static let sdkVersion = "0.1.0"
     
+    @objc public static let defaultPlacement = "default"
+    
+    @objc public static let defaultMinPrice: Price = .unknown
+    
+    @objc public private(set) var isInitialized: Bool = false
+    
     static let shared: BidOnSdk = BidOnSdk()
     
     private override init() {
@@ -69,7 +75,7 @@ public final class BidOnSdk: NSObject {
     
     private func initialize(
         appKey: String,
-        completion: @escaping () -> ()
+        completion: (() -> ())?
     ) {
         
 #warning("Incapsulate logic in tasks")
@@ -98,10 +104,15 @@ public final class BidOnSdk: NSObject {
                             }
                         }
                     }
-                    group.notify(queue: .main, execute: completion)
+                    group.notify(queue: .main) { [unowned self] in
+                        self.isInitialized = true
+                        completion?()
+                    }
                 case .failure(let error):
                     Logger.error("Network error while initilizing BidOn SDK: \(error)")
-                    DispatchQueue.main.async(execute: completion)
+                    DispatchQueue.main.async {
+                        completion?()
+                    }
                 }
             }
         }

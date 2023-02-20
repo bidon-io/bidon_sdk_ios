@@ -31,7 +31,7 @@ final class RawInterstitialAdWrapper: BaseFullscreenAdWrapper {
         }
         
         if let interstitial = bidOnInterstitial, interstitial.isReady {
-            interstitial.show(from: controller)
+            interstitial.showAd(from: controller)
         } else {
             resumeShowingContinuation(throwing: RawAdServiceError.invalidPresentationState)
         }

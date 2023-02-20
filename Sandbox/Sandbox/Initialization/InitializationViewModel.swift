@@ -17,7 +17,7 @@ import SwiftUI
 final class InitializationViewModel: ObservableObject, AdResponder {
     enum InitializationState {
         case idle
-        case initilizing
+        case initializing
         case initialized
     }
     
@@ -67,7 +67,7 @@ final class InitializationViewModel: ObservableObject, AdResponder {
     
     @MainActor
     func initialize() async {
-        update(.initilizing)
+        update(.initializing)
         await adService.initialize()
         update(.initialized)
     }

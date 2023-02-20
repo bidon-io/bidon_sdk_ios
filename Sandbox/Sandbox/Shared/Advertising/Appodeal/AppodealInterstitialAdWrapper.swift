@@ -87,6 +87,24 @@ extension AppodealInterstitialAdWrapper: AppodealInterstitialDelegate {
         resumeLoadingContinuation(throwing: AppodealAdServiceError.invalidPresentationState)
     }
     
+    func interstitialDidClick() {
+        send(
+            event: "Appodeal did click",
+            detail: "",
+            bage: "star.fill",
+            color: .secondary
+        )
+    }
+    
+    func interstitialWillPresent() {
+        send(
+            event: "Appodeal will present",
+            detail: "",
+            bage: "star.fill",
+            color: .secondary
+        )
+    }
+    
     func interstitialDidDismiss() {
         send(
             event: "Appodeal did dismiss ad",

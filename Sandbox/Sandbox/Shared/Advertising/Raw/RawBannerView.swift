@@ -12,7 +12,6 @@ import Combine
 import BidOn
 
 
-@available(iOS 13, *)
 struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
     typealias UIViewType = BannerView
     
@@ -22,7 +21,7 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
     var pricefloor: Price
     var onEvent: AdBannerWrapperViewEvent
     
-    public init(
+    init(
         format: AdBannerWrapperFormat,
         isAutorefreshing: Bool,
         autorefreshInterval: TimeInterval,
@@ -36,29 +35,32 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
         self.pricefloor = pricefloor
     }
     
-    public func makeUIView(context: Context) -> BannerView {
+    func makeUIView(context: Context) -> BannerView {
         let banner = BannerView(frame: .zero)
         
         banner.format = BannerFormat(format)
+        banner.rootViewController = UIApplication.shared.bd.topViewcontroller
         banner.loadAd(with: pricefloor)
         banner.delegate = context.coordinator
         
         return banner
     }
     
-    public func updateUIView(_ uiView: BannerView, context: Context) {
+    func updateUIView(_ uiView: BannerView, context: Context) {
         uiView.format = BannerFormat(format)
         uiView.isAutorefreshing = isAutorefreshing
         uiView.autorefreshInterval = autorefreshInterval
         uiView.loadAd(with: pricefloor)
     }
     
-    public func makeCoordinator() -> Coordinator {
+    func makeCoordinator() -> Coordinator {
         return Coordinator(onEvent: onEvent)
     }
     
-    final public class Coordinator: BaseAdWrapper {
+    final class Coordinator: BaseAdWrapper {
         private var cancellable: AnyCancellable?
+        
+        override var adType: AdType { .banner }
         
         init(onEvent: @escaping AdBannerWrapperViewEvent) {
             super.init()

@@ -15,7 +15,7 @@ class BaseFullscreenAdWrapper: BaseAdWrapper, FullscreenAdWrapper {
     
     final private(set) var pricefloor: Double = .zero
         
-    final override func load(pricefloor: Double) async throws {
+    final func load(pricefloor: Double) async throws {
         self.pricefloor = pricefloor
         try await withCheckedThrowingContinuation { [unowned self] continuation in
             self.loadingContinuation = continuation

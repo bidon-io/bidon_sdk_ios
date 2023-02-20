@@ -14,10 +14,6 @@ class BaseAdWrapper: NSObject, AdWrapper {
     final let adEventSubject = PassthroughSubject<AdEventModel, Never>()
     
     open var adType: AdType { fatalError("Undefined ad type") }
-    
-    open func load(pricefloor: Double) async throws {
-        fatalError("Base ad wrapper can not load ad")
-    }
 }
 
 

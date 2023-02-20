@@ -81,6 +81,7 @@ struct BannerAdSection: View {
                         .font(.caption)
                 }
             }
+            .disabled(true)
         }
         .foregroundColor(.primary)
     }

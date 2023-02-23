@@ -15,7 +15,7 @@ typealias Bid<DemandProviderType: DemandProvider> = (ad: Ad, provider: DemandPro
 
 internal struct HashableAd: Hashable  {
     var ad: Ad
-
+    
     init(ad: Ad) {
         self.ad = ad
     }
@@ -36,7 +36,7 @@ extension Repository where Key == HashableAd, Value: DemandProvider  {
     }
     
     var ads: [Ad] {
-        return objects.keys.map { $0.ad }
+        return keys.map { $0.ad }
     }
     
     func register(_ bid: Bid<Value>) {

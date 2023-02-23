@@ -128,14 +128,14 @@ final class ConcurrentAuctionRound<DemandProviderType: DemandProvider>: Performa
         guard timeout.isNormal else { return }
         let interval = Date.MeasurementUnits.milliseconds.convert(timeout, to: .seconds)
         
-        let timer = Timer.scheduledTimer(
-            withTimeInterval: interval,
+        let timer = Timer(
+            timeInterval: interval,
             repeats: false
         ) { [weak self] _ in
             self?.invalidateActiveAdapters(.bidTimeoutReached)
         }
         
-        RunLoop.current.add(timer, forMode: .default)
+        RunLoop.main.add(timer, forMode: .common)
         self.timer = timer
     }
     

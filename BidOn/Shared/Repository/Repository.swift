@@ -10,7 +10,7 @@ import Foundation
 
 public final class Repository<Key, Value> where Key: Hashable {
     internal let queue: DispatchQueue
-    internal var objects: [Key: Any]
+    private var objects: [Key: Any]
     
     public init(_ queueName: String) {
         objects = [:]
@@ -21,7 +21,15 @@ public final class Repository<Key, Value> where Key: Hashable {
     }
     
     var isEmpty: Bool {
-        return objects.isEmpty
+        queue.sync { [unowned self] in
+            return self.objects.isEmpty
+        }
+    }
+    
+    var keys: Dictionary<Key, Any>.Keys {
+        return queue.sync { [unowned self] in
+            return self.objects.keys
+        }
     }
     
     private func value<T>(_ key: Key) -> T? {

@@ -17,9 +17,7 @@ extension AdaptersRepository {
     }
     
     var ids: [String] {
-        queue.sync { [unowned self] in
-            return Array(self.objects.keys)
-        }
+        return Array(keys)
     }
     
     func register(className: String) {

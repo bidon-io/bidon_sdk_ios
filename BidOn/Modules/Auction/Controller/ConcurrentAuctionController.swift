@@ -177,29 +177,6 @@ where M: MediationObserver, T == M.DemandProviderType {
         )
         observer.log(event)
     }
-}
-
-
-private extension ConcurrentAuctionController {
-    
-    
-    func auctionRound(_ auctionRound: AuctionRound, didReceiveBid bid: Bid<T>) {
-        
-    }
-
-    private func receive(
-        round: AuctionRound,
-        request adapter: Adapter,
-        lineItem: LineItem?
-    ) {
-        let event = Event.bidRequest(
-            round: round,
-            adapter: adapter,
-            lineItem: lineItem
-        )
-        
-        observer.log(event)
-    }
     
     private func complete(round: RoundType) {
         let event = Event.roundFinish(
@@ -218,6 +195,7 @@ private extension ConcurrentAuctionController {
         }
     }
 }
+
 
 private extension ConcurrentAuctionController {
     var waterfall: WaterfallType {

@@ -69,8 +69,8 @@ final internal class BannerViewManager: NSObject {
         _ interval: TimeInterval,
         block: (() -> ())?
     ) {
-        let timer = Timer.scheduledTimer(
-            withTimeInterval: interval,
+        let timer = Timer(
+            timeInterval: interval,
             repeats: false
         ) { [weak self] _ in
             self?.timer = nil

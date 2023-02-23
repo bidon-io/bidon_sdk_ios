@@ -103,8 +103,12 @@ extension Interstitial: FullscreenAdManagerDelegate {
         delegate?.adObject?(self, didRecordClick: impression.ad)
     }
     
-    func didPayRevenue(_ ad: Ad) {
-        delegate?.adObject?(self, didPayRevenue: ad)
+    func didPayRevenue(_ ad: Ad, _ revenue: AdRevenue) {
+        delegate?.adObject?(
+            self,
+            didPay: revenue,
+            ad: ad
+        )
     }
     
     func didReceiveReward(_ reward: Reward, impression: Impression) {}

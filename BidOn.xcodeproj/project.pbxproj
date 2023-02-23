@@ -40,8 +40,6 @@
 		4243093A28A2BCCC002360B0 /* GeoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243093928A2BCCC002360B0 /* GeoModel.swift */; };
 		4243093C28A3AC18002360B0 /* AdapterIdCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243093B28A3AC18002360B0 /* AdapterIdCodingKey.swift */; };
 		4243093E28A3AD07002360B0 /* AdaptersInitialisationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243093D28A3AD07002360B0 /* AdaptersInitialisationParameters.swift */; };
-		424D295B28BE319200F6F2D6 /* DirectAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D295A28BE319200F6F2D6 /* DirectAdWrapper.swift */; };
-		424D295D28BE35B800F6F2D6 /* ProgrammaticAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D295C28BE35B800F6F2D6 /* ProgrammaticAdWrapper.swift */; };
 		424D296428BE630500F6F2D6 /* MainThreadComputable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D296328BE630500F6F2D6 /* MainThreadComputable.swift */; };
 		424F180828ABB4ED0082AEF3 /* Demand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F180728ABB4ED0082AEF3 /* Demand.swift */; };
 		424F180B28ABBD330082AEF3 /* DefaultWaterfallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F180A28ABBD330082AEF3 /* DefaultWaterfallController.swift */; };
@@ -67,6 +65,7 @@
 		426DD7B628A68D9400A1ADF5 /* RewardedAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7B528A68D9400A1ADF5 /* RewardedAdDelegate.swift */; };
 		426DD7B828A68EC400A1ADF5 /* AdViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7B728A68EC400A1ADF5 /* AdViewDelegate.swift */; };
 		426DD7BC28A696C600A1ADF5 /* Waterfall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7BB28A696C600A1ADF5 /* Waterfall.swift */; };
+		427B1C1629A4CE34007D4E93 /* AdRevenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1C1529A4CE34007D4E93 /* AdRevenue.swift */; };
 		428CCBF428A11190003123EF /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF328A11190003123EF /* EnvironmentManager.swift */; };
 		428CCBF728A12C8D003123EF /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF628A12C8D003123EF /* Date+Extensions.swift */; };
 		428CCBF928A13AD8003123EF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF828A13AD8003123EF /* NetworkManager.swift */; };
@@ -152,8 +151,6 @@
 		4243093928A2BCCC002360B0 /* GeoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoModel.swift; sourceTree = "<group>"; };
 		4243093B28A3AC18002360B0 /* AdapterIdCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterIdCodingKey.swift; sourceTree = "<group>"; };
 		4243093D28A3AD07002360B0 /* AdaptersInitialisationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptersInitialisationParameters.swift; sourceTree = "<group>"; };
-		424D295A28BE319200F6F2D6 /* DirectAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectAdWrapper.swift; sourceTree = "<group>"; };
-		424D295C28BE35B800F6F2D6 /* ProgrammaticAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammaticAdWrapper.swift; sourceTree = "<group>"; };
 		424D296328BE630500F6F2D6 /* MainThreadComputable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainThreadComputable.swift; sourceTree = "<group>"; };
 		424F180728ABB4ED0082AEF3 /* Demand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demand.swift; sourceTree = "<group>"; };
 		424F180A28ABBD330082AEF3 /* DefaultWaterfallController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWaterfallController.swift; sourceTree = "<group>"; };
@@ -179,6 +176,7 @@
 		426DD7B528A68D9400A1ADF5 /* RewardedAdDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdDelegate.swift; sourceTree = "<group>"; };
 		426DD7B728A68EC400A1ADF5 /* AdViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewDelegate.swift; sourceTree = "<group>"; };
 		426DD7BB28A696C600A1ADF5 /* Waterfall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waterfall.swift; sourceTree = "<group>"; };
+		427B1C1529A4CE34007D4E93 /* AdRevenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdRevenue.swift; sourceTree = "<group>"; };
 		428CCBF328A11190003123EF /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
 		428CCBF628A12C8D003123EF /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		428CCBF828A13AD8003123EF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -369,11 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				42389DEF2872F57D006024BA /* Ad.swift */,
-				424D295A28BE319200F6F2D6 /* DirectAdWrapper.swift */,
-				424D295C28BE35B800F6F2D6 /* ProgrammaticAdWrapper.swift */,
-				42389DED2872F52A006024BA /* AdsRepository.swift */,
-				424F180728ABB4ED0082AEF3 /* Demand.swift */,
-				42D3E72E28BE059F00936B3E /* Impression.swift */,
+				427B1C1529A4CE34007D4E93 /* AdRevenue.swift */,
 			);
 			path = Ad;
 			sourceTree = "<group>";
@@ -520,6 +514,14 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		427B1C1329A4CDC0007D4E93 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				42389DED2872F52A006024BA /* AdsRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		427CE9C828D0883D008BD8D9 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,8 +592,11 @@
 			children = (
 				4243093028A2BBC0002360B0 /* Ad */,
 				429EE2C3286CA252009439C6 /* Adapters */,
-				42BA81DA28770B5D001F1744 /* Reward.swift */,
+				427B1C1329A4CDC0007D4E93 /* Repository */,
 				426DD78C28A3EDD900A1ADF5 /* LineItem.swift */,
+				42BA81DA28770B5D001F1744 /* Reward.swift */,
+				424F180728ABB4ED0082AEF3 /* Demand.swift */,
+				42D3E72E28BE059F00936B3E /* Impression.swift */,
 			);
 			path = Mediation;
 			sourceTree = "<group>";
@@ -784,7 +789,6 @@
 				42D3E72F28BE059F00936B3E /* Impression.swift in Sources */,
 				421D48E8288844DA007DE2E4 /* LogDestination.swift in Sources */,
 				4243092A28A28F46002360B0 /* Request.swift in Sources */,
-				424D295B28BE319200F6F2D6 /* DirectAdWrapper.swift in Sources */,
 				428FFC6C28BF7BCD0090B126 /* DefaultMediationObserver.swift in Sources */,
 				42BA81F9287732F5001F1744 /* AdViewDemandProvider.swift in Sources */,
 				426DD7B828A68EC400A1ADF5 /* AdViewDelegate.swift in Sources */,
@@ -802,7 +806,6 @@
 				426DD7A628A5042A00A1ADF5 /* UserDefault.swift in Sources */,
 				42CCB99128CB365400DBAE97 /* UIDevice+Extensions.swift in Sources */,
 				421D48EA28884D1F007DE2E4 /* LogFormatter.swift in Sources */,
-				424D295D28BE35B800F6F2D6 /* ProgrammaticAdWrapper.swift in Sources */,
 				424D296428BE630500F6F2D6 /* MainThreadComputable.swift in Sources */,
 				429EE2C9286CA2B0009439C6 /* DemandProvider.swift in Sources */,
 				428FFC7A28BF96360090B126 /* ImpressionModel.swift in Sources */,
@@ -827,6 +830,7 @@
 				426DD7BC28A696C600A1ADF5 /* Waterfall.swift in Sources */,
 				42677B3F28A16EC4006F321D /* AdaptersInfoModel.swift in Sources */,
 				42BA820928785506001F1744 /* BannerViewManager.swift in Sources */,
+				427B1C1629A4CE34007D4E93 /* AdRevenue.swift in Sources */,
 				426DD79128A3EF5C00A1ADF5 /* AuctionRoundModel.swift in Sources */,
 				426DD79D28A4F4AC00A1ADF5 /* ConfigurationRequestBuilder.swift in Sources */,
 				428CCBF728A12C8D003123EF /* Date+Extensions.swift in Sources */,

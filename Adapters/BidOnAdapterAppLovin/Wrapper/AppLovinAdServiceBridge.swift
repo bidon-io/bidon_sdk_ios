@@ -23,45 +23,41 @@ extension InjectedValues {
 }
 
 
-final class AppLovinAdServiceBridge {
-    final private class Delegate: NSObject, ALAdLoadDelegate {
-        private let response: DemandProviderResponse
-        private let lineItem: LineItem
-        
-        init(
-            lineItem: LineItem,
-            response: @escaping DemandProviderResponse
-        ) {
-            self.response = response
-            self.lineItem = lineItem
-            
-            super.init()
-        }
-        
-        func adService(_ adService: ALAdService, didLoad ad: ALAd) {
-            let wrapped = AppLovinAd(lineItem, ad)
-            response(.success(wrapped))
-        }
-        
-        func adService(_ adService: ALAdService, didFailToLoadAdWithError code: Int32) {
-            response(.failure(MediationError(alErrorCode: code)))
-        }
-    }
-        
+final class AppLovinAdServiceBridge: NSObject {
+    private var response: DemandProviderResponse?
+    private var lineItem: LineItem!
+    
     func load(
-        _ service: ALAdService,
+        service: ALAdService,
         lineItem: LineItem,
-        completion: @escaping DemandProviderResponse
+        response: @escaping DemandProviderResponse
     ) {
-        let delegate = Delegate(
-            lineItem: lineItem,
-            response: completion
-        )
+        self.lineItem = lineItem
+        self.response = response
         
         service.loadNextAd(
             forZoneIdentifier: lineItem.adUnitId,
-            andNotify: delegate
+            andNotify: self
         )
+    }
+}
+
+
+extension AppLovinAdServiceBridge: ALAdLoadDelegate {
+    func adService(_ adService: ALAdService, didLoad ad: ALAd) {
+        let wrapper = AppLovinAdWrapper(
+            lineItem: lineItem,
+            ad: ad
+        )
+        
+        response?(.success(wrapper))
+        response = nil
+    }
+    
+    func adService(_ adService: ALAdService, didFailToLoadAdWithError code: Int32) {
+        let error = MediationError(alErrorCode: code)
+        response?(.failure(error))
+        response = nil
     }
 }
 

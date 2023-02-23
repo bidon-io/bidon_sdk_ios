@@ -11,12 +11,10 @@ import AppLovinSDK
 import UIKit
 
 
-
 internal final class AppLovinRewardedDemandProvider: NSObject {
     private let sdk: ALSdk
     
     private var interstitial: ALIncentivizedInterstitialAd?
-    private var lineItem: LineItem?
     private var response: DemandProviderResponse?
     
     weak var delegate: DemandProviderDelegate?
@@ -27,36 +25,26 @@ internal final class AppLovinRewardedDemandProvider: NSObject {
         self.sdk = sdk
         super.init()
     }
-    
-    private func wrapper(_ ad: ALAd) -> Ad? {
-        guard
-            let lineItem = lineItem,
-            ad.zoneIdentifier == lineItem.adUnitId
-        else { return nil }
-        
-        return AppLovinAd(lineItem, ad)
-    }
 }
 
 
 extension AppLovinRewardedDemandProvider: DirectDemandProvider {
     func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
         let interstitial = ALIncentivizedInterstitialAd(
-            zoneIdentifier: lineItem.adUnitId,
+            lineItem: lineItem,
             sdk: sdk
         )
         
         interstitial.adVideoPlaybackDelegate = self
         interstitial.preloadAndNotify(self)
         
-        self.lineItem = lineItem
         self.interstitial = interstitial
         self.response = response
     }
     
     func fill(ad: Ad, response: @escaping DemandProviderResponse) {
         guard
-            ad is AppLovinAd,
+            ad is AppLovinAdWrapper,
             let interstitial = interstitial,
             interstitial.isReadyForDisplay
         else {
@@ -67,13 +55,8 @@ extension AppLovinRewardedDemandProvider: DirectDemandProvider {
         response(.success(ad))
     }
     
-    func cancel(_ reason: DemandProviderCancellationReason) {
-        interstitial = nil
-        response = nil
-    }
-    
     // MARK: Noop
-    func notify(_ event: AuctionEvent) {}
+    func notify(ad: Ad, event: AuctionEvent) {}
 }
 
 
@@ -81,7 +64,7 @@ extension AppLovinRewardedDemandProvider: RewardedAdDemandProvider {
     func show(ad: Ad, from viewController: UIViewController) {
         guard
             let interstitial = interstitial,
-            let ad = ad as? AppLovinAd
+            let ad = ad as? AppLovinAdWrapper
         else {
             delegate?.providerDidFailToDisplay(self, error: SdkError.invalidPresentationState)
             return
@@ -94,8 +77,16 @@ extension AppLovinRewardedDemandProvider: RewardedAdDemandProvider {
 
 extension AppLovinRewardedDemandProvider: ALAdLoadDelegate {
     func adService(_ adService: ALAdService, didLoad ad: ALAd) {
-        guard let wrapper = wrapper(ad) else { return }
+        guard
+            let lineItem = interstitial?.lineItem,
+            lineItem.adUnitId == ad.zoneIdentifier
+        else {
+            response?(.failure(.incorrectAdUnitId))
+            response = nil
+            return
+        }
         
+        let wrapper = AppLovinAdWrapper(lineItem: lineItem, ad: ad)
         response?(.success(wrapper))
         response = nil
     }
@@ -122,10 +113,16 @@ extension AppLovinRewardedDemandProvider: ALAdVideoPlaybackDelegate {
 
 extension AppLovinRewardedDemandProvider: ALAdDisplayDelegate {
     func ad(_ ad: ALAd, wasDisplayedIn view: UIView) {
-        delegate?.providerWillPresent(self)
+        defer { delegate?.providerWillPresent(self) }
         
-        guard let wrapper = wrapper(ad) else { return }
-        revenueDelegate?.provider(self, didPayRevenueFor: wrapper)
+        guard
+            let lineItem = interstitial?.lineItem,
+            lineItem.adUnitId == ad.zoneIdentifier
+        else { return }
+
+        let wrapper = AppLovinAdWrapper(lineItem: lineItem, ad: ad)
+        let revenue = AppLovinAdRevenueWrapper(wrapper)
+        revenueDelegate?.provider(self, didPay: revenue, ad: wrapper)
     }
     
     func ad(_ ad: ALAd, wasHiddenIn view: UIView) {

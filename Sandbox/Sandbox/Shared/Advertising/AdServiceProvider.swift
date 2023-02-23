@@ -48,20 +48,21 @@ final class AdServiceProvider: ObservableObject {
 
 extension AppsFlyerAdRevenue {
     func log(
-        _ ad: BidOn.Ad,
-        from type: BidOn.AdType,
+        adRevenue: AdRevenue,
+        ad: BidOn.Ad,
+        adType: BidOn.AdType,
         placement: String = ""
     ) {
         var additionalParameters: [AnyHashable: Any] = [:]
-        additionalParameters[kAppsFlyerAdRevenueAdType] = type.rawValue
+        additionalParameters[kAppsFlyerAdRevenueAdType] = adType.rawValue
         additionalParameters[kAppsFlyerAdRevenueAdUnit] = ad.adUnitId
         additionalParameters[kAppsFlyerAdRevenuePlacement] = placement
         
         logAdRevenue(
             monetizationNetwork: ad.networkName,
             mediationNetwork: .appodeal,
-            eventRevenue: ad.price as NSNumber,
-            revenueCurrency: ad.currency,
+            eventRevenue: adRevenue.revenue as NSNumber,
+            revenueCurrency: adRevenue.currency,
             additionalParameters: additionalParameters
         )
     }

@@ -17,7 +17,7 @@ protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate {
     func didCompleteAuction(_ winner: Ad?)
     func didFailToLoad(_ error: SdkError)
     func didLoad(_ ad: Ad)
-    func didPayRevenue(_ ad: Ad)
+    func didPayRevenue(_ ad: Ad, _ revenue: AdRevenue)
 }
 
 
@@ -97,12 +97,11 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         
         let request = AuctionRequest { (builder: AuctionRequestBuilderType) in
             builder.withPlacement(placement)
-            builder.withMinPrice(pricefloor)
+            builder.withPricefloor(pricefloor)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withAuctionId(UUID().uuidString)
-            #warning("Ext doesn't send")
-//            builder.withExt(sdk.ext)
+            builder.withExt(sdk.ext)
         }
         
         Logger.verbose("Fullscreen ad manager performs request: \(request)")
@@ -149,7 +148,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withRounds(auctionInfo.rounds, lineItems: auctionInfo.lineItems)
-            builder.withPricefloor(auctionInfo.minPrice)
+            builder.withPricefloor(auctionInfo.pricefloor)
             builder.withObserver(observer)
         }
         
@@ -281,8 +280,12 @@ extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
 
 
 extension FullscreenAdManager: DemandProviderRevenueDelegate {
-    func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad) {
-        delegate?.didPayRevenue(ad)
+    func provider(
+        _ provider: DemandProvider,
+        didPay revenue: AdRevenue,
+        ad: Ad
+    ) {
+        delegate?.didPayRevenue(ad, revenue)
     }
 }
 

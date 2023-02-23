@@ -23,12 +23,8 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
         _fill(ad, response)
     }
     
-    func cancel(_ reason: DemandProviderCancellationReason) {
-        _cancel(reason)
-    }
-    
-    func notify(_ event: AuctionEvent) {
-        _notify(event)
+    func notify(ad: Ad, event: AuctionEvent) {
+        _notify(ad, event)
     }
     
     let wrapped: W
@@ -40,8 +36,7 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
     private let _setRevenueDelegate: (DemandProviderRevenueDelegate?) -> ()
     
     private let _fill: (Ad, @escaping DemandProviderResponse) -> ()
-    private let _cancel: (DemandProviderCancellationReason) -> ()
-    private let _notify: (AuctionEvent) -> ()
+    private let _notify: (Ad, AuctionEvent) -> ()
     
     init(_ wrapped: W) throws {
         self.wrapped = wrapped
@@ -55,10 +50,7 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
         _setRevenueDelegate = { wrapped.revenueDelegate = $0 }
         
         _fill = { wrapped.fill(ad: $0, response: $1) }
-        
-        _cancel = { wrapped.cancel($0) }
-        
-        _notify = { wrapped.notify($0) }
+        _notify = { wrapped.notify(ad: $0, event: $1) }
     }
 }
 

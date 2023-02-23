@@ -8,17 +8,21 @@
 import Foundation
 
 
-struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAuctionRound {
-    var id: String
-    var timeout: TimeInterval
-    var demands: [String]
+final class ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAuctionRound {
+    let id: String
+    let timeout: TimeInterval
+    let demands: [String]
     
-    private var lineItems: LineItems
-    private var providers: [AnyAdapter: DemandProviderType]
+    private let lineItems: LineItems
+    private let providers: [AnyAdapter: DemandProviderType]
     
-    private var group = DispatchGroup()
-    private var completion: (() -> ())?
-    private var isCancelled: Bool = false
+    private var pricefloor: Price = .unknown
+    private var activeAdapters = Set<AnyAdapter>()
+    private var timer: Timer?
+    
+    var onDemandRequest: AuctionRoundBidRequest?
+    var onDemandResponse: AuctionRoundBidResponse<DemandProviderType>?
+    var onRoundComplete: AuctionRoundCompletion?
     
     init(
         round: AuctionRound,
@@ -32,82 +36,122 @@ struct ConcurrentAuctionRound<DemandProviderType: DemandProvider>: PerformableAu
         self.providers = providers
     }
     
-    private func pair(_ networkId: String) -> (adapter: AnyAdapter, provider: DemandProviderType)? {
-        return providers
-            .first { adapter, provider in
-                adapter.identifier == networkId
-            }
-            .map { ($0.key, $0.value) }
+    func perform(pricefloor: Price) {
+        self.pricefloor = pricefloor
+        scheduleInvalidationTimerIfNeeded()
+        demands.forEach(proceed)
+        completeIfNeeded()
     }
     
-    func perform(
-        pricefloor: Price,
-        request: @escaping AuctionRoundBidRequest,
-        response: @escaping AuctionRoundBidResponse<DemandProviderType>,
-        completion: @escaping AuctionRoundCompletion
-    ) {
-        for networkId in demands {
-            group.enter()
-            
-            guard let provider = pair(networkId) else {
-                let adapter = AnyAdapter(identifier: networkId)
-                request(adapter, nil)
-                response(adapter, .failure(.unknownAdapter))
-                group.leave()
-                continue
-            }
-            
-            let providerResponseHandler: DemandProviderResponse = { result in
-                defer { group.leave() }
-                
-                switch result {
-                case .success(let ad):
-                    let bid = (ad, provider.provider)
-                    response(provider.adapter, .success(bid))
-                case .failure(let error):
-                    response(provider.adapter, .failure(error))
-                }
-            }
-            
-            switch provider.provider {
+    private func proceed(_ id: String) {
+        if let (adapter, provider) = providers.first(where: { $0.key.identifier == id }) {
+            switch provider {
             case let programmatic as ProgrammaticDemandProvider:
-                DispatchQueue.main.async {
-                    request(provider.adapter, nil)
-                    programmatic.bid(pricefloor, response: providerResponseHandler)
+                activeAdapters.insert(adapter)
+                DispatchQueue.main.async { [unowned self] in
+                    self.requestProgrammaticDemand(adapter: adapter, provider: programmatic)
                 }
             case let direct as DirectDemandProvider:
-                if let lineItem = lineItems.item(for: provider.adapter.identifier, pricefloor: pricefloor) {
-                    DispatchQueue.main.async {
-                        request(provider.adapter, lineItem)
-                        direct.bid(lineItem, response: providerResponseHandler)
-                    }
-                } else {
-                    request(provider.adapter, nil)
-                    response(provider.adapter, .failure(.noAppropriateAdUnitId))
-                    group.leave()
+                activeAdapters.insert(adapter)
+                DispatchQueue.main.async { [unowned self] in
+                    self.requestDirectDemand(adapter: adapter, provider: direct)
                 }
             default:
-                request(provider.adapter, nil)
-                response(provider.adapter, .failure(.unknownAdapter))
-                group.leave()
+                onDemandRequest?(adapter, nil)
+                onDemandResponse?(adapter, .failure(.unknownAdapter))
             }
+        } else {
+            let adapter = AnyAdapter(identifier: id)
+            onDemandRequest?(adapter, nil)
+            onDemandResponse?(adapter, .failure(.unknownAdapter))
+        }
+    }
+    
+    private func requestProgrammaticDemand(
+        adapter: AnyAdapter,
+        provider: ProgrammaticDemandProvider
+    ) {
+        onDemandRequest?(adapter, nil)
+        provider.bid(pricefloor) { [weak self] result in
+            self?.handleDemandProviderResponse(
+                adapter: adapter,
+                result: result
+            )
+        }
+    }
+    
+    private func requestDirectDemand(
+        adapter: AnyAdapter,
+        provider: DirectDemandProvider
+    ) {
+        if let lineItem = lineItems.item(for: adapter.identifier, pricefloor: pricefloor) {
+            onDemandRequest?(adapter, lineItem)
+            provider.bid(lineItem) { [weak self] result in
+                self?.handleDemandProviderResponse(
+                    adapter: adapter,
+                    result: result
+                )
+            }
+        } else {
+            onDemandRequest?(adapter, nil)
+            onDemandResponse?(adapter, .failure(.noAppropriateAdUnitId))
+            activeAdapters.remove(adapter)
+        }
+    }
+    
+    private func handleDemandProviderResponse(
+        adapter: AnyAdapter,
+        result: Result<Ad, MediationError>
+    ) {
+        activeAdapters.remove(adapter)
+        
+        switch result {
+        case .success(let ad):
+            if let provider = providers[adapter] {
+                let bid = (ad, provider)
+                onDemandResponse?(adapter, .success(bid))
+            } else {
+                onDemandResponse?(adapter, .failure(.noBid))
+            }
+        case .failure(let error):
+            onDemandResponse?(adapter, .failure(error))
         }
         
-        group.notify(queue: .main) {
-            completion()
+        completeIfNeeded()
+    }
+    
+    func cancel() {
+        invalidateActiveAdapters(.auctionCancelled)
+    }
+    
+    private func scheduleInvalidationTimerIfNeeded() {
+        guard timeout.isNormal else { return }
+        let interval = Date.MeasurementUnits.milliseconds.convert(timeout, to: .seconds)
+        
+        let timer = Timer.scheduledTimer(
+            withTimeInterval: interval,
+            repeats: false
+        ) { [weak self] _ in
+            self?.invalidateActiveAdapters(.bidTimeoutReached)
         }
+        
+        RunLoop.current.add(timer, forMode: .default)
+        self.timer = timer
     }
     
-    func destroy() {
-        demands
-            .compactMap(pair)
-            .forEach { $0.provider.cancel(.lifecycle) }
+    private func invalidateActiveAdapters(_ error: MediationError) {
+        activeAdapters.forEach { adapter in
+            onDemandResponse?(adapter, .failure(error))
+        }
+        
+        activeAdapters.removeAll()
+        completeIfNeeded()
     }
     
-    func timeoutReached() {
-        demands
-            .compactMap(pair)
-            .forEach { $0.provider.cancel(.timeoutReached) }
+    private func completeIfNeeded() {
+        guard activeAdapters.isEmpty else { return }
+        timer?.invalidate()
+        onRoundComplete?()
     }
 }
 

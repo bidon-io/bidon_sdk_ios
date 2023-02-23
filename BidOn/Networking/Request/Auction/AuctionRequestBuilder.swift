@@ -12,7 +12,7 @@ protocol AuctionRequestBuilder: BaseRequestBuilder {
     var adObject: AdObjectModel { get }
     var adapters: AdaptersInfo { get }
     var adType: AdType { get }
-    var minPrice: Price { get }
+    var pricefloor: Price { get }
     
     @discardableResult
     func withPlacement(_ placement: String) -> Self
@@ -21,7 +21,7 @@ protocol AuctionRequestBuilder: BaseRequestBuilder {
     func withAuctionId(_ auctionId: String) -> Self
     
     @discardableResult
-    func withMinPrice(_ minPrice: Price) -> Self
+    func withPricefloor(_ pricefloor: Price) -> Self
     
     init()
 }
@@ -30,7 +30,7 @@ protocol AuctionRequestBuilder: BaseRequestBuilder {
 final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
-    private(set) var minPrice: Price = .zero
+    private(set) var pricefloor: Price = .zero
 
     var adType: AdType { .interstitial }
     
@@ -52,8 +52,8 @@ final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionReques
     }
     
     @discardableResult
-    func withMinPrice(_ minPrice: Price) -> Self {
-        self.minPrice = minPrice
+    func withPricefloor(_ pricefloor: Price) -> Self {
+        self.pricefloor = pricefloor
         return self
     }
     
@@ -61,7 +61,7 @@ final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionReques
         AdObjectModel(
             placementId: placement,
             auctionId: auctionId,
-            minPrice: minPrice,
+            pricefloor: pricefloor,
             interstitial: AdObjectModel.InterstitialModel()
         )
     }
@@ -71,7 +71,7 @@ final class InterstitialAuctionRequestBuilder: BaseRequestBuilder, AuctionReques
 final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuilder {
     private(set) var placement: String!
     private(set) var auctionId: String!
-    private(set) var minPrice: Price = .zero
+    private(set) var pricefloor: Price = .zero
 
     var adType: AdType { .rewarded }
     
@@ -93,8 +93,8 @@ final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBui
     }
     
     @discardableResult
-    func withMinPrice(_ minPrice: Price) -> Self {
-        self.minPrice = minPrice
+    func withPricefloor(_ pricefloor: Price) -> Self {
+        self.pricefloor = pricefloor
         return self
     }
     
@@ -102,7 +102,7 @@ final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBui
         AdObjectModel(
             placementId: placement,
             auctionId: auctionId,
-            minPrice: minPrice,
+            pricefloor: pricefloor,
             rewarded: AdObjectModel.RewardedModel()
         )
     }
@@ -113,7 +113,7 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
     private(set) var placement: String!
     private(set) var auctionId: String!
     private(set) var format: BannerFormat!
-    private(set) var minPrice: Price = .zero
+    private(set) var pricefloor: Price = .zero
 
     var adType: AdType { .banner}
     
@@ -141,8 +141,8 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
     }
     
     @discardableResult
-    func withMinPrice(_ minPrice: Price) -> Self {
-        self.minPrice = minPrice
+    func withPricefloor(_ pricefloor: Price) -> Self {
+        self.pricefloor = pricefloor
         return self
     }
     
@@ -150,7 +150,7 @@ final class AdViewAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBuild
         AdObjectModel(
             placementId: placement,
             auctionId: auctionId,
-            minPrice: minPrice,
+            pricefloor: pricefloor,
             banner: AdObjectModel.BannerModel(
                 format: format
             )

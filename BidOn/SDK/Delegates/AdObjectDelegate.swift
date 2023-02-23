@@ -70,6 +70,7 @@ public protocol AdObjectDelegate: AnyObject {
     @objc optional
     func adObject(
         _ adObject: AdObject,
-        didPayRevenue ad: Ad
+        didPay revenue: AdRevenue,
+        ad: Ad
     )
 }

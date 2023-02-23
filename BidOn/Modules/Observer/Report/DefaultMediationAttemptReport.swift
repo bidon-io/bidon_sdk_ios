@@ -22,7 +22,7 @@ struct DefaultRoundReport: RoundReport {
     
     var roundId: String
     var pricefloor: Price
-    var winnerPrice: Price?
+    var winnerECPM: Price?
     var winnerNetworkId: String?
     var demands: [DemandReportType]
 }
@@ -31,7 +31,7 @@ struct DefaultRoundReport: RoundReport {
 struct DefaultDemandReport: DemandReport {
     var networkId: String
     var adUnitId: String? = nil
-    var price: Price
+    var eCPM: Price
     var status: DemandResult = .unknown
     var bidStartTimestamp: UInt? = Date.timestamp(.wall, units: .milliseconds).uint
     var bidFinishTimestamp: UInt?

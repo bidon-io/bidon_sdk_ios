@@ -35,9 +35,7 @@ enum LogLevel: String, CaseIterable {
 
 protocol AdService: AnyObject {
     var mediation: Mediation { get }
-    
     var verstion: String { get }
-    
     var logLevel: LogLevel { get set }
     
     func initialize() async

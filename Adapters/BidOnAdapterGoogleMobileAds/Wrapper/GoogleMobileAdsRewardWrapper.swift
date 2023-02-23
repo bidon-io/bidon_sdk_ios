@@ -9,9 +9,10 @@ import Foundation
 import GoogleMobileAds
 import BidOn
 
-typealias GoogleMobileAdsReward = RewardWrapper<GADAdReward>
- 
-extension GoogleMobileAdsReward {
+
+typealias GoogleMobileAdsRewardWrapper = RewardWrapper<GADAdReward>
+
+extension GoogleMobileAdsRewardWrapper {
     convenience init(_ reward: GADAdReward) {
         self.init(
             label: reward.type,

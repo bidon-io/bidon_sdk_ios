@@ -14,7 +14,7 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
     typealias AuctionType = Auction<RoundType>
     
-    private(set) var comparator: AuctionComparator = HigherPriceAuctionComparator()
+    private(set) var comparator: AuctionComparator = HigherECPMAuctionComparator()
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
     private(set) var observer: MediationObserverType!

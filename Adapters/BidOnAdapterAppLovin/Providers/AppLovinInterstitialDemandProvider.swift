@@ -11,25 +11,6 @@ import AppLovinSDK
 import UIKit
 
 
-private extension ALInterstitialAd {
-    private static var adKey: UInt8 = 0
-    
-    var ad: AppLovinAd? {
-        get { objc_getAssociatedObject(self, &ALInterstitialAd.adKey) as? AppLovinAd }
-        set { objc_setAssociatedObject(self, &ALInterstitialAd.adKey, newValue, .OBJC_ASSOCIATION_RETAIN) }
-    }
-    
-    func show(_ ad: Ad) throws {
-        guard let ad = ad as? AppLovinAd else {
-            throw SdkError.internalInconsistency
-        }
-        
-        self.ad = ad
-        show(ad.wrapped)
-    }
-}
-
-
 internal final class AppLovinInterstitialDemandProvider: NSObject {
     private let sdk: ALSdk
     
@@ -53,34 +34,34 @@ internal final class AppLovinInterstitialDemandProvider: NSObject {
 
 
 extension AppLovinInterstitialDemandProvider: DirectDemandProvider {
-    func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
+    func bid(
+        _ lineItem: LineItem,
+        response: @escaping DemandProviderResponse
+    ) {
         bridge.load(
-            sdk.adService,
+            service: sdk.adService,
             lineItem: lineItem,
-            completion: response
+            response: response
         )
     }
     
     func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard ad is AppLovinAd else {
+        guard ad is AppLovinAdWrapper else {
             response(.failure(.unscpecifiedException))
             return
         }
         
         response(.success(ad))
     }
-    
-    // MARK: Noop
-    #warning("Cancel")
-    func cancel(_ reason: DemandProviderCancellationReason) {}
-    func notify(_ event: AuctionEvent) {}
+
+    func notify(ad: Ad, event: AuctionEvent) {}
 }
 
 
 extension AppLovinInterstitialDemandProvider: InterstitialDemandProvider {
     func show(ad: Ad, from viewController: UIViewController) {
         do {
-            try interstitial.show(ad)
+            try interstitial.show(ad: ad)
         } catch {
             delegate?.providerDidFailToDisplay(self, error: SdkError(error))
         }
@@ -92,8 +73,13 @@ extension AppLovinInterstitialDemandProvider: ALAdDisplayDelegate {
     func ad(_ ad: ALAd, wasDisplayedIn view: UIView) {
         delegate?.providerWillPresent(self)
         
-        guard let wrapper = interstitial.ad else { return }
-        revenueDelegate?.provider(self, didPayRevenueFor: wrapper)
+        guard
+            let wrapper = interstitial.ad,
+            wrapper.id == interstitial.ad?.id
+        else { return }
+        
+        let revenue = AppLovinAdRevenueWrapper(wrapper)
+        revenueDelegate?.provider(self, didPay: revenue, ad: wrapper)
     }
     
     func ad(_ ad: ALAd, wasHiddenIn view: UIView) {

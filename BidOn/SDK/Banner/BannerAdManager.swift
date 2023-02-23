@@ -90,7 +90,7 @@ final class BannerAdManager: NSObject {
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withAuctionId(UUID().uuidString)
             builder.withFormat(context.format)
-            builder.withMinPrice(pricefloor)
+            builder.withPricefloor(pricefloor)
             builder.withExt(sdk.ext)
         }
         
@@ -129,7 +129,7 @@ final class BannerAdManager: NSObject {
         let auction = AuctionControllerType { (builder: AdViewConcurrentAuctionControllerBuilder) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withRounds(auctionInfo.rounds, lineItems: auctionInfo.lineItems)
-            builder.withPricefloor(auctionInfo.minPrice)
+            builder.withPricefloor(auctionInfo.pricefloor)
             builder.withContext(context)
             builder.withObserver(observer)
         }

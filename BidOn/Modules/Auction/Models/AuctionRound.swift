@@ -24,13 +24,11 @@ protocol AuctionRound {
 protocol PerformableAuctionRound: AuctionRound, Hashable {
     associatedtype DemandProviderType: DemandProvider
     
-    func perform(
-        pricefloor: Price,
-        request: @escaping AuctionRoundBidRequest,
-        response: @escaping AuctionRoundBidResponse<DemandProviderType>,
-        completion: @escaping AuctionRoundCompletion
-    )
+    var onDemandRequest: AuctionRoundBidRequest? { get set }
+    var onDemandResponse: AuctionRoundBidResponse<DemandProviderType>? { get set }
+    var onRoundComplete: AuctionRoundCompletion? { get set }
     
-    func timeoutReached()
-    func destroy()
+    func perform(pricefloor: Price)
+    
+    func cancel()
 }

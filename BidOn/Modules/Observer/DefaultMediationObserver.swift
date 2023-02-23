@@ -14,7 +14,7 @@ fileprivate struct DemandObservation {
     var adUnitId: String?
     var adId: String? = nil
     var status: DemandResult = .unknown
-    var price: Price = .unknown
+    var eCPM: Price = .unknown
     var isRoundWinner: Bool = false
     var bidRequestTimestamp: TimeInterval? = Date.timestamp(.wall, units: .milliseconds)
     var bidResponeTimestamp: TimeInterval?
@@ -46,7 +46,7 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
             return DefaultRoundReport(
                 roundId: round.roundId,
                 pricefloor: round.pricefloor,
-                winnerPrice: winner?.price,
+                winnerECPM: winner?.eCPM,
                 winnerNetworkId: winner?.networkId,
                 demands: demands.map { DefaultDemandReport($0) }
             )
@@ -102,7 +102,7 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
                 condition: { $0.roundId == round.id && $0.networkId == adapter.identifier }
             ) { observation in
                 observation.adId = bid.ad.id
-                observation.price = bid.ad.price
+                observation.eCPM = bid.ad.eCPM
                 observation.bidResponeTimestamp = Date.timestamp(.wall, units: .milliseconds)
             }
             delegate?.didReceiveBid(bid.ad, provider: bid.provider)
@@ -160,7 +160,7 @@ private extension DefaultDemandReport {
     init(_ observation: DemandObservation) {
         self.networkId = observation.networkId
         self.adUnitId = observation.adUnitId
-        self.price = observation.price
+        self.eCPM = observation.eCPM
         self.status = observation.status
         self.bidStartTimestamp = observation.bidRequestTimestamp?.uint
         self.bidFinishTimestamp = observation.bidResponeTimestamp?.uint

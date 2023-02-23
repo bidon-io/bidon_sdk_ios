@@ -12,7 +12,7 @@ protocol DemandReport {
     var networkId: String { get }
     var adUnitId: String? { get }
     var status: DemandResult { get }
-    var price: Price { get }
+    var eCPM: Price { get }
     var bidStartTimestamp: UInt? { get }
     var bidFinishTimestamp: UInt? { get }
     var fillStartTimestamp: UInt? { get }
@@ -25,7 +25,7 @@ protocol RoundReport {
     
     var roundId: String { get }
     var pricefloor: Price { get }
-    var winnerPrice: Price? { get }
+    var winnerECPM: Price? { get }
     var winnerNetworkId: String? { get }
     var demands: [DemandReportType] { get }
 }

@@ -122,10 +122,11 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
     
     func adObject(
         _ adObject: AdObject,
-        didPayRevenue ad: Ad
+        didPay revenue: AdRevenue,
+        ad: Ad
     ) {
         send(
-            event: "BidOn did pay revenue",
+            event: "BidOn did pay revenue \(revenue.revenue.pretty)",
             detail: ad.text,
             bage: "cart.fill",
             color: .primary

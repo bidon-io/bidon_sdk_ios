@@ -140,7 +140,7 @@ extension BannerView: BannerAdManagerDelegate {
             pricefloor: pricefloor
         )
     }
-
+    
     func adManager(
         _ adManager: BannerAdManager,
         didReceiveBid ad: Ad,
@@ -153,7 +153,7 @@ extension BannerView: BannerAdManagerDelegate {
     func adManager(_ adManager: BannerAdManager, didCompleteAuctionRound round: AuctionRound) {
         delegate?.adObject?(self, didCompleteAuctionRound: round.id)
     }
-
+    
     func adManager(_ adManager: BannerAdManager, didCompleteAuction winner: Ad?) {
         delegate?.adObject?(self, didCompleteAuction: winner)
     }
@@ -187,9 +187,14 @@ extension BannerView: BannerViewManagerDelegate {
 extension BannerView: DemandProviderRevenueDelegate {
     public func provider(
         _ provider: DemandProvider,
-        didPayRevenueFor ad: Ad
+        didPay revenue: AdRevenue,
+        ad: Ad
     ) {
-        delegate?.adObject?(self, didPayRevenue: ad)
+        delegate?.adObject?(
+            self,
+            didPay: revenue,
+            ad: ad
+        )
     }
 }
 

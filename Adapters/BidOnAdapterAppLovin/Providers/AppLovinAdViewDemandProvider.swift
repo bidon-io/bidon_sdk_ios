@@ -11,7 +11,6 @@ import AppLovinSDK
 import UIKit
 
 
-
 internal final class AppLovinAdViewDemandProvider: NSObject {
     private let sdk: ALSdk
     private let context: AdViewContext
@@ -35,7 +34,6 @@ internal final class AppLovinAdViewDemandProvider: NSObject {
     var bridge: AppLovinAdServiceBridge
     
     private var response: DemandProviderResponse?
-    private var lineItem: LineItem?
     
     weak var delegate: DemandProviderDelegate?
     weak var adViewDelegate: DemandProviderAdViewDelegate?
@@ -49,15 +47,6 @@ internal final class AppLovinAdViewDemandProvider: NSObject {
         self.context = context
         super.init()
     }
-    
-    private func wrapper(_ ad: ALAd) -> Ad? {
-        guard
-            let lineItem = lineItem,
-            ad.zoneIdentifier == lineItem.adUnitId
-        else { return nil }
-        
-        return AppLovinAd(lineItem, ad)
-    }
 }
 
 
@@ -66,11 +55,10 @@ extension AppLovinAdViewDemandProvider: DirectDemandProvider {
         _ lineItem: LineItem,
         response: @escaping DemandProviderResponse
     ) {
-        self.lineItem = lineItem
         bridge.load(
-            sdk.adService,
+            service: sdk.adService,
             lineItem: lineItem,
-            completion: response
+            response: response
         )
     }
     
@@ -78,19 +66,14 @@ extension AppLovinAdViewDemandProvider: DirectDemandProvider {
         ad: Ad,
         response: @escaping DemandProviderResponse
     ) {
-        guard let ad = ad as? AppLovinAd, ad.wrapped.zoneIdentifier == lineItem?.adUnitId else {
-            response(.failure(.unscpecifiedException))
-            return
+        do {
+            try adView.show(ad: ad)
+        } catch {
+            response(.failure(MediationError.noFill))
         }
-        
-        self.response = response
-        adView.render(ad.wrapped)
     }
     
-    // MARK: Noop
-    #warning("Cancel")
-    func cancel(_ reason: DemandProviderCancellationReason) {}
-    func notify(_ event: AuctionEvent) {}
+    func notify(ad: Ad, event: AuctionEvent) {}
 }
 
 
@@ -103,8 +86,6 @@ extension AppLovinAdViewDemandProvider: AdViewDemandProvider {
 
 extension AppLovinAdViewDemandProvider: ALAdViewEventDelegate {
     func ad(_ ad: ALAd, didFailToDisplayIn adView: ALAdView, withError code: ALAdViewDisplayErrorCode) {
-        guard ad.zoneIdentifier == lineItem?.adUnitId else { return }
-        
         response?(.failure(.noFill))
         response = nil
     }
@@ -125,12 +106,16 @@ extension AppLovinAdViewDemandProvider: ALAdViewEventDelegate {
 
 extension AppLovinAdViewDemandProvider: ALAdDisplayDelegate {
     func ad(_ ad: ALAd, wasDisplayedIn view: UIView) {
-        guard let wrapper = wrapper(ad) else { return }
+        guard
+            let wrapper = adView.ad,
+            wrapper.wrapped.zoneIdentifier == ad.zoneIdentifier
+        else { return }
         
         response?(.success(wrapper))
         response = nil
         
-        revenueDelegate?.provider(self, didPayRevenueFor: wrapper)
+        let revenue = AppLovinAdRevenueWrapper(wrapper)
+        revenueDelegate?.provider(self, didPay: revenue, ad: wrapper)
     }
     
     func ad(_ ad: ALAd, wasHiddenIn view: UIView) {

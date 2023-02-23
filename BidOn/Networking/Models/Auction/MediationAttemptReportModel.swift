@@ -13,7 +13,7 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
         var networkId: String
         var adUnitId: String?
         var status: DemandResult
-        var price: Price
+        var eCPM: Price
         var bidStartTimestamp: UInt?
         var bidFinishTimestamp: UInt?
         var fillStartTimestamp: UInt?
@@ -23,7 +23,7 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
             self.networkId = report.networkId
             self.adUnitId = report.adUnitId
             self.status = report.status
-            self.price = report.price
+            self.eCPM = report.eCPM
             self.bidStartTimestamp = report.bidStartTimestamp
             self.bidFinishTimestamp = report.bidFinishTimestamp
             self.fillStartTimestamp = report.fillStartTimestamp
@@ -34,7 +34,7 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
             case networkId = "id"
             case adUnitId = "ad_unit_id"
             case status
-            case price = "ecpm"
+            case eCPM = "ecpm"
             case bidStartTimestamp = "bid_start_ts"
             case bidFinishTimestamp = "bid_finish_ts"
             case fillStartTimestamp = "fill_start_ts"
@@ -45,14 +45,14 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
     struct RoundReportModel: RoundReport, Codable {
         var roundId: String
         var pricefloor: Price
-        var winnerPrice: Price?
+        var winnerECPM: Price?
         var winnerNetworkId: String?
         var demands: [DemandReportModel]
         
         init<T: RoundReport>(_ report: T) {
             self.roundId = report.roundId
             self.pricefloor = report.pricefloor
-            self.winnerPrice = report.winnerPrice
+            self.winnerECPM = report.winnerECPM
             self.winnerNetworkId = report.winnerNetworkId
             self.demands = report.demands.map(DemandReportModel.init)
         }
@@ -60,7 +60,7 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
         enum CodingKeys: String, CodingKey {
             case roundId = "id"
             case pricefloor
-            case winnerPrice = "winner_ecpm"
+            case winnerECPM = "winner_ecpm"
             case winnerNetworkId = "winner_id"
             case demands
         }

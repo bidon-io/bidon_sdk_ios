@@ -9,7 +9,7 @@ import Foundation
 
 
 public enum AuctionEvent {
-    case win(Ad)
+    case win
     case lose(Ad)
 }
 
@@ -31,12 +31,6 @@ public enum MediationError: String, Error {
 }
 
 
-public enum DemandProviderCancellationReason {
-    case timeoutReached
-    case lifecycle
-}
-
-
 public typealias DemandProviderResponse = (Result<Ad, MediationError>) -> ()
 
 
@@ -49,20 +43,21 @@ public protocol DemandProviderDelegate: AnyObject {
 
 
 public protocol DemandProviderRevenueDelegate: AnyObject {
-    func provider(_ provider: DemandProvider, didPayRevenueFor ad: Ad)
+    func provider(
+        _ provider: DemandProvider,
+        didPay revenue: AdRevenue,
+        ad: Ad
+    )
 }
     
 
 public protocol DemandProvider: AnyObject {
     var delegate: DemandProviderDelegate? { get set }
-    
     var revenueDelegate: DemandProviderRevenueDelegate? { get set }
     
     func fill(ad: Ad, response: @escaping DemandProviderResponse)
-
-    func cancel(_ reason: DemandProviderCancellationReason)
     
-    func notify(_ event: AuctionEvent)
+    func notify(ad: Ad, event: AuctionEvent)
 }
 
 

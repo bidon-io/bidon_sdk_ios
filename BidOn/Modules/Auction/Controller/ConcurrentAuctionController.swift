@@ -29,11 +29,10 @@ where M: MediationObserver, T == M.DemandProviderType {
     private lazy var active = Set<RoundType>()
     private lazy var repository = AdsRepository<DemandProviderType>()
     
-    private var roundTimer: Timer?
     private var completion: Completion?
-      
-    private var currentPrice: Price {
-        return currentWinner?.price ?? pricefloor
+    
+    private var currentECPM: Price {
+        return currentWinner?.eCPM ?? pricefloor
     }
     
     private var currentWinner: Ad? {
@@ -72,15 +71,16 @@ where M: MediationObserver, T == M.DemandProviderType {
     }
     
     private func finish() {
-        active.forEach { $0.destroy() }
+        active.forEach { $0.cancel() }
         active.removeAll()
-    
+        
         defer { completion = nil }
         
         if let winner = currentWinner {
             repository.ads.forEach { ad in
                 let provider = repository.provider(for: ad)
-                provider?.notify(ad.id == winner.id ? .win(winner) : .lose(winner))
+                let event: AuctionEvent = ad.id == winner.id ? .win : .lose(winner)
+                provider?.notify(ad: ad, event: event)
             }
             
             let event = Event.auctionFinish(winner: winner)
@@ -95,7 +95,7 @@ where M: MediationObserver, T == M.DemandProviderType {
     }
     
     private func perform(round: RoundType) {
-        let pricefloor = currentPrice
+        let pricefloor = currentECPM
         
         active.insert(round)
         
@@ -106,30 +106,87 @@ where M: MediationObserver, T == M.DemandProviderType {
         
         observer.log(event)
         
-        if round.timeout.isNormal {
-            let timer = Timer.scheduledTimer(
-                withTimeInterval: Date.MeasurementUnits.milliseconds.convert(round.timeout, to: .milliseconds),
-                repeats: false
-            ) { _ in round.timeoutReached() }
-            RunLoop.current.add(timer, forMode: .default)
-            self.roundTimer = timer
+        round.onDemandRequest = { [unowned round, unowned self] adapter, lineItem in
+            self.round(round, didRequestDemand: adapter, lineItem: lineItem)
         }
-                
-        round.perform(
-            pricefloor: pricefloor,
-            request: { [weak self] in
-                self?.receive(
-                    round: round, request: $0, lineItem: $1)
-            },
-            response: { [weak self] in
-                self?.receive(round: round, response: $0, result: $1)
-            },
-            completion: { [weak self] in
-                self?.complete(round: round)
+        
+        round.onDemandResponse = { [unowned round, unowned self] adapter, result in
+            switch result {
+            case .success(let bid):
+                self.round(round, didReceive: bid, adapter: adapter)
+            case .failure(let error):
+                self.round(round, didReceive: error, adapter: adapter)
             }
-        )
+        }
+        
+        round.onRoundComplete = { [unowned round, unowned self] in
+            self.complete(round: round)
+        }
+        
+        round.perform(pricefloor: pricefloor)
     }
     
+    private func round(
+        _ round: RoundType,
+        didRequestDemand adapter: Adapter,
+        lineItem: LineItem?
+    ) {
+        let event = Event.bidRequest(
+            round: round,
+            adapter: adapter,
+            lineItem: lineItem
+        )
+        
+        observer.log(event)
+    }
+    
+    private func round(
+        _ round: RoundType,
+        didReceive bid: Bid<DemandProviderType>,
+        adapter: Adapter
+    ) {
+        guard bid.ad.eCPM > pricefloor else {
+            let event = Event.bidError(
+                round: round,
+                adapter: adapter,
+                error: .belowPricefloor
+            )
+            observer.log(event)
+            return
+        }
+        
+        let event = Event.bidResponse(
+            round: round,
+            adapter: adapter,
+            bid: bid
+        )
+        
+        observer.log(event)
+        repository.register(bid)
+    }
+    
+    private func round(
+        _ round: RoundType,
+        didReceive error: MediationError,
+        adapter: Adapter
+    ) {
+        let event = Event.bidError(
+            round: round,
+            adapter: adapter,
+            error: error
+        )
+        observer.log(event)
+    }
+}
+
+
+private extension ConcurrentAuctionController {
+    
+    
+    func auctionRound(_ auctionRound: AuctionRound, didReceiveBid bid: Bid<T>) {
+        
+    }
+
     private func receive(
         round: AuctionRound,
         request adapter: Adapter,
@@ -144,40 +201,6 @@ where M: MediationObserver, T == M.DemandProviderType {
         observer.log(event)
     }
     
-    private func receive(
-        round: AuctionRound,
-        response adapter: Adapter,
-        result: RoundResultType
-    ) {
-        switch result {
-        case .failure(let error):
-            let event = Event.bidError(
-                round: round,
-                adapter: adapter,
-                error: error
-            )
-            observer.log(event)
-        case .success(let bid):
-            guard bid.ad.price > pricefloor else {
-                let event = Event.bidError(
-                    round: round,
-                    adapter: adapter,
-                    error: .belowPricefloor
-                )
-                observer.log(event)
-                return
-            }
-            
-            let event = Event.bidResponse(
-                round: round,
-                adapter: adapter,
-                bid: bid
-            )
-            observer.log(event)
-            repository.register(bid)
-        }
-    }
-    
     private func complete(round: RoundType) {
         let event = Event.roundFinish(
             round: round,
@@ -186,7 +209,6 @@ where M: MediationObserver, T == M.DemandProviderType {
         observer.log(event)
         
         active.remove(round)
-        roundTimer?.invalidate()
         
         let seeds = auction.seeds(of: round)
         if seeds.isEmpty && active.isEmpty {
@@ -196,7 +218,6 @@ where M: MediationObserver, T == M.DemandProviderType {
         }
     }
 }
-
 
 private extension ConcurrentAuctionController {
     var waterfall: WaterfallType {

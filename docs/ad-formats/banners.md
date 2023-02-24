@@ -51,7 +51,7 @@ extension ViewController: BidOn.AdViewDelegate {
 
 @interface ViewController() <BDNAdViewDelegate>
 
-@property (nonatomic, strong) BDNBanner *banner;
+@property (nonatomic, strong) BDNBannerView *banner;
 
 @end
 
@@ -59,11 +59,13 @@ extension ViewController: BidOn.AdViewDelegate {
 @implementation ViewController
 
 - (void)createBanner {
-    self.banner = [[BDNBanner alloc] initWithFrame: CGRectZero];
-    self.banner.format = BDNAdViewFormatBanner;
-    self.banner.rootViewController = self;
+    self.banner = [[BDNBannerView alloc] initWithFrame:CGRectZero
+                                             placement:BDNSdk.defaultPlacement];
+    self.banner.format = BDNBannerFormatBanner;
     self.banner.delegate = self;
     self.banner.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.banner loadAdWith:0.1];
     
     [self.view addSubview: self.banner];
     [NSLayoutConstraint activateConstraints:@[
@@ -80,13 +82,13 @@ extension ViewController: BidOn.AdViewDelegate {
 
 - (void)adObject:(id<BDNAdObject>)adObject didFailToLoadAd:(NSError *)error {}
 
-- (void)adObject:(id<BDNAdObject>)adObject didLoadAd:(id<BNAd>)ad {}
+- (void)adObject:(id<BDNAdObject>)adObject didLoadAd:(id<BDNAd>)ad {}
 
-- (void)adView:(UIView<BDNAdView> *)adView didDismissScreen:(id<BNAd>)ad {}
+- (void)adView:(UIView<BDNAdView> *)adView didDismissScreen:(id<BDNAd>)ad {}
 
-- (void)adView:(UIView<BDNAdView> *)adView willLeaveApplication:(id<BNAd>)ad {}
+- (void)adView:(UIView<BDNAdView> *)adView willLeaveApplication:(id<BDNAd>)ad {}
 
-- (void)adView:(UIView<BDNAdView> *)adView willPresentScreen:(id<BNAd>)ad {}
+- (void)adView:(UIView<BDNAdView> *)adView willPresentScreen:(id<BDNAd>)ad {}
 
 @end
 ```

@@ -35,7 +35,7 @@
 
 - (void)testShowInterstitial {
     if ([self.interstitial isReady]) {
-        [self.interstitial showFrom:UIViewController.new];
+        [self.interstitial showAdFrom:UIViewController.new];
     }
 }
 
@@ -48,19 +48,19 @@
 
 - (void)adObject:(id<BDNAdObject>)adObject didFailToLoadAd:(NSError *)error {}
 
-- (void)adObject:(id<BDNAdObject>)adObject didLoadAd:(id<BNAd>)ad {}
+- (void)adObject:(id<BDNAdObject>)adObject didLoadAd:(id<BDNAd>)ad {}
 
-- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didDismissAd:(id<BNAd>)ad {}
+- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didDismissAd:(id<BDNAd>)ad {}
 
 - (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didFailToPresentAd:(NSError *)error {}
 
-- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd willPresentAd:(id<BNAd>)ad {}
+- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd willPresentAd:(id<BDNAd>)ad {}
 
-- (void)adObject:(id<BDNAdObject>)adObject didPayRevenue:(id<BNAd>)ad {
-    double revenue = [ad revenue];
+- (void)adObject:(id<BDNAdObject>)adObject didPay:(id<BDNAdRevenue>)revenue ad:(id<BDNAd>)ad {
+    double value = [revenue revenue];
+    NSString *currency = [revenue currency];
     NSString *networkName = [ad networkName];
     NSString *adUnitId = [ad adUnitId];
-    NSString *currency = [ad currency];
 }
 
 @end

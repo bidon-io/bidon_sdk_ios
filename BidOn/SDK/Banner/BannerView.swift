@@ -60,6 +60,7 @@ public final class BannerView: UIView, AdView {
         return manager
     }()
     
+    @objc
     public init(
         frame: CGRect,
         placement: String = BidOnSdk.defaultPlacement

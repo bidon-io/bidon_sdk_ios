@@ -27,21 +27,22 @@ You're able to send impression-level ad revenue data for any MMP or analytics pl
 
 ```swift
 func adObject(
-    _ adObject: BidOn.AdObject,
-    didPayRevenue ad: BidOn.Ad
+    _ adObject: AdObject,
+    didPay revenue: AdRevenue,
+    ad: Ad
 ) {
-    let price = ad.price
+    let value = revenue.revenue
+    let currency = revenue.currency
     let networkName = ad.networkName
     let adUnitId = ad.adUnitId
-    let currency = ad.currency
 }
 ```
 
 ```objc
-- (void)adObject:(id<BDNAdObject>)adObject didPayRevenue:(id<BNAd>)ad {
-    double price = [ad price];
+- (void)adObject:(id<BDNAdObject>)adObject didPay:(id<BDNAdRevenue>)revenue ad:(id<BDNAd>)ad {
+    double value = [revenue revenue];
+    NSString *currency = [revenue currency];
     NSString *networkName = [ad networkName];
     NSString *adUnitId = [ad adUnitId];
-    NSString *currency = [ad currency];
 }
 ```

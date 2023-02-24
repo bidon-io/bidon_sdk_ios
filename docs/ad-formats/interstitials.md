@@ -57,13 +57,13 @@ extension ViewController: BidOn.FullscreenAdDelegate {
 
 - (void)adObject:(id<BDNAdObject>)adObject didFailToLoadAd:(NSError *)error {}
 
-- (void)adObject:(id<BDNAdObject>)adObject didLoadAd:(id<BNAd>)ad {}
+- (void)adObject:(id<BDNAdObject>)adObject didLoadAd:(id<BDNAd>)ad {}
 
-- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didDismissAd:(id<BNAd>)ad {}
+- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didDismissAd:(id<BDNAd>)ad {}
 
 - (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didFailToPresentAd:(NSError *)error {}
 
-- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd willPresentAd:(id<BNAd>)ad {}
+- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd willPresentAd:(id<BDNAd>)ad {}
 
 @end
 ```
@@ -73,14 +73,14 @@ extension ViewController: BidOn.FullscreenAdDelegate {
 ```swift
 func showInterstitialAd() {
     guard interstitialAd.isReady else { return }
-    interstitialAd.show(from: self)
+    interstitialAd.showAd(from: self)
 }
 ```
 
 ```obj-c
 - (void)showInterstitialAd {
     if ([self.interstitial isReady]) {
-        [self.interstitial showFrom:self];
+        [self.interstitial showAdFrom:self];
     }
 }
 ```

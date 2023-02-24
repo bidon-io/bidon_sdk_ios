@@ -35,7 +35,7 @@
 
 - (void)testShowrewardedAd {
     if ([self.rewardedAd isReady]) {
-        [self.rewardedAd showFrom:UIViewController.new];
+        [self.rewardedAd showAdFrom:UIViewController.new];
     }
 }
 
@@ -48,14 +48,14 @@
 
 - (void)adObject:(id<BDNAdObject>)adObject didFailToLoadAd:(NSError *)error {}
 
-- (void)adObject:(id<BDNAdObject>)adObject didLoadAd:(id<BNAd>)ad {}
+- (void)adObject:(id<BDNAdObject>)adObject didLoadAd:(id<BDNAd>)ad {}
 
-- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didDismissAd:(id<BNAd>)ad {}
+- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didDismissAd:(id<BDNAd>)ad {}
 
 - (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd didFailToPresentAd:(NSError *)error {}
 
-- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd willPresentAd:(id<BNAd>)ad {}
+- (void)fullscreenAd:(id<BDNFullscreenAd>)fullscreenAd willPresentAd:(id<BDNAd>)ad {}
 
-- (void)rewardedAd:(id<BDNRewardedAd>)rewardedAd didRewardUser:(id<BNReward>)reward {}
+- (void)rewardedAd:(id<BDNRewardedAd>)rewardedAd didRewardUser:(id<BDNReward>)reward {}
 
 @end

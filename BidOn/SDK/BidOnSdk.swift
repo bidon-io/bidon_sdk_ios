@@ -18,7 +18,7 @@ public final class BidOnSdk: NSObject {
     @Injected(\.networkManager)
     private var networkManager: NetworkManager
     
-    @objc public static let sdkVersion = "0.1.0"
+    @objc public static let sdkVersion = "0.1.1"
     
     @objc public static let defaultPlacement = "default"
     

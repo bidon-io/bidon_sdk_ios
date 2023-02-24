@@ -16,7 +16,7 @@ final class InterstitialImpressionController: NSObject, FullscreenImpressionCont
     weak var delegate: FullscreenImpressionControllerDelegate?
     
     private let provider: InterstitialDemandProvider
-    private let impression: Impression
+    private var impression: Impression!
     
     required init(demand: AnyInterstitialDemand) {
         let demand = demand.unwrapped()
@@ -37,18 +37,18 @@ final class InterstitialImpressionController: NSObject, FullscreenImpressionCont
 
 extension InterstitialImpressionController: DemandProviderDelegate {
     func providerWillPresent(_ provider: DemandProvider) {
-        delegate?.willPresent(impression)
+        delegate?.willPresent(&impression)
     }
     
     func providerDidHide(_ provider: DemandProvider) {
-        delegate?.didHide(impression)
+        delegate?.didHide(&impression)
     }
     
     func providerDidClick(_ provider: DemandProvider) {
-        delegate?.didClick(impression)
+        delegate?.didClick(&impression)
     }
     
     func providerDidFailToDisplay(_ provider: DemandProvider, error: SdkError) {
-        delegate?.didFailToPresent(impression, error: error)
+        delegate?.didFailToPresent(&impression, error: error)
     }
 }

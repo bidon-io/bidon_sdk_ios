@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate {
+protocol FullscreenAdManagerDelegate: AnyObject {
     func didStartAuction()
     func didStartAuctionRound(_ round: AuctionRound, pricefloor: Price)
     func didReceiveBid(_ ad: Ad)
@@ -18,6 +18,11 @@ protocol FullscreenAdManagerDelegate: FullscreenImpressionControllerDelegate {
     func didFailToLoad(_ error: SdkError)
     func didLoad(_ ad: Ad)
     func didPayRevenue(_ ad: Ad, _ revenue: AdRevenue)
+    func willPresent(_ impression: Impression)
+    func didHide(_ impression: Impression)
+    func didClick(_ impression: Impression)
+    func didFailToPresent(_ impression: Impression?, error: SdkError)
+    func didReceiveReward(_ reward: Reward, impression: Impression)
 }
 
 
@@ -130,7 +135,8 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             state = .impression(controller: controller)
             controller.show(from: rootViewController)
         default:
-            delegate?.didFailToPresent(nil, error: SdkError.internalInconsistency)
+            let impression: FullscreenImpression? = nil
+            delegate?.didFailToPresent(impression, error: SdkError.internalInconsistency)
         }
     }
     
@@ -212,7 +218,12 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         }
     }
     
-    private func sendImpression(_ impression: Impression, path: Route) {
+    private func sendImpressionIfNeeded(
+        _ impression: inout Impression,
+        path: Route
+    ) {
+        guard impression.isTrackingAllowed(path) else { return }
+        
         let request = ImpressionRequest { (builder: ImpressionRequestBuilderType) in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
@@ -223,6 +234,8 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         networkManager.perform(request: request) { result in
             Logger.debug("Sent impression action '\(path)' with result: \(result)")
         }
+        
+        impression.markTrackedIfNeeded(path)
     }
 }
 
@@ -252,28 +265,28 @@ extension FullscreenAdManager: MediationObserverDelegate {
 
 
 extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
-    func didFailToPresent(_ impression: Impression?, error: SdkError) {
+    func didFailToPresent(_ impression: inout Impression?, error: SdkError) {
         state = .idle
         delegate?.didFailToPresent(impression, error: error)
     }
     
-    func willPresent(_ impression: Impression) {
-        sendImpression(impression, path: .show)
+    func willPresent(_ impression: inout Impression) {
+        sendImpressionIfNeeded(&impression, path: .show)
         delegate?.willPresent(impression)
     }
     
-    func didHide(_ impression: Impression) {
+    func didHide(_ impression: inout Impression) {
         state = .idle
         delegate?.didHide(impression)
     }
     
-    func didClick(_ impression: Impression) {
-        sendImpression(impression, path: .click)
+    func didClick(_ impression: inout Impression) {
+        sendImpressionIfNeeded(&impression, path: .click)
         delegate?.didClick(impression)
     }
     
-    func didReceiveReward(_ reward: Reward, impression: Impression) {
-        sendImpression(impression, path: .reward)
+    func didReceiveReward(_ reward: Reward, impression: inout Impression) {
+        sendImpressionIfNeeded(&impression, path: .reward)
         delegate?.didReceiveReward(reward, impression: impression)
     }
 }

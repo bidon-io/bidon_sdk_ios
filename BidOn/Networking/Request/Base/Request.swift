@@ -59,8 +59,6 @@ extension Route {
         case .click: return base.appendingPathComponent("click")
         case .reward: return base.appendingPathComponent("reward")
         case .adType(let adType): return base.appendingPathComponent(adType.rawValue)
-#warning("Change order")
-//        case .complex(let left, let right): return right.url(left.url(base))
         case .complex(let right, let left): return right.url(left.url(base))
         }
     }

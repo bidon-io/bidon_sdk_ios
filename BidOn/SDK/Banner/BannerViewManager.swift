@@ -21,13 +21,16 @@ protocol BannerViewManagerDelegate: AnyObject {
 
 final internal class BannerViewManager: NSObject {
     static var impressionKey: UInt8 = 0
-
+    
     fileprivate struct AdViewImpression: Impression {
         var impressionId: String = UUID().uuidString
         var auctionId: String
         var auctionConfigurationId: Int
         var ad: Ad
         var format: BannerFormat
+        var showTrackedAt: TimeInterval = .nan
+        var clickTrackedAt: TimeInterval = .nan
+        var rewardTrackedAt: TimeInterval = .nan
         
         init(
             auctionId: String,
@@ -60,7 +63,7 @@ final internal class BannerViewManager: NSObject {
     weak var delegate: BannerViewManagerDelegate?
     
     var isRefreshGranted: Bool { timer == nil && isAdPresented }
-
+    
     deinit {
         cancelRefreshTimer()
     }
@@ -133,7 +136,7 @@ final internal class BannerViewManager: NSObject {
                 viewsToRemove.forEach { $0.destroy() }
                 self?.trackImpression(adView: view)
             }
-                
+        
         view.impression = AdViewImpression(
             auctionId: demand.auctionId,
             auctionConfigurationId: demand.auctionConfigurationId,
@@ -146,10 +149,12 @@ final internal class BannerViewManager: NSObject {
         view.addGestureRecognizer(recognizer)
     }
     
-    private func sendImpression(
-        _ impression: AdViewImpression,
+    private func sendImpressionIfNeeded(
+        _ impression: inout AdViewImpression,
         path: Route
     ) {
+        guard impression.isTrackingAllowed(path) else { return }
+        
         let request = ImpressionRequest { (builder: AdViewImpressionRequestBuilder) in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withExt(sdk.ext)
@@ -161,25 +166,30 @@ final internal class BannerViewManager: NSObject {
         networkManager.perform(request: request) { result in
             Logger.debug("Sent impression action '\(path)' with result: \(result)")
         }
+        
+        impression.markTrackedIfNeeded(path)
     }
     
     private func trackImpression(adView: AdViewContainer) {
-        guard let impression = adView.impression else { return }
+        guard var impression = adView.impression else { return }
         
-        sendImpression(impression, path: .show)
+        sendImpressionIfNeeded(&impression, path: .show)
         delegate?.viewManager(self, didRecordImpression: impression)
+        
+        adView.impression = impression
     }
     
     @objc private
     func didReceiveTap(_ recognizer: UITapGestureRecognizer) {
         guard
             let adView = recognizer.view as? AdViewContainer,
-            let impression = adView.impression
+            var impression = adView.impression
         else { return }
         
-        sendImpression(impression, path: .click)
-        
+        sendImpressionIfNeeded(&impression, path: .click)
         delegate?.viewManager(self, didRecordClick: impression)
+        
+        adView.impression = impression
     }
 }
 

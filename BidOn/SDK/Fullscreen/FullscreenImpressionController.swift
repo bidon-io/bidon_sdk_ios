@@ -10,15 +10,15 @@ import UIKit
 
 
 protocol FullscreenImpressionControllerDelegate: AnyObject {
-    func willPresent(_ impression: Impression)
+    func willPresent(_ impression: inout Impression)
     
-    func didHide(_ impression: Impression)
+    func didHide(_ impression: inout Impression)
     
-    func didClick(_ impression: Impression)
+    func didClick(_ impression: inout Impression)
     
-    func didFailToPresent(_ impression: Impression?, error: SdkError)
+    func didFailToPresent(_ impression: inout Impression?, error: SdkError)
     
-    func didReceiveReward(_ reward: Reward, impression: Impression)
+    func didReceiveReward(_ reward: Reward, impression: inout Impression)
 }
 
 
@@ -35,7 +35,9 @@ protocol FullscreenImpressionController: AnyObject {
 
 struct FullscreenImpression: Impression {
     var impressionId: String = UUID().uuidString
-    
+    var showTrackedAt: TimeInterval = .nan
+    var clickTrackedAt: TimeInterval = .nan
+    var rewardTrackedAt: TimeInterval = .nan
     var auctionId: String
     var auctionConfigurationId: Int
     var ad: Ad

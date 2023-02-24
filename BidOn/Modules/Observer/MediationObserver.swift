@@ -23,6 +23,7 @@ protocol MediationObserverDelegate: AnyObject {
     func didFinishAuction(_ auctionId: String, winner: Ad?)
 }
 
+
 protocol MediationObserver: AnyObject {
     associatedtype MediationAttemptReportType: MediationAttemptReport
     associatedtype DemandProviderType: DemandProvider
@@ -30,10 +31,10 @@ protocol MediationObserver: AnyObject {
     var auctionId: String { get }
     var auctionConfigurationId: Int { get }
     var adType: AdType { get }
-    
-    var delegate: MediationObserverDelegate? { get set }
-    
+    var firedLineItems: [LineItem] { get }
     var report: MediationAttemptReportType { get }
+
+    var delegate: MediationObserverDelegate? { get set }
     
     func log(_ event: MediationEvent<DemandProviderType>)
     

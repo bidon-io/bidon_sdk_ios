@@ -78,6 +78,7 @@
 		428FFC7828BF95FC0090B126 /* ImpressionRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FFC7728BF95FC0090B126 /* ImpressionRequestBuilder.swift */; };
 		428FFC7A28BF96360090B126 /* ImpressionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FFC7928BF96360090B126 /* ImpressionModel.swift */; };
 		428FFC7C28BFACC20090B126 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FFC7B28BFACC20090B126 /* Atomic.swift */; };
+		42969A8D29A90AF300878C9E /* LineItemElector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42969A8C29A90AF300878C9E /* LineItemElector.swift */; };
 		4299A424289BCDBC0062C580 /* Interstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A423289BCDBC0062C580 /* Interstitial.swift */; };
 		4299A427289BCF3F0062C580 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A426289BCF3F0062C580 /* HTTPTask.swift */; };
 		429EE2C2286CA23F009439C6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C1286CA23F009439C6 /* Repository.swift */; };
@@ -189,6 +190,7 @@
 		428FFC7728BF95FC0090B126 /* ImpressionRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressionRequestBuilder.swift; sourceTree = "<group>"; };
 		428FFC7928BF96360090B126 /* ImpressionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressionModel.swift; sourceTree = "<group>"; };
 		428FFC7B28BFACC20090B126 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		42969A8C29A90AF300878C9E /* LineItemElector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItemElector.swift; sourceTree = "<group>"; };
 		4299A423289BCDBC0062C580 /* Interstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interstitial.swift; sourceTree = "<group>"; };
 		4299A426289BCF3F0062C580 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		429EE2C1286CA23F009439C6 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				42BA81A928758A90001F1744 /* AuctionController.swift */,
 				429EE2D0286DD0E2009439C6 /* ConcurrentAuctionController.swift */,
 				42389DF12872F63F006024BA /* AuctionComparator.swift */,
+				42969A8C29A90AF300878C9E /* LineItemElector.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				4243093828A2BCBE002360B0 /* UserModel.swift in Sources */,
 				424F180828ABB4ED0082AEF3 /* Demand.swift in Sources */,
 				4221019A2859E35C006596DA /* Adapter.swift in Sources */,
+				42969A8D29A90AF300878C9E /* LineItemElector.swift in Sources */,
 				42244DA628C8E1E800E9C416 /* MediationEvent.swift in Sources */,
 				4243093428A2BC4C002360B0 /* SessionModel.swift in Sources */,
 				42389DF22872F63F006024BA /* AuctionComparator.swift in Sources */,
@@ -1026,7 +1030,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.sdk;
+				PRODUCT_BUNDLE_IDENTIFIER = org.bidon.core;
 				PRODUCT_NAME = BidOn;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
@@ -1060,7 +1064,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.appodeal.bidon.sdk;
+				PRODUCT_BUNDLE_IDENTIFIER = org.bidon.core;
 				PRODUCT_NAME = BidOn;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;

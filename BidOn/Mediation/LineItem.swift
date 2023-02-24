@@ -13,21 +13,3 @@ public protocol LineItem {
     var pricefloor: Price { get }
     var adUnitId: String { get }
 }
-
-
-typealias LineItems = [LineItem]
-
-
-extension LineItems {
-    func item(
-        for demand: String,
-        pricefloor: Price
-    ) -> LineItem? {
-        let candidates = filter { $0.id == demand }
-        guard !pricefloor.isUnknown else { return candidates.first }
-        return candidates
-            .sorted { $0.pricefloor < $1.pricefloor }
-            .filter { $0.pricefloor > pricefloor }
-            .first
-    }
-}

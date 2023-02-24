@@ -65,6 +65,9 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
     @Atomic
     private var roundObservations: [RoundObservation] = []
     
+    @Atomic
+    private(set) var firedLineItems: [LineItem] = []
+    
     init(
         auctionId id: String,
         auctionConfigurationId configurationId: Int,
@@ -90,6 +93,7 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
             )
             delegate?.didStartAuctionRound(round, pricefloor: pricefloor)
         case .bidRequest(let round, let adapter, let lineItem):
+            lineItem.map { self.firedLineItems.append($0) }
             demandObservations.append(
                 DemandObservation(
                     networkId: adapter.identifier,

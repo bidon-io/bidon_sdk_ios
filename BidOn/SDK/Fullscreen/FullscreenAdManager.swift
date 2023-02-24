@@ -149,11 +149,17 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             adType: adType
         )
         
+        let elector = StrictLineItemElector(
+            items: auctionInfo.lineItems,
+            observer: observer
+        )
+        
         observer.delegate = self
         
         let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
-            builder.withRounds(auctionInfo.rounds, lineItems: auctionInfo.lineItems)
+            builder.withRounds(auctionInfo.rounds)
+            builder.withElector(elector)
             builder.withPricefloor(auctionInfo.pricefloor)
             builder.withObserver(observer)
         }

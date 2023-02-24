@@ -18,15 +18,15 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
     private(set) var observer: MediationObserverType!
-        
+    private(set) var elector: LineItemElector!
+    
     private var rounds: [AuctionRound] = []
-    private var lineItems: LineItems = []
     
     var auction: AuctionType {
         let concurentRounds: [RoundType] = rounds.map {
             RoundType(
                 round: $0,
-                lineItems: lineItems,
+                elector: elector,
                 providers: providers($0.demands)
             )
         }
@@ -57,11 +57,17 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     
     @discardableResult
     public func withRounds(
-        _ rounds: [AuctionRound],
-        lineItems: LineItems
+        _ rounds: [AuctionRound]
     ) -> Self {
         self.rounds = rounds
-        self.lineItems = lineItems
+        return self
+    }
+    
+    @discardableResult
+    public func withElector(
+        _ elector: LineItemElector
+    ) -> Self {
+        self.elector = elector
         return self
     }
     

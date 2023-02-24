@@ -124,11 +124,17 @@ final class BannerAdManager: NSObject {
             adType: .banner
         )
         
-        observer.delegate = self
+        let elector = StrictLineItemElector(
+            items: auctionInfo.lineItems,
+            observer: observer
+        )
         
+        observer.delegate = self
+
         let auction = AuctionControllerType { (builder: AdViewConcurrentAuctionControllerBuilder) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
-            builder.withRounds(auctionInfo.rounds, lineItems: auctionInfo.lineItems)
+            builder.withRounds(auctionInfo.rounds)
+            builder.withElector(elector)
             builder.withPricefloor(auctionInfo.pricefloor)
             builder.withContext(context)
             builder.withObserver(observer)

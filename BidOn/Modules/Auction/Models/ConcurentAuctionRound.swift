@@ -13,8 +13,8 @@ final class ConcurrentAuctionRound<DemandProviderType: DemandProvider>: Performa
     let timeout: TimeInterval
     let demands: [String]
     
-    private let lineItems: LineItems
     private let providers: [AnyAdapter: DemandProviderType]
+    private let elector: LineItemElector
     
     private var pricefloor: Price = .unknown
     private var activeAdapters = Set<AnyAdapter>()
@@ -26,14 +26,14 @@ final class ConcurrentAuctionRound<DemandProviderType: DemandProvider>: Performa
     
     init(
         round: AuctionRound,
-        lineItems: LineItems,
+        elector: LineItemElector,
         providers: [AnyAdapter: DemandProviderType]
     ) {
         self.id = round.id
         self.timeout = round.timeout
         self.demands = round.demands
-        self.lineItems = lineItems
         self.providers = providers
+        self.elector = elector
     }
     
     func perform(pricefloor: Price) {
@@ -84,7 +84,7 @@ final class ConcurrentAuctionRound<DemandProviderType: DemandProvider>: Performa
         adapter: AnyAdapter,
         provider: DirectDemandProvider
     ) {
-        if let lineItem = lineItems.item(for: adapter.identifier, pricefloor: pricefloor) {
+        if let lineItem = elector.lineItem(for: adapter.identifier, pricefloor: pricefloor) {
             onDemandRequest?(adapter, lineItem)
             provider.bid(lineItem) { [weak self] result in
                 self?.handleDemandProviderResponse(

@@ -25,6 +25,7 @@
 		425E9C5828B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5728B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift */; };
 		425E9C5D28B7923400F4E4C7 /* AppLovinAdServiceBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5C28B7923400F4E4C7 /* AppLovinAdServiceBridge.swift */; };
 		425E9C5F28B79BAE00F4E4C7 /* AppLovinAdWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C5E28B79BAE00F4E4C7 /* AppLovinAdWrapper.swift */; };
+		4273346C29ACB3380042AE52 /* AppLovinRewardWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4273346B29ACB3380042AE52 /* AppLovinRewardWrapper.swift */; };
 		429EE2B8286C7293009439C6 /* BidMachineDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */; };
 		42BA81B52875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42BA81BA2875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81B92875AC63001F1744 /* GoogleMobileAdsDemandSourceAdapter.swift */; };
@@ -63,6 +64,7 @@
 		425E9C5728B7747F00F4E4C7 /* AppLovinInterstitialDemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinInterstitialDemandProvider.swift; sourceTree = "<group>"; };
 		425E9C5C28B7923400F4E4C7 /* AppLovinAdServiceBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinAdServiceBridge.swift; sourceTree = "<group>"; };
 		425E9C5E28B79BAE00F4E4C7 /* AppLovinAdWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinAdWrapper.swift; sourceTree = "<group>"; };
+		4273346B29ACB3380042AE52 /* AppLovinRewardWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinRewardWrapper.swift; sourceTree = "<group>"; };
 		429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidMachineDemandSourceAdapter.swift; sourceTree = "<group>"; };
 		42BA81B22875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BA81B42875ABA3001F1744 /* BidOnAdapterGoogleMobileAds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidOnAdapterGoogleMobileAds.h; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			children = (
 				425E9C5C28B7923400F4E4C7 /* AppLovinAdServiceBridge.swift */,
 				425E9C5E28B79BAE00F4E4C7 /* AppLovinAdWrapper.swift */,
+				4273346B29ACB3380042AE52 /* AppLovinRewardWrapper.swift */,
 				422931AB29A521E500C9923D /* AppLovinDemand.swift */,
 			);
 			path = Wrapper;
@@ -539,6 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4273346C29ACB3380042AE52 /* AppLovinRewardWrapper.swift in Sources */,
 				425E9C5D28B7923400F4E4C7 /* AppLovinAdServiceBridge.swift in Sources */,
 				422931AC29A521E500C9923D /* AppLovinDemand.swift in Sources */,
 				420067A328BCBCDE003B734D /* AppLovinAdViewDemandProvider.swift in Sources */,

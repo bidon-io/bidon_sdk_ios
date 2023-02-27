@@ -35,7 +35,7 @@ extension AppLovinRewardedDemandProvider: DirectDemandProvider {
             sdk: sdk
         )
         
-        interstitial.adVideoPlaybackDelegate = self
+        interstitial.adDisplayDelegate = self
         interstitial.preloadAndNotify(self)
         
         self.interstitial = interstitial
@@ -70,7 +70,7 @@ extension AppLovinRewardedDemandProvider: RewardedAdDemandProvider {
             return
         }
         
-        interstitial.show(ad.wrapped, andNotify: nil)
+        interstitial.show(ad.wrapped, andNotify: self)
     }
 }
 
@@ -98,16 +98,30 @@ extension AppLovinRewardedDemandProvider: ALAdLoadDelegate {
 }
 
 
-extension AppLovinRewardedDemandProvider: ALAdVideoPlaybackDelegate {
-    func videoPlaybackEnded(
-        in ad: ALAd,
-        atPlaybackPercent percentPlayed: NSNumber,
-        fullyWatched wasFullyWatched: Bool
+extension AppLovinRewardedDemandProvider: ALAdRewardDelegate {
+    func rewardValidationRequest(
+        for ad: ALAd,
+        didSucceedWithResponse response: [AnyHashable : Any]
     ) {
-        rewardDelegate?.provider(self, didReceiveReward: EmptyReward())
+        let reward = AppLovinRewardWrapper(response)
+        rewardDelegate?.provider(self, didReceiveReward: reward)
     }
     
-    func videoPlaybackBegan(in ad: ALAd) {}
+    // MARK: No-op
+    func rewardValidationRequest(
+        for ad: ALAd,
+        didExceedQuotaWithResponse response: [AnyHashable : Any]
+    ) {}
+    
+    func rewardValidationRequest(
+        for ad: ALAd,
+        wasRejectedWithResponse response: [AnyHashable : Any]
+    ) {}
+    
+    func rewardValidationRequest(
+        for ad: ALAd,
+        didFailWithError responseCode: Int
+    ) {}
 }
 
 

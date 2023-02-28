@@ -50,14 +50,18 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
 
 
 extension AppLovinDemandSourceAdapter: InitializableAdapter {
+    private struct Parameters: Codable {
+        public var appKey: String
+    }
+    
     public func initialize(
         from decoder: Decoder,
         completion: @escaping (Result<Void, SdkError>) -> Void
     ) {
-        var parameters: AppLovinParameters?
+        var parameters: Parameters?
         
         do {
-            parameters = try AppLovinParameters(from: decoder)
+            parameters = try Parameters(from: decoder)
         } catch {
             completion(.failure(SdkError(error)))
         }

@@ -11,6 +11,7 @@ import BidOn
 import BidOnAdapterAppLovin
 import BidOnAdapterBidMachine
 import BidOnAdapterGoogleMobileAds
+import BidOnAdapterDTExchange
 import SwiftUI
 
 
@@ -35,7 +36,7 @@ final class InitializationViewModel: ObservableObject, AdResponder {
         ),
         .init(
             name: "Mock",
-            baseURL: "https://c3d5b3d8-63e7-4818-8ece-264c1df79e4f.mock.pstmn.io"
+            baseURL: "https://07f690ed-b816-459b-82fd-212270eb950a.mock.pstmn.io"
         )
     ]
     
@@ -95,7 +96,8 @@ fileprivate extension Array where Element == BidOn.Adapter {
         return [
             AppLovinDemandSourceAdapter(),
             BidMachineDemandSourceAdapter(),
-            GoogleMobileAdsDemandSourceAdapter()
+            GoogleMobileAdsDemandSourceAdapter(),
+            DTExchangeDemandSourceAdapter()
         ]
     }
 }

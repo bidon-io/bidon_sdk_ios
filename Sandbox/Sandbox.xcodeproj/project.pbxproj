@@ -21,6 +21,7 @@
 		4243092428A25E9F002360B0 /* BidOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4243091D28A25E9F002360B0 /* BidOn.framework */; };
 		425E9C4F28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 425E9C4E28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework */; };
 		426DD7AE28A6584600A1ADF5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7AD28A6584600A1ADF5 /* HomeView.swift */; };
+		4273347A29ACE81E0042AE52 /* BidOnAdapterDTExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4273347929ACE81E0042AE52 /* BidOnAdapterDTExchange.framework */; };
 		4276A234299549DA00EE3991 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4276A233299549DA00EE3991 /* Constants.swift */; };
 		427B1BCD299A69A1007D4E93 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BCC299A69A1007D4E93 /* AdService.swift */; };
 		427B1BCF299A7AD7007D4E93 /* AppodealAdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1BCE299A7AD7007D4E93 /* AppodealAdService.swift */; };
@@ -73,6 +74,7 @@
 		4243092728A27C46002360B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		425E9C4E28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		426DD7AD28A6584600A1ADF5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4273347929ACE81E0042AE52 /* BidOnAdapterDTExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterDTExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4276A233299549DA00EE3991 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		427B1BCC299A69A1007D4E93 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
 		427B1BCE299A7AD7007D4E93 /* AppodealAdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppodealAdService.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			files = (
 				4243092228A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework in Frameworks */,
 				4243092028A25E9F002360B0 /* BidOnAdapterBidMachine.framework in Frameworks */,
+				4273347A29ACE81E0042AE52 /* BidOnAdapterDTExchange.framework in Frameworks */,
 				4243092428A25E9F002360B0 /* BidOn.framework in Frameworks */,
 				425E9C4F28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework in Frameworks */,
 				169F7C8E91CEF4CADB6E417E /* Pods_Sandbox.framework in Frameworks */,
@@ -162,6 +165,7 @@
 		4243091928A25E9F002360B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4273347929ACE81E0042AE52 /* BidOnAdapterDTExchange.framework */,
 				425E9C4E28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework */,
 				4243091B28A25E9F002360B0 /* BidOnAdapterBidMachine.framework */,
 				4243091C28A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework */,
@@ -622,10 +626,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sandbox/Preview Content\"";
-				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sandbox/Info.plist;
@@ -644,6 +649,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stasko.simplenumbers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -656,10 +662,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sandbox/Preview Content\"";
-				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sandbox/Info.plist;
@@ -678,6 +685,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stasko.simplenumbers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

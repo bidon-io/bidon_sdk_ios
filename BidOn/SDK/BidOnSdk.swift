@@ -77,7 +77,6 @@ public final class BidOnSdk: NSObject {
         appKey: String,
         completion: (() -> ())?
     ) {
-        
 #warning("Incapsulate logic in tasks")
         environmentRepository.configure(
             EnvironmentRepository.Parameters(

@@ -37,6 +37,10 @@ def appsflyer
   pod 'AppsFlyer-AdRevenue', '~> 6.9.0'
 end
 
+def dtexchange
+  pod 'Fyber_Marketplace_SDK'
+end
+
 def ocmock
   pod 'OCMock', '~> 3.9.1'
 end
@@ -71,10 +75,14 @@ target 'BidOnAdapterGoogleMobileAds' do
   admob
 end
 
-
 target 'BidOnAdapterAppLovin' do
   project 'Adapters/Adapters.xcodeproj'
   applovin
+end
+
+target 'BidOnAdapterDTExchange' do
+  project 'Adapters/Adapters.xcodeproj'
+  dtexchange
 end
 
 # Tests
@@ -86,10 +94,12 @@ target 'Tests-ObjectiveC' do
   bidmachine
   admob
   applovin
+  dtexchange
 end
 
 
-# Demo 
+# Demo
+
 target 'Sandbox' do
   project 'Sandbox/Sandbox.xcodeproj'
   applovin
@@ -97,6 +107,7 @@ target 'Sandbox' do
   bidmachine
   admob
   applovin
+  dtexchange
   appodeal_mediation
 end
 

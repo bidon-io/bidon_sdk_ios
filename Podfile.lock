@@ -138,6 +138,9 @@ PODS:
     - CriteoPublisherSdk/Sdk (= 4.5.0)
   - CriteoPublisherSdk/Sdk (4.5.0)
   - FBAudienceNetwork (6.12.0)
+  - Fyber_Marketplace_SDK (8.1.9):
+    - Fyber_Marketplace_SDK/IASDKCore (= 8.1.9)
+  - Fyber_Marketplace_SDK/IASDKCore (8.1.9)
   - Google-Mobile-Ads-SDK (9.14.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
@@ -385,6 +388,7 @@ DEPENDENCIES:
   - BidMachineSmaatoAdapter
   - BidMachineTapjoyAdapter
   - BidMachineVungleAdapter
+  - Fyber_Marketplace_SDK
   - Google-Mobile-Ads-SDK
   - OCMock (~> 3.9.1)
 
@@ -438,6 +442,7 @@ SPEC REPOS:
     - BURelyFoundation_Global
     - CriteoPublisherSdk
     - FBAudienceNetwork
+    - Fyber_Marketplace_SDK
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
@@ -502,6 +507,7 @@ SPEC CHECKSUMS:
   BURelyFoundation_Global: 5b03b5340630fa62fb9cd6eac52c5f57d4b0c17b
   CriteoPublisherSdk: 26f16f975d6c0392ee7060626268e2f2d7ed2d82
   FBAudienceNetwork: e0fcc9091fced34910ed0b6da06f129db46ac9e6
+  Fyber_Marketplace_SDK: 8004b76b5515dafbd0e185d01c4644d522869725
   Google-Mobile-Ads-SDK: 4fe6304b771f8467d29978cb790ec1e56e646946
   GoogleAppMeasurement: 40c70a7d89013f0eca72006c4b9732163ea4cdae
   GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
@@ -528,6 +534,6 @@ SPEC CHECKSUMS:
   YandexMobileAds: 3d7708df615f92815a3acedf9869da46d0b4d65e
   YandexMobileMetrica: baf7cea47cb87fc9af963c4f747ce8dd7df3d7c0
 
-PODFILE CHECKSUM: bb8809d2e3aa4ce41803d72ff4d22cc646e50cf8
+PODFILE CHECKSUM: 8c1d54357e03576a418086b5342a4d4d6c037e39
 
 COCOAPODS: 1.11.3

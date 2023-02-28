@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 
-
 public extension UIApplication {
     var bd: DSL { .init(application: self) }
     

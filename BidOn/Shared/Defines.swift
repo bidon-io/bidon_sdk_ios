@@ -84,7 +84,8 @@ struct Constants {
         static var clasess: [String] = [
             "BidOnAdapterBidMachine.BidMachineDemandSourceAdapter",
             "BidOnAdapterGoogleMobileAds.GoogleMobileAdsDemandSourceAdapter",
-            "BidOnAdapterAppLovin.AppLovinDemandSourceAdapter"
+            "BidOnAdapterAppLovin.AppLovinDemandSourceAdapter",
+            "BidOnAdapterDTExchange.DTExchangeDemandSourceAdapter"
         ]
     }
     

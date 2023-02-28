@@ -17,7 +17,7 @@ protocol LineItemElector {
 
 
 struct StrictLineItemElector<Observer: MediationObserver>: LineItemElector {
-    private struct EquatableLineItem: LineItem, Equatable {
+    fileprivate struct EquatableLineItem: LineItem, Equatable {
         private let _id: () -> String
         private let _pricefloor: () -> Price
         private let _adUnitId: () -> String
@@ -61,5 +61,12 @@ struct StrictLineItemElector<Observer: MediationObserver>: LineItemElector {
             .sorted { $0.pricefloor < $1.pricefloor }
             .filter { $0.pricefloor > pricefloor }
             .first
+    }
+}
+
+
+extension StrictLineItemElector.EquatableLineItem: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "Equatable line item '\(id)' with ad unit id: \(adUnitId), pricefloor: \(pricefloor)$"
     }
 }

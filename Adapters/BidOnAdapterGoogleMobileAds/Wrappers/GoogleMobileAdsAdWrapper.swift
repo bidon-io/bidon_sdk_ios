@@ -17,7 +17,7 @@ protocol GoogleMobileAdsAdObject: AnyObject {
 
 
 final class GoogleMobileAdsAdWrapper<AdOject: GoogleMobileAdsAdObject>: NSObject, Ad {
-    var id: String { adObject.info?.responseIdentifier ?? lineItem.id }
+    var id: String { adObject.info?.responseIdentifier ?? lineItem.adUnitId }
     var eCPM: BidOn.Price { lineItem.pricefloor }
     var adUnitId: String? { lineItem.adUnitId }
     var networkName: String { GoogleMobileAdsDemandSourceAdapter.identifier }

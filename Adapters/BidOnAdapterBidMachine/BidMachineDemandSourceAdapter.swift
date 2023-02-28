@@ -36,6 +36,10 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
 
 
 extension BidMachineDemandSourceAdapter: InitializableAdapter {
+    private struct Parameters: Codable {
+        var sellerId: String
+    }
+    
     public func initialize(
         from decoder: Decoder,
         completion: @escaping (Result<Void, SdkError>) -> Void
@@ -43,10 +47,6 @@ extension BidMachineDemandSourceAdapter: InitializableAdapter {
         guard !BidMachineSdk.shared.isInitialized else {
             completion(.failure(SdkError.internalInconsistency))
             return
-        }
-        
-        struct Parameters: Codable {
-            var sellerId: String
         }
         
         var parameters: Parameters?

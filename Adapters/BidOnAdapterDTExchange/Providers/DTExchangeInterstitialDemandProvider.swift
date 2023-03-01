@@ -17,18 +17,18 @@ final class DTExchangeInterstitialDemandProvider: DTExchangeBaseDemandProvider<I
 
     weak var rewardDelegate: DemandProviderRewardDelegate?
     
-    lazy var controller: IAFullscreenUnitController = {
-        let mraidController = IAMRAIDContentController.build { builder in
-            builder.mraidContentDelegate = self
-        }
-        
-        let videController = IAVideoContentController.build { builder in
-            builder.videoContentDelegate = self
-        }
-        
-        let controller = IAFullscreenUnitController.build { builder in
-            mraidController.map(builder.addSupportedContentController)
-            videController.map(builder.addSupportedContentController)
+    private lazy var mraidController = IAMRAIDContentController.build { builder in
+        builder.mraidContentDelegate = self
+    }
+    
+    private lazy var videController = IAVideoContentController.build { builder in
+        builder.videoContentDelegate = self
+    }
+    
+    private lazy var controller: IAFullscreenUnitController = {
+        let controller = IAFullscreenUnitController.build { [unowned self] builder in
+            self.mraidController.map(builder.addSupportedContentController)
+            self.videController.map(builder.addSupportedContentController)
             builder.unitDelegate = self
         }
         

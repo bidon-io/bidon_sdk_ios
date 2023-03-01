@@ -14,7 +14,7 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
 
 
 @objc public final class DTExchangeDemandSourceAdapter: NSObject, DemandSourceAdapter {
-    @objc public static let identifier = "dt_exchange"
+    @objc public static let identifier = "dtexchange"
     
     public let identifier: String = DTExchangeDemandSourceAdapter.identifier
     public let name: String = "DT Exchange"
@@ -44,7 +44,6 @@ extension DTExchangeDemandSourceAdapter: InitializableAdapter {
         from decoder: Decoder,
         completion: @escaping (Result<Void, SdkError>) -> Void
     ) {
-
         var parameters: Parameters?
             
         do {
@@ -55,9 +54,6 @@ extension DTExchangeDemandSourceAdapter: InitializableAdapter {
         
         guard let parameters = parameters else { return }
               
-        IASDKCore.sharedInstance().mediationType = nil
-        IASDKCore.sharedInstance().keywords = "hell & brimstone + earthly/delight, diving,programming\new line"
-        
         IASDKCore.sharedInstance().initWithAppID(
             parameters.appId,
             completionBlock: { isSuccess, error in

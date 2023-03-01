@@ -17,13 +17,13 @@ final class DTExchangeBannerDemandProvider: DTExchangeBaseDemandProvider<IAViewU
     
     weak var adViewDelegate: DemandProviderAdViewDelegate?
     
-    lazy var controller: IAViewUnitController = {
-        let mraidController = IAMRAIDContentController.build { builder in
-            builder.mraidContentDelegate = self
-        }
+    private lazy var mraidController = IAMRAIDContentController.build { builder in
+        builder.mraidContentDelegate = self
+    }
     
-        let controller = IAViewUnitController.build { builder in
-            mraidController.map(builder.addSupportedContentController)
+    private lazy var controller: IAViewUnitController = {
+        let controller = IAViewUnitController.build { [unowned self] builder in
+            self.mraidController.map(builder.addSupportedContentController)
             builder.unitDelegate = self
         }
         

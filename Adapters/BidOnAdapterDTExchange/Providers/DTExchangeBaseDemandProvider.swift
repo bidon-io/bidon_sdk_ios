@@ -62,9 +62,7 @@ extension DTExchangeBaseDemandProvider: DirectDemandProvider {
     }
     
     func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        if
-            let ad = ad as? DTExchangeAdWrapper,
-            ad.adSpot.activeUnitController === unitController() {
+        if let ad = ad as? DTExchangeAdWrapper {
             response(.success(ad))
         } else {
             response(.failure(.incorrectAdUnitId))

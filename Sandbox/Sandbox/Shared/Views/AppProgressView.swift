@@ -2,7 +2,7 @@
 //  OverlayProgressView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 05.09.2022.
+//  Created by Bidon Team on 05.09.2022.
 //
 
 import Foundation
@@ -15,20 +15,18 @@ struct AppProgressView: View {
     
     var body: some View {
         ZStack {
-            Color.primary
-            
             Wave(
                 offset: .degrees(-offset),
                 percent: percent
             )
-            .fill(Color.secondary)
+            .fill(Color.accentColor.opacity(0.8))
             .frame(width: 44, height: 64)
             
             Wave(
                 offset: .degrees(offset),
                 percent: percent
             )
-            .fill(Color(UIColor.systemGroupedBackground))
+            .fill(Color.accentColor.opacity(0.8))
             .frame(width: 44, height: 64)
         }
         .mask(

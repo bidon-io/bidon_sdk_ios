@@ -2,16 +2,16 @@
 //  AdaptersView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 14.02.2023.
+//  Created by Bidon Team on 14.02.2023.
 //
 
 import Foundation
 import SwiftUI
-import BidOn
+import Bidon
 
 
 struct AdaptersView: View {
-    @Binding var adapters: [BidOn.Adapter]
+    @Binding var adapters: [Bidon.Adapter]
     
     var body: some View {
         ForEach($adapters, id: \.identifier) { $adapter in
@@ -22,7 +22,7 @@ struct AdaptersView: View {
             }) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("BidOn \(adapter.name) Adapter")
+                        Text("Bidon \(adapter.name) Adapter")
                             .foregroundColor(adapter.isEnabled ? .secondary : .primary)
                         Text("SDK version \(adapter.sdkVersion)")
                             .font(.caption)
@@ -44,12 +44,12 @@ struct AdaptersView: View {
 }
 
 
-extension BidOn.Adapter {    
+extension Bidon.Adapter {    
     var isEnabled: Bool {
-        get { BidOnSdk.registeredAdapters().contains { $0.identifier == self.identifier } }
+        get { BidonSdk.registeredAdapters().contains { $0.identifier == self.identifier } }
         set {
             guard newValue else { return }
-            BidOnSdk.registerAdapter(adapter: self)
+            BidonSdk.registerAdapter(adapter: self)
         }
     }
 }

@@ -2,12 +2,12 @@
 //  BannerViewModel.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 29.08.2022.
+//  Created by Bidon Team on 29.08.2022.
 //
 
 import Foundation
 import Combine
-import BidOn
+import Bidon
 import AppsFlyerAdRevenue
 import SwiftUI
 

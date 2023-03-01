@@ -2,12 +2,12 @@
 //  AppodealAdvertisingServiceInitializator.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 14.02.2023.
+//  Created by Bidon Team on 14.02.2023.
 //
 
 import Foundation
 import Appodeal
-import BidOn
+import Bidon
 
 
 
@@ -46,8 +46,8 @@ final class AppodealDefaultAdInitializationWrapper: NSObject, AppodealAdInitiali
         Appodeal.initialize(withApiKey: appKey, types: adTypes)
     }
     
-    private func initializeBidOn() {
-        BidOnSdk.initialize(appKey: appKey) { [unowned self] in
+    private func initializeBidon() {
+        BidonSdk.initialize(appKey: appKey) { [unowned self] in
             self.continuation.resume()
             self.continuation = nil
         }
@@ -57,7 +57,7 @@ final class AppodealDefaultAdInitializationWrapper: NSObject, AppodealAdInitiali
 
 extension AppodealDefaultAdInitializationWrapper: AppodealInitializationDelegate {
     func appodealSDKDidInitialize() {
-        initializeBidOn()
+        initializeBidon()
     }
 }
 

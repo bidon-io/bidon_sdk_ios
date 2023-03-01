@@ -1,6 +1,6 @@
 # Integration
 
-This page is describes how to donwload, import and configure the BidOn SDK. 
+This page is describes how to donwload, import and configure the Bidon SDK. 
 
 - [Integration](#integration)
   - [Download](#download)
@@ -13,15 +13,16 @@ This page is describes how to donwload, import and configure the BidOn SDK.
 
 ### CocoaPods (Recommended)
 
-To integrate the BidOn SDK through CocoaPods, first add the following lines to your Podfile:
+To integrate the Bidon SDK through CocoaPods, first add the following lines to your Podfile:
 
 ``` ruby
-pod 'BidOn'
+pod 'Bidon'
 
 # For usage of Demand Sources uncomment following lines
-# pod 'BidOnAdapterBidMachine'
-# pod 'BidOnGoogleMobileAds'
-# pod 'BidOnAdapterAppLovin'
+# pod 'BidonAdapterBidMachine'
+# pod 'BidonAdapterGoogleMobileAds'
+# pod 'BidonAdapterAppLovin'
+# pod 'BidonAdapterDTExchange'
 
 ```
 
@@ -37,11 +38,11 @@ pod install --repo-update
 
 ## Initialize the SDK
 
-Receive your `app key` in the dashboard app settings. We highly recommend to initialize the BidOn SDK in app delegate's `application:applicationDidFinishLaunching:` method. 
+Receive your `app key` in the dashboard app settings. We highly recommend to initialize the Bidon SDK in app delegate's `application:applicationDidFinishLaunching:` method. 
 
 `swift`
 ```swift
-import BidOn
+import Bidon
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -49,11 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         // Register all available demand source adapters.
-        BidOnSdk.registerDefaultAdapters()    
-        // Configure BidOn
-        BidOnSdk.logLevel = .debug
+        BidonSdk.registerDefaultAdapters()    
+        // Configure Bidon
+        BidonSdk.logLevel = .debug
         // Initialize
-        BidOnSdk.initialize(appKey: "APP KEY") {
+        BidonSdk.initialize(appKey: "APP KEY") {
             // Load any ads
         }
 
@@ -61,14 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 ```
 
 ```obj-c
-#import <BidOn/BidOn.h>
+#import <Bidon/Bidon.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Register all available demand source adapters.
     [BDNSdk registerDefaultAdapters];
-    // Configure BidOn
+    // Configure Bidon
     [BDNSdk setLogLevel:BDNLoggerLevelDebug];
     // Initialize
     [BDNSdk initializeWithAppKey:@"APP KEY" completion:^{

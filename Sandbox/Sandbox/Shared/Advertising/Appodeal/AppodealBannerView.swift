@@ -2,14 +2,14 @@
 //  AppodealBannerView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 20.02.2023.
+//  Created by Bidon Team on 20.02.2023.
 //
 
 import Foundation
 import Combine
 import SwiftUI
 import UIKit
-import BidOn
+import Bidon
 import Appodeal
 
 
@@ -114,8 +114,8 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
         func performPostBid() {
             let pricefloor = max(pricefloor, (banners.keys.max() ?? 0))
             
-            let banner = BidOn.BannerView(frame: .zero)
-            banner.format = BidOn.BannerFormat(format)
+            let banner = Bidon.BannerView(frame: .zero)
+            banner.format = Bidon.BannerFormat(format)
             banner.isAutorefreshing = false
             banner.rootViewController = UIApplication.shared.bd.topViewcontroller
             banner.delegate = self
@@ -212,7 +212,7 @@ extension AppodealBannerView.Coordinator: APDBannerViewDelegate {
 }
 
 
-extension AppodealBannerView.Coordinator: BidOn.AdViewDelegate {
+extension AppodealBannerView.Coordinator: Bidon.AdViewDelegate {
     override func adObject(_ adObject: AdObject, didLoadAd ad: Ad) {
         super.adObject(adObject, didLoadAd: ad)
         cache = cache.filter { $0 !== adObject }
@@ -228,27 +228,27 @@ extension AppodealBannerView.Coordinator: BidOn.AdViewDelegate {
         layoutBannerIfNeeded()
     }
     
-    func adView(_ adView: UIView & BidOn.AdView, willPresentScreen ad: BidOn.Ad) {
+    func adView(_ adView: UIView & Bidon.AdView, willPresentScreen ad: Bidon.Ad) {
         send(
-            event: "BidOn will present screen",
+            event: "Bidon will present screen",
             detail: ad.text,
             bage: "star.fill",
             color: .accentColor
         )
     }
     
-    func adView(_ adView: UIView & BidOn.AdView, didDismissScreen ad: BidOn.Ad) {
+    func adView(_ adView: UIView & Bidon.AdView, didDismissScreen ad: Bidon.Ad) {
         send(
-            event: "BidOn will dismiss screen",
+            event: "Bidon will dismiss screen",
             detail: ad.text,
             bage: "star.fill",
             color: .accentColor
         )
     }
     
-    func adView(_ adView: UIView & BidOn.AdView, willLeaveApplication ad: BidOn.Ad) {
+    func adView(_ adView: UIView & Bidon.AdView, willLeaveApplication ad: Bidon.Ad) {
         send(
-            event: "BidOn will leave application",
+            event: "Bidon will leave application",
             detail: ad.text,
             bage: "star.fill",
             color: .accentColor

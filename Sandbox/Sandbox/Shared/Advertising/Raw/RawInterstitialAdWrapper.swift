@@ -2,21 +2,21 @@
 //  RawInterstitialAdWrapper.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 16.02.2023.
+//  Created by Bidon Team on 16.02.2023.
 //
 
 import Foundation
-import BidOn
+import Bidon
 import Combine
 import SwiftUI
 
 
 
 final class RawInterstitialAdWrapper: BaseFullscreenAdWrapper {
-    private var bidOnInterstitial: BidOn.Interstitial?
+    private var bidOnInterstitial: Bidon.Interstitial?
     
     override func _load() {
-        let interstitial = BidOn.Interstitial()
+        let interstitial = Bidon.Interstitial()
         interstitial.delegate = self
         interstitial.loadAd(with: pricefloor)
         self.bidOnInterstitial = interstitial
@@ -40,25 +40,25 @@ final class RawInterstitialAdWrapper: BaseFullscreenAdWrapper {
 
 
 extension RawInterstitialAdWrapper {
-    override func adObject(_ adObject: BidOn.AdObject, didLoadAd ad: BidOn.Ad) {
+    override func adObject(_ adObject: Bidon.AdObject, didLoadAd ad: Bidon.Ad) {
         super.adObject(adObject, didLoadAd: ad)
         
         resumeLoadingContinuation()
     }
     
-    override func adObject(_ adObject: BidOn.AdObject, didFailToLoadAd error: Error) {
+    override func adObject(_ adObject: Bidon.AdObject, didFailToLoadAd error: Error) {
         super.adObject(adObject, didFailToLoadAd: error)
         
         resumeLoadingContinuation(throwing: AppodealAdServiceError.noFill)
     }
     
-    override func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didFailToPresentAd error: Error) {
+    override func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didFailToPresentAd error: Error) {
         super.fullscreenAd(fullscreenAd, didFailToPresentAd: error)
         
         resumeShowingContinuation(throwing: AppodealAdServiceError.invalidPresentationState)
     }
     
-    override func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didDismissAd ad: BidOn.Ad) {
+    override func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didDismissAd ad: Bidon.Ad) {
         super.fullscreenAd(fullscreenAd, didDismissAd: ad)
         
         resumeShowingContinuation()

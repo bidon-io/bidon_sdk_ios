@@ -1,12 +1,11 @@
 platform :ios, '11.0'
-workspace 'BidOn.xcworkspace'
+workspace 'Bidon.xcworkspace'
 
 source 'https://github.com/appodeal/CocoaPods.git'
 source 'https://cdn.cocoapods.org/'
 
 install! 'cocoapods', :warn_for_multiple_pod_sources => false
 use_frameworks!
-
 
 # Defenitions
 
@@ -65,22 +64,22 @@ end
 
 # Targets
 
-target 'BidOnAdapterBidMachine' do
+target 'BidonAdapterBidMachine' do
   project 'Adapters/Adapters.xcodeproj'
   bidmachine
 end
 
-target 'BidOnAdapterGoogleMobileAds' do
+target 'BidonAdapterGoogleMobileAds' do
   project 'Adapters/Adapters.xcodeproj'
   admob
 end
 
-target 'BidOnAdapterAppLovin' do
+target 'BidonAdapterAppLovin' do
   project 'Adapters/Adapters.xcodeproj'
   applovin
 end
 
-target 'BidOnAdapterDTExchange' do
+target 'BidonAdapterDTExchange' do
   project 'Adapters/Adapters.xcodeproj'
   dtexchange
 end

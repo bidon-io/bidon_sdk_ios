@@ -2,11 +2,11 @@
 //  ContentView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 04.08.2022.
+//  Created by Bidon Team on 04.08.2022.
 //
 
 import SwiftUI
-import BidOn
+import Bidon
 
 
 struct ContentView: View {

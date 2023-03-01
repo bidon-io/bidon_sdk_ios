@@ -8,10 +8,11 @@ $build_dir = File.expand_path($root_dir + "/build")
 $podspecs_dir = $build_dir + '/Podspecs'
 $scheme = "Release"
 $targets = [
-  "BidOn",
-  "BidOnAdapterBidMachine",
-  "BidOnAdapterGoogleMobileAds",
-  "BidOnAdapterAppLovin"
+  "Bidon",
+  "BidonAdapterBidMachine",
+  "BidonAdapterGoogleMobileAds",
+  "BidonAdapterAppLovin",
+  "BidonAdapterDTExchange"
 ]
 
 # Defenitions ###
@@ -38,7 +39,7 @@ def build_universal(scheme)
     archive: true,
     archive_path: "#{$build_dir}/#{scheme}/archives/ios.xcarchive",
     scheme: scheme,
-    workspace: "BidOn.xcworkspace",
+    workspace: "Bidon.xcworkspace",
     sdk: "iphoneos",
     xcargs: (xcargs + [ "VALID_ARCHS=\"arm64 armv7\"" ]).join(" ")
   )
@@ -47,7 +48,7 @@ def build_universal(scheme)
     archive: true,
     archive_path: "#{$build_dir}/#{scheme}/archives/ios-sim.xcarchive",
     scheme: scheme,
-    workspace: "BidOn.xcworkspace",
+    workspace: "Bidon.xcworkspace",
     sdk: "iphonesimulator",
     xcargs: (xcargs + [ "VALID_ARCHS=\"x86_64 arm64\"" ]).join(" ")
   )
@@ -88,7 +89,7 @@ platform :ios do
     build_universal($scheme)
 
     $targets.each do |target|
-      is_adapter = target.start_with?("BidOnAdapter")
+      is_adapter = target.start_with?("BidonAdapter")
       ver = is_adapter ? adapters_version : version
       
       xcframework($scheme, target, target, ver)
@@ -101,7 +102,7 @@ platform :ios do
       aws_s3(
         region: "us-west-1",
         acl: "public-read",
-        path: "BidOn/#{target}/#{ver}",
+        path: "Bidon/#{target}/#{ver}",
         files: [ "#{$build_dir}/#{$scheme}/#{target}-#{ver}/#{target}.zip" ]
       ) if upload
 

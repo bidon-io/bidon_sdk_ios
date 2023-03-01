@@ -1,6 +1,6 @@
 # Interstitials
 
-This page is describes how to implement interstitial ads though the BidOn SDK.
+This page is describes how to implement interstitial ads though the Bidon SDK.
 
 ## Loading an Interstitial Ad
 
@@ -8,10 +8,10 @@ To load an interstitial ad, instantiate an `BDNInterstitial` with `placement` co
 
 ```swift
 class ViewController: UIViewController {
-    var interstitialAd: BidOn.Interstitial!
+    var interstitialAd: Bidon.Interstitial!
     
     func loadInterstitialAd() {
-        interstitialAd = BidOn.Interstitial(placement: "PLACEMENT")
+        interstitialAd = Bidon.Interstitial(placement: "PLACEMENT")
         interstitialAd.delegate = self
         
         interstitialAd.loadAd(with: 0.1)
@@ -19,22 +19,22 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: BidOn.FullscreenAdDelegate {
-    func adObject(_ adObject: BidOn.AdObject, didLoadAd ad: BidOn.Ad) {}
+extension ViewController: Bidon.FullscreenAdDelegate {
+    func adObject(_ adObject: Bidon.AdObject, didLoadAd ad: Bidon.Ad) {}
     
-    func adObject(_ adObject: BidOn.AdObject, didFailToLoadAd error: Error) {}
+    func adObject(_ adObject: Bidon.AdObject, didFailToLoadAd error: Error) {}
     
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, willPresentAd ad: BidOn.Ad) {}
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, willPresentAd ad: Bidon.Ad) {}
     
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didFailToPresentAd error: Error) {}
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didFailToPresentAd error: Error) {}
     
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didDismissAd ad: BidOn.Ad) {}
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didDismissAd ad: Bidon.Ad) {}
 }
 ```
 
 ```obj-c
 #import "ViewController.h"
-#import <BidOn/BidOn.h>
+#import <Bidon/Bidon.h>
 
 
 @interface ViewController() <BDNFullscreenAdDelegate>

@@ -1,6 +1,6 @@
 # Rewarded Ads
 
-This page is describes how to implement rewarded ads though the BidOn SDK.
+This page is describes how to implement rewarded ads though the Bidon SDK.
 
 ## Loading an Rewarded Ad
 
@@ -8,10 +8,10 @@ To load an interstitial ad, instantiate an `BDNRewardedAd` with `placement` conf
 
 ```swift
 class ViewController: UIViewController {
-    var rewardedAd: BidOn.RewardedAd!
+    var rewardedAd: Bidon.RewardedAd!
     
     func loadRewardedAd() {
-        rewardedAd = BidOn.RewardedAd(placement: "PLACEMENT")
+        rewardedAd = Bidon.RewardedAd(placement: "PLACEMENT")
         rewardedAd.delegate = self
         
         rewardedAd.loadAd(with: 0.1)
@@ -19,24 +19,24 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: BidOn.RewardedAdDelegate {
-    func adObject(_ adObject: BidOn.AdObject, didLoadAd ad: BidOn.Ad) {}
+extension ViewController: Bidon.RewardedAdDelegate {
+    func adObject(_ adObject: Bidon.AdObject, didLoadAd ad: Bidon.Ad) {}
     
-    func adObject(_ adObject: BidOn.AdObject, didFailToLoadAd error: Error) {}
+    func adObject(_ adObject: Bidon.AdObject, didFailToLoadAd error: Error) {}
     
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, willPresentAd ad: BidOn.Ad) {}
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, willPresentAd ad: Bidon.Ad) {}
     
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didFailToPresentAd error: Error) {}
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didFailToPresentAd error: Error) {}
     
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didDismissAd ad: BidOn.Ad) {}
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didDismissAd ad: Bidon.Ad) {}
     
-    func rewardedAd(_ rewardedAd: BidOn.RewardedAdObject, didRewardUser reward: BidOn.Reward) {}
+    func rewardedAd(_ rewardedAd: Bidon.RewardedAdObject, didRewardUser reward: Bidon.Reward) {}
 }
 ```
 
 ```obj-c
 #import "ViewController.h"
-#import <BidOn/BidOn.h>
+#import <Bidon/Bidon.h>
 
 
 @interface ViewController() <BDNRewardedAdDelegate>
@@ -94,7 +94,7 @@ func showRewardedAd() {
 Once a Rewarded Ad did reward user, delegate method `rewardedAd:didRewardUser` will fire. You will be able to receive reward amount and currency.
 
 ```swift
-func rewardedAd(_ rewardedAd: BidOn.RewardedAdObject, didRewardUser reward: BidOn.Reward) {
+func rewardedAd(_ rewardedAd: Bidon.RewardedAdObject, didRewardUser reward: Bidon.Reward) {
     let amount: Int = reward.amount
     let currency: String = reward.label
 } 

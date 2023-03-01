@@ -17,7 +17,7 @@ module Fastlane
           f.write "\t\tstatic let devKey = \"#{ENV["APPSFLYER_DEV_KEY"]}\"\n" 
           f.write "\t\tstatic let appId = \"#{ENV["APPSFLYER_APP_ID"]}\"\n" 
           f.write "\t}\n\n" 
-          f.write "\tstruct BidOn {\n" 
+          f.write "\tstruct Bidon {\n" 
           f.write "\t\tstatic let appKey = \"#{ENV["BIDON_APP_KEY"]}\"\n" 
           f.write "\t\tstatic let baseURL = \"#{ENV["BIDON_BASE_URL"]}\"\n" 
           f.write "\t}\n\n" 

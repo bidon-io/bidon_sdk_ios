@@ -1,6 +1,6 @@
 # Banners
 
-This page is describes how to implement banner ads though the BidOn SDK.
+This page is describes how to implement banner ads though the Bidon SDK.
 
 ## Loading an Banners
 
@@ -10,10 +10,10 @@ To load banner, create a `BDNBanner`.  Implement `BDNAdViewDelegate` that you ar
 
 ```swift
 class ViewController: UIViewController {
-    var banner: BidOn.Banner!
+    var banner: Bidon.Banner!
     
     func loadBanner() {
-        banner = BidOn.Banner(frame: .zero)
+        banner = Bidon.Banner(frame: .zero)
         banner.rootViewController = self
         banner.format = .banner
         banner.translatesAutoresizingMaskIntoConstraints = false
@@ -30,23 +30,23 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: BidOn.AdViewDelegate {
-    func adView(_ adView: UIView & BidOn.AdView, willPresentScreen ad: BidOn.Ad) {}
+extension ViewController: Bidon.AdViewDelegate {
+    func adView(_ adView: UIView & Bidon.AdView, willPresentScreen ad: Bidon.Ad) {}
     
-    func adView(_ adView: UIView & BidOn.AdView, didDismissScreen ad: BidOn.Ad) {}
+    func adView(_ adView: UIView & Bidon.AdView, didDismissScreen ad: Bidon.Ad) {}
     
-    func adView(_ adView: UIView & BidOn.AdView, willLeaveApplication ad: BidOn.Ad) {}
+    func adView(_ adView: UIView & Bidon.AdView, willLeaveApplication ad: Bidon.Ad) {}
     
-    func adObject(_ adObject: BidOn.AdObject, didLoadAd ad: BidOn.Ad) {}
+    func adObject(_ adObject: Bidon.AdObject, didLoadAd ad: Bidon.Ad) {}
     
-    func adObject(_ adObject: BidOn.AdObject, didFailToLoadAd error: Error) {}
+    func adObject(_ adObject: Bidon.AdObject, didFailToLoadAd error: Error) {}
 }
 ```
 
 ```obj-c
 #import "ViewController.h"
 #import <AppLovinSDK/AppLovinSDK.h>
-#import <BidOn/BidOn.h>
+#import <Bidon/Bidon.h>
 
 
 @interface ViewController() <BDNAdViewDelegate>

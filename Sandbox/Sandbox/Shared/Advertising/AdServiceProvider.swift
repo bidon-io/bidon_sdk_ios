@@ -2,7 +2,7 @@
 //  AdvertisingServiceProvider.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 13.02.2023.
+//  Created by Bidon Team on 13.02.2023.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import AppsFlyerLib
 import AppsFlyerAdRevenue
-import BidOn
+import Bidon
 
 
 final class AdServiceProvider: ObservableObject {
@@ -49,8 +49,8 @@ final class AdServiceProvider: ObservableObject {
 extension AppsFlyerAdRevenue {
     func log(
         adRevenue: AdRevenue,
-        ad: BidOn.Ad,
-        adType: BidOn.AdType,
+        ad: Bidon.Ad,
+        adType: Bidon.AdType,
         placement: String = ""
     ) {
         var additionalParameters: [AnyHashable: Any] = [:]

@@ -2,12 +2,12 @@
 //  HomeView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 12.08.2022.
+//  Created by Bidon Team on 12.08.2022.
 //
 
 import Foundation
 import SwiftUI
-import BidOn
+import Bidon
 import Combine
 
 
@@ -48,7 +48,7 @@ struct HomeView: View {
                     }
                 }
                 .listStyle(.insetGrouped)
-                .navigationTitle("BidOn v\(BidOnSdk.sdkVersion)")
+                .navigationTitle("Bidon v\(BidonSdk.sdkVersion)")
             }
         }
         .navigationViewStyle(.stack)

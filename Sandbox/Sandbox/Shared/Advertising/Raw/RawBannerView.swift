@@ -2,14 +2,14 @@
 //  BannerView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 12.10.2022.
+//  Created by Bidon Team on 12.10.2022.
 //
 
 import Foundation
 import SwiftUI
 import UIKit
 import Combine
-import BidOn
+import Bidon
 
 
 struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
@@ -73,28 +73,28 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
 }
 
 
-extension RawBannerView.Coordinator: BidOn.AdViewDelegate {
-    func adView(_ adView: UIView & BidOn.AdView, willPresentScreen ad: BidOn.Ad) {
+extension RawBannerView.Coordinator: Bidon.AdViewDelegate {
+    func adView(_ adView: UIView & Bidon.AdView, willPresentScreen ad: Bidon.Ad) {
         send(
-            event: "BidOn will present screen",
+            event: "Bidon will present screen",
             detail: ad.text,
             bage: "star.fill",
             color: .accentColor
         )
     }
     
-    func adView(_ adView: UIView & BidOn.AdView, didDismissScreen ad: BidOn.Ad) {
+    func adView(_ adView: UIView & Bidon.AdView, didDismissScreen ad: Bidon.Ad) {
         send(
-            event: "BidOn will dismiss screen",
+            event: "Bidon will dismiss screen",
             detail: ad.text,
             bage: "star.fill",
             color: .accentColor
         )
     }
     
-    func adView(_ adView: UIView & BidOn.AdView, willLeaveApplication ad: BidOn.Ad) {
+    func adView(_ adView: UIView & Bidon.AdView, willLeaveApplication ad: Bidon.Ad) {
         send(
-            event: "BidOn will leave application",
+            event: "Bidon will leave application",
             detail: ad.text,
             bage: "star.fill",
             color: .accentColor

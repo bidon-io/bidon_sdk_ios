@@ -30,7 +30,7 @@ module Fastlane
           end
 
           dependencies.append(Dependency.new(
-            name: "BidOn",
+            name: "Bidon",
             version: params[:sdk_version]
           ))
         end
@@ -38,7 +38,7 @@ module Fastlane
         podspec = Pod::Specification.new do |spec|
           spec.name = params[:name]
           spec.version = params[:version]
-          spec.summary = params[:name] == "BidOn" ? "BidOn iOS Framework" : "BidOn adapter for #{params[:name]}"
+          spec.summary = params[:name] == "Bidon" ? "Bidon iOS Framework" : "Bidon adapter for #{params[:name]}"
           spec.description = <<-DESC
           Appodeal’s supply-side platform is designed and built by veteran publishers,for publishers. Appodeal is not an ad network; it is a new approach to monetizing for publishers.
         The platform is a large auction house, accompanied by a mediation layer, that exposes a publisher’s inventory to all available buyers on the market via relationships with every major ad network, RTB exchange, and DSP. Appodeal showcases publisher inventory to the advertiser, and offers the highest rate in real time.
@@ -48,7 +48,7 @@ module Fastlane
           spec.license = { :type => "Copyright", :text => "Copyright #{Time.new.year}. Appodeal, Inc." }
           spec.author = { "Appodeal, Inc" => "https://appodeal.com" }
           spec.platform = :ios, "10.0"
-          spec.source = { :http => "https://s3-us-west-1.amazonaws.com/appodeal-ios/BidOn/#{spec.name}/#{spec.version}/#{spec.name}.zip" }
+          spec.source = { :http => "https://s3-us-west-1.amazonaws.com/appodeal-ios/Bidon/#{spec.name}/#{spec.version}/#{spec.name}.zip" }
           spec.swift_versions = "4.0", "4.2", "5.0"
         
           spec.vendored_frameworks = params[:vendored_frameworks]

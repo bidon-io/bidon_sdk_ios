@@ -2,12 +2,12 @@
 //  BaseAdWrapper.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 20.02.2023.
+//  Created by Bidon Team on 20.02.2023.
 //
 
 import Foundation
 import Combine
-import BidOn
+import Bidon
 
 
 class BaseAdWrapper: NSObject, AdWrapper {
@@ -17,19 +17,19 @@ class BaseAdWrapper: NSObject, AdWrapper {
 }
 
 
-extension BaseAdWrapper: BidOn.AdObjectDelegate {
-    func adObject(_ adObject: BidOn.AdObject, didLoadAd ad: BidOn.Ad) {
+extension BaseAdWrapper: Bidon.AdObjectDelegate {
+    func adObject(_ adObject: Bidon.AdObject, didLoadAd ad: Bidon.Ad) {
         send(
-            event: "BidOn did load ad",
+            event: "Bidon did load ad",
             detail: ad.text,
             bage: "star.fill",
             color: .accentColor
         )
     }
     
-    func adObject(_ adObject: BidOn.AdObject, didFailToLoadAd error: Error) {
+    func adObject(_ adObject: Bidon.AdObject, didFailToLoadAd error: Error) {
         send(
-            event: "BidOn did fail to load ad",
+            event: "Bidon did fail to load ad",
             detail: error.localizedDescription,
             bage: "star.fill",
             color: .red
@@ -41,7 +41,7 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
         didRecordImpression ad: Ad
     ) {
         send(
-            event: "BidOn did record impression",
+            event: "Bidon did record impression",
             detail: ad.text,
             bage: "flag.fill",
             color: .accentColor
@@ -53,7 +53,7 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
         didRecordClick ad: Ad
     ) {
         send(
-            event: "BidOn did record click",
+            event: "Bidon did record click",
             detail: ad.text,
             bage: "flag.fill",
             color: .accentColor
@@ -64,7 +64,7 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
         _ adObject: AdObject
     ) {
         send(
-            event: "BidOn did start auction",
+            event: "Bidon did start auction",
             detail: "",
             bage: "flag.fill",
             color: .secondary
@@ -77,7 +77,7 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
         pricefloor: Price
     ) {
         send(
-            event: "BidOn did start auction round \(auctionRound)",
+            event: "Bidon did start auction round \(auctionRound)",
             detail: "Pricefloor: \(pricefloor)",
             bage: "flag.fill",
             color: .secondary
@@ -89,7 +89,7 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
         didReceiveBid ad: Ad
     ) {
         send(
-            event: "BidOn did receive bid",
+            event: "Bidon did receive bid",
             detail: ad.text,
             bage: "flag.fill",
             color: .secondary
@@ -101,7 +101,7 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
         didCompleteAuctionRound auctionRound: String
     ) {
         send(
-            event: "BidOn did complete auction round \(auctionRound)",
+            event: "Bidon did complete auction round \(auctionRound)",
             detail: "",
             bage: "flag.fill",
             color: .secondary
@@ -113,7 +113,7 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
         didCompleteAuction winner: Ad?
     ) {
         send(
-            event: "BidOn did complete auction",
+            event: "Bidon did complete auction",
             detail: winner.map { "Winner ad is \($0.text)" } ?? "No winner",
             bage: "flag.fill",
             color: .secondary
@@ -126,7 +126,7 @@ extension BaseAdWrapper: BidOn.AdObjectDelegate {
         ad: Ad
     ) {
         send(
-            event: "BidOn did pay revenue \(revenue.revenue.pretty)",
+            event: "Bidon did pay revenue \(revenue.revenue.pretty)",
             detail: ad.text,
             bage: "cart.fill",
             color: .primary

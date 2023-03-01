@@ -2,7 +2,7 @@
 //  Appodeal+Extenstions.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 13.02.2023.
+//  Created by Bidon Team on 13.02.2023.
 //
 
 import Foundation

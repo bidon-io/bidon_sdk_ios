@@ -2,11 +2,11 @@
 //  AdvertisingService.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 13.02.2023.
+//  Created by Bidon Team on 13.02.2023.
 //
 
 import Foundation
-import BidOn
+import Bidon
 import Combine
 
 
@@ -53,8 +53,8 @@ protocol AdResponder {}
 
 extension AdService {
     var bidOnURL: String {
-        get { BidOnSdk.baseURL }
-        set { BidOnSdk.baseURL = newValue }
+        get { BidonSdk.baseURL }
+        set { BidonSdk.baseURL = newValue }
     }
 }
 
@@ -65,7 +65,7 @@ extension AdResponder {
 }
 
 
-extension BidOn.Logger.Level {
+extension Bidon.Logger.Level {
     init(_ level: LogLevel) {
         switch level {
         case .verbose: self = .verbose

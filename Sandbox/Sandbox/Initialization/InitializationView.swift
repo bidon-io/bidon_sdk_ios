@@ -2,12 +2,12 @@
 //  InitializationVIew.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 05.09.2022.
+//  Created by Bidon Team on 05.09.2022.
 //
 
 import Foundation
 import SwiftUI
-import BidOn
+import Bidon
 
 
 struct InitializationView: View {
@@ -32,9 +32,10 @@ struct InitializationView: View {
                         }
                         
                         Section(header: Text("Base URL")) {
-                            ForEach(vm.hosts) { host in
-                                HostView(host: host, selected: $vm.host)
-                            }
+                            HostView(
+                                hosts: $vm.hosts,
+                                selected: $vm.host
+                            )
                         }
                         
                         Section(header: Text("Permissions")) {
@@ -91,9 +92,9 @@ struct InitializationView: View {
                         
                         VStack(alignment: .leading) {
                             Text("Mediation: ") + Text(AdServiceProvider.shared.service.mediation.rawValue.capitalized + " v" + AdServiceProvider.shared.service.verstion).bold()
-                            Text("BidOn SDK: ") + Text("v\(BidOnSdk.sdkVersion)").bold()
+                            Text("Bidon SDK: ") + Text("v\(BidonSdk.sdkVersion)").bold()
                             Text("Bundle ID: ") + Text(Bundle.main.bundleIdentifier ?? "").bold()
-                            Text("App Key: ") + Text(Constants.BidOn.appKey).bold()
+                            Text("App Key: ") + Text(Constants.Bidon.appKey).bold()
                             Text("App Version: ") + Text(appVersion).bold()
                         }
                         .lineLimit(1)

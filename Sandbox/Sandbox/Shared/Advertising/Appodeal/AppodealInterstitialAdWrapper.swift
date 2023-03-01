@@ -2,18 +2,18 @@
 //  AppodealAdvertisingServiceInterstitialHelper.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 14.02.2023.
+//  Created by Bidon Team on 14.02.2023.
 //
 
 import Foundation
 import Appodeal
-import BidOn
+import Bidon
 import Combine
 import SwiftUI
 
 
 final class AppodealInterstitialAdWrapper: BaseFullscreenAdWrapper {
-    private var bidOnInterstitial: BidOn.Interstitial?
+    private var bidOnInterstitial: Bidon.Interstitial?
     
     override init() {
         super.init()
@@ -45,7 +45,7 @@ final class AppodealInterstitialAdWrapper: BaseFullscreenAdWrapper {
     
     private func performPostBid() {
         let pricefloor = max(pricefloor, Appodeal.predictedEcpm(for: .interstitial))
-        let interstitial = BidOn.Interstitial()
+        let interstitial = Bidon.Interstitial()
         interstitial.delegate = self
         interstitial.loadAd(with: pricefloor)
         self.bidOnInterstitial = interstitial
@@ -119,13 +119,13 @@ extension AppodealInterstitialAdWrapper: AppodealInterstitialDelegate {
 
 
 extension AppodealInterstitialAdWrapper {
-    override func adObject(_ adObject: BidOn.AdObject, didLoadAd ad: BidOn.Ad) {
+    override func adObject(_ adObject: Bidon.AdObject, didLoadAd ad: Bidon.Ad) {
         super.adObject(adObject, didLoadAd: ad)
         
         resumeLoadingContinuation()
     }
     
-    override func adObject(_ adObject: BidOn.AdObject, didFailToLoadAd error: Error) {
+    override func adObject(_ adObject: Bidon.AdObject, didFailToLoadAd error: Error) {
         super.adObject(adObject, didFailToLoadAd: error)
         
         if Appodeal.isReadyForShow(with: .interstitial) {
@@ -136,13 +136,13 @@ extension AppodealInterstitialAdWrapper {
     }
 
     
-    override func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didFailToPresentAd error: Error) {
+    override func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didFailToPresentAd error: Error) {
         super.fullscreenAd(fullscreenAd, didFailToPresentAd: error)
         
         resumeShowingContinuation(throwing: AppodealAdServiceError.invalidPresentationState)
     }
     
-    override func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didDismissAd ad: BidOn.Ad) {
+    override func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didDismissAd ad: Bidon.Ad) {
         super.fullscreenAd(fullscreenAd, didDismissAd: ad)
         
         resumeShowingContinuation()

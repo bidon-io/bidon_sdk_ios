@@ -2,13 +2,13 @@
 //  RawAdService.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 16.02.2023.
+//  Created by Bidon Team on 16.02.2023.
 //
 
 import Foundation
 import Foundation
 import Combine
-import BidOn
+import Bidon
 
 
 enum RawAdServiceError: Error {
@@ -25,7 +25,7 @@ final class RawAdService: NSObject, AdService {
     
     var logLevel: LogLevel = .debug {
         didSet {
-            BidOnSdk.logLevel = BidOn.Logger.Level(logLevel)
+            BidonSdk.logLevel = Bidon.Logger.Level(logLevel)
         }
     }
     
@@ -35,12 +35,12 @@ final class RawAdService: NSObject, AdService {
     override init() {
         super.init()
         
-        BidOnSdk.logLevel = BidOn.Logger.Level(.debug)
+        BidonSdk.logLevel = Bidon.Logger.Level(.debug)
     }
     
     func initialize() async {
         await withCheckedContinuation { continuation in
-            BidOnSdk.initialize(appKey: Constants.BidOn.appKey) {
+            BidonSdk.initialize(appKey: Constants.Bidon.appKey) {
                 continuation.resume()
             }
         }

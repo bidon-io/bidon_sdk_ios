@@ -1,24 +1,24 @@
 # Advanced
 
-This page is describes advanced features of the BidOn SDK.
+This page is describes advanced features of the Bidon SDK.
 
 ## Manualy register adapters
 
-You're able to define which adapters will be used by BidOn SDK in the application runtime by yourself. You'll need to use the following code to register adapters instead of `registerDefaultAdapters:` before initialize the BidOn SDK.
+You're able to define which adapters will be used by Bidon SDK in the application runtime by yourself. You'll need to use the following code to register adapters instead of `registerDefaultAdapters:` before initialize the Bidon SDK.
 
 ```swift
-import BidOn
-import BidOnAdapterAppLovin
-import BidOnAdapterGoogleMobileAds 
+import Bidon
+import BidonAdapterAppLovin
+import BidonAdapterGoogleMobileAds 
 ⋮
 
-BidOnSdk.registerAdapter(adapter: BidOnAdapterAppLovin.AppLovinDemandSourceAdapter())
-BidOnSdk.registerAdapter(adapter: BidOnAdapterGoogleMobileAds.GoogleMobileAdsDemandSourceAdapter())
+BidonSdk.registerAdapter(adapter: BidonAdapterAppLovin.AppLovinDemandSourceAdapter())
+BidonSdk.registerAdapter(adapter: BidonAdapterGoogleMobileAds.GoogleMobileAdsDemandSourceAdapter())
 ```
 
 ```obj-c
-[BDNSdk registerAdapterWithClassName:@"BidOnAdapterAppLovin.AppLovinDemandSourceAdapter"];
-[BDNSdk registerAdapterWithClassName:@"BidOnAdapterGoogleMobileAds.GoogleMobileAdsDemandSourceAdapter"];
+[BDNSdk registerAdapterWithClassName:@"BidonAdapterAppLovin.AppLovinDemandSourceAdapter"];
+[BDNSdk registerAdapterWithClassName:@"BidonAdapterGoogleMobileAds.GoogleMobileAdsDemandSourceAdapter"];
 ```
 
 ## Impression-Level Ad Revenue

@@ -2,7 +2,7 @@
 //  SelectMediationView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 16.02.2023.
+//  Created by Bidon Team on 16.02.2023.
 //
 
 import Foundation

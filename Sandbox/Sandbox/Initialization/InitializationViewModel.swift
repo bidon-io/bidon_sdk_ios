@@ -2,16 +2,16 @@
 //  InitializationViewModel.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 05.09.2022.
+//  Created by Bidon Team on 05.09.2022.
 //
 
 import Foundation
 import Combine
-import BidOn
-import BidOnAdapterAppLovin
-import BidOnAdapterBidMachine
-import BidOnAdapterGoogleMobileAds
-import BidOnAdapterDTExchange
+import Bidon
+import BidonAdapterAppLovin
+import BidonAdapterBidMachine
+import BidonAdapterGoogleMobileAds
+import BidonAdapterDTExchange
 import SwiftUI
 
 
@@ -29,14 +29,10 @@ final class InitializationViewModel: ObservableObject, AdResponder {
         PermissionView.Model(permission: permission)
     }
     
-    let hosts: [HostView.Model] = [
+    @Published var hosts: [HostView.Model] = [
         .init(
             name: "Production",
-            baseURL: Constants.BidOn.baseURL
-        ),
-        .init(
-            name: "Mock",
-            baseURL: "https://07f690ed-b816-459b-82fd-212270eb950a.mock.pstmn.io"
+            baseURL: Constants.Bidon.baseURL
         )
     ]
     
@@ -48,7 +44,7 @@ final class InitializationViewModel: ObservableObject, AdResponder {
     
     @Published var host = HostView.Model(
         name: "Production",
-        baseURL: Constants.BidOn.baseURL
+        baseURL: Constants.Bidon.baseURL
     ) {
         didSet { adService.bidOnURL = host.baseURL }
     }
@@ -64,7 +60,7 @@ final class InitializationViewModel: ObservableObject, AdResponder {
         }
     }
     
-    @Published var adapters: [BidOn.Adapter] = .default()
+    @Published var adapters: [Bidon.Adapter] = .default()
     
     @MainActor
     func initialize() async {
@@ -74,7 +70,7 @@ final class InitializationViewModel: ObservableObject, AdResponder {
     }
     
     func registerDefaultAdapters() {
-        BidOnSdk.registerDefaultAdapters()
+        BidonSdk.registerDefaultAdapters()
         withAnimation { [unowned self] in
             self.adapters = .default()
         }
@@ -91,7 +87,7 @@ final class InitializationViewModel: ObservableObject, AdResponder {
 }
 
 
-fileprivate extension Array where Element == BidOn.Adapter {
+fileprivate extension Array where Element == Bidon.Adapter {
     static func `default`() -> [Element] {
         return [
             AppLovinDemandSourceAdapter(),

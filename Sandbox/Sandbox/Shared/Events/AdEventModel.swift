@@ -2,11 +2,11 @@
 //  EventModel.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 26.08.2022.
+//  Created by Bidon Team on 26.08.2022.
 //
 
 import Foundation
-import BidOn
+import Bidon
 import SwiftUI
 
 

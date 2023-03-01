@@ -2,14 +2,14 @@
 //  AppodealAdWrapper.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 15.02.2023.
+//  Created by Bidon Team on 15.02.2023.
 //
 
 import Foundation
 import Combine
 import SwiftUI
 import Appodeal
-import BidOn
+import Bidon
 
 
 protocol AdWrapper {

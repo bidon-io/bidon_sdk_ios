@@ -2,16 +2,16 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:BidOn.xcodeproj">
+      location = "group:Bidon.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Adapters/Adapters.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Tests/Tests.xcodeproj">
+      location = "group:Sandbox/Sandbox.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Sandbox/Sandbox.xcodeproj">
+      location = "group:Tests/Tests.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

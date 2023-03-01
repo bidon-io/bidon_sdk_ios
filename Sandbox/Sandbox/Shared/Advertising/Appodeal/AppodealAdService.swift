@@ -2,13 +2,13 @@
 //  AppodealAdvertisingService.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 13.02.2023.
+//  Created by Bidon Team on 13.02.2023.
 //
 
 import Foundation
 import Appodeal
 import Combine
-import BidOn
+import Bidon
 
 
 enum AppodealAdServiceError: Error {
@@ -31,7 +31,7 @@ final class AppodealAdService: NSObject, AdService {
     var logLevel: LogLevel = .debug {
         didSet {
             Appodeal.setLogLevel(APDLogLevel(logLevel))
-            BidOnSdk.logLevel = BidOn.Logger.Level(logLevel)
+            BidonSdk.logLevel = Bidon.Logger.Level(logLevel)
         }
     }
     
@@ -41,7 +41,7 @@ final class AppodealAdService: NSObject, AdService {
         Appodeal.setAdRevenueDelegate(self)
         
         Appodeal.setLogLevel(APDLogLevel(.debug))
-        BidOnSdk.logLevel = BidOn.Logger.Level(.debug)
+        BidonSdk.logLevel = Bidon.Logger.Level(.debug)
     }
     
     private lazy var initializator = AppodealDefaultAdInitializationWrapper()

@@ -2,7 +2,7 @@
 //  Permission.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 01.09.2022.
+//  Created by Bidon Team on 01.09.2022.
 //
 
 import Foundation

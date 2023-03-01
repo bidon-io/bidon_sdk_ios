@@ -2,11 +2,11 @@
 //  BaseFullscreenAdWrapper.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 20.02.2023.
+//  Created by Bidon Team on 20.02.2023.
 //
 
 import Foundation
-import BidOn
+import Bidon
 
 
 class BaseFullscreenAdWrapper: BaseAdWrapper, FullscreenAdWrapper {
@@ -64,28 +64,28 @@ class BaseFullscreenAdWrapper: BaseAdWrapper, FullscreenAdWrapper {
 }
 
 
-extension BaseFullscreenAdWrapper: BidOn.RewardedAdDelegate {
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, willPresentAd ad: BidOn.Ad) {
+extension BaseFullscreenAdWrapper: Bidon.RewardedAdDelegate {
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, willPresentAd ad: Bidon.Ad) {
         send(
-            event: "BidOn will present ad",
+            event: "Bidon will present ad",
             detail: ad.text,
             bage: "star.fill",
             color: .accentColor
         )
     }
     
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didFailToPresentAd error: Error) {
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didFailToPresentAd error: Error) {
         send(
-            event: "BidOn did fail to present ad",
+            event: "Bidon did fail to present ad",
             detail: error.localizedDescription,
             bage: "star.fill",
             color: .red
         )
     }
     
-    func fullscreenAd(_ fullscreenAd: BidOn.FullscreenAdObject, didDismissAd ad: BidOn.Ad) {
+    func fullscreenAd(_ fullscreenAd: Bidon.FullscreenAdObject, didDismissAd ad: Bidon.Ad) {
         send(
-            event: "BidOn did dismiss ad",
+            event: "Bidon did dismiss ad",
             detail: ad.text,
             bage: "star.fill",
             color: .secondary
@@ -94,7 +94,7 @@ extension BaseFullscreenAdWrapper: BidOn.RewardedAdDelegate {
     
     func rewardedAd(_ rewardedAd: RewardedAdObject, didRewardUser reward: Reward) {
         send(
-            event: "BidOn did reward user",
+            event: "Bidon did reward user",
             detail: "Reward is \(reward.amount) \(reward.label)",
             bage: "gift",
             color: .orange

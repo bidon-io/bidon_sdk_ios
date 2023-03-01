@@ -1,12 +1,12 @@
 //
-//  BidOnSdkTestCase.m
+//  BidonSdkTestCase.m
 //  Tests-ObjectiveC
 //
-//  Created by Stas Kochkin on 08.02.2023.
+//  Created by Bidon Team on 08.02.2023.
 //
 
 #import <XCTest/XCTest.h>
-#import <BidOn/BidOn.h>
+#import <Bidon/Bidon.h>
 
 
 @interface BDNSdkTestCase : XCTestCase
@@ -39,8 +39,8 @@
 }
 
 - (void)testRegisterAdapters {
-    [BDNSdk registerAdapterWithClassName:@"BidOnAdapterAppLovin.AppLovinDemandSourceAdapter"];
-    [BDNSdk registerAdapterWithClassName:@"BidOnAdapterGoogleMobileAds.GoogleMobileAdsDemandSourceAdapter"];
+    [BDNSdk registerAdapterWithClassName:@"BidonAdapterAppLovin.AppLovinDemandSourceAdapter"];
+    [BDNSdk registerAdapterWithClassName:@"BidonAdapterGoogleMobileAds.GoogleMobileAdsDemandSourceAdapter"];
 }
 
 - (void)testPerformanceExample {

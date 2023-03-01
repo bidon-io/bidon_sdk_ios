@@ -2,12 +2,12 @@
 //  AdBannerWrapperView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 17.02.2023.
+//  Created by Bidon Team on 17.02.2023.
 //
 
 import Foundation
 import SwiftUI
-import BidOn
+import Bidon
 
 
 enum AdBannerWrapperFormat: String, CaseIterable {
@@ -75,7 +75,7 @@ struct AnyAdBannerWrapperView: AdBannerWrapperView {
 }
 
 
-extension BidOn.BannerFormat {
+extension Bidon.BannerFormat {
     init(_ format: AdBannerWrapperFormat) {
         switch format {
         case .banner: self = .banner

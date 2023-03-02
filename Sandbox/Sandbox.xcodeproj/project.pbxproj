@@ -16,6 +16,7 @@
 		4224AA7E28B8D59400E8D886 /* RewardedAdSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7D28B8D59400E8D886 /* RewardedAdSection.swift */; };
 		4224AA8328B8F92B00E8D886 /* AdEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA8228B8F92B00E8D886 /* AdEventModel.swift */; };
 		4224AA8528B900AF00E8D886 /* AdEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA8428B900AF00E8D886 /* AdEventView.swift */; };
+		4249D5F929AFB00400BAA338 /* BidonAdapterUnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4249D5F829AFB00400BAA338 /* BidonAdapterUnityAds.framework */; };
 		426A5C7029AF7C5A0065AAD5 /* BidonAdapterAppLovin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A5C6D29AF7C5A0065AAD5 /* BidonAdapterAppLovin.framework */; };
 		426A5C7429AF7C5A0065AAD5 /* BidonAdapterDTExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A5C6E29AF7C5A0065AAD5 /* BidonAdapterDTExchange.framework */; };
 		426A5C7829AF7C5A0065AAD5 /* Bidon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A5C6F29AF7C5A0065AAD5 /* Bidon.framework */; };
@@ -73,6 +74,7 @@
 		4243091C28A25E9F002360B0 /* BidOnAdapterGoogleMobileAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterGoogleMobileAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243091D28A25E9F002360B0 /* BidOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4243092728A27C46002360B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4249D5F829AFB00400BAA338 /* BidonAdapterUnityAds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidonAdapterUnityAds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		425E9C4E28B76B9A00F4E4C7 /* BidOnAdapterAppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidOnAdapterAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		426A5C6D29AF7C5A0065AAD5 /* BidonAdapterAppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidonAdapterAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		426A5C6E29AF7C5A0065AAD5 /* BidonAdapterDTExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidonAdapterDTExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 				426A5C7829AF7C5A0065AAD5 /* Bidon.framework in Frameworks */,
 				426A5C7C29AF7CDD0065AAD5 /* BidonAdapterBidMachine.framework in Frameworks */,
 				426A5C7029AF7C5A0065AAD5 /* BidonAdapterAppLovin.framework in Frameworks */,
+				4249D5F929AFB00400BAA338 /* BidonAdapterUnityAds.framework in Frameworks */,
 				169F7C8E91CEF4CADB6E417E /* Pods_Sandbox.framework in Frameworks */,
 				426A5C8029AF80060065AAD5 /* BidonAdapterGoogleMobileAds.framework in Frameworks */,
 			);
@@ -172,6 +175,7 @@
 		4243091928A25E9F002360B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4249D5F829AFB00400BAA338 /* BidonAdapterUnityAds.framework */,
 				426A5C7F29AF80060065AAD5 /* BidonAdapterGoogleMobileAds.framework */,
 				426A5C7B29AF7CDD0065AAD5 /* BidonAdapterBidMachine.framework */,
 				426A5C6D29AF7C5A0065AAD5 /* BidonAdapterAppLovin.framework */,

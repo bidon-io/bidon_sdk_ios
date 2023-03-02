@@ -13,8 +13,10 @@ import UIKit
 public final class BidonSdk: NSObject {
     internal lazy var adaptersRepository = AdaptersRepository()
     internal lazy var environmentRepository = EnvironmentRepository()
-    internal lazy var ext: [String : Any] = [:]
     
+    public private(set) lazy var ext: [String : Any] = [:]
+    public private(set) var isTestMode: Bool = false
+
     @Injected(\.networkManager)
     private var networkManager: NetworkManager
     
@@ -36,6 +38,12 @@ public final class BidonSdk: NSObject {
     public static var logLevel: Logger.Level {
         get { Logger.level }
         set { Logger.level = newValue }
+    }
+    
+    @objc
+    public static var isTestMode: Bool {
+        get { shared.isTestMode }
+        set { shared.isTestMode = newValue }
     }
     
     @objc
@@ -87,6 +95,7 @@ public final class BidonSdk: NSObject {
             let request = ConfigurationRequest { builder in
                 builder.withAdaptersRepository(self.adaptersRepository)
                 builder.withEnvironmentRepository(self.environmentRepository)
+                builder.withTestMode(self.isTestMode)
             }
             
             self.networkManager.perform(request: request) { result in

@@ -33,7 +33,7 @@ extension AdWrapper {
     ) {
         let adEvent = AdEventModel(
             date: Date(),
-            adType: .interstitial,
+            adType: adType,
             title: title,
             subtitle: detail,
             bage: bage,

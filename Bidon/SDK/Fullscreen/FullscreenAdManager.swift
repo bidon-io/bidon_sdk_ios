@@ -105,6 +105,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             builder.withPricefloor(pricefloor)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withTestMode(sdk.isTestMode)
             builder.withAuctionId(UUID().uuidString)
             builder.withExt(sdk.ext)
         }
@@ -214,6 +215,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
     private func sendAuctionStatistics<T: MediationAttemptReport>(_ report: T) {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withTestMode(sdk.isTestMode)
             builder.withExt(sdk.ext)
             builder.withAdType(adType)
             builder.withMediationReport(report)
@@ -232,6 +234,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         
         let request = ImpressionRequest { (builder: ImpressionRequestBuilderType) in
             builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withTestMode(sdk.isTestMode)
             builder.withExt(sdk.ext)
             builder.withImpression(impression)
             builder.withPath(path)

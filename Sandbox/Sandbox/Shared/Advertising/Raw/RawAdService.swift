@@ -29,6 +29,12 @@ final class RawAdService: NSObject, AdService {
         }
     }
     
+    var isTestMode: Bool = false {
+        didSet {
+            BidonSdk.isTestMode = isTestMode
+        }
+    }
+    
     private lazy var interstitial = RawInterstitialAdWrapper()
     private lazy var rewardedAd = RawRewardedAdWrapper()
     

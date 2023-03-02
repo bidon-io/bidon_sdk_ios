@@ -22,10 +22,17 @@ public final class GoogleMobileAdsDemandSourceAdapter: NSObject, DemandSourceAda
     public let adapterVersion: String = "1"
     public let sdkVersion: String = GADMobileAds.sharedInstance().sdkVersion
     
+    @Injected(\.context)
+    var context: Bidon.AuctionContext
+    
     public func initialize(
         from decoder: Decoder,
         completion: @escaping (Result<Void, SdkError>) -> Void
     ) {
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = context.isTestMode ?
+        [GADSimulatorID] :
+        nil
+        
         GADMobileAds.sharedInstance().start { _ in
             completion(.success(()))
         }

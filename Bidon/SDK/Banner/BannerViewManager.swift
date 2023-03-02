@@ -157,6 +157,7 @@ final internal class BannerViewManager: NSObject {
         
         let request = ImpressionRequest { (builder: AdViewImpressionRequestBuilder) in
             builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withTestMode(sdk.isTestMode)
             builder.withExt(sdk.ext)
             builder.withImpression(impression)
             builder.withFormat(impression.format)

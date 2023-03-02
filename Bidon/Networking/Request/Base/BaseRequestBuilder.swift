@@ -10,6 +10,7 @@ import Foundation
 
 class BaseRequestBuilder {
     private(set) var adaptersRepository: AdaptersRepository!
+    private(set) var testMode: Bool = false
     
     private var ext: [String: Any]?
     private var environmentRepository: EnvironmentRepository!
@@ -18,6 +19,7 @@ class BaseRequestBuilder {
         let manager = environmentRepository.environment(DeviceManager.self)
         return manager.map { DeviceModel($0) }
     }
+    
     
     var session: SessionModel? {
         let manager = environmentRepository.environment(SessionManager.self)
@@ -64,6 +66,12 @@ class BaseRequestBuilder {
     @discardableResult
     func withExt(_ ext: [String: Any]?) -> Self {
         self.ext = ext
+        return self
+    }
+    
+    @discardableResult
+    func withTestMode(_ testMode: Bool) -> Self {
+        self.testMode = testMode
         return self
     }
 }

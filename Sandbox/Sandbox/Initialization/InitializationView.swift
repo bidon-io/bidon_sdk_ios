@@ -46,6 +46,7 @@ struct InitializationView: View {
                         
                         Section(header: Text("Settings")) {
                             LogLevelView(logLevel: $vm.logLevel)
+                            Toggle("Test Mode", isOn: $vm.isTestMode)
                         }
                         
                         Section(

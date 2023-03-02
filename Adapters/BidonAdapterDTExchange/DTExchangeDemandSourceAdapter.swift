@@ -53,7 +53,7 @@ extension DTExchangeDemandSourceAdapter: InitializableAdapter {
         }
         
         guard let parameters = parameters else { return }
-              
+                 
         IASDKCore.sharedInstance().initWithAppID(
             parameters.appId,
             completionBlock: { isSuccess, error in

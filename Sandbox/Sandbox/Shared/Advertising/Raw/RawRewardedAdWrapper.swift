@@ -15,6 +15,8 @@ import SwiftUI
 final class RawRewardedAdWrapper: BaseFullscreenAdWrapper {
     private var bidOnRewardedAd: Bidon.RewardedAd?
     
+    override var adType: AdType { .rewardedAd } 
+    
     override func _load() {
         let rewardedAd = Bidon.RewardedAd()
         rewardedAd.delegate = self

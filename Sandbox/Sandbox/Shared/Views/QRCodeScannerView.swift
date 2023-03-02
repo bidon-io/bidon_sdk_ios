@@ -2,7 +2,7 @@
 //  QRCodeScannerView.swift
 //  Sandbox
 //
-//  Created by Stas Kochkin on 01.03.2023.
+//  Created by Bidon Team on 01.03.2023.
 //
 
 import Foundation

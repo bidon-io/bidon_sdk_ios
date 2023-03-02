@@ -7,6 +7,7 @@
 
 import Foundation
 import AppLovinSDK
+import AdSupport
 import Bidon
 
 
@@ -20,6 +21,9 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
     public let name: String = "AppLovin"
     public let adapterVersion: String = "1"
     public let sdkVersion: String = ALSdk.version()
+    
+    @Injected(\.context)
+    var context: AuctionContext
     
     private var sdk: ALSdk?
     
@@ -67,8 +71,12 @@ extension AppLovinDemandSourceAdapter: InitializableAdapter {
         }
         
         let settings = ALSdkSettings()
-
+        
         guard let parameters = parameters else { return }
+        
+        settings.testDeviceAdvertisingIdentifiers = context.isTestMode ?
+        [ASIdentifierManager.shared().advertisingIdentifier.uuidString] :
+        []
         
         guard let sdk = ALSdk.shared(
             withKey: parameters.appKey,

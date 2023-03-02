@@ -40,6 +40,10 @@ def dtexchange
   pod 'Fyber_Marketplace_SDK'
 end
 
+def unity_ads
+  pod 'UnityAds'
+end
+
 def ocmock
   pod 'OCMock', '~> 3.9.1'
 end
@@ -84,6 +88,11 @@ target 'BidonAdapterDTExchange' do
   dtexchange
 end
 
+target 'BidonAdapterUnityAds' do
+  project 'Adapters/Adapters.xcodeproj'
+  unity_ads
+end
+
 # Tests
 
 target 'Tests-ObjectiveC' do
@@ -94,6 +103,7 @@ target 'Tests-ObjectiveC' do
   admob
   applovin
   dtexchange
+  unity_ads
 end
 
 
@@ -107,6 +117,7 @@ target 'Sandbox' do
   admob
   applovin
   dtexchange
+  unity_ads
   appodeal_mediation
 end
 

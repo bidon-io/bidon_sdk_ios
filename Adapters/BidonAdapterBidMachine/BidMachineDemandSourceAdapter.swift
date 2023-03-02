@@ -16,6 +16,9 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
 @objc public final class BidMachineDemandSourceAdapter: NSObject, DemandSourceAdapter {
     @objc static let identifier = "bidmachine"
     
+    @Injected(\.context)
+    var context: Bidon.AuctionContext
+    
     public let identifier: String = BidMachineDemandSourceAdapter.identifier
     public let name: String = "BidMachine"
     public let adapterVersion: String = "1"
@@ -61,9 +64,7 @@ extension BidMachineDemandSourceAdapter: InitializableAdapter {
         
         BidMachineSdk.shared.populate { builder in
             builder.withLoggingMode(Logger.level == .verbose)
-#if DEBUG
-            builder.withTestMode(true)
-#endif
+            builder.withTestMode(context.isTestMode)
         }
         
         BidMachineSdk.shared.initializeSdk(parameters.sellerId)

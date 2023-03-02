@@ -15,6 +15,8 @@ import SwiftUI
 final class AppodealRewardedAdWrapper: BaseFullscreenAdWrapper {
     private var bidOnRewardedAd: Bidon.RewardedAd?
     
+    override var adType: AdType { .rewardedAd }
+    
     override init() {
         super.init()
         Appodeal.setRewardedVideoDelegate(self)

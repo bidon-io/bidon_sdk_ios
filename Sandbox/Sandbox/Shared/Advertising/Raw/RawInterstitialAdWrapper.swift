@@ -15,6 +15,8 @@ import SwiftUI
 final class RawInterstitialAdWrapper: BaseFullscreenAdWrapper {
     private var bidOnInterstitial: Bidon.Interstitial?
     
+    override var adType: AdType { .interstitial }
+    
     override func _load() {
         let interstitial = Bidon.Interstitial()
         interstitial.delegate = self

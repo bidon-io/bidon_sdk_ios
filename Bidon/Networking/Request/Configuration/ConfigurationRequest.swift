@@ -22,6 +22,7 @@ struct ConfigurationRequest: Request {
         var user: UserModel?
         var geo: GeoModel?
         var ext: String?
+        var test: Bool
         var token: String?
         var segmentId: String?
         var adapters: AdaptersInfo
@@ -50,6 +51,7 @@ struct ConfigurationRequest: Request {
             user: builder.user,
             geo: builder.geo,
             ext: builder.encodedExt,
+            test: builder.testMode,
             adapters: builder.adapters
         )
     }

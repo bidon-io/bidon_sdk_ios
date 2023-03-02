@@ -15,6 +15,8 @@ import SwiftUI
 final class AppodealInterstitialAdWrapper: BaseFullscreenAdWrapper {
     private var bidOnInterstitial: Bidon.Interstitial?
     
+    override var adType: AdType { .interstitial } 
+    
     override init() {
         super.init()
         Appodeal.setInterstitialDelegate(self)

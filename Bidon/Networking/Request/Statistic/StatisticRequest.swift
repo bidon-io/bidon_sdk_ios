@@ -22,6 +22,7 @@ struct StatisticRequest: Request {
         var user: UserModel?
         var geo: GeoModel?
         var ext: String?
+        var test: Bool
         var token: String?
         var segmentId: String?
         var stats: MediationAttemptReportModel
@@ -45,6 +46,7 @@ struct StatisticRequest: Request {
             user: builder.user,
             geo: builder.geo,
             ext: builder.encodedExt,
+            test: builder.testMode,
             stats: builder.stats
         )
     }

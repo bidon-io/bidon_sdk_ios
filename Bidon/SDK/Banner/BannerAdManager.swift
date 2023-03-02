@@ -88,6 +88,7 @@ final class BannerAdManager: NSObject {
             builder.withPlacement(placement)
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withTestMode(sdk.isTestMode)
             builder.withAuctionId(UUID().uuidString)
             builder.withFormat(context.format)
             builder.withPricefloor(pricefloor)
@@ -191,6 +192,7 @@ final class BannerAdManager: NSObject {
     private func sendMediationAttemptReport<T: MediationAttemptReport>(_ report: T) {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withTestMode(sdk.isTestMode)
             builder.withExt(sdk.ext)
             builder.withAdType(.banner)
             builder.withMediationReport(report)

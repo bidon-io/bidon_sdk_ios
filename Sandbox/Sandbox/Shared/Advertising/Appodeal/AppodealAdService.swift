@@ -35,6 +35,13 @@ final class AppodealAdService: NSObject, AdService {
         }
     }
     
+    var isTestMode: Bool = false {
+        didSet {
+            Appodeal.setTestingEnabled(isTestMode)
+            BidonSdk.isTestMode = isTestMode
+        }
+    }
+    
     override init() {
         super.init()
         Appodeal.setActivityDelegate(self)

@@ -37,6 +37,7 @@ protocol AdService: AnyObject {
     var mediation: Mediation { get }
     var verstion: String { get }
     var logLevel: LogLevel { get set }
+    var isTestMode: Bool { get set }
     
     func initialize() async
     

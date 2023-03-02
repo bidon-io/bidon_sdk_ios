@@ -22,6 +22,7 @@ struct ImpressionRequest: Request {
         var user: UserModel?
         var geo: GeoModel?
         var ext: String?
+        var test: Bool
         var token: String?
         var segmentId: String?
         var show: ImpressionModel
@@ -46,6 +47,7 @@ struct ImpressionRequest: Request {
             user: builder.user,
             geo: builder.geo,
             ext: builder.encodedExt,
+            test: builder.testMode,
             show: builder.imp
         )
     }

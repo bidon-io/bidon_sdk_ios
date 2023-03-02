@@ -12,6 +12,7 @@ import BidonAdapterAppLovin
 import BidonAdapterBidMachine
 import BidonAdapterGoogleMobileAds
 import BidonAdapterDTExchange
+import BidonAdapterUnityAds
 import SwiftUI
 
 
@@ -40,6 +41,10 @@ final class InitializationViewModel: ObservableObject, AdResponder {
     
     @Published var logLevel: LogLevel = .debug {
         didSet { adService.logLevel = logLevel }
+    }
+    
+    @Published var isTestMode: Bool = false {
+        didSet { adService.isTestMode = isTestMode }
     }
     
     @Published var host = HostView.Model(
@@ -93,7 +98,8 @@ fileprivate extension Array where Element == Bidon.Adapter {
             AppLovinDemandSourceAdapter(),
             BidMachineDemandSourceAdapter(),
             GoogleMobileAdsDemandSourceAdapter(),
-            DTExchangeDemandSourceAdapter()
+            DTExchangeDemandSourceAdapter(),
+            UnityAdsDemandSourceAdapter()
         ]
     }
 }

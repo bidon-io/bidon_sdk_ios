@@ -22,6 +22,7 @@ struct AuctionRequest: Request {
         var user: UserModel?
         var geo: GeoModel?
         var ext: String?
+        var test: Bool
         var token: String?
         var segmentId: String?
         var adObject: AdObjectModel
@@ -51,6 +52,7 @@ struct AuctionRequest: Request {
             user: builder.user,
             geo: builder.geo,
             ext: builder.encodedExt,
+            test: builder.testMode,
             adObject: builder.adObject,
             adapters: builder.adapters
         )

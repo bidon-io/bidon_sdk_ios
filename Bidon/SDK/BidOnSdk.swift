@@ -26,7 +26,9 @@ public final class BidonSdk: NSObject {
     
     @objc public static let defaultMinPrice: Price = .unknown
     
-    @objc public private(set) var isInitialized: Bool = false
+    @objc public static var isInitialized: Bool { shared.isInitialized }
+    
+    private var isInitialized: Bool = false
     
     static let shared: BidonSdk = BidonSdk()
     

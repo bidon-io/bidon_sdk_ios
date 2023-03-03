@@ -12,23 +12,12 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
     struct DemandReportModel: DemandReport, Codable {
         var networkId: String
         var adUnitId: String?
-        var status: DemandResult
+        var status: DemandResultStatus
         var eCPM: Price
         var bidStartTimestamp: UInt?
         var bidFinishTimestamp: UInt?
         var fillStartTimestamp: UInt?
         var fillFinishTimestamp: UInt?
-        
-        init<T: DemandReport>(_ report: T) {
-            self.networkId = report.networkId
-            self.adUnitId = report.adUnitId
-            self.status = report.status
-            self.eCPM = report.eCPM
-            self.bidStartTimestamp = report.bidStartTimestamp
-            self.bidFinishTimestamp = report.bidFinishTimestamp
-            self.fillStartTimestamp = report.fillStartTimestamp
-            self.fillFinishTimestamp = report.fillFinishTimestamp
-        }
         
         enum CodingKeys: String, CodingKey {
             case networkId = "id"
@@ -40,6 +29,17 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
             case fillStartTimestamp = "fill_start_ts"
             case fillFinishTimestamp = "fill_finish_ts"
         }
+    
+        init<T: DemandReport>(_ report: T) {
+            self.networkId = report.networkId
+            self.adUnitId = report.adUnitId
+            self.status = report.status
+            self.eCPM = report.eCPM
+            self.bidStartTimestamp = report.bidStartTimestamp
+            self.bidFinishTimestamp = report.bidFinishTimestamp
+            self.fillStartTimestamp = report.fillStartTimestamp
+            self.fillFinishTimestamp = report.fillFinishTimestamp
+        }
     }
     
     struct RoundReportModel: RoundReport, Codable {
@@ -49,14 +49,6 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
         var winnerNetworkId: String?
         var demands: [DemandReportModel]
         
-        init<T: RoundReport>(_ report: T) {
-            self.roundId = report.roundId
-            self.pricefloor = report.pricefloor
-            self.winnerECPM = report.winnerECPM
-            self.winnerNetworkId = report.winnerNetworkId
-            self.demands = report.demands.map(DemandReportModel.init)
-        }
-        
         enum CodingKeys: String, CodingKey {
             case roundId = "id"
             case pricefloor
@@ -64,15 +56,46 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
             case winnerNetworkId = "winner_id"
             case demands
         }
+        
+        init<T: RoundReport>(_ report: T) {
+            self.roundId = report.roundId
+            self.pricefloor = report.pricefloor
+            self.winnerECPM = report.winnerECPM
+            self.winnerNetworkId = report.winnerNetworkId
+            self.demands = report.demands.map(DemandReportModel.init)
+        }
+    }
+    
+    struct AuctionResultReportModel: AuctionResultReport, Codable {
+        var status: AuctionResultStatus
+        var winnerNetworkId: String?
+        var winnerECPM: Price?
+        var winnerAdUnitId: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case status
+            case winnerNetworkId = "winner_id"
+            case winnerECPM = "ecpm"
+            case winnerAdUnitId = "ad_unit_id"
+        }
+        
+        init<T: AuctionResultReport>(_ report: T) {
+            self.status = report.status
+            self.winnerNetworkId = report.winnerNetworkId
+            self.winnerECPM = report.winnerECPM
+            self.winnerAdUnitId = report.winnerAdUnitId
+        }
     }
     
     var auctionId: String
     var auctionConfigurationId: Int
     var rounds: [RoundReportModel]
+    var result: AuctionResultReportModel
     
     init<T: MediationAttemptReport>(_ report: T) {
         self.auctionId = report.auctionId
         self.auctionConfigurationId = report.auctionConfigurationId
         self.rounds = report.rounds.map(RoundReportModel.init)
+        self.result = AuctionResultReportModel(report.result)
     }
 }

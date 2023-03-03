@@ -13,9 +13,10 @@ fileprivate struct DemandObservation {
     var roundId: String
     var adUnitId: String?
     var adId: String? = nil
-    var status: DemandResult = .unknown
+    var status: DemandResultStatus = .unknown
     var eCPM: Price = .unknown
     var isRoundWinner: Bool = false
+    var isAuctionWinner: Bool = false
     var bidRequestTimestamp: TimeInterval? = Date.timestamp(.wall, units: .milliseconds)
     var bidResponeTimestamp: TimeInterval?
     var fillRequestTimestamp: TimeInterval?
@@ -52,10 +53,19 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
             )
         }
         
+        let winner = demandObservations.first { $0.isAuctionWinner }
+        let result = DefaultAuctionResultReport(
+            status: winner != nil ? .success : .fail,
+            winnerNetworkId: winner?.networkId,
+            winnerECPM: winner?.eCPM,
+            winnerAdUnitId: winner?.adUnitId
+        )
+        
         return DefaultMediationAttemptReport(
             auctionId: auctionId,
             auctionConfigurationId: auctionConfigurationId,
-            rounds: rounds
+            rounds: rounds,
+            result: result
         )
     }
     
@@ -114,7 +124,7 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
             demandObservations.update(
                 condition: { $0.roundId == round.id && $0.networkId == adapter.identifier }
             ) { observation in
-                observation.status = DemandResult(error)
+                observation.status = DemandResultStatus(error)
                 observation.bidResponeTimestamp = Date.timestamp(.wall, units: .milliseconds)
             }
         case .roundFinish(let round, let winner):
@@ -127,6 +137,13 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
             }
             delegate?.didFinishAuctionRound(round)
         case .auctionFinish(let winner):
+            if let winner = winner {
+                demandObservations.update(
+                    condition: { $0.adId == winner.id }
+                ) { observation in
+                    observation.isAuctionWinner = true
+                }
+            }
             delegate?.didFinishAuction(auctionId, winner: winner)
         case .fillRequest(let ad):
             demandObservations.update(
@@ -151,7 +168,7 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
                 condition: { $0.adId == ad.id }
             ) { observation in
                 observation.fillResponseTimestamp = Date.timestamp(.wall, units: .milliseconds)
-                observation.status = DemandResult(error)
+                observation.status = DemandResultStatus(error)
             }
         case .fillStart, .fillFinish:
             break

@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum DemandResult: Codable {
+enum DemandResultStatus: Codable {
     case unknown
     case win
     case lose
@@ -45,7 +45,7 @@ enum DemandResult: Codable {
             guard let error = MediationError(rawValue: value.snakeCaseToCamelCase()) else {
                 let ctx = DecodingError.Context(
                     codingPath: [],
-                    debugDescription: "Unable to create DemandResult from '\(value)'"
+                    debugDescription: "Unable to create DemandResultStatus from '\(value)'"
                 )
                 throw DecodingError.dataCorrupted(ctx)}
             self = .error(error)

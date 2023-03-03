@@ -11,7 +11,7 @@ import Foundation
 protocol DemandReport {
     var networkId: String { get }
     var adUnitId: String? { get }
-    var status: DemandResult { get }
+    var status: DemandResultStatus { get }
     var eCPM: Price { get }
     var bidStartTimestamp: UInt? { get }
     var bidFinishTimestamp: UInt? { get }
@@ -31,12 +31,22 @@ protocol RoundReport {
 }
 
 
+protocol AuctionResultReport {
+    var status: AuctionResultStatus { get }
+    var winnerNetworkId: String? { get }
+    var winnerECPM: Price? { get }
+    var winnerAdUnitId: String? { get }
+}
+
+
 protocol MediationAttemptReport {
     associatedtype RoundReportType: RoundReport
+    associatedtype AuctionResultReportType: AuctionResultReport
     
     var auctionId: String { get }
     var auctionConfigurationId: Int { get }
     var rounds: [RoundReportType] { get }
+    var result: AuctionResultReportType { get }
 }
 
 

@@ -36,7 +36,7 @@ extension ViewController: Bidon.RewardedAdDelegate {
 
 ```obj-c
 #import "ViewController.h"
-#import <Bidon/Bidon.h>
+#import <Bidon/Bidon-Swift.h>
 
 
 @interface ViewController() <BDNRewardedAdDelegate>

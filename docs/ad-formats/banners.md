@@ -46,7 +46,7 @@ extension ViewController: Bidon.AdViewDelegate {
 ```obj-c
 #import "ViewController.h"
 #import <AppLovinSDK/AppLovinSDK.h>
-#import <Bidon/Bidon.h>
+#import <Bidon/Bidon-Swift.h>
 
 
 @interface ViewController() <BDNAdViewDelegate>

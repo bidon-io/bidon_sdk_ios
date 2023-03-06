@@ -76,6 +76,20 @@
                ReferencedContainer = "container:Adapters/Adapters.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4249D5F029AFAF6700BAA338"
+               BuildableName = "BidonAdapterUnityAds.framework"
+               BlueprintName = "BidonAdapterUnityAds"
+               ReferencedContainer = "container:Adapters/Adapters.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

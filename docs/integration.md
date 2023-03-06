@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 ```
 
 ```obj-c
-#import <Bidon/Bidon.h>
+#import <Bidon/Bidon-Swift.h>
 
 @implementation AppDelegate
 

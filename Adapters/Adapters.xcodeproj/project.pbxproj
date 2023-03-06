@@ -36,6 +36,7 @@
 		426A5C6829AF7C320065AAD5 /* Bidon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A5C6729AF7C320065AAD5 /* Bidon.framework */; };
 		426A5C6A29AF7C390065AAD5 /* Bidon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A5C6929AF7C390065AAD5 /* Bidon.framework */; };
 		426A5C6C29AF7C3E0065AAD5 /* Bidon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A5C6B29AF7C3E0065AAD5 /* Bidon.framework */; };
+		42706A4A29B5EB88008321B7 /* Bidon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42706A4929B5EB88008321B7 /* Bidon.framework */; };
 		4273346C29ACB3380042AE52 /* AppLovinRewardWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4273346B29ACB3380042AE52 /* AppLovinRewardWrapper.swift */; };
 		4273347529ACE7DF0042AE52 /* BidonAdapterDTExchange.h in Headers */ = {isa = PBXBuildFile; fileRef = 4273347429ACE7DF0042AE52 /* BidonAdapterDTExchange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		429EE2B8286C7293009439C6 /* BidMachineDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2B7286C7293009439C6 /* BidMachineDemandSourceAdapter.swift */; };
@@ -92,6 +93,7 @@
 		426A5C6729AF7C320065AAD5 /* Bidon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bidon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		426A5C6929AF7C390065AAD5 /* Bidon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bidon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		426A5C6B29AF7C3E0065AAD5 /* Bidon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bidon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42706A4929B5EB88008321B7 /* Bidon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bidon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4273346B29ACB3380042AE52 /* AppLovinRewardWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLovinRewardWrapper.swift; sourceTree = "<group>"; };
 		4273347229ACE7DF0042AE52 /* BidonAdapterDTExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidonAdapterDTExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4273347429ACE7DF0042AE52 /* BidonAdapterDTExchange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidonAdapterDTExchange.h; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42706A4A29B5EB88008321B7 /* Bidon.framework in Frameworks */,
 				F8F2F63903FCDD349CEB76F9 /* Pods_BidonAdapterUnityAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +366,7 @@
 		628D13BF18603C4DCE80EE71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42706A4929B5EB88008321B7 /* Bidon.framework */,
 				426A5C6B29AF7C3E0065AAD5 /* Bidon.framework */,
 				426A5C6929AF7C390065AAD5 /* Bidon.framework */,
 				426A5C6729AF7C320065AAD5 /* Bidon.framework */,

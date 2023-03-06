@@ -6,9 +6,9 @@
 //
 
 import Foundation
+import UIKit
 import Bidon
 import UnityAds
-import UIKit
 
 
 final class UnityAdsInterstitialDemandProvider: NSObject, DirectDemandProvider {

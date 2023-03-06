@@ -34,7 +34,7 @@ extension ViewController: Bidon.FullscreenAdDelegate {
 
 ```obj-c
 #import "ViewController.h"
-#import <Bidon/Bidon.h>
+#import <Bidon/Bidon-Swift.h>
 
 
 @interface ViewController() <BDNFullscreenAdDelegate>

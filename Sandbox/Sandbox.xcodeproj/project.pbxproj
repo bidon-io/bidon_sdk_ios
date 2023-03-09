@@ -652,9 +652,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sandbox/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) requires camera usage for QR codes scanning";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Sandbox requires camera usage for QR codes scanning";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sandbox is using location for better ad personalization";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) requires photo library usage for getting QR codes";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Sandbox requires photo library usage for getting QR codes";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Sandbox is using advertising identifier for better ad personalization";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -667,7 +667,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stasko.simplenumbers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.bidon.sandbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -690,9 +690,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sandbox/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) requires camera usage for QR codes scanning";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Sandbox requires camera usage for QR codes scanning";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sandbox is using location for better ad personalization";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) requires photo library usage for getting QR codes";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Sandbox requires photo library usage for getting QR codes";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Sandbox is using advertising identifier for better ad personalization";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -705,7 +705,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stasko.simplenumbers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.bidon.sandbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

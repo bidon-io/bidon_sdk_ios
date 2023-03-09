@@ -10,11 +10,11 @@ import Foundation
 
 @objc(BDNAd)
 public protocol Ad {
-    var id: String { get }
-    var eCPM: Price { get }
-    var adUnitId: String? { get }
-    var networkName: String { get }
-    var dsp: String? { get }
+    @objc var id: String { get }
+    @objc var eCPM: Price { get }
+    @objc var adUnitId: String? { get }
+    @objc var networkName: String { get }
+    @objc var dsp: String? { get }
 }
 
 

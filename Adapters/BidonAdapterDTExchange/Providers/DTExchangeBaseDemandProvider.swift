@@ -44,8 +44,8 @@ extension DTExchangeBaseDemandProvider: DirectDemandProvider {
             return
         }
         
-        adSpot.fetchAd { adSpot, _, _ in
-            guard let adSpot = adSpot else {
+        adSpot.fetchAd { adSpot, model, error in
+            guard let adSpot = adSpot, error == nil else {
                 response(.failure(.noBid))
                 return
             }

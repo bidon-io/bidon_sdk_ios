@@ -54,9 +54,9 @@ public enum RevenuePrecision: Int {
 // MARK: Ad Revenue
 @objc(BDNAdRevenue)
 public protocol AdRevenue {
-    var revenue: Price { get }
-    var precision: RevenuePrecision { get }
-    var currency: Currency { get }
+    @objc var revenue: Price { get }
+    @objc var precision: RevenuePrecision { get }
+    @objc var currency: Currency { get }
 }
 
 

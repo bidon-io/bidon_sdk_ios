@@ -21,14 +21,14 @@ final class DTExchangeInterstitialDemandProvider: DTExchangeBaseDemandProvider<I
         builder.mraidContentDelegate = self
     }
     
-    private lazy var videController = IAVideoContentController.build { builder in
+    private lazy var videoController = IAVideoContentController.build { builder in
         builder.videoContentDelegate = self
     }
     
     private lazy var controller: IAFullscreenUnitController = {
         let controller = IAFullscreenUnitController.build { [unowned self] builder in
             self.mraidController.map(builder.addSupportedContentController)
-            self.videController.map(builder.addSupportedContentController)
+            self.videoController.map(builder.addSupportedContentController)
             builder.unitDelegate = self
         }
         

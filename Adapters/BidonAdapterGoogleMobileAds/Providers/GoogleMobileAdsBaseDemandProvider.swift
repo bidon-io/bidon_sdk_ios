@@ -64,7 +64,7 @@ extension GoogleMobileAdsBaseDemandProvider: DirectDemandProvider {
     }
     
     func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        if ad is GoogleMobileAdsAdObject {
+        if ad is AdObjectWrapper {
             response(.success(ad))
         } else {
             response(.failure(.noFill))

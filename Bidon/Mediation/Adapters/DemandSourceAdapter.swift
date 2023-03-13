@@ -9,15 +9,15 @@ import Foundation
 
 
 public protocol InterstitialDemandSourceAdapter: Adapter {
-    func interstitial() throws -> InterstitialDemandProvider
+    func interstitial() throws -> any InterstitialDemandProvider
 }
 
 
 public protocol RewardedAdDemandSourceAdapter: Adapter {
-    func rewardedAd() throws -> RewardedAdDemandProvider
+    func rewardedAd() throws -> any RewardedAdDemandProvider
 }
 
 
 public protocol AdViewDemandSourceAdapter: Adapter {
-    func adView(_ context: AdViewContext) throws -> AdViewDemandProvider
+    func adView(_ context: AdViewContext) throws -> any AdViewDemandProvider
 }

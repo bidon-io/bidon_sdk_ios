@@ -344,10 +344,10 @@
 		42BA81C02875AD7D001F1744 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				422931AF29A79B4300C9923D /* GoogleMobileAdsBaseDemandProvider.swift */,
 				42BA81C12875AE92001F1744 /* GoogleMobileAdsInterstitialDemandProvider.swift */,
 				422931B329A7A3AA00C9923D /* GoogleMobileAdsRewardedAdDemandProvider.swift */,
 				42BA820E287880DA001F1744 /* GoogleMobileAdsBannerDemandProvider.swift */,
-				422931AF29A79B4300C9923D /* GoogleMobileAdsBaseDemandProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";

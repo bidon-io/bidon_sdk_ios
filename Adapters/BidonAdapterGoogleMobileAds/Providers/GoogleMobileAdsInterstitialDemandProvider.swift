@@ -22,7 +22,7 @@ final class GoogleMobileAdsInterstitialDemandProvider: GoogleMobileAdsBaseDemand
             }
             
             interstitial.fullScreenContentDelegate = self
-
+            
             self.setupAdRevenueHandler(interstitial, lineItem: lineItem)
             
             self.handleDidLoad(adObject: interstitial, lineItem: lineItem)
@@ -32,13 +32,8 @@ final class GoogleMobileAdsInterstitialDemandProvider: GoogleMobileAdsBaseDemand
 
 
 extension GoogleMobileAdsInterstitialDemandProvider: InterstitialDemandProvider {
-    func show(ad: Ad, from viewController: UIViewController) {
-        guard let wrapper = ad as? AdObjectWrapper else {
-            delegate?.providerDidFailToDisplay(self, error: SdkError.invalidPresentationState)
-            return
-        }
-        
-        wrapper.adObject.present(fromRootViewController: viewController)
+    func show(ad: GoogleMobileAdsAdWrapper<GADInterstitialAd>, from viewController: UIViewController) {
+        ad.adObject.present(fromRootViewController: viewController)
     }
 }
 

@@ -27,7 +27,7 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
             RoundType(
                 round: $0,
                 elector: elector,
-                providers: providers($0.demands)
+                adapters: adapters()
             )
         }
         
@@ -45,8 +45,8 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     
     required init() {}
     
-    open func providers(_ demands: [String]) -> [AnyAdapter: DemandProviderType] {
-        return [:]
+    open func adapters() -> [AnyDemandSourceAdapter<DemandProviderType>] {
+        fatalError("BaseConcurrentAuctionControllerBuilder can't return adapters")
     }
     
     @discardableResult

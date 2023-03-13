@@ -26,9 +26,9 @@ struct DemandModel<Provider>: Demand {
 }
 
 
-typealias AdViewDemand = DemandModel<AdViewDemandProvider>
-typealias InterstitialDemand = DemandModel<InterstitialDemandProvider>
-typealias RewardedAdDemand = DemandModel<RewardedAdDemandProvider>
+typealias AdViewDemand = DemandModel<any AdViewDemandProvider>
+typealias InterstitialDemand = DemandModel<any InterstitialDemandProvider>
+typealias RewardedAdDemand = DemandModel<any RewardedAdDemandProvider>
 
 
 typealias AnyAdViewDemand = DemandModel<AnyAdViewDemandProvider>

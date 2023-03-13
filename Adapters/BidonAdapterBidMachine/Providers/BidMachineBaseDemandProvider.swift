@@ -12,8 +12,8 @@ import BidMachineApiCore
 import Bidon
 
 
-class BidMachineBaseDemandProvider<AdType: BidMachineAdProtocol>: NSObject, BidMachineAdDelegate {
-    private typealias AdTypeWrapper = BidMachineAdWrapper<AdType>
+class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, BidMachineAdDelegate {
+    typealias AdType = BidMachineAdWrapper<AdObject>
     
     weak var delegate: DemandProviderDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
@@ -74,13 +74,13 @@ extension BidMachineBaseDemandProvider: ProgrammaticDemandProvider {
                 builder.appendPriceFloor(pricefloor, UUID().uuidString)
             }
             
-            BidMachineSdk.shared.ad(AdType.self, configuration) { ad, error in
+            BidMachineSdk.shared.ad(AdObject.self, configuration) { ad, error in
                 guard let ad = ad, error == nil else {
                     response(.failure(.noBid))
                     return
                 }
                                 
-                let wrapper = AdTypeWrapper(ad)
+                let wrapper = AdType(ad)
                 response(.success(wrapper))
             }
         } catch {
@@ -88,12 +88,7 @@ extension BidMachineBaseDemandProvider: ProgrammaticDemandProvider {
         }
     }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard let ad = ad as? AdTypeWrapper else {
-            response(.failure(.unknownAdapter))
-            return
-        }
-        
+    func fill(ad: AdType, response: @escaping DemandProviderResponse) {
         self.response = response
         
         ad.wrapped.controller = UIApplication.shared.bd.topViewcontroller
@@ -101,9 +96,7 @@ extension BidMachineBaseDemandProvider: ProgrammaticDemandProvider {
         ad.wrapped.loadAd()
     }
         
-    func notify(ad: Ad, event: AuctionEvent) {
-        guard let ad = ad as? AdTypeWrapper else { return }
-        
+    func notify(ad: AdType, event: AuctionEvent) {
         switch event {
         case .win:
             BidMachineSdk.shared.notifyMediationWin(ad.wrapped)

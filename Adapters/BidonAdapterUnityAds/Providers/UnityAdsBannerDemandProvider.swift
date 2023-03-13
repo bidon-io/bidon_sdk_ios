@@ -12,6 +12,8 @@ import UIKit
 
 
 final class UnityAdsBannerDemandProvider: NSObject, DirectDemandProvider {
+    typealias AdType = UnityAdsBannerAdWrapper
+    
     weak var delegate: DemandProviderDelegate?
     weak var adViewDelegate: DemandProviderAdViewDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
@@ -42,21 +44,17 @@ final class UnityAdsBannerDemandProvider: NSObject, DirectDemandProvider {
         banner.load()
     }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        if let ad = ad as? UnityAdsBannerAdWrapper, ad.id == banner?.id {
-            response(.success(ad))
-        } else {
-            response(.failure(.noFill))
-        }
+    func fill(ad: UnityAdsBannerAdWrapper, response: @escaping DemandProviderResponse) {
+        response(.success(ad))
     }
     
-    func notify(ad: Ad, event: Bidon.AuctionEvent) {}
+    func notify(ad: UnityAdsBannerAdWrapper, event: Bidon.AuctionEvent) {}
 }
 
 
 extension UnityAdsBannerDemandProvider: AdViewDemandProvider {
-    func container(for ad: Ad) -> AdViewContainer? {
-        (ad as? UnityAdsBannerAdWrapper)?.bannerView
+    func container(for ad: UnityAdsBannerAdWrapper) -> AdViewContainer? {
+        return ad.bannerView
     }
 }
 

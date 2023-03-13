@@ -10,21 +10,19 @@ import Foundation
 
 final class RewardedConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyRewardedAdDemandProvider, MediationObserverType> {
     
-    override func providers(_ demands: [String]) -> [AnyAdapter: AnyRewardedAdDemandProvider] {
-        demands.reduce([:]) { result, id in
-            var result = result
-            let adapter: RewardedAdDemandSourceAdapter? = adaptersRepository[id]
-            
+    override func adapters() -> [AnyDemandSourceAdapter<AnyRewardedAdDemandProvider>] {
+        let adapters: [RewardedAdDemandSourceAdapter] = adaptersRepository.all()
+        return adapters.compactMap { adapter in
             do {
-                if let adapter = adapter {
-                    let any = AnyAdapter(adapter: adapter)
-                    result[any] = try adapter.rewardedAd().wrapped()
-                }
+                let provider = try adapter.rewardedAd().wrapped()
+                return AnyDemandSourceAdapter(
+                    adapter: adapter,
+                    provider: provider
+                )
             } catch {
-                Logger.debug("Error while creating rewarded in adapter: \(adapter.debugDescription)")
+                Logger.warning("Unable to create rewarded ad demand provider for \(adapter), error: \(error)")
+                return nil
             }
-            
-            return result
         }
     }
 }
@@ -32,12 +30,10 @@ final class RewardedConcurrentAuctionControllerBuilder<MediationObserverType: Me
 
 private extension RewardedAdDemandProvider {
     func wrapped() throws -> AnyRewardedAdDemandProvider {
-        if self is DirectDemandProvider {
-            return try AnyDirectDemandProvider(self)
-        } else if self is ProgrammaticDemandProvider {
-            return try AnyProgrammaticDemandProvider(self)
-        } else {
-            return try AnyDemandProvider(self)
+        switch self {
+        case _ as any DirectDemandProvider:         return try AnyDirectDemandProvider(self)
+        case _ as any ProgrammaticDemandProvider:   return try AnyProgrammaticDemandProvider(self)
+        default:                                    return try AnyDemandProvider(self)
         }
     }
 }

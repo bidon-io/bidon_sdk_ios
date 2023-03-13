@@ -10,21 +10,19 @@ import Foundation
 
 final class InterstitialConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyInterstitialDemandProvider, MediationObserverType> {
     
-    override func providers(_ demands: [String]) -> [AnyAdapter: AnyInterstitialDemandProvider] {
-        demands.reduce([:]) { result, id in
-            var result = result
-            let adapter: InterstitialDemandSourceAdapter? = adaptersRepository[id]
-            
+    override func adapters() -> [AnyDemandSourceAdapter<AnyInterstitialDemandProvider>] {
+        let adapters: [InterstitialDemandSourceAdapter] = adaptersRepository.all()
+        return adapters.compactMap { adapter in
             do {
-                if let adapter = adapter {
-                    let any = AnyAdapter(adapter: adapter)
-                    result[any] = try adapter.interstitial().wrapped()
-                }
+                let provider = try adapter.interstitial().wrapped()
+                return AnyDemandSourceAdapter(
+                    adapter: adapter,
+                    provider: provider
+                )
             } catch {
-                Logger.debug("Error while creating interstitial in adapter: \(adapter.debugDescription)")
+                Logger.warning("Unable to create interstitial demand provider for \(adapter), error: \(error)")
+                return nil
             }
-            
-            return result
         }
     }
 }
@@ -32,12 +30,10 @@ final class InterstitialConcurrentAuctionControllerBuilder<MediationObserverType
 
 private extension InterstitialDemandProvider {
     func wrapped() throws -> AnyInterstitialDemandProvider {
-        if self is DirectDemandProvider {
-            return try AnyDirectDemandProvider(self)
-        } else if self is ProgrammaticDemandProvider {
-            return try AnyProgrammaticDemandProvider(self)
-        } else {
-            return try AnyDemandProvider(self)
+        switch self {
+        case _ as any DirectDemandProvider:         return try AnyDirectDemandProvider(self)
+        case _ as any ProgrammaticDemandProvider:   return try AnyProgrammaticDemandProvider(self)
+        default:                                    return try AnyDemandProvider(self)
         }
     }
 }

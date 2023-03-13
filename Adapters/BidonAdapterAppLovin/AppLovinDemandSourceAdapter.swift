@@ -27,7 +27,7 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
     
     private var sdk: ALSdk?
     
-    public func interstitial() throws -> InterstitialDemandProvider {
+    public func interstitial() throws -> any InterstitialDemandProvider {
         guard let sdk = self.sdk else {
             throw SdkError("AppLovin SDK is not initialized yet")
         }
@@ -35,7 +35,7 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
         return AppLovinInterstitialDemandProvider(sdk: sdk)
     }
     
-    public func rewardedAd() throws -> RewardedAdDemandProvider {
+    public func rewardedAd() throws -> any RewardedAdDemandProvider {
         guard let sdk = self.sdk else {
             throw SdkError("AppLovin SDK is not initialized yet")
         }
@@ -43,7 +43,7 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
         return AppLovinRewardedDemandProvider(sdk: sdk)
     }
     
-    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+    public func adView(_ context: AdViewContext) throws -> any AdViewDemandProvider {
         guard let sdk = self.sdk else {
             throw SdkError("AppLovin SDK is not initialized yet")
         }

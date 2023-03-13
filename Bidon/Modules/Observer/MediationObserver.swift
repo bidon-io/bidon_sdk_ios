@@ -18,7 +18,7 @@ protocol MediationController {
 protocol MediationObserverDelegate: AnyObject {
     func didStartAuction(_ auctionId: String)
     func didStartAuctionRound(_ auctionRound: AuctionRound, pricefloor: Price)
-    func didReceiveBid(_ ad: Ad, provider: DemandProvider)
+    func didReceiveBid(_ ad: Ad, provider: any DemandProvider)
     func didFinishAuctionRound(_ auctionRound: AuctionRound)
     func didFinishAuction(_ auctionId: String, winner: Ad?)
 }

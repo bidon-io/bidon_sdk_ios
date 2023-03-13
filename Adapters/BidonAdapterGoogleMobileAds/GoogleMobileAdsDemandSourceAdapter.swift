@@ -38,15 +38,15 @@ public final class GoogleMobileAdsDemandSourceAdapter: NSObject, DemandSourceAda
         }
     }
     
-    public func interstitial() throws -> InterstitialDemandProvider {
+    public func interstitial() throws -> any InterstitialDemandProvider {
         return GoogleMobileAdsInterstitialDemandProvider()
     }
     
-    public func rewardedAd() throws -> RewardedAdDemandProvider {
+    public func rewardedAd() throws -> any RewardedAdDemandProvider {
         return GoogleMobileAdsRewardedAdDemandProvider()
     }
     
-    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+    public func adView(_ context: AdViewContext) throws -> any AdViewDemandProvider {
         return GoogleMobileAdsBannerDemandProvider(context: context)
     }
 }

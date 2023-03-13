@@ -197,7 +197,7 @@ final internal class BannerViewManager: NSObject {
 
 extension BannerViewManager: DemandProviderAdViewDelegate {
     func providerWillPresentModalView(
-        _ provider: AdViewDemandProvider,
+        _ provider: any AdViewDemandProvider,
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }
@@ -205,7 +205,7 @@ extension BannerViewManager: DemandProviderAdViewDelegate {
     }
     
     func providerDidDismissModalView(
-        _ provider: AdViewDemandProvider,
+        _ provider: any AdViewDemandProvider,
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }
@@ -213,7 +213,7 @@ extension BannerViewManager: DemandProviderAdViewDelegate {
     }
     
     func providerWillLeaveApplication(
-        _ provider: AdViewDemandProvider,
+        _ provider: any AdViewDemandProvider,
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }

@@ -12,7 +12,7 @@ import UIKit
 final class RewardedImpressionController: NSObject, FullscreenImpressionController {
     weak var delegate: FullscreenImpressionControllerDelegate?
     
-    private let provider: RewardedAdDemandProvider
+    private let provider: any RewardedAdDemandProvider
     private var impression: Impression!
     
     required init(demand: AnyRewardedAdDemand) {
@@ -27,32 +27,32 @@ final class RewardedImpressionController: NSObject, FullscreenImpressionControll
     }
     
     func show(from context: UIViewController) {
-        provider.show(ad: impression.ad, from: context)
+        provider._show(ad: impression.ad, from: context)
     }
 }
 
 
 extension RewardedImpressionController: DemandProviderDelegate {
-    func providerWillPresent(_ provider: DemandProvider) {
+    func providerWillPresent(_ provider: any DemandProvider) {
         delegate?.willPresent(&impression)
     }
     
-    func providerDidHide(_ provider: DemandProvider) {
+    func providerDidHide(_ provider: any DemandProvider) {
         delegate?.didHide(&impression)
     }
     
-    func providerDidClick(_ provider: DemandProvider) {
+    func providerDidClick(_ provider: any DemandProvider) {
         delegate?.didClick(&impression)
     }
     
-    func providerDidFailToDisplay(_ provider: DemandProvider, error: SdkError) {
+    func providerDidFailToDisplay(_ provider: any DemandProvider, error: SdkError) {
         delegate?.didFailToPresent(&impression, error: error)
     }
 }
 
 
 extension RewardedImpressionController: DemandProviderRewardDelegate {
-    func provider(_ provider: DemandProvider, didReceiveReward reward: Reward) {
+    func provider(_ provider: any DemandProvider, didReceiveReward reward: Reward) {
         delegate?.didReceiveReward(reward, impression: &impression)
     }
 }

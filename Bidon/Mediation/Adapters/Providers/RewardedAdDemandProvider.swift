@@ -10,7 +10,7 @@ import Foundation
 
 public protocol DemandProviderRewardDelegate: AnyObject {
     func provider(
-        _ provider: DemandProvider,
+        _ provider: any DemandProvider,
         didReceiveReward reward: Reward
     )
 }

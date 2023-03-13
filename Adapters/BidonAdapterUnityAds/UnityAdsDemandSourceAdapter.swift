@@ -26,15 +26,15 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
     
     private var completion: ((Result<Void, SdkError>) -> Void)?
     
-    public func interstitial() throws -> InterstitialDemandProvider {
+    public func interstitial() throws -> any InterstitialDemandProvider {
         return UnityAdsInterstitialDemandProvider()
     }
     
-    public func rewardedAd() throws -> RewardedAdDemandProvider {
+    public func rewardedAd() throws -> any RewardedAdDemandProvider {
         return UnityAdsInterstitialDemandProvider()
     }
     
-    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+    public func adView(_ context: AdViewContext) throws -> any AdViewDemandProvider {
         return UnityAdsBannerDemandProvider(context: context)
     }
 }

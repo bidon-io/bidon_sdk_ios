@@ -87,7 +87,7 @@ public final class BannerView: UIView, AdView {
     private final func refreshIfNeeded() {
         guard
             let demand = adManager.demand,
-            let adView = demand.provider.container(for: demand.ad)
+            let adView = demand.provider._container(for: demand.ad)
         else { return }
         
         if viewManager.isRefreshGranted || !viewManager.isAdPresented {
@@ -145,7 +145,7 @@ extension BannerView: BannerAdManagerDelegate {
     func adManager(
         _ adManager: BannerAdManager,
         didReceiveBid ad: Ad,
-        provider: DemandProvider
+        provider: any DemandProvider
     ) {
         provider.revenueDelegate = self
         delegate?.adObject?(self, didReceiveBid: ad)
@@ -187,7 +187,7 @@ extension BannerView: BannerViewManagerDelegate {
 
 extension BannerView: DemandProviderRevenueDelegate {
     public func provider(
-        _ provider: DemandProvider,
+        _ provider: any DemandProvider,
         didPay revenue: AdRevenue,
         ad: Ad
     ) {

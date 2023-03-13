@@ -12,6 +12,8 @@ import IASDKCore
 
 
 class DTExchangeBaseDemandProvider<Controller: IAUnitController>: NSObject {
+    typealias AdType = DTExchangeAdWrapper
+    
     weak var delegate: DemandProviderDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
     
@@ -61,13 +63,9 @@ extension DTExchangeBaseDemandProvider: DirectDemandProvider {
         self.adSpot = adSpot
     }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        if let ad = ad as? DTExchangeAdWrapper {
-            response(.success(ad))
-        } else {
-            response(.failure(.incorrectAdUnitId))
-        }
+    func fill(ad: DTExchangeAdWrapper, response: @escaping DemandProviderResponse) {
+        response(.success(ad))
     }
-        
-    func notify(ad: Ad, event: AuctionEvent) {}
+    
+    func notify(ad: DTExchangeAdWrapper, event: AuctionEvent) {}
 }

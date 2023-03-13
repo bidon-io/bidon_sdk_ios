@@ -12,6 +12,8 @@ import UIKit
 
 
 internal final class AppLovinInterstitialDemandProvider: NSObject {
+    typealias AdType = AppLovinAdWrapper
+    
     private let sdk: ALSdk
     
     @Injected(\.bridge)
@@ -45,26 +47,17 @@ extension AppLovinInterstitialDemandProvider: DirectDemandProvider {
         )
     }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard ad is AppLovinAdWrapper else {
-            response(.failure(.unscpecifiedException))
-            return
-        }
-        
+    func fill(ad: AppLovinAdWrapper, response: @escaping DemandProviderResponse) {
         response(.success(ad))
     }
-
-    func notify(ad: Ad, event: AuctionEvent) {}
+    
+    func notify(ad: AppLovinAdWrapper, event: AuctionEvent) {}
 }
 
 
 extension AppLovinInterstitialDemandProvider: InterstitialDemandProvider {
-    func show(ad: Ad, from viewController: UIViewController) {
-        do {
-            try interstitial.show(ad: ad)
-        } catch {
-            delegate?.providerDidFailToDisplay(self, error: SdkError(error))
-        }
+    func show(ad: AppLovinAdWrapper, from viewController: UIViewController) {
+        interstitial.show(ad: ad)
     }
 }
 

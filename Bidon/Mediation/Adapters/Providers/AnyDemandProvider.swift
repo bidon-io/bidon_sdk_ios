@@ -41,7 +41,7 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
     init(_ wrapped: W) throws {
         self.wrapped = wrapped
         
-        guard let wrapped = wrapped as? DemandProvider else { throw SdkError.internalInconsistency }
+        guard let wrapped = wrapped as? any DemandProvider else { throw SdkError.internalInconsistency }
         
         _delegate = { wrapped.delegate }
         _setDelegate = { wrapped.delegate = $0 }
@@ -49,8 +49,8 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
         _revenueDelegate = { wrapped.revenueDelegate }
         _setRevenueDelegate = { wrapped.revenueDelegate = $0 }
         
-        _fill = { wrapped.fill(ad: $0, response: $1) }
-        _notify = { wrapped.notify(ad: $0, event: $1) }
+        _fill = { wrapped._fill(ad: $0, response: $1) }
+        _notify = { wrapped._notify(ad: $0, event: $1) }
     }
 }
 
@@ -59,7 +59,7 @@ final class AnyDirectDemandProvider<W>: AnyDemandProvider<W>, DirectDemandProvid
     private let _bid: (LineItem, @escaping DemandProviderResponse) -> ()
     
     override init(_ wrapped: W) throws {
-        guard let _wrapped = wrapped as? DirectDemandProvider else { throw SdkError.internalInconsistency }
+        guard let _wrapped = wrapped as? any DirectDemandProvider else { throw SdkError.internalInconsistency }
         
         _bid = { _wrapped.bid($0, response: $1) }
         
@@ -76,7 +76,7 @@ final class AnyProgrammaticDemandProvider<W>: AnyDemandProvider<W>, Programmatic
     private let _bid: (Price, @escaping DemandProviderResponse) -> ()
     
     override init(_ wrapped: W) throws {
-        guard let _wrapped = wrapped as? ProgrammaticDemandProvider else { throw SdkError.internalInconsistency }
+        guard let _wrapped = wrapped as? (any ProgrammaticDemandProvider) else { throw SdkError.internalInconsistency }
         
         _bid = { _wrapped.bid($0, response: $1) }
         
@@ -89,7 +89,7 @@ final class AnyProgrammaticDemandProvider<W>: AnyDemandProvider<W>, Programmatic
 }
 
 
-typealias AnyAdViewDemandProvider = AnyDemandProvider<AdViewDemandProvider>
-typealias AnyInterstitialDemandProvider = AnyDemandProvider<InterstitialDemandProvider>
-typealias AnyRewardedAdDemandProvider = AnyDemandProvider<RewardedAdDemandProvider>
+typealias AnyAdViewDemandProvider = AnyDemandProvider<any AdViewDemandProvider>
+typealias AnyInterstitialDemandProvider = AnyDemandProvider<any InterstitialDemandProvider>
+typealias AnyRewardedAdDemandProvider = AnyDemandProvider<any RewardedAdDemandProvider>
 

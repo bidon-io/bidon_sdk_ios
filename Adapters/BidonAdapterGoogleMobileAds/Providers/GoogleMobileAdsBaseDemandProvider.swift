@@ -12,7 +12,7 @@ import Bidon
 
 
 class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsAdObject>: NSObject {
-    typealias AdObjectWrapper = GoogleMobileAdsAdWrapper<AdObject>
+    typealias AdType = GoogleMobileAdsAdWrapper<AdObject>
     
     weak var delegate: DemandProviderDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
@@ -63,14 +63,10 @@ extension GoogleMobileAdsBaseDemandProvider: DirectDemandProvider {
         loadAd(request, lineItem: lineItem)
     }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        if ad is AdObjectWrapper {
-            response(.success(ad))
-        } else {
-            response(.failure(.noFill))
-        }
+    func fill(ad: GoogleMobileAdsAdWrapper<AdObject>, response: @escaping DemandProviderResponse) {
+        response(.success(ad))
     }
-        
-    func notify(ad: Ad, event: AuctionEvent) {}
+    
+    func notify(ad: GoogleMobileAdsAdWrapper<AdObject>, event: AuctionEvent) {}
 }
 

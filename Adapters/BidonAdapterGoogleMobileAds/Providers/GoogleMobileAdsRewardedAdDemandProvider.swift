@@ -24,7 +24,7 @@ final class GoogleMobileAdsRewardedAdDemandProvider: GoogleMobileAdsBaseDemandPr
             }
             
             rewardedAd.fullScreenContentDelegate = self
-
+            
             self.setupAdRevenueHandler(rewardedAd, lineItem: lineItem)
             
             self.handleDidLoad(adObject: rewardedAd, lineItem: lineItem)
@@ -34,15 +34,10 @@ final class GoogleMobileAdsRewardedAdDemandProvider: GoogleMobileAdsBaseDemandPr
 
 
 extension GoogleMobileAdsRewardedAdDemandProvider: RewardedAdDemandProvider {
-    func show(ad: Ad, from viewController: UIViewController) {
-        guard let wrapper = ad as? AdObjectWrapper else {
-            delegate?.providerDidFailToDisplay(self, error: SdkError.invalidPresentationState)
-            return
-        }
-        
-        wrapper.adObject.present(fromRootViewController: viewController) { [weak self, weak wrapper] in
-            guard let wrapper = wrapper, let self = self else { return }
-            let rewardWrapper = GoogleMobileAdsRewardWrapper(wrapper.adObject.adReward)
+    func show(ad: GoogleMobileAdsAdWrapper<GADRewardedAd>, from viewController: UIViewController) {
+        ad.adObject.present(fromRootViewController: viewController) { [weak self, weak ad] in
+            guard let ad = ad, let self = self else { return }
+            let rewardWrapper = GoogleMobileAdsRewardWrapper(ad.adObject.adReward)
             
             self.rewardDelegate?.provider(self, didReceiveReward: rewardWrapper)
         }

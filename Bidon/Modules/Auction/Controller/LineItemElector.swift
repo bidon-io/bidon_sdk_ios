@@ -67,6 +67,6 @@ struct StrictLineItemElector<Observer: MediationObserver>: LineItemElector {
 
 extension StrictLineItemElector.EquatableLineItem: CustomDebugStringConvertible {
     var debugDescription: String {
-        return "Equatable line item '\(id)' with ad unit id: \(adUnitId), pricefloor: \(pricefloor)$"
+        return "line item '\(id)' with ad unit id: \(adUnitId), pricefloor: \(pricefloor)$"
     }
 }

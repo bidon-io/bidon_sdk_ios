@@ -79,7 +79,7 @@ where T: Demand, T.Provider: DemandProvider, M: MediationObserver {
             self.observer.log(.fillRequest(ad: demand.ad))
             
             DispatchQueue.main.async {
-                demand.provider.fill(ad: demand.ad) { [weak self] result in
+                demand.provider._fill(ad: demand.ad) { [weak self] result in
                     guard let self = self else { return }
                     switch result {
                     case .success:

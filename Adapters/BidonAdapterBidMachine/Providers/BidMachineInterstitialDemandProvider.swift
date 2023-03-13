@@ -18,14 +18,8 @@ final class BidMachineInterstitialDemandProvider: BidMachineBaseDemandProvider<B
 
 
 extension BidMachineInterstitialDemandProvider: InterstitialDemandProvider {
-    func show(
-        ad: Ad,
-        from viewController: UIViewController
-    ) {
-        guard
-            let ad = ad as? BidMachineInterstitialAdWrapper,
-            ad.wrapped.canShow
-        else {
+    func show(ad: BidMachineAdWrapper<BidMachineInterstitial>, from viewController: UIViewController) {
+        guard ad.wrapped.canShow else {
             delegate?.providerDidFailToDisplay(self, error: .invalidPresentationState)
             return
         }

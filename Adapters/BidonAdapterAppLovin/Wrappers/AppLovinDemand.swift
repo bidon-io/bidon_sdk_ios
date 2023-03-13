@@ -11,7 +11,7 @@ import Bidon
 
 
 protocol AppLovinDemand {
-    func show(ad: Ad) throws
+    func show(ad: AppLovinAdWrapper)
 }
 
 
@@ -27,11 +27,7 @@ extension AppLovinDemand {
 
 
 extension ALInterstitialAd: AppLovinDemand {
-    func show(ad: Ad) throws {
-        guard let ad = ad as? AppLovinAdWrapper else {
-            throw SdkError.internalInconsistency
-        }
-        
+    func show(ad: AppLovinAdWrapper) {
         associate(ad: ad)
         show(ad.wrapped)
     }
@@ -39,11 +35,7 @@ extension ALInterstitialAd: AppLovinDemand {
 
 
 extension ALAdView: AppLovinDemand {
-    func show(ad: Ad) throws {
-        guard let ad = ad as? AppLovinAdWrapper else {
-            throw SdkError.internalInconsistency
-        }
-        
+    func show(ad: AppLovinAdWrapper) {
         associate(ad: ad)
         render(ad.wrapped)
     }

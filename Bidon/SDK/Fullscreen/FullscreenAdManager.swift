@@ -258,7 +258,7 @@ extension FullscreenAdManager: MediationObserverDelegate {
         delegate?.didStartAuctionRound(auctionRound, pricefloor: pricefloor)
     }
     
-    func didReceiveBid(_ ad: Ad, provider: DemandProvider) {
+    func didReceiveBid(_ ad: Ad, provider: any DemandProvider) {
         provider.revenueDelegate = self
         delegate?.didReceiveBid(ad)
     }
@@ -303,7 +303,7 @@ extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
 
 extension FullscreenAdManager: DemandProviderRevenueDelegate {
     func provider(
-        _ provider: DemandProvider,
+        _ provider: any DemandProvider,
         didPay revenue: AdRevenue,
         ad: Ad
     ) {

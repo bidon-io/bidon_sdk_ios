@@ -38,9 +38,8 @@ final class DTExchangeBannerDemandProvider: DTExchangeBaseDemandProvider<IAViewU
 
 
 extension DTExchangeBannerDemandProvider: AdViewDemandProvider {
-    func container(for ad: Ad) -> AdViewContainer? {
+    func container(for ad: DTExchangeAdWrapper) -> AdViewContainer? {
         guard
-            let ad = ad as? DTExchangeAdWrapper,
             ad.adSpot.activeUnitController === controller,
             controller.isReady()
         else { return nil }

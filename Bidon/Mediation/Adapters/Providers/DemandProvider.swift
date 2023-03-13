@@ -35,16 +35,16 @@ public typealias DemandProviderResponse = (Result<Ad, MediationError>) -> ()
 
 
 public protocol DemandProviderDelegate: AnyObject {
-    func providerWillPresent(_ provider: DemandProvider)
-    func providerDidHide(_ provider: DemandProvider)
-    func providerDidClick(_ provider: DemandProvider)
-    func providerDidFailToDisplay(_ provider: DemandProvider, error: SdkError)
+    func providerWillPresent(_ provider: any DemandProvider)
+    func providerDidHide(_ provider: any DemandProvider)
+    func providerDidClick(_ provider: any DemandProvider)
+    func providerDidFailToDisplay(_ provider: any DemandProvider, error: SdkError)
 }
 
 
 public protocol DemandProviderRevenueDelegate: AnyObject {
     func provider(
-        _ provider: DemandProvider,
+        _ provider: any DemandProvider,
         didPay revenue: AdRevenue,
         ad: Ad
     )
@@ -52,12 +52,31 @@ public protocol DemandProviderRevenueDelegate: AnyObject {
     
 
 public protocol DemandProvider: AnyObject {
+    associatedtype AdType: Ad
+    
     var delegate: DemandProviderDelegate? { get set }
     var revenueDelegate: DemandProviderRevenueDelegate? { get set }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse)
+    func fill(ad: AdType, response: @escaping DemandProviderResponse)
     
-    func notify(ad: Ad, event: AuctionEvent)
+    func notify(ad: AdType, event: AuctionEvent)
+}
+
+
+internal extension DemandProvider {
+    func _fill(ad: Ad, response: @escaping DemandProviderResponse) {
+        guard let ad = ad as? AdType else {
+            response(.failure(.unscpecifiedException))
+            return
+        }
+        
+        fill(ad: ad, response: response)
+    }
+    
+    func _notify(ad: Ad, event: AuctionEvent) {
+        guard let ad = ad as? AdType else { return }
+        notify(ad: ad, event: event)
+    }
 }
 
 

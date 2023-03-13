@@ -43,9 +43,8 @@ final class DTExchangeInterstitialDemandProvider: DTExchangeBaseDemandProvider<I
 
 
 extension DTExchangeInterstitialDemandProvider: InterstitialDemandProvider {
-    func show(ad: Ad, from viewController: UIViewController) {
+    func show(ad: DTExchangeAdWrapper, from viewController: UIViewController) {
         guard
-            let ad = ad as? DTExchangeAdWrapper,
             ad.adSpot.activeUnitController === controller,
             controller.isReady()
         else {

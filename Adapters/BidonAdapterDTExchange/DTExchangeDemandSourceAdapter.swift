@@ -21,15 +21,15 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
     public let adapterVersion: String = "1"
     public let sdkVersion: String = IASDKCore.sharedInstance().version()
     
-    public func interstitial() throws -> InterstitialDemandProvider {
+    public func interstitial() throws -> any InterstitialDemandProvider {
         return DTExchangeInterstitialDemandProvider()
     }
     
-    public func rewardedAd() throws -> RewardedAdDemandProvider {
+    public func rewardedAd() throws -> any RewardedAdDemandProvider {
         return DTExchangeInterstitialDemandProvider()
     }
     
-    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+    public func adView(_ context: AdViewContext) throws -> any AdViewDemandProvider {
         return DTExchangeBannerDemandProvider()
     }
 }

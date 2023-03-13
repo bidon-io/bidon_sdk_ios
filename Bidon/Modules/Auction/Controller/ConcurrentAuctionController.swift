@@ -80,7 +80,7 @@ where M: MediationObserver, T == M.DemandProviderType {
             repository.ads.forEach { ad in
                 let provider = repository.provider(for: ad)
                 let event: AuctionEvent = ad.id == winner.id ? .win : .lose(winner)
-                provider?.notify(ad: ad, event: event)
+                provider?._notify(ad: ad, event: event)
             }
             
             let event = Event.auctionFinish(winner: winner)

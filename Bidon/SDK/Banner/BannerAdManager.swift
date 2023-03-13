@@ -14,7 +14,7 @@ protocol BannerAdManagerDelegate: AnyObject {
     func adManager(_ adManager: BannerAdManager, didFailToLoad error: SdkError)
     func adManager(_ adManager: BannerAdManager, didLoad demand: AdViewDemand)
     func adManager(_ adManager: BannerAdManager, didStartAuctionRound round: AuctionRound, pricefloor: Price)
-    func adManager(_ adManager: BannerAdManager, didReceiveBid ad: Ad, provider: DemandProvider)
+    func adManager(_ adManager: BannerAdManager, didReceiveBid ad: Ad, provider: any DemandProvider)
     func adManager(_ adManager: BannerAdManager, didCompleteAuctionRound round: AuctionRound)
     func adManager(_ adManager: BannerAdManager, didCompleteAuction winner: Ad?)
 }
@@ -214,7 +214,7 @@ extension BannerAdManager: MediationObserverDelegate {
         delegate?.adManager(self, didStartAuctionRound: auctionRound, pricefloor: pricefloor)
     }
     
-    func didReceiveBid(_ ad: Ad, provider: DemandProvider) {
+    func didReceiveBid(_ ad: Ad, provider: any DemandProvider) {
         delegate?.adManager(self, didReceiveBid: ad, provider: provider)
     }
     

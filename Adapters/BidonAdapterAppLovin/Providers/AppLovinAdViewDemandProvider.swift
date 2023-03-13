@@ -12,6 +12,8 @@ import UIKit
 
 
 internal final class AppLovinAdViewDemandProvider: NSObject {
+    typealias AdType = AppLovinAdWrapper
+    
     private let sdk: ALSdk
     private let context: AdViewContext
     
@@ -62,23 +64,16 @@ extension AppLovinAdViewDemandProvider: DirectDemandProvider {
         )
     }
     
-    func fill(
-        ad: Ad,
-        response: @escaping DemandProviderResponse
-    ) {
-        do {
-            try adView.show(ad: ad)
-        } catch {
-            response(.failure(MediationError.noFill))
-        }
+    func fill(ad: AppLovinAdWrapper, response: @escaping DemandProviderResponse) {
+        adView.show(ad: ad)
     }
     
-    func notify(ad: Ad, event: AuctionEvent) {}
+    func notify(ad: AppLovinAdWrapper, event: AuctionEvent) {}
 }
 
 
 extension AppLovinAdViewDemandProvider: AdViewDemandProvider {
-    func container(for ad: Ad) -> AdViewContainer? {
+    func container(for ad: AppLovinAdWrapper) -> AdViewContainer? {
         return adView
     }
 }

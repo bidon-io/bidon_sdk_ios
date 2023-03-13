@@ -12,6 +12,8 @@ import UnityAds
 
 
 final class UnityAdsInterstitialDemandProvider: NSObject, DirectDemandProvider {
+    typealias AdType = UnityAdsAdWrapper
+    
     weak var delegate: DemandProviderDelegate?
     weak var rewardDelegate: DemandProviderRewardDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
@@ -31,21 +33,23 @@ final class UnityAdsInterstitialDemandProvider: NSObject, DirectDemandProvider {
         )
     }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        if let ad = ads.first(where: { $0.adUnitId == ad.adUnitId }) {
-            response(.success(ad))
-        } else {
+    func fill(ad: UnityAdsAdWrapper, response: @escaping DemandProviderResponse) {
+        guard ads.contains(ad) else {
             response(.failure(.noFill))
+            return
         }
+        
+        response(.success(ad))
     }
     
-    func notify(ad: Ad, event: Bidon.AuctionEvent) {}
+    func notify(ad: UnityAdsAdWrapper, event: AuctionEvent) {}
 }
 
 
 extension UnityAdsInterstitialDemandProvider: InterstitialDemandProvider {
-    func show(ad: Ad, from viewController: UIViewController) {
-        guard let ad = ads.first(where: { $0.adUnitId == ad.adUnitId }) else { return }
+    func show(ad: UnityAdsAdWrapper, from viewController: UIViewController) {
+        guard ads.contains(ad) else { return }
+       
         UnityAds.show(
             viewController,
             placementId: ad.lineItem.adUnitId,

@@ -76,7 +76,7 @@ final class RewardedAuctionRequestBuilder: BaseRequestBuilder, AuctionRequestBui
     var adType: AdType { .rewarded }
     
     var adapters: AdaptersInfo {
-        let interstitials: [InterstitialDemandSourceAdapter] = adaptersRepository.all()
+        let interstitials: [RewardedAdDemandSourceAdapter] = adaptersRepository.all()
         return AdaptersInfo(adapters: interstitials)
     }
     

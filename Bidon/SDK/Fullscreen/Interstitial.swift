@@ -28,7 +28,7 @@ public final class Interstitial: NSObject, FullscreenAdObject {
     @objc public let placement: String
     
     @objc public var isReady: Bool { return manager.isReady }
-        
+            
     @Injected(\.sdk)
     private var sdk: Sdk
     

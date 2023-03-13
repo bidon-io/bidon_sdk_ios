@@ -19,7 +19,7 @@
 		4221019A2859E35C006596DA /* Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422101992859E35C006596DA /* Adapter.swift */; };
 		4221019C2859E3D0006596DA /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4221019B2859E3D0006596DA /* Defines.swift */; };
 		42244DA628C8E1E800E9C416 /* MediationEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42244DA528C8E1E800E9C416 /* MediationEvent.swift */; };
-		42244DA828C8E8FF00E9C416 /* AnyAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42244DA728C8E8FF00E9C416 /* AnyAdapter.swift */; };
+		42244DA828C8E8FF00E9C416 /* AnyDemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42244DA728C8E8FF00E9C416 /* AnyDemandSourceAdapter.swift */; };
 		4224AA6D28B7D1F600E8D886 /* RewardedAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA6C28B7D1F600E8D886 /* RewardedAd.swift */; };
 		4224AA6F28B7E11200E8D886 /* FullscreenImpressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA6E28B7E11200E8D886 /* FullscreenImpressionController.swift */; };
 		4224AA7128B7E2F400E8D886 /* RewardedImpressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7028B7E2F400E8D886 /* RewardedImpressionController.swift */; };
@@ -67,6 +67,7 @@
 		426DD7B828A68EC400A1ADF5 /* AdViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7B728A68EC400A1ADF5 /* AdViewDelegate.swift */; };
 		426DD7BC28A696C600A1ADF5 /* Waterfall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD7BB28A696C600A1ADF5 /* Waterfall.swift */; };
 		427B1C1629A4CE34007D4E93 /* AdRevenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B1C1529A4CE34007D4E93 /* AdRevenue.swift */; };
+		427DB5C129BF2A8500057D08 /* UnknownAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427DB5C029BF2A8500057D08 /* UnknownAdapter.swift */; };
 		428CCBF428A11190003123EF /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF328A11190003123EF /* EnvironmentManager.swift */; };
 		428CCBF728A12C8D003123EF /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF628A12C8D003123EF /* Date+Extensions.swift */; };
 		428CCBF928A13AD8003123EF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428CCBF828A13AD8003123EF /* NetworkManager.swift */; };
@@ -132,7 +133,7 @@
 		422101992859E35C006596DA /* Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adapter.swift; sourceTree = "<group>"; };
 		4221019B2859E3D0006596DA /* Defines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		42244DA528C8E1E800E9C416 /* MediationEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediationEvent.swift; sourceTree = "<group>"; };
-		42244DA728C8E8FF00E9C416 /* AnyAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAdapter.swift; sourceTree = "<group>"; };
+		42244DA728C8E8FF00E9C416 /* AnyDemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDemandSourceAdapter.swift; sourceTree = "<group>"; };
 		4224AA6C28B7D1F600E8D886 /* RewardedAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAd.swift; sourceTree = "<group>"; };
 		4224AA6E28B7E11200E8D886 /* FullscreenImpressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenImpressionController.swift; sourceTree = "<group>"; };
 		4224AA7028B7E2F400E8D886 /* RewardedImpressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedImpressionController.swift; sourceTree = "<group>"; };
@@ -180,6 +181,7 @@
 		426DD7B728A68EC400A1ADF5 /* AdViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewDelegate.swift; sourceTree = "<group>"; };
 		426DD7BB28A696C600A1ADF5 /* Waterfall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waterfall.swift; sourceTree = "<group>"; };
 		427B1C1529A4CE34007D4E93 /* AdRevenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdRevenue.swift; sourceTree = "<group>"; };
+		427DB5C029BF2A8500057D08 /* UnknownAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownAdapter.swift; sourceTree = "<group>"; };
 		428CCBF328A11190003123EF /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
 		428CCBF628A12C8D003123EF /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		428CCBF828A13AD8003123EF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -629,8 +631,9 @@
 			children = (
 				42389E1328745CCC006024BA /* Providers */,
 				422101992859E35C006596DA /* Adapter.swift */,
-				42244DA728C8E8FF00E9C416 /* AnyAdapter.swift */,
 				429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */,
+				427DB5C029BF2A8500057D08 /* UnknownAdapter.swift */,
+				42244DA728C8E8FF00E9C416 /* AnyDemandSourceAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -813,6 +816,7 @@
 				4238BBA728CA0EA9002DC473 /* DefaultMediationAttemptReport.swift in Sources */,
 				426DD7A628A5042A00A1ADF5 /* UserDefault.swift in Sources */,
 				42CCB99128CB365400DBAE97 /* UIDevice+Extensions.swift in Sources */,
+				427DB5C129BF2A8500057D08 /* UnknownAdapter.swift in Sources */,
 				421D48EA28884D1F007DE2E4 /* LogFormatter.swift in Sources */,
 				424D296428BE630500F6F2D6 /* MainThreadComputable.swift in Sources */,
 				429EE2C9286CA2B0009439C6 /* DemandProvider.swift in Sources */,
@@ -858,7 +862,7 @@
 				42BE439A28C24626000528E3 /* AnyDemandProvider.swift in Sources */,
 				429EE2DD286F45F1009439C6 /* AuctionRound.swift in Sources */,
 				42C59BA028C64F4400544EDF /* MediationObserver.swift in Sources */,
-				42244DA828C8E8FF00E9C416 /* AnyAdapter.swift in Sources */,
+				42244DA828C8E8FF00E9C416 /* AnyDemandSourceAdapter.swift in Sources */,
 				42389E1228745C6A006024BA /* InterstitialDemandProvider.swift in Sources */,
 				42BA81AC28758AC6001F1744 /* ConcurrentAuctionControllerBuilder.swift in Sources */,
 				424F180B28ABBD330082AEF3 /* DefaultWaterfallController.swift in Sources */,

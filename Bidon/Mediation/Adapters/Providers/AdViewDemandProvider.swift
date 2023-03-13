@@ -101,14 +101,21 @@ public protocol AdViewContainer: UIView {
 
 
 public protocol DemandProviderAdViewDelegate: AnyObject {
-    func providerWillPresentModalView(_ provider: AdViewDemandProvider, adView: AdViewContainer)
-    func providerDidDismissModalView(_ provider: AdViewDemandProvider, adView: AdViewContainer)
-    func providerWillLeaveApplication(_ provider: AdViewDemandProvider, adView: AdViewContainer)
+    func providerWillPresentModalView(_ provider: any AdViewDemandProvider, adView: AdViewContainer)
+    func providerDidDismissModalView(_ provider: any AdViewDemandProvider, adView: AdViewContainer)
+    func providerWillLeaveApplication(_ provider: any AdViewDemandProvider, adView: AdViewContainer)
 }
 
 
 public protocol AdViewDemandProvider: DemandProvider {
     var adViewDelegate: DemandProviderAdViewDelegate? { get set }
     
-    func container(for ad: Ad) -> AdViewContainer?
+    func container(for ad: AdType) -> AdViewContainer?
+}
+
+
+internal extension AdViewDemandProvider {
+    func _container(for ad: Ad) -> AdViewContainer? {
+        return (ad as? AdType).flatMap { container(for: $0) }
+    }
 }

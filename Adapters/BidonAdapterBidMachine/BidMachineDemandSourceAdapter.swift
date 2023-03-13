@@ -24,15 +24,15 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
     public let adapterVersion: String = "1"
     public let sdkVersion: String = BidMachineSdk.sdkVersion
     
-    public func interstitial() throws -> InterstitialDemandProvider {
+    public func interstitial() throws -> any InterstitialDemandProvider {
         return BidMachineInterstitialDemandProvider()
     }
     
-    public func rewardedAd() throws -> RewardedAdDemandProvider {
+    public func rewardedAd() throws -> any RewardedAdDemandProvider {
         BidMachineRewardedAdDemandProvider()
     }
     
-    public func adView(_ context: AdViewContext) throws -> AdViewDemandProvider {
+    public func adView(_ context: AdViewContext) throws -> any AdViewDemandProvider {
         BidMachineAdViewDemandProvider()
     }
 }

@@ -1,4 +1,4 @@
-platform :ios, '11.0'
+platform :ios, '12.0'
 workspace 'Bidon.xcworkspace'
 
 source 'https://github.com/appodeal/CocoaPods.git'
@@ -14,7 +14,7 @@ def applovin
 end
 
 def bidmachine 
-  pod 'BidMachine', '~> 2.0.0.0'
+  pod 'BidMachine', '~> 2.0.1.0'
   pod 'BidMachineAdColonyAdapter'
   pod 'BidMachineAmazonAdapter'
   pod 'BidMachineCriteoAdapter'
@@ -25,6 +25,7 @@ def bidmachine
   pod 'BidMachineVungleAdapter'
   pod 'BidMachinePangleAdapter'
   pod 'BidMachineNotsyAdapter'
+  pod 'BidMachineMintegralAdapter'
 end
 
 def admob
@@ -49,21 +50,23 @@ def ocmock
 end
 
 def appodeal_mediation
-  pod 'Appodeal', '~> 3.0.2'
-  pod 'APDAdColonyAdapter'
-  pod 'APDAdjustAdapter'
-  pod 'APDAppLovinAdapter'
-  pod 'APDAppsFlyerAdapter'
-  pod 'APDBidMachineAdapter'
-  pod 'APDGoogleAdMobAdapter'
-  pod 'APDIABAdapter'
-  pod 'APDIronSourceAdapter'
-  pod 'APDMetaAudienceNetworkAdapter'
-  pod 'APDMyTargetAdapter'
-  pod 'APDStackAnalyticsAdapter'
-  pod 'APDUnityAdapter'
-  pod 'APDVungleAdapter'
-  pod 'APDYandexAdapter'
+  pod 'Appodeal', '3.1.1-Beta'
+  pod 'APDAdColonyAdapter', '3.1.1.1-Beta'
+  pod 'APDAdjustAdapter', '3.1.1.1-Beta'
+  pod 'APDAppLovinAdapter', '3.1.1.1-Beta'
+  pod 'APDAppsFlyerAdapter', '3.1.1.1-Beta'
+  pod 'APDBidMachineAdapter', '3.1.1.1-Beta' # Required
+  pod 'APDFirebaseAdapter', '3.1.1.1-Beta'
+  pod 'APDGoogleAdMobAdapter', '3.1.1.1-Beta'
+  pod 'APDIABAdapter', '3.1.1.1-Beta' # Required
+  pod 'APDIronSourceAdapter', '3.1.1.1-Beta'
+  pod 'APDFacebookAdapter', '3.1.1.1-Beta'
+  pod 'APDMetaAudienceNetworkAdapter', '3.1.1.1-Beta'
+  pod 'APDMyTargetAdapter', '3.1.1.1-Beta'
+  pod 'APDStackAnalyticsAdapter', '3.1.1.1-Beta' # Required
+  pod 'APDUnityAdapter', '3.1.1.1-Beta'
+  pod 'APDVungleAdapter', '3.1.1.1-Beta'
+  pod 'APDYandexAdapter', '3.1.1.1-Beta'
 end
 
 # Targets

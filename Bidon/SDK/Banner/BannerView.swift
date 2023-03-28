@@ -129,34 +129,8 @@ extension BannerView: BannerAdManagerDelegate {
         refreshIfNeeded()
     }
     
-    func adManagerDidStartAuction(_ adManager: BannerAdManager) {
-        delegate?.adObjectDidStartAuction?(self)
-        
-    }
-    
-    func adManager(_ adManager: BannerAdManager, didStartAuctionRound round: AuctionRound, pricefloor: Price) {
-        delegate?.adObject?(
-            self,
-            didStartAuctionRound: round.id,
-            pricefloor: pricefloor
-        )
-    }
-    
-    func adManager(
-        _ adManager: BannerAdManager,
-        didReceiveBid ad: Ad,
-        provider: any DemandProvider
-    ) {
-        provider.revenueDelegate = self
-        delegate?.adObject?(self, didReceiveBid: ad)
-    }
-    
-    func adManager(_ adManager: BannerAdManager, didCompleteAuctionRound round: AuctionRound) {
-        delegate?.adObject?(self, didCompleteAuctionRound: round.id)
-    }
-    
-    func adManager(_ adManager: BannerAdManager, didCompleteAuction winner: Ad?) {
-        delegate?.adObject?(self, didCompleteAuction: winner)
+    func adManager(_ adManager: BannerAdManager, didPayRevenue revenue: AdRevenue, ad: Ad) {
+        delegate?.adObject?(self, didPay: revenue, ad: ad)
     }
 }
 

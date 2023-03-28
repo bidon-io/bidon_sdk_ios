@@ -31,6 +31,8 @@ where M: MediationObserver, T == M.DemandProviderType {
     
     private var completion: Completion?
     
+    private weak var revenueDelegate: DemandProviderRevenueDelegate?
+    
     private var currentECPM: Price {
         return currentWinner?.eCPM ?? pricefloor
     }
@@ -46,6 +48,7 @@ where M: MediationObserver, T == M.DemandProviderType {
         let builder = T()
         build(builder)
         
+        self.revenueDelegate = builder.revenueDelegate
         self.comparator = builder.comparator
         self.auction = builder.auction
         self.pricefloor = builder.pricefloor
@@ -154,6 +157,8 @@ where M: MediationObserver, T == M.DemandProviderType {
             observer.log(event)
             return
         }
+        
+        bid.provider.revenueDelegate = revenueDelegate
         
         let event = Event.bidResponse(
             round: round,

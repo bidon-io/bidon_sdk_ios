@@ -19,16 +19,11 @@ public struct RewardedAdPublisher: Publisher {
         case didFailToLoadAd(error: Error)
         case didRecordImpression(ad: Ad)
         case didRecordClick(ad: Ad)
-        case didStartAuction
-        case didStartAuctionRound(auctionRound: String, pricefloor: Price)
-        case didReceiveBid(ad: Ad)
-        case didCompleteAuctionRound(auctionRound: String)
-        case didCompleteAuction(winner: Ad?)
         case didPayRevenue(ad: Ad)
         case willPresentAd(ad: Ad)
         case didFailToPresentAd(error: Error)
         case didDismissAd(ad: Ad)
-        case didRewardUser(reward: Reward)
+        case didRewardUser(reward: Reward, ad: Ad)
     }
     
     private var RewardedAd: RewardedAd
@@ -100,46 +95,6 @@ where S : Subscriber, S.Failure == Never, S.Input == RewardedAdPublisher.Event {
     
     func adObject(
         _ adObject: AdObject,
-        didRecordClick ad: Ad
-    ) {
-        trigger(.didRecordClick(ad: ad))
-    }
-    
-    func adObjectDidStartAuction(_ adObject: AdObject) {
-        trigger(.didStartAuction)
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didStartAuctionRound auctionRound: String,
-        pricefloor: Price
-    ) {
-        trigger(.didStartAuctionRound(auctionRound: auctionRound, pricefloor: pricefloor))
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didReceiveBid ad: Ad
-    ) {
-        trigger(.didReceiveBid(ad: ad))
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didCompleteAuctionRound auctionRound: String
-    ) {
-        trigger(.didCompleteAuctionRound(auctionRound: auctionRound))
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didCompleteAuction winner: Ad?
-    ) {
-        trigger(.didCompleteAuction(winner: winner))
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
         didPayRevenue ad: Ad
     ) {
         trigger(.didPayRevenue(ad: ad))
@@ -157,8 +112,8 @@ where S : Subscriber, S.Failure == Never, S.Input == RewardedAdPublisher.Event {
         trigger(.didDismissAd(ad: ad))
     }
     
-    func rewardedAd(_ rewardedAd: RewardedAdObject, didRewardUser reward: Reward) {
-        trigger(.didRewardUser(reward: reward))
+    func rewardedAd(_ rewardedAd: RewardedAdObject, didRewardUser reward: Reward, ad: Ad) {
+        trigger(.didRewardUser(reward: reward, ad: ad))
     }
 }
 

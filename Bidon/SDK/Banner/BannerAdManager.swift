@@ -10,13 +10,9 @@ import UIKit
 
 
 protocol BannerAdManagerDelegate: AnyObject {
-    func adManagerDidStartAuction(_ adManager: BannerAdManager)
     func adManager(_ adManager: BannerAdManager, didFailToLoad error: SdkError)
     func adManager(_ adManager: BannerAdManager, didLoad demand: AdViewDemand)
-    func adManager(_ adManager: BannerAdManager, didStartAuctionRound round: AuctionRound, pricefloor: Price)
-    func adManager(_ adManager: BannerAdManager, didReceiveBid ad: Ad, provider: any DemandProvider)
-    func adManager(_ adManager: BannerAdManager, didCompleteAuctionRound round: AuctionRound)
-    func adManager(_ adManager: BannerAdManager, didCompleteAuction winner: Ad?)
+    func adManager(_ adManager: BannerAdManager, didPayRevenue revenue: AdRevenue, ad: Ad)
 }
 
 
@@ -130,12 +126,11 @@ final class BannerAdManager: NSObject {
             observer: observer
         )
         
-        observer.delegate = self
-
         let auction = AuctionControllerType { (builder: AdViewConcurrentAuctionControllerBuilder) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withRounds(auctionInfo.rounds)
             builder.withElector(elector)
+            builder.withRevenueDelegate(self)
             builder.withPricefloor(auctionInfo.pricefloor)
             builder.withContext(context)
             builder.withObserver(observer)
@@ -205,25 +200,13 @@ final class BannerAdManager: NSObject {
 }
 
 
-extension BannerAdManager: MediationObserverDelegate {
-    func didStartAuction(_ auctionId: String) {
-        delegate?.adManagerDidStartAuction(self)
-    }
-    
-    func didStartAuctionRound(_ auctionRound: AuctionRound, pricefloor: Price) {
-        delegate?.adManager(self, didStartAuctionRound: auctionRound, pricefloor: pricefloor)
-    }
-    
-    func didReceiveBid(_ ad: Ad, provider: any DemandProvider) {
-        delegate?.adManager(self, didReceiveBid: ad, provider: provider)
-    }
-    
-    func didFinishAuctionRound(_ auctionRound: AuctionRound) {
-        delegate?.adManager(self, didCompleteAuctionRound: auctionRound)
-    }
-    
-    func didFinishAuction(_ auctionId: String, winner: Ad?) {
-        delegate?.adManager(self, didCompleteAuction: winner)
+extension BannerAdManager: DemandProviderRevenueDelegate {
+    func provider(
+        _ provider: any DemandProvider,
+        didPay revenue: AdRevenue,
+        ad: Ad
+    ) {
+        delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
     }
 }
 

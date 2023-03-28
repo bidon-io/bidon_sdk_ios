@@ -15,6 +15,7 @@ public protocol RewardedAdObject: FullscreenAdObject {}
 public protocol RewardedAdDelegate: FullscreenAdDelegate {
     func rewardedAd(
         _ rewardedAd: RewardedAdObject,
-        didRewardUser reward: Reward
+        didRewardUser reward: Reward,
+        ad: Ad
     )
 }

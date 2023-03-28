@@ -19,7 +19,8 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     private(set) var adaptersRepository: AdaptersRepository!
     private(set) var observer: MediationObserverType!
     private(set) var elector: LineItemElector!
-    
+    private(set) var revenueDelegate: DemandProviderRevenueDelegate!
+
     private var rounds: [AuctionRound] = []
     
     var auction: AuctionType {
@@ -52,6 +53,12 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     @discardableResult
     public func withComparator(_ comparator: AuctionComparator) -> Self {
         self.comparator = comparator
+        return self
+    }
+    
+    @discardableResult
+    public func withRevenueDelegate(_ revenueDelegate: DemandProviderRevenueDelegate) -> Self {
+        self.revenueDelegate = revenueDelegate
         return self
     }
     

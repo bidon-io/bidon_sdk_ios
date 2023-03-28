@@ -9,31 +9,30 @@ import Foundation
 import UIKit
 
 
+protocol FullscreenAdManager: AnyObject {
+    var isReady: Bool { get }
+}
+
 protocol FullscreenAdManagerDelegate: AnyObject {
-    func didStartAuction()
-    func didStartAuctionRound(_ round: AuctionRound, pricefloor: Price)
-    func didReceiveBid(_ ad: Ad)
-    func didCompleteAuctionRound(_ round: AuctionRound)
-    func didCompleteAuction(_ winner: Ad?)
-    func didFailToLoad(_ error: SdkError)
-    func didLoad(_ ad: Ad)
-    func didPayRevenue(_ ad: Ad, _ revenue: AdRevenue)
-    func willPresent(_ impression: Impression)
-    func didHide(_ impression: Impression)
-    func didClick(_ impression: Impression)
-    func didFailToPresent(_ impression: Impression?, error: SdkError)
-    func didReceiveReward(_ reward: Reward, impression: Impression)
+    func adManager(_ adManager: FullscreenAdManager, didFailToLoad error: SdkError)
+    func adManager(_ adManager: FullscreenAdManager, didLoad ad: Ad)
+    func adManager(_ adManager: FullscreenAdManager, didFailToPresent impression: Impression?, error: SdkError)
+    func adManager(_ adManager: FullscreenAdManager, willPresent impression: Impression)
+    func adManager(_ adManager: FullscreenAdManager, didHide impression: Impression)
+    func adManager(_ adManager: FullscreenAdManager, didClick impression: Impression)
+    func adManager(_ adManager: FullscreenAdManager, didReward reward: Reward, impression: Impression)
+    func adManager(_ adManager: FullscreenAdManager, didPayRevenue revenue: AdRevenue, ad: Ad)
 }
 
 
-final class FullscreenAdManager<
+final class BaseFullscreenAdManager<
     DemandProviderType,
     ObserverType,
     AuctionRequestBuilderType,
     AuctionControllerBuilderType,
     ImpressionControllerType,
     ImpressionRequestBuilderType
->: NSObject where
+>: NSObject, FullscreenAdManager where
 AuctionRequestBuilderType: AuctionRequestBuilder,
 ObserverType: MediationObserver,
 ObserverType.DemandProviderType == DemandProviderType,
@@ -65,7 +64,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
     
     private var state: State = .idle
     
-    private weak var delegate: FullscreenAdManagerDelegate?
+    private weak var delegate: (any FullscreenAdManagerDelegate)?
     
     private let placement: String
     private let adType: AdType
@@ -80,7 +79,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
     init(
         adType: AdType,
         placement: String,
-        delegate: FullscreenAdManagerDelegate?
+        delegate: (any FullscreenAdManagerDelegate)?
     ) {
         self.delegate = delegate
         self.adType = adType
@@ -123,7 +122,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             case .failure(let error):
                 self.state = .idle
                 Logger.warning("Fullscreen ad manager did fail to load ad with error: \(error)")
-                self.delegate?.didFailToLoad(SdkError(error))
+                self.delegate?.adManager(self, didFailToLoad: SdkError(error))
             }
         }
     }
@@ -137,7 +136,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             controller.show(from: rootViewController)
         default:
             let impression: FullscreenImpression? = nil
-            delegate?.didFailToPresent(impression, error: SdkError.internalInconsistency)
+            delegate?.adManager(self, didFailToPresent: impression, error: .internalInconsistency)
         }
     }
     
@@ -154,13 +153,12 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             items: auctionInfo.lineItems,
             observer: observer
         )
-        
-        observer.delegate = self
-        
+
         let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withRounds(auctionInfo.rounds)
             builder.withElector(elector)
+            builder.withRevenueDelegate(self)
             builder.withPricefloor(auctionInfo.pricefloor)
             builder.withObserver(observer)
         }
@@ -178,7 +176,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
                 self.sendAuctionStatistics(observer.report)
                 self.state = .idle
                 
-                self.delegate?.didFailToLoad(error)
+                self.delegate?.adManager(self, didFailToLoad: error)
             }
         }
         
@@ -204,10 +202,10 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             switch result {
             case .success(let demand):
                 self.state = .ready(demand: demand)
-                self.delegate?.didLoad(demand.ad)
+                self.delegate?.adManager(self, didLoad: demand.ad)
             case .failure(let error):
                 self.state = .idle
-                self.delegate?.didFailToLoad(error)
+                self.delegate?.adManager(self, didFailToLoad: error)
             }
         }
     }
@@ -249,70 +247,45 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
 }
 
 
-extension FullscreenAdManager: MediationObserverDelegate {
-    func didStartAuction(_ auctionId: String) {
-        delegate?.didStartAuction()
-    }
-    
-    func didStartAuctionRound(_ auctionRound: AuctionRound, pricefloor: Price) {
-        delegate?.didStartAuctionRound(auctionRound, pricefloor: pricefloor)
-    }
-    
-    func didReceiveBid(_ ad: Ad, provider: any DemandProvider) {
-        provider.revenueDelegate = self
-        delegate?.didReceiveBid(ad)
-    }
-    
-    func didFinishAuctionRound(_ auctionRound: AuctionRound) {
-        delegate?.didCompleteAuctionRound(auctionRound)
-    }
-    
-    func didFinishAuction(_ auctionId: String, winner: Ad?) {
-        delegate?.didCompleteAuction(winner)
-    }
-}
-
-
-extension FullscreenAdManager: FullscreenImpressionControllerDelegate {
+extension BaseFullscreenAdManager: FullscreenImpressionControllerDelegate {
     func didFailToPresent(_ impression: inout Impression?, error: SdkError) {
         state = .idle
-        delegate?.didFailToPresent(impression, error: error)
+        delegate?.adManager(self, didFailToPresent: impression, error: error)
     }
     
     func willPresent(_ impression: inout Impression) {
         sendImpressionIfNeeded(&impression, path: .show)
-        delegate?.willPresent(impression)
+        delegate?.adManager(self, willPresent: impression)
     }
     
     func didHide(_ impression: inout Impression) {
         state = .idle
-        delegate?.didHide(impression)
+        delegate?.adManager(self, didHide: impression)
     }
     
     func didClick(_ impression: inout Impression) {
         sendImpressionIfNeeded(&impression, path: .click)
-        delegate?.didClick(impression)
+        delegate?.adManager(self, didClick: impression)
     }
     
     func didReceiveReward(_ reward: Reward, impression: inout Impression) {
         sendImpressionIfNeeded(&impression, path: .reward)
-        delegate?.didReceiveReward(reward, impression: impression)
+        delegate?.adManager(self, didReward: reward, impression: impression)
     }
 }
 
 
-extension FullscreenAdManager: DemandProviderRevenueDelegate {
+extension BaseFullscreenAdManager: DemandProviderRevenueDelegate {
     func provider(
         _ provider: any DemandProvider,
         didPay revenue: AdRevenue,
         ad: Ad
     ) {
-        delegate?.didPayRevenue(ad, revenue)
+        delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
     }
 }
 
-
-private extension FullscreenAdManager.State {
+private extension BaseFullscreenAdManager.State {
     var isIdle: Bool {
         switch self {
         case .idle: return true

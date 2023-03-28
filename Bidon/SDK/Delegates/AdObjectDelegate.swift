@@ -38,36 +38,6 @@ public protocol AdObjectDelegate: AnyObject {
     )
     
     @objc optional
-    func adObjectDidStartAuction(
-        _ adObject: AdObject
-    )
-    
-    @objc optional
-    func adObject(
-        _ adObject: AdObject,
-        didStartAuctionRound auctionRound: String,
-        pricefloor: Price
-    )
-    
-    @objc optional
-    func adObject(
-        _ adObject: AdObject,
-        didReceiveBid ad: Ad
-    )
-    
-    @objc optional
-    func adObject(
-        _ adObject: AdObject,
-        didCompleteAuctionRound auctionRound: String
-    )
-    
-    @objc optional
-    func adObject(
-        _ adObject: AdObject,
-        didCompleteAuction winner: Ad?
-    )
-    
-    @objc optional
     func adObject(
         _ adObject: AdObject,
         didPay revenue: AdRevenue,

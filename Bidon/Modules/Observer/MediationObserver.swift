@@ -15,15 +15,6 @@ protocol MediationController {
 }
 
 
-protocol MediationObserverDelegate: AnyObject {
-    func didStartAuction(_ auctionId: String)
-    func didStartAuctionRound(_ auctionRound: AuctionRound, pricefloor: Price)
-    func didReceiveBid(_ ad: Ad, provider: any DemandProvider)
-    func didFinishAuctionRound(_ auctionRound: AuctionRound)
-    func didFinishAuction(_ auctionId: String, winner: Ad?)
-}
-
-
 protocol MediationObserver: AnyObject {
     associatedtype MediationAttemptReportType: MediationAttemptReport
     associatedtype DemandProviderType: DemandProvider
@@ -33,8 +24,6 @@ protocol MediationObserver: AnyObject {
     var adType: AdType { get }
     var firedLineItems: [LineItem] { get }
     var report: MediationAttemptReportType { get }
-
-    var delegate: MediationObserverDelegate? { get set }
     
     func log(_ event: MediationEvent<DemandProviderType>)
     

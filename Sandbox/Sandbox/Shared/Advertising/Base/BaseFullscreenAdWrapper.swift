@@ -92,7 +92,7 @@ extension BaseFullscreenAdWrapper: Bidon.RewardedAdDelegate {
         )
     }
     
-    func rewardedAd(_ rewardedAd: RewardedAdObject, didRewardUser reward: Reward) {
+    func rewardedAd(_ rewardedAd: RewardedAdObject, didRewardUser reward: Reward, ad: Ad) {
         send(
             event: "Bidon did reward user",
             detail: "Reward is \(reward.amount) \(reward.label)",

@@ -445,7 +445,7 @@ PODS:
     - StackModules/StackUIKit
   - StackModules/StackUIKit (1.4.2):
     - StackModules/StackFoundation
-  - StackProtobuf (0.8.4):
+  - StackProtobuf (0.8.5):
     - Protobuf (~> 3.13)
   - TapjoySDK (12.11.1)
   - UnityAds (4.5.0)
@@ -668,7 +668,7 @@ SPEC CHECKSUMS:
   StackConsentManager: af49179a45ec64c167784f380ccc047d5bc6d6df
   StackIAB: 0861aacae7d81acb3838e9affc8705ed7bcc7c84
   StackModules: f61783b6313fe20ed9f12d8c7f69dcd3c0e72797
-  StackProtobuf: 54381b8dd8b69cffa68520c5ca1a51901b01b85c
+  StackProtobuf: 6b78e9e5c5f7ead500a5d1527e569c4d49599a74
   TapjoySDK: 7edeac6d20f9d941fab1352c81ecd3e885c36167
   UnityAds: fab621d1066e414af9ce884f1252cdd53894263e
   VungleSDK-iOS: 27725029a42dfb9e39c67956637233fde1ee1797

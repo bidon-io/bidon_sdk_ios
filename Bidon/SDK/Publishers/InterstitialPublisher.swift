@@ -19,11 +19,6 @@ public struct InterstitialPublisher: Publisher {
         case didFailToLoadAd(error: Error)
         case didRecordImpression(ad: Ad)
         case didRecordClick(ad: Ad)
-        case didStartAuction
-        case didStartAuctionRound(auctionRound: String, pricefloor: Price)
-        case didReceiveBid(ad: Ad)
-        case didCompleteAuctionRound(auctionRound: String)
-        case didCompleteAuction(winner: Ad?)
         case didPayRevenue(ad: Ad)
         case willPresentAd(ad: Ad)
         case didFailToPresentAd(error: Error)
@@ -102,39 +97,6 @@ where S : Subscriber, S.Failure == Never, S.Input == InterstitialPublisher.Event
         didRecordClick ad: Ad
     ) {
         trigger(.didRecordClick(ad: ad))
-    }
-    
-    func adObjectDidStartAuction(_ adObject: AdObject) {
-        trigger(.didStartAuction)
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didStartAuctionRound auctionRound: String,
-        pricefloor: Price
-    ) {
-        trigger(.didStartAuctionRound(auctionRound: auctionRound, pricefloor: pricefloor))
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didReceiveBid ad: Ad
-    ) {
-        trigger(.didReceiveBid(ad: ad))
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didCompleteAuctionRound auctionRound: String
-    ) {
-        trigger(.didCompleteAuctionRound(auctionRound: auctionRound))
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didCompleteAuction winner: Ad?
-    ) {
-        trigger(.didCompleteAuction(winner: winner))
     }
     
     func adObject(

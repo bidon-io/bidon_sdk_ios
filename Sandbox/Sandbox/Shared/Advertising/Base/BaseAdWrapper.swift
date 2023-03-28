@@ -60,66 +60,6 @@ extension BaseAdWrapper: Bidon.AdObjectDelegate {
         )
     }
     
-    func adObjectDidStartAuction(
-        _ adObject: AdObject
-    ) {
-        send(
-            event: "Bidon did start auction",
-            detail: "",
-            bage: "flag.fill",
-            color: .secondary
-        )
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didStartAuctionRound auctionRound: String,
-        pricefloor: Price
-    ) {
-        send(
-            event: "Bidon did start auction round \(auctionRound)",
-            detail: "Pricefloor: \(pricefloor)",
-            bage: "flag.fill",
-            color: .secondary
-        )
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didReceiveBid ad: Ad
-    ) {
-        send(
-            event: "Bidon did receive bid",
-            detail: ad.text,
-            bage: "flag.fill",
-            color: .secondary
-        )
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didCompleteAuctionRound auctionRound: String
-    ) {
-        send(
-            event: "Bidon did complete auction round \(auctionRound)",
-            detail: "",
-            bage: "flag.fill",
-            color: .secondary
-        )
-    }
-    
-    func adObject(
-        _ adObject: AdObject,
-        didCompleteAuction winner: Ad?
-    ) {
-        send(
-            event: "Bidon did complete auction",
-            detail: winner.map { "Winner ad is \($0.text)" } ?? "No winner",
-            bage: "flag.fill",
-            color: .secondary
-        )
-    }
-    
     func adObject(
         _ adObject: AdObject,
         didPay revenue: AdRevenue,

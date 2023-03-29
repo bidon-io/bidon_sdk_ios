@@ -110,12 +110,12 @@ public protocol DemandProviderAdViewDelegate: AnyObject {
 public protocol AdViewDemandProvider: DemandProvider {
     var adViewDelegate: DemandProviderAdViewDelegate? { get set }
     
-    func container(for ad: AdType) -> AdViewContainer?
+    func container(for ad: DemandAdType) -> AdViewContainer?
 }
 
 
 internal extension AdViewDemandProvider {
-    func _container(for ad: Ad) -> AdViewContainer? {
-        return (ad as? AdType).flatMap { container(for: $0) }
+    func container(opaque ad: DemandAd) -> AdViewContainer? {
+        return (ad as? DemandAdType).flatMap { container(for: $0) }
     }
 }

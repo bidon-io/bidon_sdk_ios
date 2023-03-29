@@ -8,15 +8,13 @@
 import Foundation
 
 
-@objc(BDNAuctionComparator)
-public protocol AuctionComparator {
-    func compare(_ lhs: Ad, _ rhs: Ad) -> Bool
+protocol AuctionComparator {
+    func compare<T: Bid>(_ lhs: T, _ rhs: T) -> Bool
 }
 
 
-@objc(BDNHigherECPMAuctionComparator)
-public final class HigherECPMAuctionComparator: NSObject, AuctionComparator {
-    public func compare(_ lhs: Ad, _ rhs: Ad) -> Bool {
+struct HigherECPMAuctionComparator: AuctionComparator {
+    func compare<T>(_ lhs: T, _ rhs: T) -> Bool where T : Bid {
         return lhs.eCPM > rhs.eCPM
     }
 }

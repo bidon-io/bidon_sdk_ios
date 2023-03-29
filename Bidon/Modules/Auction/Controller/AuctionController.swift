@@ -10,9 +10,9 @@ import Foundation
 
 protocol AuctionController {
     associatedtype DemandProviderType: DemandProvider
-    associatedtype DemandType: Demand where DemandType.Provider == DemandProviderType
+    associatedtype BidType: Bid where BidType.Provider == DemandProviderType
     
-    typealias WaterfallType = Waterfall<DemandType>    
+    typealias WaterfallType = Waterfall<BidType>
     typealias Completion = (Result<WaterfallType, SdkError>) -> ()
         
     func load(completion: @escaping Completion)

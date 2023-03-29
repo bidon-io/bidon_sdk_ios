@@ -8,7 +8,7 @@
 import Foundation
 
 
-final class AdViewConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyAdViewDemandProvider, MediationObserverType> {
+final class AdViewConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder<AnyAdViewDemandProvider> {
     private var context: AdViewContext!
     
     @discardableResult
@@ -38,9 +38,9 @@ final class AdViewConcurrentAuctionControllerBuilder<MediationObserverType: Medi
 extension AdViewDemandProvider {
     func wrapped() throws -> AnyAdViewDemandProvider {
         switch self {
-        case _ as any DirectDemandProvider:         return try AnyDirectDemandProvider(self)
-        case _ as any ProgrammaticDemandProvider:   return try AnyProgrammaticDemandProvider(self)
-        default:                                    return try AnyDemandProvider(self)
+        case _ as any DirectDemandProvider:         return try DirectDemandProviderWrapper(self)
+        case _ as any ProgrammaticDemandProvider:   return try ProgrammaticDemandProviderWrapper(self)
+        default:                                    return try DemandProviderWrapper(self)
         }
     }
 }

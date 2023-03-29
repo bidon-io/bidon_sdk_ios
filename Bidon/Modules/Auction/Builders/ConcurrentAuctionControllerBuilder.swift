@@ -8,8 +8,8 @@
 import Foundation
 
 
-class BaseConcurrentAuctionControllerBuilder<DemandProviderType, MediationObserverType>
-where DemandProviderType: DemandProvider, MediationObserverType: MediationObserver {
+class BaseConcurrentAuctionControllerBuilder<DemandProviderType>
+where DemandProviderType: DemandProvider {
     
     typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
     typealias AuctionType = Auction<RoundType>
@@ -17,7 +17,7 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     private(set) var comparator: AuctionComparator = HigherECPMAuctionComparator()
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
-    private(set) var observer: MediationObserverType!
+    private(set) var observer: AnyMediationObserver!
     private(set) var elector: LineItemElector!
     private(set) var revenueDelegate: DemandProviderRevenueDelegate!
 
@@ -80,7 +80,7 @@ where DemandProviderType: DemandProvider, MediationObserverType: MediationObserv
     
     @discardableResult
     public func withObserver(
-        _ observer: MediationObserverType
+        _ observer: AnyMediationObserver
     ) -> Self {
         self.observer = observer
         return self

@@ -31,7 +31,7 @@ public final class BannerView: UIView, AdView {
     
     @objc public var delegate: AdViewDelegate?
     
-    @objc public var isReady: Bool { return adManager.demand != nil }
+    @objc public var isReady: Bool { return adManager.bid != nil }
     
     @Injected(\.sdk)
     private var sdk: Sdk
@@ -86,8 +86,8 @@ public final class BannerView: UIView, AdView {
     
     private final func refreshIfNeeded() {
         guard
-            let demand = adManager.demand,
-            let adView = demand.provider._container(for: demand.ad)
+            let bid = adManager.bid,
+            let adView = bid.provider.container(opaque: bid.ad)
         else { return }
         
         if viewManager.isRefreshGranted || !viewManager.isAdPresented {
@@ -97,7 +97,7 @@ public final class BannerView: UIView, AdView {
                 guard let self = self else { return }
                 
                 self.viewManager.present(
-                    demand: demand,
+                    bid: bid,
                     view: adView,
                     context: self.context
                 )
@@ -124,8 +124,8 @@ extension BannerView: BannerAdManagerDelegate {
         delegate?.adObject(self, didFailToLoadAd: error)
     }
     
-    func adManager(_ adManager: BannerAdManager, didLoad demand: AdViewDemand) {
-        delegate?.adObject(self, didLoadAd: demand.ad)
+    func adManager(_ adManager: BannerAdManager, didLoad ad: Ad) {
+        delegate?.adObject(self, didLoadAd: ad)
         refreshIfNeeded()
     }
     
@@ -136,40 +136,25 @@ extension BannerView: BannerAdManagerDelegate {
 
 
 extension BannerView: BannerViewManagerDelegate {
-    func viewManager(_ viewManager: BannerViewManager, didRecordImpression impression: Impression) {
+    func viewManager(_ viewManager: BannerViewManager, didRecordImpression ad: Ad) {
         scheduleRefreshIfNeeded()
-        delegate?.adObject?(self, didRecordImpression: impression.ad)
+        delegate?.adObject?(self, didRecordImpression: ad)
     }
     
-    func viewManager(_ viewManager: BannerViewManager, didRecordClick impression: Impression) {
-        delegate?.adObject?(self, didRecordClick: impression.ad)
+    func viewManager(_ viewManager: BannerViewManager, didRecordClick ad: Ad) {
+        delegate?.adObject?(self, didRecordClick: ad)
     }
     
-    func viewManager(_ viewManager: BannerViewManager, willPresentModalView impression: Impression) {
-        delegate?.adView(self, willPresentScreen: impression.ad)
+    func viewManager(_ viewManager: BannerViewManager, willPresentModalView ad: Ad) {
+        delegate?.adView(self, willPresentScreen: ad)
     }
     
-    func viewManager(_ viewManager: BannerViewManager, didDismissModalView impression: Impression) {
-        delegate?.adView(self, didDismissScreen: impression.ad)
+    func viewManager(_ viewManager: BannerViewManager, didDismissModalView ad: Ad) {
+        delegate?.adView(self, didDismissScreen: ad)
     }
     
-    func viewManager(_ viewManager: BannerViewManager, willLeaveApplication impression: Impression) {
-        delegate?.adView(self, willLeaveApplication: impression.ad)
-    }
-}
-
-
-extension BannerView: DemandProviderRevenueDelegate {
-    public func provider(
-        _ provider: any DemandProvider,
-        didPay revenue: AdRevenue,
-        ad: Ad
-    ) {
-        delegate?.adObject?(
-            self,
-            didPay: revenue,
-            ad: ad
-        )
+    func viewManager(_ viewManager: BannerViewManager, willLeaveApplication ad: Ad) {
+        delegate?.adView(self, willLeaveApplication: ad)
     }
 }
 

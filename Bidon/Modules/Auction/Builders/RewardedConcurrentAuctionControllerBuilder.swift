@@ -8,8 +8,7 @@
 import Foundation
 
 
-final class RewardedConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyRewardedAdDemandProvider, MediationObserverType> {
-    
+final class RewardedConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder<AnyRewardedAdDemandProvider> {
     override func adapters() -> [AnyDemandSourceAdapter<AnyRewardedAdDemandProvider>] {
         let adapters: [RewardedAdDemandSourceAdapter] = adaptersRepository.all()
         return adapters.compactMap { adapter in
@@ -31,9 +30,9 @@ final class RewardedConcurrentAuctionControllerBuilder<MediationObserverType: Me
 private extension RewardedAdDemandProvider {
     func wrapped() throws -> AnyRewardedAdDemandProvider {
         switch self {
-        case _ as any DirectDemandProvider:         return try AnyDirectDemandProvider(self)
-        case _ as any ProgrammaticDemandProvider:   return try AnyProgrammaticDemandProvider(self)
-        default:                                    return try AnyDemandProvider(self)
+        case _ as any DirectDemandProvider:         return try DirectDemandProviderWrapper(self)
+        case _ as any ProgrammaticDemandProvider:   return try ProgrammaticDemandProviderWrapper(self)
+        default:                                    return try DemandProviderWrapper(self)
         }
     }
 }

@@ -11,14 +11,10 @@ import UIKit
 
 @objc(BDNRewardedAd)
 public final class RewardedAd: NSObject, RewardedAdObject {
-    typealias RewardedMediationObserver = DefaultMediationObserver<AnyRewardedAdDemandProvider>
-    typealias RewardedAuctionControllerBuilder = RewardedConcurrentAuctionControllerBuilder<RewardedMediationObserver>
-
     private typealias Manager = BaseFullscreenAdManager<
         AnyRewardedAdDemandProvider,
-        RewardedMediationObserver,
         RewardedAuctionRequestBuilder,
-        RewardedAuctionControllerBuilder,
+        RewardedConcurrentAuctionControllerBuilder,
         RewardedImpressionController,
         RewardedImpressionRequestBuilder
     >
@@ -66,25 +62,25 @@ extension RewardedAd: FullscreenAdManagerDelegate {
         delegate?.adObject(self, didLoadAd: ad)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, didFailToPresent impression: Impression?, error: SdkError) {
+    func adManager(_ adManager: FullscreenAdManager, didFailToPresent ad: Ad?, error: SdkError) {
         delegate?.fullscreenAd(self, didFailToPresentAd: error)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, willPresent impression: Impression) {
-        delegate?.fullscreenAd(self, willPresentAd: impression.ad)
-        delegate?.adObject?(self, didRecordImpression: impression.ad)
+    func adManager(_ adManager: FullscreenAdManager, willPresent ad: Ad) {
+        delegate?.fullscreenAd(self, willPresentAd: ad)
+        delegate?.adObject?(self, didRecordImpression: ad)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, didHide impression: Impression) {
-        delegate?.fullscreenAd(self, didDismissAd: impression.ad)
+    func adManager(_ adManager: FullscreenAdManager, didHide ad: Ad) {
+        delegate?.fullscreenAd(self, didDismissAd: ad)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, didClick impression: Impression) {
-        delegate?.adObject?(self, didRecordClick: impression.ad)
+    func adManager(_ adManager: FullscreenAdManager, didClick ad: Ad) {
+        delegate?.adObject?(self, didRecordClick: ad)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, didReward reward: Reward, impression: Impression) {
-        delegate?.rewardedAd(self, didRewardUser: reward, ad: impression.ad)
+    func adManager(_ adManager: FullscreenAdManager, didReward reward: Reward, ad: Ad) {
+        delegate?.rewardedAd(self, didRewardUser: reward, ad: ad)
     }
     
     func adManager(_ adManager: FullscreenAdManager, didPayRevenue revenue: AdRevenue, ad: Ad) {

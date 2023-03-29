@@ -34,11 +34,11 @@ final class GoogleMobileAdsRewardedAdDemandProvider: GoogleMobileAdsBaseDemandPr
 
 
 extension GoogleMobileAdsRewardedAdDemandProvider: RewardedAdDemandProvider {
-    func show(ad: GoogleMobileAdsAdWrapper<GADRewardedAd>, from viewController: UIViewController) {
-        ad.adObject.present(fromRootViewController: viewController) { [weak self, weak ad] in
+    func show(ad: GADRewardedAd, from viewController: UIViewController) {
+        ad.present(fromRootViewController: viewController) { [weak self, weak ad] in
             guard let ad = ad, let self = self else { return }
-            let rewardWrapper = GoogleMobileAdsRewardWrapper(ad.adObject.adReward)
             
+            let rewardWrapper = GoogleMobileAdsRewardWrapper(ad.adReward)
             self.rewardDelegate?.provider(self, didReceiveReward: rewardWrapper)
         }
     }

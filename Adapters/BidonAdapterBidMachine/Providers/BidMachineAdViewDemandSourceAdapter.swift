@@ -21,8 +21,8 @@ final class BidMachineAdViewDemandProvider: BidMachineBaseDemandProvider<BidMach
 
 
 extension BidMachineAdViewDemandProvider: AdViewDemandProvider {
-    func container(for ad: BidMachineAdWrapper<BidMachineBanner>) -> AdViewContainer? {
-        return ad.wrapped
+    func container(for ad: BidMachineAdDemand<BidMachineBanner>) -> AdViewContainer? {
+        return ad.ad
     }
 }
 

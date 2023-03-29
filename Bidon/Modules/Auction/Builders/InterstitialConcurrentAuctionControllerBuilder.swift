@@ -8,8 +8,7 @@
 import Foundation
 
 
-final class InterstitialConcurrentAuctionControllerBuilder<MediationObserverType: MediationObserver>: BaseConcurrentAuctionControllerBuilder<AnyInterstitialDemandProvider, MediationObserverType> {
-    
+final class InterstitialConcurrentAuctionControllerBuilder: BaseConcurrentAuctionControllerBuilder<AnyInterstitialDemandProvider> {
     override func adapters() -> [AnyDemandSourceAdapter<AnyInterstitialDemandProvider>] {
         let adapters: [InterstitialDemandSourceAdapter] = adaptersRepository.all()
         return adapters.compactMap { adapter in
@@ -31,9 +30,9 @@ final class InterstitialConcurrentAuctionControllerBuilder<MediationObserverType
 private extension InterstitialDemandProvider {
     func wrapped() throws -> AnyInterstitialDemandProvider {
         switch self {
-        case _ as any DirectDemandProvider:         return try AnyDirectDemandProvider(self)
-        case _ as any ProgrammaticDemandProvider:   return try AnyProgrammaticDemandProvider(self)
-        default:                                    return try AnyDemandProvider(self)
+        case _ as any DirectDemandProvider:         return try DirectDemandProviderWrapper(self)
+        case _ as any ProgrammaticDemandProvider:   return try ProgrammaticDemandProviderWrapper(self)
+        default:                                    return try DemandProviderWrapper(self)
         }
     }
 }

@@ -18,11 +18,11 @@ final class InterstitialImpressionController: NSObject, FullscreenImpressionCont
     private let provider: any InterstitialDemandProvider
     private var impression: Impression!
     
-    required init(demand: AnyInterstitialDemand) {
-        let demand = demand.unwrapped()
+    required init(bid: AnyInterstitialBid) {
+        let bid = bid.unwrapped()
         
-        self.provider = demand.provider
-        self.impression = FullscreenImpression(demand: demand)
+        self.provider = bid.provider
+        self.impression = FullscreenImpression(bid: bid)
         
         super.init()
         
@@ -30,7 +30,7 @@ final class InterstitialImpressionController: NSObject, FullscreenImpressionCont
     }
     
     func show(from context: UIViewController) {
-        provider._show(ad: impression.ad, from: context)
+        provider.show(opaque: impression.ad, from: context)
     }
 }
 

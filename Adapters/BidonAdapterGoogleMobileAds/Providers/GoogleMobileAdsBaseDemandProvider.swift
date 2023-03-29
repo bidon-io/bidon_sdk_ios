@@ -11,9 +11,7 @@ import GoogleMobileAds
 import Bidon
 
 
-class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsAdObject>: NSObject {
-    typealias AdType = GoogleMobileAdsAdWrapper<AdObject>
-    
+class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsDemandAd>: NSObject {
     weak var delegate: DemandProviderDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
     
@@ -24,12 +22,7 @@ class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsAdObject>: NSOb
     }
     
     final func handleDidLoad(adObject: AdObject, lineItem: LineItem) {
-        let adWrapper = GoogleMobileAdsAdWrapper(
-            lineItem: lineItem,
-            adObject:adObject
-        )
-        
-        self.response?(.success(adWrapper))
+        self.response?(.success(adObject))
         self.response = nil
     }
     
@@ -43,13 +36,12 @@ class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsAdObject>: NSOb
             guard let self = self, let adObject = adObject else { return }
             
             let revenueWrapper = GoogleMobileAdsAdRevenueWrapper(revenue)
-            let adWrapper = GoogleMobileAdsAdWrapper(
-                lineItem: lineItem,
-                adObject: adObject
-                
-            )
             
-            self.revenueDelegate?.provider(self, didPay: revenueWrapper, ad: adWrapper)
+            self.revenueDelegate?.provider(
+                self,
+                didPayRevenue: revenueWrapper,
+                ad: adObject
+            )
         }
     }
 }
@@ -63,10 +55,10 @@ extension GoogleMobileAdsBaseDemandProvider: DirectDemandProvider {
         loadAd(request, lineItem: lineItem)
     }
     
-    func fill(ad: GoogleMobileAdsAdWrapper<AdObject>, response: @escaping DemandProviderResponse) {
+    func fill(ad: AdObject, response: @escaping DemandProviderResponse) {
         response(.success(ad))
     }
     
-    func notify(ad: GoogleMobileAdsAdWrapper<AdObject>, event: AuctionEvent) {}
+    func notify(ad: AdObject, event: AuctionEvent) {}
 }
 

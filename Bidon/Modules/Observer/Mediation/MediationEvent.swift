@@ -8,19 +8,19 @@
 import Foundation
 
 
-enum MediationEvent<T: DemandProvider> {
+enum MediationEvent {
     case auctionStart
     case roundStart(round: AuctionRound, pricefloor: Price)
     case bidRequest(round: AuctionRound, adapter: Adapter, lineItem: LineItem?)
-    case bidResponse(round: AuctionRound, adapter: Adapter, bid: Bid<T>)
+    case bidResponse(round: AuctionRound, adapter: Adapter, bid: any Bid)
     case bidError(round: AuctionRound, adapter: Adapter, error: MediationError)
-    case roundFinish(round: AuctionRound, winner: Ad?)
-    case auctionFinish(winner: Ad?)
+    case roundFinish(round: AuctionRound, winner: (any Bid)?)
+    case auctionFinish(winner: (any Bid)?)
     case fillStart
-    case fillRequest(ad: Ad)
-    case fillResponse(ad: Ad)
-    case fillError(ad: Ad, error: MediationError)
-    case fillFinish(winner: Ad?)
+    case fillRequest(bid: any Bid)
+    case fillResponse(bid: any Bid)
+    case fillError(bid: any Bid, error: MediationError)
+    case fillFinish(winner: (any Bid)?)
 }
 
 
@@ -30,7 +30,7 @@ extension MediationEvent: CustomStringConvertible {
         case .auctionStart: return "did start auction"
         case .roundStart(let round, let pricefloor): return "did start round: \(round) with pricefloor: \(pricefloor.pretty)"
         case .bidRequest(let round, let adapter, let lineItem): return "\(adapter) will request bid" + (lineItem.map { " with \($0)" } ?? " (programmatic)" + " in round: '\(round.id)'")
-        case .bidResponse(let round, let adapter, let bid): return "\(adapter) did receive bid: \(bid.ad) in round: '\(round.id)'"
+        case .bidResponse(let round, let adapter, let ad): return "\(adapter) did receive bid: \(ad) in round: '\(round.id)'"
         case .bidError(let round, let adapter, let error): return "\(adapter) did fail with error: \(error) in round: '\(round.id)'"
         case .roundFinish(let round, let winner): return "\(round) finished" + (winner.map { " with winner: \($0)" } ?? " without winner")
         case .auctionFinish(winner: let winner): return "bidding finished" + (winner.map { " with winner: \($0)" } ?? " without winner")

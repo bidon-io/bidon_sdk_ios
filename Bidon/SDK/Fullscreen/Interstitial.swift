@@ -11,14 +11,10 @@ import UIKit
 
 @objc(BDNInterstitial)
 public final class Interstitial: NSObject, FullscreenAdObject {
-    private typealias InterstitialMediationObserver = DefaultMediationObserver<AnyInterstitialDemandProvider>
-    private typealias InterstitialAuctionControllerBuilder = InterstitialConcurrentAuctionControllerBuilder<InterstitialMediationObserver>
-    
     private typealias Manager = BaseFullscreenAdManager<
         AnyInterstitialDemandProvider,
-        InterstitialMediationObserver,
         InterstitialAuctionRequestBuilder,
-        InterstitialAuctionControllerBuilder,
+        InterstitialConcurrentAuctionControllerBuilder,
         InterstitialImpressionController,
         InterstitialImpressionRequestBuilder
     >
@@ -66,21 +62,21 @@ extension Interstitial: FullscreenAdManagerDelegate {
         delegate?.adObject(self, didLoadAd: ad)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, didFailToPresent impression: Impression?, error: SdkError) {
+    func adManager(_ adManager: FullscreenAdManager, didFailToPresent ad: Ad?, error: SdkError) {
         delegate?.fullscreenAd(self, didFailToPresentAd: error)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, willPresent impression: Impression) {
-        delegate?.fullscreenAd(self, willPresentAd: impression.ad)
-        delegate?.adObject?(self, didRecordImpression: impression.ad)
+    func adManager(_ adManager: FullscreenAdManager, willPresent ad: Ad) {
+        delegate?.fullscreenAd(self, willPresentAd: ad)
+        delegate?.adObject?(self, didRecordImpression: ad)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, didHide impression: Impression) {
-        delegate?.fullscreenAd(self, didDismissAd: impression.ad)
+    func adManager(_ adManager: FullscreenAdManager, didHide ad: Ad) {
+        delegate?.fullscreenAd(self, didDismissAd: ad)
     }
     
-    func adManager(_ adManager: FullscreenAdManager, didClick impression: Impression) {
-        delegate?.adObject?(self, didRecordClick: impression.ad)
+    func adManager(_ adManager: FullscreenAdManager, didClick ad: Ad) {
+        delegate?.adObject?(self, didRecordClick: ad)
     }
     
     func adManager(_ adManager: FullscreenAdManager, didPayRevenue revenue: AdRevenue, ad: Ad) {
@@ -91,6 +87,6 @@ extension Interstitial: FullscreenAdManagerDelegate {
         )
     }
     
-    func adManager(_ adManager: FullscreenAdManager, didReward reward: Reward, impression: Impression) {}
+    func adManager(_ adManager: FullscreenAdManager, didReward reward: Reward, ad: Ad) {}
 }
 

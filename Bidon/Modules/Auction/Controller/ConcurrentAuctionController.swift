@@ -8,26 +8,20 @@
 import Foundation
 
 
-final class ConcurrentAuctionController<T, M>: AuctionController, MediationController
-where M: MediationObserver, T == M.DemandProviderType {
+final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: AuctionController {
+    typealias BidType = BidModel<DemandProviderType>
     
-    typealias DemandType = DemandModel<T>
-    typealias DemandProviderType = T
-    typealias Observer = M
-    
-    private typealias Event = MediationEvent<DemandProviderType>
     private typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
     private typealias AuctionType = Auction<RoundType>
-    private typealias RoundResultType = AuctionRoundBidResult<DemandProviderType>
     
     private let auction: AuctionType
     private let comparator: AuctionComparator
     private let pricefloor: Price
     
-    let observer: Observer
+    let observer: AnyMediationObserver
     
     private lazy var active = Set<RoundType>()
-    private lazy var repository = AdsRepository<DemandProviderType>()
+    private lazy var repository = BidRepository<BidType>()
     
     private var completion: Completion?
     
@@ -37,14 +31,14 @@ where M: MediationObserver, T == M.DemandProviderType {
         return currentWinner?.eCPM ?? pricefloor
     }
     
-    private var currentWinner: Ad? {
+    private var currentWinner: BidType? {
         return repository
-            .ads
+            .all
             .sorted { comparator.compare($0, $1) }
             .first
     }
     
-    init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType, Observer> {
+    init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType> {
         let builder = T()
         build(builder)
         
@@ -69,8 +63,8 @@ where M: MediationObserver, T == M.DemandProviderType {
         auction.root.forEach(perform)
     }
     
-    private func provider<T>(for ad: Ad) -> T? {
-        return repository.provider(for: ad) as? T
+    private func provider(for ad: DemandAd) -> DemandProviderType? {
+        return repository.bid(for: ad)?.provider
     }
     
     private func finish() {
@@ -81,16 +75,16 @@ where M: MediationObserver, T == M.DemandProviderType {
         
         if let winner = currentWinner {
             repository.ads.forEach { ad in
-                let provider = repository.provider(for: ad)
-                let event: AuctionEvent = ad.id == winner.id ? .win : .lose(winner)
-                provider?._notify(ad: ad, event: event)
+                let provider = provider(for: ad)
+                let event: AuctionEvent = ad.id == winner.ad.id ? .win : .lose(winner.ad, winner.eCPM)
+                provider?.notify(opaque: ad, event: event)
             }
             
-            let event = Event.auctionFinish(winner: winner)
+            let event = MediationEvent.auctionFinish(winner: winner)
             observer.log(event)
             completion?(.success(waterfall))
         } else {
-            let event = Event.auctionFinish(winner: nil)
+            let event = MediationEvent.auctionFinish(winner: nil)
             observer.log(event)
             
             completion?(.failure(SdkError.internalInconsistency))
@@ -102,7 +96,7 @@ where M: MediationObserver, T == M.DemandProviderType {
         
         active.insert(round)
         
-        let event = Event.roundStart(
+        let event = MediationEvent.roundStart(
             round: round,
             pricefloor: pricefloor
         )
@@ -115,10 +109,20 @@ where M: MediationObserver, T == M.DemandProviderType {
         
         round.onDemandResponse = { [unowned round, unowned self] adapter, result in
             switch result {
-            case .success(let bid):
-                self.round(round, didReceive: bid, adapter: adapter)
+            case .success((let provider, let ad, let lineItem)):
+                self.round(
+                    round,
+                    didReceive: ad,
+                    provider: provider,
+                    lineItem: lineItem,
+                    adapter: adapter
+                )
             case .failure(let error):
-                self.round(round, didReceive: error, adapter: adapter)
+                self.round(
+                    round,
+                    didReceive: error,
+                    adapter: adapter
+                )
             }
         }
         
@@ -134,7 +138,7 @@ where M: MediationObserver, T == M.DemandProviderType {
         didRequestDemand adapter: Adapter,
         lineItem: LineItem?
     ) {
-        let event = Event.bidRequest(
+        let event = MediationEvent.bidRequest(
             round: round,
             adapter: adapter,
             lineItem: lineItem
@@ -145,11 +149,23 @@ where M: MediationObserver, T == M.DemandProviderType {
     
     private func round(
         _ round: RoundType,
-        didReceive bid: Bid<DemandProviderType>,
+        didReceive ad: DemandAd,
+        provider: DemandProviderType,
+        lineItem: LineItem?,
         adapter: Adapter
     ) {
-        guard bid.ad.eCPM > pricefloor else {
-            let event = Event.bidError(
+        let bid = BidType(
+            auctionId: observer.auctionId,
+            auctionConfigurationId: observer.auctionConfigurationId,
+            roundId: round.id,
+            adType: observer.adType,
+            lineItem: lineItem,
+            ad: ad,
+            provider: provider
+        )
+        
+        guard bid.eCPM > pricefloor else {
+            let event = MediationEvent.bidError(
                 round: round,
                 adapter: adapter,
                 error: .belowPricefloor
@@ -158,15 +174,15 @@ where M: MediationObserver, T == M.DemandProviderType {
             return
         }
         
-        bid.provider.revenueDelegate = revenueDelegate
+        provider.revenueDelegate = revenueDelegate
         
-        let event = Event.bidResponse(
+        let event = MediationEvent.bidResponse(
             round: round,
             adapter: adapter,
             bid: bid
         )
-        
         observer.log(event)
+
         repository.register(bid)
     }
     
@@ -175,7 +191,7 @@ where M: MediationObserver, T == M.DemandProviderType {
         didReceive error: MediationError,
         adapter: Adapter
     ) {
-        let event = Event.bidError(
+        let event = MediationEvent.bidError(
             round: round,
             adapter: adapter,
             error: error
@@ -184,7 +200,7 @@ where M: MediationObserver, T == M.DemandProviderType {
     }
     
     private func complete(round: RoundType) {
-        let event = Event.roundFinish(
+        let event = MediationEvent.roundFinish(
             round: round,
             winner: currentWinner
         )
@@ -206,17 +222,8 @@ private extension ConcurrentAuctionController {
     var waterfall: WaterfallType {
         return WaterfallType(
             repository
-                .ads
+                .all
                 .sorted { comparator.compare($0, $1) }
-                .compactMap { repository.bid(for: $0) }
-                .compactMap { ad, provider in
-                    DemandType(
-                        auctionId: observer.auctionId,
-                        auctionConfigurationId: observer.auctionConfigurationId,
-                        ad: ad,
-                        provider: provider
-                    )
-                }
         )
     }
 }

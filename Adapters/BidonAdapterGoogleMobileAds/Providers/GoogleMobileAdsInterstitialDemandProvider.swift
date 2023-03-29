@@ -32,8 +32,8 @@ final class GoogleMobileAdsInterstitialDemandProvider: GoogleMobileAdsBaseDemand
 
 
 extension GoogleMobileAdsInterstitialDemandProvider: InterstitialDemandProvider {
-    func show(ad: GoogleMobileAdsAdWrapper<GADInterstitialAd>, from viewController: UIViewController) {
-        ad.adObject.present(fromRootViewController: viewController)
+    func show(ad: GADInterstitialAd, from viewController: UIViewController) {
+        ad.present(fromRootViewController: viewController)
     }
 }
 

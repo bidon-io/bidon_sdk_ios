@@ -10,7 +10,7 @@ import Foundation
 
 public enum AuctionEvent {
     case win
-    case lose(Ad)
+    case lose(DemandAd, Price)
 }
 
 
@@ -31,7 +31,7 @@ public enum MediationError: String, Error {
 }
 
 
-public typealias DemandProviderResponse = (Result<Ad, MediationError>) -> ()
+public typealias DemandProviderResponse = (Result<DemandAd, MediationError>) -> ()
 
 
 public protocol DemandProviderDelegate: AnyObject {
@@ -45,27 +45,32 @@ public protocol DemandProviderDelegate: AnyObject {
 public protocol DemandProviderRevenueDelegate: AnyObject {
     func provider(
         _ provider: any DemandProvider,
-        didPay revenue: AdRevenue,
-        ad: Ad
+        didPayRevenue revenue: AdRevenue,
+        ad: DemandAd
+    )
+    
+    func provider(
+        _ provider: any DemandProvider,
+        didLogImpression ad: DemandAd
     )
 }
     
 
 public protocol DemandProvider: AnyObject {
-    associatedtype AdType: Ad
+    associatedtype DemandAdType: DemandAd
     
     var delegate: DemandProviderDelegate? { get set }
     var revenueDelegate: DemandProviderRevenueDelegate? { get set }
     
-    func fill(ad: AdType, response: @escaping DemandProviderResponse)
+    func fill(ad: DemandAdType, response: @escaping DemandProviderResponse)
     
-    func notify(ad: AdType, event: AuctionEvent)
+    func notify(ad: DemandAdType, event: AuctionEvent)
 }
 
 
 internal extension DemandProvider {
-    func _fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard let ad = ad as? AdType else {
+    func fill(opaque ad: DemandAd, response: @escaping DemandProviderResponse) {
+        guard let ad = ad as? DemandAdType else {
             response(.failure(.unscpecifiedException))
             return
         }
@@ -73,18 +78,24 @@ internal extension DemandProvider {
         fill(ad: ad, response: response)
     }
     
-    func _notify(ad: Ad, event: AuctionEvent) {
-        guard let ad = ad as? AdType else { return }
+    func notify(opaque ad: DemandAd, event: AuctionEvent) {
+        guard let ad = ad as? DemandAdType else { return }
         notify(ad: ad, event: event)
     }
 }
 
 
 public protocol ProgrammaticDemandProvider: DemandProvider {
-    func bid(_ pricefloor: Price, response: @escaping DemandProviderResponse)
+    func bid(
+        _ pricefloor: Price,
+        response: @escaping DemandProviderResponse
+    )
 }
 
 
 public protocol DirectDemandProvider: DemandProvider {
-    func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse)
+    func bid(
+        _ lineItem: LineItem,
+        response: @escaping DemandProviderResponse
+    )
 }

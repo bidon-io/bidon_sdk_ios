@@ -28,16 +28,16 @@ final class BidMachineRewardedAdDemandProvider: BidMachineBaseDemandProvider<Bid
 
 extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
     func show(
-        ad: BidMachineAdWrapper<BidMachineRewarded>,
+        ad: BidMachineAdDemand<BidMachineRewarded>,
         from viewController: UIViewController
     ) {
-        guard ad.wrapped.canShow else {
+        guard ad.ad.canShow else {
             delegate?.providerDidFailToDisplay(self, error: .invalidPresentationState)
             return
         }
         
-        ad.wrapped.controller = viewController
-        ad.wrapped.presentAd()
+        ad.ad.controller = viewController
+        ad.ad.presentAd()
     }
 }
 

@@ -13,7 +13,7 @@ import Bidon
 
 
 class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, BidMachineAdDelegate {
-    typealias AdType = BidMachineAdWrapper<AdObject>
+    typealias AdType = BidMachineAdDemand<AdObject>
     
     weak var delegate: DemandProviderDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
@@ -25,7 +25,7 @@ class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, Bi
     private var response: DemandProviderResponse?
     
     func didLoadAd(_ ad: BidMachineAdProtocol) {
-        let wrapper = BidMachineAdWrapper(ad)
+        let wrapper = BidMachineAdDemand(ad)
         response?(.success(wrapper))
         response = nil
     }
@@ -39,10 +39,10 @@ class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, Bi
     }
     
     func didTrackImpression(_ ad: BidMachineAdProtocol) {
-        let wrapper = BidMachineAdWrapper(ad)
+        let wrapper = BidMachineAdDemand(ad)
         let adRevenue = BidMachineAdRevenueWrapper(ad)
         
-        revenueDelegate?.provider(self, didPay: adRevenue, ad: wrapper)
+        revenueDelegate?.provider(self, didPayRevenue: adRevenue, ad: wrapper)
     }
     
     func didFailPresentAd(_ ad: BidMachineAdProtocol, _ error: Error) {
@@ -91,20 +91,20 @@ extension BidMachineBaseDemandProvider: ProgrammaticDemandProvider {
     func fill(ad: AdType, response: @escaping DemandProviderResponse) {
         self.response = response
         
-        ad.wrapped.controller = UIApplication.shared.bd.topViewcontroller
-        ad.wrapped.delegate = self
-        ad.wrapped.loadAd()
+        ad.ad.controller = UIApplication.shared.bd.topViewcontroller
+        ad.ad.delegate = self
+        ad.ad.loadAd()
     }
         
     func notify(ad: AdType, event: AuctionEvent) {
         switch event {
         case .win:
-            BidMachineSdk.shared.notifyMediationWin(ad.wrapped)
-        case .lose(let winner):
+            BidMachineSdk.shared.notifyMediationWin(ad.ad)
+        case .lose(let winner, let eCPM):
             BidMachineSdk.shared.notifyMediationLoss(
                 winner.networkName,
-                winner.eCPM,
-                ad.wrapped
+                eCPM,
+                ad.ad
             )
         }
     }

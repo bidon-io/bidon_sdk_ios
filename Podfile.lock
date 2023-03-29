@@ -4,20 +4,6 @@ PODS:
     - Adjust/Core (= 4.33.4)
   - Adjust/Core (4.33.4)
   - AdjustPurchase (1.0.1)
-  - Ads-Global (4.3.1.9):
-    - Ads-Global/BUAdSDK (= 4.3.1.9)
-  - Ads-Global/APM (4.3.1.9):
-    - RangersAPM-Pangle/Crash (= 2.3.2-pangle)
-    - RangersAPM-Pangle/Global (= 2.3.2-pangle)
-    - RangersAPM-Pangle/SessionTracker (= 2.3.2-pangle)
-  - Ads-Global/BUAdSDK (4.3.1.9):
-    - Ads-Global/BUFoundation
-    - Ads-Global/International
-  - Ads-Global/BUFoundation (4.3.1.9):
-    - BURelyFoundation_Global (= 0.0.1.57)
-  - Ads-Global/International (4.3.1.9):
-    - Ads-Global/APM
-    - Ads-Global/BUFoundation
   - AmazonPublisherServicesSDK (4.5.6)
   - APDAdColonyAdapter (3.1.1.1-Beta):
     - AdColony (= 4.9.0)
@@ -135,9 +121,6 @@ PODS:
   - BidMachineNotsyAdapter (2.0.1.0):
     - BidMachine (~> 2.0.1.0)
     - Google-Mobile-Ads-SDK (= 10.2.0)
-  - BidMachinePangleAdapter (2.0.1.0):
-    - Ads-Global (= 4.3.1.9)
-    - BidMachine (~> 2.0.1.0)
   - BidMachineProtoCore (0.2.0):
     - BidMachineApiCore (~> 0.2.0)
   - BidMachineSmaatoAdapter (2.0.1.0):
@@ -150,9 +133,6 @@ PODS:
   - BidMachineVungleAdapter (2.0.1.0):
     - BidMachine (~> 2.0.1.0)
     - VungleSDK-iOS (= 6.12.3)
-  - BURelyFoundation_Global (0.0.1.57):
-    - BURelyFoundation_Global/NETWork (= 0.0.1.57)
-  - BURelyFoundation_Global/NETWork (0.0.1.57)
   - CriteoPublisherSdk (4.8.0):
     - CriteoPublisherSdk/Sdk (= 4.8.0)
   - CriteoPublisherSdk/Sdk (4.8.0)
@@ -314,30 +294,8 @@ PODS:
   - nanopb/encode (2.30909.0)
   - OCMock (3.9.1)
   - OMSDK_Appodeal (1.4.2.0)
-  - OneKit-Pangle/BaseKit (1.1.21-pangle)
-  - OneKit-Pangle/Database (1.1.21-pangle):
-    - OneKit-Pangle/Service
-  - OneKit-Pangle/Service (1.1.21-pangle)
   - PromisesObjC (2.2.0)
   - Protobuf (3.22.1)
-  - RangersAPM-Pangle/Core (2.3.2-pangle):
-    - OneKit-Pangle/BaseKit (= 1.1.21-pangle)
-  - RangersAPM-Pangle/Crash (2.3.2-pangle):
-    - RangersAPM-Pangle/Core
-    - RangersAPM-Pangle/HMD
-    - RangersAPM-Pangle/Public
-  - RangersAPM-Pangle/Global (2.3.2-pangle):
-    - RangersAPM-Pangle/Core
-    - RangersAPM-Pangle/Public
-  - RangersAPM-Pangle/HMD (2.3.2-pangle):
-    - OneKit-Pangle/Database (= 1.1.21-pangle)
-    - RangersAPM-Pangle/Core
-  - RangersAPM-Pangle/Public (2.3.2-pangle):
-    - RangersAPM-Pangle/Core
-  - RangersAPM-Pangle/SessionTracker (2.3.2-pangle):
-    - RangersAPM-Pangle/Core
-    - RangersAPM-Pangle/HMD
-    - RangersAPM-Pangle/Public
   - smaato-ios-sdk (22.0.2):
     - smaato-ios-sdk/Full (= 22.0.2)
   - smaato-ios-sdk/Banner (22.0.2):
@@ -492,7 +450,6 @@ DEPENDENCIES:
   - BidMachineMintegralAdapter
   - BidMachineMyTargetAdapter
   - BidMachineNotsyAdapter
-  - BidMachinePangleAdapter
   - BidMachineSmaatoAdapter
   - BidMachineTapjoyAdapter
   - BidMachineVungleAdapter
@@ -534,7 +491,6 @@ SPEC REPOS:
     - BidMachineMyTargetAdapter
     - BidMachineNetworkCore
     - BidMachineNotsyAdapter
-    - BidMachinePangleAdapter
     - BidMachineProtoCore
     - BidMachineSmaatoAdapter
     - BidMachineTapjoyAdapter
@@ -548,12 +504,10 @@ SPEC REPOS:
   trunk:
     - AdColony
     - Adjust
-    - Ads-Global
     - AmazonPublisherServicesSDK
     - AppLovinSDK
     - AppsFlyer-AdRevenue
     - AppsFlyerFramework
-    - BURelyFoundation_Global
     - CriteoPublisherSdk
     - FBAEMKit
     - FBAudienceNetwork
@@ -577,10 +531,8 @@ SPEC REPOS:
     - myTrackerSDK
     - nanopb
     - OCMock
-    - OneKit-Pangle
     - PromisesObjC
     - Protobuf
-    - RangersAPM-Pangle
     - smaato-ios-sdk
     - StackIAB
     - StackModules
@@ -594,7 +546,6 @@ SPEC CHECKSUMS:
   AdColony: 4f3738dc633d7aaa8ec60729df973076cc8e97ed
   Adjust: 4690e07ea401ee56d4d3f4f5bdad86c94f51903f
   AdjustPurchase: a6688375a589f10a455adb9217c7de55eba93d63
-  Ads-Global: 167ddabcf74a82c41f7074dc286697418ee22b60
   AmazonPublisherServicesSDK: 06b56a890537cbedba30726becfb74dafb55d124
   APDAdColonyAdapter: af49719b693ede3e3663101c9b403e90b77d75fd
   APDAdjustAdapter: 45c9db8158f410bbae9f61898e037b272de6d32e
@@ -629,12 +580,10 @@ SPEC CHECKSUMS:
   BidMachineMyTargetAdapter: 43d8aff79d71b012ada9f7a3e1f3ed1160cfc137
   BidMachineNetworkCore: fbbcd0eb8af29d594b63d109af9ca62130679fc2
   BidMachineNotsyAdapter: 551fdc71f9011e988bc23b510d9fd8c4da23528d
-  BidMachinePangleAdapter: f3866da9afbf581b075eef21518c2501a81e4910
   BidMachineProtoCore: 43263bdfcabaf4e67312136fe2dcfd8f09b8ceb6
   BidMachineSmaatoAdapter: 3427659f2fff29480a6b03dd7e041c0d6ac6a9cc
   BidMachineTapjoyAdapter: 111d49f27fa4cb5a1e7640199c5449b5405fdd83
   BidMachineVungleAdapter: 4856a8cc2174b5900580e1a88c84076d167c4ca1
-  BURelyFoundation_Global: 5b03b5340630fa62fb9cd6eac52c5f57d4b0c17b
   CriteoPublisherSdk: 4d0e5eb37b2fd43ab04b89a9644ed58b6d42dcba
   FBAEMKit: c7f82b5145d446bcbbcd50485c032689032fc6a2
   FBAudienceNetwork: e0fcc9091fced34910ed0b6da06f129db46ac9e6
@@ -659,10 +608,8 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   OCMock: 9491e4bec59e0b267d52a9184ff5605995e74be8
   OMSDK_Appodeal: f4e97878c54edd6be63259a4ba38a5491be6226a
-  OneKit-Pangle: 68a778c39d36ed8feffd667a6b49225427bcf286
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
-  RangersAPM-Pangle: 97c8fe91af08574a739cc72a714b735efb6c891f
   smaato-ios-sdk: 4533e9c8c24ecefd0445a78ea89afba35412e1d1
   StackAnalytics: 8c15ce5c440628da6bcc37f56f1e8a159f7147bf
   StackConsentManager: af49179a45ec64c167784f380ccc047d5bc6d6df
@@ -675,6 +622,6 @@ SPEC CHECKSUMS:
   YandexMobileAds: 3d7708df615f92815a3acedf9869da46d0b4d65e
   YandexMobileMetrica: 7dafc7d224077d4443ab3a587b82b24e9b6cc9c7
 
-PODFILE CHECKSUM: 5f177ec88e3182f3a37dee5068151c40b18524c9
+PODFILE CHECKSUM: 5e4044d42a4f050e9e75b52fc6cf8d0acd0739b6
 
 COCOAPODS: 1.11.3

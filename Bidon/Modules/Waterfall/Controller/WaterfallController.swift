@@ -10,9 +10,9 @@ import Foundation
 
 protocol WaterfallController {
     associatedtype DemandProviderType: DemandProvider
-    associatedtype DemandType: Demand where DemandType.Provider == DemandProviderType
+    associatedtype BidType: Bid where BidType.Provider == DemandProviderType
 
-    typealias Completion = (Result<DemandType, SdkError>) -> ()
+    typealias Completion = (Result<BidType, SdkError>) -> ()
     
     func load(completion: @escaping Completion)
 }

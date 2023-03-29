@@ -20,8 +20,8 @@ final class ConcurrentAuctionRound<DemandProviderType: DemandProvider>: Performa
     private var timer: Timer?
     private var activeAdaptersIdentifiers = Set<String>()
     
-    var onDemandRequest: AuctionRoundBidRequest?
-    var onDemandResponse: AuctionRoundBidResponse<DemandProviderType>?
+    var onDemandRequest: AuctionRoundDemandRequest?
+    var onDemandResponse: AuctionRoundDemandResponse<DemandProviderType>?
     var onRoundComplete: AuctionRoundCompletion?
     
     init(
@@ -72,6 +72,7 @@ final class ConcurrentAuctionRound<DemandProviderType: DemandProvider>: Performa
                     direct.bid(lineItem) { [weak self] result in
                         self?.handleDemandProviderResponse(
                             adapter: adapter,
+                            lineItem: lineItem,
                             result: result
                         )
                     }
@@ -89,14 +90,14 @@ final class ConcurrentAuctionRound<DemandProviderType: DemandProvider>: Performa
     
     private func handleDemandProviderResponse(
         adapter: AnyDemandSourceAdapter<DemandProviderType>,
-        result: Result<Ad, MediationError>
+        lineItem: LineItem? = nil,
+        result: Result<DemandAd, MediationError>
     ) {
         activeAdaptersIdentifiers.remove(adapter.identifier)
         
         switch result {
         case .success(let ad):
-            let bid = (ad, adapter.provider)
-            onDemandResponse?(adapter, .success(bid))
+            onDemandResponse?(adapter, .success((adapter.provider, ad, lineItem)))
         case .failure(let error):
             onDemandResponse?(adapter, .failure(error))
         }

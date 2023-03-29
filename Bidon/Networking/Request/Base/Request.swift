@@ -58,7 +58,7 @@ extension Route {
         case .show: return base.appendingPathComponent("show")
         case .click: return base.appendingPathComponent("click")
         case .reward: return base.appendingPathComponent("reward")
-        case .adType(let adType): return base.appendingPathComponent(adType.rawValue)
+        case .adType(let adType): return base.appendingPathComponent(adType.stringValue)
         case .complex(let right, let left): return right.url(left.url(base))
         }
     }

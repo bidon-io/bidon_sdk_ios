@@ -12,7 +12,6 @@ import UIKit
 
 
 final class DTExchangeBannerDemandProvider: DTExchangeBaseDemandProvider<IAViewUnitController> {
-    private var presentedAdWrapper: DTExchangeAdWrapper?
     private weak var rootViewController: UIViewController?
     
     weak var adViewDelegate: DemandProviderAdViewDelegate?
@@ -38,13 +37,11 @@ final class DTExchangeBannerDemandProvider: DTExchangeBaseDemandProvider<IAViewU
 
 
 extension DTExchangeBannerDemandProvider: AdViewDemandProvider {
-    func container(for ad: DTExchangeAdWrapper) -> AdViewContainer? {
+    func container(for ad: IAAdSpot) -> AdViewContainer? {
         guard
-            ad.adSpot.activeUnitController === controller,
+            ad.activeUnitController === controller,
             controller.isReady()
         else { return nil }
-        
-        self.presentedAdWrapper = ad
         
         return controller.adView
     }
@@ -64,9 +61,8 @@ extension DTExchangeBannerDemandProvider: IAUnitDelegate {
     }
     
     func iaAdWillLogImpression(_ unitController: IAUnitController?) {
-        guard let ad = presentedAdWrapper else { return }
-        let revenue = AdRevenueWrapper(eCPM: ad.eCPM, wrapped: ad)
-        revenueDelegate?.provider(self, didPay: revenue, ad: ad)
+        guard let adSpot = adSpot, adSpot.activeUnitController === unitController else { return } 
+        revenueDelegate?.provider(self, didLogImpression: adSpot)
     }
     
     func iaAdDidReceiveClick(_ unitController: IAUnitController?) {

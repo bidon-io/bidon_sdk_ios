@@ -23,28 +23,11 @@ protocol FullscreenImpressionControllerDelegate: AnyObject {
 
 
 protocol FullscreenImpressionController: AnyObject {
-    associatedtype DemandType: Demand
+    associatedtype BidType: Bid
     
-    init(demand: DemandType)
+    init(bid: BidType)
     
     func show(from rootViewController: UIViewController)
     
     var delegate: FullscreenImpressionControllerDelegate? { get set }
-}
-
-
-struct FullscreenImpression: Impression {
-    var impressionId: String = UUID().uuidString
-    var showTrackedAt: TimeInterval = .nan
-    var clickTrackedAt: TimeInterval = .nan
-    var rewardTrackedAt: TimeInterval = .nan
-    var auctionId: String
-    var auctionConfigurationId: Int
-    var ad: Ad
-    
-    init<T: Demand>(demand: T) {
-        self.auctionId = demand.auctionId
-        self.auctionConfigurationId = demand.auctionConfigurationId
-        self.ad = demand.ad
-    }
 }

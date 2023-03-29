@@ -8,7 +8,7 @@
 import Foundation
 
 
-class AnyDemandProvider<W>: NSObject, DemandProvider {
+class DemandProviderWrapper<W>: NSObject, DemandProvider {
     var delegate: DemandProviderDelegate? {
         get { _delegate() }
         set { _setDelegate(newValue) }
@@ -19,11 +19,11 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
         set { _setRevenueDelegate(newValue) }
     }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
+    func fill(ad: DemandAd, response: @escaping DemandProviderResponse) {
         _fill(ad, response)
     }
-    
-    func notify(ad: Ad, event: AuctionEvent) {
+
+    func notify(ad: DemandAd, event: AuctionEvent) {
         _notify(ad, event)
     }
     
@@ -35,13 +35,13 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
     private let _revenueDelegate: () -> DemandProviderRevenueDelegate?
     private let _setRevenueDelegate: (DemandProviderRevenueDelegate?) -> ()
     
-    private let _fill: (Ad, @escaping DemandProviderResponse) -> ()
-    private let _notify: (Ad, AuctionEvent) -> ()
+    private let _fill: (DemandAd, @escaping DemandProviderResponse) -> ()
+    private let _notify: (DemandAd, AuctionEvent) -> ()
     
     init(_ wrapped: W) throws {
         self.wrapped = wrapped
         
-        guard let wrapped = wrapped as? any DemandProvider else { throw SdkError.internalInconsistency }
+        guard let wrapped = wrapped as? (any DemandProvider) else { throw SdkError.internalInconsistency }
         
         _delegate = { wrapped.delegate }
         _setDelegate = { wrapped.delegate = $0 }
@@ -49,17 +49,17 @@ class AnyDemandProvider<W>: NSObject, DemandProvider {
         _revenueDelegate = { wrapped.revenueDelegate }
         _setRevenueDelegate = { wrapped.revenueDelegate = $0 }
         
-        _fill = { wrapped._fill(ad: $0, response: $1) }
-        _notify = { wrapped._notify(ad: $0, event: $1) }
+        _fill = { wrapped.fill(opaque: $0, response: $1) }
+        _notify = { wrapped.notify(opaque: $0, event: $1) }
     }
 }
 
 
-final class AnyDirectDemandProvider<W>: AnyDemandProvider<W>, DirectDemandProvider {
+final class DirectDemandProviderWrapper<W>: DemandProviderWrapper<W>, DirectDemandProvider {
     private let _bid: (LineItem, @escaping DemandProviderResponse) -> ()
     
     override init(_ wrapped: W) throws {
-        guard let _wrapped = wrapped as? any DirectDemandProvider else { throw SdkError.internalInconsistency }
+        guard let _wrapped = wrapped as? (any DirectDemandProvider) else { throw SdkError.internalInconsistency }
         
         _bid = { _wrapped.bid($0, response: $1) }
         
@@ -72,7 +72,7 @@ final class AnyDirectDemandProvider<W>: AnyDemandProvider<W>, DirectDemandProvid
 }
 
 
-final class AnyProgrammaticDemandProvider<W>: AnyDemandProvider<W>, ProgrammaticDemandProvider {
+final class ProgrammaticDemandProviderWrapper<W>: DemandProviderWrapper<W>, ProgrammaticDemandProvider {
     private let _bid: (Price, @escaping DemandProviderResponse) -> ()
     
     override init(_ wrapped: W) throws {
@@ -89,7 +89,7 @@ final class AnyProgrammaticDemandProvider<W>: AnyDemandProvider<W>, Programmatic
 }
 
 
-typealias AnyAdViewDemandProvider = AnyDemandProvider<any AdViewDemandProvider>
-typealias AnyInterstitialDemandProvider = AnyDemandProvider<any InterstitialDemandProvider>
-typealias AnyRewardedAdDemandProvider = AnyDemandProvider<any RewardedAdDemandProvider>
+typealias AnyAdViewDemandProvider = DemandProviderWrapper<(any AdViewDemandProvider)>
+typealias AnyInterstitialDemandProvider = DemandProviderWrapper<(any InterstitialDemandProvider)>
+typealias AnyRewardedAdDemandProvider = DemandProviderWrapper<(any RewardedAdDemandProvider)>
 

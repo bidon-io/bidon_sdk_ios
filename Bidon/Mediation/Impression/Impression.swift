@@ -8,11 +8,14 @@
 import Foundation
 
 
-protocol Impression {
+protocol Impression: ECPMProvider {
     var impressionId: String { get }
     var auctionId: String { get }
     var auctionConfigurationId: Int { get }
-    var ad: Ad { get }
+    var roundId: String { get }
+    var lineItem: LineItem? { get }
+    var adType: AdType { get }
+    var ad: DemandAd { get }
     
     var showTrackedAt: TimeInterval { get set }
     var clickTrackedAt: TimeInterval { get set }

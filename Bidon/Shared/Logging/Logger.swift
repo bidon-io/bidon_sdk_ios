@@ -32,7 +32,7 @@ public class Logger: NSObject {
         return Set([any])
     }()
     
-    private static let queue = DispatchQueue(label: "com.ads.logger.queue")
+    private static let queue = DispatchQueue(label: "com.bidon.logger.queue")
     
     static func add(_ destination: LogDestination) {
         let any = AnyLogDestination(destination)

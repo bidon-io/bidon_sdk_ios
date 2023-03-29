@@ -8,16 +8,15 @@
 import Foundation
 
 
-protocol MediationController {
-    associatedtype Observer: MediationObserver
-    
-    var observer: Observer { get }
-}
+//protocol MediationController {
+//    associatedtype Observer: MediationObserver
+//
+//    var observer: Observer { get }
+//}
 
 
 protocol MediationObserver: AnyObject {
     associatedtype MediationAttemptReportType: MediationAttemptReport
-    associatedtype DemandProviderType: DemandProvider
     
     var auctionId: String { get }
     var auctionConfigurationId: Int { get }
@@ -25,7 +24,7 @@ protocol MediationObserver: AnyObject {
     var firedLineItems: [LineItem] { get }
     var report: MediationAttemptReportType { get }
     
-    func log(_ event: MediationEvent<DemandProviderType>)
+    func log(_ event: MediationEvent)
     
     init(
         auctionId: String,
@@ -33,3 +32,6 @@ protocol MediationObserver: AnyObject {
         adType: AdType
     )
 }
+
+
+typealias AnyMediationObserver = (any MediationObserver)

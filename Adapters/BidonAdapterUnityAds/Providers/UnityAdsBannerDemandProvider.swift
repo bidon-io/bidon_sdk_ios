@@ -11,15 +11,14 @@ import UnityAds
 import UIKit
 
 
+#warning("Ad Revenue for Unity Ads banners")
 final class UnityAdsBannerDemandProvider: NSObject, DirectDemandProvider {
-    typealias AdType = UnityAdsBannerAdWrapper
-    
     weak var delegate: DemandProviderDelegate?
     weak var adViewDelegate: DemandProviderAdViewDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
     
     private let context: AdViewContext
-    private var banner: UnityAdsBannerAdWrapper?
+    private var banner: UADSBannerView?
     private var response: DemandProviderResponse?
     
     init(context: AdViewContext) {
@@ -36,54 +35,51 @@ final class UnityAdsBannerDemandProvider: NSObject, DirectDemandProvider {
         banner.delegate = self
         
         self.response = response
-        self.banner = UnityAdsBannerAdWrapper(
-            lineItem: lineItem,
-            bannerView: banner
-        )
+        self.banner = banner
         
         banner.load()
     }
     
-    func fill(ad: UnityAdsBannerAdWrapper, response: @escaping DemandProviderResponse) {
+    func fill(ad: UADSBannerView, response: @escaping DemandProviderResponse) {
         response(.success(ad))
     }
     
-    func notify(ad: UnityAdsBannerAdWrapper, event: Bidon.AuctionEvent) {}
+    func notify(ad: UADSBannerView, event: Bidon.AuctionEvent) {}
 }
 
 
 extension UnityAdsBannerDemandProvider: AdViewDemandProvider {
-    func container(for ad: UnityAdsBannerAdWrapper) -> AdViewContainer? {
-        return ad.bannerView
+    func container(for ad: UADSBannerView) -> AdViewContainer? {
+        return ad
     }
 }
 
 
 extension UnityAdsBannerDemandProvider: UADSBannerViewDelegate {
     func bannerViewDidLoad(_ bannerView: UADSBannerView!) {
-        guard let banner = banner, banner.bannerView === bannerView else { return }
+        guard let banner = banner, self.banner === banner else { return }
         
         response?(.success(banner))
         response = nil
     }
     
     func bannerViewDidError(_ bannerView: UADSBannerView!, error: UADSBannerError!) {
-        guard let banner = banner, banner.bannerView === bannerView else { return }
+        guard self.banner === bannerView else { return }
         
         response?(.failure(MediationError(error)))
         response = nil
     }
     
     func bannerViewDidClick(_ bannerView: UADSBannerView!) {
-        guard let banner = banner, banner.bannerView === bannerView else { return }
+        guard self.banner === bannerView else { return }
         
         delegate?.providerDidClick(self)
     }
     
     func bannerViewDidLeaveApplication(_ bannerView: UADSBannerView!) {
-        guard let banner = banner, banner.bannerView === bannerView else { return }
+        guard let banner = banner, self.banner === bannerView else { return }
         
-        adViewDelegate?.providerWillLeaveApplication(self, adView: banner.bannerView)
+        adViewDelegate?.providerWillLeaveApplication(self, adView: banner)
     }
 }
 

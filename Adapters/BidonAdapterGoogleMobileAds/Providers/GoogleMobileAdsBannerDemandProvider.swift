@@ -42,8 +42,8 @@ final class GoogleMobileAdsBannerDemandProvider: GoogleMobileAdsBaseDemandProvid
 
 
 extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
-    func container(for ad: GoogleMobileAdsAdWrapper<GADBannerView>) -> AdViewContainer? {
-        return ad.adObject
+    func container(for ad: GADBannerView) -> AdViewContainer? {
+        return ad
     }
 }
 

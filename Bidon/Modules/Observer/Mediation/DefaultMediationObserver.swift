@@ -30,7 +30,7 @@ fileprivate struct RoundObservation {
 }
 
 
-final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
+final class DefaultMediationObserver: MediationObserver {
     let auctionId: String
     let auctionConfigurationId: Int
     let adType: AdType
@@ -86,7 +86,7 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
         self.auctionConfigurationId = configurationId
     }
     
-    func log(_ event: MediationEvent<T>) {
+    func log(_ event: MediationEvent) {
         Logger.debug("[\(adType)] [Auction: \(auctionId)] " + event.description)
         
         switch event {
@@ -111,7 +111,7 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
                 condition: { $0.roundId == round.id && $0.networkId == adapter.identifier }
             ) { observation in
                 observation.adId = bid.ad.id
-                observation.eCPM = bid.ad.eCPM
+                observation.eCPM = bid.eCPM
                 observation.bidResponeTimestamp = Date.timestamp(.wall, units: .milliseconds)
             }
         case .bidError(let round, let adapter, let error):
@@ -124,33 +124,33 @@ final class DefaultMediationObserver<T: DemandProvider>: MediationObserver {
         case .roundFinish(_, let winner):
             if let winner = winner {
                 demandObservations.update(
-                    condition: { $0.adId == winner.id }
+                    condition: { $0.adId == winner.ad.id }
                 ) { observation in
                     observation.isRoundWinner = true
                 }
             }
-        case .fillRequest(let ad):
+        case .fillRequest(let bid):
             demandObservations.update(
-                condition: { $0.adId == ad.id }
+                condition: { $0.adId == bid.ad.id }
             ) { observation in
                 observation.fillRequestTimestamp = Date.timestamp(.wall, units: .milliseconds)
             }
-        case .fillResponse(let ad):
+        case .fillResponse(let bid):
             demandObservations.update(
-                condition: { $0.adId == ad.id }
+                condition: { $0.adId == bid.ad.id }
             ) { observation in
                 observation.fillResponseTimestamp = Date.timestamp(.wall, units: .milliseconds)
                 observation.status = .win
                 observation.isAuctionWinner = true
             }
             demandObservations.update(
-                condition: { $0.adId != ad.id && $0.status.isUnknown }
+                condition: { $0.adId != bid.ad.id && $0.status.isUnknown }
             ) { observation in
                 observation.status = .lose
             }
-        case .fillError(let ad, let error):
+        case .fillError(let bid, let error):
             demandObservations.update(
-                condition: { $0.adId == ad.id }
+                condition: { $0.adId == bid.ad.id }
             ) { observation in
                 observation.fillResponseTimestamp = Date.timestamp(.wall, units: .milliseconds)
                 observation.status = DemandResultStatus(error)

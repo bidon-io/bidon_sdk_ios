@@ -9,10 +9,9 @@ import Foundation
 
 
 
-final class DefaultWaterfallController<T, M>: WaterfallController, MediationController
-where T: Demand, T.Provider: DemandProvider, M: MediationObserver {
+final class DefaultWaterfallController<T>: WaterfallController
+where T: Bid, T.Provider: DemandProvider {
     
-    typealias Observer = M
     typealias DemandType = T
     typealias DemandProviderType = T.Provider
     
@@ -20,16 +19,16 @@ where T: Demand, T.Provider: DemandProvider, M: MediationObserver {
     private var timer: Timer?
     
     let timeout: TimeInterval
-    let observer: Observer
+    let observer: any MediationObserver
     
     private let queue = DispatchQueue(
-        label: "com.ads.waterfall.queue",
+        label: "com.bidon.waterfall.queue",
         qos: .default
     )
     
     init(
         _ waterfall: Waterfall<DemandType>,
-        observer: Observer,
+        observer: AnyMediationObserver,
         timeout: TimeInterval
     ) {
         self.timeout = timeout
@@ -38,14 +37,16 @@ where T: Demand, T.Provider: DemandProvider, M: MediationObserver {
     }
     
     func load(completion: @escaping (Result<DemandType, SdkError>) -> ()) {
-        observer.log(.fillStart)
+        let event = MediationEvent.fillStart
+        observer.log(event)
+        
         recursivelyLoad(completion: completion)
     }
     
     private func recursivelyLoad(completion: @escaping (Result<DemandType, SdkError>) -> ()) {
         queue.async { [weak self] in
             guard let self = self else { return }
-            guard let demand = self.waterfall.next() else {
+            guard let bid = self.waterfall.next() else {
                 self.observer.log(.fillFinish(winner: nil))
                 DispatchQueue.main.async {
                     completion(.failure(.noFill))
@@ -62,12 +63,15 @@ where T: Demand, T.Provider: DemandProvider, M: MediationObserver {
                     timeInterval: interval,
                     repeats: false
                 ) { [weak self] _ in
-                    print("BLUSSDsds`d")
                     defer { isFinished = true }
                     guard !isFinished, let self = self else { return }
                     
-                    self.observer.log(.fillError(ad: demand.ad, error: .fillTimeoutReached))
-                    Logger.verbose("Provider \(demand.provider) did fail to load bid: \(demand.ad), error: \(MediationError.fillTimeoutReached)")
+                    let event = MediationEvent.fillError(
+                        bid: bid,
+                        error: .fillTimeoutReached
+                    )
+                    self.observer.log(event)
+                    
                     self.recursivelyLoad(completion: completion)
                 }
                 
@@ -75,28 +79,30 @@ where T: Demand, T.Provider: DemandProvider, M: MediationObserver {
                 self.timer = timer
             }
             
-            Logger.verbose("Provider \(demand.provider) will load bid: \(demand.ad), timeout: \(interval)")
-            self.observer.log(.fillRequest(ad: demand.ad))
+            let event = MediationEvent.fillRequest(bid: bid)
+            self.observer.log(event)
             
             DispatchQueue.main.async {
-                demand.provider._fill(ad: demand.ad) { [weak self] result in
+                bid.provider.fill(opaque: bid.ad) { [weak self] result in
                     guard let self = self else { return }
                     switch result {
                     case .success:
                         defer { isFinished = true }
                         guard !isFinished else { return }
                         
-                        self.observer.log(.fillResponse(ad: demand.ad))
+                        let event = MediationEvent.fillResponse(bid: bid)
+                        self.observer.log(event)
+                        
                         DispatchQueue.main.async {
-                            Logger.verbose("Provider \(demand.provider) did load bid: \(demand.ad)")
-                            completion(.success(demand))
+                            completion(.success(bid))
                         }
                     case .failure(let error):
                         defer { isFinished = true }
                         guard !isFinished else { return }
                         
-                        self.observer.log(.fillError(ad: demand.ad, error: error))
-                        Logger.verbose("Provider \(demand.provider) did fail to load bid: \(demand.ad), error: \(error)")
+                        let event = MediationEvent.fillError(bid: bid, error: error)
+                        self.observer.log(event)
+                        
                         self.recursivelyLoad(completion: completion)
                     }
                 }

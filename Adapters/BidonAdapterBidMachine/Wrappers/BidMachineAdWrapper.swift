@@ -10,26 +10,21 @@ import Bidon
 import BidMachine
 
 
-typealias BidMachineAdWrapper<T: BidMachineAdProtocol> = AdWrapper<T>
-typealias BidMachineInterstitialAdWrapper = BidMachineAdWrapper<BidMachineInterstitial>
-typealias BidMachineRewardedAdWrapper = BidMachineAdWrapper<BidMachineRewarded>
-typealias BidMachineBannerAdWrapper = BidMachineAdWrapper<BidMachineBanner>
-
-typealias BidMachineAdRevenueWrapper = AdRevenueWrapper<BidMachineAdProtocol>
-
-
-extension AdWrapper where Wrapped: BidMachineAdProtocol  {
-    convenience init(_ ad: Wrapped) {
-        self.init(
-            id: ad.auctionInfo.bidId,
-            eCPM: ad.auctionInfo.price,
-            networkName: BidMachineDemandSourceAdapter.identifier,
-            dsp: ad.auctionInfo.demandSource,
-            wrapped: ad
-        )
+final class BidMachineAdDemand<Ad: BidMachineAdProtocol>: NSObject, DemandAd {
+    var id: String { ad.auctionInfo.bidId }
+    var networkName: String { BidMachineDemandSourceAdapter.identifier }
+    var dsp: String? { ad.auctionInfo.demandSource }
+    var eCPM: Price { ad.auctionInfo.price }
+    
+    let ad: Ad
+    
+    init(_ ad: Ad) {
+        self.ad = ad
+        super.init()
     }
 }
 
+typealias BidMachineAdRevenueWrapper = AdRevenueWrapper<BidMachineAdProtocol>
 
 extension BidMachineAdRevenueWrapper {
     convenience init(_ ad: BidMachineAdProtocol) {

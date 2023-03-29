@@ -15,10 +15,11 @@ final class RewardedImpressionController: NSObject, FullscreenImpressionControll
     private let provider: any RewardedAdDemandProvider
     private var impression: Impression!
     
-    required init(demand: AnyRewardedAdDemand) {
-        let demand = demand.unwrapped()
-        self.provider = demand.provider
-        self.impression = FullscreenImpression(demand: demand)
+    required init(bid: AnyRewardedAdBid) {
+        let bid = bid.unwrapped()
+        
+        self.provider = bid.provider
+        self.impression = FullscreenImpression(bid: bid)
         
         super.init()
         
@@ -27,7 +28,7 @@ final class RewardedImpressionController: NSObject, FullscreenImpressionControll
     }
     
     func show(from context: UIViewController) {
-        provider._show(ad: impression.ad, from: context)
+        provider.show(opaque: impression.ad, from: context)
     }
 }
 

@@ -12,7 +12,6 @@ import UIKit
 
 
 final class DTExchangeInterstitialDemandProvider: DTExchangeBaseDemandProvider<IAFullscreenUnitController> {
-    private var presentedAdWrapper: DTExchangeAdWrapper?
     private weak var rootViewController: UIViewController?
 
     weak var rewardDelegate: DemandProviderRewardDelegate?
@@ -43,16 +42,15 @@ final class DTExchangeInterstitialDemandProvider: DTExchangeBaseDemandProvider<I
 
 
 extension DTExchangeInterstitialDemandProvider: InterstitialDemandProvider {
-    func show(ad: DTExchangeAdWrapper, from viewController: UIViewController) {
+    func show(ad: IAAdSpot, from viewController: UIViewController) {
         guard
-            ad.adSpot.activeUnitController === controller,
+            ad.activeUnitController === controller,
             controller.isReady()
         else {
             delegate?.providerDidFailToDisplay(self, error: .invalidPresentationState)
             return
         }
         
-        self.presentedAdWrapper = ad
         self.rootViewController = viewController
         
         controller.showAd(animated: true)
@@ -83,9 +81,8 @@ extension DTExchangeInterstitialDemandProvider: IAUnitDelegate {
     }
     
     func iaAdWillLogImpression(_ unitController: IAUnitController?) {
-        guard let ad = presentedAdWrapper else { return }
-        let revenue = AdRevenueWrapper(eCPM: ad.eCPM, wrapped: ad)
-        revenueDelegate?.provider(self, didPay: revenue, ad: ad)
+        guard let adSpot = adSpot, adSpot.activeUnitController === unitController else { return }
+        revenueDelegate?.provider(self, didLogImpression: adSpot)
     }
     
     func iaAdDidReceiveClick(_ unitController: IAUnitController?) {

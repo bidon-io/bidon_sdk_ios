@@ -31,7 +31,7 @@ internal final class AppLovinRewardedDemandProvider: NSObject {
 extension AppLovinRewardedDemandProvider: DirectDemandProvider {
     func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
         let interstitial = ALIncentivizedInterstitialAd(
-            lineItem: lineItem,
+            zoneIdentifier: lineItem.adUnitId,
             sdk: sdk
         )
         
@@ -42,11 +42,8 @@ extension AppLovinRewardedDemandProvider: DirectDemandProvider {
         self.response = response
     }
     
-    func fill(ad: Ad, response: @escaping DemandProviderResponse) {
-        guard
-            ad is AppLovinAdWrapper,
-            let interstitial = interstitial,
-            interstitial.isReadyForDisplay
+    func fill(ad: ALAd, response: @escaping DemandProviderResponse) {
+        guard let interstitial = interstitial, interstitial.isReadyForDisplay
         else {
             response(.failure(.noFill))
             return
@@ -56,38 +53,25 @@ extension AppLovinRewardedDemandProvider: DirectDemandProvider {
     }
     
     // MARK: Noop
-    func notify(ad: Ad, event: AuctionEvent) {}
+    func notify(ad: ALAd, event: AuctionEvent) {}
 }
 
 
 extension AppLovinRewardedDemandProvider: RewardedAdDemandProvider {
-    func show(ad: Ad, from viewController: UIViewController) {
-        guard
-            let interstitial = interstitial,
-            let ad = ad as? AppLovinAdWrapper
-        else {
+    func show(ad: ALAd, from viewController: UIViewController) {
+        guard let interstitial = interstitial else {
             delegate?.providerDidFailToDisplay(self, error: SdkError.invalidPresentationState)
             return
         }
         
-        interstitial.show(ad.wrapped, andNotify: self)
+        interstitial.show(ad, andNotify: self)
     }
 }
 
 
 extension AppLovinRewardedDemandProvider: ALAdLoadDelegate {
     func adService(_ adService: ALAdService, didLoad ad: ALAd) {
-        guard
-            let lineItem = interstitial?.lineItem,
-            lineItem.adUnitId == ad.zoneIdentifier
-        else {
-            response?(.failure(.incorrectAdUnitId))
-            response = nil
-            return
-        }
-        
-        let wrapper = AppLovinAdWrapper(lineItem: lineItem, ad: ad)
-        response?(.success(wrapper))
+        response?(.success(ad))
         response = nil
     }
     
@@ -128,15 +112,8 @@ extension AppLovinRewardedDemandProvider: ALAdRewardDelegate {
 extension AppLovinRewardedDemandProvider: ALAdDisplayDelegate {
     func ad(_ ad: ALAd, wasDisplayedIn view: UIView) {
         defer { delegate?.providerWillPresent(self) }
-        
-        guard
-            let lineItem = interstitial?.lineItem,
-            lineItem.adUnitId == ad.zoneIdentifier
-        else { return }
-
-        let wrapper = AppLovinAdWrapper(lineItem: lineItem, ad: ad)
-        let revenue = AppLovinAdRevenueWrapper(wrapper)
-        revenueDelegate?.provider(self, didPay: revenue, ad: wrapper)
+    
+        revenueDelegate?.provider(self, didLogImpression: ad)
     }
     
     func ad(_ ad: ALAd, wasHiddenIn view: UIView) {

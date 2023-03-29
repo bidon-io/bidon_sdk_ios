@@ -23,7 +23,7 @@ def bidmachine
   pod 'BidMachineSmaatoAdapter'
   pod 'BidMachineTapjoyAdapter'
   pod 'BidMachineVungleAdapter'
-  pod 'BidMachinePangleAdapter'
+#  pod 'BidMachinePangleAdapter'
   pod 'BidMachineNotsyAdapter'
   pod 'BidMachineMintegralAdapter'
 end

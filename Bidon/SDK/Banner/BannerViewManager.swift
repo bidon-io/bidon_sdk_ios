@@ -11,39 +11,16 @@ import UIKit
 
 
 protocol BannerViewManagerDelegate: AnyObject {
-    func viewManager(_ viewManager: BannerViewManager, didRecordImpression impression: Impression)
-    func viewManager(_ viewManager: BannerViewManager, didRecordClick impression: Impression)
-    func viewManager(_ viewManager: BannerViewManager, willPresentModalView impression: Impression)
-    func viewManager(_ viewManager: BannerViewManager, didDismissModalView impression: Impression)
-    func viewManager(_ viewManager: BannerViewManager, willLeaveApplication impression: Impression)
+    func viewManager(_ viewManager: BannerViewManager, didRecordImpression ad: Ad)
+    func viewManager(_ viewManager: BannerViewManager, didRecordClick ad: Ad)
+    func viewManager(_ viewManager: BannerViewManager, willPresentModalView ad: Ad)
+    func viewManager(_ viewManager: BannerViewManager, didDismissModalView ad: Ad)
+    func viewManager(_ viewManager: BannerViewManager, willLeaveApplication ad: Ad)
 }
 
 
 final internal class BannerViewManager: NSObject {
     static var impressionKey: UInt8 = 0
-    
-    fileprivate struct AdViewImpression: Impression {
-        var impressionId: String = UUID().uuidString
-        var auctionId: String
-        var auctionConfigurationId: Int
-        var ad: Ad
-        var format: BannerFormat
-        var showTrackedAt: TimeInterval = .nan
-        var clickTrackedAt: TimeInterval = .nan
-        var rewardTrackedAt: TimeInterval = .nan
-        
-        init(
-            auctionId: String,
-            auctionConfigurationId: Int,
-            ad: Ad,
-            format: BannerFormat
-        ) {
-            self.auctionId = auctionId
-            self.auctionConfigurationId = auctionConfigurationId
-            self.ad = ad
-            self.format = format
-        }
-    }
     
     @Injected(\.networkManager)
     private var networkManager: NetworkManager
@@ -90,7 +67,7 @@ final internal class BannerViewManager: NSObject {
     }
     
     func present(
-        demand: AdViewDemand,
+        bid: AdViewBid,
         view: AdViewContainer,
         context: AdViewContext
     ) {
@@ -99,7 +76,7 @@ final internal class BannerViewManager: NSObject {
             !container.subviews.contains(view)
         else { return }
         
-        demand.provider.adViewDelegate = self
+        bid.provider.adViewDelegate = self
         
         let viewsToRemove = container.subviews.compactMap { $0 as? AdViewContainer }
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -138,9 +115,7 @@ final internal class BannerViewManager: NSObject {
             }
         
         view.impression = AdViewImpression(
-            auctionId: demand.auctionId,
-            auctionConfigurationId: demand.auctionConfigurationId,
-            ad: demand.ad,
+            bid: bid,
             format: context.format
         )
         
@@ -175,7 +150,9 @@ final internal class BannerViewManager: NSObject {
         guard var impression = adView.impression else { return }
         
         sendImpressionIfNeeded(&impression, path: .show)
-        delegate?.viewManager(self, didRecordImpression: impression)
+        
+        let ad = AdContainer(impression: impression)
+        delegate?.viewManager(self, didRecordImpression: ad)
         
         adView.impression = impression
     }
@@ -188,7 +165,9 @@ final internal class BannerViewManager: NSObject {
         else { return }
         
         sendImpressionIfNeeded(&impression, path: .click)
-        delegate?.viewManager(self, didRecordClick: impression)
+        
+        let ad = AdContainer(impression: impression)
+        delegate?.viewManager(self, didRecordClick: ad)
         
         adView.impression = impression
     }
@@ -201,7 +180,9 @@ extension BannerViewManager: DemandProviderAdViewDelegate {
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }
-        delegate?.viewManager(self, willPresentModalView: impression)
+        
+        let ad = AdContainer(impression: impression)
+        delegate?.viewManager(self, willPresentModalView: ad)
     }
     
     func providerDidDismissModalView(
@@ -209,7 +190,9 @@ extension BannerViewManager: DemandProviderAdViewDelegate {
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }
-        delegate?.viewManager(self, didDismissModalView: impression)
+        
+        let ad = AdContainer(impression: impression)
+        delegate?.viewManager(self, didDismissModalView: ad)
     }
     
     func providerWillLeaveApplication(
@@ -217,7 +200,9 @@ extension BannerViewManager: DemandProviderAdViewDelegate {
         adView: AdViewContainer
     ) {
         guard let impression = adView.impression else { return }
-        delegate?.viewManager(self, willLeaveApplication: impression)
+        
+        let ad = AdContainer(impression: impression)
+        delegate?.viewManager(self, willLeaveApplication: ad)
     }
 }
 
@@ -233,8 +218,8 @@ extension BannerViewManager: UIGestureRecognizerDelegate {
 
 
 private extension AdViewContainer {
-    var impression: BannerViewManager.AdViewImpression? {
-        get { objc_getAssociatedObject(self, &BannerViewManager.impressionKey) as? BannerViewManager.AdViewImpression }
+    var impression: AdViewImpression? {
+        get { objc_getAssociatedObject(self, &BannerViewManager.impressionKey) as? AdViewImpression }
         set { objc_setAssociatedObject(self, &BannerViewManager.impressionKey, newValue, .OBJC_ASSOCIATION_RETAIN) }
     }
     

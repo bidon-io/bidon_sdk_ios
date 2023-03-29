@@ -11,7 +11,7 @@ import UIKit
 
 protocol BannerAdManagerDelegate: AnyObject {
     func adManager(_ adManager: BannerAdManager, didFailToLoad error: SdkError)
-    func adManager(_ adManager: BannerAdManager, didLoad demand: AdViewDemand)
+    func adManager(_ adManager: BannerAdManager, didLoad ad: Ad)
     func adManager(_ adManager: BannerAdManager, didPayRevenue revenue: AdRevenue, ad: Ad)
 }
 
@@ -19,16 +19,15 @@ protocol BannerAdManagerDelegate: AnyObject {
 final class BannerAdManager: NSObject {
     private typealias AuctionInfo = AuctionRequest.ResponseBody
     
-    fileprivate typealias BannerMediationObserver = DefaultMediationObserver<AnyAdViewDemandProvider>
-    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<AnyAdViewDemandProvider, BannerMediationObserver>
-    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<AnyAdViewDemand, BannerMediationObserver>
+    fileprivate typealias AuctionControllerType = ConcurrentAuctionController<AnyAdViewDemandProvider>
+    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<AnyAdViewBid>
     
     fileprivate enum State {
         case idle
         case preparing
         case auction(controller: AuctionControllerType)
         case loading(controller: WaterfallControllerType)
-        case ready(demand: AdViewDemand)
+        case ready(bid: AdViewBid)
     }
     
     @Injected(\.networkManager)
@@ -48,9 +47,9 @@ final class BannerAdManager: NSObject {
         super.init()
     }
     
-    var demand: AdViewDemand? {
+    var bid: AdViewBid? {
         switch state {
-        case .ready(let demand): return demand
+        case .ready(let bid): return bid
         default: return nil
         }
     }
@@ -115,7 +114,7 @@ final class BannerAdManager: NSObject {
     ) {
         Logger.verbose("Banner ad manager will start auction: \(auctionInfo)")
         
-        let observer = BannerMediationObserver(
+        let observer = DefaultMediationObserver(
             auctionId: auctionInfo.auctionId,
             auctionConfigurationId: auctionInfo.auctionConfigurationId,
             adType: .banner
@@ -155,9 +154,9 @@ final class BannerAdManager: NSObject {
         state = .auction(controller: auction)
     }
     
-    private func loadWaterfall(
+    private func loadWaterfall<Observer: MediationObserver>(
         _ waterfall: AuctionControllerType.WaterfallType,
-        observer: AuctionControllerType.Observer
+        observer: Observer
     ) {
         let waterfall = WaterfallControllerType(
             waterfall,
@@ -167,16 +166,18 @@ final class BannerAdManager: NSObject {
         
         state = .loading(controller: waterfall)
         
-        waterfall.load { [weak self, unowned observer]  result in
+        waterfall.load { [weak self, unowned observer] result in
             guard let self = self else { return }
             
             self.sendMediationAttemptReport(observer.report)
             
             switch result {
-            case .success(let demand):
-                let unwrapped = demand.unwrapped()
-                self.state = .ready(demand: unwrapped)
-                self.delegate?.adManager(self, didLoad: unwrapped)
+            case .success(let bid):
+                let unwrapped = bid.unwrapped()
+                self.state = .ready(bid: unwrapped)
+                
+                let ad = AdContainer(bid: bid)
+                self.delegate?.adManager(self, didLoad: ad)
             case .failure(let error):
                 self.state = .idle
                 self.delegate?.adManager(self, didFailToLoad: error)
@@ -203,10 +204,15 @@ final class BannerAdManager: NSObject {
 extension BannerAdManager: DemandProviderRevenueDelegate {
     func provider(
         _ provider: any DemandProvider,
-        didPay revenue: AdRevenue,
-        ad: Ad
+        didPayRevenue revenue: AdRevenue,
+        ad: DemandAd
     ) {
-        delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
+        #warning("Revenue")
+//        delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
+    }
+    
+    func provider(_ provider: any DemandProvider, didLogImpression ad: DemandAd) {
+        
     }
 }
 

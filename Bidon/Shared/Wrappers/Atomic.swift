@@ -10,7 +10,7 @@ import Foundation
 
 @propertyWrapper
 struct Atomic<Value> {
-    private let queue = DispatchQueue(label: "com.bidon.atomic")
+    private let queue = DispatchQueue(label: "com.bidon.atomic.queue")
     private var value: Value
 
     init(wrappedValue: Value) {

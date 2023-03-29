@@ -13,7 +13,7 @@ internal typealias AdaptersRepository = Repository<String, Adapter>
 
 extension AdaptersRepository {
     convenience init() {
-        self.init("com.ads.adapters-repository.queue")
+        self.init("com.bidon.adapters-repository.queue")
     }
     
     var ids: [String] {

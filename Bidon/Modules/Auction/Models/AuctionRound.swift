@@ -8,9 +8,9 @@
 import Foundation
 
 
-typealias AuctionRoundBidRequest = (Adapter, LineItem?) -> ()
-typealias AuctionRoundBidResult<T: DemandProvider> = Result<Bid<T>, MediationError>
-typealias AuctionRoundBidResponse<T: DemandProvider> = (Adapter, AuctionRoundBidResult<T>) -> ()
+typealias AuctionRoundDemandRequest = (Adapter, LineItem?) -> ()
+typealias AuctionRoundDemandResult<T: DemandProvider> = Result<(T, DemandAd, LineItem?), MediationError>
+typealias AuctionRoundDemandResponse<T: DemandProvider> = (Adapter, AuctionRoundDemandResult<T>) -> ()
 typealias AuctionRoundCompletion = () -> ()
 
 
@@ -24,8 +24,8 @@ protocol AuctionRound {
 protocol PerformableAuctionRound: AuctionRound, Hashable {
     associatedtype DemandProviderType: DemandProvider
     
-    var onDemandRequest: AuctionRoundBidRequest? { get set }
-    var onDemandResponse: AuctionRoundBidResponse<DemandProviderType>? { get set }
+    var onDemandRequest: AuctionRoundDemandRequest? { get set }
+    var onDemandResponse: AuctionRoundDemandResponse<DemandProviderType>? { get set }
     var onRoundComplete: AuctionRoundCompletion? { get set }
     
     func perform(pricefloor: Price)

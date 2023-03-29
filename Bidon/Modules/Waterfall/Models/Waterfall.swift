@@ -8,7 +8,7 @@
 import Foundation
 
 
-typealias Waterfall<DemandType: Demand> = Queue<DemandType>
+typealias Waterfall<BidType: Bid> = Queue<BidType>
 
 
 struct Queue<T> {

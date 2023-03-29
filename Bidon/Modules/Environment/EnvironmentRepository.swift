@@ -29,7 +29,7 @@ extension EnvironmentRepository {
     }
     
     convenience init() {
-        self.init("com.ads.adapters-repository.queue")
+        self.init("com.bidon.adapters-repository.queue")
     }
     
     func configure(_ parameters: Parameters, completion: @escaping () -> ()) {

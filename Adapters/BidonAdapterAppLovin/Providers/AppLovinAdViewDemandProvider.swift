@@ -12,8 +12,6 @@ import UIKit
 
 
 internal final class AppLovinAdViewDemandProvider: NSObject {
-    typealias AdType = AppLovinAdWrapper
-    
     private let sdk: ALSdk
     private let context: AdViewContext
     
@@ -64,16 +62,16 @@ extension AppLovinAdViewDemandProvider: DirectDemandProvider {
         )
     }
     
-    func fill(ad: AppLovinAdWrapper, response: @escaping DemandProviderResponse) {
-        adView.show(ad: ad)
+    func fill(ad: ALAd, response: @escaping DemandProviderResponse) {
+        adView.render(ad)
     }
     
-    func notify(ad: AppLovinAdWrapper, event: AuctionEvent) {}
+    func notify(ad: ALAd, event: AuctionEvent) {}
 }
 
 
 extension AppLovinAdViewDemandProvider: AdViewDemandProvider {
-    func container(for ad: AppLovinAdWrapper) -> AdViewContainer? {
+    func container(for ad: ALAd) -> AdViewContainer? {
         return adView
     }
 }
@@ -101,16 +99,10 @@ extension AppLovinAdViewDemandProvider: ALAdViewEventDelegate {
 
 extension AppLovinAdViewDemandProvider: ALAdDisplayDelegate {
     func ad(_ ad: ALAd, wasDisplayedIn view: UIView) {
-        guard
-            let wrapper = adView.ad,
-            wrapper.wrapped.zoneIdentifier == ad.zoneIdentifier
-        else { return }
-        
-        response?(.success(wrapper))
+        response?(.success(ad))
         response = nil
         
-        let revenue = AppLovinAdRevenueWrapper(wrapper)
-        revenueDelegate?.provider(self, didPay: revenue, ad: wrapper)
+        revenueDelegate?.provider(self, didLogImpression: ad)
     }
     
     func ad(_ ad: ALAd, wasHiddenIn view: UIView) {

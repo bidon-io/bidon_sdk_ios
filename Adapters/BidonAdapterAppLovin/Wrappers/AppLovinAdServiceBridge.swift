@@ -45,12 +45,7 @@ final class AppLovinAdServiceBridge: NSObject {
 
 extension AppLovinAdServiceBridge: ALAdLoadDelegate {
     func adService(_ adService: ALAdService, didLoad ad: ALAd) {
-        let wrapper = AppLovinAdWrapper(
-            lineItem: lineItem,
-            ad: ad
-        )
-        
-        response?(.success(wrapper))
+        response?(.success(ad))
         response = nil
     }
     

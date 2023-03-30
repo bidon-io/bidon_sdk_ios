@@ -86,7 +86,7 @@ fileprivate extension Formatter {
 extension AdContainer {
     override var description: String {
         let components: [String?] = [
-            "ad #\(id)",
+            "\(adType.stringValue) ad #\(id)",
             Formatter.eCPM.string(from: eCPM as NSNumber).map { "eCPM \($0)" },
             "network '\(networkName)'",
             dsp.map { "DSP '\($0)'" },

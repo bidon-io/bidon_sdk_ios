@@ -17,9 +17,9 @@ where DemandProviderType: DemandProvider {
     private(set) var comparator: AuctionComparator = HigherECPMAuctionComparator()
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
-    private(set) var observer: AnyMediationObserver!
+    private(set) var mediationObserver: AnyMediationObserver!
+    private(set) var adRevenueObserver: AdRevenueObserver!
     private(set) var elector: LineItemElector!
-    private(set) var revenueDelegate: DemandProviderRevenueDelegate!
 
     private var rounds: [AuctionRound] = []
     
@@ -57,12 +57,6 @@ where DemandProviderType: DemandProvider {
     }
     
     @discardableResult
-    public func withRevenueDelegate(_ revenueDelegate: DemandProviderRevenueDelegate) -> Self {
-        self.revenueDelegate = revenueDelegate
-        return self
-    }
-    
-    @discardableResult
     public func withRounds(
         _ rounds: [AuctionRound]
     ) -> Self {
@@ -79,10 +73,18 @@ where DemandProviderType: DemandProvider {
     }
     
     @discardableResult
-    public func withObserver(
+    public func withMediationObserver(
         _ observer: AnyMediationObserver
     ) -> Self {
-        self.observer = observer
+        self.mediationObserver = observer
+        return self
+    }
+    
+    @discardableResult
+    public func withAdRevenueObserver(
+        _ observer: AdRevenueObserver
+    ) -> Self {
+        self.adRevenueObserver = observer
         return self
     }
     

@@ -11,7 +11,7 @@ import Foundation
 protocol DemandReport {
     var networkId: String { get }
     var adUnitId: String? { get }
-    var status: DemandResultStatus { get }
+    var status: DemandReportStatus { get }
     var eCPM: Price { get }
     var bidStartTimestamp: UInt? { get }
     var bidFinishTimestamp: UInt? { get }
@@ -32,7 +32,7 @@ protocol RoundReport {
 
 
 protocol AuctionResultReport {
-    var status: AuctionResultStatus { get }
+    var status: AuctionResultReportStatus { get }
     var winnerNetworkId: String? { get }
     var winnerECPM: Price? { get }
     var winnerAdUnitId: String? { get }

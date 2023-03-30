@@ -67,6 +67,15 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
     private let placement: String
     private let adType: AdType
     
+    private lazy var adRevenueObserver: AdRevenueObserver = {
+        let observer = BaseAdRevenueObserver()
+        observer.onRegisterAdRevenue = { [weak self] ad, revenue in
+            guard let self = self else { return }
+            self.delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
+        }
+        return observer
+    }()
+    
     var isReady: Bool {
         switch state {
         case .ready: return true
@@ -140,7 +149,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
     private func performAuction(_ auctionInfo: AuctionInfo) {
         Logger.verbose("Fullscreen ad manager will start auction: \(auctionInfo)")
         
-        let observer = DefaultMediationObserver(
+        let mediationObserver = BaseMediationObserver(
             auctionId: auctionInfo.auctionId,
             auctionConfigurationId: auctionInfo.auctionConfigurationId,
             adType: adType
@@ -148,29 +157,29 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         
         let elector = StrictLineItemElector(
             items: auctionInfo.lineItems,
-            observer: observer
+            observer: mediationObserver
         )
 
         let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withRounds(auctionInfo.rounds)
             builder.withElector(elector)
-            builder.withRevenueDelegate(self)
+            builder.withMediationObserver(mediationObserver)
             builder.withPricefloor(auctionInfo.pricefloor)
-            builder.withObserver(observer)
+            builder.withAdRevenueObserver(self.adRevenueObserver)
         }
         
-        auction.load { [unowned observer, weak self] result in
+        auction.load { [unowned mediationObserver, weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let waterfall):
                 self.loadWaterfall(
                     waterfall,
-                    observer: observer
+                    observer: mediationObserver
                 )
             case .failure(let error):
-                self.sendAuctionStatistics(observer.report)
+                self.sendAuctionStatistics(mediationObserver.report)
                 self.state = .idle
                 
                 self.delegate?.adManager(self, didFailToLoad: error)
@@ -282,21 +291,6 @@ extension BaseFullscreenAdManager: FullscreenImpressionControllerDelegate {
     }
 }
 
-
-extension BaseFullscreenAdManager: DemandProviderRevenueDelegate {
-    func provider(
-        _ provider: any DemandProvider,
-        didPayRevenue revenue: AdRevenue,
-        ad: DemandAd
-    ) {
-        #warning("Revenue")
-//        delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
-    }
-    
-    func provider(_ provider: any DemandProvider, didLogImpression ad: DemandAd) {
-        
-    }
-}
 
 private extension BaseFullscreenAdManager.State {
     var isIdle: Bool {

@@ -13,7 +13,7 @@ fileprivate struct DemandObservation {
     var roundId: String
     var adUnitId: String?
     var adId: String? = nil
-    var status: DemandResultStatus = .unknown
+    var status: DemandReportStatus = .unknown
     var eCPM: Price = .unknown
     var isRoundWinner: Bool = false
     var isAuctionWinner: Bool = false
@@ -30,36 +30,36 @@ fileprivate struct RoundObservation {
 }
 
 
-final class DefaultMediationObserver: MediationObserver {
+final class BaseMediationObserver: MediationObserver {
     let auctionId: String
     let auctionConfigurationId: Int
     let adType: AdType
         
-    var report: DefaultMediationAttemptReport {
-        let rounds: [DefaultRoundReport] = roundObservations.map { round in
+    var report: MediationAttemptReportModel {
+        let rounds: [RoundReportModel] = roundObservations.map { round in
             let demands = demandObservations
                 .filter { $0.roundId == round.roundId }
             
             let winner = demands.first { $0.isRoundWinner }
             
-            return DefaultRoundReport(
+            return RoundReportModel(
                 roundId: round.roundId,
                 pricefloor: round.pricefloor,
                 winnerECPM: winner?.eCPM,
                 winnerNetworkId: winner?.networkId,
-                demands: demands.map { DefaultDemandReport($0) }
+                demands: demands.map { DemandReportModel($0) }
             )
         }
         
         let winner = demandObservations.first { $0.isAuctionWinner }
-        let result = DefaultAuctionResultReport(
+        let result = AuctionResultReportModel(
             status: winner != nil ? .success : .fail,
             winnerNetworkId: winner?.networkId,
             winnerECPM: winner?.eCPM,
             winnerAdUnitId: winner?.adUnitId
         )
         
-        return DefaultMediationAttemptReport(
+        return MediationAttemptReportModel(
             auctionId: auctionId,
             auctionConfigurationId: auctionConfigurationId,
             rounds: rounds,
@@ -118,7 +118,7 @@ final class DefaultMediationObserver: MediationObserver {
             demandObservations.update(
                 condition: { $0.roundId == round.id && $0.networkId == adapter.identifier }
             ) { observation in
-                observation.status = DemandResultStatus(error)
+                observation.status = DemandReportStatus(error)
                 observation.bidResponeTimestamp = Date.timestamp(.wall, units: .milliseconds)
             }
         case .roundFinish(_, let winner):
@@ -153,7 +153,7 @@ final class DefaultMediationObserver: MediationObserver {
                 condition: { $0.adId == bid.ad.id }
             ) { observation in
                 observation.fillResponseTimestamp = Date.timestamp(.wall, units: .milliseconds)
-                observation.status = DemandResultStatus(error)
+                observation.status = DemandReportStatus(error)
             }
         default:
             break
@@ -162,7 +162,7 @@ final class DefaultMediationObserver: MediationObserver {
 }
 
 
-private extension DefaultDemandReport {
+private extension DemandReportModel {
     init(_ observation: DemandObservation) {
         self.networkId = observation.networkId
         self.adUnitId = observation.adUnitId

@@ -9,33 +9,28 @@ import Foundation
 
 
 // MARK: Ad Revenue wrapper
-public final class AdRevenueWrapper<Wrapped: AnyObject>: AdRevenue {
+public final class AdRevenueModel: AdRevenue {
     public let revenue: Price
     public let precision: RevenuePrecision
     public let currency: Currency
-    public let wrapped: Wrapped
 
     public init(
         revenue: Price,
         precision: RevenuePrecision,
-        currency: Currency = .default,
-        wrapped: Wrapped
+        currency: Currency = .default
     ) {
         self.revenue = revenue
         self.precision = precision
         self.currency = currency
-        self.wrapped = wrapped
     }
     
     public convenience init(
         eCPM: Price,
-        precision: RevenuePrecision = .estimated,
-        wrapped: Wrapped
+        precision: RevenuePrecision = .estimated
     ) {
         self.init(
             revenue: eCPM / 1000,
-            precision: precision,
-            wrapped: wrapped
+            precision: precision
         )
     }
 }

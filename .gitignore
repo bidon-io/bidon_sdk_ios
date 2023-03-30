@@ -49,3 +49,4 @@ Pods/
 
 # Secrets
 /Sandbox/**/Constants.swift
+/**/GoogleService-Info.plist

@@ -10,16 +10,13 @@ import GoogleMobileAds
 import Bidon
 
 
-final class GoogleMobileAdsAdRevenueWrapper: NSObject, AdRevenue {
-    var currency: Bidon.Currency { value.currencyCode }
-    var revenue: Price { value.value.doubleValue }
-    var precision: RevenuePrecision { RevenuePrecision(value.precision) }
-    
-    let value: GADAdValue
-    
-    init(_ value: GADAdValue) {
-        self.value = value
-        super.init()
+extension GADAdValue {
+    var revenue: AdRevenue {
+        AdRevenueModel(
+            revenue: value.doubleValue,
+            precision: RevenuePrecision(precision),
+            currency: currencyCode
+        )
     }
 }
 

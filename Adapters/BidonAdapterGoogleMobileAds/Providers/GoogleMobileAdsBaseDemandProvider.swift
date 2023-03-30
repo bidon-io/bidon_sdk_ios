@@ -32,14 +32,12 @@ class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsDemandAd>: NSOb
     }
     
     final func setupAdRevenueHandler(_ adObject: AdObject, lineItem: LineItem) {
-        adObject.paidEventHandler = { [weak self, weak adObject] revenue in
+        adObject.paidEventHandler = { [weak self, weak adObject] value in
             guard let self = self, let adObject = adObject else { return }
-            
-            let revenueWrapper = GoogleMobileAdsAdRevenueWrapper(revenue)
-            
+                        
             self.revenueDelegate?.provider(
                 self,
-                didPayRevenue: revenueWrapper,
+                didPayRevenue: value.revenue,
                 ad: adObject
             )
         }

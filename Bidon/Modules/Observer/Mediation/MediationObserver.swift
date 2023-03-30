@@ -8,13 +8,6 @@
 import Foundation
 
 
-//protocol MediationController {
-//    associatedtype Observer: MediationObserver
-//
-//    var observer: Observer { get }
-//}
-
-
 protocol MediationObserver: AnyObject {
     associatedtype MediationAttemptReportType: MediationAttemptReport
     

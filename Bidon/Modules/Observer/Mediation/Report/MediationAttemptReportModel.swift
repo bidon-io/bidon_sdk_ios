@@ -8,19 +8,19 @@
 import Foundation
 
 
-struct DefaultMediationAttemptReport: MediationAttemptReport {
-    typealias RoundReportType = DefaultRoundReport
-    typealias AuctionResultReportType = DefaultAuctionResultReport
+struct MediationAttemptReportModel: MediationAttemptReport {
+    typealias RoundReportType = RoundReportModel
+    typealias AuctionResultReportType = AuctionResultReportModel
     
     var auctionId: String
     var auctionConfigurationId: Int
     var rounds: [RoundReportType]
-    var result: DefaultAuctionResultReport
+    var result: AuctionResultReportModel
 }
 
 
-struct DefaultRoundReport: RoundReport {
-    typealias DemandReportType = DefaultDemandReport
+struct RoundReportModel: RoundReport {
+    typealias DemandReportType = DemandReportModel
     
     var roundId: String
     var pricefloor: Price
@@ -30,18 +30,19 @@ struct DefaultRoundReport: RoundReport {
 }
 
 
-struct DefaultAuctionResultReport: AuctionResultReport {
-    var status: AuctionResultStatus
+struct AuctionResultReportModel: AuctionResultReport {
+    var status: AuctionResultReportStatus
     var winnerNetworkId: String?
     var winnerECPM: Price?
     var winnerAdUnitId: String?
 }
 
-struct DefaultDemandReport: DemandReport {
+
+struct DemandReportModel: DemandReport {
     var networkId: String
     var adUnitId: String? = nil
     var eCPM: Price
-    var status: DemandResultStatus = .unknown
+    var status: DemandReportStatus = .unknown
     var bidStartTimestamp: UInt? = Date.timestamp(.wall, units: .milliseconds).uint
     var bidFinishTimestamp: UInt?
     var fillStartTimestamp: UInt?

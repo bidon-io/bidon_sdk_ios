@@ -18,15 +18,14 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
     private let comparator: AuctionComparator
     private let pricefloor: Price
     
-    let observer: AnyMediationObserver
+    let mediationObserver: AnyMediationObserver
+    let adRevenueObserver: AdRevenueObserver
     
     private lazy var active = Set<RoundType>()
     private lazy var repository = BidRepository<BidType>()
     
     private var completion: Completion?
-    
-    private weak var revenueDelegate: DemandProviderRevenueDelegate?
-    
+        
     private var currentECPM: Price {
         return currentWinner?.eCPM ?? pricefloor
     }
@@ -42,11 +41,11 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         let builder = T()
         build(builder)
         
-        self.revenueDelegate = builder.revenueDelegate
         self.comparator = builder.comparator
         self.auction = builder.auction
         self.pricefloor = builder.pricefloor
-        self.observer = builder.observer
+        self.mediationObserver = builder.mediationObserver
+        self.adRevenueObserver = builder.adRevenueObserver
     }
     
     func load(completion: @escaping Completion) {
@@ -59,7 +58,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         
         repository.clear()
         
-        observer.log(.auctionStart)
+        mediationObserver.log(.auctionStart)
         auction.root.forEach(perform)
     }
     
@@ -81,11 +80,11 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
             }
             
             let event = MediationEvent.auctionFinish(winner: winner)
-            observer.log(event)
+            mediationObserver.log(event)
             completion?(.success(waterfall))
         } else {
             let event = MediationEvent.auctionFinish(winner: nil)
-            observer.log(event)
+            mediationObserver.log(event)
             
             completion?(.failure(SdkError.internalInconsistency))
         }
@@ -101,7 +100,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
             pricefloor: pricefloor
         )
         
-        observer.log(event)
+        mediationObserver.log(event)
         
         round.onDemandRequest = { [unowned round, unowned self] adapter, lineItem in
             self.round(round, didRequestDemand: adapter, lineItem: lineItem)
@@ -144,7 +143,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
             lineItem: lineItem
         )
         
-        observer.log(event)
+        mediationObserver.log(event)
     }
     
     private func round(
@@ -155,10 +154,10 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         adapter: Adapter
     ) {
         let bid = BidType(
-            auctionId: observer.auctionId,
-            auctionConfigurationId: observer.auctionConfigurationId,
+            auctionId: mediationObserver.auctionId,
+            auctionConfigurationId: mediationObserver.auctionConfigurationId,
             roundId: round.id,
-            adType: observer.adType,
+            adType: mediationObserver.adType,
             lineItem: lineItem,
             ad: ad,
             provider: provider
@@ -170,19 +169,18 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
                 adapter: adapter,
                 error: .belowPricefloor
             )
-            observer.log(event)
+            mediationObserver.log(event)
             return
         }
         
-        provider.revenueDelegate = revenueDelegate
-        
+        adRevenueObserver.observe(bid)
         let event = MediationEvent.bidResponse(
             round: round,
             adapter: adapter,
             bid: bid
         )
-        observer.log(event)
-
+        mediationObserver.log(event)
+        
         repository.register(bid)
     }
     
@@ -196,7 +194,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
             adapter: adapter,
             error: error
         )
-        observer.log(event)
+        mediationObserver.log(event)
     }
     
     private func complete(round: RoundType) {
@@ -204,7 +202,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
             round: round,
             winner: currentWinner
         )
-        observer.log(event)
+        mediationObserver.log(event)
         
         active.remove(round)
         

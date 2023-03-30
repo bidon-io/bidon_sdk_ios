@@ -40,9 +40,8 @@ class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, Bi
     
     func didTrackImpression(_ ad: BidMachineAdProtocol) {
         let wrapper = BidMachineAdDemand(ad)
-        let adRevenue = BidMachineAdRevenueWrapper(ad)
         
-        revenueDelegate?.provider(self, didPayRevenue: adRevenue, ad: wrapper)
+        revenueDelegate?.provider(self, didPayRevenue: ad.revenue, ad: wrapper)
     }
     
     func didFailPresentAd(_ ad: BidMachineAdProtocol, _ error: Error) {

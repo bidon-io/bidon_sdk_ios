@@ -24,14 +24,12 @@ final class BidMachineAdDemand<Ad: BidMachineAdProtocol>: NSObject, DemandAd {
     }
 }
 
-typealias BidMachineAdRevenueWrapper = AdRevenueWrapper<BidMachineAdProtocol>
 
-extension BidMachineAdRevenueWrapper {
-    convenience init(_ ad: BidMachineAdProtocol) {
-        self.init(
-            eCPM: ad.auctionInfo.price,
-            precision: .precise,
-            wrapped: ad
+extension BidMachineAdProtocol {
+    var revenue: AdRevenueModel {
+        AdRevenueModel(
+            eCPM: auctionInfo.price,
+            precision: .precise
         )
     }
 }

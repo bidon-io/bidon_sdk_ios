@@ -29,7 +29,7 @@ final class BidRepository<BidType: Bid> {
     }
     
     func register(_ bid: BidType) {
-        queue.async { [unowned self] in
+        queue.async(flags: .barrier) { [unowned self] in
             self.bids.insert(bid)
         }
     }

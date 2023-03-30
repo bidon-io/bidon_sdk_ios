@@ -42,6 +42,15 @@ final class BannerAdManager: NSObject {
     
     weak var delegate: BannerAdManagerDelegate?
     
+    private lazy var adRevenueObserver: AdRevenueObserver = {
+        let observer = BaseAdRevenueObserver()
+        observer.onRegisterAdRevenue = { [weak self] ad, revenue in
+            guard let self = self else { return }
+            self.delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
+        }
+        return observer
+    }()
+    
     init(placement: String = "") {
         self.placement = placement
         super.init()
@@ -78,7 +87,7 @@ final class BannerAdManager: NSObject {
         pricefloor: Price
     ) {
         state = .preparing
-
+        
         let request = AuctionRequest { (builder: AdViewAuctionRequestBuilder) in
             builder.withPlacement(placement)
             builder.withAdaptersRepository(sdk.adaptersRepository)
@@ -114,7 +123,7 @@ final class BannerAdManager: NSObject {
     ) {
         Logger.verbose("Banner ad manager will start auction: \(auctionInfo)")
         
-        let observer = DefaultMediationObserver(
+        let observer = BaseMediationObserver(
             auctionId: auctionInfo.auctionId,
             auctionConfigurationId: auctionInfo.auctionConfigurationId,
             adType: .banner
@@ -129,12 +138,12 @@ final class BannerAdManager: NSObject {
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withRounds(auctionInfo.rounds)
             builder.withElector(elector)
-            builder.withRevenueDelegate(self)
             builder.withPricefloor(auctionInfo.pricefloor)
             builder.withContext(context)
-            builder.withObserver(observer)
+            builder.withMediationObserver(observer)
+            builder.withAdRevenueObserver(self.adRevenueObserver)
         }
-                        
+        
         auction.load { [unowned observer, weak self] result in
             guard let self = self else { return }
             
@@ -197,22 +206,6 @@ final class BannerAdManager: NSObject {
         networkManager.perform(request: request) { result in
             Logger.debug("Sent statistics with result: \(result)")
         }
-    }
-}
-
-
-extension BannerAdManager: DemandProviderRevenueDelegate {
-    func provider(
-        _ provider: any DemandProvider,
-        didPayRevenue revenue: AdRevenue,
-        ad: DemandAd
-    ) {
-        #warning("Revenue")
-//        delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
-    }
-    
-    func provider(_ provider: any DemandProvider, didLogImpression ad: DemandAd) {
-        
     }
 }
 

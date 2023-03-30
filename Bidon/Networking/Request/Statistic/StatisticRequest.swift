@@ -25,7 +25,7 @@ struct StatisticRequest: Request {
         var test: Bool
         var token: String?
         var segmentId: String?
-        var stats: MediationAttemptReportModel
+        var stats: MediationAttemptReportCodableModel
     }
     
     struct ResponseBody: Decodable, Tokenized {

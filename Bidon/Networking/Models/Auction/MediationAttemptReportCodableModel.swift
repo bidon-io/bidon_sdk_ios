@@ -8,11 +8,11 @@
 import Foundation
 
 
-struct MediationAttemptReportModel: MediationAttemptReport, Codable {
+struct MediationAttemptReportCodableModel: MediationAttemptReport, Codable {
     struct DemandReportModel: DemandReport, Codable {
         var networkId: String
         var adUnitId: String?
-        var status: DemandResultStatus
+        var status: DemandReportStatus
         var eCPM: Price
         var bidStartTimestamp: UInt?
         var bidFinishTimestamp: UInt?
@@ -42,7 +42,7 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
         }
     }
     
-    struct RoundReportModel: RoundReport, Codable {
+    struct RoundReportCodableModel: RoundReport, Codable {
         var roundId: String
         var pricefloor: Price
         var winnerECPM: Price?
@@ -66,8 +66,8 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
         }
     }
     
-    struct AuctionResultReportModel: AuctionResultReport, Codable {
-        var status: AuctionResultStatus
+    struct AuctionResultReportCodableModel: AuctionResultReport, Codable {
+        var status: AuctionResultReportStatus
         var winnerNetworkId: String?
         var winnerECPM: Price?
         var winnerAdUnitId: String?
@@ -89,13 +89,13 @@ struct MediationAttemptReportModel: MediationAttemptReport, Codable {
     
     var auctionId: String
     var auctionConfigurationId: Int
-    var rounds: [RoundReportModel]
-    var result: AuctionResultReportModel
+    var rounds: [RoundReportCodableModel]
+    var result: AuctionResultReportCodableModel
     
     init<T: MediationAttemptReport>(_ report: T) {
         self.auctionId = report.auctionId
         self.auctionConfigurationId = report.auctionConfigurationId
-        self.rounds = report.rounds.map(RoundReportModel.init)
-        self.result = AuctionResultReportModel(report.result)
+        self.rounds = report.rounds.map(RoundReportCodableModel.init)
+        self.result = AuctionResultReportCodableModel(report.result)
     }
 }

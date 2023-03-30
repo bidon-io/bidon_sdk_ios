@@ -14,6 +14,8 @@ protocol AuctionController {
     
     typealias WaterfallType = Waterfall<BidType>
     typealias Completion = (Result<WaterfallType, SdkError>) -> ()
-        
+    
+    var currentBids: [BidType] { get }
+    
     func load(completion: @escaping Completion)
 }

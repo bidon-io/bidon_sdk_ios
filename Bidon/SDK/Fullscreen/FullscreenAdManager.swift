@@ -69,6 +69,10 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
     
     private lazy var adRevenueObserver: AdRevenueObserver = {
         let observer = BaseAdRevenueObserver()
+        observer.ads = { [weak self] in
+            guard let self = self else { return [] }
+            return self.state.ads
+        }
         observer.onRegisterAdRevenue = { [weak self] ad, revenue in
             guard let self = self else { return }
             self.delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
@@ -297,6 +301,20 @@ private extension BaseFullscreenAdManager.State {
         switch self {
         case .idle: return true
         default: return false
+        }
+    }
+    
+    var ads: [Ad] {
+        switch self {
+        case .auction(let controller):
+            return controller.currentBids.map(AdContainer.init)
+        case .loading(let controller):
+            return controller.bids.map(AdContainer.init)
+        case .ready(let bid):
+            return [AdContainer(bid: bid)]
+        case .impression(let controller):
+            return [AdContainer(impression: controller.impression)]
+        default: return []
         }
     }
 }

@@ -14,5 +14,7 @@ protocol WaterfallController {
 
     typealias Completion = (Result<BidType, SdkError>) -> ()
     
+    var bids: [BidType] { get }
+    
     func load(completion: @escaping Completion)
 }

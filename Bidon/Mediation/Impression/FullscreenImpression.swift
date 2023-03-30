@@ -21,7 +21,6 @@ struct FullscreenImpression: Impression {
     var adType: AdType
     var ad: DemandAd
 
-    
     init<T: Bid>(bid: T) {
         self.auctionId = bid.auctionId
         self.auctionConfigurationId = bid.auctionConfigurationId

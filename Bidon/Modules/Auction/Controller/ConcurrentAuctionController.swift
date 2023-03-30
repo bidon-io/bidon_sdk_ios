@@ -20,18 +20,22 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
     
     let mediationObserver: AnyMediationObserver
     let adRevenueObserver: AdRevenueObserver
-    
-    private lazy var active = Set<RoundType>()
-    private lazy var repository = BidRepository<BidType>()
-    
+
     private var completion: Completion?
         
+    private let bids = ThreadSafeBidSet<BidType>()
+    private var active = Set<RoundType>()
+
     private var currentECPM: Price {
         return currentWinner?.eCPM ?? pricefloor
     }
     
+    var currentBids: [BidModel<DemandProviderType>] {
+        return bids.all
+    }
+    
     private var currentWinner: BidType? {
-        return repository
+        return bids
             .all
             .sorted { comparator.compare($0, $1) }
             .first
@@ -56,14 +60,14 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         
         self.completion = completion
         
-        repository.clear()
+        bids.removeAll()
         
         mediationObserver.log(.auctionStart)
         auction.root.forEach(perform)
     }
     
     private func provider(for ad: DemandAd) -> DemandProviderType? {
-        return repository.bid(for: ad)?.provider
+        return bids.bid(for: ad)?.provider
     }
     
     private func finish() {
@@ -73,7 +77,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         defer { completion = nil }
         
         if let winner = currentWinner {
-            repository.ads.forEach { ad in
+            bids.ads.forEach { ad in
                 let provider = provider(for: ad)
                 let event: AuctionEvent = ad.id == winner.ad.id ? .win : .lose(winner.ad, winner.eCPM)
                 provider?.notify(opaque: ad, event: event)
@@ -181,7 +185,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         )
         mediationObserver.log(event)
         
-        repository.register(bid)
+        bids.insert(bid)
     }
     
     private func round(
@@ -219,7 +223,7 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
 private extension ConcurrentAuctionController {
     var waterfall: WaterfallType {
         return WaterfallType(
-            repository
+            bids
                 .all
                 .sorted { comparator.compare($0, $1) }
         )

@@ -22,6 +22,12 @@ final class BidMachineAdDemand<Ad: BidMachineAdProtocol>: NSObject, DemandAd {
         self.ad = ad
         super.init()
     }
+    
+    override var hash: Int {
+        var hasher = Hasher()
+        hasher.combine(id)
+        return hasher.finalize()
+    }
 }
 
 

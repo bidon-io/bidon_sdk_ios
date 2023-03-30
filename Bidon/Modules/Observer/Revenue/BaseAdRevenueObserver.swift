@@ -10,19 +10,15 @@ import Foundation
 
 final class BaseAdRevenueObserver: AdRevenueObserver {
     var onRegisterAdRevenue: RegisterAdRevenue?
-    
-    private let cache = NSMapTable<DemandAd, AdContainer>(
-        keyOptions: .weakMemory,
-        valueOptions: .strongMemory
-    )
-    
+    var ads: (() -> [Ad])?
     
     func observe<BidType>(_ bid: BidType)
     where BidType : Bid, BidType.Provider : DemandProvider {
         bid.provider.revenueDelegate = self
-        
-        let ad = AdContainer(bid: bid)
-        cache.setObject(ad, forKey: bid.ad)
+    }
+    
+    private func container(for demandAd: DemandAd) -> Ad? {
+        return ads?().first { $0.id == demandAd.id }
     }
 }
 
@@ -33,8 +29,7 @@ extension BaseAdRevenueObserver: DemandProviderRevenueDelegate {
         didPayRevenue revenue: AdRevenue,
         ad: DemandAd
     ) {
-        guard let container = cache.object(forKey: ad) else { return }
-        
+        guard let container = container(for: ad) else { return }
         onRegisterAdRevenue?(container, revenue)
     }
     
@@ -42,9 +37,9 @@ extension BaseAdRevenueObserver: DemandProviderRevenueDelegate {
         _ provider: any DemandProvider,
         didLogImpression ad: DemandAd
     ) {
-        guard let container = cache.object(forKey: ad) else { return }
-        
+        guard let container = container(for: ad) else { return }
         let adRevenue = AdRevenueModel(eCPM: container.eCPM)
+        
         onRegisterAdRevenue?(container, adRevenue)
     }
 }

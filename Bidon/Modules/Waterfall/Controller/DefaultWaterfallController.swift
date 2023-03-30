@@ -12,14 +12,18 @@ import Foundation
 final class DefaultWaterfallController<T>: WaterfallController
 where T: Bid, T.Provider: DemandProvider {
     
-    typealias DemandType = T
+    typealias BidType = T
     typealias DemandProviderType = T.Provider
     
-    private var waterfall: Waterfall<DemandType>
+    private var waterfall: Waterfall<BidType>
     private var timer: Timer?
     
     let timeout: TimeInterval
     let observer: any MediationObserver
+    
+    var bids: [T] {
+        waterfall.elements
+    }
     
     private let queue = DispatchQueue(
         label: "com.bidon.waterfall.queue",
@@ -27,7 +31,7 @@ where T: Bid, T.Provider: DemandProvider {
     )
     
     init(
-        _ waterfall: Waterfall<DemandType>,
+        _ waterfall: Waterfall<BidType>,
         observer: AnyMediationObserver,
         timeout: TimeInterval
     ) {
@@ -36,14 +40,14 @@ where T: Bid, T.Provider: DemandProvider {
         self.observer = observer
     }
     
-    func load(completion: @escaping (Result<DemandType, SdkError>) -> ()) {
+    func load(completion: @escaping (Result<BidType, SdkError>) -> ()) {
         let event = MediationEvent.fillStart
         observer.log(event)
         
         recursivelyLoad(completion: completion)
     }
     
-    private func recursivelyLoad(completion: @escaping (Result<DemandType, SdkError>) -> ()) {
+    private func recursivelyLoad(completion: @escaping (Result<BidType, SdkError>) -> ()) {
         queue.async { [weak self] in
             guard let self = self else { return }
             guard let bid = self.waterfall.next() else {

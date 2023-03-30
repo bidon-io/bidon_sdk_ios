@@ -8,7 +8,20 @@
 import Foundation
 
 
-final class BidRepository<BidType: Bid> {
+protocol BidSet {
+    associatedtype BidType: Bid
+    
+    var all: [BidType] { get }
+    var ads: [DemandAd] { get }
+    
+    func insert(_ bid: BidType)
+    func bid(for ad: DemandAd) -> BidType?
+    
+    func removeAll()
+}
+
+
+final class ThreadSafeBidSet<BidType: Bid> {
     internal let queue = DispatchQueue(
         label: "com.bidon.bid-repository.queue",
         attributes: .concurrent
@@ -28,7 +41,7 @@ final class BidRepository<BidType: Bid> {
         }
     }
     
-    func register(_ bid: BidType) {
+    func insert(_ bid: BidType) {
         queue.async(flags: .barrier) { [unowned self] in
             self.bids.insert(bid)
         }
@@ -40,7 +53,7 @@ final class BidRepository<BidType: Bid> {
         }
     }
     
-    func clear() {
+    func removeAll() {
         queue.async(flags: .barrier) { [unowned self] in
             self.bids.removeAll()
         }

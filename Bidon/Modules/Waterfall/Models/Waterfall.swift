@@ -12,7 +12,7 @@ typealias Waterfall<BidType: Bid> = Queue<BidType>
 
 
 struct Queue<T> {
-    private var elements: [T] = []
+    private(set) var elements: [T] = []
     
     init<W>(_ sequence: W) where W: Sequence, W.Element == T {
         self.elements = Array(sequence)

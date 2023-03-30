@@ -20,7 +20,7 @@ where DemandProviderType: DemandProvider {
     private(set) var mediationObserver: AnyMediationObserver!
     private(set) var adRevenueObserver: AdRevenueObserver!
     private(set) var elector: LineItemElector!
-
+    
     private var rounds: [AuctionRound] = []
     
     var auction: AuctionType {

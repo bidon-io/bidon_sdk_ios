@@ -25,6 +25,8 @@ protocol FullscreenImpressionControllerDelegate: AnyObject {
 protocol FullscreenImpressionController: AnyObject {
     associatedtype BidType: Bid
     
+    var impression: Impression { get }
+    
     init(bid: BidType)
     
     func show(from rootViewController: UIViewController)

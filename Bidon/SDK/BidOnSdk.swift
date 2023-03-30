@@ -20,9 +20,9 @@ public final class BidonSdk: NSObject {
     @Injected(\.networkManager)
     private var networkManager: NetworkManager
     
-    @objc public static let sdkVersion = "0.1.3"
+    @objc public static let sdkVersion = Constants.sdkVersion
     
-    @objc public static let defaultPlacement = "default"
+    @objc public static let defaultPlacement = Constants.defaultPlacement
     
     @objc public static let defaultMinPrice: Price = .unknown
     

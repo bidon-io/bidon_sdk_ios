@@ -110,6 +110,7 @@ public final class BidonSdk: NSObject {
                 builder.withAdaptersRepository(self.adaptersRepository)
                 builder.withEnvironmentRepository(self.environmentRepository)
                 builder.withTestMode(self.isTestMode)
+                builder.withExt(self.extras)
             }
             
             self.networkManager.perform(request: request) { result in

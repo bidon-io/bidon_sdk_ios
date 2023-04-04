@@ -87,6 +87,8 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         }
     }
     
+    lazy var extras: [String : AnyHashable] = [:]
+    
     init(
         adType: AdType,
         placement: String,
@@ -117,7 +119,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withTestMode(sdk.isTestMode)
             builder.withAuctionId(UUID().uuidString)
-            builder.withExt(sdk.ext)
+            builder.withExt(extras, sdk.extras)
         }
         
         Logger.verbose("Fullscreen ad manager performs request: \(request)")
@@ -225,7 +227,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withTestMode(sdk.isTestMode)
-            builder.withExt(sdk.ext)
+            builder.withExt(extras, sdk.extras)
             builder.withAdType(adType)
             builder.withMediationReport(report)
         }
@@ -244,7 +246,7 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         let request = ImpressionRequest { (builder: ImpressionRequestBuilderType) in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withTestMode(sdk.isTestMode)
-            builder.withExt(sdk.ext)
+            builder.withExt(extras, sdk.extras)
             builder.withImpression(impression)
             builder.withPath(path)
         }

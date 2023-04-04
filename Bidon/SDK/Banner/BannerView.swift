@@ -33,6 +33,14 @@ public final class BannerView: UIView, AdView {
     
     @objc public var isReady: Bool { return adManager.bid != nil }
     
+    @objc private(set) public
+    lazy var extras: [String : AnyHashable] = [:] {
+        didSet {
+            adManager.extras = extras
+            viewManager.extras = extras
+        }
+    }
+    
     @Injected(\.sdk)
     private var sdk: Sdk
     
@@ -76,6 +84,13 @@ public final class BannerView: UIView, AdView {
     final override public func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         refreshIfNeeded()
+    }
+    
+    @objc public func setExtraValue(
+        _ value: AnyHashable?,
+        for key: String
+    ) {
+        extras[key] = value
     }
     
     @objc public func loadAd(

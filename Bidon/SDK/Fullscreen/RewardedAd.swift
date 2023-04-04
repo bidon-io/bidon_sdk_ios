@@ -25,6 +25,8 @@ public final class RewardedAd: NSObject, RewardedAdObject {
     
     @objc public var isReady: Bool { return manager.isReady }
 
+    @objc public var extras: [String : AnyHashable] { return manager.extras }
+
     @Injected(\.sdk)
     private var sdk: Sdk
     
@@ -39,6 +41,13 @@ public final class RewardedAd: NSObject, RewardedAdObject {
     ) {
         self.placement = placement
         super.init()
+    }
+    
+    @objc public func setExtraValue(
+        _ value: AnyHashable?,
+        for key: String
+    ) {
+        manager.extras[key] = value
     }
     
     @objc public func loadAd(

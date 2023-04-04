@@ -64,8 +64,10 @@ class BaseRequestBuilder {
     }
     
     @discardableResult
-    func withExt(_ ext: [String: Any]?) -> Self {
-        self.ext = ext
+    func withExt(_ ext: [String: Any] ...) -> Self {
+        self.ext = ext.reduce([:]) { result, next in
+            result.merging(next) { current, _ in current }
+        }
         return self
     }
     

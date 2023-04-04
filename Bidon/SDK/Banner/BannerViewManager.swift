@@ -41,6 +41,8 @@ final internal class BannerViewManager: NSObject {
     
     var isRefreshGranted: Bool { timer == nil && isAdPresented }
     
+    var extras: [String: AnyHashable] = [:]
+    
     deinit {
         cancelRefreshTimer()
     }
@@ -133,7 +135,7 @@ final internal class BannerViewManager: NSObject {
         let request = ImpressionRequest { (builder: AdViewImpressionRequestBuilder) in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withTestMode(sdk.isTestMode)
-            builder.withExt(sdk.ext)
+            builder.withExt(extras, sdk.extras)
             builder.withImpression(impression)
             builder.withFormat(impression.format)
             builder.withPath(path)

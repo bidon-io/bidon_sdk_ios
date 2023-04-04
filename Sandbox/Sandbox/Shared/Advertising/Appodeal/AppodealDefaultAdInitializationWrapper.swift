@@ -47,6 +47,7 @@ final class AppodealDefaultAdInitializationWrapper: NSObject, AppodealAdInitiali
     }
     
     private func initializeBidon() {
+        BidonSdk.setExtraValue(Appodeal.segmentId(), for: "appodeal_segment_id")
         BidonSdk.initialize(appKey: appKey) { [unowned self] in
             self.continuation.resume()
             self.continuation = nil

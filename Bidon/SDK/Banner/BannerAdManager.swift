@@ -55,16 +55,18 @@ final class BannerAdManager: NSObject {
         return observer
     }()
     
-    init(placement: String = "") {
-        self.placement = placement
-        super.init()
-    }
-    
     var bid: AdViewBid? {
         switch state {
         case .ready(let bid): return bid
         default: return nil
         }
+    }
+    
+    var extras: [String: AnyHashable] = [:]
+    
+    init(placement: String = "") {
+        self.placement = placement
+        super.init()
     }
     
     func prepareForReuse() {
@@ -100,7 +102,7 @@ final class BannerAdManager: NSObject {
             builder.withAuctionId(UUID().uuidString)
             builder.withFormat(context.format)
             builder.withPricefloor(pricefloor)
-            builder.withExt(sdk.ext)
+            builder.withExt(extras, sdk.extras)
         }
         
         Logger.verbose("Banner ad manager performs request: \(request)")
@@ -202,7 +204,7 @@ final class BannerAdManager: NSObject {
         let request = StatisticRequest { builder in
             builder.withEnvironmentRepository(sdk.environmentRepository)
             builder.withTestMode(sdk.isTestMode)
-            builder.withExt(sdk.ext)
+            builder.withExt(extras, sdk.extras)
             builder.withAdType(.banner)
             builder.withMediationReport(report)
         }

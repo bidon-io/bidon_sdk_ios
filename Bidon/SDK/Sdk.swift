@@ -35,8 +35,8 @@ public extension InjectedValues {
 
 
 public protocol AuctionContext {
-    var ext: [String: Any] { get }
     var isTestMode: Bool { get }
+    var extras: [String: AnyHashable] { get }
 }
 
 

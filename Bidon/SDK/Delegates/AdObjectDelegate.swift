@@ -8,7 +8,7 @@
 import Foundation
 
 @objc(BDNAdObject)
-public protocol AdObject {
+public protocol AdObject: ExtrasProvider {
     var isReady: Bool { get }
 }
 

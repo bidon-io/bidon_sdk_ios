@@ -498,8 +498,6 @@ SPEC REPOS:
     - OMSDK_Appodeal
     - StackAnalytics
     - StackConsentManager
-    - StackIAB
-    - StackModules
     - StackProtobuf
   trunk:
     - AdColony
@@ -613,8 +611,8 @@ SPEC CHECKSUMS:
   smaato-ios-sdk: 4533e9c8c24ecefd0445a78ea89afba35412e1d1
   StackAnalytics: 8c15ce5c440628da6bcc37f56f1e8a159f7147bf
   StackConsentManager: af49179a45ec64c167784f380ccc047d5bc6d6df
-  StackIAB: 0861aacae7d81acb3838e9affc8705ed7bcc7c84
-  StackModules: f61783b6313fe20ed9f12d8c7f69dcd3c0e72797
+  StackIAB: 17ee4cbe12d1aa6eb79f9a79b85375250bdd50fb
+  StackModules: 9c5f24f9112662fe218b93085318054c6861a44d
   StackProtobuf: 6b78e9e5c5f7ead500a5d1527e569c4d49599a74
   TapjoySDK: 7edeac6d20f9d941fab1352c81ecd3e885c36167
   UnityAds: fab621d1066e414af9ce884f1252cdd53894263e

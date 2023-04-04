@@ -14,7 +14,6 @@ public final class BidonSdk: NSObject {
     internal lazy var adaptersRepository = AdaptersRepository()
     internal lazy var environmentRepository = EnvironmentRepository()
     
-    public private(set) lazy var ext: [String : Any] = [:]
     public private(set) var isTestMode: Bool = false
 
     @Injected(\.networkManager)
@@ -28,7 +27,12 @@ public final class BidonSdk: NSObject {
     
     @objc public static var isInitialized: Bool { shared.isInitialized }
     
+    @objc public static var extras: [String: AnyHashable] { shared.extras }
+    
     private var isInitialized: Bool = false
+    
+    private(set) public
+    lazy var extras: [String : AnyHashable] = [:]
     
     static let shared: BidonSdk = BidonSdk()
     
@@ -70,6 +74,14 @@ public final class BidonSdk: NSObject {
     
     public static func registerAdapter(adapter: Adapter) {
         shared.adaptersRepository.register(adapter: adapter)
+    }
+    
+    @objc
+    public static func setExtraValue(
+        _ value: AnyHashable?,
+        for key: String
+    ) {
+        shared.extras[key] = value
     }
     
     @objc

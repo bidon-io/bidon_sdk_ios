@@ -115,6 +115,9 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
             let pricefloor = max(pricefloor, (banners.keys.max() ?? 0))
             
             let banner = Bidon.BannerView(frame: .zero)
+            
+            banner[extrasKey: "appodeal_key"] = true
+
             banner.format = Bidon.BannerFormat(format)
             banner.isAutorefreshing = false
             banner.rootViewController = UIApplication.shared.bd.topViewcontroller

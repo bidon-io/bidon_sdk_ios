@@ -107,7 +107,7 @@ public enum AdType: Int, Codable {
 
 
 struct Constants {
-    static let sdkVersion: String = "0.1.5"
+    static let sdkVersion: String = "0.1.6"
     
     static let zeroUUID: String = "00000000-0000-0000-0000-000000000000"
     

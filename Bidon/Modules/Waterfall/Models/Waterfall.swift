@@ -12,7 +12,9 @@ typealias Waterfall<BidType: Bid> = Queue<BidType>
 
 
 struct Queue<T> {
-    private(set) var elements: [T] = []
+    fileprivate var elements: [T] = []
+    
+    var isEmpty: Bool { elements.isEmpty }
     
     init<W>(_ sequence: W) where W: Sequence, W.Element == T {
         self.elements = Array(sequence)
@@ -29,3 +31,16 @@ struct Queue<T> {
     }
 }
 
+
+extension Queue: CustomStringConvertible {
+    var description: String {
+        return elements.description
+    }
+}
+
+
+extension Array where Element: Bid {
+    init(waterfall: Waterfall<Element>) {
+        self = waterfall.elements
+    }
+}

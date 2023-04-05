@@ -31,13 +31,15 @@ final class BaseFullscreenAdManager<
     AuctionRequestBuilderType,
     AuctionControllerBuilderType,
     ImpressionControllerType,
-    ImpressionRequestBuilderType
+    ImpressionRequestBuilderType,
+    LossRequestBuilderType
 >: NSObject, FullscreenAdManager where
 AuctionRequestBuilderType: AuctionRequestBuilder,
 AuctionControllerBuilderType: BaseConcurrentAuctionControllerBuilder<DemandProviderType>,
 ImpressionControllerType: FullscreenImpressionController,
 ImpressionControllerType.BidType == BidModel<DemandProviderType>,
-ImpressionRequestBuilderType: ImpressionRequestBuilder {
+ImpressionRequestBuilderType: ImpressionRequestBuilder,
+LossRequestBuilderType: LossRequestBuilder {
     
     fileprivate typealias BidType = BidModel<DemandProviderType>
     fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType>
@@ -107,6 +109,35 @@ ImpressionRequestBuilderType: ImpressionRequestBuilder {
         }
         
         fetchAuctionInfo(pricefloor)
+    }
+    
+    func notifyOnLoss(
+        ad: DemandAd,
+        winner demandId: String,
+        eCPM: Price
+    ) {
+        switch state {
+        case .ready(let bid):
+            guard bid.ad.id == ad.id else { return }
+            
+            let impression = ImpressionControllerType(bid: bid).impression
+            
+            let request = LossRequest { (builder: LossRequestBuilderType) in
+                builder.withEnvironmentRepository(sdk.environmentRepository)
+                builder.withTestMode(sdk.isTestMode)
+                builder.withExt(extras, sdk.extras)
+                builder.withImpression(impression)
+                builder.withExternalWinner(demandId: demandId, eCPM: eCPM)
+            }
+            
+            networkManager.perform(request: request) { result in
+                Logger.debug("Sent loss with result: \(result)")
+            }
+            
+            state = .idle
+        default:
+            break
+        }
     }
     
     private func fetchAuctionInfo(_ pricefloor: Price) {

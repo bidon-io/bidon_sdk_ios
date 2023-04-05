@@ -96,7 +96,22 @@ public final class BannerView: UIView, AdView {
     @objc public func loadAd(
         with pricefloor: Price = BidonSdk.defaultMinPrice
     ) {
-        adManager.loadAd(context: context, pricefloor: pricefloor)
+        adManager.loadAd(
+            context: context,
+            pricefloor: pricefloor
+        )
+    }
+    
+    @objc public func notifyOnLoss(
+        ad: DemandAd,
+        winner demandId: String,
+        eCPM: Price
+    ) {
+        viewManager.notifyOnLoss(
+            ad: ad,
+            winner: demandId,
+            eCPM: eCPM
+        )
     }
     
     private final func refreshIfNeeded() {

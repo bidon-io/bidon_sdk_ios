@@ -76,22 +76,13 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
         
         defer { completion = nil }
         
-        if let winner = currentWinner {
-            bids.ads.forEach { ad in
-                let provider = provider(for: ad)
-                let event: AuctionEvent = ad.id == winner.ad.id ? .win : .lose(winner.ad, winner.eCPM)
-                provider?.notify(opaque: ad, event: event)
-            }
-            
-            let event = MediationEvent.auctionFinish(winner: winner)
-            mediationObserver.log(event)
-            completion?(.success(waterfall))
-        } else {
-            let event = MediationEvent.auctionFinish(winner: nil)
-            mediationObserver.log(event)
-            
-            completion?(.failure(SdkError.internalInconsistency))
-        }
+        let waterfall = waterfall
+        let event = MediationEvent.auctionFinish(
+            waterfall: waterfall
+        )
+        mediationObserver.log(event)
+        
+        completion?(waterfall.isEmpty ? .failure(.internalInconsistency) : .success(waterfall))
     }
     
     private func perform(round: RoundType) {

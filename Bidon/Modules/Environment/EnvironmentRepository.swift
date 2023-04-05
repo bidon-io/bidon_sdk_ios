@@ -22,10 +22,14 @@ enum EnvironmentRepositoryKey: String {
 
 extension EnvironmentRepository {
     struct Parameters {
+        struct FrameworkInfo {
+            var framework: Framework = .native
+            var frameworkVersion: String?
+            var pluginVersion: String?
+        }
+        
         var appKey: String
-        var framework: Framework
-        var frameworkVersion: String?
-        var pluginVersion: String?
+        var framework: FrameworkInfo
     }
     
     convenience init() {
@@ -37,9 +41,9 @@ extension EnvironmentRepository {
         self[.session] = SessionManager()
         self[.app] = AppManager(
             key: parameters.appKey,
-            framework: parameters.framework,
-            frameworkVersion: parameters.frameworkVersion,
-            pluginVersion: parameters.pluginVersion
+            framework: parameters.framework.framework,
+            frameworkVersion: parameters.framework.frameworkVersion,
+            pluginVersion: parameters.framework.pluginVersion
         )
         self[.user] = UserManager()
         

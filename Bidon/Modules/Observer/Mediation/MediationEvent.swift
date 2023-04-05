@@ -15,7 +15,7 @@ enum MediationEvent {
     case bidResponse(round: AuctionRound, adapter: Adapter, bid: any Bid)
     case bidError(round: AuctionRound, adapter: Adapter, error: MediationError)
     case roundFinish(round: AuctionRound, winner: (any Bid)?)
-    case auctionFinish(winner: (any Bid)?)
+    case auctionFinish(waterfall: any CustomStringConvertible)
     case fillStart
     case fillRequest(bid: any Bid)
     case fillResponse(bid: any Bid)
@@ -33,7 +33,7 @@ extension MediationEvent: CustomStringConvertible {
         case .bidResponse(let round, let adapter, let ad): return "\(adapter) did receive bid: \(ad) in round: '\(round.id)'"
         case .bidError(let round, let adapter, let error): return "\(adapter) did fail with error: \(error) in round: '\(round.id)'"
         case .roundFinish(let round, let winner): return "\(round) finished" + (winner.map { " with winner: \($0)" } ?? " without winner")
-        case .auctionFinish(winner: let winner): return "bidding finished" + (winner.map { " with winner: \($0)" } ?? " without winner")
+        case .auctionFinish(let waterfall): return "bidding finished with waterfall: \(waterfall)"
         case .fillStart: return "will load bids"
         case .fillRequest(let ad): return "will fill \(ad)"
         case .fillResponse(let ad): return "did fill \(ad)"

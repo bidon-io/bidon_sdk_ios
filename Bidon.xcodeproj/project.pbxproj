@@ -44,6 +44,8 @@
 		424D296428BE630500F6F2D6 /* MainThreadComputable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D296328BE630500F6F2D6 /* MainThreadComputable.swift */; };
 		424F180B28ABBD330082AEF3 /* DefaultWaterfallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F180A28ABBD330082AEF3 /* DefaultWaterfallController.swift */; };
 		424F181328ABCF470082AEF3 /* InterstitialImpressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F181228ABCF470082AEF3 /* InterstitialImpressionController.swift */; };
+		4257D71829DDBF830066DE1B /* LossRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257D71729DDBF830066DE1B /* LossRequest.swift */; };
+		4257D71A29DDBF970066DE1B /* LossRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257D71929DDBF970066DE1B /* LossRequestBuilder.swift */; };
 		425E9C6228B7B19800F4E4C7 /* FullscreenAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425E9C6128B7B19800F4E4C7 /* FullscreenAdManager.swift */; };
 		42677B3F28A16EC4006F321D /* AdaptersInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42677B3E28A16EC4006F321D /* AdaptersInfoModel.swift */; };
 		426DD78B28A3E88100A1ADF5 /* AuctionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DD78A28A3E88100A1ADF5 /* AuctionRequest.swift */; };
@@ -167,6 +169,8 @@
 		424D296328BE630500F6F2D6 /* MainThreadComputable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainThreadComputable.swift; sourceTree = "<group>"; };
 		424F180A28ABBD330082AEF3 /* DefaultWaterfallController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWaterfallController.swift; sourceTree = "<group>"; };
 		424F181228ABCF470082AEF3 /* InterstitialImpressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialImpressionController.swift; sourceTree = "<group>"; };
+		4257D71729DDBF830066DE1B /* LossRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LossRequest.swift; sourceTree = "<group>"; };
+		4257D71929DDBF970066DE1B /* LossRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LossRequestBuilder.swift; sourceTree = "<group>"; };
 		425E9C6128B7B19800F4E4C7 /* FullscreenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenAdManager.swift; sourceTree = "<group>"; };
 		42677B3E28A16EC4006F321D /* AdaptersInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptersInfoModel.swift; sourceTree = "<group>"; };
 		426DD78A28A3E88100A1ADF5 /* AuctionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRequest.swift; sourceTree = "<group>"; };
@@ -371,6 +375,7 @@
 				4272C97A28C5EB8B002D3E0E /* Auction */,
 				42EDA0A928C5EC2C00BF74DE /* Statistic */,
 				426DD79928A4F46000A1ADF5 /* Impression */,
+				4257D71629DDBF6E0066DE1B /* Loss */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -420,6 +425,15 @@
 				4224AA7028B7E2F400E8D886 /* RewardedImpressionController.swift */,
 			);
 			path = Fullscreen;
+			sourceTree = "<group>";
+		};
+		4257D71629DDBF6E0066DE1B /* Loss */ = {
+			isa = PBXGroup;
+			children = (
+				4257D71729DDBF830066DE1B /* LossRequest.swift */,
+				4257D71929DDBF970066DE1B /* LossRequestBuilder.swift */,
+			);
+			path = Loss;
 			sourceTree = "<group>";
 		};
 		426DD79428A3FEBA00A1ADF5 /* Adapters */ = {
@@ -876,6 +890,7 @@
 				42D047EF289D6A380096A8C6 /* EnvironmentRepository.swift in Sources */,
 				422077F129B2079800A2AD26 /* AuctionResultReportStatus.swift in Sources */,
 				42D047F1289D73F80096A8C6 /* GeoManager.swift in Sources */,
+				4257D71829DDBF830066DE1B /* LossRequest.swift in Sources */,
 				428FFC7028BF83AF0090B126 /* StatisticRequestBuilder.swift in Sources */,
 				42AAEA0528CB80E10093DB23 /* String+Extensions.swift in Sources */,
 				42BA81DB28770B5D001F1744 /* Reward.swift in Sources */,
@@ -946,6 +961,7 @@
 				429EE2D1286DD0E2009439C6 /* ConcurrentAuctionController.swift in Sources */,
 				42BE439628C203AF000528E3 /* BannerPublisher.swift in Sources */,
 				42BA82072878547C001F1744 /* BannerView.swift in Sources */,
+				4257D71A29DDBF970066DE1B /* LossRequestBuilder.swift in Sources */,
 				42BE438B28C0AE93000528E3 /* UserManager.swift in Sources */,
 				4299A427289BCF3F0062C580 /* HTTPTask.swift in Sources */,
 				42D047E0289D5E5C0096A8C6 /* Session.swift in Sources */,

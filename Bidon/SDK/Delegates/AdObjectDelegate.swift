@@ -10,6 +10,12 @@ import Foundation
 @objc(BDNAdObject)
 public protocol AdObject: ExtrasProvider {
     var isReady: Bool { get }
+    
+    func notifyOnLoss(
+        ad: DemandAd,
+        winner demandId: String,
+        eCPM: Price
+    )
 }
 
 

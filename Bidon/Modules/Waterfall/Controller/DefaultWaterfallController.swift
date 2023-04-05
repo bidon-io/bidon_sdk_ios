@@ -21,9 +21,7 @@ where T: Bid, T.Provider: DemandProvider {
     let timeout: TimeInterval
     let observer: any MediationObserver
     
-    var bids: [T] {
-        waterfall.elements
-    }
+    var bids: [T] { Array(waterfall: waterfall) }
     
     private let queue = DispatchQueue(
         label: "com.bidon.waterfall.queue",
@@ -93,9 +91,18 @@ where T: Bid, T.Provider: DemandProvider {
                     case .success:
                         defer { isFinished = true }
                         guard !isFinished else { return }
-                        
+                                                
                         let event = MediationEvent.fillResponse(bid: bid)
                         self.observer.log(event)
+                        
+                        // Notify providers
+                        bid.provider.notify(opaque: bid.ad, event: .win)
+                        while let loser = self.waterfall.next() {
+                            loser.provider.notify(
+                                opaque: loser.ad,
+                                event: .lose(bid.ad, bid.eCPM)
+                            )
+                        }
                         
                         DispatchQueue.main.async {
                             completion(.success(bid))

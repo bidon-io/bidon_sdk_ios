@@ -34,6 +34,8 @@ public final class BidonSdk: NSObject {
     private(set) public
     lazy var extras: [String : AnyHashable] = [:]
     
+    private lazy var framework = EnvironmentRepository.Parameters.FrameworkInfo()
+    
     static let shared: BidonSdk = BidonSdk()
     
     private override init() {
@@ -85,6 +87,22 @@ public final class BidonSdk: NSObject {
     }
     
     @objc
+    public static func setFramework(
+        _ framework: Framework,
+        version: String
+    ) {
+        shared.framework.framework = framework
+        shared.framework.frameworkVersion = version
+    }
+    
+    @objc
+    public static func setPluginVersion(
+        _ pluginVersion: String
+    ) {
+        shared.framework.pluginVersion = pluginVersion
+    }
+    
+    @objc
     public static func initialize(
         appKey: String,
         completion: @escaping () -> () = {}
@@ -99,13 +117,12 @@ public final class BidonSdk: NSObject {
         appKey: String,
         completion: (() -> ())?
     ) {
-#warning("Incapsulate logic in tasks")
-        environmentRepository.configure(
-            EnvironmentRepository.Parameters(
-                appKey: appKey,
-                framework: .native
-            )
-        ) { [unowned self] in
+        let parameters = EnvironmentRepository.Parameters(
+            appKey: appKey,
+            framework: framework
+        )
+        
+        environmentRepository.configure(parameters) { [unowned self] in
             let request = ConfigurationRequest { builder in
                 builder.withAdaptersRepository(self.adaptersRepository)
                 builder.withEnvironmentRepository(self.environmentRepository)

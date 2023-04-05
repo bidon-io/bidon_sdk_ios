@@ -1,19 +1,24 @@
 //
-//  ActionRequest.swift
+//  LossRequest.swift
 //  Bidon
 //
-//  Created by Bidon Team on 31.08.2022.
+//  Created by Stas Kochkin on 05.04.2023.
 //
 
 import Foundation
 
 
-struct ImpressionRequest: Request {
+struct LossRequest: Request {
     var route: Route
     var method: HTTPTask.HTTPMethod = .post
     var headers: [HTTPTask.HTTPHeader: String] = .default()
     var timeout: TimeInterval = 10
     var body: RequestBody?
+    
+    struct ExternalWinner: Encodable {
+        var ecpm: Price
+        var demandId: String
+    }
     
     struct RequestBody: Encodable, Tokenized {
         var device: DeviceModel?
@@ -26,6 +31,7 @@ struct ImpressionRequest: Request {
         var token: String?
         var segmentId: String?
         var bid: ImpressionModel
+        var externalWinner: ExternalWinner
     }
     
     struct ResponseBody: Decodable, Tokenized {
@@ -34,7 +40,7 @@ struct ImpressionRequest: Request {
         var success: Bool
     }
     
-    init<T: ImpressionRequestBuilder>(_ build: (T) -> ()) {
+    init<T: LossRequestBuilder>(_ build: (T) -> ()) {
         let builder = T()
         build(builder)
     
@@ -48,7 +54,8 @@ struct ImpressionRequest: Request {
             geo: builder.geo,
             ext: builder.encodedExt,
             test: builder.testMode,
-            bid: builder.imp
+            bid: builder.imp,
+            externalWinner: builder.externalWinner
         )
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import Bidon
 
 
 final class FullscreenAdSectionViewModel: ObservableObject, AdResponder {
@@ -23,6 +24,7 @@ final class FullscreenAdSectionViewModel: ObservableObject, AdResponder {
     @Published var state: State = .idle
     @Published var events: [AdEventModel] = []
     @Published var pricefloor: Double = 0.1
+    @Published var ad: Bidon.Ad?
     
     private var cancellables = Set<AnyCancellable>()
     private let adType: AdType
@@ -31,6 +33,11 @@ final class FullscreenAdSectionViewModel: ObservableObject, AdResponder {
         self.adType = adType
         
         subscribe()
+    }
+    
+    func notify(loss ad: Ad) {
+        adService.notify(loss: ad, adType: adType)
+        update(.idle)
     }
     
     @MainActor
@@ -74,6 +81,15 @@ final class FullscreenAdSectionViewModel: ObservableObject, AdResponder {
             .sink { event in
                 withAnimation { [unowned self] in
                     self.events.append(event)
+                }
+            }
+            .store(in: &cancellables)
+        adService
+            .adPublisher(adType: adType)
+            .receive(on: RunLoop.main)
+            .sink { ad in
+                withAnimation { [unowned self] in
+                    self.ad = ad
                 }
             }
             .store(in: &cancellables)

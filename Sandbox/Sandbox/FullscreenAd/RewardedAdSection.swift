@@ -40,6 +40,8 @@ struct RewardedAdSection: View {
                 }
             }
             .disabled(vm.state == .loading || vm.state == .ready)
+            .adContextMenu(vm.ad, onLoss: vm.notify(loss:))
+
             
             Button(action: show) {
                 HStack {

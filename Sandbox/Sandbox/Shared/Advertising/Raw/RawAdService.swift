@@ -54,25 +54,56 @@ final class RawAdService: NSObject, AdService {
     
     func adEventPublisher(adType: AdType) -> AnyPublisher<AdEventModel, Never> {
         switch adType {
-        case .interstitial: return interstitial.adEventSubject.eraseToAnyPublisher()
-        case .rewardedAd: return rewardedAd.adEventSubject.eraseToAnyPublisher()
-        default: fatalError("Not implemented")
+        case .interstitial:
+            return interstitial.adEventSubject.eraseToAnyPublisher()
+        case .rewardedAd:
+            return rewardedAd.adEventSubject.eraseToAnyPublisher()
+        default:
+            fatalError("Not implemented")
+        }
+    }
+    
+    func adPublisher(adType: AdType) -> AnyPublisher<Bidon.Ad?, Never> {
+        switch adType {
+        case .interstitial:
+            return interstitial.adSubject.eraseToAnyPublisher()
+        case .rewardedAd:
+            return rewardedAd.adSubject.eraseToAnyPublisher()
+        default:
+            fatalError("Not implemented")
         }
     }
     
     func load(pricefloor: Double, adType: AdType) async throws {
         switch adType {
-        case .interstitial: try await interstitial.load(pricefloor: pricefloor)
-        case .rewardedAd: try await rewardedAd.load(pricefloor: pricefloor)
-        default: throw AppodealAdServiceError.unsupported
+        case .interstitial:
+            try await interstitial.load(pricefloor: pricefloor)
+        case .rewardedAd:
+            try await rewardedAd.load(pricefloor: pricefloor)
+        default:
+            throw AppodealAdServiceError.unsupported
         }
     }
     
     func show(adType: AdType) async throws {
         switch adType {
-        case .interstitial: try await interstitial.show()
-        case .rewardedAd: try await rewardedAd.show()
-        default: throw AppodealAdServiceError.unsupported
+        case .interstitial:
+            try await interstitial.show()
+        case .rewardedAd:
+            try await rewardedAd.show()
+        default:
+            throw AppodealAdServiceError.unsupported
+        }
+    }
+    
+    func notify(loss ad: Ad, adType: AdType) {
+        switch adType {
+        case .interstitial:
+            interstitial.notify(loss: ad)
+        case .rewardedAd:
+            rewardedAd.notify(loss: ad)
+        default:
+            break
         }
     }
 }

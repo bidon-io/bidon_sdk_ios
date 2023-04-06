@@ -53,6 +53,8 @@ struct AnyAdBannerWrapperView: AdBannerWrapperView {
     var pricefloor: Double
     var onEvent: AdBannerWrapperViewEvent
     
+    @Binding var ad: Bidon.Ad?
+    
     var body: some View {
         switch mediation {
         case .appodeal:
@@ -60,7 +62,8 @@ struct AnyAdBannerWrapperView: AdBannerWrapperView {
                 format: format,
                 isAutorefreshing: isAutorefreshing,
                 autorefreshInterval: autorefreshInterval,
-                onEvent: onEvent
+                onEvent: onEvent,
+                ad: $ad
             )
         case .none:
             RawBannerView(
@@ -68,7 +71,8 @@ struct AnyAdBannerWrapperView: AdBannerWrapperView {
                 isAutorefreshing: isAutorefreshing,
                 autorefreshInterval: autorefreshInterval,
                 pricefloor: pricefloor,
-                onEvent: onEvent
+                onEvent: onEvent,
+                ad: $ad
             )
         }
     }

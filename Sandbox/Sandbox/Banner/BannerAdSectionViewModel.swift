@@ -20,10 +20,15 @@ final class BannerAdSectionViewModel: ObservableObject {
     @Published var events: [AdEventModel] = []
     @Published var isLoading: Bool = false
     @Published var pricefloor: Price = 0.1
+    @Published var ad: Bidon.Ad?
     
-    func receive(_ event: AdEventModel) {
+    func receive(event: AdEventModel) {
         withAnimation { [unowned self] in
             self.events.append(event)
         }
+    }
+    
+    func notify(loss ad: Ad) {
+        
     }
 }

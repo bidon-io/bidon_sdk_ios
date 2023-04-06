@@ -126,8 +126,8 @@ final internal class BannerViewManager: NSObject {
         view.addGestureRecognizer(recognizer)
     }
     
-    func notifyOnLoss(
-        ad: DemandAd,
+    func notify(
+        loss ad: Ad,
         winner demandId: String,
         eCPM: Price
     ) {

@@ -41,6 +41,14 @@ final class AppodealRewardedAdWrapper: BaseFullscreenAdWrapper {
         }
     }
     
+    override func notify(loss ad: Ad) {
+        bidOnRewardedAd?.notify(
+            loss: ad,
+            winner: "some_appodeal_ad_network",
+            eCPM: ad.eCPM + 0.01
+        )
+    }
+    
     private func performMediation() {
         Appodeal.cacheAd(.rewardedVideo)
     }

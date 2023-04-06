@@ -38,6 +38,14 @@ final class RawInterstitialAdWrapper: BaseFullscreenAdWrapper {
             resumeShowingContinuation(throwing: RawAdServiceError.invalidPresentationState)
         }
     }
+    
+    override func notify(loss ad: Ad) {
+        bidOnInterstitial?.notify(
+            loss: ad,
+            winner: "some_unknown_ad_network",
+            eCPM: ad.eCPM + 0.01
+        )
+    }
 }
 
 

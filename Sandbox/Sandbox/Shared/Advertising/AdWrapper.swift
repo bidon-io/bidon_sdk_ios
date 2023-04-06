@@ -14,6 +14,7 @@ import Bidon
 
 protocol AdWrapper {
     var adEventSubject: PassthroughSubject<AdEventModel, Never> { get }
+    var adSubject: PassthroughSubject<Ad?, Never> { get }
     var adType: AdType { get }
 }
 
@@ -21,6 +22,7 @@ protocol AdWrapper {
 protocol FullscreenAdWrapper: AdWrapper {
     func show() async throws
     func load(pricefloor: Double) async throws
+    func notify(loss ad: Ad)
 }
 
 

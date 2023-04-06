@@ -37,7 +37,8 @@ struct HomeView: View {
                                 isAutorefreshing: vm.bannerSettings.isAutorefreshing,
                                 autorefreshInterval: vm.bannerSettings.autorefreshInterval,
                                 pricefloor: vm.bannerSettings.pricefloor,
-                                onEvent: vm.banner.receive
+                                onEvent: vm.banner.receive,
+                                ad: $vm.banner.ad
                             )
                             
                             if vm.isBannerLoading {

@@ -20,3 +20,4 @@ public protocol Ad {
     @objc var currencyCode: Currency? { get }
     @objc var adType: AdType { get }
 }
+

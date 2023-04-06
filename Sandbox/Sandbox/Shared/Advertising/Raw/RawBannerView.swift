@@ -21,18 +21,22 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
     var pricefloor: Price
     var onEvent: AdBannerWrapperViewEvent
     
+    @Binding var ad: Bidon.Ad?
+
     init(
         format: AdBannerWrapperFormat,
         isAutorefreshing: Bool,
         autorefreshInterval: TimeInterval,
         pricefloor: Price = 0.1,
-        onEvent: @escaping AdBannerWrapperViewEvent
+        onEvent: @escaping AdBannerWrapperViewEvent,
+        ad: Binding<Bidon.Ad?>
     ) {
         self.format = format
         self.isAutorefreshing = isAutorefreshing
         self.autorefreshInterval = autorefreshInterval
         self.onEvent = onEvent
         self.pricefloor = pricefloor
+        self._ad = ad
     }
     
     func makeUIView(context: Context) -> BannerView {
@@ -54,20 +58,33 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(onEvent: onEvent)
+        return Coordinator(
+            onEvent: onEvent
+        ) {
+            self.ad = $0
+        }
     }
     
     final class Coordinator: BaseAdWrapper {
-        private var cancellable: AnyCancellable?
-        
+        private var cancellables = Set<AnyCancellable>()
+
         override var adType: AdType { .banner }
         
-        init(onEvent: @escaping AdBannerWrapperViewEvent) {
+        init(
+            onEvent: @escaping AdBannerWrapperViewEvent,
+            onUpdateAd: @escaping (Bidon.Ad?) -> ()
+        ) {
             super.init()
             
-            self.cancellable = self.adEventSubject
+            adEventSubject
                 .receive(on: RunLoop.main)
                 .sink(receiveValue: onEvent)
+                .store(in: &cancellables)
+            
+            adSubject
+                .receive(on: RunLoop.main)
+                .sink(receiveValue: onUpdateAd)
+                .store(in: &cancellables)
         }
     }
 }

@@ -33,6 +33,7 @@ struct BannerAdSection: View {
                         Spacer()
                     }
                 }
+                .adContextMenu(vm.ad, onLoss: vm.notify(loss:)) 
                 
                 NavigationLink("Events", destination: AdEventsList(events: vm.events))
             }

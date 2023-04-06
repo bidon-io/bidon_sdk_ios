@@ -42,10 +42,13 @@ protocol AdService: AnyObject {
     func initialize() async
     
     func adEventPublisher(adType: AdType) -> AnyPublisher<AdEventModel, Never>
+    func adPublisher(adType: AdType) -> AnyPublisher<Bidon.Ad?, Never>
     
     func load(pricefloor: Double, adType: AdType) async throws
     
     func show(adType: AdType) async throws
+    
+    func notify(loss ad: Ad, adType: AdType)
 }
 
 

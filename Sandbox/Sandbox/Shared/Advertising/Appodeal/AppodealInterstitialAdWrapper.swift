@@ -41,6 +41,14 @@ final class AppodealInterstitialAdWrapper: BaseFullscreenAdWrapper {
         }
     }
     
+    override func notify(loss ad: Ad) {
+        bidOnInterstitial?.notify(
+            loss: ad,
+            winner: "some_appodeal_ad_network",
+            eCPM: ad.eCPM + 0.01
+        )
+    }
+    
     private func performMediation() {
         Appodeal.cacheAd(.interstitial)
     }

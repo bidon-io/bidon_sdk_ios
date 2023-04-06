@@ -22,18 +22,22 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
     var pricefloor: Price
     var onEvent: AdBannerWrapperViewEvent
     
+    @Binding var ad: Bidon.Ad?
+    
     init(
         format: AdBannerWrapperFormat,
         isAutorefreshing: Bool,
         autorefreshInterval: TimeInterval,
         pricefloor: Price = 0.1,
-        onEvent: @escaping AdBannerWrapperViewEvent
+        onEvent: @escaping AdBannerWrapperViewEvent,
+        ad: Binding<Bidon.Ad?>
     ) {
         self.format = format
         self.isAutorefreshing = isAutorefreshing
         self.autorefreshInterval = autorefreshInterval
         self.onEvent = onEvent
         self.pricefloor = pricefloor
+        self._ad = ad
     }
     
     func makeUIView(context: Context) -> UIView {
@@ -51,13 +55,17 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(onEvent: onEvent)
+        return Coordinator(
+            onEvent: onEvent
+        ) {
+            self.ad = $0
+        }
     }
     
     final class Coordinator: BaseAdWrapper {
         override var adType: AdType { .banner }
-
-        private var cancellable: AnyCancellable?
+        
+        private var cancellables = Set<AnyCancellable>()
         
         private weak var container: UIView?
         
@@ -69,12 +77,21 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
         private lazy var banners = [Price: UIView]()
         private lazy var cache = [AnyObject]()
         
-        init(onEvent: @escaping AdBannerWrapperViewEvent) {
+        init(
+            onEvent: @escaping AdBannerWrapperViewEvent,
+            onUpdateAd: @escaping (Bidon.Ad?) -> ()
+        ) {
             super.init()
             
-            self.cancellable = self.adEventSubject
+            adEventSubject
                 .receive(on: RunLoop.main)
                 .sink(receiveValue: onEvent)
+                .store(in: &cancellables)
+            
+            adSubject
+                .receive(on: RunLoop.main)
+                .sink(receiveValue: onUpdateAd)
+                .store(in: &cancellables)
         }
         
         func load(
@@ -117,7 +134,7 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
             let banner = Bidon.BannerView(frame: .zero)
             
             banner[extrasKey: "appodeal_key"] = true
-
+            
             banner.format = Bidon.BannerFormat(format)
             banner.isAutorefreshing = false
             banner.rootViewController = UIApplication.shared.bd.topViewcontroller
@@ -220,7 +237,7 @@ extension AppodealBannerView.Coordinator: Bidon.AdViewDelegate {
         super.adObject(adObject, didLoadAd: ad)
         cache = cache.filter { $0 !== adObject }
         banners[ad.eCPM] = adObject as? UIView
-
+        
         layoutBannerIfNeeded()
     }
     

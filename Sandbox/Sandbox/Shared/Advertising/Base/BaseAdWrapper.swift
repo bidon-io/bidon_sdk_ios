@@ -12,7 +12,8 @@ import Bidon
 
 class BaseAdWrapper: NSObject, AdWrapper {
     final let adEventSubject = PassthroughSubject<AdEventModel, Never>()
-    
+    final let adSubject = PassthroughSubject<Ad?, Never>()
+
     open var adType: AdType { fatalError("Undefined ad type") }
 }
 
@@ -25,6 +26,7 @@ extension BaseAdWrapper: Bidon.AdObjectDelegate {
             bage: "star.fill",
             color: .accentColor
         )
+        adSubject.send(ad)
     }
     
     func adObject(_ adObject: Bidon.AdObject, didFailToLoadAd error: Error) {
@@ -34,6 +36,7 @@ extension BaseAdWrapper: Bidon.AdObjectDelegate {
             bage: "star.fill",
             color: .red
         )
+        adSubject.send(nil)
     }
     
     func adObject(
@@ -46,6 +49,7 @@ extension BaseAdWrapper: Bidon.AdObjectDelegate {
             bage: "flag.fill",
             color: .accentColor
         )
+        adSubject.send(nil)
     }
     
     func adObject(

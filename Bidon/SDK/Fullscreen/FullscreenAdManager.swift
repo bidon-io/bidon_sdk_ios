@@ -111,8 +111,8 @@ LossRequestBuilderType: LossRequestBuilder {
         fetchAuctionInfo(pricefloor)
     }
     
-    func notifyOnLoss(
-        ad: DemandAd,
+    func notify(
+        loss ad: Ad,
         winner demandId: String,
         eCPM: Price
     ) {

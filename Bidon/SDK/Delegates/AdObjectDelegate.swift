@@ -11,8 +11,9 @@ import Foundation
 public protocol AdObject: ExtrasProvider {
     var isReady: Bool { get }
     
-    func notifyOnLoss(
-        ad: DemandAd,
+    @objc(notifyLossAd:winner:eCPM:)
+    func notify(
+        loss ad: Ad,
         winner demandId: String,
         eCPM: Price
     )

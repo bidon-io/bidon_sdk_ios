@@ -17,7 +17,7 @@ public final class Interstitial: NSObject, FullscreenAdObject {
         InterstitialConcurrentAuctionControllerBuilder,
         InterstitialImpressionController,
         InterstitialImpressionRequestBuilder,
-        RewardedLossRequestBuilder
+        InterstitialLossRequestBuilder
     >
     
     @objc public var delegate: FullscreenAdDelegate?
@@ -61,13 +61,14 @@ public final class Interstitial: NSObject, FullscreenAdObject {
         manager.show(from: rootViewController)
     }
     
-    @objc public func notifyOnLoss(
-        ad: DemandAd,
+    @objc(notifyLossAd:winner:eCPM:)
+    public func notify(
+        loss ad: Ad,
         winner demandId: String,
         eCPM: Price
     ) {
-        manager.notifyOnLoss(
-            ad: ad,
+        manager.notify(
+            loss: ad,
             winner: demandId,
             eCPM: eCPM
         )

@@ -102,13 +102,14 @@ public final class BannerView: UIView, AdView {
         )
     }
     
-    @objc public func notifyOnLoss(
-        ad: DemandAd,
+    @objc(notifyLossAd:winner:eCPM:)
+    public func notify(
+        loss ad: Ad,
         winner demandId: String,
         eCPM: Price
     ) {
-        viewManager.notifyOnLoss(
-            ad: ad,
+        viewManager.notify(
+            loss: ad,
             winner: demandId,
             eCPM: eCPM
         )

@@ -43,7 +43,7 @@ module Fastlane
           spec.homepage = "https://appodeal.com"
           spec.license = { :type => "Copyright", :text => "Copyright #{Time.new.year}. Bidon Inc." }
           spec.author = { "Bidon Inc." => "https://http://bidon.org" }
-          spec.platform = :ios, "10.0"
+          spec.platform = :ios, "12.0"
           spec.source = { :http => "https://s3-us-west-1.amazonaws.com/appodeal-ios/Bidon/#{spec.name}/#{spec.version}/#{spec.name}.zip" }
           spec.swift_versions = "4.0", "4.2", "5.0"
         

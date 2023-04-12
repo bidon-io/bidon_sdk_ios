@@ -106,6 +106,10 @@ extension RewardedAd: FullscreenAdManagerDelegate {
         delegate?.rewardedAd(self, didRewardUser: reward, ad: ad)
     }
     
+    func adManager(_ adManager: FullscreenAdManager, didExpire ad: Ad) {
+        delegate?.adObject?(self, didExpireAd: ad)
+    }
+    
     func adManager(_ adManager: FullscreenAdManager, didPayRevenue revenue: AdRevenue, ad: Ad) {
         delegate?.adObject?(
             self,

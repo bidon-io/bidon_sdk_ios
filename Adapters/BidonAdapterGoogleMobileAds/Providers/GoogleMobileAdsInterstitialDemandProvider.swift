@@ -44,7 +44,12 @@ extension GoogleMobileAdsInterstitialDemandProvider: GADFullScreenContentDelegat
     }
     
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        delegate?.providerDidFailToDisplay(self, error: SdkError(error))
+        guard let ad = ad as? GADInterstitialAd else { return }
+        delegate?.provider(
+            self,
+            didFailToDisplayAd: ad,
+            error: .generic(error: error)
+        )
     }
     
     func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {

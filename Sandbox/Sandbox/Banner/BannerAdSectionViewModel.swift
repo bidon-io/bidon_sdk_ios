@@ -29,6 +29,6 @@ final class BannerAdSectionViewModel: ObservableObject {
     }
     
     func notify(loss ad: Ad) {
-        
+        // TODO: Make loss notification for banners
     }
 }

@@ -22,6 +22,7 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
     var onEvent: AdBannerWrapperViewEvent
     
     @Binding var ad: Bidon.Ad?
+    @Binding var isLoading: Bool
 
     init(
         format: AdBannerWrapperFormat,
@@ -29,7 +30,8 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
         autorefreshInterval: TimeInterval,
         pricefloor: Price = 0.1,
         onEvent: @escaping AdBannerWrapperViewEvent,
-        ad: Binding<Bidon.Ad?>
+        ad: Binding<Bidon.Ad?>,
+        isLoading: Binding<Bool>
     ) {
         self.format = format
         self.isAutorefreshing = isAutorefreshing
@@ -37,6 +39,7 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
         self.onEvent = onEvent
         self.pricefloor = pricefloor
         self._ad = ad
+        self._isLoading = isLoading
     }
     
     func makeUIView(context: Context) -> BannerView {
@@ -52,9 +55,11 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
     
     func updateUIView(_ uiView: BannerView, context: Context) {
         uiView.format = BannerFormat(format)
-        uiView.isAutorefreshing = isAutorefreshing
-        uiView.autorefreshInterval = autorefreshInterval
-        uiView.loadAd(with: pricefloor)
+//        uiView.isAutorefreshing = isAutorefreshing
+//        uiView.autorefreshInterval = autorefreshInterval
+        if isLoading {
+            uiView.loadAd(with: pricefloor)
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -62,6 +67,7 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
             onEvent: onEvent
         ) {
             self.ad = $0
+            self.isLoading = false
         }
     }
     

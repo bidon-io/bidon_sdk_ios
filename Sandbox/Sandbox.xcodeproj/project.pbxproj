@@ -54,6 +54,7 @@
 		42BE439028C0E7B3000528E3 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438F28C0E7B3000528E3 /* Permission.swift */; };
 		42BE439228C0E7CB000528E3 /* LocationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439128C0E7CB000528E3 /* LocationPermission.swift */; };
 		42BE439428C0E936000528E3 /* AppTrackingTransparencyPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */; };
+		42C4F45E29E6B37300B12E15 /* ActivityPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C4F45D29E6B37300B12E15 /* ActivityPlaceholder.swift */; };
 		42C59B9E28C61F1100544EDF /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C59B9D28C61F1100544EDF /* HostView.swift */; };
 		42EDA0AC28C5EEE300BF74DE /* InitializationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0AB28C5EEE300BF74DE /* InitializationView.swift */; };
 		42EDA0AE28C5EF6000BF74DE /* InitializationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDA0AD28C5EF6000BF74DE /* InitializationViewModel.swift */; };
@@ -117,6 +118,7 @@
 		42BE438F28C0E7B3000528E3 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		42BE439128C0E7CB000528E3 /* LocationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermission.swift; sourceTree = "<group>"; };
 		42BE439328C0E936000528E3 /* AppTrackingTransparencyPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparencyPermission.swift; sourceTree = "<group>"; };
+		42C4F45D29E6B37300B12E15 /* ActivityPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPlaceholder.swift; sourceTree = "<group>"; };
 		42C59B9D28C61F1100544EDF /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
 		42EDA0AB28C5EEE300BF74DE /* InitializationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationView.swift; sourceTree = "<group>"; };
 		42EDA0AD28C5EF6000BF74DE /* InitializationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationViewModel.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				42EDA0B128C612B000BF74DE /* AppProgressView.swift */,
 				429F4D8728CF6AA700765BD7 /* Wave.swift */,
 				42166C3129DEB5F100095691 /* AdContextMenu.swift */,
+				42C4F45D29E6B37300B12E15 /* ActivityPlaceholder.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42C4F45E29E6B37300B12E15 /* ActivityPlaceholder.swift in Sources */,
 				427B1BDD299BE2D3007D4E93 /* AppodealInterstitialAdWrapper.swift in Sources */,
 				427B1BE6299E403F007D4E93 /* RawInterstitialAdWrapper.swift in Sources */,
 				427B1BE1299D2F70007D4E93 /* AdWrapper.swift in Sources */,
@@ -675,7 +679,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stasko.simplenumbers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.bidon.sandbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -713,7 +717,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stasko.simplenumbers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.bidon.sandbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

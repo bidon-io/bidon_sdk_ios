@@ -25,6 +25,23 @@ struct BannerAdSection: View {
                 
                 Button(action: {
                     withAnimation {
+                        vm.isLoading.toggle()
+                    }
+                }) {
+                    HStack {
+                        Text(vm.isLoading ? "Loading...": "Load")
+                            .foregroundColor(!vm.isPresented || vm.isLoading ? .secondary : .primary)
+                        Spacer()
+                        if vm.isLoading {
+                            ProgressView()
+                        }
+                    }
+                }
+                .adContextMenu(vm.ad, onLoss: vm.notify(loss:))
+                .disabled(!vm.isPresented || vm.isLoading)
+                
+                Button(action: {
+                    withAnimation {
                         vm.isPresented.toggle()
                     }
                 }) {
@@ -33,7 +50,6 @@ struct BannerAdSection: View {
                         Spacer()
                     }
                 }
-                .adContextMenu(vm.ad, onLoss: vm.notify(loss:)) 
                 
                 NavigationLink("Events", destination: AdEventsList(events: vm.events))
             }

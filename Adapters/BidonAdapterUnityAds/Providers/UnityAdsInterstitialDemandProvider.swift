@@ -108,7 +108,11 @@ extension UnityAdsInterstitialDemandProvider: UnityAdsShowDelegate {
         guard let placement = placements.first(where: { $0.placementId == placementId }) else { return }
         
         placements.remove(placement)
-        delegate?.providerDidFailToDisplay(self, error: .message(message))
+        delegate?.provider(
+            self,
+            didFailToDisplayAd: placement,
+            error: .message(message)
+        )
     }
     
     func unityAdsShowStart(_ placementId: String) {

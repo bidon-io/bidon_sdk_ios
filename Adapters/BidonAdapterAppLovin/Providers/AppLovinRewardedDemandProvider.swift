@@ -60,7 +60,11 @@ extension AppLovinRewardedDemandProvider: DirectDemandProvider {
 extension AppLovinRewardedDemandProvider: RewardedAdDemandProvider {
     func show(ad: ALAd, from viewController: UIViewController) {
         guard let interstitial = interstitial else {
-            delegate?.providerDidFailToDisplay(self, error: SdkError.invalidPresentationState)
+            delegate?.provider(
+                self,
+                didFailToDisplayAd: ad,
+                error: .invalidPresentationState
+            )
             return
         }
         

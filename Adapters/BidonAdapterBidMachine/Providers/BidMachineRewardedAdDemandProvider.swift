@@ -32,7 +32,11 @@ extension BidMachineRewardedAdDemandProvider: RewardedAdDemandProvider {
         from viewController: UIViewController
     ) {
         guard ad.ad.canShow else {
-            delegate?.providerDidFailToDisplay(self, error: .invalidPresentationState)
+            delegate?.provider(
+                self,
+                didFailToDisplayAd: ad,
+                error: .invalidPresentationState
+            )
             return
         }
         

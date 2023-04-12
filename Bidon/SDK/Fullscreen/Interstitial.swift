@@ -110,6 +110,10 @@ extension Interstitial: FullscreenAdManagerDelegate {
         )
     }
     
+    func adManager(_ adManager: FullscreenAdManager, didExpire ad: Ad) {
+        delegate?.adObject?(self, didExpireAd: ad)
+    }
+    
     func adManager(_ adManager: FullscreenAdManager, didReward reward: Reward, ad: Ad) {}
 }
 

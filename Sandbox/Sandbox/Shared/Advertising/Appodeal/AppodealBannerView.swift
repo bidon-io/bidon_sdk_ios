@@ -23,14 +23,16 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
     var onEvent: AdBannerWrapperViewEvent
     
     @Binding var ad: Bidon.Ad?
-    
+    @Binding var isLoading: Bool
+
     init(
         format: AdBannerWrapperFormat,
         isAutorefreshing: Bool,
         autorefreshInterval: TimeInterval,
         pricefloor: Price = 0.1,
         onEvent: @escaping AdBannerWrapperViewEvent,
-        ad: Binding<Bidon.Ad?>
+        ad: Binding<Bidon.Ad?>,
+        isLoading: Binding<Bool>
     ) {
         self.format = format
         self.isAutorefreshing = isAutorefreshing
@@ -38,6 +40,7 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
         self.onEvent = onEvent
         self.pricefloor = pricefloor
         self._ad = ad
+        self._isLoading = isLoading
     }
     
     func makeUIView(context: Context) -> UIView {
@@ -45,19 +48,22 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
-        context.coordinator.load(
-            container: uiView,
-            format: format,
-            isAutorefreshing: isAutorefreshing,
-            autorefreshInterval: autorefreshInterval,
-            pricefloor: pricefloor
-        )
+        if isLoading {
+            context.coordinator.load(
+                container: uiView,
+                format: format,
+                isAutorefreshing: isAutorefreshing,
+                autorefreshInterval: autorefreshInterval,
+                pricefloor: pricefloor
+            )
+        }
     }
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(
             onEvent: onEvent
         ) {
+            self.isLoading = false
             self.ad = $0
         }
     }
@@ -136,7 +142,7 @@ struct AppodealBannerView: UIViewRepresentable, AdBannerWrapperView {
             banner[extrasKey: "appodeal_key"] = true
             
             banner.format = Bidon.BannerFormat(format)
-            banner.isAutorefreshing = false
+//            banner.isAutorefreshing = false
             banner.rootViewController = UIApplication.shared.bd.topViewcontroller
             banner.delegate = self
             banner.loadAd(with: pricefloor)

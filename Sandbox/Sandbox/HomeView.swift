@@ -38,11 +38,12 @@ struct HomeView: View {
                                 autorefreshInterval: vm.bannerSettings.autorefreshInterval,
                                 pricefloor: vm.bannerSettings.pricefloor,
                                 onEvent: vm.banner.receive,
-                                ad: $vm.banner.ad
+                                ad: $vm.banner.ad,
+                                isLoading: $vm.banner.isLoading
                             )
                             
                             if vm.isBannerLoading {
-                                ProgressView()
+                                ActivityPlaceholder()
                             }
                         }
                         .frame(height: vm.bannerHeight)

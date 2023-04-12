@@ -35,6 +35,12 @@ public protocol AdObjectDelegate: AnyObject {
     @objc optional
     func adObject(
         _ adObject: AdObject,
+        didExpireAd ad: Ad
+    )
+    
+    @objc optional
+    func adObject(
+        _ adObject: AdObject,
         didRecordImpression ad: Ad
     )
     

@@ -23,8 +23,6 @@
 		4224AA6D28B7D1F600E8D886 /* RewardedAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA6C28B7D1F600E8D886 /* RewardedAd.swift */; };
 		4224AA6F28B7E11200E8D886 /* FullscreenImpressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA6E28B7E11200E8D886 /* FullscreenImpressionController.swift */; };
 		4224AA7128B7E2F400E8D886 /* RewardedImpressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7028B7E2F400E8D886 /* RewardedImpressionController.swift */; };
-		4224AA7928B8C5F800E8D886 /* InterstitialPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7828B8C5F800E8D886 /* InterstitialPublisher.swift */; };
-		4224AA7B28B8C87900E8D886 /* RewardedAdPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7A28B8C87900E8D886 /* RewardedAdPublisher.swift */; };
 		42389DEC2872F497006024BA /* AdaptersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DEB2872F497006024BA /* AdaptersRepository.swift */; };
 		42389DEE2872F52A006024BA /* BidSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DED2872F52A006024BA /* BidSet.swift */; };
 		42389DF02872F57D006024BA /* Ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42389DEF2872F57D006024BA /* Ad.swift */; };
@@ -105,8 +103,8 @@
 		42BA820928785506001F1744 /* BannerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA820828785506001F1744 /* BannerViewManager.swift */; };
 		42BE438B28C0AE93000528E3 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438A28C0AE93000528E3 /* UserManager.swift */; };
 		42BE438D28C0B0E3000528E3 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE438C28C0B0E3000528E3 /* SessionManager.swift */; };
-		42BE439628C203AF000528E3 /* BannerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439528C203AF000528E3 /* BannerPublisher.swift */; };
 		42BE439A28C24626000528E3 /* DemandProviderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE439928C24626000528E3 /* DemandProviderWrapper.swift */; };
+		42C4F46029E6CEEE00B12E15 /* BidKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C4F45F29E6CEEE00B12E15 /* BidKeeper.swift */; };
 		42C59BA028C64F4400544EDF /* MediationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C59B9F28C64F4400544EDF /* MediationObserver.swift */; };
 		42CCB99128CB365400DBAE97 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CCB99028CB365400DBAE97 /* UIDevice+Extensions.swift */; };
 		42D047DE289D5A0D0096A8C6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D047DD289D5A0D0096A8C6 /* Device.swift */; };
@@ -148,8 +146,6 @@
 		4224AA6C28B7D1F600E8D886 /* RewardedAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAd.swift; sourceTree = "<group>"; };
 		4224AA6E28B7E11200E8D886 /* FullscreenImpressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenImpressionController.swift; sourceTree = "<group>"; };
 		4224AA7028B7E2F400E8D886 /* RewardedImpressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedImpressionController.swift; sourceTree = "<group>"; };
-		4224AA7828B8C5F800E8D886 /* InterstitialPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialPublisher.swift; sourceTree = "<group>"; };
-		4224AA7A28B8C87900E8D886 /* RewardedAdPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdPublisher.swift; sourceTree = "<group>"; };
 		42389DEB2872F497006024BA /* AdaptersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptersRepository.swift; sourceTree = "<group>"; };
 		42389DED2872F52A006024BA /* BidSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidSet.swift; sourceTree = "<group>"; };
 		42389DEF2872F57D006024BA /* Ad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad.swift; sourceTree = "<group>"; };
@@ -231,8 +227,8 @@
 		42BA820828785506001F1744 /* BannerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewManager.swift; sourceTree = "<group>"; };
 		42BE438A28C0AE93000528E3 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		42BE438C28C0B0E3000528E3 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		42BE439528C203AF000528E3 /* BannerPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerPublisher.swift; sourceTree = "<group>"; };
 		42BE439928C24626000528E3 /* DemandProviderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandProviderWrapper.swift; sourceTree = "<group>"; };
+		42C4F45F29E6CEEE00B12E15 /* BidKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidKeeper.swift; sourceTree = "<group>"; };
 		42C59B9F28C64F4400544EDF /* MediationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediationObserver.swift; sourceTree = "<group>"; };
 		42CCB99028CB365400DBAE97 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		42D047DD289D5A0D0096A8C6 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -316,22 +312,11 @@
 				424F180C28ABC0780082AEF3 /* Fullscreen */,
 				42BA820528785464001F1744 /* Banner */,
 				426DD7B428A68BF700A1ADF5 /* Delegates */,
-				4224AA7728B8C5C500E8D886 /* Publishers */,
 				426DD7A228A5004200A1ADF5 /* Sdk.swift */,
 				428DDD1529DC2B7300147ABA /* ExtrasProvider.swift */,
 				422101972859E2C3006596DA /* BidOnSdk.swift */,
 			);
 			path = SDK;
-			sourceTree = "<group>";
-		};
-		4224AA7728B8C5C500E8D886 /* Publishers */ = {
-			isa = PBXGroup;
-			children = (
-				4224AA7828B8C5F800E8D886 /* InterstitialPublisher.swift */,
-				4224AA7A28B8C87900E8D886 /* RewardedAdPublisher.swift */,
-				42BE439528C203AF000528E3 /* BannerPublisher.swift */,
-			);
-			path = Publishers;
 			sourceTree = "<group>";
 		};
 		42389E1328745CCC006024BA /* Providers */ = {
@@ -735,6 +720,7 @@
 			isa = PBXGroup;
 			children = (
 				42389DED2872F52A006024BA /* BidSet.swift */,
+				42C4F45F29E6CEEE00B12E15 /* BidKeeper.swift */,
 				42FE946D29D42D9000DF7920 /* Bid.swift */,
 			);
 			path = Bid;
@@ -876,7 +862,6 @@
 				426DD78B28A3E88100A1ADF5 /* AuctionRequest.swift in Sources */,
 				4219DB5828B90D5E001F38E5 /* BannerAdManager.swift in Sources */,
 				42E6184228C7490C00B837D4 /* WaterfallController.swift in Sources */,
-				4224AA7928B8C5F800E8D886 /* InterstitialPublisher.swift in Sources */,
 				42389DEE2872F52A006024BA /* BidSet.swift in Sources */,
 				42D3E72F28BE059F00936B3E /* Impression.swift in Sources */,
 				421D48E8288844DA007DE2E4 /* LogDestination.swift in Sources */,
@@ -900,6 +885,7 @@
 				426DD7A628A5042A00A1ADF5 /* UserDefault.swift in Sources */,
 				42CCB99128CB365400DBAE97 /* UIDevice+Extensions.swift in Sources */,
 				427DB5C129BF2A8500057D08 /* UnknownAdapter.swift in Sources */,
+				42C4F46029E6CEEE00B12E15 /* BidKeeper.swift in Sources */,
 				421D48EA28884D1F007DE2E4 /* LogFormatter.swift in Sources */,
 				424D296428BE630500F6F2D6 /* MainThreadComputable.swift in Sources */,
 				429EE2C9286CA2B0009439C6 /* DemandProvider.swift in Sources */,
@@ -924,7 +910,6 @@
 				42BE438D28C0B0E3000528E3 /* SessionManager.swift in Sources */,
 				424F181328ABCF470082AEF3 /* InterstitialImpressionController.swift in Sources */,
 				4243093228A2BBFF002360B0 /* DeviceModel.swift in Sources */,
-				4224AA7B28B8C87900E8D886 /* RewardedAdPublisher.swift in Sources */,
 				429EE2DB286F1C8C009439C6 /* ConcurentAuctionRound.swift in Sources */,
 				4243093E28A3AD07002360B0 /* AdaptersInitialisationParameters.swift in Sources */,
 				426DD7BC28A696C600A1ADF5 /* Waterfall.swift in Sources */,
@@ -959,7 +944,6 @@
 				421D48E62888423B007DE2E4 /* Logger.swift in Sources */,
 				4298902029D5822800C5FB7B /* AdRevenueObserver.swift in Sources */,
 				429EE2D1286DD0E2009439C6 /* ConcurrentAuctionController.swift in Sources */,
-				42BE439628C203AF000528E3 /* BannerPublisher.swift in Sources */,
 				42BA82072878547C001F1744 /* BannerView.swift in Sources */,
 				4257D71A29DDBF970066DE1B /* LossRequestBuilder.swift in Sources */,
 				42BE438B28C0AE93000528E3 /* UserManager.swift in Sources */,

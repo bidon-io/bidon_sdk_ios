@@ -38,7 +38,8 @@ public protocol DemandProviderDelegate: AnyObject {
     func providerWillPresent(_ provider: any DemandProvider)
     func providerDidHide(_ provider: any DemandProvider)
     func providerDidClick(_ provider: any DemandProvider)
-    func providerDidFailToDisplay(_ provider: any DemandProvider, error: SdkError)
+    func provider(_ provider: any DemandProvider, didExpireAd ad: DemandAd)
+    func provider(_ provider: any DemandProvider, didFailToDisplayAd ad: DemandAd, error: SdkError)
 }
 
 

@@ -40,12 +40,21 @@ class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, Bi
     
     func didTrackImpression(_ ad: BidMachineAdProtocol) {
         let wrapper = BidMachineAdDemand(ad)
-        
         revenueDelegate?.provider(self, didPayRevenue: ad.revenue, ad: wrapper)
     }
     
     func didFailPresentAd(_ ad: BidMachineAdProtocol, _ error: Error) {
-        delegate?.providerDidFailToDisplay(self, error: .generic(error: error))
+        let wrapper = BidMachineAdDemand(ad)
+        delegate?.provider(
+            self,
+            didFailToDisplayAd: wrapper,
+            error: .generic(error: error)
+        )
+    }
+    
+    func didExpired(_ ad: BidMachineAdProtocol) {
+        let wrapper = BidMachineAdDemand(ad)
+        delegate?.provider(self, didExpireAd: wrapper)
     }
     
     func didDismissAd(_ ad: BidMachineAdProtocol) {
@@ -59,7 +68,6 @@ class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, Bi
     // Noop
     func willPresentScreen(_ ad: BidMachineAdProtocol) {}
     func didDismissScreen(_ ad: BidMachineAdProtocol) {}
-    func didExpired(_ ad: BidMachineAdProtocol) {}
     func didTrackInteraction(_ ad: BidMachineAdProtocol) {}
 }
 

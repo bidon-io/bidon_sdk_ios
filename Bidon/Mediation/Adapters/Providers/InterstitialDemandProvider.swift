@@ -18,13 +18,13 @@ internal extension InterstitialDemandProvider {
     func show(opaque ad: DemandAd, from viewController: UIViewController?) {
         guard let viewController = viewController ?? UIApplication.shared.bd.topViewcontroller else {
             let error = SdkError.unableToFindRootViewController
-            delegate?.providerDidFailToDisplay(self, error: error)
+            delegate?.provider(self, didFailToDisplayAd: ad, error: error)
             return
         }
         
         guard let ad = ad as? DemandAdType else {
             let error = SdkError.internalInconsistency
-            delegate?.providerDidFailToDisplay(self, error: error)
+            delegate?.provider(self, didFailToDisplayAd: ad, error: error)
             return
         }
         

@@ -47,7 +47,11 @@ extension DTExchangeInterstitialDemandProvider: InterstitialDemandProvider {
             ad.activeUnitController === controller,
             controller.isReady()
         else {
-            delegate?.providerDidFailToDisplay(self, error: .invalidPresentationState)
+            delegate?.provider(
+                self,
+                didFailToDisplayAd: ad,
+                error: .invalidPresentationState
+            )
             return
         }
         
@@ -65,8 +69,16 @@ extension DTExchangeInterstitialDemandProvider: IAMRAIDContentDelegate {}
 
 
 extension DTExchangeInterstitialDemandProvider: IAVideoContentDelegate {
-    func iaVideoContentController(_ contentController: IAVideoContentController?, videoInterruptedWithError error: Error) {
-        delegate?.providerDidFailToDisplay(self, error: .generic(error: error))
+    func iaVideoContentController(
+        _ contentController: IAVideoContentController?,
+        videoInterruptedWithError error: Error
+    ) {
+        guard let adSpot = adSpot else { return }
+        delegate?.provider(
+            self,
+            didFailToDisplayAd: adSpot,
+            error: .generic(error: error)
+        )
     }
 }
 

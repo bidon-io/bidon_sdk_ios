@@ -18,6 +18,7 @@ protocol FullscreenAdManagerDelegate: AnyObject {
     func adManager(_ adManager: FullscreenAdManager, didFailToLoad error: SdkError)
     func adManager(_ adManager: FullscreenAdManager, didLoad ad: Ad)
     func adManager(_ adManager: FullscreenAdManager, didFailToPresent ad: Ad?, error: SdkError)
+    func adManager(_ adManager: FullscreenAdManager, didExpire ad: Ad)
     func adManager(_ adManager: FullscreenAdManager, willPresent ad: Ad)
     func adManager(_ adManager: FullscreenAdManager, didHide ad: Ad)
     func adManager(_ adManager: FullscreenAdManager, didClick ad: Ad)
@@ -52,7 +53,7 @@ LossRequestBuilderType: LossRequestBuilder {
         case preparing
         case auction(controller: AuctionControllerType)
         case loading(controller: WaterfallControllerType)
-        case ready(bid: BidType)
+        case ready(keeper: BidKeeper<BidType>)
         case impression(controller: ImpressionControllerType)
     }
     
@@ -117,10 +118,10 @@ LossRequestBuilderType: LossRequestBuilder {
         eCPM: Price
     ) {
         switch state {
-        case .ready(let bid):
-            guard bid.ad.id == ad.id else { return }
+        case .ready(let keeper):
+            guard keeper.bid.ad.id == ad.id else { return }
             
-            let impression = ImpressionControllerType(bid: bid).impression
+            let impression = ImpressionControllerType(bid: keeper.bid).impression
             
             let request = LossRequest { (builder: LossRequestBuilderType) in
                 builder.withEnvironmentRepository(sdk.environmentRepository)
@@ -173,8 +174,8 @@ LossRequestBuilderType: LossRequestBuilder {
     
     func show(from rootViewController: UIViewController) {
         switch state {
-        case .ready(let bid):
-            let controller = ImpressionControllerType(bid: bid)
+        case .ready(let keeper):
+            let controller = ImpressionControllerType(bid: keeper.bid)
             controller.delegate = self
             state = .impression(controller: controller)
             controller.show(from: rootViewController)
@@ -244,7 +245,11 @@ LossRequestBuilderType: LossRequestBuilder {
             
             switch result {
             case .success(let bid):
-                self.state = .ready(bid: bid)
+                let keeper = BidKeeper(bid: bid) { [weak self] expiredBid in
+                    self?.expire(bid: expiredBid)
+                }
+                
+                self.state = .ready(keeper: keeper)
                 let ad = AdContainer(bid: bid)
                 self.delegate?.adManager(self, didLoad: ad)
             case .failure(let error):
@@ -287,6 +292,12 @@ LossRequestBuilderType: LossRequestBuilder {
         }
         
         impression.markTrackedIfNeeded(path)
+    }
+    
+    private func expire(bid: BidType) {
+        state = .idle
+        let container = AdContainer(bid: bid)
+        delegate?.adManager(self, didExpire: container)
     }
 }
 
@@ -343,8 +354,8 @@ private extension BaseFullscreenAdManager.State {
             return controller.currentBids.map(AdContainer.init)
         case .loading(let controller):
             return controller.bids.map(AdContainer.init)
-        case .ready(let bid):
-            return [AdContainer(bid: bid)]
+        case .ready(let keeper):
+            return [AdContainer(bid: keeper.bid)]
         case .impression(let controller):
             return [AdContainer(impression: controller.impression)]
         default: return []

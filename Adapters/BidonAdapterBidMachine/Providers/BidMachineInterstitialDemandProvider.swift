@@ -20,7 +20,11 @@ final class BidMachineInterstitialDemandProvider: BidMachineBaseDemandProvider<B
 extension BidMachineInterstitialDemandProvider: InterstitialDemandProvider {
     func show(ad: BidMachineAdDemand<BidMachineInterstitial>, from viewController: UIViewController) {
         guard ad.ad.canShow else {
-            delegate?.providerDidFailToDisplay(self, error: .invalidPresentationState)
+            delegate?.provider(
+                self,
+                didFailToDisplayAd: ad,
+                error: .invalidPresentationState
+            )
             return
         }
         

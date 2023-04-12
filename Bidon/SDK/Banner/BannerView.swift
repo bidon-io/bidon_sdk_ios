@@ -160,7 +160,7 @@ public final class BannerView: UIView, AdView {
 
 extension BannerView: BannerAdManagerDelegate {
     func adManager(_ adManager: BannerAdManager, didFailToLoad error: SdkError) {
-        delegate?.adObject(self, didFailToLoadAd: error)
+        delegate?.adObject(self, didFailToLoadAd: error.nserror)
     }
     
     func adManager(_ adManager: BannerAdManager, didLoad ad: Ad) {

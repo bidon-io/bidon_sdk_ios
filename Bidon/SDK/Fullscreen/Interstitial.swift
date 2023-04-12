@@ -78,7 +78,7 @@ public final class Interstitial: NSObject, FullscreenAdObject {
 
 extension Interstitial: FullscreenAdManagerDelegate {
     func adManager(_ adManager: FullscreenAdManager, didFailToLoad error: SdkError) {
-        delegate?.adObject(self, didFailToLoadAd: error)
+        delegate?.adObject(self, didFailToLoadAd: error.nserror)
     }
     
     func adManager(_ adManager: FullscreenAdManager, didLoad ad: Ad) {
@@ -86,7 +86,7 @@ extension Interstitial: FullscreenAdManagerDelegate {
     }
     
     func adManager(_ adManager: FullscreenAdManager, didFailToPresent ad: Ad?, error: SdkError) {
-        delegate?.fullscreenAd(self, didFailToPresentAd: error)
+        delegate?.fullscreenAd(self, didFailToPresentAd: error.nserror)
     }
     
     func adManager(_ adManager: FullscreenAdManager, willPresent ad: Ad) {

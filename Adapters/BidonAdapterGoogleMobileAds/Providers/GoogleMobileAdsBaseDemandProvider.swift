@@ -21,7 +21,7 @@ class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsDemandAd>: NSOb
         fatalError("Base demand provider can't load any ad")
     }
     
-    final func handleDidLoad(adObject: AdObject, lineItem: LineItem) {
+    final func handleDidLoad(adObject: AdObject) {
         self.response?(.success(adObject))
         self.response = nil
     }

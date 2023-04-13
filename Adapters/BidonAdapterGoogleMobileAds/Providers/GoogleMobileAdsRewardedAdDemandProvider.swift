@@ -27,7 +27,7 @@ final class GoogleMobileAdsRewardedAdDemandProvider: GoogleMobileAdsBaseDemandPr
             
             self.setupAdRevenueHandler(rewardedAd, lineItem: lineItem)
             
-            self.handleDidLoad(adObject: rewardedAd, lineItem: lineItem)
+            self.handleDidLoad(adObject: rewardedAd)
         }
     }
 }

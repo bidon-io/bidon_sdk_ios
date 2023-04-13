@@ -17,19 +17,20 @@ final class UnityAdsBannerDemandProvider: NSObject, DirectDemandProvider {
     weak var adViewDelegate: DemandProviderAdViewDelegate?
     weak var revenueDelegate: DemandProviderRevenueDelegate?
     
-    private let context: AdViewContext
+    private let size: CGSize
+    
     private var banner: UADSBannerView?
     private var response: DemandProviderResponse?
     
     init(context: AdViewContext) {
-        self.context = context
+        self.size = context.size
         super.init()
     }
     
     func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
         let banner = UADSBannerView(
             placementId: lineItem.adUnitId,
-            size: context.size
+            size: size
         )
         
         banner.delegate = self

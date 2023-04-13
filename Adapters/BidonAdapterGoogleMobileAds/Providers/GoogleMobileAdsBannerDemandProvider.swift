@@ -12,25 +12,26 @@ import UIKit
 
 
 final class GoogleMobileAdsBannerDemandProvider: GoogleMobileAdsBaseDemandProvider<GADBannerView> {
-    private let context: AdViewContext
+    private weak var rootViewController: UIViewController?
     
-    private var lineItem: LineItem?
+    private let adSize: GADAdSize
     private var banner: GADBannerView?
     
     weak var adViewDelegate: DemandProviderAdViewDelegate?
     
     init(context: AdViewContext) {
-        self.context = context
+        self.adSize = context.adSize
+        self.rootViewController = context.rootViewController
+        
         super.init()
     }
 
     override func loadAd(_ request: GADRequest, lineItem: LineItem) {
-        self.lineItem = lineItem
-        let banner = GADBannerView(adSize: context.adSize)
+        let banner = GADBannerView(adSize: adSize)
                 
         banner.delegate = self
         banner.adUnitID = lineItem.adUnitId
-        banner.rootViewController = context.rootViewController
+        banner.rootViewController = rootViewController
         
         setupAdRevenueHandler(banner, lineItem: lineItem)
         
@@ -50,8 +51,7 @@ extension GoogleMobileAdsBannerDemandProvider: AdViewDemandProvider {
 
 extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        guard let lineItem = lineItem else { return }
-        handleDidLoad(adObject: bannerView, lineItem: lineItem)
+        handleDidLoad(adObject: bannerView)
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {

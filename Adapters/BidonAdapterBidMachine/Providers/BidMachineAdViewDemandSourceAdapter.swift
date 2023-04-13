@@ -13,10 +13,17 @@ import Bidon
 
 
 final class BidMachineAdViewDemandProvider: BidMachineBaseDemandProvider<BidMachineBanner> {
+    private let format: BannerFormat
+    
     weak var adViewDelegate: DemandProviderAdViewDelegate?
     
-    // TODO: Select format according to size
-    override var placementFormat: BidMachineApiCore.PlacementFormat { .banner }
+    override var placementFormat: BidMachineApiCore.PlacementFormat { .init(format: format) }
+    
+    init(context: AdViewContext) {
+        self.format = context.format
+        
+        super.init()
+    }
 }
 
 
@@ -29,4 +36,16 @@ extension BidMachineAdViewDemandProvider: AdViewDemandProvider {
 
 extension BidMachineBanner: AdViewContainer {
     public var isAdaptive: Bool { false }
+}
+
+
+extension BidMachineApiCore.PlacementFormat {
+    init(format: BannerFormat) {
+        switch format {
+        case .banner: self = .banner320x50
+        case .leaderboard: self = .banner728x90
+        case .adaptive: self = .banner
+        case .mrec: self = .banner300x250
+        }
+    }
 }

@@ -25,7 +25,7 @@ final class GoogleMobileAdsInterstitialDemandProvider: GoogleMobileAdsBaseDemand
             
             self.setupAdRevenueHandler(interstitial, lineItem: lineItem)
             
-            self.handleDidLoad(adObject: interstitial, lineItem: lineItem)
+            self.handleDidLoad(adObject: interstitial)
         }
     }
 }

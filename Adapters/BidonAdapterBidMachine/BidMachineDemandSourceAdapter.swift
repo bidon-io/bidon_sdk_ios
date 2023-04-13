@@ -33,7 +33,7 @@ internal typealias DemandSourceAdapter = InterstitialDemandSourceAdapter & Rewar
     }
     
     public func adView(_ context: AdViewContext) throws -> any AdViewDemandProvider {
-        BidMachineAdViewDemandProvider()
+        BidMachineAdViewDemandProvider(context: context)
     }
 }
 

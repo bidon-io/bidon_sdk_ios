@@ -13,14 +13,15 @@ import UIKit
 
 internal final class AppLovinAdViewDemandProvider: NSObject {
     private let sdk: ALSdk
-    private let context: AdViewContext
-    
+    private let adSize: ALAdSize
+    private let size: CGSize
+
     private lazy var adView: ALAdView = {
-        let frame = CGRect(origin: .zero, size: context.size)
+        let frame = CGRect(origin: .zero, size: size)
         
         let adView = ALAdView(
             frame: frame,
-            size: context.appLovinAdSize,
+            size: adSize,
             sdk: sdk
         )
         
@@ -44,7 +45,8 @@ internal final class AppLovinAdViewDemandProvider: NSObject {
         context: AdViewContext
     ) {
         self.sdk = sdk
-        self.context = context
+        self.adSize = context.appLovinAdSize
+        self.size = context.size
         super.init()
     }
 }

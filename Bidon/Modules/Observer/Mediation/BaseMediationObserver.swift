@@ -34,7 +34,7 @@ final class BaseMediationObserver: MediationObserver {
     let auctionId: String
     let auctionConfigurationId: Int
     let adType: AdType
-        
+    
     var report: MediationAttemptReportModel {
         let rounds: [RoundReportModel] = roundObservations.map { round in
             let demands = demandObservations
@@ -73,9 +73,6 @@ final class BaseMediationObserver: MediationObserver {
     @Atomic
     private var roundObservations: [RoundObservation] = []
     
-    @Atomic
-    private(set) var firedLineItems: [LineItem] = []
-    
     init(
         auctionId id: String,
         auctionConfigurationId configurationId: Int,
@@ -89,74 +86,144 @@ final class BaseMediationObserver: MediationObserver {
     func log(_ event: MediationEvent) {
         Logger.debug("[\(adType)] [Auction: \(auctionId)] " + event.description)
         
+        #warning("Mediation Event handling")
         switch event {
-        case .roundStart(let round, let pricefloor):
-            roundObservations.append(
+//        case .roundStart(let round, let pricefloor):
+//            proceedRoundStart(
+//                round,
+//                pricefloor: pricefloor
+//            )
+//        case .bidRequest(let round, let adapter, let lineItem):
+//            proceedBidRequest(
+//                round: round,
+//                adapter: adapter,
+//                lineItem: lineItem
+//            )
+//        case .bidResponse(let round, let adapter, let bid):
+//            proceedBidResponse(
+//                round: round,
+//                adapter: adapter,
+//                bid: bid
+//            )
+//        case .bidError(let round, let adapter, let error):
+//            proceedBidError(
+//                round: round,
+//                adapter: adapter,
+//                error: error
+//            )
+//        case .roundFinish(_, let winner):
+//            proceedRoundFinish(winner: winner)
+//        case .fillRequest(let bid):
+//            proceedFillRequest(bid: bid)
+//        case .fillResponse(let bid):
+//            proceedFillResponse(bid: bid)
+//        case .fillError(let bid, let error):
+//            proceedFillError(
+//                bid: bid,
+//                error: error
+//            )
+        default:
+            break
+        }
+    }
+    
+    private func proceedRoundStart(
+        _ round: AuctionRound,
+        pricefloor: Price
+    ) {
+        $roundObservations.mutate {
+            $0.append(
                 RoundObservation(
                     roundId: round.id,
                     pricefloor: pricefloor
                 )
             )
-        case .bidRequest(let round, let adapter, let lineItem):
-            lineItem.map { self.firedLineItems.append($0) }
-            demandObservations.append(
-                DemandObservation(
-                    networkId: adapter.identifier,
-                    roundId: round.id,
-                    adUnitId: lineItem?.adUnitId
-                )
+        }
+    }
+    
+    private func proceedBidRequest(
+        round: AuctionRound,
+        adapter: Adapter,
+        lineItem: LineItem?
+    ) {        
+        $demandObservations.appendIfNeeded(
+            DemandObservation(
+                networkId: adapter.identifier,
+                roundId: round.id,
+                adUnitId: lineItem?.adUnitId
             )
-        case .bidResponse(let round, let adapter, let bid):
-            demandObservations.update(
-                condition: { $0.roundId == round.id && $0.networkId == adapter.identifier }
-            ) { observation in
-                observation.adId = bid.ad.id
-                observation.eCPM = bid.eCPM
-                observation.bidResponeTimestamp = Date.timestamp(.wall, units: .milliseconds)
-            }
-        case .bidError(let round, let adapter, let error):
-            demandObservations.update(
-                condition: { $0.roundId == round.id && $0.networkId == adapter.identifier }
-            ) { observation in
-                observation.status = DemandReportStatus(error)
-                observation.bidResponeTimestamp = Date.timestamp(.wall, units: .milliseconds)
-            }
-        case .roundFinish(_, let winner):
-            if let winner = winner {
-                demandObservations.update(
-                    condition: { $0.adId == winner.ad.id }
-                ) { observation in
-                    observation.isRoundWinner = true
-                }
-            }
-        case .fillRequest(let bid):
-            demandObservations.update(
-                condition: { $0.adId == bid.ad.id }
-            ) { observation in
-                observation.fillRequestTimestamp = Date.timestamp(.wall, units: .milliseconds)
-            }
-        case .fillResponse(let bid):
-            demandObservations.update(
-                condition: { $0.adId == bid.ad.id }
-            ) { observation in
-                observation.fillResponseTimestamp = Date.timestamp(.wall, units: .milliseconds)
-                observation.status = .win
-                observation.isAuctionWinner = true
-            }
-            demandObservations.update(
-                condition: { $0.adId != bid.ad.id && $0.status.isUnknown }
-            ) { observation in
-                observation.status = .lose
-            }
-        case .fillError(let bid, let error):
-            demandObservations.update(
-                condition: { $0.adId == bid.ad.id }
-            ) { observation in
-                observation.fillResponseTimestamp = Date.timestamp(.wall, units: .milliseconds)
-                observation.status = DemandReportStatus(error)
-            }
-        default:
-            break
+        )
+    }
+    
+    private func proceedBidResponse(
+        round: AuctionRound,
+        adapter: Adapter,
+        bid: some Bid
+    ) {
+        $demandObservations.update(condition: {
+            $0.roundId == round.id && $0.networkId == adapter.identifier }
+        ) { observation in
+            observation.adId = bid.ad.id
+            observation.eCPM = bid.eCPM
+            observation.bidResponeTimestamp = Date.timestamp(.wall, units: .milliseconds)
+        }
+    }
+    
+    private func proceedBidError(
+        round: AuctionRound,
+        adapter: Adapter,
+        error: MediationError
+    ) {
+        $demandObservations.update(condition: {
+            $0.roundId == round.id && $0.networkId == adapter.identifier
+        }) { observation in
+            observation.status = DemandReportStatus(error)
+            observation.bidResponeTimestamp = Date.timestamp(.wall, units: .milliseconds)
+        }
+    }
+    
+    private func proceedRoundFinish(winner: (any Bid)?) {
+        guard let winner = winner else { return }
+        $demandObservations.update(condition: {
+            $0.adId == winner.ad.id
+        }) { observation in
+            observation.isRoundWinner = true
+        }
+    }
+    
+    private func proceedFillRequest(bid: some Bid) {
+        $demandObservations.update(condition: {
+            $0.adId == bid.ad.id
+        }) { observation in
+            observation.fillRequestTimestamp = Date.timestamp(.wall, units: .milliseconds)
+        }
+    }
+    
+    private func proceedFillResponse(bid: some Bid) {
+        $demandObservations.update(
+            condition: { $0.adId == bid.ad.id }
+        ) { observation in
+            observation.fillResponseTimestamp = Date.timestamp(.wall, units: .milliseconds)
+            observation.status = .win
+            observation.isAuctionWinner = true
+        }
+        
+        $demandObservations.update(
+            condition: { $0.adId != bid.ad.id && $0.status.isUnknown }
+        ) { observation in
+            observation.status = .lose
+        }
+    }
+    
+    private func proceedFillError(
+        bid: some Bid,
+        error: MediationError
+    ) {
+        $demandObservations.update(condition: {
+            $0.adId == bid.ad.id
+        }) { observation in
+            observation.fillResponseTimestamp = Date.timestamp(.wall, units: .milliseconds)
+            observation.status = DemandReportStatus(error)
         }
     }
 }
@@ -176,16 +243,26 @@ private extension DemandReportModel {
 }
 
 
-private extension Array where Element == DemandObservation {
-    mutating func update(
-        condition: (Element) -> Bool,
-        mutation: (inout Element) -> ()
+private extension Atomic where Value: RangeReplaceableCollection {
+    func appendIfNeeded(_ element: Value.Element?) {
+        guard let element = element else { return }
+        mutate { $0.append(element) }
+    }
+}
+
+
+private extension Atomic where Value == [DemandObservation] {
+    func update(
+        condition: (DemandObservation) -> Bool,
+        mutation: (inout DemandObservation) -> ()
     ) {
-        self = map { element in
-            guard condition(element) else { return element }
-            var element = element
-            mutation(&element)
-            return element
+        mutate { value in
+            value = value.map { element in
+                guard condition(element) else { return element }
+                var element = element
+                mutation(&element)
+                return element
+            }
         }
     }
 }

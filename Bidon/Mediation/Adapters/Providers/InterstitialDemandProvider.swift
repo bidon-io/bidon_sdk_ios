@@ -32,3 +32,5 @@ internal extension InterstitialDemandProvider {
     }
 }
 
+
+typealias AnyInterstitialDemandProvider = DemandProviderWrapper<(any InterstitialDemandProvider)>

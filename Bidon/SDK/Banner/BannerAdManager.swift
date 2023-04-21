@@ -20,13 +20,11 @@ final class BannerAdManager: NSObject {
     private typealias AuctionInfo = AuctionRequest.ResponseBody
     
     fileprivate typealias AuctionControllerType = ConcurrentAuctionController<AnyAdViewDemandProvider>
-    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<AnyAdViewBid>
     
     fileprivate enum State {
         case idle
         case preparing
         case auction(controller: AuctionControllerType)
-        case loading(controller: WaterfallControllerType)
         case ready(bid: AdViewBid)
     }
     
@@ -135,10 +133,7 @@ final class BannerAdManager: NSObject {
             adType: .banner
         )
         
-        let elector = StrictLineItemElector(
-            items: auctionInfo.lineItems,
-            observer: observer
-        )
+        let elector = StrictAuctionLineItemElector(lineItems: auctionInfo.lineItems)
         
         let auction = AuctionControllerType { (builder: AdViewConcurrentAuctionControllerBuilder) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
@@ -153,39 +148,8 @@ final class BannerAdManager: NSObject {
         auction.load { [unowned observer, weak self] result in
             guard let self = self else { return }
             
-            switch result {
-            case .success(let waterfall):
-                self.loadWaterfall(
-                    waterfall,
-                    observer: observer
-                )
-            case .failure(let error):
-                self.sendMediationAttemptReport(observer.report)
-                self.state = .idle
-                self.delegate?.adManager(self, didFailToLoad: error)
-            }
-        }
-        
-        state = .auction(controller: auction)
-    }
-    
-    private func loadWaterfall<Observer: MediationObserver>(
-        _ waterfall: AuctionControllerType.WaterfallType,
-        observer: Observer
-    ) {
-        let waterfall = WaterfallControllerType(
-            waterfall,
-            observer: observer,
-            timeout: .unknown
-        )
-        
-        state = .loading(controller: waterfall)
-        
-        waterfall.load { [weak self, unowned observer] result in
-            guard let self = self else { return }
-            
             self.sendMediationAttemptReport(observer.report)
-            
+
             switch result {
             case .success(let bid):
                 let unwrapped = bid.unwrapped()
@@ -198,6 +162,8 @@ final class BannerAdManager: NSObject {
                 self.delegate?.adManager(self, didFailToLoad: error)
             }
         }
+        
+        state = .auction(controller: auction)
     }
     
     private func sendMediationAttemptReport<T: MediationAttemptReport>(_ report: T) {
@@ -226,10 +192,6 @@ private extension BannerAdManager.State {
     
     var ads: [Ad] {
         switch self {
-        case .auction(let controller):
-            return controller.currentBids.map(AdContainer.init)
-        case .loading(let controller):
-            return controller.bids.map(AdContainer.init)
         case .ready(let bid):
             return [AdContainer(bid: bid)]
         default: return []

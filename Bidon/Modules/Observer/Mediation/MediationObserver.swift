@@ -14,16 +14,15 @@ protocol MediationObserver: AnyObject {
     var auctionId: String { get }
     var auctionConfigurationId: Int { get }
     var adType: AdType { get }
-    var firedLineItems: [LineItem] { get }
     var report: MediationAttemptReportType { get }
     
     func log(_ event: MediationEvent)
-    
-    init(
-        auctionId: String,
-        auctionConfigurationId: Int,
-        adType: AdType
-    )
+//    
+//    init(
+//        auctionId: String,
+//        auctionConfigurationId: Int,
+//        adType: AdType
+//    )
 }
 
 

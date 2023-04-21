@@ -12,10 +12,7 @@ protocol AuctionController {
     associatedtype DemandProviderType: DemandProvider
     associatedtype BidType: Bid where BidType.Provider == DemandProviderType
     
-    typealias WaterfallType = Waterfall<BidType>
-    typealias Completion = (Result<WaterfallType, SdkError>) -> ()
-    
-    var currentBids: [BidType] { get }
-    
+    typealias Completion = (Result<BidType, SdkError>) -> ()
+        
     func load(completion: @escaping Completion)
 }

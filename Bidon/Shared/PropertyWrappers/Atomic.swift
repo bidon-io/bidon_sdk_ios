@@ -9,10 +9,12 @@ import Foundation
 
 
 @propertyWrapper
-struct Atomic<Value> {
+class Atomic<Value> {
     private let queue = DispatchQueue(label: "com.bidon.atomic.queue")
     private var value: Value
 
+    var projectedValue: Atomic<Value> { self }
+    
     init(wrappedValue: Value) {
         self.value = wrappedValue
     }
@@ -23,6 +25,12 @@ struct Atomic<Value> {
         }
         set {
             queue.sync { value = newValue }
+        }
+    }
+    
+    func mutate(_ mutation: (inout Value) -> ()) {
+        return queue.sync {
+            mutation(&value)
         }
     }
 }

@@ -8,15 +8,7 @@
 import Foundation
 
 
-protocol LineItemElector {
-    func lineItem(
-        for demand: String,
-        pricefloor: Price
-    ) -> LineItem?
-}
-
-
-struct StrictLineItemElector<Observer: MediationObserver>: LineItemElector {
+struct StrictAuctionLineItemElector: AuctionLineItemElector {
     fileprivate struct EquatableLineItem: LineItem, Equatable {
         private let _id: () -> String
         private let _pricefloor: () -> Price
@@ -37,35 +29,36 @@ struct StrictLineItemElector<Observer: MediationObserver>: LineItemElector {
         }
     }
     
-    private var items: [EquatableLineItem]
-    private var observer: Observer
+    private var lineItems: [EquatableLineItem]
     
-    init(
-        items: [LineItem],
-        observer: Observer
-    ) {
-        self.items = items.map(EquatableLineItem.init)
-        self.observer = observer
+    init(lineItems: [LineItem]) {
+        self.lineItems = lineItems.map(EquatableLineItem.init)
     }
     
-    func lineItem(
+    mutating func popLineItem(
         for demand: String,
         pricefloor: Price
     ) -> LineItem? {
-        let firedLineItems = observer.firedLineItems.map(EquatableLineItem.init)
-        let candidates = items.filter { $0.id == demand && !firedLineItems.contains($0) }
+        let lineItem: EquatableLineItem?
+        let candidates = lineItems.filter { $0.id == demand }
         
-        guard !pricefloor.isUnknown else { return candidates.first }
+        if pricefloor.isUnknown {
+            lineItem = candidates.first
+        } else {
+            lineItem = candidates
+                .sorted { $0.pricefloor < $1.pricefloor }
+                .filter { $0.pricefloor > pricefloor }
+                .first
+        }
         
-        return candidates
-            .sorted { $0.pricefloor < $1.pricefloor }
-            .filter { $0.pricefloor > pricefloor }
-            .first
+        lineItems = lineItems.filter { $0 != lineItem }
+         
+        return lineItem
     }
 }
 
 
-extension StrictLineItemElector.EquatableLineItem: CustomDebugStringConvertible {
+extension StrictAuctionLineItemElector.EquatableLineItem: CustomDebugStringConvertible {
     var debugDescription: String {
         return "line item '\(id)' with ad unit id: \(adUnitId), pricefloor: \(pricefloor)$"
     }

@@ -44,7 +44,6 @@ LossRequestBuilderType: LossRequestBuilder {
     
     fileprivate typealias BidType = BidModel<DemandProviderType>
     fileprivate typealias AuctionControllerType = ConcurrentAuctionController<DemandProviderType>
-    fileprivate typealias WaterfallControllerType = DefaultWaterfallController<BidType>
     
     private typealias AuctionInfo = AuctionRequest.ResponseBody
     
@@ -52,7 +51,6 @@ LossRequestBuilderType: LossRequestBuilder {
         case idle
         case preparing
         case auction(controller: AuctionControllerType)
-        case loading(controller: WaterfallControllerType)
         case ready(keeper: BidKeeper<BidType>)
         case impression(controller: ImpressionControllerType)
     }
@@ -72,14 +70,17 @@ LossRequestBuilderType: LossRequestBuilder {
     
     private lazy var adRevenueObserver: AdRevenueObserver = {
         let observer = BaseAdRevenueObserver()
+        
         observer.ads = { [weak self] in
             guard let self = self else { return [] }
             return self.state.ads
         }
+        
         observer.onRegisterAdRevenue = { [weak self] ad, revenue in
             guard let self = self else { return }
             self.delegate?.adManager(self, didPayRevenue: revenue, ad: ad)
         }
+        
         return observer
     }()
     
@@ -187,62 +188,28 @@ LossRequestBuilderType: LossRequestBuilder {
     private func performAuction(_ auctionInfo: AuctionInfo) {
         Logger.verbose("Fullscreen ad manager will start auction: \(auctionInfo)")
         
-        let mediationObserver = BaseMediationObserver(
+        let observer = BaseMediationObserver(
             auctionId: auctionInfo.auctionId,
             auctionConfigurationId: auctionInfo.auctionConfigurationId,
             adType: adType
         )
         
-        let elector = StrictLineItemElector(
-            items: auctionInfo.lineItems,
-            observer: mediationObserver
-        )
+        let elector = StrictAuctionLineItemElector(lineItems: auctionInfo.lineItems)
 
         let auction = AuctionControllerType { (builder: AuctionControllerBuilderType) in
             builder.withAdaptersRepository(sdk.adaptersRepository)
             builder.withRounds(auctionInfo.rounds)
             builder.withElector(elector)
-            builder.withMediationObserver(mediationObserver)
+            builder.withMediationObserver(observer)
             builder.withPricefloor(auctionInfo.pricefloor)
             builder.withAdRevenueObserver(self.adRevenueObserver)
         }
         
-        auction.load { [unowned mediationObserver, weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let waterfall):
-                self.loadWaterfall(
-                    waterfall,
-                    observer: mediationObserver
-                )
-            case .failure(let error):
-                self.sendAuctionStatistics(mediationObserver.report)
-                self.state = .idle
-                
-                self.delegate?.adManager(self, didFailToLoad: error)
-            }
-        }
-        
-        state = .auction(controller: auction)
-    }
-    
-    private func loadWaterfall<Observer: MediationObserver>(
-        _ waterfall: AuctionControllerType.WaterfallType,
-        observer: Observer
-    ) {
-        let waterfall = WaterfallControllerType(
-            waterfall,
-            observer: observer,
-            timeout: .unknown
-        )
-        
-        state = .loading(controller: waterfall)
-        waterfall.load { [unowned observer, weak self] result in
+        auction.load { [unowned observer, weak self] result in
             guard let self = self else { return }
             
             self.sendAuctionStatistics(observer.report)
-            
+
             switch result {
             case .success(let bid):
                 let keeper = BidKeeper(bid: bid) { [weak self] expiredBid in
@@ -251,12 +218,15 @@ LossRequestBuilderType: LossRequestBuilder {
                 
                 self.state = .ready(keeper: keeper)
                 let ad = AdContainer(bid: bid)
+                
                 self.delegate?.adManager(self, didLoad: ad)
             case .failure(let error):
                 self.state = .idle
                 self.delegate?.adManager(self, didFailToLoad: error)
             }
         }
+        
+        state = .auction(controller: auction)
     }
     
     private func sendAuctionStatistics<T: MediationAttemptReport>(_ report: T) {
@@ -350,10 +320,6 @@ private extension BaseFullscreenAdManager.State {
     
     var ads: [Ad] {
         switch self {
-        case .auction(let controller):
-            return controller.currentBids.map(AdContainer.init)
-        case .loading(let controller):
-            return controller.bids.map(AdContainer.init)
         case .ready(let keeper):
             return [AdContainer(bid: keeper.bid)]
         case .impression(let controller):

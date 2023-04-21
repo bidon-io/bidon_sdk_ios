@@ -21,7 +21,6 @@ extension String {
         }
     }
     
-    
     func snakeCaseToCamelCase() -> String {
         return lowercased()
             .split(separator: "_")

@@ -153,8 +153,8 @@ final class SessionManager: Session, EnvironmentManager {
     
     @objc private
     func didReceiveMemoryWarning(_ notification: Notification) {
-        memoryWaraningsTimestamps.append(timestamp)
-        memoryWaraningsTimestampsMonotonic.append(timestampMonotonic)
+        $memoryWaraningsTimestamps.mutate { $0.append(timestamp) }
+        $memoryWaraningsTimestampsMonotonic.mutate { $0.append(timestampMonotonic) }
     }
     
     @objc private

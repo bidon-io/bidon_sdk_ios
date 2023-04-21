@@ -19,3 +19,6 @@ public protocol DemandProviderRewardDelegate: AnyObject {
 public protocol RewardedAdDemandProvider: InterstitialDemandProvider {
     var rewardDelegate: DemandProviderRewardDelegate? { get set }
 }
+
+
+typealias AnyRewardedAdDemandProvider = DemandProviderWrapper<(any RewardedAdDemandProvider)>

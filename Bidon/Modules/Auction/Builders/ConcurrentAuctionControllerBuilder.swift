@@ -10,39 +10,14 @@ import Foundation
 
 class BaseConcurrentAuctionControllerBuilder<DemandProviderType>
 where DemandProviderType: DemandProvider {
-    
-    typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
-    typealias AuctionType = Auction<RoundType>
-    
-    private(set) var comparator: AuctionComparator = HigherECPMAuctionComparator()
+    private(set) var comparator: AuctionBidComparator = HigherECPMAuctionBidComparator()
     private(set) var pricefloor: Price = .unknown
     private(set) var adaptersRepository: AdaptersRepository!
     private(set) var mediationObserver: AnyMediationObserver!
     private(set) var adRevenueObserver: AdRevenueObserver!
-    private(set) var elector: LineItemElector!
+    private(set) var elector: AuctionLineItemElector!
     
-    private var rounds: [AuctionRound] = []
-    
-    var auction: AuctionType {
-        let concurentRounds: [RoundType] = rounds.map {
-            RoundType(
-                round: $0,
-                elector: elector,
-                adapters: adapters()
-            )
-        }
-        
-        var auction = AuctionType(rounds: concurentRounds)
-        
-        for idx in (0..<concurentRounds.count) {
-            guard idx < (concurentRounds.count - 1) else { break }
-            let current = concurentRounds[idx]
-            let next = concurentRounds[idx + 1]
-            try? auction.addEdge(from: current, to: next)
-        }
-        
-        return auction
-    }
+    private(set) var rounds: [AuctionRound] = []
     
     required init() {}
     
@@ -51,7 +26,7 @@ where DemandProviderType: DemandProvider {
     }
     
     @discardableResult
-    public func withComparator(_ comparator: AuctionComparator) -> Self {
+    public func withComparator(_ comparator: AuctionBidComparator) -> Self {
         self.comparator = comparator
         return self
     }
@@ -66,7 +41,7 @@ where DemandProviderType: DemandProvider {
     
     @discardableResult
     public func withElector(
-        _ elector: LineItemElector
+        _ elector: AuctionLineItemElector
     ) -> Self {
         self.elector = elector
         return self

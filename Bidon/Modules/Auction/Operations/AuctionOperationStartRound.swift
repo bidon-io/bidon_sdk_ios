@@ -8,11 +8,11 @@
 import Foundation
 
 
-final class ConcurrentAuctionStartRoundOperation<BidType: Bid>: Operation
+final class AuctionOperationStartRound<BidType: Bid>: Operation
 where BidType.Provider: DemandProvider {
     var pricefloor: Price {
         let initial = deps(ConcurrentAuctionStartOperation.self).first?.pricefloor ?? .unknown
-        let latest = deps(ConcurrentAuctionFinishRoundOperation<BidType>.self).last?.winner?.eCPM ?? .unknown
+        let latest = deps(AuctionOperationFinishRound<BidType>.self).last?.winner?.eCPM ?? .unknown
         
         return max(initial, latest)
     }
@@ -42,3 +42,4 @@ where BidType.Provider: DemandProvider {
 }
 
 
+extension AuctionOperationStartRound: AuctionOperation {}

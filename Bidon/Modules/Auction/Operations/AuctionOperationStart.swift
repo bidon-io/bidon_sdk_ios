@@ -9,7 +9,7 @@ import Foundation
 
 
 
-final class ConcurrentAuctionStartOperation: Operation {
+final class AuctionOperationStart: Operation {
     let pricefloor: Price
     let observer: AnyMediationObserver
     
@@ -27,3 +27,6 @@ final class ConcurrentAuctionStartOperation: Operation {
         observer.log(.auctionStart)
     }
 }
+
+
+extension AuctionOperationStart: AuctionOperation {}

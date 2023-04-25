@@ -101,7 +101,7 @@ final class AdViewLossRequestBuilder: BaseRequestBuilder, LossRequestBuilder {
     
     var externalWinner: LossRequest.ExternalWinner { _externalWinner }
 
-    var route: Route { .complex(.adType(.rewarded), .loss) }
+    var route: Route { .complex(.adType(.banner), .loss) }
     
     private var _imp: Impression!
     private(set) var _externalWinner: LossRequest.ExternalWinner!

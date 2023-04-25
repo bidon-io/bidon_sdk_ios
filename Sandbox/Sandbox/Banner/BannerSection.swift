@@ -11,7 +11,7 @@ import Bidon
 
 
 struct BannerAdSection: View {
-    @EnvironmentObject var vm: BannerAdSectionViewModel
+    @EnvironmentObject var vm: BannerSectionViewModel
     
     var body: some View {
         Group {

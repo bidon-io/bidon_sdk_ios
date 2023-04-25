@@ -108,11 +108,25 @@ public final class BannerView: UIView, AdView {
         winner demandId: String,
         eCPM: Price
     ) {
-        viewManager.notify(
-            loss: ad,
-            winner: demandId,
-            eCPM: eCPM
-        )
+        guard
+            let bid = adManager.bid,
+            !viewManager.isAdPresented
+        else { return }
+        
+        let impression = AdViewImpression(bid: bid, format: format)
+        
+        let request = LossRequest { (builder: AdViewLossRequestBuilder) in
+            builder.withEnvironmentRepository(sdk.environmentRepository)
+            builder.withTestMode(sdk.isTestMode)
+            builder.withExt(extras, sdk.extras)
+            builder.withImpression(impression)
+            builder.withFormat(format)
+            builder.withExternalWinner(demandId: demandId, eCPM: eCPM)
+        }
+        
+        networkManager.perform(request: request) { result in
+            Logger.debug("Sent loss with result: \(result)")
+        }
     }
     
     private final func refreshIfNeeded() {

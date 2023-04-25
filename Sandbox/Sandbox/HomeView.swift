@@ -77,7 +77,7 @@ final class HomeViewModel: ObservableObject {
         var pricefloor: Price
     }
     
-    @Published var banner = BannerAdSectionViewModel()
+    @Published var banner = BannerSectionViewModel()
     
     @Published var isBannerPresented: Bool = false
     @Published var isBannerLoading: Bool = false

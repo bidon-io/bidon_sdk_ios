@@ -126,33 +126,6 @@ final internal class BannerViewManager: NSObject {
         view.addGestureRecognizer(recognizer)
     }
     
-    func notify(
-        loss ad: Ad,
-        winner demandId: String,
-        eCPM: Price
-    ) {
-        guard
-            let adView = container?.subviews.first(where: { $0 is AdViewContainer }) as? AdViewContainer,
-            let impression = adView.impression,
-            impression.ad.id == ad.id
-        else { return }
-        
-        let request = LossRequest { (builder: AdViewLossRequestBuilder) in
-            builder.withEnvironmentRepository(sdk.environmentRepository)
-            builder.withTestMode(sdk.isTestMode)
-            builder.withExt(extras, sdk.extras)
-            builder.withImpression(impression)
-            builder.withFormat(impression.format)
-            builder.withExternalWinner(demandId: demandId, eCPM: eCPM)
-        }
-        
-        networkManager.perform(request: request) { result in
-            Logger.debug("Sent loss with result: \(result)")
-        }
-        
-        adView.destroy()
-    }
-
     private func sendImpressionIfNeeded(
         _ impression: inout AdViewImpression,
         path: Route

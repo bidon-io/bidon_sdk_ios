@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		169F7C8E91CEF4CADB6E417E /* Pods_Sandbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A1E0483C51188FF09EB928 /* Pods_Sandbox.framework */; };
 		4200679D28BCA8A3003B734D /* BannerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200679C28BCA8A3003B734D /* BannerSection.swift */; };
-		420067A528BCEF06003B734D /* BannerAdSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A428BCEF06003B734D /* BannerAdSectionViewModel.swift */; };
+		420067A528BCEF06003B734D /* BannerSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420067A428BCEF06003B734D /* BannerSectionViewModel.swift */; };
 		42166C3229DEB5F100095691 /* AdContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42166C3129DEB5F100095691 /* AdContextMenu.swift */; };
 		4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219DB5528B90479001F38E5 /* AdEventsList.swift */; };
 		4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224AA7328B8BD0500E8D886 /* InterstitialSection.swift */; };
@@ -66,7 +66,7 @@
 /* Begin PBXFileReference section */
 		2F533D98A3EB5DDDC412B52F /* Pods-Sandbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sandbox.release.xcconfig"; path = "Target Support Files/Pods-Sandbox/Pods-Sandbox.release.xcconfig"; sourceTree = "<group>"; };
 		4200679C28BCA8A3003B734D /* BannerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerSection.swift; sourceTree = "<group>"; };
-		420067A428BCEF06003B734D /* BannerAdSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdSectionViewModel.swift; sourceTree = "<group>"; };
+		420067A428BCEF06003B734D /* BannerSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerSectionViewModel.swift; sourceTree = "<group>"; };
 		42166C3129DEB5F100095691 /* AdContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContextMenu.swift; sourceTree = "<group>"; };
 		4219DB5528B90479001F38E5 /* AdEventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEventsList.swift; sourceTree = "<group>"; };
 		4224AA7328B8BD0500E8D886 /* InterstitialSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialSection.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				4200679C28BCA8A3003B734D /* BannerSection.swift */,
-				420067A428BCEF06003B734D /* BannerAdSectionViewModel.swift */,
+				420067A428BCEF06003B734D /* BannerSectionViewModel.swift */,
 			);
 			path = Banner;
 			sourceTree = "<group>";
@@ -493,7 +493,7 @@
 				427B1BD2299A7E6E007D4E93 /* AdServiceProvider.swift in Sources */,
 				4224AA7E28B8D59400E8D886 /* RewardedAdSection.swift in Sources */,
 				426DD7AE28A6584600A1ADF5 /* HomeView.swift in Sources */,
-				420067A528BCEF06003B734D /* BannerAdSectionViewModel.swift in Sources */,
+				420067A528BCEF06003B734D /* BannerSectionViewModel.swift in Sources */,
 				427B1BE8299E40D5007D4E93 /* RawRewardedAdWrapper.swift in Sources */,
 				4224AA7428B8BD0500E8D886 /* InterstitialSection.swift in Sources */,
 				4219DB5628B90479001F38E5 /* AdEventsList.swift in Sources */,

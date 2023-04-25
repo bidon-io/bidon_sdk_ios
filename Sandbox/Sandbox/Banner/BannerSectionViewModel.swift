@@ -12,7 +12,7 @@ import AppsFlyerAdRevenue
 import SwiftUI
 
 
-final class BannerAdSectionViewModel: ObservableObject {
+final class BannerSectionViewModel: ObservableObject {
     @Published var isPresented: Bool = false
     @Published var format: AdBannerWrapperFormat = .adaptive
     @Published var isAutorefreshing: Bool = false

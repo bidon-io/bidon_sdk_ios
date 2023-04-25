@@ -118,7 +118,8 @@ public final class BannerView: UIView, AdView {
     private final func refreshIfNeeded() {
         guard
             let bid = adManager.bid,
-            let adView = bid.provider.container(opaque: bid.ad)
+            let adView = bid.provider.container(opaque: bid.ad),
+            superview != nil
         else { return }
         
         if viewManager.isRefreshGranted || !viewManager.isAdPresented {
@@ -133,7 +134,6 @@ public final class BannerView: UIView, AdView {
                     view: adView,
                     context: self.context
                 )
-                
             }
         }
     }

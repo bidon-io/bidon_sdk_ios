@@ -26,14 +26,14 @@ final class GoogleMobileAdsBannerDemandProvider: GoogleMobileAdsBaseDemandProvid
         super.init()
     }
 
-    override func loadAd(_ request: GADRequest, lineItem: LineItem) {
+    override func loadAd(_ request: GADRequest, adUnitId: String) {
         let banner = GADBannerView(adSize: adSize)
                 
         banner.delegate = self
-        banner.adUnitID = lineItem.adUnitId
+        banner.adUnitID = adUnitId
         banner.rootViewController = rootViewController
         
-        setupAdRevenueHandler(banner, lineItem: lineItem)
+        setupAdRevenueHandler(adObject: banner)
         
         banner.load(request)
         
@@ -55,7 +55,7 @@ extension GoogleMobileAdsBannerDemandProvider: GADBannerViewDelegate {
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        handleDidFailToLoad(.noBid)
+        handleDidFailToLoad(.noFill)
     }
     
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {

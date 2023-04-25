@@ -25,9 +25,15 @@ class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, Bi
     private var response: DemandProviderResponse?
     
     func didLoadAd(_ ad: BidMachineAdProtocol) {
-        let wrapper = BidMachineAdDemand(ad)
-        response?(.success(wrapper))
-        response = nil
+        defer { response = nil }
+        
+        if let ad = ad as? AdObject {
+            let wrapper = BidMachineAdDemand(ad)
+            response?(.success(wrapper))
+            
+        } else {
+            response?(.failure(.unscpecifiedException))
+        }
     }
     
     func didFailLoadAd(_ ad: BidMachineAdProtocol, _ error: Error) {
@@ -39,11 +45,15 @@ class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, Bi
     }
     
     func didTrackImpression(_ ad: BidMachineAdProtocol) {
+        guard let ad = ad as? AdObject else { return }
+
         let wrapper = BidMachineAdDemand(ad)
         revenueDelegate?.provider(self, didPayRevenue: ad.revenue, ad: wrapper)
     }
     
     func didFailPresentAd(_ ad: BidMachineAdProtocol, _ error: Error) {
+        guard let ad = ad as? AdObject else { return }
+        
         let wrapper = BidMachineAdDemand(ad)
         delegate?.provider(
             self,
@@ -53,6 +63,8 @@ class BidMachineBaseDemandProvider<AdObject: BidMachineAdProtocol>: NSObject, Bi
     }
     
     func didExpired(_ ad: BidMachineAdProtocol) {
+        guard let ad = ad as? AdObject else { return }
+
         let wrapper = BidMachineAdDemand(ad)
         delegate?.provider(self, didExpireAd: wrapper)
     }
@@ -86,7 +98,7 @@ extension BidMachineBaseDemandProvider: ProgrammaticDemandProvider {
                     response(.failure(.noBid))
                     return
                 }
-                                
+                
                 let wrapper = AdType(ad)
                 response(.success(wrapper))
             }
@@ -102,7 +114,7 @@ extension BidMachineBaseDemandProvider: ProgrammaticDemandProvider {
         ad.ad.delegate = self
         ad.ad.loadAd()
     }
-        
+    
     func notify(ad: AdType, event: AuctionEvent) {
         switch event {
         case .win:

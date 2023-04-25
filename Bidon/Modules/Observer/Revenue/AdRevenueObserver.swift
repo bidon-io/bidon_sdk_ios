@@ -11,7 +11,7 @@ import Foundation
 typealias RegisterAdRevenue = (Ad, AdRevenue) -> ()
 
 
-protocol AdRevenueObserver {
+protocol AdRevenueObserver: AnyObject {
     var onRegisterAdRevenue: RegisterAdRevenue? { get set }
     
     func observe<BidType>(_ bid: BidType)

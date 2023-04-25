@@ -24,19 +24,17 @@ extension InjectedValues {
 
 
 final class AppLovinAdServiceBridge: NSObject {
-    private var response: DemandProviderResponse?
-    private var lineItem: LineItem!
+    private var response: ((Result<ALAd, MediationError>) -> ())?
     
     func load(
         service: ALAdService,
-        lineItem: LineItem,
-        response: @escaping DemandProviderResponse
+        adUnitId: String,
+        response: @escaping (Result<ALAd, MediationError>) -> ()
     ) {
-        self.lineItem = lineItem
         self.response = response
         
         service.loadNextAd(
-            forZoneIdentifier: lineItem.adUnitId,
+            forZoneIdentifier: adUnitId,
             andNotify: self
         )
     }
@@ -60,12 +58,11 @@ extension AppLovinAdServiceBridge: ALAdLoadDelegate {
 private extension MediationError {
     init(alErrorCode: Int32) {
         switch alErrorCode {
-        case kALErrorCodeNoFill: self = .noFill
         case kALErrorCodeSdkDisabled: self = .adapterNotInitialized
         case kALErrorCodeAdRequestNetworkTimeout: self = .networkError
         case kALErrorCodeNotConnectedToInternet: self = .networkError
         case kALErrorCodeInvalidZone: self = .incorrectAdUnitId
-        default: self = .noBid
+        default: self = .noFill
         }
     }
 }

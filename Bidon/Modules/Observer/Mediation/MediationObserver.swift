@@ -17,12 +17,6 @@ protocol MediationObserver: AnyObject {
     var report: MediationAttemptReportType { get }
     
     func log(_ event: MediationEvent)
-//    
-//    init(
-//        auctionId: String,
-//        auctionConfigurationId: Int,
-//        adType: AdType
-//    )
 }
 
 

@@ -24,9 +24,9 @@ class DTExchangeBaseDemandProvider<Controller: IAUnitController>: NSObject {
 
 
 extension DTExchangeBaseDemandProvider: DirectDemandProvider {
-    func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
+    func load(_ adUnitId: String, response: @escaping DemandProviderResponse) {
         let adRequest = IAAdRequest.build { builder in
-            builder.spotID = lineItem.adUnitId
+            builder.spotID = adUnitId
         }
         
         guard let adRequest = adRequest else {
@@ -46,7 +46,7 @@ extension DTExchangeBaseDemandProvider: DirectDemandProvider {
         
         adSpot.fetchAd { adSpot, model, error in
             guard let adSpot = adSpot, error == nil else {
-                response(.failure(.noBid))
+                response(.failure(.noFill))
                 return
             }
     
@@ -54,10 +54,6 @@ extension DTExchangeBaseDemandProvider: DirectDemandProvider {
         }
         
         self.adSpot = adSpot
-    }
-    
-    func fill(ad: IAAdSpot, response: @escaping DemandProviderResponse) {
-        response(.success(ad))
     }
     
     func notify(ad: IAAdSpot, event: AuctionEvent) {}

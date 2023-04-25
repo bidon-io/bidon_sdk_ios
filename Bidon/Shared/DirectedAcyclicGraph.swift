@@ -8,21 +8,64 @@
 import Foundation
 
 
-struct GraphNode<T> {
-    var value: T
-    var children: [GraphNode<T>]
-    
-    init(value: T, children: [GraphNode<T>] = []) {
-        self.value = value
-        self.children = children
+struct DirectedAcyclicGraph<Node: Equatable & CustomStringConvertible> {
+    enum GraphError: Error {
+        case nodeNotFound
+        case nodeExists
+        case cycleDependency
     }
     
-    mutating func add(child: GraphNode<T>) {
-        children.append(child)
-    }
-}
-
-
-struct Graph<T> {
+    private var nodes: [Node]
+    private var edges: [Int: Set<Int>]
     
+    var root: [Node] {
+        return edges
+            .reduce(Array(edges.keys)) { result, edge in
+                return result.filter { !edge.value.contains($0) }
+            }
+            .compactMap { nodes[$0] }
+    }
+    
+    var width: Int {
+        edges.reduce(0) { max($0, $1.value.count) }
+    }
+    
+    init(nodes: [Node] = []) {
+        self.nodes = nodes
+        self.edges = nodes
+            .enumerated()
+            .map { $0.offset }
+            .reduce([:]) { edges, offset in
+                var edges = edges
+                edges[offset] = Set()
+                return edges
+            }
+    }
+    
+    mutating func add(node: Node) throws {
+        guard !nodes.contains(node) else { return }
+        nodes.append(node)
+        edges[nodes.count - 1] = Set()
+    }
+    
+    mutating func addEdge(from fromNode: Node, to toNode: Node) throws {
+        guard
+            let fromIndex = nodes.firstIndex(of: fromNode),
+            let toIndex = nodes.firstIndex(of: toNode)
+        else {
+            throw GraphError.nodeNotFound
+        }
+        
+        var toEdges = edges[fromIndex]
+        toEdges?.insert(toIndex)
+        edges[fromIndex] = toEdges
+    }
+    
+    func seeds(of node: Node) -> [Node] {
+        guard
+            let idx = nodes.firstIndex(of: node),
+            let seeds = edges[idx]
+        else { return [] }
+        return seeds.compactMap { nodes[$0] }
+    }
 }

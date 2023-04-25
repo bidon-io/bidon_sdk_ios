@@ -94,12 +94,15 @@
 		429EE2CF286D9B8D009439C6 /* Auction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2CE286D9B8D009439C6 /* Auction.swift */; };
 		429EE2D1286DD0E2009439C6 /* ConcurrentAuctionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2D0286DD0E2009439C6 /* ConcurrentAuctionController.swift */; };
 		429F4D8428CF56C900765BD7 /* DemandReportStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429F4D8328CF56C900765BD7 /* DemandReportStatus.swift */; };
-		42A0155829F2BFBF00547B37 /* ConcurrentAuctionStartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155729F2BFBF00547B37 /* ConcurrentAuctionStartOperation.swift */; };
-		42A0155A29F2C0E000547B37 /* ConcurrentAuctionFinishOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155929F2C0E000547B37 /* ConcurrentAuctionFinishOperation.swift */; };
-		42A0155C29F2C79300547B37 /* ConcurrentAuctionStartRoundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155B29F2C79300547B37 /* ConcurrentAuctionStartRoundOperation.swift */; };
-		42A0155E29F2C84900547B37 /* ConcurrentAuctionRequestDemandOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155D29F2C84900547B37 /* ConcurrentAuctionRequestDemandOperation.swift */; };
-		42A0156029F2E23000547B37 /* ConcurrentAuctionFinishRoundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155F29F2E23000547B37 /* ConcurrentAuctionFinishRoundOperation.swift */; };
+		42A0155829F2BFBF00547B37 /* AuctionOperationStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155729F2BFBF00547B37 /* AuctionOperationStart.swift */; };
+		42A0155A29F2C0E000547B37 /* AuctionOperationFinish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155929F2C0E000547B37 /* AuctionOperationFinish.swift */; };
+		42A0155C29F2C79300547B37 /* AuctionOperationStartRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155B29F2C79300547B37 /* AuctionOperationStartRound.swift */; };
+		42A0155E29F2C84900547B37 /* AuctionOperationRequestDirectDemand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155D29F2C84900547B37 /* AuctionOperationRequestDirectDemand.swift */; };
+		42A0156029F2E23000547B37 /* AuctionOperationFinishRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0155F29F2E23000547B37 /* AuctionOperationFinishRound.swift */; };
 		42A0156429F2E8CC00547B37 /* Operation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0156329F2E8CC00547B37 /* Operation+Extensions.swift */; };
+		42A0156629F4706D00547B37 /* AuctionOperationRequestProgrammaticDemand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0156529F4706D00547B37 /* AuctionOperationRequestProgrammaticDemand.swift */; };
+		42A0156A29F674FA00547B37 /* AuctionOperationLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0156929F674FA00547B37 /* AuctionOperationLogEvent.swift */; };
+		42A0156C29F6AFDB00547B37 /* AuctionOperationRoundTimeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0156B29F6AFDB00547B37 /* AuctionOperationRoundTimeout.swift */; };
 		42AAEA0528CB80E10093DB23 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AAEA0428CB80E10093DB23 /* String+Extensions.swift */; };
 		42BA81AA28758A90001F1744 /* AuctionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81A928758A90001F1744 /* AuctionController.swift */; };
 		42BA81AC28758AC6001F1744 /* ConcurrentAuctionControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA81AB28758AC6001F1744 /* ConcurrentAuctionControllerBuilder.swift */; };
@@ -229,12 +232,15 @@
 		429EE2CE286D9B8D009439C6 /* Auction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auction.swift; sourceTree = "<group>"; };
 		429EE2D0286DD0E2009439C6 /* ConcurrentAuctionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentAuctionController.swift; sourceTree = "<group>"; };
 		429F4D8328CF56C900765BD7 /* DemandReportStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandReportStatus.swift; sourceTree = "<group>"; };
-		42A0155729F2BFBF00547B37 /* ConcurrentAuctionStartOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentAuctionStartOperation.swift; sourceTree = "<group>"; };
-		42A0155929F2C0E000547B37 /* ConcurrentAuctionFinishOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentAuctionFinishOperation.swift; sourceTree = "<group>"; };
-		42A0155B29F2C79300547B37 /* ConcurrentAuctionStartRoundOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentAuctionStartRoundOperation.swift; sourceTree = "<group>"; };
-		42A0155D29F2C84900547B37 /* ConcurrentAuctionRequestDemandOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentAuctionRequestDemandOperation.swift; sourceTree = "<group>"; };
-		42A0155F29F2E23000547B37 /* ConcurrentAuctionFinishRoundOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentAuctionFinishRoundOperation.swift; sourceTree = "<group>"; };
+		42A0155729F2BFBF00547B37 /* AuctionOperationStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionOperationStart.swift; sourceTree = "<group>"; };
+		42A0155929F2C0E000547B37 /* AuctionOperationFinish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionOperationFinish.swift; sourceTree = "<group>"; };
+		42A0155B29F2C79300547B37 /* AuctionOperationStartRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionOperationStartRound.swift; sourceTree = "<group>"; };
+		42A0155D29F2C84900547B37 /* AuctionOperationRequestDirectDemand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionOperationRequestDirectDemand.swift; sourceTree = "<group>"; };
+		42A0155F29F2E23000547B37 /* AuctionOperationFinishRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionOperationFinishRound.swift; sourceTree = "<group>"; };
 		42A0156329F2E8CC00547B37 /* Operation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operation+Extensions.swift"; sourceTree = "<group>"; };
+		42A0156529F4706D00547B37 /* AuctionOperationRequestProgrammaticDemand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionOperationRequestProgrammaticDemand.swift; sourceTree = "<group>"; };
+		42A0156929F674FA00547B37 /* AuctionOperationLogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionOperationLogEvent.swift; sourceTree = "<group>"; };
+		42A0156B29F6AFDB00547B37 /* AuctionOperationRoundTimeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionOperationRoundTimeout.swift; sourceTree = "<group>"; };
 		42A4C86928F6DF3400A7FE40 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		42AAEA0428CB80E10093DB23 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		42BA81A928758A90001F1744 /* AuctionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionController.swift; sourceTree = "<group>"; };
@@ -693,11 +699,14 @@
 		42A0155629F2BFA100547B37 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				42A0155729F2BFBF00547B37 /* ConcurrentAuctionStartOperation.swift */,
-				42A0155B29F2C79300547B37 /* ConcurrentAuctionStartRoundOperation.swift */,
-				42A0155D29F2C84900547B37 /* ConcurrentAuctionRequestDemandOperation.swift */,
-				42A0155F29F2E23000547B37 /* ConcurrentAuctionFinishRoundOperation.swift */,
-				42A0155929F2C0E000547B37 /* ConcurrentAuctionFinishOperation.swift */,
+				42A0155729F2BFBF00547B37 /* AuctionOperationStart.swift */,
+				42A0155B29F2C79300547B37 /* AuctionOperationStartRound.swift */,
+				42A0156B29F6AFDB00547B37 /* AuctionOperationRoundTimeout.swift */,
+				42A0155D29F2C84900547B37 /* AuctionOperationRequestDirectDemand.swift */,
+				42A0156529F4706D00547B37 /* AuctionOperationRequestProgrammaticDemand.swift */,
+				42A0155F29F2E23000547B37 /* AuctionOperationFinishRound.swift */,
+				42A0155929F2C0E000547B37 /* AuctionOperationFinish.swift */,
+				42A0156929F674FA00547B37 /* AuctionOperationLogEvent.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -891,8 +900,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42A0155A29F2C0E000547B37 /* ConcurrentAuctionFinishOperation.swift in Sources */,
-				42A0155E29F2C84900547B37 /* ConcurrentAuctionRequestDemandOperation.swift in Sources */,
+				42A0155A29F2C0E000547B37 /* AuctionOperationFinish.swift in Sources */,
+				42A0156629F4706D00547B37 /* AuctionOperationRequestProgrammaticDemand.swift in Sources */,
+				42A0155E29F2C84900547B37 /* AuctionOperationRequestDirectDemand.swift in Sources */,
 				42DDB70C29D3298400DBA4C5 /* AdViewImpression.swift in Sources */,
 				422101982859E2C3006596DA /* BidOnSdk.swift in Sources */,
 				4243093828A2BCBE002360B0 /* UserModel.swift in Sources */,
@@ -931,12 +941,12 @@
 				42C4F46829E6E4AC00B12E15 /* ErrorCode.swift in Sources */,
 				42BA81DB28770B5D001F1744 /* Reward.swift in Sources */,
 				42A0156429F2E8CC00547B37 /* Operation+Extensions.swift in Sources */,
-				42A0156029F2E23000547B37 /* ConcurrentAuctionFinishRoundOperation.swift in Sources */,
+				42A0156029F2E23000547B37 /* AuctionOperationFinishRound.swift in Sources */,
 				426DD79B28A4F47800A1ADF5 /* BaseRequestBuilder.swift in Sources */,
 				426DD7AA28A550F700A1ADF5 /* AdViewConcurrentAuctionControllerBuilder.swift in Sources */,
 				4238BBA728CA0EA9002DC473 /* MediationAttemptReportModel.swift in Sources */,
 				426DD7A628A5042A00A1ADF5 /* UserDefault.swift in Sources */,
-				42A0155C29F2C79300547B37 /* ConcurrentAuctionStartRoundOperation.swift in Sources */,
+				42A0155C29F2C79300547B37 /* AuctionOperationStartRound.swift in Sources */,
 				42C46C9729F2ABC50057D7CE /* DirectedAcyclicGraph.swift in Sources */,
 				42CCB99128CB365400DBAE97 /* UIDevice+Extensions.swift in Sources */,
 				427DB5C129BF2A8500057D08 /* UnknownAdapter.swift in Sources */,
@@ -956,7 +966,7 @@
 				42D047ED289D670E0096A8C6 /* Environment.swift in Sources */,
 				4298902229D589BE00C5FB7B /* BaseAdRevenueObserver.swift in Sources */,
 				42FE946E29D42D9000DF7920 /* Bid.swift in Sources */,
-				42A0155829F2BFBF00547B37 /* ConcurrentAuctionStartOperation.swift in Sources */,
+				42A0155829F2BFBF00547B37 /* AuctionOperationStart.swift in Sources */,
 				42D047DE289D5A0D0096A8C6 /* Device.swift in Sources */,
 				426DD7A128A4F75900A1ADF5 /* Injected.swift in Sources */,
 				42389DF02872F57D006024BA /* Ad.swift in Sources */,
@@ -997,6 +1007,7 @@
 				42BA81AC28758AC6001F1744 /* ConcurrentAuctionControllerBuilder.swift in Sources */,
 				421D48E62888423B007DE2E4 /* Logger.swift in Sources */,
 				4298902029D5822800C5FB7B /* AdRevenueObserver.swift in Sources */,
+				42A0156C29F6AFDB00547B37 /* AuctionOperationRoundTimeout.swift in Sources */,
 				429EE2D1286DD0E2009439C6 /* ConcurrentAuctionController.swift in Sources */,
 				42BA82072878547C001F1744 /* BannerView.swift in Sources */,
 				4257D71A29DDBF970066DE1B /* LossRequestBuilder.swift in Sources */,
@@ -1019,6 +1030,7 @@
 				428CCBF428A11190003123EF /* EnvironmentManager.swift in Sources */,
 				42EDA0A828C5EBF900BF74DE /* AuctionRequestBuilder.swift in Sources */,
 				4224AA6D28B7D1F600E8D886 /* RewardedAd.swift in Sources */,
+				42A0156A29F674FA00547B37 /* AuctionOperationLogEvent.swift in Sources */,
 				42C4F46629E6E49200B12E15 /* Framework.swift in Sources */,
 				426DD78F28A3EED400A1ADF5 /* AdObjectModel.swift in Sources */,
 			);

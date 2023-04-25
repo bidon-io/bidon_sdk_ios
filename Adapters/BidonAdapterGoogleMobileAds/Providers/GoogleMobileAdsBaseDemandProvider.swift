@@ -17,7 +17,7 @@ class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsDemandAd>: NSOb
     
     private var response: DemandProviderResponse?
     
-    open func loadAd(_ request: GADRequest, lineItem: LineItem) {
+    open func loadAd(_ request: GADRequest, adUnitId: String) {
         fatalError("Base demand provider can't load any ad")
     }
     
@@ -31,7 +31,7 @@ class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsDemandAd>: NSOb
         self.response = nil
     }
     
-    final func setupAdRevenueHandler(_ adObject: AdObject, lineItem: LineItem) {
+    final func setupAdRevenueHandler(adObject: AdObject) {
         adObject.paidEventHandler = { [weak self, weak adObject] value in
             guard let self = self, let adObject = adObject else { return }
                         
@@ -46,15 +46,11 @@ class GoogleMobileAdsBaseDemandProvider<AdObject: GoogleMobileAdsDemandAd>: NSOb
 
 
 extension GoogleMobileAdsBaseDemandProvider: DirectDemandProvider {
-    func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
+    func load(_ adUnitId: String, response: @escaping DemandProviderResponse) {
         self.response = response
         
         let request = GADRequest()
-        loadAd(request, lineItem: lineItem)
-    }
-    
-    func fill(ad: AdObject, response: @escaping DemandProviderResponse) {
-        response(.success(ad))
+        loadAd(request, adUnitId: adUnitId)
     }
     
     func notify(ad: AdObject, event: AuctionEvent) {}

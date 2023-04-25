@@ -76,7 +76,6 @@ enum MediationEvent {
     case fillError(
         round: AuctionRound,
         adapter: Adapter,
-        bid: any Bid,
         error: MediationError
     )
     
@@ -88,6 +87,12 @@ enum MediationEvent {
     case auctionFinish(
         winner: (any Bid)?
     )
+    
+    case scheduleRoundTimer(interval: TimeInterval)
+    
+    case invalidateRoundTimer
+    
+    case roundTimerFired
 }
 
 
@@ -118,14 +123,20 @@ extension MediationEvent: CustomStringConvertible {
             return "\(adapter) will fill \(bid) in round: '\(round.id)'"
         case .fillResponse(let round, let adapter, let bid):
             return "\(adapter) did fill \(bid) in round: '\(round.id)'"
-        case .fillError(let round, let adapter, let bid, let error):
-            return "\(adapter) did fail to fill \(bid) \(error) in round: '\(round.id)'"
+        case .fillError(let round, let adapter, let error):
+            return "\(adapter) did fail to fill \(error) in round: '\(round.id)'"
         case .roundFinish(let round, let winner):
             return "\(round) finished " +
             (winner.map { "with winner: \($0)" } ?? "without winner")
         case .auctionFinish(let winner):
             return "did finish auction " +
             (winner.map { "with winner: \($0)" } ?? "without winner")
+        case .scheduleRoundTimer(let interval):
+            return "schedule round timer with interval \(interval)"
+        case .invalidateRoundTimer:
+            return "invalidate round timer"
+        case .roundTimerFired:
+            return "timeout reached"
         }
     }
 }

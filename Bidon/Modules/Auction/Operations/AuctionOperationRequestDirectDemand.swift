@@ -21,7 +21,7 @@ final class AuctionOperationRequestDirectDemand<DemandProviderType: DemandProvid
     private(set) var bid: BidType?
     
     private var pricefloor: Price {
-        deps(ConcurrentAuctionStartRoundOperation<BidType>.self)
+        deps(AuctionOperationStartRound<BidType>.self)
             .first?
             .pricefloor ?? .unknown
     }
@@ -47,7 +47,9 @@ final class AuctionOperationRequestDirectDemand<DemandProviderType: DemandProvid
             fatalError("Inconsistent provider")
         }
         
-        load(direct: provider)
+        DispatchQueue.main.async { [unowned self] in
+            self.load(direct: provider)
+        }
     }
     
     private func load(direct provider: any DirectDemandProvider) {
@@ -87,6 +89,7 @@ final class AuctionOperationRequestDirectDemand<DemandProviderType: DemandProvid
                     auctionConfigurationId: self.observer.auctionConfigurationId,
                     roundId: self.round.id,
                     adType: self.observer.adType,
+                    lineItem: lineItem,
                     ad: ad,
                     provider: self.adapter.provider
                 )
@@ -101,10 +104,25 @@ final class AuctionOperationRequestDirectDemand<DemandProviderType: DemandProvid
                 self.bid = bid
                 self.finish()
             }
-            
         }
     }
 }
 
 
 extension AuctionOperationRequestDirectDemand: AuctionOperation {}
+
+
+extension AuctionOperationRequestDirectDemand: AuctionOperationRequestDemand {
+    func timeoutReached() {
+        guard isExecuting else { return }
+        
+        let event = MediationEvent.loadError(
+            round: round,
+            adapter: adapter,
+            error: .fillTimeoutReached
+        )
+        
+        observer.log(event)
+        finish()
+    }
+}

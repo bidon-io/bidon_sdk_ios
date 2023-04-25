@@ -11,9 +11,6 @@ import Foundation
 final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: AuctionController {
     typealias BidType = BidModel<DemandProviderType>
     
-//    private typealias RoundType = ConcurrentAuctionRound<DemandProviderType>
-//    private typealias AuctionType = Auction<RoundType>
-    
     private let rounds: [AuctionRound]
     private let adapters: [AnyDemandSourceAdapter<DemandProviderType>]
     private let comparator: AuctionBidComparator
@@ -21,21 +18,16 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
     
     private let mediationObserver: AnyMediationObserver
     private let adRevenueObserver: AdRevenueObserver
-
+    
     private var completion: Completion?
     private var elector: AuctionLineItemElector
     
     private lazy var queue: OperationQueue = {
         let queue = OperationQueue()
         queue.name = "com.bidon.auction.queue"
-        queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .default
-        queue.isSuspended = true
         return queue
     }()
-    
-//    private let bids = ThreadSafeBidSet<BidType>()
-//    private var active = Set<RoundType>()
     
     init<T>(_ build: (T) -> ()) where T: BaseConcurrentAuctionControllerBuilder<DemandProviderType> {
         let builder = T()
@@ -53,192 +45,133 @@ final class ConcurrentAuctionController<DemandProviderType: DemandProvider>: Auc
     func load(
         completion: @escaping Completion
     ) {
-        guard queue.isSuspended else {
-            completion(.failure(.internalInconsistency))
-            return
-        }
+        // TODO: Better error handling
+        // Create DAG
+        var auction = Auction()
         
-        let start = ConcurrentAuctionStartOperation(
+        // Instantiate auction with start operation
+        let startAuctionOperation = AuctionOperationStart(
             pricefloor: pricefloor,
             observer: mediationObserver
         )
+        try? auction.add(node: startAuctionOperation)
         
-        let rounds = rounds.map { round in
-            let start = ConcurrentAuctionStartRoundOperation<BidType>(
+        // Finish auction
+        let finishAuctionOperation = AuctionOperationFinish(
+            observer: mediationObserver,
+            comparator: comparator,
+            completion: completion
+        )
+        
+        // Finish auction is child of the lates round finish
+        try? auction.add(node: finishAuctionOperation)
+        try? auction.addEdge(from: startAuctionOperation, to: finishAuctionOperation)
+        
+        // Use array of operation for backracking. Any start of new round should be children of
+        // every previous round finish and auction start
+        // to have actual pricefloor
+        var shared: [AuctionOperation] = [startAuctionOperation]
+        rounds.forEach { round in
+            // Instantiate round start operation and add it to DAG
+            let startRoundOperation = AuctionOperationStartRound<BidType>(
                 observer: mediationObserver,
+                round: round,
+                comparator: comparator
+            )
+            try? auction.add(node: startRoundOperation)
+            
+            // Instantiate timeout operation
+            let timeoutOperation = AuctionOperationRoundTimeout(
+                observer: mediationObserver,
+                interval: round.timeout
+            )
+            try? auction.add(node: timeoutOperation)
+            try? auction.addEdge(from: startRoundOperation, to: timeoutOperation)
+            
+            // Instantiate round finisj opearation and add it to DAG
+            let finishRoundOperation = AuctionOperationFinishRound<BidType>(
+                observer: mediationObserver,
+                adRevenueObserver: adRevenueObserver,
+                comparator: comparator,
+                timeout: timeoutOperation,
                 round: round
             )
             
-//            round.demands.map { id in
-//                let adapter = adapters.first { $0.identifier == id } ?? UnknownAdapter(identifier: id)
-//                let request = ConcurrentAuctionRequestDemandOperation<DemandProviderType>(
-//                    round: round,
-//                    observer: mediationObserver,
-//                    adapter: adapter
-//                ) { [weak self] adapter, pricefloor in
-//                    self?.elector.popLineItem(
-//                        for: adapter.identifier,
-//                        pricefloor: pricefloor
-//                    )
-//                }
-//
-//            }
+            try? auction.add(node: finishRoundOperation)
+
+            // Add edges between finishes of previous rounds to current round start
+            shared.forEach { operation in
+                try? auction.addEdge(from: operation, to: startRoundOperation)
+            }
+                    
+            // Create request operation for every demand sources
+            round.demands.forEach { identifier in
+                let requestDemandOperation = requestDemandNode(
+                    round: round,
+                    demand: identifier
+                )
+                
+                timeoutOperation.add(requestDemandOperation)
+                
+                // Every request demand operation should be childern of round start
+                // and parent of round finish
+                try? auction.add(node: requestDemandOperation)
+                try? auction.addEdge(from: startRoundOperation, to: requestDemandOperation)
+                try? auction.addEdge(from: requestDemandOperation, to: finishRoundOperation)
+            }
             
+            shared.append(finishRoundOperation)
+            
+            try? auction.addEdge(from: finishRoundOperation, to: finishAuctionOperation)
         }
-//        let startAuction = StartAuctionOperation(observer: mediationObserver)
-//        guard active.isEmpty else {
-//            completion(.failure(.internalInconsistency))
-//            return
-//        }
-//
-//        self.completion = completion
-//
-//        bids.removeAll()
-//
-//        mediationObserver.log(.auctionStart)
-//        auction.root.forEach(perform)
+        
+        // TODO: Human readable auction description
+        // Logger.debug("\(mediationObserver.adType.stringValue.capitalized) will proceed auction: \(auction)")
+        
+        // We can proceed all demand source operations per round at once
+        queue.maxConcurrentOperationCount = auction.width
+        queue.addOperations(auction.operations(), waitUntilFinished: false)
     }
     
-//    private func provider(for ad: DemandAd) -> DemandProviderType? {
-//        return bids.bid(for: ad)?.provider
-//    }
-    
-//    private func finish() {
-//        active.forEach { $0.cancel() }
-//        active.removeAll()
-//
-//        defer { completion = nil }
-//
-////        let waterfall = waterfall
-////        let event = MediationEvent.auctionFinish(
-////            waterfall: waterfall
-////        )
-////        mediationObserver.log(event)
-//
-////        completion?(waterfall.isEmpty ? .failure(.internalInconsistency) : .success(waterfall))
-//    }
-//
-//    private func perform(round: RoundType) {
-//        let pricefloor = 0.0
-//
-//        active.insert(round)
-//
-//        let event = MediationEvent.roundStart(
-//            round: round,
-//            pricefloor: pricefloor
-//        )
-//
-//        mediationObserver.log(event)
-//
-//        round.onDemandRequest = { [unowned round, unowned self] adapter, lineItem in
-//            self.round(round, didRequestDemand: adapter, lineItem: lineItem)
-//        }
-//
-//        round.onDemandResponse = { [unowned round, unowned self] adapter, result in
-//            switch result {
-//            case .success((let provider, let ad, let lineItem)):
-//                self.round(
-//                    round,
-//                    didReceive: ad,
-//                    provider: provider,
-//                    lineItem: lineItem,
-//                    adapter: adapter
-//                )
-//            case .failure(let error):
-//                self.round(
-//                    round,
-//                    didReceive: error,
-//                    adapter: adapter
-//                )
-//            }
-//        }
-//
-//        round.onRoundComplete = { [unowned round, unowned self] in
-//            self.complete(round: round)
-//        }
-//
-//        round.perform(pricefloor: pricefloor)
-//    }
-//
-//    private func round(
-//        _ round: RoundType,
-//        didRequestDemand adapter: Adapter,
-//        lineItem: LineItem?
-//    ) {
-//        let event = MediationEvent.bidRequest(
-//            round: round,
-//            adapter: adapter,
-//            lineItem: lineItem
-//        )
-//
-//        mediationObserver.log(event)
-//    }
-//
-//    private func round(
-//        _ round: RoundType,
-//        didReceive ad: DemandAd,
-//        provider: DemandProviderType,
-//        lineItem: LineItem?,
-//        adapter: Adapter
-//    ) {
-//        let bid = BidType(
-//            auctionId: mediationObserver.auctionId,
-//            auctionConfigurationId: mediationObserver.auctionConfigurationId,
-//            roundId: round.id,
-//            adType: mediationObserver.adType,
-//            lineItem: lineItem,
-//            ad: ad,
-//            provider: provider
-//        )
-//
-//        guard bid.eCPM > pricefloor else {
-//            let event = MediationEvent.bidError(
-//                round: round,
-//                adapter: adapter,
-//                error: .belowPricefloor
-//            )
-//            mediationObserver.log(event)
-//            return
-//        }
-//
-//        adRevenueObserver.observe(bid)
-//        let event = MediationEvent.bidResponse(
-//            round: round,
-//            adapter: adapter,
-//            bid: bid
-//        )
-//        mediationObserver.log(event)
-//
-//        bids.insert(bid)
-//    }
-//
-//    private func round(
-//        _ round: RoundType,
-//        didReceive error: MediationError,
-//        adapter: Adapter
-//    ) {
-//        let event = MediationEvent.bidError(
-//            round: round,
-//            adapter: adapter,
-//            error: error
-//        )
-//        mediationObserver.log(event)
-//    }
-//
-//    private func complete(round: RoundType) {
-//        let event = MediationEvent.roundFinish(
-//            round: round,
-//            winner: nil
-//        )
-//        mediationObserver.log(event)
-//
-//        active.remove(round)
-//
-//        let seeds = auction.seeds(of: round)
-//        if seeds.isEmpty && active.isEmpty {
-//            finish()
-//        } else {
-//            seeds.forEach(perform)
-//        }
-//    }
+    private func requestDemandNode(
+        round: AuctionRound,
+        demand identifier: String
+    ) -> AuctionOperation {
+        guard let adapter = adapters.first(where: { $0.identifier == identifier }) else {
+            return AuctionOperationLogEvent(
+                observer: mediationObserver,
+                event: .unknownAdapter(
+                    round: round,
+                    adapter: UnknownAdapter(identifier: identifier)
+                )
+            )
+        }
+        
+        if adapter.provider is (any ProgrammaticDemandProvider) {
+            return AuctionOperationRequestProgrammaticDemand(
+                round: round,
+                observer: mediationObserver,
+                adapter: adapter
+            )
+        } else if adapter.provider is (any DirectDemandProvider) {
+            return AuctionOperationRequestDirectDemand(
+                round: round,
+                observer: mediationObserver,
+                adapter: adapter
+            ) { [weak self] _adapter, pricefloor in
+                return self?.elector.popLineItem(
+                    for: _adapter.identifier,
+                    pricefloor: pricefloor
+                )
+            }
+        } else {
+            return AuctionOperationLogEvent(
+                observer: mediationObserver,
+                event: .unknownAdapter(
+                    round: round,
+                    adapter: UnknownAdapter(identifier: identifier)
+                )
+            )
+        }
+    }
 }

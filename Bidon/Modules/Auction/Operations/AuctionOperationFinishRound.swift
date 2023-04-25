@@ -11,42 +11,46 @@ import Foundation
 final class AuctionOperationFinishRound<BidType: Bid>: Operation
 where BidType.Provider: DemandProvider {
     let observer: AnyMediationObserver
-    let round: AuctionRound
+    let adRevenueObserver: AdRevenueObserver
     let comparator: AuctionBidComparator
+    let round: AuctionRound
     
-    private(set) var winner: BidType?
+    private weak var timeout: AuctionOperationRoundTimeout?
+    private(set) var bids: [BidType] = []
     
     init(
         observer: AnyMediationObserver,
-        round: AuctionRound,
-        comparator: AuctionBidComparator
+        adRevenueObserver: AdRevenueObserver,
+        comparator: AuctionBidComparator,
+        timeout: AuctionOperationRoundTimeout,
+        round: AuctionRound
     ) {
         self.observer = observer
-        self.round = round
+        self.adRevenueObserver = adRevenueObserver
         self.comparator = comparator
+        self.timeout = timeout
+        self.round = round
         super.init()
-    }
-    
-    private var directBids: [BidType] {
-        deps(ConcurrentAuctionRequestDirectDemandOperation<BidType.Provider>.self)
-            .compactMap { $0.bid as? BidType }
-    }
-    
-    private var programmaticBids: [BidType] {
-        deps(ConcurrentAuctionRequestProgrammaticDemandOperation<BidType.Provider>.self)
-            .compactMap { $0.bid as? BidType }
     }
     
     override func main() {
         super.main()
         
-        winner = (directBids + programmaticBids)
-            .sorted { comparator.compare($0, $1) }
-            .first
-
+        timeout?.invalidate()
+        
+        bids = (
+            deps(AuctionOperationRequestDirectDemand<BidType.Provider>.self)
+                .compactMap { $0.bid as? BidType } +
+            deps(AuctionOperationRequestProgrammaticDemand<BidType.Provider>.self)
+                .compactMap { $0.bid as? BidType }
+        )
+        .sorted { comparator.compare($0, $1) }
+        
+        bids.forEach(adRevenueObserver.observe)
+        
         let event = MediationEvent.roundFinish(
             round: round,
-            winner: winner
+            winner: bids.first
         )
         
         observer.log(event)
@@ -55,3 +59,4 @@ where BidType.Provider: DemandProvider {
 
 
 extension AuctionOperationFinishRound: AuctionOperation {}
+

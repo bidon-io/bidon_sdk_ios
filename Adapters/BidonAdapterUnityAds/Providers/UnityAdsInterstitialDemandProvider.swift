@@ -19,8 +19,8 @@ final class UnityAdsInterstitialDemandProvider: NSObject, DirectDemandProvider {
     private var placements = Set<UADSPlacement>()
     private var response: DemandProviderResponse?
     
-    func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
-        let placement = UADSPlacement(lineItem.adUnitId)
+    func load(_ adUnitId: String, response: @escaping DemandProviderResponse) {
+        let placement = UADSPlacement(adUnitId)
         
         self.placements.insert(placement)
         self.response = response
@@ -29,15 +29,6 @@ final class UnityAdsInterstitialDemandProvider: NSObject, DirectDemandProvider {
             placement.placementId,
             loadDelegate: self
         )
-    }
-    
-    func fill(ad: UADSPlacement, response: @escaping DemandProviderResponse) {
-        guard placements.contains(ad) else {
-            response(.failure(.noFill))
-            return
-        }
-        
-        response(.success(ad))
     }
     
     func notify(ad: UADSPlacement, event: AuctionEvent) {}

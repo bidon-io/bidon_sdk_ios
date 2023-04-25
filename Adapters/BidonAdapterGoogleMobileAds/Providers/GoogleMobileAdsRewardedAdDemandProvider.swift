@@ -14,19 +14,18 @@ import UIKit
 final class GoogleMobileAdsRewardedAdDemandProvider: GoogleMobileAdsBaseDemandProvider<GADRewardedAd> {
     weak var rewardDelegate: DemandProviderRewardDelegate?
     
-    override func loadAd(_ request: GADRequest, lineItem: LineItem) {
-        GADRewardedAd.load(withAdUnitID: lineItem.adUnitId, request: request) { [weak self] rewardedAd, _ in
+    override func loadAd(_ request: GADRequest, adUnitId: String) {
+        GADRewardedAd.load(withAdUnitID: adUnitId, request: request) { [weak self] rewardedAd, _ in
             guard let self = self else { return }
             
             guard let rewardedAd = rewardedAd else {
-                self.handleDidFailToLoad(.noBid)
+                self.handleDidFailToLoad(.noFill)
                 return
             }
             
             rewardedAd.fullScreenContentDelegate = self
             
-            self.setupAdRevenueHandler(rewardedAd, lineItem: lineItem)
-            
+            self.setupAdRevenueHandler(adObject: rewardedAd)
             self.handleDidLoad(adObject: rewardedAd)
         }
     }

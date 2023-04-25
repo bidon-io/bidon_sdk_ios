@@ -27,9 +27,9 @@ final class UnityAdsBannerDemandProvider: NSObject, DirectDemandProvider {
         super.init()
     }
     
-    func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
+    func load(_ adUnitId: String, response: @escaping DemandProviderResponse) {
         let banner = UADSBannerView(
-            placementId: lineItem.adUnitId,
+            placementId: adUnitId,
             size: size
         )
         
@@ -39,10 +39,6 @@ final class UnityAdsBannerDemandProvider: NSObject, DirectDemandProvider {
         self.banner = banner
         
         banner.load()
-    }
-    
-    func fill(ad: UADSBannerView, response: @escaping DemandProviderResponse) {
-        response(.success(ad))
     }
     
     func notify(ad: UADSBannerView, event: Bidon.AuctionEvent) {}

@@ -29,9 +29,12 @@ internal final class AppLovinRewardedDemandProvider: NSObject {
 
 
 extension AppLovinRewardedDemandProvider: DirectDemandProvider {
-    func bid(_ lineItem: LineItem, response: @escaping DemandProviderResponse) {
+    func load(
+        _ adUnitId: String,
+        response: @escaping DemandProviderResponse
+    ) {
         let interstitial = ALIncentivizedInterstitialAd(
-            zoneIdentifier: lineItem.adUnitId,
+            zoneIdentifier: adUnitId,
             sdk: sdk
         )
         
@@ -40,16 +43,6 @@ extension AppLovinRewardedDemandProvider: DirectDemandProvider {
         
         self.interstitial = interstitial
         self.response = response
-    }
-    
-    func fill(ad: ALAd, response: @escaping DemandProviderResponse) {
-        guard let interstitial = interstitial, interstitial.isReadyForDisplay
-        else {
-            response(.failure(.noFill))
-            return
-        }
-        
-        response(.success(ad))
     }
     
     // MARK: Noop

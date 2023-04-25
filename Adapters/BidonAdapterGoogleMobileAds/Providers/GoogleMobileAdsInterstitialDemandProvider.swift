@@ -12,19 +12,18 @@ import UIKit
 
 
 final class GoogleMobileAdsInterstitialDemandProvider: GoogleMobileAdsBaseDemandProvider<GADInterstitialAd> {
-    override func loadAd(_ request: GADRequest, lineItem: LineItem) {
-        GADInterstitialAd.load(withAdUnitID: lineItem.adUnitId, request: request) { [weak self] interstitial, _ in
+    override func loadAd(_ request: GADRequest, adUnitId: String) {
+        GADInterstitialAd.load(withAdUnitID: adUnitId, request: request) { [weak self] interstitial, _ in
             guard let self = self else { return }
             
             guard let interstitial = interstitial else {
-                self.handleDidFailToLoad(.noBid)
+                self.handleDidFailToLoad(.noFill)
                 return
             }
             
             interstitial.fullScreenContentDelegate = self
             
-            self.setupAdRevenueHandler(interstitial, lineItem: lineItem)
-            
+            self.setupAdRevenueHandler(adObject: interstitial)
             self.handleDidLoad(adObject: interstitial)
         }
     }

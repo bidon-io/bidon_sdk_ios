@@ -15,11 +15,14 @@ protocol AuctionRound {
 }
 
 
+protocol AuctionOperation: Operation {}
+
+
 typealias Auction = DirectedAcyclicGraph<Operation>
 
 
 extension Auction {
-    func flatten() -> [Operation] {
+    func operations() -> [Operation] {
         return root.reduce([]) {
             $0 + traverse(operation: $1, previous: [])
         }

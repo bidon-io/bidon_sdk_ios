@@ -53,19 +53,19 @@ internal final class AppLovinAdViewDemandProvider: NSObject {
 
 
 extension AppLovinAdViewDemandProvider: DirectDemandProvider {
-    func bid(
-        _ lineItem: LineItem,
-        response: @escaping DemandProviderResponse
-    ) {
+    func load(_ adUnitId: String, response: @escaping DemandProviderResponse) {
         bridge.load(
             service: sdk.adService,
-            lineItem: lineItem,
-            response: response
-        )
-    }
-    
-    func fill(ad: ALAd, response: @escaping DemandProviderResponse) {
-        adView.render(ad)
+            adUnitId: adUnitId
+        ) { [weak self] result in
+            switch result {
+            case .success(let ad):
+                self?.adView.render(ad)
+                response(.success(ad))
+            case .failure(let error):
+                response(.failure(error))
+            }
+        }
     }
     
     func notify(ad: ALAd, event: AuctionEvent) {}

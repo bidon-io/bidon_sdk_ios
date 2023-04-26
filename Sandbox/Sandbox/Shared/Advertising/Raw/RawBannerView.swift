@@ -55,8 +55,7 @@ struct RawBannerView: UIViewRepresentable, AdBannerWrapperView {
     
     func updateUIView(_ uiView: BannerView, context: Context) {
         uiView.format = BannerFormat(format)
-//        uiView.isAutorefreshing = isAutorefreshing
-//        uiView.autorefreshInterval = autorefreshInterval
+        
         if isLoading {
             uiView.loadAd(with: pricefloor)
         }

@@ -88,6 +88,8 @@
 		4298902229D589BE00C5FB7B /* BaseAdRevenueObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4298902129D589BE00C5FB7B /* BaseAdRevenueObserver.swift */; };
 		4299A424289BCDBC0062C580 /* Interstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A423289BCDBC0062C580 /* Interstitial.swift */; };
 		4299A427289BCF3F0062C580 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299A426289BCF3F0062C580 /* HTTPTask.swift */; };
+		429E645F29F928EC00149EEA /* Viewability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E645E29F928EC00149EEA /* Viewability.swift */; };
+		429E646129F94CDD00149EEA /* ViewabilityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E646029F94CDD00149EEA /* ViewabilityTracker.swift */; };
 		429EE2C2286CA23F009439C6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C1286CA23F009439C6 /* Repository.swift */; };
 		429EE2C7286CA283009439C6 /* DemandSourceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */; };
 		429EE2C9286CA2B0009439C6 /* DemandProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429EE2C8286CA2B0009439C6 /* DemandProvider.swift */; };
@@ -226,6 +228,8 @@
 		4298902129D589BE00C5FB7B /* BaseAdRevenueObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAdRevenueObserver.swift; sourceTree = "<group>"; };
 		4299A423289BCDBC0062C580 /* Interstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interstitial.swift; sourceTree = "<group>"; };
 		4299A426289BCF3F0062C580 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		429E645E29F928EC00149EEA /* Viewability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viewability.swift; sourceTree = "<group>"; };
+		429E646029F94CDD00149EEA /* ViewabilityTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewabilityTracker.swift; sourceTree = "<group>"; };
 		429EE2C1286CA23F009439C6 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		429EE2C6286CA283009439C6 /* DemandSourceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandSourceAdapter.swift; sourceTree = "<group>"; };
 		429EE2C8286CA2B0009439C6 /* DemandProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandProvider.swift; sourceTree = "<group>"; };
@@ -616,8 +620,9 @@
 				421D48E4288841C6007DE2E4 /* Logging */,
 				423FBA9929F0474D00B20A5D /* Enums */,
 				423FBAA329F13A7100B20A5D /* Operations */,
+				429E645D29F9288100149EEA /* Viewability */,
+				429E645C29F9287500149EEA /* DAG */,
 				4221019B2859E3D0006596DA /* Constants.swift */,
-				42C46C9629F2ABC50057D7CE /* DirectedAcyclicGraph.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -664,6 +669,23 @@
 				4243091628A25603002360B0 /* Models */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		429E645C29F9287500149EEA /* DAG */ = {
+			isa = PBXGroup;
+			children = (
+				42C46C9629F2ABC50057D7CE /* DirectedAcyclicGraph.swift */,
+			);
+			path = DAG;
+			sourceTree = "<group>";
+		};
+		429E645D29F9288100149EEA /* Viewability */ = {
+			isa = PBXGroup;
+			children = (
+				429E645E29F928EC00149EEA /* Viewability.swift */,
+				429E646029F94CDD00149EEA /* ViewabilityTracker.swift */,
+			);
+			path = Viewability;
 			sourceTree = "<group>";
 		};
 		429EE2B9286C82D9009439C6 /* Repository */ = {
@@ -950,6 +972,7 @@
 				42C46C9729F2ABC50057D7CE /* DirectedAcyclicGraph.swift in Sources */,
 				42CCB99128CB365400DBAE97 /* UIDevice+Extensions.swift in Sources */,
 				427DB5C129BF2A8500057D08 /* UnknownAdapter.swift in Sources */,
+				429E645F29F928EC00149EEA /* Viewability.swift in Sources */,
 				42C4F46029E6CEEE00B12E15 /* BidKeeper.swift in Sources */,
 				421D48EA28884D1F007DE2E4 /* LogFormatter.swift in Sources */,
 				424D296428BE630500F6F2D6 /* MainThreadComputable.swift in Sources */,
@@ -1029,6 +1052,7 @@
 				426DD7A328A5004200A1ADF5 /* Sdk.swift in Sources */,
 				428CCBF428A11190003123EF /* EnvironmentManager.swift in Sources */,
 				42EDA0A828C5EBF900BF74DE /* AuctionRequestBuilder.swift in Sources */,
+				429E646129F94CDD00149EEA /* ViewabilityTracker.swift in Sources */,
 				4224AA6D28B7D1F600E8D886 /* RewardedAd.swift in Sources */,
 				42A0156A29F674FA00547B37 /* AuctionOperationLogEvent.swift in Sources */,
 				42C4F46629E6E49200B12E15 /* Framework.swift in Sources */,

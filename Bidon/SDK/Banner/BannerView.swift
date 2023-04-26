@@ -12,16 +12,10 @@ import UIKit
 @objc(BDNBannerView)
 public final class BannerView: UIView, AdView {
     @available(*, unavailable)
-    @objc public var autorefreshInterval: TimeInterval = 15 {
-        didSet { scheduleRefreshIfNeeded() }
-    }
+    @objc public var autorefreshInterval: TimeInterval = 15
     
     @available(*, unavailable)
-    @objc public var isAutorefreshing: Bool = false // {
-    //        didSet {
-    //            isAutorefreshing ? scheduleRefreshIfNeeded() : viewManager.cancelRefreshTimer()
-    //        }
-    //    }
+    @objc public var isAutorefreshing: Bool = false
     
     @objc public let placement: String
     
@@ -151,24 +145,6 @@ public final class BannerView: UIView, AdView {
             }
         }
     }
-    
-    // TODO: Autorefresh feature is not implemented
-    private final func scheduleRefreshIfNeeded() {
-//        guard
-//            isAutorefreshing,
-//            autorefreshInterval > 0,
-//            viewManager.isRefreshGranted
-//        else { return }
-//
-//        weak var weakSelf = self
-//
-//        Logger.verbose("Banner \(self) did start refresh timer with interval: \(autorefreshInterval)s")
-//
-//        adManager.prepareForReuse()
-//        viewManager.schedule(autorefreshInterval, block: weakSelf?.refreshIfNeeded)
-//
-//        loadAd(with: .zero)
-    }
 }
 
 
@@ -190,7 +166,6 @@ extension BannerView: BannerAdManagerDelegate {
 
 extension BannerView: BannerViewManagerDelegate {
     func viewManager(_ viewManager: BannerViewManager, didRecordImpression ad: Ad) {
-        scheduleRefreshIfNeeded()
         delegate?.adObject?(self, didRecordImpression: ad)
     }
     

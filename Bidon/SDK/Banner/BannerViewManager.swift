@@ -28,10 +28,10 @@ final internal class BannerViewManager: NSObject {
     @Injected(\.sdk)
     private var sdk: Sdk
     
+    private lazy var viewabilityTracker = Viewability.Tracker()
+    
     weak var container: UIView?
-    
-    private var timer: Timer?
-    
+        
     var isAdPresented: Bool {
         guard let container = container else { return false }
         return !container.subviews.isEmpty
@@ -39,35 +39,10 @@ final internal class BannerViewManager: NSObject {
     
     weak var delegate: BannerViewManagerDelegate?
     
-    var isRefreshGranted: Bool { timer == nil && isAdPresented }
-    
+    var isRefreshGranted: Bool { isAdPresented }
+
     var extras: [String: AnyHashable] = [:]
-    
-    deinit {
-        cancelRefreshTimer()
-    }
-    
-    func schedule(
-        _ interval: TimeInterval,
-        block: (() -> ())?
-    ) {
-        let timer = Timer(
-            timeInterval: interval,
-            repeats: false
-        ) { [weak self] _ in
-            self?.timer = nil
-            block?()
-        }
-        
-        RunLoop.main.add(timer, forMode: .default)
-        self.timer = timer
-    }
-    
-    func cancelRefreshTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
+
     func present(
         bid: AdViewBid,
         view: AdViewContainer,
@@ -80,7 +55,6 @@ final internal class BannerViewManager: NSObject {
         
         bid.provider.adViewDelegate = self
         
-        let viewsToRemove = container.subviews.compactMap { $0 as? AdViewContainer }
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alpha = 0
         container.addSubview(view)
@@ -109,12 +83,24 @@ final internal class BannerViewManager: NSObject {
             withDuration: 0.25,
             delay: 0, options: .curveEaseInOut,
             animations: {
-                viewsToRemove.forEach { $0.alpha = 0 }
+                container
+                    .subviews
+                    .filter { $0 is AdViewContainer && $0 !== view }
+                    .forEach { $0.alpha = 0 }
                 view.alpha = 1
-            }) { [weak self] _ in
-                viewsToRemove.forEach { $0.destroy() }
+            }
+        ) { [weak self] _ in
+            container
+                .subviews
+                .filter { $0 !== view }
+                .compactMap { $0 as? AdViewContainer }
+                .forEach { $0.destroy() }
+            
+            self?.viewabilityTracker.startTracking(view: view) { [weak self] in
+                self?.viewabilityTracker.finishTracking()
                 self?.trackImpression(adView: view)
             }
+        }
         
         view.impression = AdViewImpression(
             bid: bid,

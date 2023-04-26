@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'cocoapods-core'
 require 'json'
+require 'cgi'
 
 
 module Fastlane
@@ -44,7 +45,7 @@ module Fastlane
           spec.license = { :type => "Copyright", :text => "Copyright #{Time.new.year}. Bidon Inc." }
           spec.author = { "Bidon Inc." => "https://http://bidon.org" }
           spec.platform = :ios, "12.0"
-          spec.source = { :http => "https://s3-us-west-1.amazonaws.com/appodeal-ios/Bidon/#{spec.name}/#{spec.version}/#{spec.name}.zip" }
+          spec.source = { :http => "https://s3-us-west-1.amazonaws.com/appodeal-ios/Bidon/#{spec.name}/#{CGI.escape(params[:version])}/#{spec.name}.zip" }
           spec.swift_versions = "4.0", "4.2", "5.0"
         
           spec.vendored_frameworks = params[:vendored_frameworks]

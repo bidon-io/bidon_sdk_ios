@@ -108,10 +108,8 @@ final class HomeViewModel: ObservableObject {
         }
         .store(in: &cancellables)
         
-        banner.$isLoading.sink { isBannerLoading in
-            withAnimation { [unowned self] in
-                self.isBannerLoading = isBannerLoading
-            }
+        banner.$isLoading.sink { [unowned self] isBannerLoading in
+            self.isBannerLoading = isBannerLoading
         }
         .store(in: &cancellables)
         

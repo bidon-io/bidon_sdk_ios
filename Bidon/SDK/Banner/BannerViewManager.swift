@@ -32,15 +32,18 @@ final internal class BannerViewManager: NSObject {
     
     weak var container: UIView?
         
-    var isAdPresented: Bool {
-        guard let container = container else { return false }
-        return !container.subviews.isEmpty
+    var isImpressionTracked: Bool {
+        guard
+            let container = container,
+            let view = container.subviews.compactMap({ $0 as? AdViewContainer }).first,
+            let impression = view.impression
+        else { return false }
+        
+        return !impression.isTrackingAllowed(.show)
     }
     
     weak var delegate: BannerViewManagerDelegate?
     
-    var isRefreshGranted: Bool { isAdPresented }
-
     var extras: [String: AnyHashable] = [:]
 
     func present(
@@ -110,6 +113,14 @@ final internal class BannerViewManager: NSObject {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(didReceiveTap))
         recognizer.delegate = self
         view.addGestureRecognizer(recognizer)
+    }
+    
+    func hide() {
+        viewabilityTracker.finishTracking()
+        container?
+            .subviews
+            .compactMap { $0 as? AdViewContainer }
+            .forEach { $0.destroy() }
     }
     
     private func sendImpressionIfNeeded(

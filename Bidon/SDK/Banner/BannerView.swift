@@ -75,11 +75,6 @@ public final class BannerView: UIView, AdView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    final override public func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-        refreshIfNeeded()
-    }
-    
     @objc public func setExtraValue(
         _ value: AnyHashable?,
         for key: String
@@ -104,7 +99,7 @@ public final class BannerView: UIView, AdView {
     ) {
         guard
             let bid = adManager.bid,
-            !viewManager.isAdPresented
+            !viewManager.isImpressionTracked
         else { return }
         
         let impression = AdViewImpression(bid: bid, format: format)
@@ -121,28 +116,27 @@ public final class BannerView: UIView, AdView {
         networkManager.perform(request: request) { result in
             Logger.debug("Sent loss with result: \(result)")
         }
+        
+        viewManager.hide()
     }
     
-    private final func refreshIfNeeded() {
+    private final func presentIfNeeded() {
         guard
             let bid = adManager.bid,
-            let adView = bid.provider.container(opaque: bid.ad),
-            superview != nil
+            let adView = bid.provider.container(opaque: bid.ad)
         else { return }
         
-        if viewManager.isRefreshGranted || !viewManager.isAdPresented {
-            Logger.verbose("Banner \(self) will refresh ad view")
+        Logger.verbose("Banner \(self) will refresh ad view")
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                
-                self.adManager.prepareForReuse()
-                self.viewManager.present(
-                    bid: bid,
-                    view: adView,
-                    context: self.context
-                )
-            }
+            self.adManager.prepareForReuse()
+            self.viewManager.present(
+                bid: bid,
+                view: adView,
+                context: self.context
+            )
         }
     }
 }
@@ -155,7 +149,7 @@ extension BannerView: BannerAdManagerDelegate {
     
     func adManager(_ adManager: BannerAdManager, didLoad ad: Ad) {
         delegate?.adObject(self, didLoadAd: ad)
-        refreshIfNeeded()
+        presentIfNeeded()
     }
     
     func adManager(_ adManager: BannerAdManager, didPayRevenue revenue: AdRevenue, ad: Ad) {
